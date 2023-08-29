@@ -1,33 +1,17 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: "green",
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Text style={{ fontSize: 20, fontWeight: "bold", color: "white" }}>
-          게시판
-        </Text>
-      </View>
-      <View
-        style={{
-          flex: 8,
-          backgroundColor: "white",
-          width: "100%",
-          height: "100%",
-        }}
-      ></View>
+    <View style={styles.container}>
+      <Text>Axios 라이브러리 설치완료</Text>
+      <Text>Navigation 라이브러리 설치 완료</Text>
+      <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+        각 디렉토리 마다 Readme 파일이 존재 할테니 한번씩은 읽어 보시길
+        바랍니다.
+      </Text>
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </View>
   );
 }
 
