@@ -35,6 +35,7 @@ Expo 의 버전은
 Android 와 Ios의 UI통합을 위해 주로 사용될 React Native 내부 모듈
 
 1. Platform.OS
+
     import { Platform } from 'react-native';
     
     따로 외부에서 설치할 필요없이 react-Native 내부에 존재하는 모듈 이므로 import 하여 바로 사용하면 됩니다.
