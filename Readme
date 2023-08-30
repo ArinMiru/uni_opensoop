@@ -30,6 +30,15 @@ Expo 의 버전은
 4. @expo/react-native-read-more-text -> 설치 완료
     댓글 또는 게시글의 본문의 내용이 길다면 개발자가 지정한 만큼의 행을 미리 보여주고 그 이후는 더보기를 눌러서 전체 내용을 볼 수 있도록 하여 주는 외부 라이브러리 입니다.
 
+!-- 8월 30일자 기반 구축 사항 --!
+
+기기 정보 습득을 위한 백그라운드 기반 작성 완료 -> 실행 성공 확인
+
+경로 : Src/Utils/DeviceUtils.ts
+
+사용 예시 :  App.tsx 사용 기준 예시
+import {currentPlatform,deviceHeight,deviceWidth,} from "./Src/Utils/DeviceUtils";
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 Android 와 Ios의 UI통합을 위해 주로 사용될 React Native 내부 모듈
