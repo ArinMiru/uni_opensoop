@@ -54,3 +54,14 @@ react-native-calendars -> 일정 스크린
 @expo/react-native-read-more-text -> 게시글 또는 댓글의 미리보기 기능을 제공하기 위함 입니다. 
 
 resizeMode = "contain" -> 이미지를 효율적으로 처리하고 일정 영역에 정확하게 이미지를 출력 해주기 위함.
+
+-----------------------------------------------------------------------------------------------   
+
+!-- 9월 1일자 작업 사항 --!
+
+Alert.tsx
+Background.tsx
+Button.tsx
+TextInput.tsx
+Topbar.tsx
+파일 생성 완료 

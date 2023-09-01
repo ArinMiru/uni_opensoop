@@ -7,3 +7,14 @@ styles 디렉토리는 모바일 앱의 스타일 시트들이 위치하는 디�
 
 이 곳에서는
 StyleSheet 라이브러리를 사용할 예정 입니다. 
+
+
+-----------------------------------------------------------------------------------------------   
+
+!-- 9월 1일자 --!
+
+BackgroundStyle.tsx
+ButtonStyle.tsx
+TextInputStyle.tsx
+TopbarStyle.tsx
+파일 생성 완료 

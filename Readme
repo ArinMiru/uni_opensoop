@@ -39,6 +39,18 @@ Expo 의 버전은
 사용 예시 :  App.tsx 사용 기준 예시
 import {currentPlatform,deviceHeight,deviceWidth,} from "./Src/Utils/DeviceUtils";
 
+
+!-- 9월 1일자 기반 구축 사항 --!
+
+
+경로 : Src/Services/ApiService.ts
+경로 : Src/Services/Api.config.ts
+
+Api.config.ts 파일 생성 완료 후 서버 통신 백그라운드 작업 기반 -> 완료
+ApiService.ts 파일 생성 완료 후 서버 통신 백그라운드 작업 기반 만들어진 함수 호출 -> 완료 
+
+
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 Android 와 Ios의 UI통합을 위해 주로 사용될 React Native 내부 모듈

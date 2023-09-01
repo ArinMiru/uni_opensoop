@@ -5,8 +5,11 @@ import {
   deviceHeight,
   deviceWidth,
 } from "./Src/Utils/DeviceUtils";
+import { fetchData } from "./Src/Services/ApiService";
 
 export default function App() {
+  fetchData();                                      // 생성 해 놓은 ApiService 함수 호출
+
   return (
     <View style={styles.container}>
       <Text> 플랫폼 : {currentPlatform}</Text>
