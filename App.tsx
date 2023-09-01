@@ -10,6 +10,5 @@ import { NavigationContainerWrapper } from "./Src/Navigations/NavigationContaine
 
 export default function App() {
   fetchData();                              // 생성 해 놓은 ApiService 함수 호출
-
   return <NavigationContainerWrapper />;    // Navigation 루트 설정
 }

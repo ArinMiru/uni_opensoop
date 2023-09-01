@@ -1,12 +1,14 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { Text } from "react-native";
+import React from "react";
+import { LoginBackground } from "../Components/Background";
+import { BaseButton } from "../Components/Button";
 
 const TestScreen = () => {
   return (
-    <View>
-      <Text>삭제할 스크린 입니다. </Text>
-    </View>
-  )
-}
+    <LoginBackground>
+      <BaseButton text="다음"></BaseButton>
+    </LoginBackground>
+  );
+};
 
-export default TestScreen
+export default TestScreen;
