@@ -17,9 +17,9 @@ export const serverConnection = async (): Promise<string> => {          // 서�
     }
   } catch (error) {                                                     // ERROR 발생
     if (typeof error === "string") {
-      return `Error connecting to the server: ${error}`;
+      return `Error connecting to the server: ${error}`;                // 문자열 형태의 에러인 경우
     } else {
-      return `Error connecting to the server: ${(error as Error).message}`;
+      return `Error connecting to the server: ${(error as Error).message}`;   //문자열이 아닌 다른 형태의 에러인 경우
     }
   }
 };

@@ -45,11 +45,13 @@ import {currentPlatform,deviceHeight,deviceWidth,} from "./Src/Utils/DeviceUtils
 
 경로 : Src/Services/ApiService.ts
 경로 : Src/Services/Api.config.ts
+경로 : Src/Navigations/NavigationContatiner.tsx
+경로 : Src/Navigations/StackNavigator.tsx
 
 Api.config.ts 파일 생성 완료 후 서버 통신 백그라운드 작업 기반 -> 완료
-ApiService.ts 파일 생성 완료 후 서버 통신 백그라운드 작업 기반 만들어진 함수 호출 -> 완료 
-
-
+ApiService.ts 파일 생성 완료 후 서버 통신 백그라운드 작업 기반 만들어진 함수 호출 -> 완료
+Navigations/NavagationContatiner.tsx 파일 생성 완료 후 NavigationContatiner 기반 구축 -> 완료
+StackNavigator.tsx 파일 생성 완료 후 NavigationStack 기반 구축 -> 완료 
 
 ------------------------------------------------------------------------------------------------------------------------------
 
