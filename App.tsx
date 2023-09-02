@@ -16,7 +16,6 @@ export default function App() {
     initializeApp();                                                                // 앱 초기화 함수 호출
   }, []);                                                                           // useEffect를 한 번만 실행하도록 설정 (빈 배열을 의미)
 
-  
   return isFontLoaded ? (                                                           // 폰트 로딩이 완료되면 내비게이션 컨테이너 컴포넌트를 렌더링
     <NavigationContainerWrapper />
   ) : (

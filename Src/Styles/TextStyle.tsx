@@ -5,6 +5,6 @@ export default StyleSheet.create({
     fontFamily: "NotoSans",
     fontWeight: "bold",
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: 15,
   },
 });
