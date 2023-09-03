@@ -4,7 +4,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import AppStackNavigator from "./StackNavigator";
 
-export const NavigationContainerWrapper = () => {
+const NavigationContainerWrapper = () => {
   return (
     <NavigationContainer>
       <AppStackNavigator />
@@ -12,4 +12,4 @@ export const NavigationContainerWrapper = () => {
   );
 };
 
-NavigationContainerWrapper();
+export default NavigationContainerWrapper;                    // 컴포넌트를 내보냅니다.
