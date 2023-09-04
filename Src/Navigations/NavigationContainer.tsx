@@ -1,13 +1,11 @@
-// navigation/NavigationContainer.tsx
-
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import AppStackNavigator from "./StackNavigator";
+import StackNavigator from "./StackNavigator";
 
-const NavigationContainerWrapper = () => {
+export const NavigationContainerWrapper = () => {
   return (
     <NavigationContainer>
-      <AppStackNavigator />
+      <StackNavigator />
     </NavigationContainer>
   );
 };

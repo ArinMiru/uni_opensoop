@@ -17,7 +17,7 @@ export default function App() {
   }, []);                                                                           // useEffect를 한 번만 실행하도록 설정 (빈 배열을 의미)
 
   return isFontLoaded ? (                                                           // 폰트 로딩이 완료되면 내비게이션 컨테이너 컴포넌트를 렌더링
-    <NavigationContainerWrapper />
+    <NavigationContainerWrapper/>
   ) : (
                                                                                     //폰트 로딩 중에는 로딩 텍스트를 표시  
     <View>                                                                       
