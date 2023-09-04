@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { deviceWidth, deviceHeight } from "../Utils/DeviceUtils";
 
 export default StyleSheet.create({
-  longButton: {
+  longButtonStyle: {
     width: deviceWidth * 0.8,
     height: deviceHeight * 0.062,
     backgroundColor: "#4BB781",
@@ -10,7 +10,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     borderRadius: 11,
   },
-  shortButton: {
+  shortButtonStyle: {
     width: deviceWidth * 0.2,
     height: deviceHeight * 0.062,
     backgroundColor: "#4BB781",

@@ -16,11 +16,11 @@ const TestScreen: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <LoginBackground>
       <BasicTopbar text="기본 상단 UI" />
-      <LongButton text="기본 긴 버튼"></LongButton>
-      <ShortButton text="짧은 버튼"></ShortButton>
-      <LongInput text="기본 긴 인풋"></LongInput>
-      <ShortInput text="짧은 인풋"></ShortInput>
-      <TouchableOpacity style={Styles.longButton} onPress={openModal}>
+      <LongButton text="기본 긴 버튼" />
+      <ShortButton text="짧은 버튼" />
+      <LongInput text="기본 긴 인풋" />
+      <ShortInput text="짧은 인풋" />
+      <TouchableOpacity style={Styles.longButtonStyle} onPress={openModal}>
         <Text>Bottom Modal Test</Text>
       </TouchableOpacity>
     </LoginBackground>
