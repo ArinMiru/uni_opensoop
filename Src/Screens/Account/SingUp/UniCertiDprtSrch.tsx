@@ -6,9 +6,9 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 const UniCertiDprtSrch: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <RegiCommonView
-      bigtext="학과/전공"
+      bigtext="학번"
       smalltext="선택하기"
-      inputtext="학과/전공"
+      inputtext="학번"
       buttontext="다음"
       onPress={() => navigation.navigate("TestScreen")}
       navigation={navigation}
