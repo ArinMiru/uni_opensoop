@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { RegiCommonView } from "../../../Components/CommonSrc/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
@@ -10,7 +9,7 @@ const UniCertiDprtSrch: React.FC<ScreenProps> = ({ navigation }) => {
       smalltext="선택하기"
       inputtext="학번"
       buttontext="다음"
-      onPress={() => navigation.navigate("TestScreen")}
+      onPress={() => navigation.navigate("AccountLoginRegi")}
       navigation={navigation}
     />
   );
