@@ -39,5 +39,14 @@ export default StyleSheet.create({
     marginRight : deviceWidth*0.01,
     marginLeft : deviceWidth*0.01,
     marginTop : deviceHeight*0.05
-  }
+  },
+  commonButtonStyle: {
+    width: deviceWidth * 0.8,
+    height: deviceHeight * 0.06,
+    marginLeft: deviceWidth * 0.1,
+    backgroundColor: "#4bb781",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 11,
+  },
 });
