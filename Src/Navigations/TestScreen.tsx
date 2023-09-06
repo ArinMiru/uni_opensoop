@@ -1,7 +1,7 @@
 import { Text } from "react-native";
 import React from "react";
 import { LoginBackground } from "../Components/Background";
-import { LongButton, ShortButton } from "../Components/Button";
+import { LongButton } from "../Components/Button";
 import { LongInput, ShortInput } from "../Components/TextInput";
 import { BasicTopbar } from "../Components/Topbar";
 import { ScreenProps } from "./StackNavigator";
@@ -16,8 +16,11 @@ const TestScreen: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <LoginBackground>
       <BasicTopbar text="기본 상단 UI" />
-      <LongButton text="기본 긴 버튼" />
-      <ShortButton text="짧은 버튼" />
+      <LongButton
+        text="공동 스크린 이동"
+        onPress={() => navigation.navigate("UniCertiDprtSrch")}
+        navigation={navigation}
+      />
       <LongInput text="기본 긴 인풋" />
       <ShortInput text="짧은 인풋" />
       <TouchableOpacity style={Styles.longButtonStyle} onPress={openModal}>
