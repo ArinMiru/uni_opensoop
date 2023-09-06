@@ -7,4 +7,11 @@ export default StyleSheet.create({
     color: "#ffffff",
     fontSize: 15,
   },
+
+  regibuttontext: {
+    fontFamily: "NotoSans",
+    fontWeight: "bold",
+    color: "#4BB781",
+    fontSize: 15,
+  }
 });

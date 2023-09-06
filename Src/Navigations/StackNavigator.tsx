@@ -3,10 +3,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ModalScreen from "../Screens/ModalScreen";
 import TestScreen from "./TestScreen";
 import { StackNavigationProp } from "@react-navigation/stack";
+import AccountLoginRegi from "../Screens/AccountLoginRegi";
 
-type RootStackParamList = {
-  TestScreen: undefined;                                                          //파라미터 전달 값 없음
-  ModalScreen: undefined;                                                         //파라미터 전달 값 없음
+type RootStackParamList = {                                                         //파라미터 전달 값 없음
+  ModalScreen: undefined;
+  AccountLoginRegi: undefined;                                                         //파라미터 전달 값 없음
 };
 
 export type ScreenProps = {
@@ -19,8 +20,8 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="TestScreen"
-        component={TestScreen}
+        name="AccountLoginRegi"
+        component={AccountLoginRegi}
         options={{ headerShown: false }}
       />
       <Stack.Screen

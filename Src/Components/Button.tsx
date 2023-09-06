@@ -37,3 +37,15 @@ export const ShortButton: React.FC<ButtonProps> = ({ children, text }) => {     
   );
 };
 
+/**
+ * 맨 처음 로그인 회원가입 화면에서 사용할 회원가입 버튼
+ */
+
+export const RegiButton: React.FC<ButtonProps> = ({ children, text }) => {
+  return (
+    <TouchableOpacity style={Styles.regiStyle}>
+      <Text style={textStyle.regibuttontext}>{text}</Text>
+      {children}
+    </TouchableOpacity>
+  )
+}
