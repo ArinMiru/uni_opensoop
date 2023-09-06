@@ -26,5 +26,18 @@ export default StyleSheet.create({
     justifyContent: "center",
     borderRadius: 11,
     marginTop : 25
+  },
+  loginStyle : {
+    width: deviceWidth * 0.25,
+    height: deviceHeight * 0.042,
+    backgroundColor: "#E4F1E4",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 120,
+    borderColor: "#E2E2E2",
+    borderWidth: 1,
+    marginRight : deviceWidth*0.01,
+    marginLeft : deviceWidth*0.01,
+    marginTop : deviceHeight*0.05
   }
 });

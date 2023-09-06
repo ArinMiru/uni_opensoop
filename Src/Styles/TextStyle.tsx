@@ -13,5 +13,12 @@ export default StyleSheet.create({
     fontWeight: "bold",
     color: "#4BB781",
     fontSize: 15,
+  },
+
+  loginbuttontext: {
+    fontFamily: "NotoSans",
+    fontWeight: "bold",
+    color: "#4BB781",
+    fontSize: 11,
   }
 });

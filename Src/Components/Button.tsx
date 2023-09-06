@@ -2,12 +2,16 @@ import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 import Styles from "../Styles/ButtonStyle";
 import textStyle from "../Styles/TextStyle";
+import { Ionicons } from "@expo/vector-icons";
+import { deviceWidth } from "../Utils/DeviceUtils";
 
 
 //  프로퍼티 타입 정의 
 interface ButtonProps {
   children?: React.ReactNode;
   text: string;
+  onPress: () => void;
+  navigation: {navigate: (screenName: string) => void;}
 }
 
 /**
@@ -15,9 +19,9 @@ interface ButtonProps {
  * 사용법은 LongButton text="문자열"
  */
 
-export const LongButton: React.FC<ButtonProps> = ({ children, text }) => {                // 파스칼 케이스 적용 
+export const LongButton: React.FC<ButtonProps> = ({ children, text, onPress }) => {                // 파스칼 케이스 적용 
   return (
-    <TouchableOpacity style={Styles.longButtonStyle}>
+    <TouchableOpacity style={Styles.longButtonStyle} onPress={onPress}>
       <Text style={textStyle.textbase}>{text}</Text>
       {children}
     </TouchableOpacity>
@@ -45,6 +49,29 @@ export const RegiButton: React.FC<ButtonProps> = ({ children, text }) => {
   return (
     <TouchableOpacity style={Styles.regiStyle}>
       <Text style={textStyle.regibuttontext}>{text}</Text>
+      {children}
+    </TouchableOpacity>
+  );
+};
+
+/**
+ * 두 번째 로그인 화면에서 사용할 아이디찾기, 비밀번호찾기 버튼
+ */
+export const LoginButton: React.FC<ButtonProps> = ({ children, text }) => {
+  return (
+    <TouchableOpacity style={Styles.loginStyle}>
+      <Text style={textStyle.loginbuttontext}>{text}</Text>
+      {children}
+    </TouchableOpacity>
+  )
+}
+
+/**
+ * chevron-back 아이콘에 해당하는 버튼 영역
+ */
+export const IconButton: React.FC<ButtonProps> = ({ children, text, onPress }) => {
+  return (
+    <TouchableOpacity onPress={onPress}><Ionicons style={{marginLeft:deviceWidth*0.06}} name="chevron-back" size={24} color="black"/>
       {children}
     </TouchableOpacity>
   )
