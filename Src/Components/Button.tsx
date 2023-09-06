@@ -4,10 +4,15 @@ import Styles from "../Styles/ButtonStyle";
 import textStyle from "../Styles/TextStyle";
 
 
+
 //  프로퍼티 타입 정의 
 interface ButtonProps {
   children?: React.ReactNode;
   text: string;
+  onPress : () => void;
+  navigation: {
+    navigate: (screenName: string) => void;
+  };
 }
 
 /**
@@ -15,9 +20,9 @@ interface ButtonProps {
  * 사용법은 LongButton text="문자열"
  */
 
-export const LongButton: React.FC<ButtonProps> = ({ children, text }) => {                // 파스칼 케이스 적용 
+export const LongButton: React.FC<ButtonProps> = ({ children, text, onPress }) => {                // 파스칼 케이스 적용 
   return (
-    <TouchableOpacity style={Styles.longButtonStyle}>
+    <TouchableOpacity style={Styles.longButtonStyle} onPress={onPress}>
       <Text style={textStyle.textbase}>{text}</Text>
       {children}
     </TouchableOpacity>
@@ -28,7 +33,7 @@ export const LongButton: React.FC<ButtonProps> = ({ children, text }) => {      
  * 사용법은 ShortButton text = "문자열"
  */
 
-export const ShortButton: React.FC<ButtonProps> = ({ children, text }) => {               // 파스칼 케이스 적용 
+export const ShortButton: React.FC<ButtonProps> = ({ children, text, onPress }) => {               // 파스칼 케이스 적용 
   return (
     <TouchableOpacity style={Styles.shortButtonStyle}>
       <Text style={textStyle.textbase}>{text}</Text>
