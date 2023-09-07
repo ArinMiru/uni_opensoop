@@ -2,7 +2,7 @@ import React from "react";
 import { RegiCommonView } from "../../../Components/CommonSrc/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 
-const UniCertiDprtSrch: React.FC<ScreenProps> = ({ navigation }) => {
+const UniCertiEcode: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <RegiCommonView
       bigtext="학번"
@@ -15,4 +15,4 @@ const UniCertiDprtSrch: React.FC<ScreenProps> = ({ navigation }) => {
   );
 };
 
-export default UniCertiDprtSrch;
+export default UniCertiEcode;
