@@ -13,6 +13,7 @@ export default StyleSheet.create({
   shortButtonStyle: {
     width: deviceWidth * 0.2,
     height: deviceHeight * 0.062,
+    marginLeft: deviceWidth * 0.02,
     backgroundColor: "#4BB781",
     alignItems: "center",
     justifyContent: "center",
