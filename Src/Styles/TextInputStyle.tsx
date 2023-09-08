@@ -12,7 +12,7 @@ export default StyleSheet.create({
     borderWidth: 1,
   },
   shortInput: {
-    width: deviceWidth * 0.6,
+    width: deviceWidth * 0.575,
     height: deviceHeight * 0.062,
     backgroundColor: "#f7f8f9",
     borderRadius: 11,
