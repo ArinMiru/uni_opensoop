@@ -1,7 +1,7 @@
 import { SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import styles from "../Styles/BackgroundStyle";
+import styles from "../../Styles/BackgroundStyle";
 import { StyleSheet } from "react-native";
 
 interface BackgroundProps {
