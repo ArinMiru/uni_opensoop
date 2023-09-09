@@ -60,9 +60,9 @@ export const RegiButton: React.FC<ButtonProps> = ({ children, text, onPress }) =
 /**
  * 두 번째 로그인 화면에서 사용할 아이디찾기, 비밀번호찾기 버튼
  */
-export const LoginButton: React.FC<ButtonProps> = ({ children, text }) => {
+export const LoginButton: React.FC<ButtonProps> = ({ children, text, onPress }) => {
   return (
-    <TouchableOpacity style={Styles.loginStyle}>
+    <TouchableOpacity onPress={onPress} style={Styles.loginStyle}>
       <Text style={textStyle.loginbuttontext}>{text}</Text>
       {children}
     </TouchableOpacity>

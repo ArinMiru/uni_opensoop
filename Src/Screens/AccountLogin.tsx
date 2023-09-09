@@ -6,6 +6,8 @@ import { LongInput, LongInputMargin } from "../Components/TextInput";
 import { ScreenProps } from "../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../Utils/DeviceUtils";
+import { RegiText1, RegiCommonButton3, RegiNextButton } from "../Components/CommonView/CommonCompo";
+
 
 const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   // 타입을 명시적으로 설정
@@ -24,8 +26,8 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
             <LongButton text="로그인"/>
         </View>
         <View style={{flex:3,justifyContent:"center", alignItems:"center", flexDirection:"row"}}>
-            <LoginButton text="아이디찾기"/> 
-            <LoginButton text="비밀번호찾기"/>
+            <LoginButton text="아이디찾기" onPress={() => navigation.navigate("IdFindEmail")} navigation={navigation}></LoginButton>
+            <LoginButton text="비밀번호찾기" onPress={() => navigation.navigate("PassFindForId")} navigation={navigation}></LoginButton>
         </View>
     </LoginBackground>
   );
