@@ -1,7 +1,7 @@
-import Styles from "../Styles/TopbarStyle";
+import Styles from "../../Styles/TopbarStyle";
 import React from "react";
 import { View, Text } from "react-native";
-import textSyle from "../Styles/TextStyle";
+import textSyle from "../../Styles/TextStyle";
 
 //프로퍼티 타입 정의
 interface inputProps {
@@ -10,9 +10,10 @@ interface inputProps {
 }
 
 /**
- * 기본적인 상단 바 사용법은 BasicTopbar text = "문자열" 
+ * 기본적인 상단 바 사용법은 BasicTopbar text = "문자열"
  */
-export const BasicTopbar: React.FC<inputProps> = ({ children, text }) => {              // 컴포넌트의 타입을 정확하게 명시
+export const BasicTopbar: React.FC<inputProps> = ({ children, text }) => {
+  // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.basicTopbar}>
       <Text style={textSyle.textbase}>{text}</Text>
