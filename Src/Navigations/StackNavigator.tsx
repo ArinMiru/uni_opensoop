@@ -1,13 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import ModalScreen from "../Screens/ModalScreen";
-import TestScreen from "./TestScreen";
 import { StackNavigationProp } from "@react-navigation/stack";
-import AccountLogin from "../Screens/AccountLogin"
-import AccountLoginRegi from "../Screens/AccountLoginRegi";
-import RegiId from "../Screens/RegiId";
-import RegiNmNic from "../Screens/RegiNmNic"
-import RegiPass from "../Screens/RegiPass"
+import AccountLogin from "../Screens/Account/SignIn/AccountLogin";
+import AccountLoginRegi from "../Screens/Account/SignIn/AccountLoginRegi";
+import RegiId from "../Screens/Account/SignUp/RegiId";
+import RegiNmNic from "../Screens/Account/SignUp/RegiNmNic";
+import RegiPass from "../Screens/Account/SignUp/RegiPass";
 import UniCertiDprtSrch from "../Screens/Account/UniCrtf/UniCertiDprtSrch";
 import UniCertiEcode from "../Screens/Account/UniCrtf/UniCertiEcode";
 import UniCertiEmail from "../Screens/Account/UniCrtf/UniCertiEmail";
@@ -18,25 +17,27 @@ import PassFindForId from "../Screens/Account/PassFind/PassFindForId";
 import IdFindEcode from "../Screens/Account/IdFind/IdFindEcode";
 import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
+import NoticePage from "../Screens/Home/NoTice/NoticePage";
 
-
-type RootStackParamList = {                                                         //파라미터 전달 값 없음
+type RootStackParamList = {
+  //파라미터 전달 값 없음
   ModalScreen: undefined;
   AccountLoginRegi: undefined;
   AccountLogin: undefined;
-  RegiId: undefined; 
-  RegiNmNic: undefined;        
-  RegiPass: undefined;                                              //파라미터 전달 값 없음
+  RegiId: undefined;
+  RegiNmNic: undefined;
+  RegiPass: undefined; //파라미터 전달 값 없음
   UniCertiDprtSrch: undefined;
-  UniCertiEcode : undefined;
-  UniCertiEmail : undefined;
-  UniCertiStudNum : undefined;
-  PassFindEcode : undefined;
-  PassFindForEmail : undefined;
-  PassFindForId : undefined;
-  IdFindEcode : undefined;
-  IdFindEmail : undefined;
-  IdFindOut : undefined;
+  UniCertiEcode: undefined;
+  UniCertiEmail: undefined;
+  UniCertiStudNum: undefined;
+  PassFindEcode: undefined;
+  PassFindForEmail: undefined;
+  PassFindForId: undefined;
+  IdFindEcode: undefined;
+  IdFindEmail: undefined;
+  IdFindOut: undefined;
+  NoticePage: undefined;
 };
 
 export type ScreenProps = {
@@ -126,6 +127,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="IdFindOut"
         component={IdFindOut}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NoticePage"
+        component={NoticePage}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

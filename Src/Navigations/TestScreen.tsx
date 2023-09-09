@@ -1,9 +1,9 @@
 import { Text } from "react-native";
 import React from "react";
-import { LoginBackground } from "../Components/Background";
-import { LongButton, ShortButton } from "../Components/Button";
-import { LongInput, ShortInput } from "../Components/TextInput";
-import { BasicTopbar } from "../Components/Topbar";
+import { LoginBackground } from "../Components/Reusable/Background";
+import { LongButton, ShortButton } from "../Components/Reusable/Button";
+import { LongInput, ShortInput } from "../Components/Reusable/TextInput";
+import { BasicTopbar } from "../Components/Reusable/Topbar";
 import { ScreenProps } from "./StackNavigator";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Styles from "../Styles/ButtonStyle";
