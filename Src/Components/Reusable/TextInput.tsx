@@ -13,7 +13,6 @@ export const LongInput: React.FC<inputProps> = ({
   text,
   ...props
 }) => {
-  // 버튼 컴포넌트의 타입을 정확하게 명시
 
   return (
     <TextInput
