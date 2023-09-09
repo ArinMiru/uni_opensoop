@@ -8,7 +8,17 @@ import AccountLoginRegi from "../Screens/AccountLoginRegi";
 import RegiId from "../Screens/RegiId";
 import RegiNmNic from "../Screens/RegiNmNic"
 import RegiPass from "../Screens/RegiPass"
-import UniCertiDprtSrch from "../Screens/Account/SingUp/UniCertiDprtSrch";
+import UniCertiDprtSrch from "../Screens/Account/UniCrtf/UniCertiDprtSrch";
+import UniCertiEcode from "../Screens/Account/UniCrtf/UniCertiEcode";
+import UniCertiEmail from "../Screens/Account/UniCrtf/UniCertiEmail";
+import UniCertiStudNum from "../Screens/Account/UniCrtf/UniCertiStudNum";
+import PassFindEcode from "../Screens/Account/PassFind/PassFindEcode";
+import PassFindForEmail from "../Screens/Account/PassFind/PassFindForEmail";
+import PassFindForId from "../Screens/Account/PassFind/PassFindForId";
+import IdFindEcode from "../Screens/Account/IdFind/IdFindEcode";
+import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
+import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
+
 
 type RootStackParamList = {                                                         //파라미터 전달 값 없음
   ModalScreen: undefined;
@@ -18,6 +28,15 @@ type RootStackParamList = {                                                     
   RegiNmNic: undefined;        
   RegiPass: undefined;                                              //파라미터 전달 값 없음
   UniCertiDprtSrch: undefined;
+  UniCertiEcode : undefined;
+  UniCertiEmail : undefined;
+  UniCertiStudNum : undefined;
+  PassFindEcode : undefined;
+  PassFindForEmail : undefined;
+  PassFindForId : undefined;
+  IdFindEcode : undefined;
+  IdFindEmail : undefined;
+  IdFindOut : undefined;
 };
 
 export type ScreenProps = {
@@ -55,14 +74,59 @@ const StackNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="ModalScreen"
+        component={ModalScreen}
+        options={{ headerShown: false, presentation: "modal" }}
+      />
+      <Stack.Screen
+        name="UniCertiEcode"
+        component={UniCertiEcode}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="UniCertiDprtSrch"
         component={UniCertiDprtSrch}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="ModalScreen"
-        component={ModalScreen}
-        options={{ headerShown: false, presentation: "modal" }}
+        name="UniCertiEmail"
+        component={UniCertiEmail}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="UniCertiStudNum"
+        component={UniCertiStudNum}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="PassFindEcode"
+        component={PassFindEcode}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="PassFindForEmail"
+        component={PassFindForEmail}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="PassFindForId"
+        component={PassFindForId}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="IdFindEcode"
+        component={IdFindEcode}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="IdFindEmail"
+        component={IdFindEmail}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="IdFindOut"
+        component={IdFindOut}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
