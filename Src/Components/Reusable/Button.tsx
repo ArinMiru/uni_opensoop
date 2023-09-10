@@ -8,17 +8,14 @@ import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 //  프로퍼티 타입 정의
 interface ButtonProps {
   children?: React.ReactNode;
-  text: string;
+  text?: string;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
-interface BasicProps {}
 
 /**
- * 기본 긴 버튼
- * 사용법은 LongButton text="문자열"
+ * 피그마 기준 기본 가로 길이 긴 버튼
  */
-
 export const LongButton: React.FC<ButtonProps> = ({
   children,
   text,
@@ -32,11 +29,10 @@ export const LongButton: React.FC<ButtonProps> = ({
     </TouchableOpacity>
   );
 };
-/**
- * 기본 짧은 버튼
- * 사용법은 ShortButton text = "문자열"
- */
 
+/**
+ * 피그마 기준 기본 가로 짧은 버튼
+ */
 export const ShortButton: React.FC<ButtonProps> = ({
   children,
   text,
@@ -54,7 +50,6 @@ export const ShortButton: React.FC<ButtonProps> = ({
 /**
  * 맨 처음 로그인 회원가입 화면에서 사용할 회원가입 버튼
  */
-
 export const RegiButton: React.FC<ButtonProps> = ({
   children,
   text,
@@ -89,7 +84,6 @@ export const LoginButton: React.FC<ButtonProps> = ({
  */
 export const IconButton: React.FC<ButtonProps> = ({
   children,
-  text,
   onPress,
 }) => {
   return (

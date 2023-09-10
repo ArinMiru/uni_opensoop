@@ -10,7 +10,7 @@ interface inputProps {
 }
 
 /**
- * 기본적인 상단 바 사용법은 BasicTopbar text = "문자열"
+ * 공지사항 스크린 기본적인 상단 바
  */
 export const BasicTopbar: React.FC<inputProps> = ({ children, text }) => {
   // 컴포넌트의 타입을 정확하게 명시
