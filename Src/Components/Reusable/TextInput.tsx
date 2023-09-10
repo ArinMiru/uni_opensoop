@@ -8,6 +8,11 @@ interface inputProps extends TextInputProps {
   text: string; //문자열로 타입 명시
 }
 
+/**
+ * 피그마 기준 가장 기본 긴 인풋
+ * @param LongInput
+ * @returns 
+ */
 export const LongInput: React.FC<inputProps> = ({
   children,
   text,
@@ -24,6 +29,11 @@ export const LongInput: React.FC<inputProps> = ({
   );
 };
 
+/**
+ * 로그인 스크린 상단 아이디 입력 텍스트인풋 
+ * @param LoginInputMargin
+ * @returns 
+ */
 export const LongInputMargin: React.FC<inputProps> = ({
   children,
   text,
@@ -43,6 +53,11 @@ export const LongInputMargin: React.FC<inputProps> = ({
   );
 };
 
+/**
+ * 피그마 기준 가로 길이 짧은 인풋
+ * @param ShortInput
+ * @returns 
+ */
 export const ShortInput: React.FC<inputProps> = ({
   children,
   text,
