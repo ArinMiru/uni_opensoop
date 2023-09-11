@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, TextInputProps } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import shortButtonStyle from "../../Styles/ButtonStyle" ;
 import longButtonStyle from "../../Styles/ButtonStyle"
@@ -6,7 +6,7 @@ import TextInputStyle from "../../Styles/TextInputStyle";
 import { deviceWidth, deviceHeight } from "../../Utils/DeviceUtils";
 import { TextInput } from "react-native-gesture-handler";
 
-interface TextTopProps {
+interface TextTopProps extends TextInputProps {
     children?: React.ReactNode;
     text?: string;
     inputText?: string;
@@ -14,9 +14,9 @@ interface TextTopProps {
 
 interface ButtonProps {
     children?: React.ReactNode;
-    text: string;
-    onPress: () => void;
-    navigation: {navigate: (screenName: string) => void;}
+    text?: string;
+    onPress?: () => void;
+    navigation?: {navigate: (screenName: string) => void;}
 }
 
 /*
@@ -49,9 +49,9 @@ export const RegiCommonButton2: React.FC<TextTopProps> = ({ children, text, inpu
 /*
 회원가입 화면에 flex 3의 범위를 가진 텍스트 인풋, 짧은 버튼이 가로정렬된 컴포넌트
 **/
-export const RegiCommonButton3: React.FC<TextTopProps> = ({ children, text, inputText }) => (
+export const RegiCommonButton3: React.FC<TextTopProps> = ({ children, text, inputText, ...props }) => (
     <View style={{flex:3, justifyContent:"center", marginTop:deviceHeight*0.03, flexDirection:"row"}}> 
-        <TextInput placeholderTextColor="#8391A1" style={TextInputStyle.shortInput} placeholder={inputText}></TextInput>
+        <TextInput placeholderTextColor="#8391A1" style={TextInputStyle.shortInput} placeholder={inputText} {...props}></TextInput>
         <TouchableOpacity style={shortButtonStyle.shortButtonStyle}><Text style={textStyle.textbase}>{text}</Text>{children}</TouchableOpacity>
     </View>);
     
