@@ -156,7 +156,7 @@ export default StyleSheet.create({
     fontSize: 12,
   },
 
-  /*-------------------------------------------*/ 
+  /*----------------regular-------------------*/ 
 
   regular07:{
     fontFamily: "NotoSans",
@@ -181,5 +181,7 @@ export default StyleSheet.create({
     fontWeight: "400", /*regular*/
     fontSize: 13,
   },
+
+  /*------------------------------------------*/ 
 
 });
