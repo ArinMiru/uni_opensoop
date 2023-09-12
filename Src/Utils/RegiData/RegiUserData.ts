@@ -5,12 +5,14 @@ type UserDataField = "MEMB_ID" | "MEMB_PASS"; // 필요한 필드를 여기에 �
 interface RegiDataType {
   MEMB_ID: string;
   MEMB_PASS: string;
+  MEMB_NM: string;
   // 다른 필드 정의
 }
 
 const RegiUserData: RegiDataType = {
   MEMB_ID: "",
   MEMB_PASS: "",
+  MEMB_NM: ""
   // 다른 필드 초기화
 };
 /**

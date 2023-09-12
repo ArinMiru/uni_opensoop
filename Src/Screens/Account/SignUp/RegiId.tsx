@@ -14,7 +14,7 @@ import { setUserDataAndNavigate } from "../../../Utils/RegiData/RegiUserData";
 const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
   const [userRegiId, setUserRegiId] = useState<string>("");
 
-  const RegiDataParsing = () => {
+  const RegiUserDataSave = () => {
     setUserDataAndNavigate("MEMB_ID", userRegiId, navigation, "RegiNmNic");       // 회원가입 사용자 데이터 저장 함수 사용 예시
   };
 
@@ -41,7 +41,7 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
         value={userRegiId}
         onChangeText={(text) => setUserRegiId(text)}
       />
-      <RegiNextButton text="다음" onPress={RegiDataParsing} />
+      <RegiNextButton text="다음" onPress={RegiUserDataSave} />
     </LoginBackground>
   );
 };
