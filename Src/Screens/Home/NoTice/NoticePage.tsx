@@ -7,7 +7,7 @@ const NoTicePage = () => {
   return (
     <SafeAreaView style={{ flex: 2 }}>
       <Text>{userData?.MEMB_NM}</Text>
-      {userData?.TIT_CD === "02" && <Text> 학회장 </Text>}                              {/* 조건부 렌더링 예시 */}
+      {userData?.TIT_CD === "02" && <Text> 학회장 </Text>}
     </SafeAreaView>
   );
 };
