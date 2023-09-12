@@ -13,47 +13,19 @@ import {
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
-import { fetchData } from "../../../Services/ApiService";
 import { getUserData } from "../../../Utils/ApiData/UserData";
+import { loginUser } from "../../../Services/EndPointApiFuntion";
 
 const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   // 아이디와 비밀번호 상태값과 타입 명시적 설정 설정
-  const [id, setId] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [LOGIN_ID, setLOGIN_ID] = useState<string>("");
+  const [LOGIN_PASS, setLOGIN_PASS] = useState<string>("");
 
-  // 아이디 입력값 상태 핸들러
-  const idInputChange = (idInput: string) => {
-    setId(idInput);
-  };
+  const handleLogin = async () => {
+    const result = await loginUser(LOGIN_ID, LOGIN_PASS);
 
-  // 비밀번호 입력값 상태 핸들러
-  const passInputChange = (passInput: string) => {
-    setPassword(passInput);
-  };
-  /**
-   * 로그인 버튼 클릭시 동작 핸들러
-   */
-  const handleLoginPress = async () => {
-    try {
-      await fetchData(id, password);                                            // 1. 아이디와 비밀번호를 서버로 전송하여 데이터 가져오기
-      const userData = getUserData();                                           // 2. 서버로부터 UserData 가져오기
-      if (userData) {                                                           
-        if (userData.RSLT_CD === "00") {                                        // 3. UserData가 존재하는 경우
-          navigation.navigate("NoticePage");                                    // 4. RSLT_CD가 "00"이면 로그인 성공 메시지 출력 및 NoticePage로 이동
-        } else {                                                                // 5. RSLT_CD가 "00"이 아니면 로그인 실패 메시지 출력
-          Alert.alert(
-            "에러",
-            "로그인 실패: 아이디 또는 비밀번호가 일치하지 않습니다."
-          );
-        }
-      } else {                                                                  // 6. UserData가 존재하지 않으면 서버에서 데이터를 가져오지 못한 경우 메시지 출력
-        Alert.alert(
-          "에러",
-          "로그인 실패: 서버에서 데이터를 가져오지 못했습니다."
-        );
-      }
-    } catch (error) {                                                           // 7. 데이터 전송 중 오류 발생 시 오류 메시지 출력
-      console.error("데이터 전송 중 오류 발생:", error);
+    if(getUserData()?.RSLT_CD === "00"){
+      navigation.navigate("NoticePage")
     }
   };
 
@@ -84,17 +56,17 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={{ flex: 2.5 }}>
         <LongInputMargin
           text="아이디"
-          value={id}
-          onChangeText={idInputChange}
+          value={LOGIN_ID}
+          onChangeText={(text) => setLOGIN_ID(text)}
         />
         <LongInput
           text="비밀번호"
-          value={password}
-          onChangeText={passInputChange}
+          value={LOGIN_PASS}
+          onChangeText={(text) => setLOGIN_PASS(text)}
         />
       </View>
       <View style={{ flex: 2, justifyContent: "center" }}>
-        <LongButton text="로그인" onPress={handleLoginPress} />
+        <LongButton text="로그인" onPress={handleLogin} />
       </View>
       <View
         style={{
