@@ -70,4 +70,13 @@ export default StyleSheet.create({
     justifyContent: "center",
     borderRadius: 11,
   },
+  srchDupleButtonStyl: {
+    width : deviceWidth * 0.2,
+    height : deviceHeight * 0.062,
+    backgroundColor: "#4BB781",
+    borderRadius: 11,
+    justifyContent: "center",
+    alignItems: "center",
+
+  }
 });

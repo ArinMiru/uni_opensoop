@@ -5,6 +5,7 @@ import { LongButton, RegiButton } from "../../../Components/Reusable/Button";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
+import { SrchDupleInput } from "../../../Components/AccountCompo/AccoutTextInput";
 const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
   // 타입을 명시적으로 설정
 
@@ -31,6 +32,7 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
           navigation={navigation}
           text="회원가입"
         />
+        <SrchDupleInput text="Fuck" />
       </View>
     </LoginBackground>
   );

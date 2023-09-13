@@ -9,7 +9,7 @@ import {
   RegiCommonButton3,
   RegiNextButton,
 } from "../../../Components/CommonView/CommonCompo";
-import { setUserDataAndNavigate } from "../../../Utils/RegiData/RegiUserData";
+import { setUserDataAndNavigate } from "../../../Utils/_private/RegiData/RegiUserData";
 
 const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
   const [userRegiId, setUserRegiId] = useState<string>("");
