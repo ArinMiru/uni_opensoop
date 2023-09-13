@@ -1,14 +1,27 @@
 import { StyleSheet } from "react-native";
 import { deviceWidth, deviceHeight } from "../Utils/DeviceUtils";
 
-/* 삭제 예정(@김도원) */
-
 export default StyleSheet.create({
+  /*-------------------Account Compo Button Style----------------------*/
+
   /**
-   * Components/Reusable/Button
-   * LongButton 스타일
+   * /Components/AccountCompo/AccountButton
+   * 중복 확인 버튼
    */
-  longButtonStyle: {
+  srchDupleButtonStyle: {
+    width: deviceWidth * 0.2,
+    height: deviceHeight * 0.062,
+    backgroundColor: "#4BB781",
+    borderRadius: 11,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  /**
+   * /Components/AccountCompo/AccountButton
+   * Account에서만 쓰이는 버튼(다음, 완료, 로그인하러가기 등..)
+   */
+  onlyAccountStyle: {
     width: deviceWidth * 0.8,
     height: deviceHeight * 0.062,
     backgroundColor: "#4BB781",
@@ -16,24 +29,12 @@ export default StyleSheet.create({
     justifyContent: "center",
     borderRadius: 11,
   },
+
   /**
-   * Components/Reusable/Button
-   * ShortButton 스틸
+   * /Components/AccountCompo/AccountButton
+   * 회원가입 버튼
    */
-  shortButtonStyle: {
-    width: deviceWidth * 0.2,
-    height: deviceHeight * 0.062,
-    marginLeft: deviceWidth * 0.02,
-    backgroundColor: "#4BB781",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 11,
-  },
-  /**
-   * Components/Reusable/Button
-   * RegiButton 스타일
-   */
-  regiStyle: {
+  onlyAccountRegiStyle: {
     width: deviceWidth * 0.8,
     height: deviceHeight * 0.062,
     backgroundColor: "#E4F1E4",
@@ -42,11 +43,12 @@ export default StyleSheet.create({
     borderRadius: 11,
     marginTop: 25,
   },
+
   /**
-   * Components/Reusable/Button
-   * LoginButton 스타일
+   * /Components/AccountCompo/AccountButton
+   * 아이디, 비밀번호 찾기 버튼
    */
-  loginStyle: {
+  idPassFindStyle: {
     width: deviceWidth * 0.25,
     height: deviceHeight * 0.042,
     backgroundColor: "#E4F1E4",
@@ -59,17 +61,6 @@ export default StyleSheet.create({
     marginLeft: deviceWidth * 0.01,
     marginTop: deviceHeight * 0.05,
   },
-  /**
-   * Components/RegiCommon/
-   * 회원가입 스크린 버튼 스타일
-   */
-  commonButtonStyle: {
-    width: deviceWidth * 0.8,
-    height: deviceHeight * 0.06,
-    marginLeft: deviceWidth * 0.1,
-    backgroundColor: "#4bb781",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 11,
-  },
+
+  /*------------------------------------------------------------*/
 });
