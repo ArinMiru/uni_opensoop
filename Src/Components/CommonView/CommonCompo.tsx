@@ -24,7 +24,7 @@ interface ButtonProps {
 **/
 export const RegiText1: React.FC<TextTopProps> = ({ children,text }) => (
 <View style={{flex:1, justifyContent:"flex-end", marginRight:deviceWidth*0.5}}>
-    <Text style={{fontSize: 30, fontFamily:"NotoSans"}}>{text}</Text>
+    <Text style={{fontSize: 30, fontFamily:"Bold"}}>{text}</Text>
     {children}
 </View>);
 
@@ -33,7 +33,7 @@ export const RegiText1: React.FC<TextTopProps> = ({ children,text }) => (
 **/
 export const RegiText2: React.FC<TextTopProps> = ({ children,text }) => (
     <View style={{flex:2, justifyContent:"flex-end", marginRight:deviceWidth*0.5}}>
-        <Text style={{fontSize: 30, fontFamily:"NotoSans"}}>{text}</Text>
+        <Text style={{fontSize: 30, fontFamily:"Bold"}}>{text}</Text>
         {children}
     </View>);
 

@@ -9,7 +9,7 @@ import {
   RegiCommonButton2,
   RegiNextButton,
 } from "../../../Components/CommonView/CommonCompo";
-import RegiUserData from "../../../Utils/RegiData/RegiUserData";
+import RegiUserData from "../../../Utils/_private/RegiData/RegiUserData";
 
 const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
   // 타입을 명시적으로 설정
