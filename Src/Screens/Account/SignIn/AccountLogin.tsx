@@ -13,8 +13,8 @@ import {
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
-import { getUserData } from "../../../Utils/ApiData/UserData";
-import { loginUser } from "../../../Services/EndPointApiFuntion";
+import { getUserData } from "../../../Utils/_private/ApiData/UserData";
+import { loginUser } from "../../../Services/_private/EndPointApiFuntion";
 
 const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   // 아이디와 비밀번호 상태값과 타입 명시적 설정 설정
