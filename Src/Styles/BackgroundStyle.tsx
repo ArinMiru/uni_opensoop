@@ -2,8 +2,12 @@ import { StyleSheet } from "react-native";
 import { deviceWidth, deviceHeight } from "../Utils/DeviceUtils";
 import Constants from "expo-constants";
 
+/* 삭제 예정(@김도원) */
+
 export default StyleSheet.create({
   /**
+   *
+   *
    * /Compnents/Backgroud.tsx 파일 LoginBackground 배경 스타
    */
   loginBackground: {
@@ -12,7 +16,7 @@ export default StyleSheet.create({
     width: deviceWidth * 1,
     height: deviceHeight * 1,
     alignItems: "center",
-    paddingTop: Constants.statusBarHeight,             // 안드로이드의 경우 SafeAreaView 가 적용되지 않아 별도의 값을 구하여 상태 표시줄을 보존 하여야 함
+    paddingTop: Constants.statusBarHeight, // 안드로이드의 경우 SafeAreaView 가 적용되지 않아 별도의 값을 구하여 상태 표시줄을 보존 하여야 함
   },
   /**
    * Components/RegiCommon/

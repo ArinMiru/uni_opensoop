@@ -3,8 +3,6 @@ import React from "react";
 import { View, Text } from "react-native";
 import textSyle from "../../Styles/TextStyle";
 
-/* 삭제 예정 (@김도원)*/
-
 //프로퍼티 타입 정의
 interface inputProps {
   children?: React.ReactNode; //리액트로 타입 명시
@@ -12,13 +10,14 @@ interface inputProps {
 }
 
 /**
- * 공지사항 스크린 기본적인 상단 바
+ * App 화면 상단 초록색 상단 바(공지사항, 게시판, 투표, 캘린더))
+ * (2023.09.14 김도원 생성)
  */
-export const BasicTopbar: React.FC<inputProps> = ({ children, text }) => {
+export const Topbar: React.FC<inputProps> = ({ children, text }) => {
   // 컴포넌트의 타입을 정확하게 명시
   return (
-    <View style={Styles.basicTopbar}>
-      <Text style={textSyle.textbase}>{text}</Text>
+    <View style={Styles.Topbar}>
+      <Text style={textSyle.semibold19}>{text}</Text>
       {children}
     </View>
   );
