@@ -3,6 +3,8 @@ import React from "react";
 import { TextInput, TextInputProps } from "react-native";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 
+/* 삭제 예정 (@김도원)*/
+
 //프로퍼티 타입 정의
 interface inputProps extends TextInputProps {
   text: string; //문자열로 타입 명시
@@ -10,15 +12,15 @@ interface inputProps extends TextInputProps {
 
 /**
  * 피그마 기준 가장 기본 긴 인풋
+ * Account
  * @param LongInput
- * @returns 
+ * @returns
  */
 export const LongInput: React.FC<inputProps> = ({
   children,
   text,
   ...props
 }) => {
-
   return (
     <TextInput
       placeholderTextColor="#8391A1"
@@ -30,9 +32,10 @@ export const LongInput: React.FC<inputProps> = ({
 };
 
 /**
- * 로그인 스크린 상단 아이디 입력 텍스트인풋 
+ * 로그인 스크린 상단 아이디 입력 텍스트인풋
+ * Account
  * @param LoginInputMargin
- * @returns 
+ * @returns
  */
 export const LongInputMargin: React.FC<inputProps> = ({
   children,
@@ -55,8 +58,9 @@ export const LongInputMargin: React.FC<inputProps> = ({
 
 /**
  * 피그마 기준 가로 길이 짧은 인풋
+ * Account(중복확인)
  * @param ShortInput
- * @returns 
+ * @returns
  */
 export const ShortInput: React.FC<inputProps> = ({
   children,

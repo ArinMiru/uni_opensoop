@@ -5,6 +5,8 @@ import {
   currentPlatform,
 } from "../Utils/DeviceUtils";
 
+/* App에서 사용하는 모든 TextStyle File  */
+
 export default StyleSheet.create({
   /**
    * 모든 컴포넌트 가장 기본 텍스트 스타일
@@ -68,6 +70,8 @@ export default StyleSheet.create({
     fontSize: 18,
   },
 
+  // 위에 있는 모든 TextStyle 삭제 예정(@김도원)*/
+
   /*-------------------------------------------*/
 
   /*
@@ -94,6 +98,12 @@ export default StyleSheet.create({
     fontFamily: "Medium",
     fontWeight: "500" /*medium*/,
     fontSize: 12,
+  },
+
+  medium13: {
+    fontFamily: "Medium",
+    fontWeight: "500" /*medium*/,
+    fontSize: 13,
   },
 
   medium14: {
@@ -138,6 +148,12 @@ export default StyleSheet.create({
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
     fontSize: 14,
+  },
+
+  semibold19: {
+    fontFamily: "SemiBold",
+    fontWeight: "600" /*semibold*/,
+    fontSize: 19,
   },
 
   /*-----------------bold---------------------*/

@@ -5,6 +5,8 @@ import textStyle from "../../Styles/TextStyle";
 import { Ionicons } from "@expo/vector-icons";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 
+/* 삭제 예정 (@김도원)*/
+
 //  프로퍼티 타입 정의
 interface ButtonProps {
   children?: React.ReactNode;
@@ -15,6 +17,7 @@ interface ButtonProps {
 
 /**
  * 피그마 기준 기본 가로 길이 긴 버튼
+ * Account
  */
 export const LongButton: React.FC<ButtonProps> = ({
   children,
@@ -32,6 +35,7 @@ export const LongButton: React.FC<ButtonProps> = ({
 
 /**
  * 피그마 기준 기본 가로 짧은 버튼
+ * Account
  */
 export const ShortButton: React.FC<ButtonProps> = ({
   children,
@@ -49,6 +53,7 @@ export const ShortButton: React.FC<ButtonProps> = ({
 
 /**
  * 맨 처음 로그인 회원가입 화면에서 사용할 회원가입 버튼
+ * Account
  */
 export const RegiButton: React.FC<ButtonProps> = ({
   children,
@@ -65,6 +70,7 @@ export const RegiButton: React.FC<ButtonProps> = ({
 
 /**
  * 두 번째 로그인 화면에서 사용할 아이디찾기, 비밀번호찾기 버튼
+ * Account
  */
 export const LoginButton: React.FC<ButtonProps> = ({
   children,
@@ -81,11 +87,9 @@ export const LoginButton: React.FC<ButtonProps> = ({
 
 /**
  * chevron-back 아이콘에 해당하는 버튼 영역
+ * Account back button
  */
-export const IconButton: React.FC<ButtonProps> = ({
-  children,
-  onPress,
-}) => {
+export const IconButton: React.FC<ButtonProps> = ({ children, onPress }) => {
   return (
     <TouchableOpacity
       style={{ width: deviceWidth * 0.2, height: deviceHeight * 0.05 }}

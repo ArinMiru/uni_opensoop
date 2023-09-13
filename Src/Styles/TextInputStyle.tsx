@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 import { deviceHeight, deviceWidth } from "../Utils/DeviceUtils";
 
+/* 삭제 예정(@김도원) */
+
 export default StyleSheet.create({
   /**
    * /Components/Reusable/TextInput
@@ -42,13 +44,5 @@ export default StyleSheet.create({
     borderWidth: 1,
     width: deviceWidth * 0.8,
     height: deviceHeight * 0.06,
-  },
-  srchDupleInputStyle: {
-    width: deviceWidth * 0.575,
-    height: deviceHeight * 0.062,
-    borderRadius: 11,
-    paddingLeft: 10,
-    borderColor: "#e8ecf4",
-    borderWidth: 1,
   },
 });

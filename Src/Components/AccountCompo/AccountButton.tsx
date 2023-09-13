@@ -1,5 +1,9 @@
+/**
+ * AccountButton Components (Figma 참고)
+ */
+
 import { Children } from "react";
-import ButtonStyle from "../../Styles/ButtonStyle";
+import ButtonStyle from "../../Styles/AccountButtonStyle";
 import { TouchableOpacity, Text } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 
@@ -11,9 +15,12 @@ interface ButtonProps {
 }
 
 /**
- * 예시일뿐 쓰면 안이쁨
  * @param param0
  * @returns
+ */
+
+/**
+ * 중복 확인 버튼
  */
 export const SrchDupleButton: React.FC<ButtonProps> = ({
   children,
@@ -21,8 +28,43 @@ export const SrchDupleButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity style={ButtonStyle.srchDupleButtonStyl} onPress={onPress}>
+    <TouchableOpacity
+      style={ButtonStyle.srchDupleButtonStyle}
+      onPress={onPress}
+    >
       <Text style={[textStyle.semibold13, { color: "#ffffff" }]}>{text} </Text>
+      {children}
+    </TouchableOpacity>
+  );
+};
+
+/**
+ * Account에서 쓰이는 버튼(다음, 완료, 로그인하러가기 등..)
+ */
+export const OnlyAccountButton: React.FC<ButtonProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  return (
+    <TouchableOpacity style={ButtonStyle.onlyAccountStyle} onPress={onPress}>
+      <Text style={textStyle.semibold13}>{text}</Text>
+      {children}
+    </TouchableOpacity>
+  );
+};
+
+/**
+ * 아이디, 비밀번호 찾기 버튼
+ */
+export const IdPassFindButton: React.FC<ButtonProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  return (
+    <TouchableOpacity style={ButtonStyle.idPassFindStyle} onPress={onPress}>
+      <Text style={textStyle.bold08}>{text}</Text>
       {children}
     </TouchableOpacity>
   );
