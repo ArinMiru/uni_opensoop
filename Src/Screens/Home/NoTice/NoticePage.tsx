@@ -1,6 +1,6 @@
 import { SafeAreaView, Text } from "react-native";
 import React from "react";
-import { getUserData } from "../../../Utils/ApiData/UserData";
+import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 
 const NoTicePage = () => {
   const userData = getUserData();
