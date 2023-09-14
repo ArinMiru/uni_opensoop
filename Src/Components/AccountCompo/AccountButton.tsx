@@ -3,9 +3,10 @@
  */
 
 import { Children } from "react";
-import ButtonStyle from "../../Styles/AccountButtonStyle";
+import AccountButtonStyle from "../../Styles/AccountButtonStyle";
 import { TouchableOpacity, Text } from "react-native";
 import textStyle from "../../Styles/TextStyle";
+import { deviceHeight } from "../../Utils/DeviceUtils";
 
 interface ButtonProps {
   children?: React.ReactNode;
@@ -13,12 +14,10 @@ interface ButtonProps {
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
-
 /**
  * @param param0
  * @returns
  */
-
 /**
  * 중복 확인 버튼
  */
@@ -29,7 +28,7 @@ export const SrchDupleButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={ButtonStyle.srchDupleButtonStyle}
+      style={AccountButtonStyle.srchDupleButtonStyle}
       onPress={onPress}
     >
       <Text style={[textStyle.semibold13, { color: "#ffffff" }]}>{text} </Text>
@@ -37,7 +36,6 @@ export const SrchDupleButton: React.FC<ButtonProps> = ({
     </TouchableOpacity>
   );
 };
-
 /**
  * Account에서 쓰이는 버튼(다음, 완료, 로그인하러가기 등..)
  */
@@ -47,13 +45,12 @@ export const OnlyAccountButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity style={ButtonStyle.onlyAccountStyle} onPress={onPress}>
+    <TouchableOpacity style={AccountButtonStyle.onlyAccountStyle} onPress={onPress}>
       <Text style={textStyle.semibold13}>{text}</Text>
       {children}
     </TouchableOpacity>
   );
 };
-
 /**
  * 아이디, 비밀번호 찾기 버튼
  */
@@ -63,7 +60,7 @@ export const IdPassFindButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity style={ButtonStyle.idPassFindStyle} onPress={onPress}>
+    <TouchableOpacity style={AccountButtonStyle.idPassFindStyle} onPress={onPress}>
       <Text style={textStyle.bold08}>{text}</Text>
       {children}
     </TouchableOpacity>

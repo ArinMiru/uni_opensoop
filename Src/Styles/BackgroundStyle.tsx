@@ -2,8 +2,6 @@ import { StyleSheet } from "react-native";
 import { deviceWidth, deviceHeight } from "../Utils/DeviceUtils";
 import Constants from "expo-constants";
 
-/* 삭제 예정(@김도원) */
-
 export default StyleSheet.create({
   /**
    *
@@ -22,26 +20,35 @@ export default StyleSheet.create({
    * Components/RegiCommon/
    * 회원가입 스크린 상단 텍스트 영역 스타일
    */
-  uniDprtSrchText: {
+  backIconFlex: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "flex-end",
+    justifyContent: "flex-start",
     width: deviceWidth * 1,
   },
   /**
    * Components/RegiCommon/
    * 회원가입 스크린 중간 텍스트 인풋 영역 스타일
    */
-  uniDprtSrchInput: {
+  titleTextFlex: {
     flex: 1,
     width: deviceWidth * 1,
+    flexDirection: "row",
+    alignItems: "flex-end",
   },
   /**
    * Components/RegiCommon/
    * 회원가입 스크린 하단 버튼 영역 스타일
    */
-  uniDprtSrchButton: {
-    flex: 2,
+  accountInputFlex: {
+    flex: 3,
     width: deviceWidth * 1,
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+
+  accountButtonFlex: {
+    flex: 4,
+    width: deviceWidth * 1,
+    alignItems: "center",
   },
 });
