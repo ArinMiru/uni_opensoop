@@ -1,7 +1,10 @@
 import { View } from "react-native";
 import React from "react";
 import { LoginBackground } from "../../../Components/AllCompo/Background";
-import { LongButton, RegiButton } from "../../../Components/Reusable/Button";
+import {
+  OnlyAccountButton,
+  OnlyAccountRegiButton,
+} from "../../../Components/AccountCompo/AccountButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
@@ -22,12 +25,12 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
         ></Image>
       </View>
       <View style={{ flex: 3, justifyContent: "center", alignItems: "center" }}>
-        <LongButton
+        <OnlyAccountButton
           onPress={() => navigation.navigate("AccountLogin")}
           navigation={navigation}
           text="로그인"
         />
-        <RegiButton
+        <OnlyAccountRegiButton
           onPress={() => navigation.navigate("RegiId")}
           navigation={navigation}
           text="회원가입"

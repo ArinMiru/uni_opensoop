@@ -1,9 +1,5 @@
 import { StyleSheet } from "react-native";
-import {
-  deviceHeight,
-  deviceWidth,
-  currentPlatform,
-} from "../Utils/DeviceUtils";
+import { responsiveFontSize } from "../Utils/ResponsiveFontSize";
 
 /* App에서 사용하는 모든 TextStyle File  */
 
@@ -27,31 +23,31 @@ export default StyleSheet.create({
   medium09: {
     fontFamily: "Medium",
     fontWeight: "500" /*medium*/,
-    fontSize: 9,
+    fontSize: responsiveFontSize(9),
   },
 
   medium12: {
     fontFamily: "Medium",
     fontWeight: "500" /*medium*/,
-    fontSize: 12,
+    fontSize: responsiveFontSize(12),
   },
 
   medium13: {
     fontFamily: "Medium",
     fontWeight: "500" /*medium*/,
-    fontSize: 13,
+    fontSize: responsiveFontSize(13),
   },
 
   medium14: {
     fontFamily: "Medium",
     fontWeight: "500" /*medium*/,
-    fontSize: 14,
+    fontSize: responsiveFontSize(26),
   },
 
   medium20: {
     fontFamily: "Medium",
     fontWeight: "500" /*medium*/,
-    fontSize: 20,
+    fontSize: responsiveFontSize(35),
   },
 
   /*----------------semibold-------------------*/
@@ -59,43 +55,43 @@ export default StyleSheet.create({
   semibold07: {
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
-    fontSize: 7,
+    fontSize: responsiveFontSize(7),
   },
 
   semibold08: {
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
-    fontSize: 8,
+    fontSize: responsiveFontSize(8),
   },
 
   semibold10: {
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
-    fontSize: 10,
+    fontSize: responsiveFontSize(12),
   },
 
   semibold12: {
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
-    fontSize: 12,
+    fontSize: responsiveFontSize(12),
   },
 
   semibold13: {
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
-    fontSize: 13,
+    fontSize: responsiveFontSize(30),
   },
 
   semibold14: {
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
-    fontSize: 14,
+    fontSize: responsiveFontSize(14),
   },
 
   semibold19: {
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
-    fontSize: 19,
+    fontSize: responsiveFontSize(19),
   },
 
   /*-----------------bold---------------------*/
@@ -103,25 +99,25 @@ export default StyleSheet.create({
   bold08: {
     fontFamily: "Bold",
     fontWeight: "700" /*bold*/,
-    fontSize: 8,
+    fontSize: responsiveFontSize(20),
   },
 
   bold11: {
     fontFamily: "Bold",
     fontWeight: "700" /*bold*/,
-    fontSize: 11,
+    fontSize: responsiveFontSize(11),
   },
 
   bold12: {
     fontFamily: "Bold",
     fontWeight: "700" /*bold*/,
-    fontSize: 12,
+    fontSize: responsiveFontSize(12),
   },
 
   bold25: {
     fontFamily: "Bold",
     fontWeight: "700" /*bold*/,
-    fontSize: 25,
+    fontSize: responsiveFontSize(50),
   },
 
   /*----------------regular-------------------*/
@@ -129,25 +125,25 @@ export default StyleSheet.create({
   regular07: {
     fontFamily: "Regular",
     fontWeight: "400" /*regular*/,
-    fontSize: 7,
+    fontSize: responsiveFontSize(7),
   },
 
   regular08: {
     fontFamily: "Regular",
     fontWeight: "400" /*regular*/,
-    fontSize: 8,
+    fontSize: responsiveFontSize(8),
   },
 
   regular10: {
     fontFamily: "Regular",
     fontWeight: "400" /*regular*/,
-    fontSize: 10,
+    fontSize: responsiveFontSize(10),
   },
 
   regular13: {
     fontFamily: "Regular",
     fontWeight: "400" /*regular*/,
-    fontSize: 13,
+    fontSize: responsiveFontSize(13),
   },
 
   /*------------------------------------------*/
