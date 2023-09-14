@@ -176,12 +176,6 @@ export default StyleSheet.create({
     fontSize: 12,
   },
 
-  bold25: {
-    fontFamily: "Bold",
-    fontWeight: "700" /*bold*/,
-    fontSize: 25,
-  },
-
   /*----------------regular-------------------*/
 
   regular07: {
