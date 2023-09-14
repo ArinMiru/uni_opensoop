@@ -1,8 +1,8 @@
 import { View } from "react-native";
 import React from "react";
 import { LoginBackground } from "../../../Components/AllCompo/Background";
-import { IconButton } from "../../../Components/Reusable/Button";
-import { LongButton } from "../../../Components/Reusable/Button";
+import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
+import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
@@ -24,11 +24,11 @@ const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
           width: deviceWidth * 1,
         }}
       >
-        <IconButton
+        <BlackBackIconButton
           text=""
           onPress={() => navigation.navigate("RegiId")}
           navigation={navigation}
-        ></IconButton>
+        ></BlackBackIconButton>
       </View>
       <RegiTextflex1 text="회원가입" />
       <View style={{ flex: 1 }}>
@@ -36,7 +36,7 @@ const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
       </View>
       <RegiDupleFlex2 inputText="닉네임" text="중복 확인" />
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
-        <LongButton
+        <OnlyAccountButton
           text="다음"
           onPress={() => navigation.navigate("RegiPass")}
         />
