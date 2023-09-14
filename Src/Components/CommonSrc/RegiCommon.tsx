@@ -1,18 +1,9 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  Text,
-  View,
-  SafeAreaView,
-  TextInput,
-} from "react-native";
+import { Text, View, SafeAreaView } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import BackgroundStyle from "../../Styles/BackgroundStyle";
-import ButtonStyle from "../../Styles/ButtonStyle";
-import InputStyle from "../../Styles/TextInputStyle";
 import { BlackBackIconButton } from "../AllCompo/BackIconButton";
-import { OnlyAccountInput } from "../AccountCompo/AccoutTextInput";
-import { TextInputProps, ButtonProps } from "react-native";
+import { OnlyAccountInputMarginTop2 } from "../AccountCompo/AccoutTextInput";
 import { OnlyAccountButton } from "../AccountCompo/AccountButton";
 import { deviceWidth } from "../../Utils/DeviceUtils";
 
@@ -22,7 +13,7 @@ interface CommonProps {
   bigtext: string;
   smalltext: string;
   buttontext: string;
-  inputtexttext: string;
+  text: string;
   onPress: () => void;
   navigation: {
     navigate: (screenName: string) => void;
@@ -33,7 +24,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
   bigtext,
   smalltext,
   buttontext,
-  inputtexttext,
+  text,
   onPress,
 }) => {
   // 파스칼 케이스 적용
@@ -56,7 +47,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
         </Text>
       </View>
       <View style={BackgroundStyle.accountInputFlex}>
-        <OnlyAccountInput inputtext={inputtexttext} />
+        <OnlyAccountInputMarginTop2 text={text} />
       </View>
       <View style={BackgroundStyle.accountButtonFlex}>
         <OnlyAccountButton text={buttontext} />
