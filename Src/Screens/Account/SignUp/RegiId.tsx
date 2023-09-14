@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import React, { useState } from "react";
-import { LoginBackground } from "../../../Components/Reusable/Background";
+import { LoginBackground } from "../../../Components/AllCompo/Background";
 import { IconButton, LongButton } from "../../../Components/Reusable/Button";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { deviceWidth } from "../../../Utils/DeviceUtils";

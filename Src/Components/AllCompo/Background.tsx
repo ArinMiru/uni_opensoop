@@ -4,8 +4,6 @@ import React from "react";
 import styles from "../../Styles/BackgroundStyle";
 import { StyleSheet } from "react-native";
 
-/* 삭제 예정 (@김도원)*/
-
 interface BackgroundProps {
   children?: React.ReactNode;
 }

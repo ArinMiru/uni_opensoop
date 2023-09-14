@@ -45,7 +45,10 @@ export const OnlyAccountButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity style={AccountButtonStyle.onlyAccountStyle} onPress={onPress}>
+    <TouchableOpacity
+      style={AccountButtonStyle.onlyAccountStyle}
+      onPress={onPress}
+    >
       <Text style={textStyle.semibold13}>{text}</Text>
       {children}
     </TouchableOpacity>
@@ -60,7 +63,10 @@ export const IdPassFindButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity style={AccountButtonStyle.idPassFindStyle} onPress={onPress}>
+    <TouchableOpacity
+      style={AccountButtonStyle.idPassFindStyle}
+      onPress={onPress}
+    >
       <Text style={textStyle.bold08}>{text}</Text>
       {children}
     </TouchableOpacity>
