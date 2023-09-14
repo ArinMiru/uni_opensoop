@@ -11,7 +11,7 @@ const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
       smalltext="로 아이디 찾기"
       inputtext="이메일"
       buttontext="다음"
-      onPress={() => navigation.navigate("IdFindEcode")}
+      onPress={() => navigation.navigate("IdFindEmail")}
       navigation={navigation}
     />
   );

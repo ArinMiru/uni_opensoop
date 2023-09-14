@@ -2,14 +2,14 @@ import { View, Alert } from "react-native";
 import React, { useState } from "react";
 import { LoginBackground } from "../../../Components/AllCompo/Background";
 import {
-  LongButton,
-  LoginButton,
-  IconButton,
-} from "../../../Components/Reusable/Button";
+  OnlyAccountButton,
+  IdPassFindButton,
+} from "../../../Components/AccountCompo/AccountButton";
 import {
-  LongInput,
-  LongInputMargin,
-} from "../../../Components/Reusable/TextInput";
+  OnlyAccountInputMarginTop2,
+  OnlyAccountInputMarginTop3,
+} from "../../../Components/AccountCompo/AccoutTextInput";
+import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
@@ -38,11 +38,11 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           width: deviceWidth * 1,
         }}
       >
-        <IconButton
+        <BlackBackIconButton
           text=""
           onPress={() => navigation.navigate("AccountLoginRegi")}
           navigation={navigation}
-        ></IconButton>
+        ></BlackBackIconButton>
         <Image
           style={{
             resizeMode: "contain",
@@ -54,19 +54,19 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
         ></Image>
       </View>
       <View style={{ flex: 2.5 }}>
-        <LongInputMargin
+        <OnlyAccountInputMarginTop3
           text="아이디"
           value={LOGIN_ID}
           onChangeText={(text) => setLOGIN_ID(text)}
         />
-        <LongInput
+        <OnlyAccountInputMarginTop2
           text="비밀번호"
           value={LOGIN_PASS}
           onChangeText={(text) => setLOGIN_PASS(text)}
         />
       </View>
       <View style={{ flex: 2, justifyContent: "center" }}>
-        <LongButton text="로그인" onPress={handleLogin} />
+        <OnlyAccountButton text="로그인" onPress={handleLogin} />
       </View>
       <View
         style={{
@@ -76,11 +76,11 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           flexDirection: "row",
         }}
       >
-        <LoginButton
+        <IdPassFindButton
           text="아이디찾기"
-          onPress={() => navigation.navigate("IdFindEcode")}
+          onPress={() => navigation.navigate("IdFindEmail")}
         />
-        <LoginButton text="비밀번호찾기" />
+        <IdPassFindButton text="비밀번호찾기" />
       </View>
     </LoginBackground>
   );

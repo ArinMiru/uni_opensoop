@@ -38,7 +38,7 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
-          onPress={() => navigation.navigate("RegiNmNic")}
+          onPress={() => navigation.navigate("AccountLogin")}
         />
       </View>
     </LoginBackground>
