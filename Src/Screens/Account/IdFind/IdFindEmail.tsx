@@ -1,5 +1,5 @@
 import React from "react";
-import { RegiCommonView } from "../../../Components/CommonSrc/RegiCommon"
+import { RegiCommonView } from "../../../Components/CommonSrc/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 
 const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
@@ -7,8 +7,8 @@ const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
     <RegiCommonView
       bigtext="이메일"
       smalltext="로 아이디 찾기"
-      inputtext="이메일"
-      buttontext="인증번호 전송"
+      text="이메일"
+      buttontext="다음"
       onPress={() => navigation.navigate("IdFindEcode")}
       navigation={navigation}
     />
