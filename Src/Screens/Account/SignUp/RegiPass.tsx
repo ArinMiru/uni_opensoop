@@ -7,9 +7,9 @@ import {
   OnlyAccountInputMarginTop2,
   OnlyAccountInputMarginTop3,
 } from "../../../Components/AccountCompo/AccoutTextInput";
+import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { Image } from "react-native";
 
 const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {

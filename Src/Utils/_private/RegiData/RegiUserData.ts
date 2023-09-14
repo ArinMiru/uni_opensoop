@@ -12,7 +12,7 @@ interface RegiDataType {
 export const RegiUserData: RegiDataType = {
   MEMB_ID: "",
   MEMB_PASS: "",
-  MEMB_NM: ""
+  MEMB_NM: "",
   // 다른 필드 초기화
 };
 /**

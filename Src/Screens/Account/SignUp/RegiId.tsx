@@ -46,5 +46,4 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
     </LoginBackground>
   );
 };
-
 export default RegiId;

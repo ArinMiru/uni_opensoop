@@ -10,48 +10,56 @@ import textStyle from "../../Styles/TextStyle";
 import BackgroundStyle from "../../Styles/BackgroundStyle";
 import ButtonStyle from "../../Styles/ButtonStyle";
 import InputStyle from "../../Styles/TextInputStyle";
+import { BlackBackIconButton } from "../AllCompo/BackIconButton";
+import { OnlyAccountInput } from "../AccountCompo/AccoutTextInput";
+import { TextInputProps, ButtonProps } from "react-native";
+import { OnlyAccountButton } from "../AccountCompo/AccountButton";
+import { deviceWidth } from "../../Utils/DeviceUtils";
 
 //  프로퍼티 타입 정의
 interface CommonProps {
   children?: React.ReactNode;
   bigtext: string;
   smalltext: string;
-  inputtext: string;
   buttontext: string;
+  inputtexttext: string;
   onPress: () => void;
   navigation: {
     navigate: (screenName: string) => void;
   };
 }
-
 export const RegiCommonView: React.FC<CommonProps> = ({
   children,
   bigtext,
   smalltext,
-  inputtext,
   buttontext,
+  inputtexttext,
   onPress,
 }) => {
   // 파스칼 케이스 적용
   return (
     <SafeAreaView style={BackgroundStyle.loginBackground}>
-      <View style={BackgroundStyle.uniDprtSrchText}>
-        <Text style={textStyle.commonScreenbigText}>{bigtext}</Text>
-        <Text style={textStyle.commonScreensmallText}>{smalltext}</Text>
+      <View style={BackgroundStyle.backIconFlex}>
+        <BlackBackIconButton />
       </View>
-      <View style={BackgroundStyle.uniDprtSrchInput}>
-        <TextInput
-          style={InputStyle.commonInput}
-          placeholder={inputtext}
-        ></TextInput>
-      </View>
-      <View style={BackgroundStyle.uniDprtSrchButton}>
-        <TouchableOpacity
-          style={ButtonStyle.commonButtonStyle}
-          onPress={onPress}
+      <View style={BackgroundStyle.titleTextFlex}>
+        <Text
+          style={[
+            textStyle.bold25,
+            { color: "#4BB781", marginLeft: deviceWidth * 0.111 },
+          ]}
         >
-          <Text style={textStyle.commonButtonText}>{buttontext}</Text>
-        </TouchableOpacity>
+          {bigtext}
+        </Text>
+        <Text style={[textStyle.medium20, { color: "#424C43" }]}>
+          {smalltext}
+        </Text>
+      </View>
+      <View style={BackgroundStyle.accountInputFlex}>
+        <OnlyAccountInput inputtext={inputtexttext} />
+      </View>
+      <View style={BackgroundStyle.accountButtonFlex}>
+        <OnlyAccountButton text={buttontext} />
       </View>
       {children}
     </SafeAreaView>

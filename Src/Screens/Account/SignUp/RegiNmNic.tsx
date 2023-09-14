@@ -1,10 +1,10 @@
 import { View } from "react-native";
 import React from "react";
 import { LoginBackground } from "../../../Components/Reusable/Background";
-import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { IconButton } from "../../../Components/Reusable/Button";
 import { LongButton } from "../../../Components/Reusable/Button";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
+import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
 import { RegiDupleFlex2 } from "../../../Components/AccountCompo/AccountCustomCompo";
