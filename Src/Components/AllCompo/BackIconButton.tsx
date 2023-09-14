@@ -1,7 +1,5 @@
 import React from "react";
 import { TouchableOpacity, Text, Platform } from "react-native";
-import Styles from "../../Styles/ButtonStyle";
-import textStyle from "../../Styles/TextStyle";
 import { Ionicons } from "@expo/vector-icons";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 
@@ -21,6 +19,7 @@ interface ButtonProps {
  */
 export const BlackBackIconButton: React.FC<ButtonProps> = ({
   children,
+  text,
   onPress,
 }) => {
   return (

@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import React from "react";
-import { LoginBackground } from "../../../Components/Reusable/Background";
+import { LoginBackground } from "../../../Components/AllCompo/Background";
 import { LongButton, RegiButton } from "../../../Components/Reusable/Button";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
