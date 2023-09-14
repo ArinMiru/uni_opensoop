@@ -24,8 +24,8 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   const handleLogin = async () => {
     const result = await loginUser(LOGIN_ID, LOGIN_PASS);
 
-    if(getUserData()?.RSLT_CD === "00"){
-      navigation.navigate("NoticePage")
+    if (getUserData()?.RSLT_CD === "00") {
+      navigation.navigate("NoticePage");
     }
   };
 
@@ -76,7 +76,10 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           flexDirection: "row",
         }}
       >
-        <LoginButton text="아이디찾기" />
+        <LoginButton
+          text="아이디찾기"
+          onPress={() => navigation.navigate("IdFindEcode")}
+        />
         <LoginButton text="비밀번호찾기" />
       </View>
     </LoginBackground>

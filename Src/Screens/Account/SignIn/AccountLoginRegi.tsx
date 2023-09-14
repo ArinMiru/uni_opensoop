@@ -32,7 +32,6 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
           navigation={navigation}
           text="회원가입"
         />
-        <SrchDupleInput text="Fuck" />
       </View>
     </LoginBackground>
   );

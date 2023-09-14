@@ -20,8 +20,8 @@ interface ButtonProps {
 }
 
 /*
-회원가입 화면에서 flex 1의 범위를 가진 '회원가입' 글자 컴포넌트
-**/
+ * 회원가입 화면에서 flex 1의 범위를 가진 '회원가입' 글자 컴포넌트
+ **/
 export const RegiText1: React.FC<TextTopProps> = ({ children, text }) => (
   <View
     style={{
@@ -54,7 +54,7 @@ export const RegiText2: React.FC<TextTopProps> = ({ children, text }) => (
 /*
 회원가입 화면에 flex 2의 범위를 가진 텍스트 인풋, 짧은 버튼이 가로정렬된 컴포넌트
 **/
-export const RegiCommonButton2: React.FC<TextTopProps> = ({
+export const RegiDupleFlex2: React.FC<TextTopProps> = ({
   children,
   text,
   inputText,
@@ -77,7 +77,7 @@ export const RegiCommonButton2: React.FC<TextTopProps> = ({
 /*
 회원가입 화면에 flex 3의 범위를 가진 텍스트 인풋, 짧은 버튼이 가로정렬된 컴포넌트
 **/
-export const RegiCommonButton3: React.FC<TextTopProps> = ({
+export const RegiDupleFlex3: React.FC<TextTopProps> = ({
   children,
   text,
   inputText,
