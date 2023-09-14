@@ -30,10 +30,10 @@ export const SrchDupleInput: React.FC<inputProps> = ({
   );
 };
 
-/* Account에서만 쓰이는 Input
+/* Account에서만 쓰이는 마진 탑이 0.03 들어간 Input
  * Figma 필수 참고
  */
-export const OnlyAccountInput: React.FC<inputProps> = ({
+export const OnlyAccountInputMarginTop3: React.FC<inputProps> = ({
   children,
   text,
   ...props
@@ -41,7 +41,25 @@ export const OnlyAccountInput: React.FC<inputProps> = ({
   return (
     <TextInput
       placeholderTextColor="#8391A1"
-      style={[Styles.onlyAccountInputStyle, textStyle.medium14]}
+      style={[Styles.onlyAccountInputStyleMarginTop3, textStyle.medium14]}
+      placeholder={text}
+      {...props}
+    />
+  );
+};
+
+/* Account에서만 쓰이는 마진 탑이 0.02 들어간 Input
+ * Figma 필수 참고
+ */
+export const OnlyAccountInputMarginTop2: React.FC<inputProps> = ({
+  children,
+  text,
+  ...props
+}) => {
+  return (
+    <TextInput
+      placeholderTextColor="#8391A1"
+      style={[Styles.onlyAccountInputStyleMarginTop2, textStyle.medium14]}
       placeholder={text}
       {...props}
     />
