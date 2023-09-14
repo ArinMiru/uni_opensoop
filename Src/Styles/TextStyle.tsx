@@ -112,6 +112,12 @@ export default StyleSheet.create({
     fontSize: 14,
   },
 
+  medium20: {
+    fontFamily: "Medium",
+    fontWeight: "500" /*medium*/,
+    fontSize: 20,
+  },
+
   /*----------------semibold-------------------*/
 
   semibold07: {
@@ -174,6 +180,12 @@ export default StyleSheet.create({
     fontFamily: "Bold",
     fontWeight: "700" /*bold*/,
     fontSize: 12,
+  },
+
+  bold25: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: 25,
   },
 
   /*----------------regular-------------------*/
