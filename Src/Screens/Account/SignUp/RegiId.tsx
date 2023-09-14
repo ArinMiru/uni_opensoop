@@ -7,12 +7,14 @@ import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
 import { RegiDupleFlex3 } from "../../../Components/AccountCompo/AccountCustomCompo";
 import { setUserDataAndNavigate } from "../../../Utils/_private/RegiData/RegiUserData";
+import { RegiUserData } from "../../../Utils/_private/RegiData/RegiUserData";
 
 const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
   const [userRegiId, setUserRegiId] = useState<string>("");
 
   const RegiUserDataSave = () => {
     setUserDataAndNavigate("MEMB_ID", userRegiId, navigation, "RegiNmNic"); // 회원가입 사용자 데이터 저장 함수 사용 예시
+    console.log(RegiUserData.MEMB_ID);
   };
 
   // 타입을 명시적으로 설정
@@ -39,10 +41,7 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
         onChangeText={(text) => setUserRegiId(text)}
       />
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
-        <LongButton
-          text="다음"
-          onPress={() => navigation.navigate("RegiNmNic")}
-        />
+        <LongButton text="다음" onPress={RegiUserDataSave} />
       </View>
     </LoginBackground>
   );
