@@ -80,7 +80,10 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           text="아이디찾기"
           onPress={() => navigation.navigate("IdFindEmail")}
         />
-        <IdPassFindButton text="비밀번호찾기" />
+        <IdPassFindButton
+          text="비밀번호찾기"
+          onPress={() => navigation.navigate("PassFindForEmail")}
+        />
       </View>
     </LoginBackground>
   );
