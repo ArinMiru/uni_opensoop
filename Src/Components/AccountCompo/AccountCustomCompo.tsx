@@ -1,7 +1,5 @@
 import { View, Text, TouchableOpacity, TextInputProps } from "react-native";
 import textStyle from "../../Styles/TextStyle";
-import shortButtonStyle from "../../Styles/ButtonStyle";
-import TextInputStyle from "../../Styles/TextInputStyle";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 import { TextInput } from "react-native-gesture-handler";
 import AccountButtonStyle from "../../Styles/AccountButtonStyle";

@@ -13,7 +13,7 @@ interface CommonProps {
   bigtext: string;
   smalltext: string;
   buttontext: string;
-  text: string;
+  inputtext: string;
   onPress: () => void;
   navigation: {
     navigate: (screenName: string) => void;
@@ -21,10 +21,10 @@ interface CommonProps {
 }
 export const RegiCommonView: React.FC<CommonProps> = ({
   children,
-  bigtext,
-  smalltext,
-  buttontext,
-  text,
+  bigtext, //Account Title Text
+  smalltext, // Account subheading Text
+  buttontext, // Button안에 들어가는 Text
+  inputtext, // 내용 작성 창에 들어가는 Text
   onPress,
 }) => {
   // 파스칼 케이스 적용
@@ -47,7 +47,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
         </Text>
       </View>
       <View style={BackgroundStyle.accountInputFlex}>
-        <OnlyAccountInputMarginTop2 text={text} />
+        <OnlyAccountInputMarginTop2 text={inputtext} />
       </View>
       <View style={BackgroundStyle.accountButtonFlex}>
         <OnlyAccountButton text={buttontext} />

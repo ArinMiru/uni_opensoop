@@ -1,8 +1,8 @@
 import { View } from "react-native";
 import React from "react";
-import { LoginBackground } from "../../../Components/Reusable/Background";
-import { IconButton } from "../../../Components/Reusable/Button";
-import { LongButton } from "../../../Components/Reusable/Button";
+import { LoginBackground } from "../../../Components/AllCompo/Background";
+import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
+import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import {
   OnlyAccountInputMarginTop2,
   OnlyAccountInputMarginTop3,
@@ -24,11 +24,11 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
           width: deviceWidth * 1,
         }}
       >
-        <IconButton
+        <BlackBackIconButton
           text=""
           onPress={() => navigation.navigate("RegiNmNic")}
           navigation={navigation}
-        ></IconButton>
+        ></BlackBackIconButton>
       </View>
       <RegiTextflex1 text="회원가입" />
       <View style={{ flex: 3 }}>
@@ -36,7 +36,7 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
         <OnlyAccountInputMarginTop2 text="비밀번호 확인" />
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
-        <LongButton
+        <OnlyAccountButton
           text="다음"
           onPress={() => navigation.navigate("RegiNmNic")}
         />
