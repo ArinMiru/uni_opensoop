@@ -1,46 +1,32 @@
 import { View } from "react-native";
 import React from "react";
 import { LoginBackground } from "../../../Components/Reusable/Background";
-import { IconButton } from "../../../Components/Reusable/Button";
-import { LongButton } from "../../../Components/Reusable/Button";
 import {
-  OnlyAccountInputMarginTop2,
-  OnlyAccountInputMarginTop3,
-} from "../../../Components/AccountCompo/AccoutTextInput";
-import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
+  LongInput,
+  LongInputMargin,
+} from "../../../Components/Reusable/TextInput";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { Image } from "react-native";
+import {
+  RegiText2,
+  RegiNextButton,
+} from "../../../Components/CommonView/CommonCompo";
 
 const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
   // 타입을 명시적으로 설정
 
   return (
     <LoginBackground>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "flex-start",
-          width: deviceWidth * 1,
-        }}
-      >
-        <IconButton
-          text=""
-          onPress={() => navigation.navigate("RegiNmNic")}
-          navigation={navigation}
-        ></IconButton>
+      <RegiText2 text="회원가입" />
+      <View style={{ flex: 3.3 }}>
+        <LongInputMargin text="비밀번호" />
+        <LongInput text="비밀번호 확인" />
       </View>
-      <RegiTextflex1 text="회원가입" />
-      <View style={{ flex: 3 }}>
-        <OnlyAccountInputMarginTop3 text="비밀번호" />
-        <OnlyAccountInputMarginTop2 text="비밀번호 확인" />
-      </View>
-      <View style={{ flex: 4, justifyContent: "flex-start" }}>
-        <LongButton
-          text="다음"
-          onPress={() => navigation.navigate("RegiNmNic")}
-        />
-      </View>
+      <RegiNextButton
+        text="다음"
+        onPress={() => navigation.navigate("AccountLoginRegi")}
+        navigation={navigation}
+      />
     </LoginBackground>
   );
 };
