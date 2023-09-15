@@ -35,7 +35,12 @@ const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
         <OnlyAccountInputMarginTop3 text="이름을 입력해주세요." />
       </View>
       <RegiDupleFlex2 inputText="닉네임" text="중복 확인" />
-      <View style={{ flex: 4, justifyContent: "flex-start" }}>
+      <View
+        style={{
+          flex: 4,
+          justifyContent: "flex-start",
+        }}
+      >
         <OnlyAccountButton
           text="다음"
           onPress={() => navigation.navigate("RegiPass")}

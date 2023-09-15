@@ -3,7 +3,7 @@ import { Text, View, SafeAreaView } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import BackgroundStyle from "../../Styles/BackgroundStyle";
 import { BlackBackIconButton } from "../AllCompo/BackIconButton";
-import { OnlyAccountInputMarginTop2 } from "../AccountCompo/AccoutTextInput";
+import { OnlyAccountInputMarginTop3 } from "../AccountCompo/AccoutTextInput";
 import { OnlyAccountButton } from "../AccountCompo/AccountButton";
 import {
   deviceHeight,
@@ -35,7 +35,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
   return (
     <SafeAreaView style={BackgroundStyle.loginBackground}>
       <View style={BackgroundStyle.backIconFlex}>
-        <BlackBackIconButton/>
+        <BlackBackIconButton onPress={onPress} />
       </View>
       <View style={BackgroundStyle.titleTextFlex}>
         <Text
@@ -59,10 +59,10 @@ export const RegiCommonView: React.FC<CommonProps> = ({
         </Text>
       </View>
       <View style={BackgroundStyle.accountInputFlex}>
-        <OnlyAccountInputMarginTop2 text={inputtext} />
+        <OnlyAccountInputMarginTop3 text={inputtext} />
       </View>
       <View style={BackgroundStyle.accountButtonFlex}>
-        <OnlyAccountButton text={buttontext} />
+        <OnlyAccountButton text={buttontext} onPress={onPress} />
       </View>
       {children}
     </SafeAreaView>
