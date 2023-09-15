@@ -78,7 +78,12 @@ export const nickCheckpoint = async (NICK_NM: string) => {
   }
 };
 
-export const noticeCall = async () => {
+export const noticeCall = async (
+  LOGIN_ID: string,
+  MEMB_SC_CD: string,
+  MEMB_DEP_CD: string,
+  TIT_CD: string
+) => {
   const endpoint = "/UNI/OpenBubListSvc";
 
   // 로그인한 사용자의 데이터 가져오기
@@ -87,13 +92,17 @@ export const noticeCall = async () => {
   if (userData !== null) {
     // userData가 null이 아닌 경우에만 요청 보내기
 
+    // 고정된 값으로 설정
+    const LIST_UNIT_CNT = 10;
+    const REQ_PAGE = 1;
+
     const data = {
-      LOGIN_ID: userData.LOGIN_ID,
-      MEMB_SC_CD: userData.MEMB_SC_CD,
-      MEMB_DEP_CD: userData.MEMB_DEP_CD,
-      TIT_CD: userData.TIT_CD,
-      LIST_UNIT_CNT: userData.LIST_UNIT_CNT,
-      REQ_PAGE: userData.REQ_PAGE,
+      LOGIN_ID,
+      MEMB_SC_CD,
+      MEMB_DEP_CD,
+      TIT_CD,
+      LIST_UNIT_CNT,
+      REQ_PAGE,
     };
 
     try {
@@ -105,7 +114,7 @@ export const noticeCall = async () => {
       if (result !== null && result.data.RSLT_CD === "00") {
         // 데이터 파싱
         const noticeData: NoticeData = parseNoticeData(result.data);
-        console.log(result.data);
+        console.log(noticeData.OPEN_BUB);
       } else {
         console.log("실패");
       }
