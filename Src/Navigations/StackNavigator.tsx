@@ -14,6 +14,7 @@ import UniCertiStudNum from "../Screens/Account/UniCrtf/UniCertiStudNum";
 import PassFindEcode from "../Screens/Account/PassFind/PassFindEcode";
 import PassFindForEmail from "../Screens/Account/PassFind/PassFindForEmail";
 import PassFindForId from "../Screens/Account/PassFind/PassFindForId";
+import IdFindEcode from "../Screens/Account/IdFind/IdFindEcode";
 import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
@@ -33,6 +34,7 @@ type RootStackParamList = {
   PassFindEcode: undefined;
   PassFindForEmail: undefined;
   PassFindForId: undefined;
+  IdFindEcode: undefined;
   IdFindEmail: undefined;
   IdFindOut: undefined;
   NoticePage: undefined;
@@ -110,6 +112,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="PassFindForId"
         component={PassFindForId}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="IdFindEcode"
+        component={IdFindEcode}
         options={{ headerShown: false }}
       />
       <Stack.Screen

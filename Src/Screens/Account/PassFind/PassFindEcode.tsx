@@ -1,5 +1,5 @@
 import React from "react";
-import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
+import { RegiCommonView } from "../../../Components/CommonSrc/RegiCommon"
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 
 const PassFindEcode: React.FC<ScreenProps> = ({ navigation }) => {
