@@ -21,6 +21,8 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   const [LOGIN_ID, setLOGIN_ID] = useState<string>("");
   const [LOGIN_PASS, setLOGIN_PASS] = useState<string>("");
 
+  
+
   const handleLogin = async () => {
     const result = await loginUser(LOGIN_ID, LOGIN_PASS);
 

@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { LoginBackground } from "../../../Components/Reusable/Background";
 import { IconButton } from "../../../Components/Reusable/Button";
 import { LongButton } from "../../../Components/Reusable/Button";
@@ -8,12 +8,23 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
 import { RegiDupleFlex2 } from "../../../Components/AccountCompo/AccountCustomCompo";
-import RegiUserData from "../../../Utils/_private/RegiData/RegiUserData";
+import RegiUserData, {
+  setUserDataAndNavigate,
+} from "../../../Utils/_private/RegiData/RegiUserData";
 import { OnlyAccountInputMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
+import { nickCheckpoint } from "../../../Services/_private/EndPointApiFuntion";
 
 const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
-  // 타입을 명시적으로 설정
-  console.log(RegiUserData.MEMB_ID);
+  const [userRegiNick, setUserRegNick] = useState<string>("");
+
+  const NickCHeck = async () => {
+    const result = await nickCheckpoint(userRegiNick);
+  };
+
+  const RegiUserDataSave = () => {
+    setUserDataAndNavigate("NICK_NM", userRegiNick, navigation, "RegiPass");
+    console.log(RegiUserData.NICK_NM);
+  };
 
   return (
     <LoginBackground>
@@ -34,12 +45,15 @@ const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={{ flex: 1 }}>
         <OnlyAccountInputMarginTop3 text="이름을 입력해주세요." />
       </View>
-      <RegiDupleFlex2 inputText="닉네임" text="중복 확인" />
+      <RegiDupleFlex2
+        inputText="닉네임"
+        text="중복 확인"
+        value={userRegiNick}
+        onChangeText={(text) => setUserRegNick(text)}
+        onPress={NickCHeck}
+      />
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
-        <LongButton
-          text="다음"
-          onPress={() => navigation.navigate("RegiPass")}
-        />
+        <LongButton text="다음" onPress={RegiUserDataSave} />
       </View>
     </LoginBackground>
   );

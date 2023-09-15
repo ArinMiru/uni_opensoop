@@ -13,8 +13,29 @@ export interface UserData {
     NICK_NM: string;                    // 사용자의 닉네임
     MEMB_EM: string;                    // 사용자의 이메일
     COLL_CERT_IND: string;              // 대학생 인증 여부
+    LIST_UNIT_CNT: number;              // LIST_UNIT_CNT 추가
+    REQ_PAGE: number;                   // REQ_PAGE 추가
   }
-  
+
+  let userData: UserData | null = {
+    RSLT_CD: "",
+    LOGIN_ID: "",
+    MEMB_NM: "",
+    MEMB_SC_CD: "",
+    MEMB_DEP_CD: "",
+    MEMB_NUM: "",
+    MEMB_SC_NM: "",
+    MEMB_DEP_NM: "",
+    TIT_CD: "",
+    TIT_NM: "",
+    NICK_NM: "",
+    MEMB_EM: "",
+    COLL_CERT_IND: "",
+    LIST_UNIT_CNT: 10, // 고정된 값
+    REQ_PAGE: 2,       // 고정된 값
+  };
+
+
   
   export function setUserData(data: UserData | null): void {                // userData 설정 함수: 서버에서 받은 데이터로 userData를 설정
     userData = data;
@@ -28,5 +49,5 @@ export interface UserData {
     userData = data;                                                        // 주어진 데이터로 userData 객체 생성 및 설정
   }
 
-  let userData: UserData | null = null;                                     // 초기에 userData를 null로 설정
+
   

@@ -8,9 +8,14 @@ import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
 import { RegiDupleFlex3 } from "../../../Components/AccountCompo/AccountCustomCompo";
 import { setUserDataAndNavigate } from "../../../Utils/_private/RegiData/RegiUserData";
 import { RegiUserData } from "../../../Utils/_private/RegiData/RegiUserData";
+import { idCheckpoint } from "../../../Services/_private/EndPointApiFuntion";
 
 const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
   const [userRegiId, setUserRegiId] = useState<string>("");
+
+  const IdCheck = async () => {
+    const result = await idCheckpoint(userRegiId);
+  };
 
   const RegiUserDataSave = () => {
     setUserDataAndNavigate("MEMB_ID", userRegiId, navigation, "RegiNmNic"); // 회원가입 사용자 데이터 저장 함수 사용 예시
@@ -39,6 +44,7 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
         text="중복 확인"
         value={userRegiId}
         onChangeText={(text) => setUserRegiId(text)}
+        onPress={IdCheck}
       />
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <LongButton text="다음" onPress={RegiUserDataSave} />

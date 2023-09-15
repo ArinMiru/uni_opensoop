@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 });
 
 /**
- * 로그인 호출 함수
+ * 호출 함수
  * @param endpoint 엔드포인트
  * @param data 로그인 데이터
  */
