@@ -3,10 +3,7 @@ import React from "react";
 import { LoginBackground } from "../../../Components/AllCompo/Background";
 import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
-import {
-  OnlyAccountInputMarginTop2,
-  OnlyAccountInputMarginTop3,
-} from "../../../Components/AccountCompo/AccoutTextInput";
+import { OnlyAccountInputMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
@@ -33,7 +30,7 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
       <RegiTextflex1 text="회원가입" />
       <View style={{ flex: 3 }}>
         <OnlyAccountInputMarginTop3 text="비밀번호" />
-        <OnlyAccountInputMarginTop2 text="비밀번호 확인" />
+        <OnlyAccountInputMarginTop3 text="비밀번호 확인" />
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton

@@ -18,7 +18,7 @@ export default StyleSheet.create({
 
   /**
    * /Components/AccountCompo/AccountTextInput
-   * Account에서만 쓰이는 마진 탑이 0.03 들어간 Input
+   * Account에서만 쓰이는 마진 탑이 0.03 들어간 Input (SignUp폴더 안에 있는 파일의 (긴)인풋)
    */
   onlyAccountInputStyleMarginTop3: {
     width: deviceWidth * 0.8,
@@ -38,7 +38,7 @@ export default StyleSheet.create({
   onlyAccountInputStyleMarginTop2: {
     width: deviceWidth * 0.8,
     height: deviceHeight * 0.07,
-    marginTop: deviceHeight * 0.02,
+    marginTop: deviceHeight * 0.03,
     backgroundColor: "#f7f8f9",
     borderRadius: 11,
     paddingLeft: 10,

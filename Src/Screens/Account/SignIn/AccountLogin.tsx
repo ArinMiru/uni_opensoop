@@ -5,10 +5,7 @@ import {
   OnlyAccountButton,
   IdPassFindButton,
 } from "../../../Components/AccountCompo/AccountButton";
-import {
-  OnlyAccountInputMarginTop2,
-  OnlyAccountInputMarginTop3,
-} from "../../../Components/AccountCompo/AccoutTextInput";
+import { OnlyAccountInputMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
@@ -53,24 +50,30 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           source={require("../../../Assets/Images/Loginimage.png")}
         ></Image>
       </View>
-      <View style={{ flex: 2.5 }}>
+      <View style={{ flex: 1 }}>
         <OnlyAccountInputMarginTop3
           text="아이디"
           value={LOGIN_ID}
           onChangeText={(text) => setLOGIN_ID(text)}
         />
-        <OnlyAccountInputMarginTop2
+      </View>
+      <View style={{ flex: 2 }}>
+        <OnlyAccountInputMarginTop3
           text="비밀번호"
           value={LOGIN_PASS}
           onChangeText={(text) => setLOGIN_PASS(text)}
         />
       </View>
-      <View style={{ flex: 2, justifyContent: "center" }}>
+      <View
+        style={{
+          flex: 2,
+        }}
+      >
         <OnlyAccountButton text="로그인" onPress={handleLogin} />
       </View>
       <View
         style={{
-          flex: 3,
+          flex: 2,
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "row",

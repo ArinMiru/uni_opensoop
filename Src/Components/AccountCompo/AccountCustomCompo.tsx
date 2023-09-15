@@ -22,18 +22,18 @@ export const RegiDupleFlex2: React.FC<TextTopProps> = ({
 }) => (
   <View style={{ flex: 2, flexDirection: "row" }}>
     <TextInput
-      placeholderTextColor="#8391A1"
+      placeholderTextColor="#BDBDBD"
       style={[
         AccountInputStyle.srchDupleInputStyle,
         textStyle.medium14,
-        { marginTop: deviceHeight * 0.01, marginRight: deviceWidth * 0.02 },
+        { marginTop: deviceHeight * 0.03, marginRight: deviceWidth * 0.0375 },
       ]}
       placeholder={inputText}
     ></TextInput>
     <TouchableOpacity
       style={[
         AccountButtonStyle.srchDupleButtonStyle,
-        { marginTop: deviceHeight * 0.01 },
+        { marginTop: deviceHeight * 0.03 },
       ]}
     >
       <Text style={[textStyle.semibold13, { color: "#fff" }]}>{text}</Text>
@@ -43,7 +43,7 @@ export const RegiDupleFlex2: React.FC<TextTopProps> = ({
 );
 
 /*
-  회원가입 화면에 flex 3의 범위를 가진 텍스트 인풋, 짧은 버튼이 가로정렬된 컴포넌트
+  회원가입 화면에 flex 3의 범위를 가진 텍스트 인풋, 짧은 버튼이 가로정렬된 컴포넌트(SignUp폴더 안에 있는 파일의 (긴)인풋)
   **/
 export const RegiDupleFlex3: React.FC<TextTopProps> = ({
   children,
@@ -59,11 +59,11 @@ export const RegiDupleFlex3: React.FC<TextTopProps> = ({
     }}
   >
     <TextInput
-      placeholderTextColor="#8391A1"
+      placeholderTextColor="#BDBDBD"
       style={[
         AccountInputStyle.srchDupleInputStyle,
         textStyle.medium14,
-        { marginTop: deviceHeight * 0.03, marginRight: deviceWidth * 0.02 },
+        { marginTop: deviceHeight * 0.03, marginRight: deviceWidth * 0.0375 },
       ]}
       placeholder={inputText}
       {...props}
