@@ -1,16 +1,18 @@
 import React from "react";
 import { TouchableOpacity, Text, Platform } from "react-native";
-import Styles from "../../Styles/ButtonStyle";
-import textStyle from "../../Styles/TextStyle";
 import { Ionicons } from "@expo/vector-icons";
-import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
+import {
+  deviceHeight,
+  deviceWidth,
+  currentPlatform,
+} from "../../Utils/DeviceUtils";
 
 /* 2023.09.14 생성 (@김도원) */
 
 //  프로퍼티 타입 정의
 interface ButtonProps {
   children?: React.ReactNode;
-  text?: string;
+  text?: String;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
@@ -29,7 +31,10 @@ export const BlackBackIconButton: React.FC<ButtonProps> = ({
       onPress={onPress}
     >
       <Ionicons
-        style={{ marginLeft: deviceWidth * 0.06 }}
+        style={{
+          marginLeft: deviceWidth * 0.06,
+          marginTop: currentPlatform === "ios" ? 0 : deviceHeight * 0.0099,
+        }}
         name="chevron-back"
         size={16}
         color="black"
@@ -53,7 +58,10 @@ export const GreenBackIconButton: React.FC<ButtonProps> = ({
       onPress={onPress}
     >
       <Ionicons
-        style={{ marginLeft: deviceWidth * 0.06 }}
+        style={{
+           marginLeft: deviceWidth * 0.06,
+           marginTop: currentPlatform === "ios" ? 0 : deviceHeight * 0.0099,
+          }}
         name="chevron-back"
         size={16}
         color="#4BB781"
@@ -77,7 +85,10 @@ export const WhiteBackIconButton: React.FC<ButtonProps> = ({
       onPress={onPress}
     >
       <Ionicons
-        style={{ marginLeft: deviceWidth * 0.06 }}
+        style={{
+           marginLeft: deviceWidth * 0.06,
+           marginTop: currentPlatform === "ios" ? 0 : deviceHeight * 0.0099,
+          }}
         name="chevron-back"
         size={16}
         color="#FFFFFF"

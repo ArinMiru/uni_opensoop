@@ -1,15 +1,12 @@
 import { View, Alert } from "react-native";
 import React, { useState } from "react";
-import { LoginBackground } from "../../../Components/Reusable/Background";
+import { LoginBackground } from "../../../Components/AllCompo/Background";
 import {
-  LongButton,
-  LoginButton,
-  IconButton,
-} from "../../../Components/Reusable/Button";
-import {
-  LongInput,
-  LongInputMargin,
-} from "../../../Components/Reusable/TextInput";
+  OnlyAccountButton,
+  IdPassFindButton,
+} from "../../../Components/AccountCompo/AccountButton";
+import { OnlyAccountInputMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
+import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
@@ -20,8 +17,6 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   // 아이디와 비밀번호 상태값과 타입 명시적 설정 설정
   const [LOGIN_ID, setLOGIN_ID] = useState<string>("");
   const [LOGIN_PASS, setLOGIN_PASS] = useState<string>("");
-
-  
 
   const handleLogin = async () => {
     const result = await loginUser(LOGIN_ID, LOGIN_PASS);
@@ -40,11 +35,11 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           width: deviceWidth * 1,
         }}
       >
-        <IconButton
+        <BlackBackIconButton
           text=""
           onPress={() => navigation.navigate("AccountLoginRegi")}
           navigation={navigation}
-        ></IconButton>
+        ></BlackBackIconButton>
         <Image
           style={{
             resizeMode: "contain",
@@ -55,34 +50,43 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           source={require("../../../Assets/Images/Loginimage.png")}
         ></Image>
       </View>
-      <View style={{ flex: 2.5 }}>
-        <LongInputMargin
+      <View style={{ flex: 1 }}>
+        <OnlyAccountInputMarginTop3
           text="아이디"
           value={LOGIN_ID}
           onChangeText={(text) => setLOGIN_ID(text)}
         />
-        <LongInput
+      </View>
+      <View style={{ flex: 2 }}>
+        <OnlyAccountInputMarginTop3
           text="비밀번호"
           value={LOGIN_PASS}
           onChangeText={(text) => setLOGIN_PASS(text)}
         />
       </View>
-      <View style={{ flex: 2, justifyContent: "center" }}>
-        <LongButton text="로그인" onPress={handleLogin} />
+      <View
+        style={{
+          flex: 2,
+        }}
+      >
+        <OnlyAccountButton text="로그인" onPress={handleLogin} />
       </View>
       <View
         style={{
-          flex: 3,
+          flex: 2,
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "row",
         }}
       >
-        <LoginButton
+        <IdPassFindButton
           text="아이디찾기"
-          onPress={() => navigation.navigate("IdFindEcode")}
+          onPress={() => navigation.navigate("IdFindEmail")}
         />
-        <LoginButton text="비밀번호찾기" />
+        <IdPassFindButton
+          text="비밀번호찾기"
+          onPress={() => navigation.navigate("PassFindForEmail")}
+        />
       </View>
     </LoginBackground>
   );

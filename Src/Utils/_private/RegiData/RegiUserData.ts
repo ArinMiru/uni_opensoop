@@ -1,20 +1,18 @@
 import { NavigationProp } from "@react-navigation/native";
 
-type UserDataField = "MEMB_ID" | "PASS" | "MEMB_NM" | "NICK_NM" ; // 필요한 필드를 여기에 추가
+type UserDataField = "MEMB_ID" | "MEMB_PASS"; // 필요한 필드를 여기에 추가
 
-export interface RegiDataType {
+interface RegiDataType {
   MEMB_ID: string;
-  PASS: string;
+  MEMB_PASS: string;
   MEMB_NM: string;
-  NICK_NM: string;
   // 다른 필드 정의
 }
 
 export const RegiUserData: RegiDataType = {
   MEMB_ID: "",
-  PASS: "",
+  MEMB_PASS: "",
   MEMB_NM: "",
-  NICK_NM: "",
   // 다른 필드 초기화
 };
 /**
