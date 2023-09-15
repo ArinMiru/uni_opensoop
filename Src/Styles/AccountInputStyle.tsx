@@ -7,8 +7,8 @@ export default StyleSheet.create({
    * 중복 확인 Input
    */
   srchDupleInputStyle: {
-    width: deviceWidth * 0.575,
-    height: deviceHeight * 0.062,
+    width: deviceWidth * 0.5625,
+    height: deviceHeight * 0.07,
     borderRadius: 11,
     paddingLeft: 10,
     borderColor: "#e8ecf4",
@@ -22,7 +22,7 @@ export default StyleSheet.create({
    */
   onlyAccountInputStyleMarginTop3: {
     width: deviceWidth * 0.8,
-    height: deviceHeight * 0.062,
+    height: deviceHeight * 0.07,
     marginTop: deviceHeight * 0.03,
     backgroundColor: "#f7f8f9",
     borderRadius: 11,
@@ -37,7 +37,7 @@ export default StyleSheet.create({
    */
   onlyAccountInputStyleMarginTop2: {
     width: deviceWidth * 0.8,
-    height: deviceHeight * 0.062,
+    height: deviceHeight * 0.07,
     marginTop: deviceHeight * 0.02,
     backgroundColor: "#f7f8f9",
     borderRadius: 11,

@@ -1,8 +1,8 @@
 import { View } from "react-native";
-import React, { useState } from "react";
-import { LoginBackground } from "../../../Components/Reusable/Background";
-import { IconButton } from "../../../Components/Reusable/Button";
-import { LongButton } from "../../../Components/Reusable/Button";
+import React from "react";
+import { LoginBackground } from "../../../Components/AllCompo/Background";
+import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
+import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import {
   OnlyAccountInputMarginTop2,
   OnlyAccountInputMarginTop3,
@@ -10,13 +10,11 @@ import {
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { setUserDataAndNavigate } from "../../../Utils/_private/RegiData/RegiUserData";
+import { Image } from "react-native";
 
 const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
-  const [pass, setPass] = useState<string>("");
-  const regiPassData = () => {
-    setUserDataAndNavigate("PASS",pass,navigation,"AccountLoginRegi")
-  }
+  // 타입을 명시적으로 설정
+
   return (
     <LoginBackground>
       <View
@@ -26,25 +24,21 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
           width: deviceWidth * 1,
         }}
       >
-        <IconButton
+        <BlackBackIconButton
           text=""
           onPress={() => navigation.navigate("RegiNmNic")}
           navigation={navigation}
-        ></IconButton>
+        ></BlackBackIconButton>
       </View>
       <RegiTextflex1 text="회원가입" />
       <View style={{ flex: 3 }}>
-        <OnlyAccountInputMarginTop3
-          text="비밀번호"
-          value="pass"
-          onChangeText={(text) => setPass(text)}
-        />
+        <OnlyAccountInputMarginTop3 text="비밀번호" />
         <OnlyAccountInputMarginTop2 text="비밀번호 확인" />
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
-        <LongButton
+        <OnlyAccountButton
           text="다음"
-          onPress={() => navigation.navigate("RegiNmNic")}
+          onPress={() => navigation.navigate("AccountLogin")}
         />
       </View>
     </LoginBackground>

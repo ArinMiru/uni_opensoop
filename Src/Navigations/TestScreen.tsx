@@ -1,6 +1,6 @@
 import { Text } from "react-native";
 import React from "react";
-import { LoginBackground } from "../Components/Reusable/Background";
+import { LoginBackground } from "../Components/AllCompo/Background";
 import { LongButton, ShortButton } from "../Components/Reusable/Button";
 import { LongInput, ShortInput } from "../Components/Reusable/TextInput";
 import { BasicTopbar } from "../Components/Reusable/Topbar";
