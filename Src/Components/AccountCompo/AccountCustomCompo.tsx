@@ -1,7 +1,5 @@
 import { View, Text, TouchableOpacity, TextInputProps } from "react-native";
 import textStyle from "../../Styles/TextStyle";
-import shortButtonStyle from "../../Styles/ButtonStyle";
-import TextInputStyle from "../../Styles/TextInputStyle";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 import { TextInput } from "react-native-gesture-handler";
 import AccountButtonStyle from "../../Styles/AccountButtonStyle";
@@ -12,7 +10,6 @@ interface TextTopProps extends TextInputProps {
   children?: React.ReactNode;
   text?: string;
   inputText?: string;
-  onPress?: () => void;
 }
 
 /*
@@ -22,8 +19,6 @@ export const RegiDupleFlex2: React.FC<TextTopProps> = ({
   children,
   text,
   inputText,
-  onPress,
-  ...props
 }) => (
   <View style={{ flex: 2, flexDirection: "row" }}>
     <TextInput
@@ -34,14 +29,12 @@ export const RegiDupleFlex2: React.FC<TextTopProps> = ({
         { marginTop: deviceHeight * 0.01, marginRight: deviceWidth * 0.02 },
       ]}
       placeholder={inputText}
-      {...props}
     ></TextInput>
     <TouchableOpacity
       style={[
         AccountButtonStyle.srchDupleButtonStyle,
         { marginTop: deviceHeight * 0.01 },
       ]}
-      onPress={onPress}
     >
       <Text style={[textStyle.semibold13, { color: "#fff" }]}>{text}</Text>
       {children}
@@ -56,7 +49,6 @@ export const RegiDupleFlex3: React.FC<TextTopProps> = ({
   children,
   text,
   inputText,
-  onPress,
   ...props
 }) => (
   <View
@@ -81,7 +73,6 @@ export const RegiDupleFlex3: React.FC<TextTopProps> = ({
         AccountButtonStyle.srchDupleButtonStyle,
         { marginTop: deviceHeight * 0.03 },
       ]}
-      onPress={onPress}
     >
       <Text style={[textStyle.semibold13, { color: "#fff" }]}>{text}</Text>
       {children}
