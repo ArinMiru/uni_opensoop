@@ -21,7 +21,7 @@ export default StyleSheet.create({
    * Account에서만 쓰이는 마진 탑이 0.03 들어간 Input (SignUp폴더 안에 있는 파일의 (긴)인풋)
    * 정은유 작성
    *
-   * Account에 모든 긴 인풋은 이걸 씀 -> 컴포넌트 파일 참고(OnlyAccountInputMarginTop3) <- 돋보기에 검색
+   * Account에 모든 긴 인풋은 이걸 씀 -> 컴포넌트 파일 참고(OnlyAccountInputCompoMarginTop3) <- 돋보기에 검색
    * 김도원 작성
    *
    */
