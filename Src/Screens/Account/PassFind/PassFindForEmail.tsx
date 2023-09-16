@@ -5,6 +5,7 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 const PassFindForEmail: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <RegiCommonView
+      IconPress={() => navigation.navigate("PassFindForId")}
       bigtext="이메일"
       smalltext="로 비밀번호 찾기"
       inputtext="이메일"
