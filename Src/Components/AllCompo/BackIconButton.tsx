@@ -36,7 +36,7 @@ export const BlackBackIconButton: React.FC<ButtonProps> = ({
           marginTop: deviceHeight * 0.0099,
         }}
         name="chevron-back"
-        size={16}
+        size={deviceWidth * 0.06}
         color="black"
       />
       {children}
@@ -63,7 +63,7 @@ export const GreenBackIconButton: React.FC<ButtonProps> = ({
           marginTop: deviceHeight * 0.0099,
         }}
         name="chevron-back"
-        size={16}
+        size={deviceWidth * 0.06}
         color="#4BB781"
       />
       {children}
@@ -90,7 +90,7 @@ export const WhiteBackIconButton: React.FC<ButtonProps> = ({
           marginTop: deviceHeight * 0.0099,
         }}
         name="chevron-back"
-        size={16}
+        size={deviceWidth * 0.06}
         color="#FFFFFF"
       />
       {children}

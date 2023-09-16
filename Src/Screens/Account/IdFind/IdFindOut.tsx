@@ -7,11 +7,12 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 const IdFindOut: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <RegiCommonView
+      IconPress={() => navigation.navigate("IdFindEmail")}
       bigtext="아이디"
       smalltext="확인하기"
       inputtext="아이디 출력(변경예정)" //Text OutPut
       buttontext="로그인하러 가기"
-      onPress={() => navigation.navigate("AccountLoginRegi")}
+      onPress={() => navigation.navigate("Topbartest")}
       navigation={navigation}
     />
   );
