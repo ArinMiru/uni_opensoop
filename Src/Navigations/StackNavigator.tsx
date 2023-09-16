@@ -17,7 +17,7 @@ import PassFindForId from "../Screens/Account/PassFind/PassFindForId";
 import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
-import Topbartest from "../Screens/Account/IdFind/Topbartest";
+import TopbarStyletest from "../Screens/Account/IdFind/Topbartest";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -133,7 +133,7 @@ const StackNavigator = () => {
 
       <Stack.Screen
         name="Topbartest"
-        component={Topbartest}
+        component={TopbarStyletest}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

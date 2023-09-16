@@ -1,12 +1,10 @@
 /**
  * AccountButton Components (Figma 참고)
  */
-
-import { Children } from "react";
+import React from "react";
 import AccountButtonStyle from "../../Styles/AccountButtonStyle";
 import { TouchableOpacity, Text } from "react-native";
 import textStyle from "../../Styles/TextStyle";
-import { deviceHeight } from "../../Utils/DeviceUtils";
 
 interface ButtonProps {
   children?: React.ReactNode;
