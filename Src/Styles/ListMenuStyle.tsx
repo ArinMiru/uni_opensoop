@@ -7,7 +7,7 @@ export default StyleSheet.create({
    * BackIconDelTopbarStyle, BackIconRegiTopbarStyle, BackIconEditTopbarStyle, BackIconTopbarStyle 스타일
    * justifyContent, alignItems 참고 -> * https://joylee-developer.tistory.com/147
    */
-  TopbarStyle: {
+  ListMenuStyle: {
     flex: 1,
     flexDirection: "row",
     width: deviceWidth * 1,
