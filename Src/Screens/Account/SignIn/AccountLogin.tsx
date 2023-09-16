@@ -9,7 +9,7 @@ import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountComp
 import { BlackBackIconButton } from "../../../Components/AllCompo/IconCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
-import { deviceHeight, deviceWidth } from "../../../../Utils/DeviceUtils";
+import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { loginUser } from "../../../Services/_private/EndPointApiFuntion";
 
