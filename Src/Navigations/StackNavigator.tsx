@@ -17,6 +17,7 @@ import PassFindForId from "../Screens/Account/PassFind/PassFindForId";
 import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
+import Topbartest from "../Screens/Account/IdFind/Topbartest";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -36,6 +37,8 @@ type RootStackParamList = {
   IdFindEmail: undefined;
   IdFindOut: undefined;
   NoticePage: undefined;
+
+  Topbartest: undefined;
 };
 
 export type ScreenProps = {
@@ -125,6 +128,12 @@ const StackNavigator = () => {
       <Stack.Screen
         name="NoticePage"
         component={NoticePage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="Topbartest"
+        component={Topbartest}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

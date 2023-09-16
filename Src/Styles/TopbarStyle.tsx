@@ -9,12 +9,10 @@ export default StyleSheet.create({
    * (2023.09.14 김도원 생성)
    */
   Topbar: {
+    flex: 1,
+    flexDirection: "row",
     width: deviceWidth * 1,
-    height: deviceHeight * 0.08,
     backgroundColor: "#4bb781" /*시그니처 Color*/,
-    alignItems: "center",
     justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
-    // 안드로이드의 경우 SafeAreaView 가 적용되지 않아 별도의 값을 구하여 상태 표시줄을 보존 하여야 함
   },
 });
