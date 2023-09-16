@@ -5,7 +5,7 @@ import {
   OnlyAccountButton,
   IdPassFindButton,
 } from "../../../Components/AccountCompo/AccountButton";
-import { OnlyAccountInputMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
+import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
@@ -52,14 +52,14 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
         ></Image>
       </View>
       <View style={{ flex: 1 }}>
-        <OnlyAccountInputMarginTop3
+        <OnlyAccountInputCompoMarginTop3
           text="아이디"
           value={LOGIN_ID}
           onChangeText={(text) => setLOGIN_ID(text)}
         />
       </View>
       <View style={{ flex: 2 }}>
-        <OnlyAccountInputMarginTop3
+        <OnlyAccountInputCompoMarginTop3
           text="비밀번호"
           value={LOGIN_PASS}
           onChangeText={(text) => setLOGIN_PASS(text)}
