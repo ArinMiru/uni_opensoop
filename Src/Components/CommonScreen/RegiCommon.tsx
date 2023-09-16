@@ -9,7 +9,7 @@ import {
   deviceHeight,
   deviceWidth,
   currentPlatform,
-} from "../../../Utils/DeviceUtils";
+} from "../../Utils/DeviceUtils";
 
 //  프로퍼티 타입 정의
 interface CommonProps {
