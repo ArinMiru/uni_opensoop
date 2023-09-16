@@ -27,10 +27,11 @@ export const SrchDupleInput: React.FC<inputProps> = ({
   );
 };
 
-/* Account 페이지 내의 모든 긴 인풋에 해당하는 함수 -> 마진탑 0.03
- * Figma 필수 참고
+/*
+ * Account 페이지 내의 모든 긴 인풋에 해당하는 컴포넌트(함수) -> Margin : 0.03
+ *
  */
-export const OnlyAccountInputMarginTop3: React.FC<inputProps> = ({
+export const OnlyAccountInputCompoMarginTop3: React.FC<inputProps> = ({
   children,
   text,
   ...props

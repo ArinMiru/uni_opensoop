@@ -11,7 +11,7 @@ import { RegiDupleFlex2 } from "../../../Components/AccountCompo/AccountCustomCo
 import RegiUserData, {
   setUserDataAndNavigate,
 } from "../../../Utils/_private/RegiData/RegiUserData";
-import { OnlyAccountInputMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
+import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 import { nickCheckpoint } from "../../../Services/_private/EndPointApiFuntion";
 
 const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
@@ -43,7 +43,7 @@ const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
       </View>
       <RegiTextflex1 text="회원가입" />
       <View style={{ flex: 1 }}>
-        <OnlyAccountInputMarginTop3 text="이름을 입력해주세요." />
+        <OnlyAccountInputCompoMarginTop3 text="이름을 입력해주세요." />
       </View>
       <RegiDupleFlex2
         inputText="닉네임"
