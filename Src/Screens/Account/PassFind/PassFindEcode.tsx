@@ -5,6 +5,7 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 const PassFindEcode: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <RegiCommonView
+      IconPress={() => navigation.navigate("PassFindForEmail")}
       bigtext="인증번호"
       smalltext="입력하기"
       inputtext="인증번호"
