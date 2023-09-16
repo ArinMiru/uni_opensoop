@@ -1,27 +1,23 @@
 import React from "react";
-import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import {
-  MenuTopbar,
-  MenuTopbarManager,
+  MenuTopbarStyle,
+  MenuTopbarStyleManager,
+  BackIocnTopbarStyle,
+  BackIconDelTopbarStyle,
+  BackIconRegiTopbarStyle,
+  BackIconEditTopbarStyle,
 } from "../../../Components/AllCompo/TopbarCompo";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
-import { Text, View, SafeAreaView } from "react-native";
+import { View, SafeAreaView } from "react-native";
 
-/** 이메일로 아이디 찾기 아이디 출력 Screen */
-
-const Topbartest: React.FC<ScreenProps> = ({ navigation }) => {
+const TopbarStyletest: React.FC<ScreenProps> = ({ navigation }) => {
   return (
-    <SafeAreaView style={BackgroundStyle.loginBackground}>
-      <MenuTopbarManager text="공지사항" />
-      <View
-        style={{
-          flex: 8,
-          backgroundColor: "red",
-        }}
-      ></View>
+    <SafeAreaView style={BackgroundStyle.AccountBackground}>
+      <BackIconRegiTopbarStyle text="공지사항" />
+      <View style={{ flex: 8 }}></View>
     </SafeAreaView>
   );
 };
 
-export default Topbartest;
+export default TopbarStyletest;

@@ -10,9 +10,9 @@ export default StyleSheet.create({
   /**
    *
    *
-   * /Compnents/Backgroud.tsx 파일 LoginBackground 배경 스타
+   * /Compnents/Backgroud.tsx 파일 AccountBackground 배경 스타
    */
-  loginBackground: {
+  AccountBackground: {
     flex: 1,
     backgroundColor: "#ffffff",
     width: deviceWidth * 1,

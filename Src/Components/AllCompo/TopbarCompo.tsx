@@ -2,8 +2,14 @@ import Styles from "../../Styles/TopbarStyle";
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import textStyle from "../../Styles/TextStyle";
-import { Feather } from "@expo/vector-icons";
-import { deviceWidth, deviceHeight } from "../../Utils/DeviceUtils";
+import { WhiteBackIconButton } from "./IconCompo/BackIconButton";
+import { TopbarStylePlusIcon } from "../AllCompo/IconCompo/PlusIcon";
+import { MenuIcon } from "../AllCompo/IconCompo/MenuIcon";
+import {
+  TopbarDelButton,
+  TopbarEditButton,
+  TopbarRegiButton,
+} from "./TopbarEditDelRegiButton";
 
 //프로퍼티 타입 정의
 interface inputProps {
@@ -12,142 +18,209 @@ interface inputProps {
   onPress?: () => void;
 }
 
+/*------------------------------------------------------------*/
+
 /**
- * App 화면 상단 초록색 상단 바(공지사항, 게시판, 투표, 캘린더))
- * (2023.09.14 김도원 생성)
+ * MenuTopbarStyle
+ * MenuTopbarStyleManager와 다른 점은 오른쪽에 Plus 아이콘이 존재하지 않는다는 점이다.
  */
-export const MenuTopbar: React.FC<inputProps> = ({
+export const MenuTopbarStyle: React.FC<inputProps> = ({
   children,
   text,
   onPress,
 }) => {
   // 컴포넌트의 타입을 정확하게 명시
   return (
-    <View style={Styles.Topbar}>
+    <View style={Styles.TopbarStyle}>
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            width: deviceWidth * 0.1,
-            marginLeft: deviceWidth * 0.06,
-          }}
-          onPress={onPress}
-        >
-          <Feather name="menu" size={deviceWidth * 0.08} color="#ffffff" />
-        </TouchableOpacity>
+        <MenuIcon />
       </View>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text
-          style={[
-            textStyle.semibold19,
-            {
-              color: "#FFFFFF",
-            },
-          ]}
-        >
-          {text}
-        </Text>
-      </View>
-
+      <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
       <View style={{ flex: 1 }}></View>
       {children}
     </View>
   );
 };
 
-export const MenuTopbarManager: React.FC<inputProps> = ({
+/*------------------------------------------------------------*/
+
+/**
+ * MenuTopbarStyleManager
+ * MenuTopbarStyle와 다른 점은 오른쪽에 Plus 아이콘이 존재한다는 점이다.
+ * Plus 아이콘은 onPress를 통해 Plus 아이콘을 누르면 Plus 아이콘에 해당하는 기능을 수행한다.
+ */
+export const MenuTopbarStyleManager: React.FC<inputProps> = ({
   children,
   text,
   onPress,
 }) => {
   // 컴포넌트의 타입을 정확하게 명시
   return (
-    <View style={Styles.Topbar}>
-      <View style={{ flex: 1, justifyContent: "center" }}>
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            width: deviceWidth * 0.1,
-            marginLeft: deviceWidth * 0.06,
-          }}
-          onPress={onPress}
-        >
-          <Feather name="menu" size={deviceWidth * 0.08} color="#ffffff" />
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text
-          style={[
-            textStyle.semibold19,
-            {
-              color: "#FFFFFF",
-            },
-          ]}
-        >
-          {text}
-        </Text>
-      </View>
-
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "flex-end",
-        }}
-      >
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            width: deviceWidth * 0.1,
-            marginRight: deviceWidth * 0.06,
-          }}
-          onPress={onPress}
-        >
-          <Feather
-            name="plus-circle"
-            size={deviceWidth * 0.07}
-            color="#ffffff"
-          />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
-
-export const BackIocnTopbar: React.FC<inputProps> = ({ children, text }) => {
-  // 컴포넌트의 타입을 정확하게 명시
-  return (
-    <View style={Styles.Topbar}>
+    <View style={Styles.TopbarStyle}>
+      <MenuIcon />
       <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
-      {children}
+      <TopbarStylePlusIcon />
     </View>
   );
 };
 
-export const BackIconEditDelRegiTopbar: React.FC<inputProps> = ({
+/*------------------------------------------------------------*/
+
+/**
+ * BackIocnTopbarStyle
+ * 뒤로가기 아이콘과 텍스트가 존재하는 TopbarStyle
+ * 뒤로가기 아이콘은 onPress를 통해 뒤로가기 기능을 수행한다.
+ * 텍스트는 뒤로가기 아이콘과 같은 라인에 존재한다.
+ * 텍스트는 문자열로 타입을 명시한다.
+ */
+export const BackIocnTopbarStyle: React.FC<inputProps> = ({
   children,
   text,
+  onPress,
 }) => {
   // 컴포넌트의 타입을 정확하게 명시
   return (
-    <View style={Styles.Topbar}>
+    <View style={Styles.TopbarStyle}>
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <TouchableOpacity onPress={onPress}>
+          <WhiteBackIconButton />
+        </TouchableOpacity>
+      </View>
       <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
+      <View style={[{ flex: 1 }]}></View>
       {children}
     </View>
   );
 };
+
+/*------------------------------------------------------------*/
+
+/**
+ * BackIconDelTopbarStyle
+ * 뒤로가기 아이콘, 텍스트, 삭제 버튼이 존재하는 TopbarStyle
+ * 뒤로가기 아이콘은 onPress를 통해 뒤로가기 기능을 수행한다.
+ * 삭제 버튼은 onPress를 통해 삭제 기능을 수행한다.
+ * 삭제 아이콘은 텍스트와 같은 라인에 존재한다.
+ */
+export const BackIconDelTopbarStyle: React.FC<inputProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  // 컴포넌트의 타입을 정확하게 명시
+  return (
+    <View style={Styles.TopbarStyle}>
+      <TouchableOpacity onPress={onPress}>
+        <WhiteBackIconButton />
+      </TouchableOpacity>
+      <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
+      <TopbarDelButton />
+    </View>
+  );
+};
+
+/*------------------------------------------------------------*/
+
+/**
+ * BackIconRegiTopbarStyle
+ * 뒤로가기 아이콘, 텍스트, 등록 버튼이 존재하는 TopbarStyle
+ * 뒤로가기 아이콘은 onPress를 통해 뒤로가기 기능을 수행한다.
+ * 등록 버튼은 onPress를 통해 등록 기능을 수행한다.
+ * 등록 아이콘은 텍스트와 같은 라인에 존재한다.
+ */
+export const BackIconRegiTopbarStyle: React.FC<inputProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  // 컴포넌트의 타입을 정확하게 명시
+  return (
+    <View style={Styles.TopbarStyle}>
+      <TouchableOpacity onPress={onPress}>
+        <WhiteBackIconButton />
+      </TouchableOpacity>
+      <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
+      <TopbarRegiButton />
+    </View>
+  );
+};
+
+/*------------------------------------------------------------*/
+
+/**
+ * BackIconEditTopbarStyle
+ * 뒤로가기 아이콘, 텍스트, 작성 버튼이 존재하는 TopbarStyle
+ * 뒤로가기 아이콘은 onPress를 통해 뒤로가기 기능을 수행한다.
+ * 작성 버튼은 onPress를 통해 작성 기능을 수행한다.
+ * 작성 아이콘은 텍스트와 같은 라인에 존재한다.
+ */
+export const BackIconEditTopbarStyle: React.FC<inputProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  // 컴포넌트의 타입을 정확하게 명시
+  return (
+    <View style={Styles.TopbarStyle}>
+      <TouchableOpacity onPress={onPress}>
+        <WhiteBackIconButton />
+      </TouchableOpacity>
+      <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
+      <TopbarEditButton />
+    </View>
+  );
+};
+
+/*------------------------------------------------------------*/
+
+/**
+ * MenuIconRegiTopbarStyle
+ * MenuIcon과 텍스트, 등록 버튼이 존재하는 TopbarStyle
+ * MenuIcon은 onPress를 통해 MenuIcon 기능을 수행한다.
+ * 등록 버튼은 onPress를 통해 등록 기능을 수행한다.
+ * 등록 아이콘은 텍스트와 같은 라인에 존재한다.
+ */
+export const MenuIconRegiTopbarStyle: React.FC<inputProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  // 컴포넌트의 타입을 정확하게 명시
+  return (
+    <View style={Styles.TopbarStyle}>
+      <TouchableOpacity onPress={onPress}>
+        <MenuIcon />
+      </TouchableOpacity>
+      <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
+      <TopbarRegiButton />
+    </View>
+  );
+};
+
+/*------------------------------------------------------------*/
+
+/**
+ * MenuIconEditTopbarStyle
+ * MenuIcon과 텍스트, 작성 버튼이 존재하는 TopbarStyle
+ * MenuIcon은 onPress를 통해 MenuIcon 기능을 수행한다.
+ * 작성 버튼은 onPress를 통해 작성 기능을 수행한다.
+ * 작성 아이콘은 텍스트와 같은 라인에 존재한다.
+ */
+export const MenuIconEditTopbarStyle: React.FC<inputProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  // 컴포넌트의 타입을 정확하게 명시
+  return (
+    <View style={Styles.TopbarStyle}>
+      <TouchableOpacity onPress={onPress}>
+        <MenuIcon />
+      </TouchableOpacity>
+      <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
+      <TopbarEditButton />
+    </View>
+  );
+};
+
+/*------------------------------------------------------------*/

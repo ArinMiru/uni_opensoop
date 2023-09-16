@@ -1,15 +1,15 @@
 import { View, Alert } from "react-native";
 import React, { useState } from "react";
-import { LoginBackground } from "../../../Components/AllCompo/Background";
+import { AccountBackground } from "../../../Components/AllCompo/Background";
 import {
   OnlyAccountButton,
   IdPassFindButton,
 } from "../../../Components/AccountCompo/AccountButton";
 import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
-import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
+import { BlackBackIconButton } from "../../../Components/AllCompo/IconCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
-import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceHeight, deviceWidth } from "../../../../Utils/DeviceUtils";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { loginUser } from "../../../Services/_private/EndPointApiFuntion";
 
@@ -27,7 +27,7 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <LoginBackground>
+    <AccountBackground>
       <View
         style={{
           flex: 2,
@@ -88,7 +88,7 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           onPress={() => navigation.navigate("PassFindForId")}
         />
       </View>
-    </LoginBackground>
+    </AccountBackground>
   );
 };
 

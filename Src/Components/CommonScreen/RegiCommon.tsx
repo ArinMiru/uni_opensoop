@@ -2,14 +2,14 @@ import React from "react";
 import { Text, View, SafeAreaView } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import BackgroundStyle from "../../Styles/BackgroundStyle";
-import { BlackBackIconButton } from "../AllCompo/BackIconButton";
+import { BlackBackIconButton } from "../AllCompo/IconCompo/BackIconButton";
 import { OnlyAccountInputCompoMarginTop3 } from "../AccountCompo/AccoutTextInput";
 import { OnlyAccountButton } from "../AccountCompo/AccountButton";
 import {
   deviceHeight,
   deviceWidth,
   currentPlatform,
-} from "../../Utils/DeviceUtils";
+} from "../../../Utils/DeviceUtils";
 
 //  프로퍼티 타입 정의
 interface CommonProps {
@@ -35,7 +35,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
 }) => {
   // 파스칼 케이스 적용
   return (
-    <SafeAreaView style={BackgroundStyle.loginBackground}>
+    <SafeAreaView style={BackgroundStyle.AccountBackground}>
       <View style={BackgroundStyle.backIconFlex}>
         <BlackBackIconButton onPress={IconPress} />
       </View>
@@ -43,7 +43,11 @@ export const RegiCommonView: React.FC<CommonProps> = ({
         <Text
           style={[
             textStyle.bold25,
-            { color: "#4BB781", marginLeft: deviceWidth * 0.1 },
+            {
+              color: "#4BB781",
+              marginLeft: deviceWidth * 0.1,
+              marginTop: currentPlatform === "ios" ? 0 : deviceHeight * 0.07,
+            },
           ]}
         >
           {bigtext}
