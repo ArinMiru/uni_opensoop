@@ -33,7 +33,7 @@ export const BlackBackIconButton: React.FC<ButtonProps> = ({
       <Ionicons
         style={{
           marginLeft: deviceWidth * 0.06,
-          marginTop: currentPlatform === "ios" ? 0 : deviceHeight * 0.0099,
+          marginTop: deviceHeight * 0.0099,
         }}
         name="chevron-back"
         size={16}
@@ -59,9 +59,9 @@ export const GreenBackIconButton: React.FC<ButtonProps> = ({
     >
       <Ionicons
         style={{
-           marginLeft: deviceWidth * 0.06,
-           marginTop: currentPlatform === "ios" ? 0 : deviceHeight * 0.0099,
-          }}
+          marginLeft: deviceWidth * 0.06,
+          marginTop: deviceHeight * 0.0099,
+        }}
         name="chevron-back"
         size={16}
         color="#4BB781"
@@ -86,9 +86,9 @@ export const WhiteBackIconButton: React.FC<ButtonProps> = ({
     >
       <Ionicons
         style={{
-           marginLeft: deviceWidth * 0.06,
-           marginTop: currentPlatform === "ios" ? 0 : deviceHeight * 0.0099,
-          }}
+          marginLeft: deviceWidth * 0.06,
+          marginTop: deviceHeight * 0.0099,
+        }}
         name="chevron-back"
         size={16}
         color="#FFFFFF"
