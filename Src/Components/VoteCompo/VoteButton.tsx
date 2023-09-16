@@ -2,12 +2,11 @@
  * VoteButton Components (Figma 참고)
  */
 
-import { Children } from "react";
 import { TouchableOpacity, Text } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import VoteButtonStyle from "../../Styles/VoteButtonStyle";
 import { AntDesign } from "@expo/vector-icons";
-import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
+import { deviceWidth } from "../../Utils/DeviceUtils";
 
 interface ButtonProps {
   children?: React.ReactNode;

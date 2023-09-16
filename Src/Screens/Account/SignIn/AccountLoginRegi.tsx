@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import React from "react";
-import { LoginBackground } from "../../../Components/AllCompo/Background";
+import { AccountBackground } from "../../../Components/AllCompo/Background";
 import {
   OnlyAccountButton,
   OnlyAccountRegiButton,
@@ -13,7 +13,7 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
   // 타입을 명시적으로 설정
 
   return (
-    <LoginBackground>
+    <AccountBackground>
       <View style={{ flex: 5, justifyContent: "center", alignItems: "center" }}>
         <Image
           style={{
@@ -36,7 +36,7 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
           text="회원가입"
         />
       </View>
-    </LoginBackground>
+    </AccountBackground>
   );
 };
 

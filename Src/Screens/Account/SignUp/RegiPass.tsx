@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import React, { useState } from "react";
-import { LoginBackground } from "../../../Components/AllCompo/Background";
-import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
+import { AccountBackground } from "../../../Components/AllCompo/Background";
+import { BlackBackIconButton } from "../../../Components/AllCompo/IconCompo/BackIconButton";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
@@ -19,7 +19,7 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <LoginBackground>
+    <AccountBackground>
       <View
         style={{
           flex: 1,
@@ -41,7 +41,7 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton text="다음" onPress={regiPassData} />
       </View>
-    </LoginBackground>
+    </AccountBackground>
   );
 };
 
