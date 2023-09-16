@@ -14,6 +14,9 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
+  /*------------------------------------------------------------*/
+
   /**
    * /Components/AccountCompo/AccountButton
    * Account에서만 쓰이는 버튼(다음, 완료, 로그인하러가기 등..)
@@ -26,6 +29,9 @@ export default StyleSheet.create({
     justifyContent: "center",
     borderRadius: 11,
   },
+
+  /*------------------------------------------------------------*/
+
   /**
    * /Components/AccountCompo/AccountButton
    * 회원가입 버튼
@@ -39,6 +45,9 @@ export default StyleSheet.create({
     borderRadius: 11,
     marginTop: 25,
   },
+
+  /*------------------------------------------------------------*/
+
   /**
    * /Components/AccountCompo/AccountButton
    * 아이디, 비밀번호 찾기 버튼

@@ -1,11 +1,10 @@
 import { View } from "react-native";
 import React, { useState } from "react";
-import { LoginBackground } from "../../../Components/AllCompo/Background";
+import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
-import { BlackBackIconButton } from "../../../Components/AllCompo/BackIconButton";
-import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
+import { BlackBackIconButton } from "../../../Components/AllCompo/IconCompo/BackIconButton";
+import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { Image } from "react-native";
 import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
 import { RegiDupleFlex2 } from "../../../Components/AccountCompo/AccountCustomCompo";
 import RegiUserData, {
@@ -27,7 +26,7 @@ const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <LoginBackground>
+    <AccountBackground>
       <View
         style={{
           flex: 1,
@@ -60,7 +59,7 @@ const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <OnlyAccountButton text="다음" onPress={RegiUserDataSave} />
       </View>
-    </LoginBackground>
+    </AccountBackground>
   );
 };
 
