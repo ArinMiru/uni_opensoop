@@ -22,6 +22,7 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
     const result = await loginUser(LOGIN_ID, LOGIN_PASS);
 
     if (getUserData()?.RSLT_CD === "00") {
+      
       navigation.navigate("NoticePage");
     }
   };

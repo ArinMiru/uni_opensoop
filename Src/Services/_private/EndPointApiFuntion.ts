@@ -6,7 +6,7 @@ import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import {
   parseNoticeData,
   NoticeData,
-} from "../../Utils/_private/ApiData/NoticeData"; // NoticeData 파일 경로를 수정하세요.
+} from "../../Utils/_private/ApiData/NoticeData";
 import { RegiDataType } from "../../Utils/_private/RegiData/RegiUserData";
 
 /**
@@ -48,7 +48,10 @@ export const registerUser = async (data: RegiDataType) => {
   // 서버 응답(result)에 대한 처리
   return result; // 서버 응답을 반환합니다.
 };
-
+/**
+ * ID 중복체크 API 호출 함수
+ * @param MEMB_ID 
+ */
 export const idCheckpoint = async (MEMB_ID: string) => {
   const endpoint = "/UNI/MembIdChkSvc";
   const data = {
@@ -63,7 +66,10 @@ export const idCheckpoint = async (MEMB_ID: string) => {
     console.log("중복된 아이디 입니다.");
   }
 };
-
+/**
+ * 닉네임 중복체크 API 호출 함수
+ * @param NICK_NM 
+ */
 export const nickCheckpoint = async (NICK_NM: string) => {
   const endpoint = "/UNI/MembNicChkSvc";
   const data = {
@@ -78,12 +84,20 @@ export const nickCheckpoint = async (NICK_NM: string) => {
   }
 };
 
+/**
+ * 공지사항 데이터 호출 서비스 함수
+ * @param LOGIN_ID 사용자 아이디
+ * @param MEMB_SC_CD 사용자 학과 코드
+ * @param MEMB_DEP_CD 사용자 학부 코드
+ * @param TIT_CD 사용자 직책 코드
+ * @returns Promise<NoticeData | null>
+ */
 export const noticeCall = async (
   LOGIN_ID: string,
   MEMB_SC_CD: string,
   MEMB_DEP_CD: string,
   TIT_CD: string
-) => {
+): Promise<NoticeData | null> => {
   const endpoint = "/UNI/OpenBubListSvc";
 
   // 로그인한 사용자의 데이터 가져오기
@@ -93,35 +107,39 @@ export const noticeCall = async (
     // userData가 null이 아닌 경우에만 요청 보내기
 
     // 고정된 값으로 설정
-    const LIST_UNIT_CNT = 10;
-    const REQ_PAGE = 1;
+    const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 공지사항 수
+    const REQ_PAGE = 1;       // 요청할 페이지 번호
 
     const data = {
-      LOGIN_ID,
-      MEMB_SC_CD,
-      MEMB_DEP_CD,
-      TIT_CD,
-      LIST_UNIT_CNT,
-      REQ_PAGE,
+      LOGIN_ID,               // 사용자 아이디
+      MEMB_SC_CD,             // 사용자 학과 코드
+      MEMB_DEP_CD,            // 사용자 학부 코드
+      TIT_CD,                 // 사용자 직책 코드
+      LIST_UNIT_CNT,          // 한 페이지에 표시할 공지사항 수
+      REQ_PAGE,               // 요청할 페이지 번호
     };
 
     try {
+      // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
       const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
         endpoint,
         data
       );
 
       if (result !== null && result.data.RSLT_CD === "00") {
-        // 데이터 파싱
+        // 서버 응답이 성공적이면 데이터를 파싱합니다.
         const noticeData: NoticeData = parseNoticeData(result.data);
-        console.log(noticeData.OPEN_BUB);
+        return noticeData; // 파싱된 데이터를 반환합니다.
       } else {
-        console.log("실패");
+        console.log("공지사항 데이터 가져오기 실패");
+        return null;
       }
     } catch (error) {
       console.error("오류 발생:", error);
+      return null;
     }
   } else {
     console.log("데이터를 가져올 수 없습니다.");
+    return null;
   }
 };
