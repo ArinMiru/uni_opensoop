@@ -46,7 +46,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
             {
               color: "#4BB781",
               marginLeft: deviceWidth * 0.1,
-              marginTop: currentPlatform === "ios" ? 0 : deviceHeight * 0.07,
+              lineHeight: deviceWidth * 0.09,
             },
           ]}
         >
@@ -57,7 +57,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
             textStyle.medium20,
             {
               color: "#424C43",
-              marginTop: currentPlatform === "ios" ? 0 : deviceHeight * 0.06,
+              lineHeight: deviceHeight * 0.04,
             },
           ]}
         >
