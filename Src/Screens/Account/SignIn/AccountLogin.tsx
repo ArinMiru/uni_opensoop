@@ -22,7 +22,6 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
     const result = await loginUser(LOGIN_ID, LOGIN_PASS);
 
     if (getUserData()?.RSLT_CD === "00") {
-      
       navigation.navigate("NoticePage");
     }
   };
@@ -86,7 +85,7 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
         />
         <IdPassFindButton
           text="비밀번호찾기"
-          onPress={() => navigation.navigate("PassFindForEmail")}
+          onPress={() => navigation.navigate("PassFindForId")}
         />
       </View>
     </LoginBackground>

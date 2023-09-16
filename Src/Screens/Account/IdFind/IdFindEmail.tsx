@@ -7,6 +7,7 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <RegiCommonView
+      IconPress={() => navigation.navigate("AccountLogin")}
       bigtext="이메일"
       smalltext="로 아이디 찾기"
       inputtext="이메일"

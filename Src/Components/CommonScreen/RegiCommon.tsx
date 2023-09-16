@@ -18,6 +18,7 @@ interface CommonProps {
   smalltext: string;
   buttontext: string;
   inputtext: string;
+  IconPress: () => void;
   onPress: () => void;
   navigation: {
     navigate: (screenName: string) => void;
@@ -30,12 +31,13 @@ export const RegiCommonView: React.FC<CommonProps> = ({
   buttontext, // Button안에 들어가는 Text
   inputtext, // 내용 작성 창에 들어가는 Text
   onPress,
+  IconPress,
 }) => {
   // 파스칼 케이스 적용
   return (
     <SafeAreaView style={BackgroundStyle.loginBackground}>
       <View style={BackgroundStyle.backIconFlex}>
-        <BlackBackIconButton onPress={onPress} />
+        <BlackBackIconButton onPress={IconPress} />
       </View>
       <View style={BackgroundStyle.titleTextFlex}>
         <Text
