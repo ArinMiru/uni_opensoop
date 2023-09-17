@@ -10,11 +10,20 @@ import {
   TopbarEditButton,
   TopbarRegiButton,
 } from "./TopbarEditDelRegiButton";
+import DrawerScreenProps from "../../Navigations/StackNavigator";
 
 //프로퍼티 타입 정의
 interface inputProps {
   children?: React.ReactNode; //리액트로 타입 명시
   text: string; //문자열로 타입 명시
+  navigation?: any;
+  onPress?: () => void;
+}
+
+interface DrawerScreenProps {
+  children?: React.ReactNode; //리액트로 타입 명시
+  text: string; //문자열로 타입 명시
+  navigation?: any;
   onPress?: () => void;
 }
 
@@ -24,16 +33,20 @@ interface inputProps {
  * MenuTopbarStyle
  * MenuTopbarStyleManager와 다른 점은 오른쪽에 Plus 아이콘이 존재하지 않는다는 점이다.
  */
-export const MenuTopbarStyle: React.FC<inputProps> = ({
+export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
   children,
   text,
+  navigation,
   onPress,
 }) => {
+  const openDrawer = () => {
+    navigation?.navigate("DrawerScreen");
+  };
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <MenuIcon />
+        <MenuIcon onPress={openDrawer} />
       </View>
       <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
       <View style={{ flex: 1 }}></View>
