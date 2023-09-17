@@ -9,6 +9,8 @@ import {
 } from "../../Utils/_private/ApiData/NoticeData";
 import { RegiDataType } from "../../Utils/_private/RegiData/RegiUserData";
 
+/* ------------------------------------------------------------------------------- */
+
 /**
  * 로그인 서비스 함수
  * @param LOGIN_ID 사용자 아이디
@@ -33,6 +35,8 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
   }
 };
 
+/* ------------------------------------------------------------------------------- */
+
 /**
  * 회원가입 서비스 함수
  * @param MEMB_ID 사용자 아이디
@@ -50,7 +54,7 @@ export const registerUser = async (data: RegiDataType) => {
 };
 /**
  * ID 중복체크 API 호출 함수
- * @param MEMB_ID 
+ * @param MEMB_ID
  */
 export const idCheckpoint = async (MEMB_ID: string) => {
   const endpoint = "/UNI/MembIdChkSvc";
@@ -66,9 +70,12 @@ export const idCheckpoint = async (MEMB_ID: string) => {
     console.log("중복된 아이디 입니다.");
   }
 };
+
+/* ------------------------------------------------------------------------------- */
+
 /**
  * 닉네임 중복체크 API 호출 함수
- * @param NICK_NM 
+ * @param NICK_NM
  */
 export const nickCheckpoint = async (NICK_NM: string) => {
   const endpoint = "/UNI/MembNicChkSvc";
@@ -83,6 +90,8 @@ export const nickCheckpoint = async (NICK_NM: string) => {
     console.log("중복된 닉네임 입니다.");
   }
 };
+
+/* ------------------------------------------------------------------------------- */
 
 /**
  * 공지사항 데이터 호출 서비스 함수
@@ -108,15 +117,15 @@ export const noticeCall = async (
 
     // 고정된 값으로 설정
     const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 공지사항 수
-    const REQ_PAGE = 1;       // 요청할 페이지 번호
+    const REQ_PAGE = 1; // 요청할 페이지 번호
 
     const data = {
-      LOGIN_ID,               // 사용자 아이디
-      MEMB_SC_CD,             // 사용자 학과 코드
-      MEMB_DEP_CD,            // 사용자 학부 코드
-      TIT_CD,                 // 사용자 직책 코드
-      LIST_UNIT_CNT,          // 한 페이지에 표시할 공지사항 수
-      REQ_PAGE,               // 요청할 페이지 번호
+      LOGIN_ID, // 사용자 아이디
+      MEMB_SC_CD, // 사용자 학과 코드
+      MEMB_DEP_CD, // 사용자 학부 코드
+      TIT_CD, // 사용자 직책 코드
+      LIST_UNIT_CNT, // 한 페이지에 표시할 공지사항 수
+      REQ_PAGE, // 요청할 페이지 번호
     };
 
     try {
@@ -143,3 +152,5 @@ export const noticeCall = async (
     return null;
   }
 };
+
+/* ------------------------------------------------------------------------------- */
