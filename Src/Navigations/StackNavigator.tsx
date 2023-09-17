@@ -18,6 +18,7 @@ import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
 import TopbarStyletest from "../Screens/Account/IdFind/Topbartest";
+import DrawerScreen from "../Components/AllCompo/DrawerMenu/DrawerScreen";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -37,12 +38,16 @@ type RootStackParamList = {
   IdFindEmail: undefined;
   IdFindOut: undefined;
   NoticePage: undefined;
-
   Topbartest: undefined;
+  DrawerScreen: undefined;
 };
 
 export type ScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, "ModalScreen">;
+};
+
+export type DrawerScreenProps = {
+  navigation: StackNavigationProp<RootStackParamList, "DrawerScreen">;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -135,6 +140,12 @@ const StackNavigator = () => {
         name="Topbartest"
         component={TopbarStyletest}
         options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="DrawerScreen"
+        component={DrawerScreen}
+        options={{ headerShown: false, presentation: "transparentModal" }}
       />
     </Stack.Navigator>
   );
