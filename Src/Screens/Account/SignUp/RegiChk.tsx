@@ -24,7 +24,7 @@ const RegiChk: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
-          onPress={() => navigation.navigate("UniCertiDprtSrch")}
+          onPress={() => navigation.navigate("UniCertiSchSrch")}
           navigation={navigation}
         />
       </View>
