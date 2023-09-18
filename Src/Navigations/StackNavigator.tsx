@@ -14,6 +14,7 @@ import UniCertiEmail from "../Screens/Account/UniCrtf/UniCertiEmail";
 import UniCertiStudNum from "../Screens/Account/UniCrtf/UniCertiStudNum";
 import UniCertiChk from "../Screens/Account/UniCrtf/UniCertiChk"
 import UniCertiSchSrch from "../Screens/Account/UniCrtf/UniCertiSchSrch";
+import UniCertiGrad from "../Screens/Account/UniCrtf/UniCertGard";
 import PassFindEcode from "../Screens/Account/PassFind/PassFindEcode";
 import PassFindForEmail from "../Screens/Account/PassFind/PassFindForEmail";
 import PassFindForId from "../Screens/Account/PassFind/PassFindForId";
@@ -38,6 +39,7 @@ type RootStackParamList = {
   UniCertiEcode: undefined;
   UniCertiEmail: undefined;
   UniCertiStudNum: undefined;
+  UniCertiGrad: undefined;
   UniCertiChk: undefined;
   UniCertiSchSrch: undefined;
   PassFindEcode: undefined;
@@ -123,6 +125,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="UniCertiStudNum"
         component={UniCertiStudNum}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="UniCertiGrad"
+        component={UniCertiGrad}
         options={{ headerShown: false }}
       />
       <Stack.Screen
