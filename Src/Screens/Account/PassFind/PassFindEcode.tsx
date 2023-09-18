@@ -10,7 +10,7 @@ const PassFindEcode: React.FC<ScreenProps> = ({ navigation }) => {
       smalltext="입력하기"
       inputtext="인증번호"
       buttontext="완료"
-      onPress={() => navigation.navigate("AccountLoginRegi")}
+      onPress={() => navigation.navigate("PassFindNewPass")}
       navigation={navigation}
     />
   );
