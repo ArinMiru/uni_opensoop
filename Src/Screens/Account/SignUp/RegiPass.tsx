@@ -15,7 +15,7 @@ import RegiUserData, {
 const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
   const [pass, setPass] = useState<string>("");
   const regiPassData = () => {
-    setUserDataAndNavigate("PASS", pass, navigation, "AccountLoginRegi");
+    setUserDataAndNavigate("PASS", pass, navigation, "RegiChk");
   };
 
   return (

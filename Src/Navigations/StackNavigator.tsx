@@ -7,17 +7,21 @@ import AccountLoginRegi from "../Screens/Account/SignIn/AccountLoginRegi";
 import RegiId from "../Screens/Account/SignUp/RegiId";
 import RegiNmNic from "../Screens/Account/SignUp/RegiNmNic";
 import RegiPass from "../Screens/Account/SignUp/RegiPass";
+import RegiChk from "../Screens/Account/SignUp/RegiChk";
 import UniCertiDprtSrch from "../Screens/Account/UniCrtf/UniCertiDprtSrch";
 import UniCertiEcode from "../Screens/Account/UniCrtf/UniCertiEcode";
 import UniCertiEmail from "../Screens/Account/UniCrtf/UniCertiEmail";
 import UniCertiStudNum from "../Screens/Account/UniCrtf/UniCertiStudNum";
+import UniCertiChk from "../Screens/Account/UniCrtf/UniCertiChk"
 import PassFindEcode from "../Screens/Account/PassFind/PassFindEcode";
 import PassFindForEmail from "../Screens/Account/PassFind/PassFindForEmail";
 import PassFindForId from "../Screens/Account/PassFind/PassFindForId";
+import PassFindNewPass from "../Screens/Account/PassFind/PassFindNewPass";
+import PassFindChk from "../Screens/Account/PassFind/PassFindChk";
 import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
-import TopbarStyletest from "../Screens/Account/IdFind/Topbartest";
+import Topbartest from "../Screens/Account/IdFind/Topbartest";
 import DrawerScreen from "../Components/AllCompo/DrawerMenu/DrawerScreen";
 
 type RootStackParamList = {
@@ -28,13 +32,17 @@ type RootStackParamList = {
   RegiId: undefined;
   RegiNmNic: undefined;
   RegiPass: undefined; //파라미터 전달 값 없음
+  RegiChk: undefined;
   UniCertiDprtSrch: undefined;
   UniCertiEcode: undefined;
   UniCertiEmail: undefined;
   UniCertiStudNum: undefined;
+  UniCertiChk: undefined;
   PassFindEcode: undefined;
   PassFindForEmail: undefined;
   PassFindForId: undefined;
+  PassFindNewPass: undefined;
+  PassFindChk: undefined;
   IdFindEmail: undefined;
   IdFindOut: undefined;
   NoticePage: undefined;
@@ -43,7 +51,7 @@ type RootStackParamList = {
 };
 
 export type ScreenProps = {
-  navigation: StackNavigationProp<RootStackParamList, "ModalScreen">;
+  navigation: StackNavigationProp<RootStackParamList, "AccountLoginRegi">;
 };
 
 export type DrawerScreenProps = {
@@ -81,6 +89,11 @@ const StackNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="RegiChk"
+        component={RegiChk}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="ModalScreen"
         component={ModalScreen}
         options={{ headerShown: false, presentation: "modal" }}
@@ -106,6 +119,11 @@ const StackNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="UniCertiChk"
+        component={UniCertiChk}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="PassFindEcode"
         component={PassFindEcode}
         options={{ headerShown: false }}
@@ -118,6 +136,16 @@ const StackNavigator = () => {
       <Stack.Screen
         name="PassFindForId"
         component={PassFindForId}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="PassFindNewPass"
+        component={PassFindNewPass}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="PassFindChk"
+        component={PassFindChk}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -138,7 +166,7 @@ const StackNavigator = () => {
 
       <Stack.Screen
         name="Topbartest"
-        component={TopbarStyletest}
+        component={Topbartest}
         options={{ headerShown: false }}
       />
 

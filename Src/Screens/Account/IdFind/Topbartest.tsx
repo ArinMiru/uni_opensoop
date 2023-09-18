@@ -1,5 +1,4 @@
 import React from "react";
-import { ScreenProps } from "../../../Navigations/StackNavigator";
 import {
   MenuTopbarStyle,
   MenuTopbarStyleManager,
@@ -10,9 +9,9 @@ import {
 } from "../../../Components/AllCompo/TopbarCompo";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import { View, SafeAreaView } from "react-native";
-import { DrawerScreenProps } from "../../../Navigations/StackNavigator";
+import { ScreenProps } from "../../../Navigations/StackNavigator";
 
-const TopbarStyletest: React.FC<DrawerScreenProps> = ({ navigation }) => {
+const Topbartest: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={BackgroundStyle.AccountBackground}>
       <MenuTopbarStyle text="공지사항" navigation={navigation} />
@@ -21,4 +20,4 @@ const TopbarStyletest: React.FC<DrawerScreenProps> = ({ navigation }) => {
   );
 };
 
-export default TopbarStyletest;
+export default Topbartest;
