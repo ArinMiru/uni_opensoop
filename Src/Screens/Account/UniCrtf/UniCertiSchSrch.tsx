@@ -2,13 +2,14 @@ import { View, Text } from "react-native";
 import React, { useState } from "react";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
-import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
+import { BlackBackIconButton } from "../../../Components/AllCompo/IconCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
 import { Image } from "react-native";
+import { RegiDupleFlex3 } from "../../../Components/AccountCompo/AccountCustomCompo";
 
 const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
   return (
@@ -18,7 +19,13 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
           flex: 1,
           width: deviceWidth * 1,
         }}
-      ></View>
+      >
+        <BlackBackIconButton
+          text=""
+          onPress={() => navigation.navigate("AccountLoginRegi")}
+          navigation={navigation}
+        ></BlackBackIconButton>
+      </View>
       <View style={BackgroundStyle.titleTextFlex}>
         <Text
           style={[
@@ -30,7 +37,7 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
             },
           ]}
         >
-          새로운 비밀번호
+          대학교
         </Text>
         <Text
           style={[
@@ -42,17 +49,16 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
             },
           ]}
         >
-          입력하기
+          찾기
         </Text>
       </View>
       <View style={{ flex: 3 }}>
-        <OnlyAccountInputCompoMarginTop3 text="새로운 비밀번호" />
-        <OnlyAccountInputCompoMarginTop3 text="새로운 비밀번호 확인" />
+        <RegiDupleFlex3 inputText="학교" text="검색"></RegiDupleFlex3>
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
-          onPress={() => navigation.navigate("PassFindChk")}
+          onPress={() => navigation.navigate("UniCertiDprtSrch")}
         />
       </View>
     </AccountBackground>
