@@ -57,7 +57,8 @@ export const RegiCommonView: React.FC<CommonProps> = ({
             textStyle.medium20,
             {
               color: "#424C43",
-              lineHeight: deviceHeight * 0.04,
+              lineHeight: deviceHeight * 0.0459,
+              marginLeft: deviceWidth * 0.01,
             },
           ]}
         >
