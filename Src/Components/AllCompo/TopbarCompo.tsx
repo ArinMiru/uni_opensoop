@@ -10,7 +10,6 @@ import {
   TopbarEditButton,
   TopbarRegiButton,
 } from "./TopbarEditDelRegiButton";
-import DrawerScreenProps from "../../Navigations/StackNavigator";
 
 //프로퍼티 타입 정의
 interface inputProps {
