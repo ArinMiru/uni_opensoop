@@ -9,7 +9,7 @@ import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
 import { Image } from "react-native";
-import { RegiDupleFlex3 } from "../../../Components/AccountCompo/AccountCustomCompo";
+import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 
 const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
   return (
@@ -22,7 +22,7 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <BlackBackIconButton
           text=""
-          onPress={() => navigation.navigate("RegiChk")}
+          onPress={() => navigation.navigate("UniCertiDprtSrch")}
           navigation={navigation}
         ></BlackBackIconButton>
       </View>
@@ -37,7 +37,7 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
             },
           ]}
         >
-          대학교
+          학년
         </Text>
         <Text
           style={[
@@ -49,16 +49,16 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
             },
           ]}
         >
-          찾기
+          선택하기
         </Text>
       </View>
       <View style={{ flex: 3 }}>
-        <RegiDupleFlex3 inputText="학교" text="검색"></RegiDupleFlex3>
+        <OnlyAccountInputCompoMarginTop3 text="학년"></OnlyAccountInputCompoMarginTop3>
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
-          onPress={() => navigation.navigate("UniCertiDprtSrch")}
+          onPress={() => navigation.navigate("UniCertiStudNum")}
         />
       </View>
     </AccountBackground>
