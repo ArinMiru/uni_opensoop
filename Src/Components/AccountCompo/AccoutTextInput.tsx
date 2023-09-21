@@ -1,7 +1,7 @@
 /**
  * AccountTextInput Components (Figma 참고)
  */
-import Styles from "../../Styles/AccountInputStyle";
+import Styles from "../../Styles/AccountStyles/AccountInputStyle";
 import textStyle from "../../Styles/TextStyle";
 import React from "react";
 import { TextInput, TextInputProps } from "react-native";

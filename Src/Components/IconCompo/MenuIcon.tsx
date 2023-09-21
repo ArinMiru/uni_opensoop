@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceWidth } from "../../Utils/DeviceUtils";
 
 //프로퍼티 타입 정의
 interface inputProps {

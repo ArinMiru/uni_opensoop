@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { deviceWidth } from "../Utils/DeviceUtils";
+import { deviceWidth } from "../../Utils/DeviceUtils";
 
 export default StyleSheet.create({
   /**

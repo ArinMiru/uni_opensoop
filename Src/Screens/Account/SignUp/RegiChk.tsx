@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
-import { GreenCheckIcon } from "../../../Components/AllCompo/IconCompo/CheckIcon";
+import { GreenCheckIcon } from "../../../Components/IconCompo/CheckIcon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import textStyle from "../../../Styles/TextStyle";
 
