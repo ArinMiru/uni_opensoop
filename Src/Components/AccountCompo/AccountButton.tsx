@@ -2,7 +2,7 @@
  * AccountButton Components (Figma 참고)
  */
 import React from "react";
-import AccountButtonStyle from "../../Styles/AccountButtonStyle";
+import AccountButtonStyle from "../../Styles/AccountStyles/AccountButtonStyle";
 import { TouchableOpacity, Text } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 

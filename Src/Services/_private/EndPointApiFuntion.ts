@@ -8,6 +8,7 @@ import {
   NoticeData,
 } from "../../Utils/_private/ApiData/NoticeData";
 import { RegiDataType } from "../../Utils/_private/RegiData/RegiUserData";
+import { SchlSrchData, parseSchlSrchData } from "../../Utils/_private/RegiData/SchlSrchData";
 
 /* ------------------------------------------------------------------------------- */
 
@@ -152,5 +153,45 @@ export const noticeCall = async (
     return null;
   }
 };
+
+/* ------------------------------------------------------------------------------- */
+
+/**
+ * 대학교명 데이터 호출 서비스 함수
+ * @param SCH_CD 대학교 코드
+ * @param SCH_NM 대학교 이름
+ * @returns Promise<SchlSrchData | null>
+ */
+export const SchlSrchCall = async (
+  SCH_NM: string,
+): Promise<SchlSrchData | null> => {
+  const endpoint = "/UNI/SchlSrch";
+
+
+    const data = {
+      SCH_NM, // 대학교 이름
+    };
+
+    try {
+      // 서버에 대학교명 데이터 요청을 보내고 응답을 기다립니다.
+      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+        endpoint,
+        data
+      );
+
+      if (result !== null && result.data.RSLT_CD === "00") {
+        // 서버 응답이 성공적이면 데이터를 파싱합니다.
+        const schlsrchdata: SchlSrchData = parseSchlSrchData(result.data);
+        console.log(result.data)
+        return schlsrchdata; // 파싱된 데이터를 반환합니다.
+      } else {
+        console.log("대학교명이 존재하지 않습니다.");
+        return null;
+      }
+    } catch (error) {
+      console.error("오류 발생:", error);
+      return null;
+    }
+  };
 
 /* ------------------------------------------------------------------------------- */

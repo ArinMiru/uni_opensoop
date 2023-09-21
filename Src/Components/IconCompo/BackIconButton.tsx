@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 
 /* 2023.09.14 생성 (@김도원) */
 

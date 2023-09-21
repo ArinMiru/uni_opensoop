@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { deviceWidth } from "../../Utils/DeviceUtils";
-import TopbarEditDelRegiButtonStyle from "../../Styles/TopbarEditDelRegiButtonStyle";
+import TopbarEditDelRegiButtonStyle from "../../Styles/TopbarStyles/TopbarEditDelRegiButtonStyle";
 import TextStyle from "../../Styles/TextStyle";
 
 /** TopbarEditDelRegiButton
