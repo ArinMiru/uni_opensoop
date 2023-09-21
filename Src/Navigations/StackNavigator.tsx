@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import ModalScreen from "../Screens/ModalScreen";
+import ModalScreen from "../Screens/ModalScreen/ModalScreen";
 import { StackNavigationProp } from "@react-navigation/stack";
 import AccountLogin from "../Screens/Account/SignIn/AccountLogin";
 import AccountLoginRegi from "../Screens/Account/SignIn/AccountLoginRegi";
@@ -24,8 +24,10 @@ import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
 import Topbartest from "../Screens/Account/IdFind/Topbartest";
-import DrawerScreen from "../Components/AllCompo/DrawerMenu/DrawerScreen";
-import ListTest from "../Components/ListCompo/ListTest";
+import DrawerScreen from "../Screens/DrawerMenuScreen/DrawerScreen";
+import JungTestScreen from "../Screens/JungTest/JungTestScreen";
+import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
+import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -54,7 +56,9 @@ type RootStackParamList = {
   Topbartest: undefined;
   DrawerScreen: undefined;
 
-  ListTest: undefined;
+  JungTestScreen: undefined;
+  DowonTestScreen: undefined;
+  RyuTestScreen: undefined;
 };
 
 export type ScreenProps = {
@@ -194,8 +198,20 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name="ListTest"
-        component={ListTest}
+        name="JungTestScreen"
+        component={JungTestScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="DowonTestScreen"
+        component={DowonTestScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="RyuTestScreen"
+        component={RyuTestScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

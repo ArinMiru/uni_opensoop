@@ -4,7 +4,7 @@
 
 import { TouchableOpacity, Text } from "react-native";
 import textStyle from "../../Styles/TextStyle";
-import VoteButtonStyle from "../../Styles/VoteButtonStyle";
+import VoteButtonStyle from "../../Styles/VoteStyles/VoteButtonStyle";
 import { AntDesign } from "@expo/vector-icons";
 import { deviceWidth } from "../../Utils/DeviceUtils";
 

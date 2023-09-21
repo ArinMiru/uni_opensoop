@@ -1,10 +1,10 @@
 import { View, Text, TextInputProps } from "react-native";
-import { deviceWidth } from "../../Utils/DeviceUtils";
+import { deviceWidth } from "../../../Utils/DeviceUtils";
 import {
   FreBefoClikButton,
   SgsBefoClikButton,
   QstBefoClikButton,
-} from "../ListCompo/ListCategorieButton";
+} from "../ListCommonCompo/ListCategorieButton";
 
 interface ButtonProps extends TextInputProps {
   children?: React.ReactNode;

@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceWidth } from "../../Utils/DeviceUtils";
 
 /**
  * 공지사항, 투표 -> TopbarStyle 에 해당하는 Plus아이콘 & 공지사항 이미지 업로드에 해당하는 Plus 아이콘
