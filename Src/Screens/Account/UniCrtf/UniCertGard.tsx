@@ -9,17 +9,9 @@ import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
 import { Image } from "react-native";
-import { RegiDupleFlex3 } from "../../../Components/AccountCompo/AccountCustomCompo";
-import { SchlSrchCall } from "../../../Services/_private/EndPointApiFuntion";
+import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 
-const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
-  const [userSchSrch, setUserSchSrch ] = useState<string>("");
-
-  const SrchCheck = async () => {
-    const result = await SchlSrchCall(userSchSrch);
-  };
-
-
+const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
       <View
@@ -30,7 +22,7 @@ const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <BlackBackIconButton
           text=""
-          onPress={() => navigation.navigate("RegiChk")}
+          onPress={() => navigation.navigate("UniCertiDprtSrch")}
           navigation={navigation}
         ></BlackBackIconButton>
       </View>
@@ -45,7 +37,7 @@ const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
             },
           ]}
         >
-          대학교
+          학년
         </Text>
         <Text
           style={[
@@ -57,27 +49,20 @@ const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
             },
           ]}
         >
-          찾기
+          선택하기
         </Text>
       </View>
       <View style={{ flex: 3 }}>
-        <RegiDupleFlex3 inputText="학교" 
-          text="검색"
-          value={userSchSrch}
-          onChangeText={
-            (text) => setUserSchSrch(text)
-          }
-          onPress={SrchCheck}
-        ></RegiDupleFlex3>
+        <OnlyAccountInputCompoMarginTop3 text="학년"></OnlyAccountInputCompoMarginTop3>
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
-          onPress={() => navigation.navigate("UniCertiDprtSrch")}
+          onPress={() => navigation.navigate("UniCertiStudNum")}
         />
       </View>
     </AccountBackground>
   );
 };
 
-export default UniCertiSchSrch;
+export default PassFindNewPass;

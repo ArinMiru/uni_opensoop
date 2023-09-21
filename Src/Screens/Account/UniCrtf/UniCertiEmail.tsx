@@ -10,7 +10,7 @@ const UniCertiEmail: React.FC<ScreenProps> = ({ navigation }) => {
       smalltext="입력하기"
       inputtext="이메일"
       buttontext="인증번호 전송"
-      onPress={() => navigation.navigate("UniCertiChk")}
+      onPress={() => navigation.navigate("UniCertiEcode")}
       navigation={navigation}
     />
   );
