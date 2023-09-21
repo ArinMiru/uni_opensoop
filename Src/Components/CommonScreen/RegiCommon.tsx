@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, SafeAreaView } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import BackgroundStyle from "../../Styles/BackgroundStyle";
-import { BlackBackIconButton } from "../AllCompo/IconCompo/BackIconButton";
+import { BlackBackIconButton } from "../IconCompo/BackIconButton";
 import { OnlyAccountInputCompoMarginTop3 } from "../AccountCompo/AccoutTextInput";
 import { OnlyAccountButton } from "../AccountCompo/AccountButton";
 import {
