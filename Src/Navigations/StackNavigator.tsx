@@ -12,7 +12,7 @@ import UniCertiDprtSrch from "../Screens/Account/UniCrtf/UniCertiDprtSrch";
 import UniCertiEcode from "../Screens/Account/UniCrtf/UniCertiEcode";
 import UniCertiEmail from "../Screens/Account/UniCrtf/UniCertiEmail";
 import UniCertiStudNum from "../Screens/Account/UniCrtf/UniCertiStudNum";
-import UniCertiChk from "../Screens/Account/UniCrtf/UniCertiChk"
+import UniCertiChk from "../Screens/Account/UniCrtf/UniCertiChk";
 import UniCertiSchSrch from "../Screens/Account/UniCrtf/UniCertiSchSrch";
 import UniCertiGrad from "../Screens/Account/UniCrtf/UniCertGard";
 import PassFindEcode from "../Screens/Account/PassFind/PassFindEcode";
@@ -25,6 +25,7 @@ import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
 import Topbartest from "../Screens/Account/IdFind/Topbartest";
 import DrawerScreen from "../Components/AllCompo/DrawerMenu/DrawerScreen";
+import ListTest from "../Components/ListCompo/ListTest";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -52,6 +53,8 @@ type RootStackParamList = {
   NoticePage: undefined;
   Topbartest: undefined;
   DrawerScreen: undefined;
+
+  ListTest: undefined;
 };
 
 export type ScreenProps = {
@@ -188,6 +191,12 @@ const StackNavigator = () => {
         name="DrawerScreen"
         component={DrawerScreen}
         options={{ headerShown: false, presentation: "transparentModal" }}
+      />
+
+      <Stack.Screen
+        name="ListTest"
+        component={ListTest}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
