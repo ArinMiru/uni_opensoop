@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { deviceHeight, deviceWidth } from "../Utils/DeviceUtils";
+import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 export default StyleSheet.create({
   /*-------------------Account Compo Input Style----------------------*/
   /**

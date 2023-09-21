@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import React, { useState } from "react";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
-import { BlackBackIconButton } from "../../../Components/AllCompo/IconCompo/BackIconButton";
+import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButton";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 import { deviceWidth } from "../../../Utils/DeviceUtils";

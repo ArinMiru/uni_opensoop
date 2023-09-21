@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import ModalScreen from "../Screens/ModalScreen";
+import ModalScreen from "../Screens/ModalScreen/ModalScreen";
 import { StackNavigationProp } from "@react-navigation/stack";
 import AccountLogin from "../Screens/Account/SignIn/AccountLogin";
 import AccountLoginRegi from "../Screens/Account/SignIn/AccountLoginRegi";
@@ -12,7 +12,7 @@ import UniCertiDprtSrch from "../Screens/Account/UniCrtf/UniCertiDprtSrch";
 import UniCertiEcode from "../Screens/Account/UniCrtf/UniCertiEcode";
 import UniCertiEmail from "../Screens/Account/UniCrtf/UniCertiEmail";
 import UniCertiStudNum from "../Screens/Account/UniCrtf/UniCertiStudNum";
-import UniCertiChk from "../Screens/Account/UniCrtf/UniCertiChk"
+import UniCertiChk from "../Screens/Account/UniCrtf/UniCertiChk";
 import UniCertiSchSrch from "../Screens/Account/UniCrtf/UniCertiSchSrch";
 import UniCertiGrad from "../Screens/Account/UniCrtf/UniCertGard";
 import PassFindEcode from "../Screens/Account/PassFind/PassFindEcode";
@@ -24,7 +24,10 @@ import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
 import Topbartest from "../Screens/Account/IdFind/Topbartest";
-import DrawerScreen from "../Components/AllCompo/DrawerMenu/DrawerScreen";
+import DrawerScreen from "../Screens/DrawerMenuScreen/DrawerScreen";
+import JungTestScreen from "../Screens/JungTest/JungTestScreen";
+import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
+import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -52,6 +55,10 @@ type RootStackParamList = {
   NoticePage: undefined;
   Topbartest: undefined;
   DrawerScreen: undefined;
+
+  JungTestScreen: undefined;
+  DowonTestScreen: undefined;
+  RyuTestScreen: undefined;
 };
 
 export type ScreenProps = {
@@ -188,6 +195,24 @@ const StackNavigator = () => {
         name="DrawerScreen"
         component={DrawerScreen}
         options={{ headerShown: false, presentation: "transparentModal" }}
+      />
+
+      <Stack.Screen
+        name="JungTestScreen"
+        component={JungTestScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="DowonTestScreen"
+        component={DowonTestScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="RyuTestScreen"
+        component={RyuTestScreen}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
