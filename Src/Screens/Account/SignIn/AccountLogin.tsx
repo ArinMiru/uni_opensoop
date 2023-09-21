@@ -6,7 +6,7 @@ import {
   IdPassFindButton,
 } from "../../../Components/AccountCompo/AccountButton";
 import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
-import { BlackBackIconButton } from "../../../Components/AllCompo/IconCompo/BackIconButton";
+import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";

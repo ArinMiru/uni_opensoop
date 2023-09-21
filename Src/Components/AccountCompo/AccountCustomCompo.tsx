@@ -2,8 +2,8 @@ import { View, Text, TouchableOpacity, TextInputProps } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 import { TextInput } from "react-native-gesture-handler";
-import AccountButtonStyle from "../../Styles/AccountButtonStyle";
-import AccountInputStyle from "../../Styles/AccountInputStyle";
+import AccountButtonStyle from "../../Styles/AccountStyles/AccountButtonStyle";
+import AccountInputStyle from "../../Styles/AccountStyles/AccountInputStyle";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 interface TextTopProps extends TextInputProps {

@@ -2,7 +2,7 @@ import { View } from "react-native";
 import React, { useState } from "react";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
-import { BlackBackIconButton } from "../../../Components/AllCompo/IconCompo/BackIconButton";
+import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
