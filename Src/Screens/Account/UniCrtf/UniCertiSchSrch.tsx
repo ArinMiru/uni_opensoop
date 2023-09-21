@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
-import { BlackBackIconButton } from "../../../Components/AllCompo/IconCompo/BackIconButton";
+import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
@@ -13,12 +13,11 @@ import { RegiDupleFlex3 } from "../../../Components/AccountCompo/AccountCustomCo
 import { SchlSrchCall } from "../../../Services/_private/EndPointApiFuntion";
 
 const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
-  const [userSchSrch, setUserSchSrch ] = useState<string>("");
+  const [userSchSrch, setUserSchSrch] = useState<string>("");
 
   const SrchCheck = async () => {
     const result = await SchlSrchCall(userSchSrch);
   };
-
 
   return (
     <AccountBackground>
@@ -61,12 +60,11 @@ const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
         </Text>
       </View>
       <View style={{ flex: 3 }}>
-        <RegiDupleFlex3 inputText="학교" 
+        <RegiDupleFlex3
+          inputText="학교"
           text="검색"
           value={userSchSrch}
-          onChangeText={
-            (text) => setUserSchSrch(text)
-          }
+          onChangeText={(text) => setUserSchSrch(text)}
           onPress={SrchCheck}
         ></RegiDupleFlex3>
       </View>

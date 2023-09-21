@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 import textStyle from "../../Styles/TextStyle";
-import ListCommonButtonStyle from "../ListCompo/ListCommonButtonStyle";
+import ListCommonButtonStyle from "../../Styles/ListStyles/ListCommonButtonStyle";
 
 interface ButtonProps {
   children?: React.ReactNode;

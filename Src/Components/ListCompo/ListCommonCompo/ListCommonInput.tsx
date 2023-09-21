@@ -1,5 +1,5 @@
-import ListCommonInputStyle from "./ListCommonInputStyle";
-import textStyle from "../../Styles/TextStyle";
+import ListCommonInputStyle from "../../../Styles/ListStyles/ListCommonInputStyle";
+import textStyle from "../../../Styles/TextStyle";
 import React from "react";
 import { TextInput, TextInputProps } from "react-native";
 

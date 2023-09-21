@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { RegiButton } from "../ListCompo/RegiButton";
+import { RegiButton } from "../../Components/ListCompo/RegiButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BackgroundStyle from "../../Styles/BackgroundStyle";
 import {
@@ -10,12 +10,12 @@ import {
   QstBefoClikButton,
   SgsButton,
   QstButton,
-} from "../ListCompo/ListCategorieButton";
+} from "../../Components/ListCompo/ListCommonCompo/ListCategorieButton";
 import {
   OpenFreSgsTitInputBox,
   OpenFreSgsContInputBox,
-} from "./ListCommonInput";
-import { ListCategorieCompo } from "../ListCompo/ListCategorieCompo";
+} from "../../Components/ListCompo/ListCommonCompo/ListCommonInput";
+import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 
 const ListTest = () => {
   return (
