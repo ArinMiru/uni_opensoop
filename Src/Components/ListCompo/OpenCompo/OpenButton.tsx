@@ -32,7 +32,7 @@ export const OpenPhotoButton: React.FC<ButtonProps> = ({
           marginRight: deviceWidth * 0.04,
         }}
         name="chevron-right"
-        size={12}
+        size={deviceWidth * 0.03}
         color="#fff"
       />
       {children}
