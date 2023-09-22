@@ -16,6 +16,7 @@ import {
   OpenFreSgsContInputBox,
 } from "../../Components/ListCompo/ListCommonCompo/ListCommonInput";
 import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
+import { FreeLawButton } from "../../Components/ListCompo/FreCompo/FreButton";
 
 const ListTest = () => {
   return (
@@ -30,6 +31,7 @@ const ListTest = () => {
       <OpenFreSgsTitInputBox text="제목을 입력하세요." />
       <OpenFreSgsContInputBox text="내용을 입력하세요." multiline={true} />
       <ListCategorieCompo />
+      <FreeLawButton />
     </SafeAreaView>
   );
 };
