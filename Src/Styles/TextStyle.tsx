@@ -102,6 +102,18 @@ export default StyleSheet.create({
     fontSize: responsiveFontSize(16),
   },
 
+  bold09: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(18),
+  },
+
+  bold10: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(20),
+  },
+
   bold11: {
     fontFamily: "Bold",
     fontWeight: "700" /*bold*/,

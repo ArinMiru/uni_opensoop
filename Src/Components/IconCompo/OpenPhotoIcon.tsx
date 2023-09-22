@@ -20,8 +20,13 @@ export const OpenPhotoDelIcon: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity
       style={{
-        marginBottom: deviceHeight * 0.1,
-        marginLeft: deviceWidth * 0.15,
+        marginBottom: deviceHeight * 0.09,
+        marginLeft: deviceWidth * 0.17,
+        width: deviceWidth * 0.08,
+        height: deviceHeight * 0.04,
+        borderRadius: 100,
+        alignItems: "center",
+        justifyContent: "center",
       }}
       onPress={onPress}
     >
