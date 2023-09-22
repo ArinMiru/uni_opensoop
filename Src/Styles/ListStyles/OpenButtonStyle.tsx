@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Dimensions } from "react-native";
 import { deviceWidth, deviceHeight } from "../../Utils/DeviceUtils";
 
 export default StyleSheet.create({
@@ -6,11 +7,12 @@ export default StyleSheet.create({
    * 공지사항에서 사용하는 사진을 불러오는 버튼입니다.
    */
   PhotoLawStyle: {
-    width: deviceWidth * 0.41,
-    height: deviceHeight * 0.045,
+    width: deviceWidth * 0.3625,
+    height: deviceHeight * 0.0404,
     backgroundColor: "#A1A1A1",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
     borderRadius: 100,
   },
 
@@ -23,6 +25,7 @@ export default StyleSheet.create({
     backgroundColor: "#4BB781",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
     borderRadius: 16,
   },
 
