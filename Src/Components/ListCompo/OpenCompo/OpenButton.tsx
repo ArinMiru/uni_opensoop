@@ -27,7 +27,10 @@ export const OpenPhotoButton: React.FC<ButtonProps> = ({
         사진 불러오기
       </Text>
       <Entypo
-        style={{ marginLeft: deviceWidth * 0.04 }}
+        style={{
+          marginLeft: deviceWidth * 0.04,
+          marginRight: deviceWidth * 0.04,
+        }}
         name="chevron-right"
         size={12}
         color="#fff"
