@@ -11,7 +11,7 @@ export default StyleSheet.create({
     height: deviceHeight * 0.0404,
     backgroundColor: "#A1A1A1",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     flexDirection: "row",
     borderRadius: 100,
   },
