@@ -34,8 +34,10 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
         ></BlackBackIconButton>
       </View>
       <RegiTextflex1 text="회원가입" />
-      <View style={{ flex: 3 }}>
+      <View style={{ flex: 1 }}>
         <OnlyAccountInputCompoMarginTop3 text="비밀번호" />
+      </View>
+      <View style={{ flex: 2 }}>
         <OnlyAccountInputCompoMarginTop3 text="비밀번호 확인" />
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
