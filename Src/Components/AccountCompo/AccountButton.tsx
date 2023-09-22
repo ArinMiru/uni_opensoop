@@ -85,7 +85,7 @@ export const IdPassFindButton: React.FC<ButtonProps> = ({
       style={AccountButtonStyle.idPassFindStyle}
       onPress={onPress}
     >
-      <Text style={[textStyle.bold08, { color: "#4BB781" }]}>{text}</Text>
+      <Text style={[textStyle.bold10, { color: "#4BB781" }]}>{text}</Text>
       {children}
     </TouchableOpacity>
   );
