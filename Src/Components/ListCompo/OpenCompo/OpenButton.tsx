@@ -6,7 +6,7 @@ import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { OpenPhotoDelIcon } from "../../IconCompo/OpenPhotoIcon";
-
+import { SafeAreaView } from "react-native-safe-area-context";
 interface ButtonProps {
   children?: React.ReactNode;
   text?: string;
@@ -23,17 +23,15 @@ export const OpenPhotoButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity style={OpenButtonStyle.PhotoLawStyle} onPress={onPress}>
-      <View style={{ flexDirection: "row", marginLeft: deviceWidth * 0.1 }}>
-        <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>
-          사진 불러오기
-        </Text>
-        <Entypo
-          style={{ marginLeft: deviceWidth * 0.07 }}
-          name="chevron-right"
-          size={12}
-          color="#fff"
-        />
-      </View>
+      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>
+        사진 불러오기
+      </Text>
+      <Entypo
+        style={{ marginLeft: deviceWidth * 0.04 }}
+        name="chevron-right"
+        size={12}
+        color="#fff"
+      />
       {children}
     </TouchableOpacity>
   );
@@ -41,6 +39,7 @@ export const OpenPhotoButton: React.FC<ButtonProps> = ({
 
 /**
  * 공지사항에서 사용하는 좋아요 버튼 컴포넌트입니다.
+ * <Text> 태그 안에 들어가는 숫자는 추후에 서버에서 받아와야 합니다.
  */
 export const OpenLikeButtton: React.FC<ButtonProps> = ({
   children,
@@ -51,18 +50,17 @@ export const OpenLikeButtton: React.FC<ButtonProps> = ({
       style={OpenButtonStyle.OpenLikeButtonStyle}
       onPress={onPress}
     >
-      <View style={{ flexDirection: "row" }}>
-        <AntDesign
-          style={{
-            marginRight: deviceWidth * 0.01,
-            marginTop: deviceHeight * 0.002,
-          }}
-          name="heart"
-          size={15}
-          color="#fff"
-        />
-        <Text style={[textStyle.semibold12, { color: "#ffffff" }]}>150</Text>
-      </View>
+      <AntDesign name="heart" size={deviceWidth * 0.041} color="#fff" />
+      <Text
+        style={[
+          textStyle.semibold12,
+          { color: "#ffffff" },
+          { marginLeft: deviceWidth * 0.009 },
+          { lineHeight: deviceHeight * 0.022 },
+        ]}
+      >
+        150
+      </Text>
       {children}
     </TouchableOpacity>
   );
@@ -80,7 +78,7 @@ export const OpenPhotoPlusBox: React.FC<ButtonProps> = ({
       style={OpenButtonStyle.OpenPhotoBoxStyle}
       onPress={onPress}
     >
-      <AntDesign name="plus" size={35} color="#4BB781" />
+      <AntDesign name="plus" size={deviceWidth * 0.09} color="#4BB781" />
     </TouchableOpacity>
   );
 };
@@ -93,7 +91,7 @@ export const OpenPhotoDelBox: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <View style={OpenButtonStyle.OpenPhotoBoxStyle}>
+    <View style={[OpenButtonStyle.OpenPhotoBoxStyle]}>
       <OpenPhotoDelIcon></OpenPhotoDelIcon>
     </View>
   );
