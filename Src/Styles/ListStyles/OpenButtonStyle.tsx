@@ -34,7 +34,7 @@ export default StyleSheet.create({
    */
   OpenPhotoBoxStyle: {
     width: deviceWidth * 0.2,
-    height: deviceHeight * 0.11,
+    height: deviceWidth * 0.2, // @holly1017 레전드 작품
     backgroundColor: "#DEEBE4",
     alignItems: "center",
     justifyContent: "center",

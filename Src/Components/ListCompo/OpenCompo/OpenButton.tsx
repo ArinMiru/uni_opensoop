@@ -50,7 +50,7 @@ export const OpenLikeButtton: React.FC<ButtonProps> = ({
       style={OpenButtonStyle.OpenLikeButtonStyle}
       onPress={onPress}
     >
-      <AntDesign name="heart" size={15} color="#fff" />
+      <AntDesign name="heart" size={deviceWidth * 0.041} color="#fff" />
       <Text
         style={[
           textStyle.semibold12,
@@ -78,7 +78,7 @@ export const OpenPhotoPlusBox: React.FC<ButtonProps> = ({
       style={OpenButtonStyle.OpenPhotoBoxStyle}
       onPress={onPress}
     >
-      <AntDesign name="plus" size={35} color="#4BB781" />
+      <AntDesign name="plus" size={deviceWidth * 0.09} color="#4BB781" />
     </TouchableOpacity>
   );
 };
