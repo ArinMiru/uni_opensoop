@@ -28,12 +28,6 @@ export const FreEditDelButton: React.FC<ButtonProps> = ({ children }) => (
   <View
     style={{
       flexDirection: "row",
-      lineHeight: Platform.OS === "android" ? deviceHeight * 0.04 : 0,
-      ...Platform.select({
-        ios: {
-          lineHeight: deviceHeight * 0.05,
-        },
-      }),
     }}
   >
     <FreEditButton
@@ -41,11 +35,13 @@ export const FreEditDelButton: React.FC<ButtonProps> = ({ children }) => (
         /* 버튼 클릭 시 동작 */
       }}
     />
-    <FreDelButton
-      onPress={() => {
-        /* 버튼 클릭 시 동작 */
-      }}
-    />
+    <View style={{ marginLeft: deviceWidth * 0.009 }}>
+      <FreDelButton
+        onPress={() => {
+          /* 버튼 클릭 시 동작 */
+        }}
+      />
+    </View>
   </View>
 );
 
@@ -64,18 +60,10 @@ export const FreLikeButtton: React.FC<ButtonProps> = ({
       <AntDesign name="heart" size={deviceWidth * 0.0246} color="#4BB781" />
       <Text
         style={[
-          textStyle.semibold07,
+          textStyle.semibold08,
           { color: "#000000" },
           { marginLeft: deviceWidth * 0.006 },
-          {
-            lineHeight: Platform.OS === "android" ? deviceHeight * 0.0155 : 0,
-            ...Platform.select({
-              ios: {
-                height: deviceHeight * 0.02,
-                lineHeight: deviceHeight * 0.019,
-              },
-            }),
-          },
+          { lineHeight: deviceHeight * 0.0155 },
         ]}
       >
         150
@@ -94,16 +82,20 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
       <View
         style={[
           FreButtonStyles.horizontalLine,
-          { flex: 1.5, flexDirection: "row", alignItems: "center" },
+          {
+            flex: 1.5,
+            flexDirection: "row",
+            alignItems: "center",
+          },
         ]}
       >
         <OpenProfileIcon />
-        <Text style={[textStyle.semibold10, { color: "#4BB781", flex: 1 }]}>
+        <Text style={[textStyle.semibold12, { color: "#4BB781", flex: 1 }]}>
           닉네임
         </Text>
         <Text
           style={[
-            textStyle.regular07,
+            textStyle.regular08,
             {
               color: "#000000",
               marginTop: deviceHeight * 0.02,
@@ -118,15 +110,15 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
         style={{
           flex: 2,
           width: "100%",
+          justifyContent: "center",
         }}
       >
         <Text
           style={[
-            textStyle.semibold10,
+            textStyle.semibold12,
             {
               color: "#000000",
               marginLeft: "5%",
-              marginTop: Platform.OS === "ios" ? "3%" : 0,
             },
           ]}
         >
@@ -138,13 +130,14 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
         style={{
           flex: 2,
           width: "100%",
-          borderBottomLeftRadius: 11,
-          borderBottomRightRadius: 11,
+          borderBottomLeftRadius: 10,
+          borderBottomRightRadius: 10,
+          justifyContent: "center",
         }}
       >
         <Text
           style={[
-            textStyle.regular08,
+            textStyle.regular10,
             {
               color: "#424C43",
               marginLeft: "5%",
