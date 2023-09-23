@@ -66,12 +66,7 @@ export const FreEditButton: React.FC<ButtonProps> = ({ children, onPress }) => {
         style={[
           textStyle.medium09,
           {
-            lineHeight: Platform.OS === "android" ? deviceHeight * 0.017 : 0,
-            ...Platform.select({
-              ios: {
-                lineHeight: deviceHeight * 0.018,
-              },
-            }),
+            lineHeight: deviceHeight * 0.017,
             color: "#4BB781",
           },
         ]}
