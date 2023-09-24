@@ -16,6 +16,8 @@ import {
 import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { OpenProfileIcon } from "../../Components/IconCompo/ProfileIcon";
 import { OpenEdtDltButton } from "../../Components/IconCompo/OpenEdtDltIconButton";
+import { SgsListContentButton } from "../../Components/ListCompo/SgsCompo/SgsButtonCompo";
+import { SgsDelButton } from "../../Components/ListCompo/SgsCompo/SgsCompo";
 
 /**
  * @Dowon(김도원 생성)
@@ -25,16 +27,8 @@ import { OpenEdtDltButton } from "../../Components/IconCompo/OpenEdtDltIconButto
 const DowonTestScreen = () => {
   return (
     <SafeAreaView style={BackgroundStyle.AccountBackground}>
-      <OpenProfileIcon />
-      <OpenEdtDltButton />
-      <SgsBefoClikButton text="건의" />
-      <QstBefoClikButton text="질문" />
-      <FreButton text="자유" />
-      <SgsButton text="건의" />
-      <QstButton text="질문" />
-      <OpenFreSgsTitInputBox text="제목을 입력하세요." />
-      <OpenFreSgsContInputBox text="내용을 입력하세요." multiline={true} />
-      <ListCategorieCompo />
+      <SgsListContentButton />
+      <SgsDelButton />
     </SafeAreaView>
   );
 };
