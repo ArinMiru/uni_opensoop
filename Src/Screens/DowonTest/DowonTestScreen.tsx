@@ -27,7 +27,10 @@ import { SgsDelButton } from "../../Components/ListCompo/SgsCompo/SgsCompo";
 const DowonTestScreen = () => {
   return (
     <SafeAreaView style={BackgroundStyle.AccountBackground}>
-      <SgsListContentButton />
+      <SgsListContentButton
+        title="비공개 게시물입니다."
+        poststatus="비공개 게시물입니다."
+      />
       <SgsDelButton />
     </SafeAreaView>
   );
