@@ -10,9 +10,12 @@ import { SgsListButton, SgsTimeBox } from "./SgsCompo";
 import { SgsListLockIcon } from "../../IconCompo/SgsIcon";
 import textStyle from "../../../Styles/TextStyle";
 
-interface ButtonProps extends TextInputProps {
+interface ButtonProps {
   children?: React.ReactNode;
+  title?: string;
+  poststatus?: string;
   onPress?: () => void;
+  navigation?: { navigate: (screenName: string) => void };
 }
 
 /**
@@ -24,6 +27,8 @@ interface ButtonProps extends TextInputProps {
 export const SgsListContentButton: React.FC<ButtonProps> = ({
   children,
   onPress,
+  title,
+  poststatus,
 }) => {
   return (
     <SgsListButton>
@@ -52,7 +57,7 @@ export const SgsListContentButton: React.FC<ButtonProps> = ({
               },
             ]}
           >
-            제목
+            {title}
           </Text>
         </View>
         <View style={{ flex: 1 }}>
@@ -66,7 +71,7 @@ export const SgsListContentButton: React.FC<ButtonProps> = ({
               },
             ]}
           >
-            비공개 게시물
+            {poststatus}
           </Text>
         </View>
       </View>
