@@ -66,7 +66,7 @@ export const FreEditButton: React.FC<ButtonProps> = ({ children, onPress }) => {
         style={[
           textStyle.medium09,
           {
-            lineHeight: deviceHeight * 0.017,
+            lineHeight: deviceHeight * 0.018,
             color: "#4BB781",
           },
         ]}
