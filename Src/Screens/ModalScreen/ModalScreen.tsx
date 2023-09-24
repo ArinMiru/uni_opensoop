@@ -1,36 +1,39 @@
-// ModalScreen.tsx
-
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { ScreenProps } from "../../Navigations/StackNavigator"; // 타입 임포트
+import { ScreenProps } from "../../Navigations/StackNavigator";
 
 interface ModalProps {
-  // 속성 지정
-  children?: React.ReactNode; //리액트로 타입 명시
-  text: string; //문자열로 타입 명시
+  children?: React.ReactNode;
+  text: string;
 }
 
 const ModalScreen: React.FC<ScreenProps> = ({ navigation }) => {
-  // 타입을 명시적으로 설정
-  const closeModal = () => {
-    navigation.goBack(); // 모달을 닫기 위한 함수를 정의합니다.
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View
+      style={{
+        flex: 1, // 세로 크기를 디바이스의 20%로 설정
+        justifyContent: "flex-end",
+        alignItems: "center",
+        flexDirection: "column-reverse",
+        paddingBottom: 0,
+      }}
+    >
       <TouchableOpacity
         style={{
-          height: "50%",
+          height: "100%",
           width: "100%",
           borderColor: "#000000",
           borderWidth: 10,
         }}
-        onPress={closeModal}
+        onPress={toggleModal}
       >
-        <Text>
-          Modal Test 스타일 수정 해야 함. 스타이 적용 안되어 있음. 그냥 이 영역
-          누르거나 드래그 해서 밑으로 내리면 모달 꺼짐
-        </Text>
+        <Text>Open Modal</Text>
       </TouchableOpacity>
     </View>
   );
