@@ -8,10 +8,16 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
-import { Image } from "react-native";
-import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
+import { Dropdown } from "../../../Components/SingleUse/Dropdown";
 
 const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
+  const data = ["1학년", "2학년", "3학년", "4학년"];
+
+  const handleDropdownSelect = (selectedItem: string) => {
+    // 선택된 항목에 대한 처리 로직
+    console.log(`Selected item: ${selectedItem}`);
+  };
+
   return (
     <AccountBackground>
       <View
@@ -53,7 +59,12 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
         </Text>
       </View>
       <View style={{ flex: 3 }}>
-        <OnlyAccountInputCompoMarginTop3 text="학년"></OnlyAccountInputCompoMarginTop3>
+        <Dropdown
+          data={data}
+          onSelect={handleDropdownSelect}
+          defaultButtonText="학년"
+          rowStyle={{ borderBottomWidth: 1 }}
+        />
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton

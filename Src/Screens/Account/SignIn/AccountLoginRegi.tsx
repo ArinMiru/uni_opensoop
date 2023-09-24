@@ -8,7 +8,6 @@ import {
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
-
 import { SrchDupleButton } from "../../../Components/AccountCompo/AccountButton";
 
 const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
