@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import * as ImageManipulator from "expo-image-manipulator";
 import * as FileSystem from "expo-file-system";
 import { sendLoginCredentials } from "../Services/_private/Api.config";
