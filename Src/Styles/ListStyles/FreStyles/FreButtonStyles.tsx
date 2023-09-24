@@ -40,7 +40,7 @@ export default StyleSheet.create({
   },
 
   /*
-   * 자유게시판의 게시글을 수정하는 버튼의 스타일 입니다.
+   * 자유게시판의 게시글을 삭제하는 버튼의 스타일 입니다.
    **/
   FreDelButtonStyle: {
     width: deviceWidth * 0.09,
