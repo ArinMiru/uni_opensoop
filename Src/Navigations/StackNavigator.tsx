@@ -107,7 +107,14 @@ const StackNavigator = () => {
       <Stack.Screen
         name="ModalScreen"
         component={ModalScreen}
-        options={{ headerShown: false, presentation: "modal" }}
+        options={{
+          headerShown: false,
+          presentation: "modal",
+          cardStyle: {
+            flex: 0.2,
+            flexDirection: "column-reverse",
+          },
+        }}
       />
       <Stack.Screen
         name="UniCertiEcode"
