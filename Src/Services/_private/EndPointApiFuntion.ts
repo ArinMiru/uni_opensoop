@@ -195,3 +195,23 @@ export const SchlSrchCall = async (
   };
 
 /* ------------------------------------------------------------------------------- */
+
+/**
+ * 대학교 인증 API 호출 함수
+ * @param CERT_SEQ
+ */
+export const MembCertUpd = async (CERT_SEQ: string) => {
+  const endpoint = "/UNI/MembUniCertUpdSvc";
+  const data = {
+    CERT_SEQ,
+  };
+  const result: AxiosResponse<UserData, any> | null =
+    await sendLoginCredentials(endpoint, data);
+  if (result !== null && result.data.RSLT_CD == "00") {
+    console.log("통신 성공");
+  } else {
+    console.log("통신 실패");
+  }
+};
+
+/* ------------------------------------------------------------------------------- */
