@@ -18,6 +18,7 @@ import { OpenProfileIcon } from "../../Components/IconCompo/ProfileIcon";
 import { OpenEdtDltButton } from "../../Components/IconCompo/OpenEdtDltIconButton";
 import { SgsListContentButton } from "../../Components/ListCompo/SgsCompo/SgsButtonCompo";
 import { SgsDelButton } from "../../Components/ListCompo/SgsCompo/SgsCompo";
+import { NoticePostBoxView } from "../../Components/ListCompo/OpenCompo/NoticePostCompo";
 
 /**
  * @Dowon(김도원 생성)
@@ -27,11 +28,7 @@ import { SgsDelButton } from "../../Components/ListCompo/SgsCompo/SgsCompo";
 const DowonTestScreen = () => {
   return (
     <SafeAreaView style={BackgroundStyle.AccountBackground}>
-      <SgsListContentButton
-        title="비공개 게시물입니다."
-        poststatus="비공개 게시물입니다."
-      />
-      <SgsDelButton />
+      <NoticePostBoxView title={""}></NoticePostBoxView>
     </SafeAreaView>
   );
 };
