@@ -39,7 +39,7 @@ export default StyleSheet.create({
    **/
   QstAnswerButtonStyle: {
     width: deviceWidth * 0.09,
-    height: deviceHeight * 0.025,
+    height: deviceHeight * 0.028,
     backgroundColor: "#4BB781",
     borderRadius: 11,
     alignItems: "center",
