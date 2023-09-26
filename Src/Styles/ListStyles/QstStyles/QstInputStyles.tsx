@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
+import Constants from "expo-constants";
 
 export default StyleSheet.create({
   /**
@@ -9,10 +10,9 @@ export default StyleSheet.create({
     width: deviceWidth * 0.72,
     height: deviceHeight * 0.028,
     backgroundColor: "#FFFFFF",
-    alignItems: "center",
-    justifyContent: "center",
     borderRadius: 11,
     borderColor: "#8D9490",
     borderWidth: 1,
+    paddingLeft: 10,
   },
 });

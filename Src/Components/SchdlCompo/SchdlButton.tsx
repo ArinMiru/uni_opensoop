@@ -31,6 +31,7 @@ export const SchdlTimeButton: React.FC<ButtonProps> = ({
         SchdlButtonStyle.SchdlTimeButtonStyle,
         {
           flexDirection: "row",
+          alignContent: "center",
           justifyContent: "space-evenly",
         },
       ]}
@@ -41,8 +42,8 @@ export const SchdlTimeButton: React.FC<ButtonProps> = ({
           textStyle.semibold14,
           {
             color: "#666666",
-            lineHeight: Platform.OS === "android" ? deviceHeight * 0.06 : 0,
             marginLeft: "14%",
+            lineHeight: deviceHeight * 0.03,
           },
         ]}
       >
@@ -53,7 +54,7 @@ export const SchdlTimeButton: React.FC<ButtonProps> = ({
           textStyle.semibold14,
           {
             color: "#666666",
-            lineHeight: Platform.OS === "android" ? deviceHeight * 0.06 : 0,
+            lineHeight: deviceHeight * 0.03,
           },
         ]}
       >
@@ -64,7 +65,7 @@ export const SchdlTimeButton: React.FC<ButtonProps> = ({
           textStyle.semibold14,
           {
             color: "#666666",
-            lineHeight: Platform.OS === "android" ? deviceHeight * 0.06 : 0,
+            lineHeight: deviceHeight * 0.03,
             marginRight: "14%",
           },
         ]}

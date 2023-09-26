@@ -7,7 +7,7 @@ import React from "react";
 import { TextInput, TextInputProps } from "react-native";
 //프로퍼티 타입 정의
 interface inputProps extends TextInputProps {
-  text: string; //문자열로 타입 명시
+  text?: string; //문자열로 타입 명시
 }
 /* 중복 확인 Input
  * Figma 참고
