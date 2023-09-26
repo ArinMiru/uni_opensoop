@@ -9,6 +9,8 @@ import {
 } from "../../Utils/_private/ApiData/NoticeData";
 import { RegiDataType } from "../../Utils/_private/RegiData/RegiUserData";
 import { SchlSrchData, parseSchlSrchData } from "../../Utils/_private/RegiData/SchlSrchData";
+import { sendEmailCredentials } from "../_private/Api.config";
+
 
 /* ------------------------------------------------------------------------------- */
 
@@ -89,6 +91,25 @@ export const nickCheckpoint = async (NICK_NM: string) => {
     console.log("사용할 수 있는 닉네임 입니다.");
   } else {
     console.log("중복된 닉네임 입니다.");
+  }
+};
+
+/**
+ * 이메일로 아이디 찾기 API 호출 함수
+ * @param MEMB_EM
+ */
+export const emailCheckpoint = async (MEMB_EM: string) => {
+  const endpoint = "/UNI/MembIdFndSvc";
+  const data = {
+    MEMB_EM,
+  };
+  const result: AxiosResponse<UserData, any> | null =
+    await sendEmailCredentials(endpoint, data);
+  if (result !== null && result.data.RSLT_CD === "00") {
+    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+    console.log("등록되어 있는 이메일 입니다.");
+  } else {
+    console.log("등록되어 있지 않은 이메일 입니다.");
   }
 };
 
