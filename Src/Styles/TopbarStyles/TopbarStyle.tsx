@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { deviceWidth } from "../../Utils/DeviceUtils";
+import { deviceWidth, deviceHeight } from "../../Utils/DeviceUtils";
+import Constants from "expo-constants";
 
 export default StyleSheet.create({
   /**
@@ -8,12 +9,12 @@ export default StyleSheet.create({
    * justifyContent, alignItems 참고 -> * https://joylee-developer.tistory.com/147
    */
   TopbarStyle: {
-    flex: 1,
+    height: deviceHeight * 0.1,
     flexDirection: "row",
     width: deviceWidth * 1,
     backgroundColor: "#4bb781" /*시그니처 Color*/,
-    justifyContent: "space-between",
     alignItems: "center",
+    paddingRight: deviceWidth * 0.38,
   },
 
   /*------------------------------------------------------------------*/
