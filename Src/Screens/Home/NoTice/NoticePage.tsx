@@ -14,6 +14,7 @@ import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추�
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { ParamListBase } from "@react-navigation/native"; // React Navigation v6의 경우
 import Constants from "expo-constants";
+import { NoticePostBoxView } from "../../../Components/ListCompo/OpenCompo/NoticePostCompo";
 
 const NoTicePage = ({
   navigation,
@@ -50,6 +51,8 @@ const NoTicePage = ({
     <View style={{ height: 1, backgroundColor: "#ddd", marginVertical: 8 }} />
   );
 
+  /*-------------------------------------------------------------------*/
+
   return (
     <SafeAreaView
       style={{
@@ -57,31 +60,23 @@ const NoTicePage = ({
         paddingTop: Constants.statusBarHeight,
       }}
     >
-      {/* 사용자 이름 출력 */}
       <MenuTopbarStyle
         text="공지사항"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())} // 드로어 열기
       />
-      <Text>{userData?.MEMB_NM}</Text>
-
-      {/* 사용자가 학회장인 경우 "학회장" 출력 */}
-      {userData?.TIT_CD === "02" && <Text> 학회장 </Text>}
 
       {/* FlatList를 사용하여 공지사항 데이터 출력 */}
       <FlatList
         data={noticeData?.OPEN_BUB}
         keyExtractor={(item) => item.CRE_SEQ.toString()} // "CRE_SEQ"를 문자열로 사용하여 고유 키로 지정
         renderItem={({ item }) => (
-          <View>
-            {/* 공지사항 제목 출력 */}
-            <Text>제목 : {item.TIT}</Text>
-
-            {/* 공지사항 내용 출력 */}
-            <Text>본문 : {item.CONT}</Text>
-
-            {/* 공지사항 작성 일자 출력 */}
-            <Text>작성 일자 : {item.CRE_DAT}</Text>
-          </View>
+          <NoticePostBoxView
+            title={item.TIT}
+            MEMB_CD={"학회장"}
+            MEMB_DEP_CD={"정보통신학과"}
+            Title={item.TIT}
+            PostingTime={item.CRE_DAT}
+          ></NoticePostBoxView>
         )}
         ItemSeparatorComponent={renderSeparator} // 항목 사이에 구분선 삽입
       />

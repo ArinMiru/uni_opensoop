@@ -11,8 +11,6 @@ import {
   TopbarRegiButton,
 } from "./TopbarEditDelRegiButton";
 
-
-
 //프로퍼티 타입 정의
 interface inputProps {
   children?: React.ReactNode; //리액트로 타입 명시
@@ -46,11 +44,18 @@ export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
-      <View style={{ flex: 1, justifyContent: "center" }}>
-        <MenuIcon onPress={onPress}/>
+      <View
+        style={{
+          flex: 1,
+        }}
+      >
+        <MenuIcon onPress={onPress} />
       </View>
-      <Text style={[textStyle.semibold19, { color: "#FFFFFF" ,}]}>{text}</Text>
-      {children}
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
+        {children}
+      </View>
+      <View style={{ flex: 1 }}></View>
     </View>
   );
 };
