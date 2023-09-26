@@ -8,7 +8,11 @@ import {
   NoticeData,
 } from "../../Utils/_private/ApiData/NoticeData";
 import { RegiDataType } from "../../Utils/_private/RegiData/RegiUserData";
-import { SchlSrchData, parseSchlSrchData } from "../../Utils/_private/RegiData/SchlSrchData";
+import {
+  SchlSrchData,
+  parseSchlSrchData,
+} from "../../Utils/_private/RegiData/SchlSrchData";
+import { sendEmailCredentials } from "../_private/Api.config";
 
 /* ------------------------------------------------------------------------------- */
 
@@ -92,6 +96,28 @@ export const nickCheckpoint = async (NICK_NM: string) => {
   }
 };
 
+/**
+ * 이메일로 아이디 찾기 API 호출 함수
+ * @param MEMB_EM
+ */
+export const emailCheckpoint = async (MEMB_EM: string) => {
+  const endpoint = "/UNI/MembIdFndSvc";
+  const data = {
+    MEMB_EM,
+  };
+  const result: AxiosResponse<UserData, any> | null =
+    await sendEmailCredentials(endpoint, data);
+  console.log(data);
+  if (result !== null && result.data.RSLT_CD === "00") {
+    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+    console.log("등록되어 있는 이메일 입니다.");
+    console.log(result.data);
+  } else {
+    console.log("등록되어 있지 않은 이메일 입니다.");
+    console.log(result?.data);
+  }
+};
+
 /* ------------------------------------------------------------------------------- */
 
 /**
@@ -163,36 +189,35 @@ export const noticeCall = async (
  * @returns Promise<SchlSrchData | null>
  */
 export const SchlSrchCall = async (
-  SCH_NM: string,
+  SCH_NM: string
 ): Promise<SchlSrchData | null> => {
   const endpoint = "/UNI/SchlSrch";
 
+  const data = {
+    SCH_NM, // 대학교 이름
+  };
 
-    const data = {
-      SCH_NM, // 대학교 이름
-    };
+  try {
+    // 서버에 대학교명 데이터 요청을 보내고 응답을 기다립니다.
+    const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      endpoint,
+      data
+    );
 
-    try {
-      // 서버에 대학교명 데이터 요청을 보내고 응답을 기다립니다.
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
-        endpoint,
-        data
-      );
-
-      if (result !== null && result.data.RSLT_CD === "00") {
-        // 서버 응답이 성공적이면 데이터를 파싱합니다.
-        const schlsrchdata: SchlSrchData = parseSchlSrchData(result.data);
-        console.log(result.data)
-        return schlsrchdata; // 파싱된 데이터를 반환합니다.
-      } else {
-        console.log("대학교명이 존재하지 않습니다.");
-        return null;
-      }
-    } catch (error) {
-      console.error("오류 발생:", error);
+    if (result !== null && result.data.RSLT_CD === "00") {
+      // 서버 응답이 성공적이면 데이터를 파싱합니다.
+      const schlsrchdata: SchlSrchData = parseSchlSrchData(result.data);
+      console.log(result.data);
+      return schlsrchdata; // 파싱된 데이터를 반환합니다.
+    } else {
+      console.log("대학교명이 존재하지 않습니다.");
       return null;
     }
-  };
+  } catch (error) {
+    console.error("오류 발생:", error);
+    return null;
+  }
+};
 
 /* ------------------------------------------------------------------------------- */
 

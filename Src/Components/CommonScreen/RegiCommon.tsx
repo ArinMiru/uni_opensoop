@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, SafeAreaView } from "react-native";
+import { Text, View, SafeAreaView,TextInputProps } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import BackgroundStyle from "../../Styles/BackgroundStyle";
 import { BlackBackIconButton } from "../IconCompo/BackIconButton";
@@ -12,15 +12,15 @@ import {
 } from "../../Utils/DeviceUtils";
 
 //  프로퍼티 타입 정의
-interface CommonProps {
+interface CommonProps extends TextInputProps {
   children?: React.ReactNode;
-  bigtext: string;
-  smalltext: string;
-  buttontext: string;
-  inputtext: string;
-  IconPress: () => void;
-  onPress: () => void;
-  navigation: {
+  bigtext?: string;
+  smalltext?: string;
+  buttontext?: string;
+  inputtext?: string;
+  IconPress?: () => void;
+  onPress?: () => void;
+  navigation?: {
     navigate: (screenName: string) => void;
   };
 }
@@ -32,6 +32,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
   inputtext, // 내용 작성 창에 들어가는 Text
   onPress,
   IconPress,
+  ...props
 }) => {
   // 파스칼 케이스 적용
   return (
@@ -66,7 +67,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
         </Text>
       </View>
       <View style={BackgroundStyle.accountInputFlex}>
-        <OnlyAccountInputCompoMarginTop3 text={inputtext} />
+        <OnlyAccountInputCompoMarginTop3 text={inputtext} {...props} />
       </View>
       <View style={BackgroundStyle.accountButtonFlex}>
         <OnlyAccountButton text={buttontext} onPress={onPress} />
