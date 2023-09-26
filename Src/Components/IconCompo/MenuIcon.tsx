@@ -2,10 +2,10 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { deviceWidth } from "../../Utils/DeviceUtils";
+import { DrawerActions } from "@react-navigation/native"; // React Navigation v6의 경우
 
-//프로퍼티 타입 정의
-interface inputProps {
-  children?: React.ReactNode; //리액트로 타입 명시
+// 프로퍼티 타입 정의
+interface MenuIconProps {
   onPress?: () => void;
 }
 
@@ -13,9 +13,7 @@ interface inputProps {
  * MenuIcon
  * MenuIcon 컴포넌트는 메뉴 아이콘을 렌더링하는 컴포넌트입니다.
  */
-
-export const MenuIcon: React.FC<inputProps> = ({ children, onPress }) => {
-  // 컴포넌트의 타입을 정확하게 명시
+export const MenuIcon: React.FC<MenuIconProps> = ({ onPress }) => {
   return (
     <TouchableOpacity
       style={{
@@ -27,7 +25,6 @@ export const MenuIcon: React.FC<inputProps> = ({ children, onPress }) => {
       onPress={onPress}
     >
       <Feather name="menu" size={deviceWidth * 0.08} color="#ffffff" />
-      {children}
     </TouchableOpacity>
   );
 };

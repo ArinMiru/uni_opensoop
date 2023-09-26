@@ -28,6 +28,7 @@ import DrawerScreen from "../Screens/DrawerMenuScreen/DrawerScreen";
 import JungTestScreen from "../Screens/JungTest/JungTestScreen";
 import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
 import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
+import DrawerNavigator from "./DrawerNavigator";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -55,10 +56,10 @@ type RootStackParamList = {
   NoticePage: undefined;
   Topbartest: undefined;
   DrawerScreen: undefined;
-
   JungTestScreen: undefined;
   DowonTestScreen: undefined;
   RyuTestScreen: undefined;
+  DrawerNavigator: undefined;
 };
 
 export type ScreenProps = {
@@ -219,6 +220,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="RyuTestScreen"
         component={RyuTestScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="DrawerNavigator"
+        component={DrawerNavigator}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
