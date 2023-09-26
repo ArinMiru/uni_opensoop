@@ -5,6 +5,7 @@ import QstInputStyles from "../../../Styles/ListStyles/QstStyles/QstInputStyles"
 import TextStyle from "../../../Styles/TextStyle";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import QstButtonStyles from "../../../Styles/ListStyles/QstStyles/QstButtonStyles";
+import { Positions } from "react-native-calendars/src/expandableCalendar";
 
 interface TextTopProps extends TextInputProps {
   children?: React.ReactNode;
@@ -21,10 +22,22 @@ export const AnswerInputBox: React.FC<TextTopProps> = ({
   inputText,
   onPress,
 }) => (
-  <View style={{ flex: 1, flexDirection: "row" }}>
+  <View
+    style={{
+      flex: 1,
+      flexDirection: "row",
+      alignItems: "center",
+    }}
+  >
     <TextInput style={QstInputStyles.AnswerInputBoxStyle}></TextInput>
     <TouchableOpacity
-      style={QstButtonStyles.QstAnswerButtonStyle}
+      style={[
+        QstButtonStyles.QstAnswerButtonStyle,
+        {
+          position: "absolute",
+          right: deviceWidth * 0.00093,
+        },
+      ]}
       onPress={onPress}
     >
       <Text

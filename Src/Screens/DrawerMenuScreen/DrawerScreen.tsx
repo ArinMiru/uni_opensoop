@@ -13,7 +13,7 @@ const Drawer = createDrawerNavigator();
 const DrawerScreen: React.FC<DrawerScreenProps> = ({ navigation }) => {
   // 타입을 명시적으로 설정
   const closeDrawer = () => {
-    navigation.goBack(); // 모달을 닫기 위한 함수를 정의합니다.
+    navigation.goBack();
   };
 
   return (

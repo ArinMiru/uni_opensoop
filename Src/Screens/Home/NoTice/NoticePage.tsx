@@ -13,6 +13,7 @@ import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { ParamListBase } from "@react-navigation/native"; // React Navigation v6의 경우
+import Constants from "expo-constants";
 
 const NoTicePage = ({
   navigation,
@@ -50,7 +51,12 @@ const NoTicePage = ({
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        paddingTop: Constants.statusBarHeight,
+      }}
+    >
       {/* 사용자 이름 출력 */}
       <MenuTopbarStyle
         text="공지사항"

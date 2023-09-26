@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { deviceWidth, deviceHeight } from "../../Utils/DeviceUtils";
+import Constants from "expo-constants";
 
 export default StyleSheet.create({
   /**
