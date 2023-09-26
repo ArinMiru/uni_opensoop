@@ -22,9 +22,7 @@ export const AnswerInputBox: React.FC<TextTopProps> = ({
   onPress,
 }) => (
   <View style={{ flex: 1, flexDirection: "row" }}>
-    <TextInput
-      style={[QstInputStyles.AnswerInputBoxStyle, TextStyle.medium09]}
-    ></TextInput>
+    <TextInput style={QstInputStyles.AnswerInputBoxStyle}></TextInput>
     <TouchableOpacity
       style={QstButtonStyles.QstAnswerButtonStyle}
       onPress={onPress}

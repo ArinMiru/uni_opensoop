@@ -35,15 +35,6 @@ export default StyleSheet.create({
   },
 
   /*
-   * 질문 게시판 답변하기 글자 밑에 들어가는 선 스타일입니다.
-   **/
-  answerLine: {
-    borderBottomWidth: 0.8,
-    borderBottomColor: "#00841D",
-    width: "100%",
-  },
-
-  /*
    * 질문 게시판에서 답변을 등록하는 버튼의 스타일입니다.
    **/
   QstAnswerButtonStyle: {

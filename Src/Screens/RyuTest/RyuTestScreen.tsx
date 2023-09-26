@@ -8,7 +8,11 @@ import { AnswerInputBox } from "../../Components/ListCompo/QstCompo/QstInputComp
 const ListTest = () => {
   return (
     <SafeAreaView style={BackgroundStyle.AccountBackground}>
-      <QstListButton />
+      <QstListButton
+        nickname="김정일"
+        postanswer="답변하기"
+        postcontent="우리의 소망은 통일??"
+      />
       <AnswerInputBox />
     </SafeAreaView>
   );
