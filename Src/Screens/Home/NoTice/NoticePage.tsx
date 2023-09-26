@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, Text, FlatList, View } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  FlatList,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { noticeCall } from "../../../Services/_private/EndPointApiFuntion";
 import { NoticeData } from "../../../Utils/_private/ApiData/NoticeData";
+import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { ParamListBase } from "@react-navigation/native"; // React Navigation v6의 경우
 
-const NoTicePage = () => {
+const NoTicePage = ({
+  navigation,
+}: {
+  navigation: DrawerNavigationProp<ParamListBase>;
+}) => {
   // 사용자 데이터와 공지사항 데이터 상태를 정의합니다.
   const userData = getUserData(); // 현재 사용자 데이터
   const [noticeData, setNoticeData] = useState<NoticeData | null>(null); // 공지사항 데이터
@@ -36,8 +50,12 @@ const NoTicePage = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 2 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       {/* 사용자 이름 출력 */}
+      <MenuTopbarStyle
+        text="공지사항"
+        onPress={() => navigation.dispatch(DrawerActions.openDrawer())} // 드로어 열기
+      />
       <Text>{userData?.MEMB_NM}</Text>
 
       {/* 사용자가 학회장인 경우 "학회장" 출력 */}
