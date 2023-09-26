@@ -10,6 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 interface ButtonProps {
   children?: React.ReactNode;
   text?: string;
+  postLike?: number;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
@@ -46,6 +47,7 @@ export const OpenPhotoButton: React.FC<ButtonProps> = ({
  */
 export const OpenLikeButtton: React.FC<ButtonProps> = ({
   children,
+  postLike,
   onPress,
 }) => {
   return (
@@ -62,7 +64,7 @@ export const OpenLikeButtton: React.FC<ButtonProps> = ({
           { lineHeight: deviceHeight * 0.022 },
         ]}
       >
-        150
+        150{postLike}
       </Text>
       {children}
     </TouchableOpacity>
