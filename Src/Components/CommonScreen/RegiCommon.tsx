@@ -67,7 +67,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
         </Text>
       </View>
       <View style={BackgroundStyle.accountInputFlex}>
-        <OnlyAccountInputCompoMarginTop3 text={inputtext} />
+        <OnlyAccountInputCompoMarginTop3 text={inputtext} {...props} />
       </View>
       <View style={BackgroundStyle.accountButtonFlex}>
         <OnlyAccountButton text={buttontext} onPress={onPress} />
