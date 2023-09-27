@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 
 export default StyleSheet.create({
@@ -25,12 +25,12 @@ export default StyleSheet.create({
 
   OpenFreSgsContInputBoxStyle: {
     width: deviceWidth * 0.84,
-    height: deviceHeight * 0.334,
+    height: deviceHeight * 0.3,
     backgroundColor: "#FFFFFF",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingLeft: 10,
     paddingTop: 10,
+    paddingEnd: 10,
+    paddingLeft: 8,
+    paddingRight: 8,
     borderRadius: 8,
     borderColor: "#8D9490",
     borderWidth: 1,

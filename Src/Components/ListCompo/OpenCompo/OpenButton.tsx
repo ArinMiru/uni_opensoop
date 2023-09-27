@@ -30,7 +30,7 @@ export const OpenPhotoButton: React.FC<ButtonProps> = ({
       <Entypo
         style={{
           marginLeft: deviceWidth * 0.04,
-          marginRight: deviceWidth * 0.04,
+          marginRight: deviceWidth * 0.06,
         }}
         name="chevron-right"
         size={deviceWidth * 0.03}
@@ -64,7 +64,7 @@ export const OpenLikeButtton: React.FC<ButtonProps> = ({
           { lineHeight: deviceHeight * 0.022 },
         ]}
       >
-        150{postLike}
+        {postLike}
       </Text>
       {children}
     </TouchableOpacity>
@@ -80,7 +80,7 @@ export const OpenPhotoPlusBox: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={OpenButtonStyle.OpenPhotoBoxStyle}
+      style={[OpenButtonStyle.OpenPhotoBoxStyle]}
       onPress={onPress}
     >
       <AntDesign name="plus" size={deviceWidth * 0.09} color="#4BB781" />
@@ -96,8 +96,47 @@ export const OpenPhotoDelBox: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <View style={[OpenButtonStyle.OpenPhotoBoxStyle]}>
-      <OpenPhotoDelIcon></OpenPhotoDelIcon>
+    <View
+      style={[
+        OpenButtonStyle.OpenPhotoBoxStyle,
+        { marginRight: deviceWidth * 0.02 },
+      ]}
+    >
+      <OpenPhotoDelIcon onPress={onPress}></OpenPhotoDelIcon>
+    </View>
+  );
+};
+
+/**
+ *
+ */
+export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
+  children,
+  onPress,
+}) => {
+  const [photoList, setPhotoList] = React.useState([0]);
+
+  const addPhotoBox = () => {
+    if (photoList.length < 4) setPhotoList([...photoList, photoList.length]);
+  };
+
+  const removePhotoBox = (index?: any) => {
+    setPhotoList(photoList.filter((_, i) => i !== index));
+  };
+  return (
+    <View
+      style={{
+        flex: 2,
+        width: deviceWidth * 0.84,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+      }}
+    >
+      {photoList.map((_, index) => (
+        <OpenPhotoDelBox key={index} onPress={() => removePhotoBox(index)} />
+      ))}
+      {photoList.length < 4 && <OpenPhotoPlusBox onPress={addPhotoBox} />}
     </View>
   );
 };

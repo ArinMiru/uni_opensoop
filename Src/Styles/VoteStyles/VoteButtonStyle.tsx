@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { deviceWidth, deviceHeight } from "../../Utils/DeviceUtils";
 
 export default StyleSheet.create({
@@ -86,6 +86,44 @@ export default StyleSheet.create({
     borderRadius: 30,
     borderColor: "#56BB89",
     borderWidth: 1,
+  },
+
+  /**
+   * /Components/VoteCompo/VoteButton
+   * 미투표 보기 버튼
+   */
+  viewUnvottedButtonStyle: {
+    width: deviceWidth * 0.265,
+    height: deviceHeight * 0.051,
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+  },
+
+  /**
+   * /Components/VoteCompo/VoteButton
+   * 미투표 보기 버튼
+   */
+  VoteListButtonStyle: {
+    width: deviceWidth * 0.862,
+    height: deviceHeight * 0.093,
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    borderRadius: 11,
+    borderColor: "#F9AEC8",
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    elevation: Platform.OS === "android" ? 3 : 0, // Android에서 그림자 효과
+    ...Platform.select({
+      // iOS에서 그림자 효과
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+      },
+    }),
   },
 
   /*------------------------------------------------------------*/

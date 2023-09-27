@@ -2,11 +2,12 @@
  * VoteButton Components (Figma 참고)
  */
 
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import VoteButtonStyle from "../../Styles/VoteStyles/VoteButtonStyle";
 import { AntDesign } from "@expo/vector-icons";
 import { deviceWidth } from "../../Utils/DeviceUtils";
+import { Entypo } from "@expo/vector-icons";
 
 interface ButtonProps {
   children?: React.ReactNode;
@@ -123,6 +124,104 @@ export const AddVoteOptionButton: React.FC<ButtonProps> = ({
         color="#FFFFFF"
         borderWidth="1.5"
       />
+      {children}
+    </TouchableOpacity>
+  );
+};
+
+/**
+ * 투표 선택지 늘리는 버튼
+ */
+export const ViewUnvottedButton: React.FC<ButtonProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        width: deviceWidth * 1,
+        justifyContent: "center",
+      }}
+    >
+      <TouchableOpacity
+        style={[
+          VoteButtonStyle.viewUnvottedButtonStyle,
+          { left: deviceWidth * 0.06 },
+          { flexDirection: "row" },
+          { justifyContent: "center" },
+          { alignItems: "center" },
+        ]}
+        onPress={onPress}
+      >
+        <Entypo name="circle" size={deviceWidth * 0.05} color="#4BB781" />
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          <Text
+            style={[
+              textStyle.medium13,
+              { color: "#212121" },
+              { left: deviceWidth * 0.01 },
+              { lineHeight: deviceWidth * 0.06 },
+            ]}
+          >
+            미투표 보기
+          </Text>
+        </View>
+        {children}
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+/**
+ * 투표 선택지 늘리는 버튼
+ */
+export const VoteListButton: React.FC<ButtonProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  return (
+    <TouchableOpacity
+      style={VoteButtonStyle.VoteListButtonStyle}
+      onPress={onPress}
+    >
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          backgroundColor: "#888888",
+          borderRadius: 10,
+          alignItems: "center",
+        }}
+      >
+        <View style={{ flex: 0.2 }}>
+          <Text>111</Text>
+        </View>
+        <View
+          style={{
+            flex: 3,
+            flexDirection: "column",
+            backgroundColor: "#666666",
+          }}
+        >
+          <Text>111</Text>
+          <View style={{ flex: 1 }}>
+            <Text>222</Text>
+          </View>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text>333</Text>
+        </View>
+      </View>
       {children}
     </TouchableOpacity>
   );
