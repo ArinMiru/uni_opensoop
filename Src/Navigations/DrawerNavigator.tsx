@@ -15,7 +15,7 @@ function DrawerNavigator({ navigation }: DrawerNavigatorProps) {
   return (
     <Drawer.Navigator initialRouteName="Stack">
       <Drawer.Screen
-        name="Notice"
+        name="공지사항"
         component={NoticePage}
         options={{ headerShown: false }}
       />

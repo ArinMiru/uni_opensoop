@@ -24,11 +24,14 @@ import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
 import Topbartest from "../Screens/Account/IdFind/Topbartest";
-import DrawerScreen from "../Screens/DrawerMenuScreen/DrawerScreen";
 import JungTestScreen from "../Screens/JungTest/JungTestScreen";
 import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
 import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
 import DrawerNavigator from "./DrawerNavigator";
+import MNoticePostRegi from "../Screens/Home/NoTice/MNoticePostRegiPage";
+import FrePostPage from "../Screens/Community/Free/FrePostPage";
+import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
+import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -55,19 +58,18 @@ type RootStackParamList = {
   IdFindOut: undefined;
   NoticePage: undefined;
   Topbartest: undefined;
-  DrawerScreen: undefined;
   JungTestScreen: undefined;
   DowonTestScreen: undefined;
   RyuTestScreen: undefined;
   DrawerNavigator: undefined;
+  MNoticePostRegi: undefined;
+  FrePostPage: undefined;
+  QstPostPage: undefined;
+  SgsPostPage: undefined;
 };
 
 export type ScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, "AccountLoginRegi">;
-};
-
-export type DrawerScreenProps = {
-  navigation: StackNavigationProp<RootStackParamList, "DrawerScreen">;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -200,9 +202,9 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name="DrawerScreen"
-        component={DrawerScreen}
-        options={{ headerShown: false, presentation: "transparentModal" }}
+        name="DrawerNavigator"
+        component={DrawerNavigator}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
@@ -222,9 +224,28 @@ const StackNavigator = () => {
         component={RyuTestScreen}
         options={{ headerShown: false }}
       />
+
       <Stack.Screen
-        name="DrawerNavigator"
-        component={DrawerNavigator}
+        name="MNoticePostRegi"
+        component={MNoticePostRegi}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="FrePostPage"
+        component={FrePostPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="QstPostPage"
+        component={QstPostPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="SgsPostPage"
+        component={SgsPostPage}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

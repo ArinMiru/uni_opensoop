@@ -6,6 +6,7 @@ import ListCategorieButtonStyle from "../../../Styles/ListStyles/ListCategorieBu
 interface ButtonProps {
   children?: React.ReactNode;
   text?: string;
+  color?: string;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
@@ -20,15 +21,20 @@ interface ButtonProps {
  */
 export const FreBefoClikButton: React.FC<ButtonProps> = ({
   children,
+  color,
   text,
+  navigation,
   onPress,
 }) => {
   return (
     <TouchableOpacity
-      style={ListCategorieButtonStyle.ListCategorieBefoButtonStyle}
+      style={[
+        ListCategorieButtonStyle.ListCategorieBefoButtonStyle,
+        { backgroundColor: color },
+      ]}
       onPress={onPress}
     >
-      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>{text} </Text>
+      <Text style={[textStyle.semibold10, { color: "#ffffff" }]}>{text} </Text>
       {children}
     </TouchableOpacity>
   );
@@ -37,14 +43,18 @@ export const FreBefoClikButton: React.FC<ButtonProps> = ({
 export const SgsBefoClikButton: React.FC<ButtonProps> = ({
   children,
   text,
+  color,
   onPress,
 }) => {
   return (
     <TouchableOpacity
-      style={ListCategorieButtonStyle.ListCategorieBefoButtonStyle}
+      style={[
+        ListCategorieButtonStyle.ListCategorieBefoButtonStyle,
+        { backgroundColor: color },
+      ]}
       onPress={onPress}
     >
-      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>{text} </Text>
+      <Text style={[textStyle.semibold10, { color: "#ffffff" }]}>{text} </Text>
       {children}
     </TouchableOpacity>
   );
@@ -53,14 +63,18 @@ export const SgsBefoClikButton: React.FC<ButtonProps> = ({
 export const QstBefoClikButton: React.FC<ButtonProps> = ({
   children,
   text,
+  color,
   onPress,
 }) => {
   return (
     <TouchableOpacity
-      style={ListCategorieButtonStyle.ListCategorieBefoButtonStyle}
+      style={[
+        ListCategorieButtonStyle.ListCategorieBefoButtonStyle,
+        { backgroundColor: color },
+      ]}
       onPress={onPress}
     >
-      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>{text} </Text>
+      <Text style={[textStyle.semibold10, { color: "#ffffff" }]}>{text} </Text>
       {children}
     </TouchableOpacity>
   );
@@ -82,7 +96,7 @@ export const FreButton: React.FC<ButtonProps> = ({
       style={ListCategorieButtonStyle.ListCategorieButtonStyle}
       onPress={onPress}
     >
-      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>{text} </Text>
+      <Text style={[textStyle.semibold10, { color: "#ffffff" }]}>{text} </Text>
       {children}
     </TouchableOpacity>
   );
@@ -98,7 +112,7 @@ export const SgsButton: React.FC<ButtonProps> = ({
       style={ListCategorieButtonStyle.ListCategorieButtonStyle}
       onPress={onPress}
     >
-      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>{text} </Text>
+      <Text style={[textStyle.semibold10, { color: "#ffffff" }]}>{text} </Text>
       {children}
     </TouchableOpacity>
   );
@@ -114,7 +128,7 @@ export const QstButton: React.FC<ButtonProps> = ({
       style={ListCategorieButtonStyle.ListCategorieButtonStyle}
       onPress={onPress}
     >
-      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>{text} </Text>
+      <Text style={[textStyle.semibold10, { color: "#ffffff" }]}>{text} </Text>
       {children}
     </TouchableOpacity>
   );
