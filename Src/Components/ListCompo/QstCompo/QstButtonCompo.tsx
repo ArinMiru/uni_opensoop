@@ -60,7 +60,10 @@ export const QstListButton: React.FC<ButtonProps> = ({
           }}
         >
           <Text
-            style={[textStyle.semibold10, { color: "#00B45A", left: "2%" }]}
+            style={[
+              textStyle.semibold10,
+              { color: "#00B45A", left: "2%", textDecorationLine: "underline" },
+            ]}
           >
             {nickname}
           </Text>

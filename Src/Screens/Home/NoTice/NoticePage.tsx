@@ -9,7 +9,10 @@ import {
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { noticeCall } from "../../../Services/_private/EndPointApiFuntion";
 import { NoticeData } from "../../../Utils/_private/ApiData/NoticeData";
-import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import {
+  MenuTopbarStyle,
+  MenuTopbarStyleManager,
+} from "../../../Components/AllCompo/TopbarCompo";
 import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { ParamListBase } from "@react-navigation/native"; // React Navigation v6의 경우
@@ -53,6 +56,12 @@ const NoTicePage = ({
 
   /*-------------------------------------------------------------------*/
 
+  /**
+   * @ArinMiru(김도원)
+   * 02(학회장),03(부학회장),05(관리자) 경우 MenuTopbarStyleManger 노출
+   * 이외의 경우 MenuTopbarStyle 노출
+   */
+
   return (
     <SafeAreaView
       style={{
@@ -60,10 +69,17 @@ const NoTicePage = ({
         paddingTop: Constants.statusBarHeight,
       }}
     >
-      <MenuTopbarStyle
-        text="공지사항"
-        onPress={() => navigation.dispatch(DrawerActions.openDrawer())} // 드로어 열기
-      />
+      {["02", "03", "05"].includes(userData?.TIT_CD ?? "") ? (
+        <MenuTopbarStyleManager
+          text="공지사항"
+          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+        />
+      ) : (
+        <MenuTopbarStyle
+          text="공지사항"
+          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+        />
+      )}
 
       {/* FlatList를 사용하여 공지사항 데이터 출력 */}
       <FlatList
@@ -76,6 +92,7 @@ const NoTicePage = ({
             MEMB_DEP_CD={"정보통신학과"}
             Title={item.TIT}
             PostingTime={item.CRE_DAT}
+            postLike={item.LIKE_CNT}
           ></NoticePostBoxView>
         )}
         ItemSeparatorComponent={renderSeparator} // 항목 사이에 구분선 삽입

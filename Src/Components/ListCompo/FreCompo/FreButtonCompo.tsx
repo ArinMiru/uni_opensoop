@@ -18,6 +18,10 @@ import { OpenProfileIcon } from "../../IconCompo/ProfileIcon";
 
 interface ButtonProps extends TextInputProps {
   children?: React.ReactNode;
+  nickname?: string;
+  freposttime?: string;
+  fretit?: string;
+  frecont?: string;
   onPress?: () => void;
 }
 
@@ -75,6 +79,10 @@ export const FreLikeButtton: React.FC<ButtonProps> = ({
 
 export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
   children,
+  nickname,
+  freposttime,
+  fretit,
+  frecont,
   onPress,
 }) => {
   return (
@@ -91,7 +99,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
       >
         <OpenProfileIcon />
         <Text style={[textStyle.semibold12, { color: "#4BB781", flex: 1 }]}>
-          닉네임
+          닉네임{nickname}
         </Text>
         <Text
           style={[
@@ -102,7 +110,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
             },
           ]}
         >
-          0초전
+          0초전{freposttime}
         </Text>
       </View>
 
@@ -122,7 +130,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
             },
           ]}
         >
-          제목 없음
+          제목 없음{fretit}
         </Text>
       </View>
 
@@ -144,7 +152,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
             },
           ]}
         >
-          먹이를 찾아 산기슭을 어슬렁 거리는 김도원
+          먹이를 찾아 산기슭을 어슬렁 거리는 김도원{frecont}
         </Text>
       </View>
       {children}
