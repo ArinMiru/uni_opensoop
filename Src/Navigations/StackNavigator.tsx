@@ -30,6 +30,8 @@ import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
 import DrawerNavigator from "./DrawerNavigator";
 import MNoticePostRegi from "../Screens/Home/NoTice/MNoticePostRegiPage";
 import FrePostPage from "../Screens/Community/Free/FrePostPage";
+import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
+import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -62,6 +64,8 @@ type RootStackParamList = {
   DrawerNavigator: undefined;
   MNoticePostRegi: undefined;
   FrePostPage: undefined;
+  QstPostPage: undefined;
+  SgsPostPage: undefined;
 };
 
 export type ScreenProps = {
@@ -230,6 +234,18 @@ const StackNavigator = () => {
       <Stack.Screen
         name="FrePostPage"
         component={FrePostPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="QstPostPage"
+        component={QstPostPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="SgsPostPage"
+        component={SgsPostPage}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

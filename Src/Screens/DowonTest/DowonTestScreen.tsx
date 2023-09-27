@@ -44,7 +44,8 @@ import { FreeListButton } from "../../Components/ListCompo/FreCompo/FreButton";
 import { FreeListIclucontnButton } from "../../Components/ListCompo/FreCompo/FreButtonCompo";
 import { ScreenProps } from "../../Navigations/StackNavigator";
 import { QstListButton } from "../../Components/ListCompo/QstCompo/QstButtonCompo";
-
+import { ViewUnvottedButton } from "../../Components/VoteCompo/VoteButton";
+import { VoteListButton } from "../../Components/VoteCompo/VoteButton";
 /**
  * @Dowon(김도원 생성)
  * DowonTestScreen
@@ -53,7 +54,7 @@ import { QstListButton } from "../../Components/ListCompo/QstCompo/QstButtonComp
 const DowonTestScreen = () => {
   return (
     <AccountBackground>
-      <BackIconRegiTopbarStyle text="게시판" />
+      <BackIocnTopbarStyle text="투표" />
       <View
         style={{
           flex: 1,
@@ -63,11 +64,7 @@ const DowonTestScreen = () => {
           alignContent: "center",
         }}
       >
-        <ListCategorieCompo
-          firsttext="자유"
-          secondtext="건의"
-          thirdtext="질문"
-        />
+        <ViewUnvottedButton />
       </View>
       <View
         style={{
@@ -78,11 +75,7 @@ const DowonTestScreen = () => {
         }}
         //FlatList로 변경
       >
-        <QstListButton
-          nickname="test"
-          postanswer="답변하기"
-          postcontent="멤버 로그인 후 라이엇계정"
-        />
+        <VoteListButton />
       </View>
     </AccountBackground>
   );
