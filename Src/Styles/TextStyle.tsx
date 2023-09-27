@@ -64,10 +64,22 @@ export default StyleSheet.create({
     fontSize: responsiveFontSize(16),
   },
 
+  semibold09: {
+    fontFamily: "SemiBold",
+    fontWeight: "600" /*semibold*/,
+    fontSize: responsiveFontSize(18),
+  },
+
   semibold10: {
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
     fontSize: responsiveFontSize(20),
+  },
+
+  semibold11: {
+    fontFamily: "SemiBold",
+    fontWeight: "600" /*semibold*/,
+    fontSize: responsiveFontSize(22),
   },
 
   semibold12: {
@@ -150,6 +162,12 @@ export default StyleSheet.create({
     fontFamily: "Regular",
     fontWeight: "400" /*regular*/,
     fontSize: responsiveFontSize(16),
+  },
+
+  regular09: {
+    fontFamily: "Regular",
+    fontWeight: "400" /*regular*/,
+    fontSize: responsiveFontSize(18),
   },
 
   regular10: {
