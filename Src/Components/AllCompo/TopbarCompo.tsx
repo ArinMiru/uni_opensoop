@@ -19,6 +19,11 @@ interface inputProps {
   onPress?: () => void;
 }
 
+interface ButtonProps {
+  color: string;
+  onPress: () => void;
+}
+
 interface DrawerScreenProps {
   children?: React.ReactNode; //리액트로 타입 명시
   text: string; //문자열로 타입 명시
@@ -75,7 +80,7 @@ export const MenuTopbarStyleManager: React.FC<inputProps> = ({
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
-      <MenuIcon />
+      <MenuIcon onPress={onPress} />
       <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
       <TopbarStylePlusIcon />
     </View>
@@ -101,7 +106,7 @@ export const BackIocnTopbarStyle: React.FC<inputProps> = ({
     <View style={Styles.TopbarStyle}>
       <View style={{ flex: 1, justifyContent: "center" }}>
         <TouchableOpacity onPress={onPress}>
-          <WhiteBackIconButton />
+          <WhiteBackIconButton onPress={onPress} />
         </TouchableOpacity>
       </View>
       <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
@@ -129,7 +134,7 @@ export const BackIconDelTopbarStyle: React.FC<inputProps> = ({
   return (
     <View style={Styles.TopbarStyle}>
       <TouchableOpacity onPress={onPress}>
-        <WhiteBackIconButton />
+        <WhiteBackIconButton onPress={onPress} />
       </TouchableOpacity>
       <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
       <TopbarDelButton />
@@ -155,7 +160,7 @@ export const BackIconRegiTopbarStyle: React.FC<inputProps> = ({
   return (
     <View style={Styles.TopbarStyle}>
       <TouchableOpacity onPress={onPress}>
-        <WhiteBackIconButton />
+        <WhiteBackIconButton onPress={onPress} />
       </TouchableOpacity>
       <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
       <TopbarRegiButton />
@@ -233,7 +238,7 @@ export const MenuIconEditTopbarStyle: React.FC<inputProps> = ({
   return (
     <View style={Styles.TopbarStyle}>
       <TouchableOpacity onPress={onPress}>
-        <MenuIcon />
+        <MenuIcon onPress={onPress} />
       </TouchableOpacity>
       <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
       <TopbarEditButton />

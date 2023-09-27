@@ -14,6 +14,7 @@ export default StyleSheet.create({
     width: deviceWidth * 1,
     backgroundColor: "#4bb781" /*시그니처 Color*/,
     alignItems: "center",
+    justifyContent: "space-between",
   },
 
   /*------------------------------------------------------------------*/

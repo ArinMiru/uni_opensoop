@@ -68,12 +68,11 @@ export default StyleSheet.create({
 
   /*
    * 자유 게시판 리스트 화면 버튼에 들어가는 선 입니다.
-    선넘지 마십시오 ㅋㅋㅋ
    **/
 
   horizontalLine: {
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#8B8B8B",
     width: "90%",
   },
 });
