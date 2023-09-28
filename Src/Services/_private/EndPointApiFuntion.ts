@@ -12,7 +12,7 @@ import {
   SchlSrchData,
   parseSchlSrchData,
 } from "../../Utils/_private/RegiData/SchlSrchData";
-import { sendEmailCredentials } from "../_private/Api.config";
+
 
 /* ------------------------------------------------------------------------------- */
 
@@ -106,7 +106,7 @@ export const emailCheckpoint = async (MEMB_EM: string) => {
     MEMB_EM,
   };
   const result: AxiosResponse<UserData, any> | null =
-    await sendEmailCredentials(endpoint, data);
+    await sendLoginCredentials(endpoint, data);
   console.log(data);
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
