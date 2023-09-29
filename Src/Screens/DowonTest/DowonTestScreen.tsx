@@ -45,7 +45,9 @@ import { FreeListIclucontnButton } from "../../Components/ListCompo/FreCompo/Fre
 import { ScreenProps } from "../../Navigations/StackNavigator";
 import { QstListButton } from "../../Components/ListCompo/QstCompo/QstButtonCompo";
 import { ViewUnvottedButton } from "../../Components/VoteCompo/VoteButton";
-import { VoteListButton } from "../../Components/VoteCompo/VoteButton";
+import { UnVotedListButton } from "../../Components/VoteCompo/VoteButton";
+import { VoteStatusPageButton } from "../../Components/VoteCompo/VoteButton";
+import { VotedListButton } from "../../Components/VoteCompo/VoteButton";
 /**
  * @Dowon(김도원 생성)
  * DowonTestScreen
@@ -75,7 +77,19 @@ const DowonTestScreen = () => {
         }}
         //FlatList로 변경
       >
-        <VoteListButton />
+        <UnVotedListButton />
+        <View
+          style={{
+            flex: 1,
+            width: deviceWidth * 1,
+            justifyContent: "flex-start",
+            alignContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <VoteStatusPageButton text="한라산" votestatusnum="12명" />
+          <VotedListButton />
+        </View>
       </View>
     </AccountBackground>
   );
