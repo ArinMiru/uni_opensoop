@@ -30,7 +30,10 @@ interface ButtonProps {
 const SgsPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
-      <BackIconRegiTopbarStyle text="게시판" />
+      <BackIconRegiTopbarStyle
+        text="게시판"
+        onPress={() => navigation.goBack()}
+      />
       <View
         style={{
           flex: 1,
