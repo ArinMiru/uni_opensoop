@@ -18,6 +18,7 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { ParamListBase } from "@react-navigation/native"; // React Navigation v6의 경우
 import Constants from "expo-constants";
 import { NoticePostBoxView } from "../../../Components/ListCompo/OpenCompo/NoticePostCompo";
+import MNoticePostRegiPage from "../NoTice/MNoticePostRegiPage";
 
 const NoTicePage = ({
   navigation,
@@ -73,6 +74,7 @@ const NoTicePage = ({
         <MenuTopbarStyleManager
           text="공지사항"
           onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+          onPressRegi={() => navigation.navigate("MNoticePostRegiPage")}
         />
       ) : (
         <MenuTopbarStyle

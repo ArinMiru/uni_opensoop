@@ -6,6 +6,7 @@ import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { SgsListContentButton } from "../../../Components/ListCompo/SgsCompo/SgsButtonCompo";
+import SgsPostRegiPage from "../SuggeStion/SgsPostRegiPage";
 /**
  * @Dowon(김도원 생성)
  * SgsPostPage
@@ -33,6 +34,7 @@ const SgsPostPage: React.FC<ScreenProps> = ({ navigation }) => {
       <BackIconRegiTopbarStyle
         text="게시판"
         onPress={() => navigation.goBack()}
+        onPressRegi={() => navigation.navigate("SgsPostRegiPage")}
       />
       <View
         style={{

@@ -35,6 +35,7 @@ const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
       <BackIconRegiTopbarStyle
         text="게시판"
         onPress={() => navigation.goBack()}
+        onPressRegi={() => navigation.navigate("NoticePage")}
       />
       <View
         style={{
