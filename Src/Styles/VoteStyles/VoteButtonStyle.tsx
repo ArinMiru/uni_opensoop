@@ -15,6 +15,16 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
+    elevation: Platform.OS === "android" ? 3 : 0, // Android에서 그림자 효과
+    ...Platform.select({
+      // iOS에서 그림자 효과
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+      },
+    }),
   },
 
   /**
@@ -30,6 +40,16 @@ export default StyleSheet.create({
     borderRadius: 30,
     borderColor: "#4BB781",
     borderWidth: 1,
+    elevation: Platform.OS === "android" ? 3 : 0, // Android에서 그림자 효과
+    ...Platform.select({
+      // iOS에서 그림자 효과
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+      },
+    }),
   },
 
   /**
@@ -84,6 +104,7 @@ export default StyleSheet.create({
     backgroundColor: "#4BB781",
     alignItems: "center",
     justifyContent: "center",
+    alignContent: "center",
     borderRadius: 30,
     borderColor: "#56BB89",
     borderWidth: 1,
