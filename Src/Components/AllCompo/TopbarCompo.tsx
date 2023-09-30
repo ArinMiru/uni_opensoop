@@ -17,6 +17,7 @@ interface inputProps {
   text: string; //문자열로 타입 명시
   navigation?: any;
   onPress?: () => void;
+  onPressRegi?: () => void;
 }
 
 interface ButtonProps {
@@ -76,13 +77,14 @@ export const MenuTopbarStyleManager: React.FC<inputProps> = ({
   children,
   text,
   onPress,
+  onPressRegi,
 }) => {
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
       <MenuIcon onPress={onPress} />
       <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
-      <TopbarStylePlusIcon />
+      <TopbarStylePlusIcon onPress={onPressRegi} />
     </View>
   );
 };
@@ -155,15 +157,16 @@ export const BackIconRegiTopbarStyle: React.FC<inputProps> = ({
   children,
   text,
   onPress,
+  onPressRegi,
 }) => {
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity>
         <WhiteBackIconButton onPress={onPress} />
       </TouchableOpacity>
       <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
-      <TopbarRegiButton />
+      <TopbarRegiButton onPress={onPressRegi} />
     </View>
   );
 };

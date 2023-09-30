@@ -32,6 +32,8 @@ import MNoticePostRegi from "../Screens/Home/NoTice/MNoticePostRegiPage";
 import FrePostPage from "../Screens/Community/Free/FrePostPage";
 import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
 import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
+import MNoticePostRegiPage from "../Screens/Home/NoTice/MNoticePostRegiPage";
+import SgsPostRegiPage from "../Screens/Community/SuggeStion/SgsPostRegiPage";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -66,6 +68,8 @@ type RootStackParamList = {
   FrePostPage: undefined;
   QstPostPage: undefined;
   SgsPostPage: undefined;
+  MNoticePostRegiPage: undefined;
+  SgsPostRegiPage: undefined;
 };
 
 export type ScreenProps = {
@@ -246,6 +250,17 @@ const StackNavigator = () => {
       <Stack.Screen
         name="SgsPostPage"
         component={SgsPostPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="MNoticePostRegiPage"
+        component={MNoticePostRegiPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SgsPostRegiPage"
+        component={SgsPostRegiPage}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
