@@ -31,6 +31,7 @@ import DrawerNavigator from "./DrawerNavigator";
 import MNoticePostRegi from "../Screens/Home/NoTice/MNoticePostRegiPage";
 import FrePostPage from "../Screens/Community/Free/FrePostPage";
 import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
+import QstPostRegi from "../Screens/Community/QuesTion/QstPostRegi";
 import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
 
 type RootStackParamList = {
@@ -65,6 +66,7 @@ type RootStackParamList = {
   MNoticePostRegi: undefined;
   FrePostPage: undefined;
   QstPostPage: undefined;
+  QstPostRegi: undefined;
   SgsPostPage: undefined;
 };
 
@@ -240,6 +242,12 @@ const StackNavigator = () => {
       <Stack.Screen
         name="QstPostPage"
         component={QstPostPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="QstPostRegi"
+        component={QstPostRegi}
         options={{ headerShown: false }}
       />
 
