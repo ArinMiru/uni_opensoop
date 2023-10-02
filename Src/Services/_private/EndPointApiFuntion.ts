@@ -7,12 +7,16 @@ import {
   parseNoticeData,
   NoticeData,
 } from "../../Utils/_private/ApiData/NoticeData";
+import { 
+  parseFreeData,
+  FreeData,
+ } from "../../Utils/_private/ApiData/FreeData";
 import { RegiDataType } from "../../Utils/_private/RegiData/RegiUserData";
 import {
   SchlSrchData,
   parseSchlSrchData,
 } from "../../Utils/_private/RegiData/SchlSrchData";
-import { sendEmailCredentials } from "../_private/Api.config";
+
 
 /* ------------------------------------------------------------------------------- */
 
@@ -106,7 +110,7 @@ export const emailCheckpoint = async (MEMB_EM: string) => {
     MEMB_EM,
   };
   const result: AxiosResponse<UserData, any> | null =
-    await sendEmailCredentials(endpoint, data);
+    await sendLoginCredentials(endpoint, data);
   console.log(data);
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
@@ -115,6 +119,50 @@ export const emailCheckpoint = async (MEMB_EM: string) => {
   } else {
     console.log("등록되어 있지 않은 이메일 입니다.");
     console.log(result?.data);
+  }
+};
+
+/**
+ * 비밀번호 찾기 API 호출 함수
+ * @param MEMB_ID
+ * @param MEMB_EM
+ */
+export const passFindCheckpoint = async (MEMB_ID: string, MEMB_EM: string) => {
+  const endpoint = "/UNI/MembPassFndSvc";
+  const data = {
+    MEMB_ID,
+    MEMB_EM,
+  };
+  const result: AxiosResponse<UserData, any> | null =
+    await sendLoginCredentials(endpoint, data);
+  if (result !== null && result.data.RSLT_CD === "00") {
+    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+    console.log("인증번호를 발송합니다.");
+  } else {
+    console.log("등록되지 않은 정보입니다.");
+  }
+};
+
+/**
+ * 비밀번호 찾기 인증번호 API 호출 함수
+ */
+export const ecodeCheckpoint = async (
+  MEMB_ID: string, 
+  CERT_SEQ: string, 
+  INPUT_CD: string) => {
+  const endpoint = "/UNI/ChkAndCertSvc";
+  const data = {
+    MEMB_ID,
+    CERT_SEQ,
+    INPUT_CD,
+  };
+  const result: AxiosResponse<UserData, any> | null =
+    await sendLoginCredentials(endpoint, data);
+  if (result !== null && result.data.RSLT_CD === "00") {
+    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+    console.log("인증번호 일치.");
+  } else {
+    console.log("인증번호 불일치.");
   }
 };
 
@@ -236,6 +284,70 @@ export const MembCertUpd = async (CERT_SEQ: string) => {
     console.log("통신 성공");
   } else {
     console.log("통신 실패");
+  }
+};
+
+/* ------------------------------------------------------------------------------- */
+
+/**
+ * 자유게시판 데이터 호출 서비스 함수
+ * @param LOGIN_ID 사용자 아이디
+ * @param MEMB_SC_CD 사용자 학과 코드
+ * @param MEMB_DEP_CD 사용자 학부 코드
+ * @param TIT_CD 사용자 직책 코드
+ * @param LIST_UNIT_CNT 리스트 단위건수
+ * @param REQ_PAGE 요청페이지정보
+ * @returns Promise<FreeData | null>
+ */
+export const freeCall = async (
+  LOGIN_ID: string,
+  MEMB_SC_CD: string,
+  MEMB_DEP_CD: string,
+  TIT_CD: string
+): Promise<FreeData | null> => {
+  const endpoint = "/UNI/FreeBubListSvc";
+
+  // 로그인한 사용자의 데이터 가져오기
+  const userData = getUserData();
+
+  if (userData !== null) {
+    // userData가 null이 아닌 경우에만 요청 보내기
+
+    // 고정된 값으로 설정
+    const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 게시글 수
+    const REQ_PAGE = 1; // 요청할 페이지 번호
+
+    const data = {
+      LOGIN_ID, // 사용자 아이디
+      MEMB_SC_CD, // 사용자 학과 코드
+      MEMB_DEP_CD, // 사용자 학부 코드
+      TIT_CD, // 사용자 직책 코드
+      LIST_UNIT_CNT, // 한 페이지에 표시할 게시글 수
+      REQ_PAGE, // 요청할 페이지 번호
+    };
+
+    try {
+      // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
+      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+        endpoint,
+        data
+      );
+
+      if (result !== null && result.data.RSLT_CD === "00") {
+        // 서버 응답이 성공적이면 데이터를 파싱합니다.
+        const freeData: FreeData = parseFreeData(result.data);
+        return freeData; // 파싱된 데이터를 반환합니다.
+      } else {
+        console.log("자유게시판 데이터 가져오기 실패");
+        return null;
+      }
+    } catch (error) {
+      console.error("오류 발생:", error);
+      return null;
+    }
+  } else {
+    console.log("데이터를 가져올 수 없습니다.");
+    return null;
   }
 };
 
