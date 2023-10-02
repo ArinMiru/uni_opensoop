@@ -9,10 +9,7 @@ import {
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { noticeCall } from "../../../Services/_private/EndPointApiFuntion";
 import { NoticeData } from "../../../Utils/_private/ApiData/NoticeData";
-import {
-  MenuTopbarStyle,
-  MenuTopbarStyleManager,
-} from "../../../Components/AllCompo/TopbarCompo";
+import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { ParamListBase } from "@react-navigation/native"; // React Navigation v6의 경우
@@ -71,24 +68,12 @@ const NoTicePage = ({
       }}
     >
       {/* 수정 바람 */}
+      {/* (@ArinMiru/ 2023-10-02 /수정완료) */}
       <MenuTopbarStyle
         text="공지사항"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
         onPressRegi={() => navigation.navigate("MNoticePostRegiPage")}
       />
-      {/* # 삭제 #  
-      {["02", "03", "05"].includes(userData?.TIT_CD ?? "") ? (
-        <MenuTopbarStyleManager
-          text="공지사항"
-          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-          onPressRegi={() => navigation.navigate("MNoticePostRegiPage")}
-        />
-      ) : (
-        <MenuTopbarStyle
-          text="공지사항"
-          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-        />
-      )}*/}
 
       {/* FlatList를 사용하여 공지사항 데이터 출력 */}
       <FlatList
