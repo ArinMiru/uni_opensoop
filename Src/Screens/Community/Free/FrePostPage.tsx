@@ -6,6 +6,7 @@ import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { FreeListIclucontnButton } from "../../../Components/ListCompo/FreCompo/FreButtonCompo";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
+import NoticePage from "../../../Screens/Home/NoTice/NoticePage";
 
 /**
  * @Dowon(김도원 생성)
@@ -31,7 +32,11 @@ interface ButtonProps {
 const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
-      <BackIconRegiTopbarStyle text="게시판" />
+      <BackIconRegiTopbarStyle
+        text="게시판"
+        onPress={() => navigation.goBack()}
+        onPressRegi={() => navigation.navigate("NoticePage")}
+      />
       <View
         style={{
           flex: 1,
