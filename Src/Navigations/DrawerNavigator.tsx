@@ -6,7 +6,7 @@ import { ParamListBase } from "@react-navigation/native";
 import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
 import FrePostPage from "../Screens/Community/Free/FrePostPage";
 import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
-import MVotePage from "../Screens/Home/VoTe/MVotePage";
+import MVotePage from "../Screens/Home/VoTe/VotePostPage";
 import { View } from "react-native";
 import Constants from "expo-constants";
 import {

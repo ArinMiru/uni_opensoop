@@ -27,10 +27,7 @@ import { SgsListContentButton } from "../../Components/ListCompo/SgsCompo/SgsBut
 import { SgsDelButton } from "../../Components/ListCompo/SgsCompo/SgsCompo";
 import { NoticePostBoxView } from "../../Components/ListCompo/OpenCompo/NoticePostCompo";
 import MNoticePostRegi from "../Home/NoTice/MNoticePostRegiPage";
-import {
-  BackIconRegiTopbarStyle,
-  BackIocnTopbarStyle,
-} from "../../Components/AllCompo/TopbarCompo";
+import { BackIconRegiTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
 import { AccountBackground } from "../../Components/AllCompo/Background";
 import {
   OpenPhotoButton,
@@ -53,17 +50,16 @@ import {
 import { UnVotedListButton } from "../../Components/VoteCompo/VoteButton";
 import { VoteStatusPageButton } from "../../Components/VoteCompo/VoteButton";
 import { VotedListButton } from "../../Components/VoteCompo/VoteButton";
-import { MenuTopbarStyleManager } from "../../Components/AllCompo/TopbarCompo";
 import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { ParamListBase } from "@react-navigation/native";
-import { BackIconDelTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
 import TextStyle from "../../Styles/TextStyle";
 import { VoteUnSlctButton } from "../../Components/VoteCompo/VoteButton";
 import { SchdlVoteRegiTitInput } from "../../Components/SchdlCompo/SchdlInput";
 import { VoteInput } from "../../Components/VoteCompo/VoteTextInput";
 import { TextInput, TextInputProps } from "react-native";
 import { AddVoteOptionButton } from "../../Components/VoteCompo/VoteButton";
+import { BackIconTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
 
 /**
  * @Dowon(김도원 생성)
@@ -77,7 +73,7 @@ const DowonTestScreen = ({
 }) => {
   return (
     <AccountBackground>
-      <BackIocnTopbarStyle text="투표" />
+      <BackIconTopbarStyle text="투표" />
       <View
         style={{
           flex: 1,
