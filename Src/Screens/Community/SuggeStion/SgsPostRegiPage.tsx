@@ -2,7 +2,7 @@ import React from "react";
 import { View, KeyboardAvoidingView, Text } from "react-native";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { BackIocnTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import {
   OpenFreSgsTitInputBox,
@@ -15,7 +15,7 @@ import TextStyle from "../../../Styles/TextStyle";
 const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
-      <BackIocnTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
+      <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
       <View
         style={{
           flex: 1,
