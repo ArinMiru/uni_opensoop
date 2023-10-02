@@ -1,24 +1,14 @@
 import React, { useEffect, useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  FlatList,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { SafeAreaView, FlatList, View } from "react-native";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { noticeCall } from "../../../Services/_private/EndPointApiFuntion";
 import { NoticeData } from "../../../Utils/_private/ApiData/NoticeData";
-import {
-  MenuTopbarStyle,
-  MenuTopbarStyleManager,
-} from "../../../Components/AllCompo/TopbarCompo";
+import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { ParamListBase } from "@react-navigation/native"; // React Navigation v6의 경우
 import Constants from "expo-constants";
 import { NoticePostBoxView } from "../../../Components/ListCompo/OpenCompo/NoticePostCompo";
-import MNoticePostRegiPage from "../NoTice/MNoticePostRegiPage";
 
 const NoTicePage = ({
   navigation,
@@ -71,32 +61,18 @@ const NoTicePage = ({
       }}
     >
       {/* 수정 바람 */}
+      {/* 수정 완료 @ArinMiru김도원 23.10.03 */}
       <MenuTopbarStyle
         text="공지사항"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
         onPressRegi={() => navigation.navigate("MNoticePostRegiPage")}
       />
-      {/* # 삭제 #  
-      {["02", "03", "05"].includes(userData?.TIT_CD ?? "") ? (
-        <MenuTopbarStyleManager
-          text="공지사항"
-          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-          onPressRegi={() => navigation.navigate("MNoticePostRegiPage")}
-        />
-      ) : (
-        <MenuTopbarStyle
-          text="공지사항"
-          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-        />
-      )}*/}
-
       {/* FlatList를 사용하여 공지사항 데이터 출력 */}
       <FlatList
         data={noticeData?.OPEN_BUB}
         keyExtractor={(item) => item.CRE_SEQ.toString()} // "CRE_SEQ"를 문자열로 사용하여 고유 키로 지정
         renderItem={({ item }) => (
           <NoticePostBoxView
-            title={item.TIT}
             MEMB_CD={"학회장"}
             MEMB_DEP_CD={"정보통신학과"}
             Title={item.TIT}
