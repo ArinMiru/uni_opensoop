@@ -24,9 +24,6 @@ import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
 import Topbartest from "../Screens/Account/IdFind/Topbartest";
-import JungTestScreen from "../Screens/JungTest/JungTestScreen";
-import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
-import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
 import DrawerNavigator from "./DrawerNavigator";
 import MNoticePostRegi from "../Screens/Home/NoTice/MNoticePostRegiPage";
 import FrePostPage from "../Screens/Community/Free/FrePostPage";
@@ -35,6 +32,16 @@ import QstPostRegi from "../Screens/Community/QuesTion/QstPostRegi";
 import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
 import MNoticePostRegiPage from "../Screens/Home/NoTice/MNoticePostRegiPage";
 import SgsPostRegiPage from "../Screens/Community/SuggeStion/SgsPostRegiPage";
+import VotePostPage from "../Screens/Home/VoTe/VotePostPage";
+import VotePostRegiPage from "../Screens/Home/VoTe/VotePostRegiPage";
+
+/**----------------------------------------------------------------------------*/
+/**----------------------------------------------------------------------------*/
+import JungTestScreen from "../Screens/JungTest/JungTestScreen";
+import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
+import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
+/**----------------------------------------------------------------------------*/
+/**----------------------------------------------------------------------------*/
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
@@ -61,9 +68,6 @@ type RootStackParamList = {
   IdFindOut: undefined;
   NoticePage: undefined;
   Topbartest: undefined;
-  JungTestScreen: undefined;
-  DowonTestScreen: undefined;
-  RyuTestScreen: undefined;
   DrawerNavigator: undefined;
   MNoticePostRegi: undefined;
   FrePostPage: undefined;
@@ -72,6 +76,16 @@ type RootStackParamList = {
   SgsPostPage: undefined;
   MNoticePostRegiPage: undefined;
   SgsPostRegiPage: undefined;
+  VotePostPage: undefined;
+  VotePostRegiPage: undefined;
+
+  /**----------------------------------------------------------------------------*/
+  /**----------------------------------------------------------------------------*/
+  JungTestScreen: undefined;
+  DowonTestScreen: undefined;
+  RyuTestScreen: undefined;
+  /**----------------------------------------------------------------------------*/
+  /**----------------------------------------------------------------------------*/
 };
 
 export type ScreenProps = {
@@ -214,24 +228,6 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name="JungTestScreen"
-        component={JungTestScreen}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="DowonTestScreen"
-        component={DowonTestScreen}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="RyuTestScreen"
-        component={RyuTestScreen}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
         name="MNoticePostRegi"
         component={MNoticePostRegi}
         options={{ headerShown: false }}
@@ -271,6 +267,42 @@ const StackNavigator = () => {
         component={SgsPostRegiPage}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name="VotePostPage"
+        component={VotePostPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="VotePostRegiPage"
+        component={VotePostRegiPage}
+        options={{ headerShown: false }}
+      />
+
+      {/**-------------------------------------------------------------------------------*/}
+      {/**---------위에서부터 추가-----------------------------------------------------------*/}
+
+      <Stack.Screen
+        name="JungTestScreen"
+        component={JungTestScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="DowonTestScreen"
+        component={DowonTestScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="RyuTestScreen"
+        component={RyuTestScreen}
+        options={{ headerShown: false }}
+      />
+
+      {/**----------위에서부터 추가-----------------------------------------------------------*/}
+      {/**-------------------------------------------------------------------------------*/}
     </Stack.Navigator>
   );
 };
