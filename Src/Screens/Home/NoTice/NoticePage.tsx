@@ -4,7 +4,6 @@ import {
   Text,
   FlatList,
   View,
-  TouchableOpacity,
 } from "react-native";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { noticeCall } from "../../../Services/_private/EndPointApiFuntion";
@@ -15,7 +14,6 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { ParamListBase } from "@react-navigation/native"; // React Navigation v6의 경우
 import Constants from "expo-constants";
 import { NoticePostBoxView } from "../../../Components/ListCompo/OpenCompo/NoticePostCompo";
-import MNoticePostRegiPage from "../NoTice/MNoticePostRegiPage";
 
 const NoTicePage = ({
   navigation,
@@ -67,25 +65,17 @@ const NoTicePage = ({
         paddingTop: Constants.statusBarHeight,
       }}
     >
-      {/* 수정 바람 */}
-      <MenuTopbarStyle
-        text="공지사항"
-        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-        onPressRegi={() => navigation.navigate("MNoticePostRegiPage")}
-      />
-      {/* # 삭제 #  
       {["02", "03", "05"].includes(userData?.TIT_CD ?? "") ? (
         <MenuTopbarStyleManager
           text="공지사항"
           onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-          onPressRegi={() => navigation.navigate("MNoticePostRegiPage")}
         />
       ) : (
         <MenuTopbarStyle
           text="공지사항"
           onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
         />
-      )}*/}
+      )}
 
       {/* FlatList를 사용하여 공지사항 데이터 출력 */}
       <FlatList
@@ -93,12 +83,12 @@ const NoTicePage = ({
         keyExtractor={(item) => item.CRE_SEQ.toString()} // "CRE_SEQ"를 문자열로 사용하여 고유 키로 지정
         renderItem={({ item }) => (
           <NoticePostBoxView
-            title={item.TIT}
             MEMB_CD={"학회장"}
             MEMB_DEP_CD={"정보통신학과"}
             Title={item.TIT}
             PostingTime={item.CRE_DAT}
             postLike={item.LIKE_CNT}
+            PostContent={item.CONT}
           ></NoticePostBoxView>
         )}
         ItemSeparatorComponent={renderSeparator} // 항목 사이에 구분선 삽입

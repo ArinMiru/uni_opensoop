@@ -35,3 +35,14 @@ export const setUserDataAndNavigate = (
 };
 
 export default PassFindData;
+
+export interface MembPassDataType {
+  MEMB_ID: string;
+  PASS: string;
+} //다른 필드 정의
+
+export const MembPassUpdSvc: MembPassDataType = {
+  MEMB_ID: "",
+  PASS: "",
+}; //다른 필드 초기화
+

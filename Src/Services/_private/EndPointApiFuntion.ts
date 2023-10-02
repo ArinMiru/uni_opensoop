@@ -352,3 +352,32 @@ export const freeCall = async (
 };
 
 /* ------------------------------------------------------------------------------- */
+
+/**
+ *비밀번호 변경 서비스 호출 함수
+ * @param MEMB_ID 사용자 아이디
+ * @param PASS 변경할 비밀번호
+ */
+
+ export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
+  const endpoint = "/MembPassUpdSvc"; //비밀번호변경 엔드포인트 URL
+  const data = {
+    MEMB_ID, //변경자 사용 아이디
+    PASS, //새로운 비밀번호
+  };
+
+  const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+    endpoint,
+    data
+  );
+  //새로운 비밀번호가 맞는지 서버 응답을 기다립니다.
+
+  if (result !== null && result.data.RSLT_CD === "00") {
+    //result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 00인 경우
+    //비밀번호 변경 시의 처리
+    //userData 객체의 데이터 저장
+    console.log("비밀번호가 변경되었습니다.");
+  } else {
+    console.log("다른 새로운 비밀번호를 입력해주세요.");
+  }
+};
