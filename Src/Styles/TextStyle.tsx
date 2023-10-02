@@ -180,6 +180,66 @@ export default StyleSheet.create({
     fontSize: responsiveFontSize(28),
   },
 
+  bold15: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(30),
+  },
+
+  bold16: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(32),
+  },
+
+  bold17: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(34),
+  },
+
+  bold18: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(36),
+  },
+
+  bold19: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(38),
+  },
+
+  bold20: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(40),
+  },
+
+  bold21: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(42),
+  },
+
+  bold22: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(44),
+  },
+
+  bold23: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(46),
+  },
+
+  bold24: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(48),
+  },
+
   bold25: {
     fontFamily: "Bold",
     fontWeight: "700" /*bold*/,

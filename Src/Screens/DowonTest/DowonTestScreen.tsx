@@ -44,16 +44,37 @@ import { FreeListButton } from "../../Components/ListCompo/FreCompo/FreButton";
 import { FreeListIclucontnButton } from "../../Components/ListCompo/FreCompo/FreButtonCompo";
 import { ScreenProps } from "../../Navigations/StackNavigator";
 import { QstListButton } from "../../Components/ListCompo/QstCompo/QstButtonCompo";
-import { ViewUnvottedButton } from "../../Components/VoteCompo/VoteButton";
+import {
+  ViewUnvottedButton,
+  VoteRegiButton,
+  VoteSlctButton,
+  VoteStatusButton,
+} from "../../Components/VoteCompo/VoteButton";
 import { UnVotedListButton } from "../../Components/VoteCompo/VoteButton";
 import { VoteStatusPageButton } from "../../Components/VoteCompo/VoteButton";
 import { VotedListButton } from "../../Components/VoteCompo/VoteButton";
+import { MenuTopbarStyleManager } from "../../Components/AllCompo/TopbarCompo";
+import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { ParamListBase } from "@react-navigation/native";
+import { BackIconDelTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
+import TextStyle from "../../Styles/TextStyle";
+import { VoteUnSlctButton } from "../../Components/VoteCompo/VoteButton";
+import { SchdlVoteRegiTitInput } from "../../Components/SchdlCompo/SchdlInput";
+import { VoteInput } from "../../Components/VoteCompo/VoteTextInput";
+import { TextInput, TextInputProps } from "react-native";
+import { AddVoteOptionButton } from "../../Components/VoteCompo/VoteButton";
+
 /**
  * @Dowon(김도원 생성)
  * DowonTestScreen
  */
 
-const DowonTestScreen = () => {
+const DowonTestScreen = ({
+  navigation,
+}: {
+  navigation: DrawerNavigationProp<ParamListBase>;
+}) => {
   return (
     <AccountBackground>
       <BackIocnTopbarStyle text="투표" />
@@ -61,35 +82,74 @@ const DowonTestScreen = () => {
         style={{
           flex: 1,
           width: deviceWidth * 1,
+          flexDirection: "column",
           justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <SchdlVoteRegiTitInput text="제목을 입력하세요." />
+      </View>
+      <View
+        style={{
+          flex: 3,
+          flexDirection: "column",
+          width: deviceWidth * 1,
+          justifyContent: "flex-end",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "flex-end",
+            alignItems: "center",
+            width: deviceWidth * 1,
+          }}
+        >
+          <VoteInput text="텍스트" />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            width: deviceWidth * 1,
+          }}
+        >
+          <VoteInput text="텍스트" />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "flex-start",
+            alignItems: "center",
+            width: deviceWidth * 1,
+          }}
+        >
+          <AddVoteOptionButton />
+        </View>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          width: deviceWidth * 1,
+          justifyContent: "flex-start",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <VoteRegiButton />
+      </View>
+      <View
+        style={{
+          flex: 3,
+          width: deviceWidth * 1,
+          justifyContent: "flex-start",
           alignItems: "center",
           alignContent: "center",
         }}
       >
-        <ViewUnvottedButton />
-      </View>
-      <View
-        style={{
-          flex: 7,
-          width: deviceWidth * 1,
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}
-        //FlatList로 변경
-      >
-        <UnVotedListButton />
-        <View
-          style={{
-            flex: 1,
-            width: deviceWidth * 1,
-            justifyContent: "flex-start",
-            alignContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <VoteStatusPageButton text="한라산" votestatusnum="12명" />
-          <VotedListButton />
-        </View>
+        <VoteStatusButton />
       </View>
     </AccountBackground>
   );
