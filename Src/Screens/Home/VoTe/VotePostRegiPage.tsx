@@ -5,12 +5,10 @@ import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { VoteStatusButton } from "../../../Components/VoteCompo/VoteButton";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
 import { ParamListBase } from "@react-navigation/native";
-import { BackIconDelTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { VoteUnSlctButton } from "../../../Components/VoteCompo/VoteButton";
 import { VoteRegiButton } from "../../../Components/VoteCompo/VoteButton";
-import { BackIocnTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 
 /**
  * @Dowon(김도원 생성)
@@ -23,16 +21,16 @@ import { BackIocnTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
  * 어떤 투표 정보를 파싱해야하는지 작성해뒀음 (참고)
  */
 
-const MVotePostRegiPage = ({
+const VotePostRegiPage = ({
   navigation,
 }: {
   navigation: DrawerNavigationProp<ParamListBase>;
 }) => {
   return (
     <AccountBackground>
-      <BackIocnTopbarStyle
+      <BackIconTopbarStyle
         text="투표"
-        // onPress={}
+        // onPressDel={}
       />
       <View
         style={{
@@ -136,4 +134,4 @@ const MVotePostRegiPage = ({
   );
 };
 
-export default MVotePostRegiPage;
+export default VotePostRegiPage;
