@@ -26,6 +26,18 @@ export default StyleSheet.create({
     fontSize: responsiveFontSize(18),
   },
 
+  medium10: {
+    fontFamily: "Medium",
+    fontWeight: "500" /*medium*/,
+    fontSize: responsiveFontSize(20),
+  },
+
+  medium11: {
+    fontFamily: "Medium",
+    fontWeight: "500" /*medium*/,
+    fontSize: responsiveFontSize(22),
+  },
+
   medium12: {
     fontFamily: "Medium",
     fontWeight: "500" /*medium*/,
@@ -42,6 +54,12 @@ export default StyleSheet.create({
     fontFamily: "Medium",
     fontWeight: "500" /*medium*/,
     fontSize: responsiveFontSize(28),
+  },
+
+  medium15: {
+    fontFamily: "Medium",
+    fontWeight: "500" /*medium*/,
+    fontSize: responsiveFontSize(30),
   },
 
   medium20: {
@@ -100,6 +118,12 @@ export default StyleSheet.create({
     fontSize: responsiveFontSize(28),
   },
 
+  semibold15: {
+    fontFamily: "SemiBold",
+    fontWeight: "600" /*semibold*/,
+    fontSize: responsiveFontSize(30),
+  },
+
   semibold19: {
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
@@ -144,6 +168,78 @@ export default StyleSheet.create({
     fontSize: responsiveFontSize(24),
   },
 
+  bold13: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(26),
+  },
+
+  bold14: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(28),
+  },
+
+  bold15: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(30),
+  },
+
+  bold16: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(32),
+  },
+
+  bold17: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(34),
+  },
+
+  bold18: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(36),
+  },
+
+  bold19: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(38),
+  },
+
+  bold20: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(40),
+  },
+
+  bold21: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(42),
+  },
+
+  bold22: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(44),
+  },
+
+  bold23: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(46),
+  },
+
+  bold24: {
+    fontFamily: "Bold",
+    fontWeight: "700" /*bold*/,
+    fontSize: responsiveFontSize(48),
+  },
+
   bold25: {
     fontFamily: "Bold",
     fontWeight: "700" /*bold*/,
@@ -176,10 +272,34 @@ export default StyleSheet.create({
     fontSize: responsiveFontSize(20),
   },
 
+  regular11: {
+    fontFamily: "Regular",
+    fontWeight: "400" /*regular*/,
+    fontSize: responsiveFontSize(22),
+  },
+
+  regular12: {
+    fontFamily: "Regular",
+    fontWeight: "400" /*regular*/,
+    fontSize: responsiveFontSize(24),
+  },
+
   regular13: {
     fontFamily: "Regular",
     fontWeight: "400" /*regular*/,
     fontSize: responsiveFontSize(26),
+  },
+
+  regular14: {
+    fontFamily: "Regular",
+    fontWeight: "400" /*regular*/,
+    fontSize: responsiveFontSize(28),
+  },
+
+  regular15: {
+    fontFamily: "Regular",
+    fontWeight: "400" /*regular*/,
+    fontSize: responsiveFontSize(30),
   },
 
   /*------------------------------------------*/

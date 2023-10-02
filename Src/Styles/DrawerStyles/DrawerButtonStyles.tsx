@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { Dimensions } from "react-native";
 import { deviceWidth, deviceHeight } from "../../Utils/DeviceUtils";
 
 export default StyleSheet.create({
@@ -9,10 +8,21 @@ export default StyleSheet.create({
   DrawerMenuButton: {
     width: deviceWidth * 0.543,
     height: deviceHeight * 0.0669,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#4BB781",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
+    flexDirection: "row",
+  },
+
+  DrawerMenuclkButton: {
+    width: deviceWidth * 0.543,
+    height: deviceHeight * 0.0669,
+    backgroundColor: "#ffffff",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 30,
+    flexDirection: "row",
   },
 
   /**
@@ -22,6 +32,7 @@ export default StyleSheet.create({
   DrawerMenuHorizonLine: {
     borderBottomWidth: 1,
     borderBottomColor: "#FFFFFF",
-    width: deviceWidth * 0.3098,
+    width: deviceWidth * 0.55,
+    alignSelf: "center",
   },
 });
