@@ -10,6 +10,9 @@ import {
   TopbarEditButton,
   TopbarRegiButton,
 } from "./TopbarEditDelRegiButton";
+import { getUserData } from "../../Utils/_private/ApiData/UserData";
+
+const userData = getUserData()
 
 //프로퍼티 타입 정의
 interface inputProps {
@@ -31,6 +34,7 @@ interface DrawerScreenProps {
   text: string; //문자열로 타입 명시
   navigation?: any;
   onPress?: () => void;
+  onPressRegi?: () => void;
 }
 
 /*------------------------------------------------------------*/
@@ -45,10 +49,9 @@ export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
   text,
   navigation,
   onPress,
+  onPressRegi,
 }) => {
-  const openDrawer = () => {
-    navigation.openDrawer();
-  };
+  
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
@@ -63,6 +66,8 @@ export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
         <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
         {children}
       </View>
+      {/* # 아래의 정보 처럼 사용자의 직함 코드를 이용하여 조건부로 렌더링 할 것. # */}
+      {userData?.TIT_CD !== '00' && <TopbarStylePlusIcon onPress={onPressRegi} />}
       <View style={{ flex: 1 }}></View>
     </View>
   );
@@ -75,6 +80,7 @@ export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
  * 메뉴 아이콘 + 텍스트 + Plus
  * MenuTopbarStyle와 다른 점은 오른쪽에 Plus 아이콘이 존재한다는 점이다.
  * Plus 아이콘은 onPress를 통해 Plus 아이콘을 누르면 Plus 아이콘에 해당하는 기능을 수행한다.
+ * # 삭제. 관리자 및 사용자의 컴포넌트를 따로 생성하지 않음 # 
  */
 export const MenuTopbarStyleManager: React.FC<inputProps> = ({
   children,
@@ -83,9 +89,6 @@ export const MenuTopbarStyleManager: React.FC<inputProps> = ({
   onPress,
   onPressRegi,
 }) => {
-  const openDrawer = () => {
-    navigation.openDrawer();
-  };
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>

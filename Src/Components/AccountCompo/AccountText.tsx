@@ -2,7 +2,7 @@ import { View, Text, TextInputProps } from "react-native";
 import { deviceWidth } from "../../Utils/DeviceUtils";
 import textStyle from "../../Styles/TextStyle";
 
-interface TextTopProps extends TextInputProps {
+interface TextTopProps extends TextInputProps { // TextInputProps 종속성 삭제 
   children?: React.ReactNode;
   text?: string;
   inputText?: string;

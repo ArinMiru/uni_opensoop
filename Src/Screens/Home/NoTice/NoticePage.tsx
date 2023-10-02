@@ -70,6 +70,13 @@ const NoTicePage = ({
         paddingTop: Constants.statusBarHeight,
       }}
     >
+      {/* 수정 바람 */}
+      <MenuTopbarStyle
+        text="공지사항"
+        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+        onPressRegi={() => navigation.navigate("MNoticePostRegiPage")}
+      />
+      {/* # 삭제 #  
       {["02", "03", "05"].includes(userData?.TIT_CD ?? "") ? (
         <MenuTopbarStyleManager
           text="공지사항"
@@ -81,7 +88,7 @@ const NoTicePage = ({
           text="공지사항"
           onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
         />
-      )}
+      )}*/}
 
       {/* FlatList를 사용하여 공지사항 데이터 출력 */}
       <FlatList
