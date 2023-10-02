@@ -15,15 +15,17 @@ interface inputProps extends TextInputProps {
 /**
  * 투표 선택지 만드는 Input
  */
-export const SrchDupleInput: React.FC<inputProps> = ({
+export const VoteInput: React.FC<inputProps> = ({
   children,
   text,
   ...props
 }) => {
+  // text 속성을 이용하여 최대 길이를 계산
+  const maxLength = text ? text.length : 0;
   return (
     <TextInput
       placeholderTextColor="#8391A1"
-      style={[Styles.voteInputStyle, textStyle.medium13]}
+      style={[Styles.VoteInputStyle, textStyle.medium13]}
       placeholder={text}
       {...props}
     />
