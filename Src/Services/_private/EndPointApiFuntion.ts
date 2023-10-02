@@ -122,6 +122,50 @@ export const emailCheckpoint = async (MEMB_EM: string) => {
   }
 };
 
+/**
+ * 비밀번호 찾기 API 호출 함수
+ * @param MEMB_ID
+ * @param MEMB_EM
+ */
+export const passFindCheckpoint = async (MEMB_ID: string, MEMB_EM: string) => {
+  const endpoint = "/UNI/MembPassFndSvc";
+  const data = {
+    MEMB_ID,
+    MEMB_EM,
+  };
+  const result: AxiosResponse<UserData, any> | null =
+    await sendLoginCredentials(endpoint, data);
+  if (result !== null && result.data.RSLT_CD === "00") {
+    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+    console.log("인증번호를 발송합니다.");
+  } else {
+    console.log("등록되지 않은 정보입니다.");
+  }
+};
+
+/**
+ * 비밀번호 찾기 인증번호 API 호출 함수
+ */
+export const ecodeCheckpoint = async (
+  MEMB_ID: string, 
+  CERT_SEQ: string, 
+  INPUT_CD: string) => {
+  const endpoint = "/UNI/ChkAndCertSvc";
+  const data = {
+    MEMB_ID,
+    CERT_SEQ,
+    INPUT_CD,
+  };
+  const result: AxiosResponse<UserData, any> | null =
+    await sendLoginCredentials(endpoint, data);
+  if (result !== null && result.data.RSLT_CD === "00") {
+    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+    console.log("인증번호 일치.");
+  } else {
+    console.log("인증번호 불일치.");
+  }
+};
+
 /* ------------------------------------------------------------------------------- */
 
 /**

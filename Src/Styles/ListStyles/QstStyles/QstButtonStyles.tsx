@@ -25,6 +25,29 @@ export default StyleSheet.create({
     }),
   },
 
+  /**
+   * 질문 게시판에서 답변하기 버튼이 존재하는 메인화면 스타일입니다.
+   */
+  QstListQstPushStyle: {
+    alignItems: "center",
+    width: deviceWidth * 0.85,
+    height: deviceHeight * 0.2,
+    backgroundColor: "#ffffff",
+    borderRadius: 11,
+    borderColor: "#4BB781",
+    borderWidth: 1.2,
+    elevation: Platform.OS === "android" ? 3 : 0, // Android에서 그림자 효과
+    ...Platform.select({
+      // iOS에서 그림자 효과
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+      },
+    }),
+  },
+
   /*
    * 질문 게시판 리스트 화면 버튼에 들어가는 선 스타일입니다.
    **/

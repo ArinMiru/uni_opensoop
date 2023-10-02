@@ -6,6 +6,7 @@ import { ParamListBase } from "@react-navigation/native";
 import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
 import FrePostPage from "../Screens/Community/Free/FrePostPage";
 import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
+import MVotePage from "../Screens/Home/VoTe/MVotePage";
 import { View } from "react-native";
 import Constants from "expo-constants";
 import {
@@ -20,6 +21,7 @@ import {
   DrawerTextArea,
   Drawerdivision,
 } from "../Components/DrawerCopmpo/DrawerCompo";
+import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
 
 // navigation의 타입을 DrawerNavigationProp로 명시적으로 지정
 type DrawerNavigatorProps = {
@@ -101,6 +103,11 @@ function DrawerNavigator({ navigation }: DrawerNavigatorProps) {
       <Drawer.Screen
         name="질문게시판"
         component={QstPostPage}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="투표"
+        component={MVotePage}
         options={{ headerShown: false }}
       />
     </Drawer.Navigator>

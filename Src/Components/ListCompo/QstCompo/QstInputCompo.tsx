@@ -19,39 +19,62 @@ interface TextTopProps extends TextInputProps {
 **/
 export const AnswerInputBox: React.FC<TextTopProps> = ({
   children,
-  inputText,
+  text,
   onPress,
-}) => (
-  <View
-    style={{
-      flex: 1,
-      flexDirection: "row",
-      alignItems: "center",
-    }}
-  >
-    <TextInput style={QstInputStyles.AnswerInputBoxStyle}></TextInput>
-    <TouchableOpacity
-      style={[
-        QstButtonStyles.QstAnswerButtonStyle,
-        {
-          position: "absolute",
-          right: deviceWidth * 0.00093,
-        },
-      ]}
-      onPress={onPress}
+}) => {
+  const maxLength = text ? text.length : 0;
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+      }}
     >
-      <Text
+      <TextInput
+        style={[QstInputStyles.AnswerInputBoxStyle]}
+        placeholder={text}
+        maxLength={30}
+      ></TextInput>
+      <TouchableOpacity
         style={[
-          TextStyle.medium09,
+          QstButtonStyles.QstAnswerButtonStyle,
           {
-            color: "#FFFFFF",
-            lineHeight: deviceHeight * 0.02,
+            position: "absolute",
+            right: deviceWidth * 0.00093,
           },
         ]}
+        onPress={onPress}
       >
-        등록
-      </Text>
-      {children}
-    </TouchableOpacity>
-  </View>
-);
+        <Text
+          style={[
+            TextStyle.medium09,
+            {
+              color: "#FFFFFF",
+              lineHeight: deviceHeight * 0.02,
+            },
+          ]}
+        >
+          등록
+        </Text>
+        {children}
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export const QstContInputBox: React.FC<TextInputProps> = ({
+  children,
+  ...props
+}) => {
+  return (
+    <TextInput
+      placeholderTextColor="#BDBDBD"
+      style={[QstInputStyles.QstContInputBoxStyle, TextStyle.medium12]}
+      textAlignVertical="top"
+      multiline={true}
+      {...props}
+    />
+  );
+};

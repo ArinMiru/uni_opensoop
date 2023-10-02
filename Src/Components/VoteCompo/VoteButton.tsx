@@ -105,7 +105,7 @@ export const VoteStatusButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity style={VoteButtonStyle.voteStatusStyle} onPress={onPress}>
-      <Text style={[textStyle.regular13, { color: "#67B28A" }]}>{text}</Text>
+      <Text style={[textStyle.regular13, { color: "#67B28A" }]}>투표현황</Text>
       {children}
     </TouchableOpacity>
   );
@@ -113,6 +113,7 @@ export const VoteStatusButton: React.FC<ButtonProps> = ({
 
 /**
  * 투표게시물 버튼 클릭 후 -> 투표 상세페이지 투표하기 버튼
+ * 투표하기 버튼
  * VotePostScreen.tsx
  */
 export const VoteRegiButton: React.FC<ButtonProps> = ({
@@ -121,8 +122,8 @@ export const VoteRegiButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity style={VoteButtonStyle.voteStatusStyle} onPress={onPress}>
-      <Text style={[textStyle.semibold13, { color: "#FFFFFF" }]}>{text}</Text>
+    <TouchableOpacity style={VoteButtonStyle.voteRegiStyle} onPress={onPress}>
+      <Text style={[textStyle.semibold13, { color: "#FFFFFF" }]}>투표하기</Text>
       {children}
     </TouchableOpacity>
   );
@@ -142,13 +143,7 @@ export const AddVoteOptionButton: React.FC<ButtonProps> = ({
       style={VoteButtonStyle.addVoteOptionStyle}
       onPress={onPress}
     >
-      <AntDesign
-        style={{ marginLeft: deviceWidth * 0.06 }}
-        name="plus"
-        size={21}
-        color="#FFFFFF"
-        borderWidth="1.5"
-      />
+      <AntDesign name="plus" size={21} color="#FFFFFF" />
       {children}
     </TouchableOpacity>
   );
@@ -326,7 +321,11 @@ export const VotedListButton: React.FC<ButtonProps> = ({
             flex: 1,
             alignItems: "center",
           }}
-        ></View>
+        >
+          <Text style={[textStyle.regular10, { color: "#4BB781" }]}>
+            투표완료{poststatus}
+          </Text>
+        </View>
       </View>
       {children}
     </TouchableOpacity>
