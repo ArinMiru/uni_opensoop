@@ -8,7 +8,7 @@ interface inputProps extends TextInputProps {
   text: string; //문자열로 타입 명시
 }
 
-export const SchdlVoteRegiTilteInput: React.FC<inputProps> = ({
+export const SchdlVoteRegiTitInput: React.FC<inputProps> = ({
   children,
   text,
   ...props

@@ -25,7 +25,7 @@ export default StyleSheet.create({
 
   OpenFreSgsContInputBoxStyle: {
     width: deviceWidth * 0.84,
-    height: deviceHeight * 0.3,
+    height: "100%",
     backgroundColor: "#FFFFFF",
     paddingTop: 10,
     paddingEnd: 10,

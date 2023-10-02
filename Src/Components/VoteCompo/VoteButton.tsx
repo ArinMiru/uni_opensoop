@@ -12,6 +12,10 @@ import { Entypo } from "@expo/vector-icons";
 interface ButtonProps {
   children?: React.ReactNode;
   text?: string;
+  title?: string;
+  posttime?: string; // 투표게시판 리스트에서 투표 마감시간
+  poststatus?: string; // 투표게시판 리스트에서 투표 상태(미투표, 투표환료)
+  votestatusnum?: string; // 투표현황 버튼에서 투표현황 숫자
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
@@ -55,10 +59,13 @@ export const VoteUnSlctButton: React.FC<ButtonProps> = ({
 
 /**
  * 투표 현황 페이지 버튼
+ * 투표 현황 페이지에서 투표현황보여주는 박스(버튼)
+ * VoteStatusScreen.tsx
  */
 export const VoteStatusPageButton: React.FC<ButtonProps> = ({
   children,
   text,
+  votestatusnum,
   onPress,
 }) => {
   return (
@@ -66,14 +73,30 @@ export const VoteStatusPageButton: React.FC<ButtonProps> = ({
       style={VoteButtonStyle.voteStatusPageStyle}
       onPress={onPress}
     >
-      <Text style={[textStyle.medium13, { color: "#166D41" }]}>{text}</Text>
+      <View style={{ flex: 1 }}></View>
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <Text style={[textStyle.medium13, { color: "#166D41" }]}>{text}</Text>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+        }}
+      >
+        <Text style={[textStyle.medium13, { color: "#166D41" }]}>
+          {votestatusnum}
+        </Text>
+      </View>
       {children}
     </TouchableOpacity>
   );
 };
 
 /**
- * 투표 현황보기 버튼
+ * 투표 상세보기 페이지 -> 해당 투표 게시물 투표 현황보기 버튼
+ * 매니저만 보이는 버튼
+ * VoteStatusScreen.tsx
+ * VotePostScreen.tsx
  */
 export const VoteStatusButton: React.FC<ButtonProps> = ({
   children,
@@ -82,14 +105,16 @@ export const VoteStatusButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity style={VoteButtonStyle.voteStatusStyle} onPress={onPress}>
-      <Text style={[textStyle.regular13, { color: "#67B28A" }]}>{text}</Text>
+      <Text style={[textStyle.regular13, { color: "#67B28A" }]}>투표현황</Text>
       {children}
     </TouchableOpacity>
   );
 };
 
 /**
+ * 투표게시물 버튼 클릭 후 -> 투표 상세페이지 투표하기 버튼
  * 투표하기 버튼
+ * VotePostScreen.tsx
  */
 export const VoteRegiButton: React.FC<ButtonProps> = ({
   children,
@@ -97,15 +122,16 @@ export const VoteRegiButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity style={VoteButtonStyle.voteStatusStyle} onPress={onPress}>
-      <Text style={[textStyle.semibold13, { color: "#FFFFFF" }]}>{text}</Text>
+    <TouchableOpacity style={VoteButtonStyle.voteRegiStyle} onPress={onPress}>
+      <Text style={[textStyle.semibold13, { color: "#FFFFFF" }]}>투표하기</Text>
       {children}
     </TouchableOpacity>
   );
 };
 
 /**
- * 투표 선택지 늘리는 버튼
+ * 투표 게시물 등록 -> 투표 선택지 늘리는 버튼
+ * VotePostRegiScreen.tsx
  */
 export const AddVoteOptionButton: React.FC<ButtonProps> = ({
   children,
@@ -117,20 +143,15 @@ export const AddVoteOptionButton: React.FC<ButtonProps> = ({
       style={VoteButtonStyle.addVoteOptionStyle}
       onPress={onPress}
     >
-      <AntDesign
-        style={{ marginLeft: deviceWidth * 0.06 }}
-        name="plus"
-        size={21}
-        color="#FFFFFF"
-        borderWidth="1.5"
-      />
+      <AntDesign name="plus" size={21} color="#FFFFFF" />
       {children}
     </TouchableOpacity>
   );
 };
 
 /**
- * 투표 선택지 늘리는 버튼
+ * 투표게시판 미투표 보기 버튼
+ * VotePostListScreen.tsx
  */
 export const ViewUnvottedButton: React.FC<ButtonProps> = ({
   children,
@@ -182,44 +203,128 @@ export const ViewUnvottedButton: React.FC<ButtonProps> = ({
 };
 
 /**
- * 투표 선택지 늘리는 버튼
+ * 투표게시판 리스트 버튼(미투표)
+ * 미투표 상태 게시물 버튼
+ * VotePostListScreen.tsx
  */
-export const VoteListButton: React.FC<ButtonProps> = ({
+export const UnVotedListButton: React.FC<ButtonProps> = ({
   children,
-  text,
+  title,
+  posttime,
+  poststatus,
   onPress,
 }) => {
   return (
     <TouchableOpacity
-      style={VoteButtonStyle.VoteListButtonStyle}
+      style={VoteButtonStyle.UnVotedListButtonStyle}
       onPress={onPress}
     >
       <View
         style={{
           flex: 1,
           flexDirection: "row",
-          backgroundColor: "#888888",
           borderRadius: 10,
           alignItems: "center",
         }}
       >
-        <View style={{ flex: 0.2 }}>
-          <Text>111</Text>
+        <View
+          style={{
+            flex: 0.3,
+          }}
+        >
+          <View style={VoteButtonStyle.VoteUnvotedColorBoxStyle}></View>
         </View>
         <View
           style={{
             flex: 3,
             flexDirection: "column",
-            backgroundColor: "#666666",
           }}
         >
-          <Text>111</Text>
-          <View style={{ flex: 1 }}>
-            <Text>222</Text>
+          <View style={{ flex: 1, justifyContent: "center" }}>
+            <Text style={[textStyle.regular13, { color: "#090909" }]}>
+              MT장소{title}
+            </Text>
+          </View>
+          <View style={{ flex: 1, justifyContent: "center" }}>
+            <Text style={[textStyle.medium10, { color: "#9E9E9E" }]}>
+              23.04.03 마감{posttime}
+            </Text>
           </View>
         </View>
-        <View style={{ flex: 1 }}>
-          <Text>333</Text>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+          }}
+        >
+          <Text style={[textStyle.regular10, { color: "#D72966" }]}>
+            미투표{poststatus}
+          </Text>
+        </View>
+      </View>
+      {children}
+    </TouchableOpacity>
+  );
+};
+
+/**
+ * 투표게시판 리스트 버튼(투표완료)
+ * 투표완료 상태 게시물 버튼
+ * VotePostListScreen.tsx
+ */
+export const VotedListButton: React.FC<ButtonProps> = ({
+  children,
+  title,
+  posttime,
+  poststatus,
+  onPress,
+}) => {
+  return (
+    <TouchableOpacity
+      style={VoteButtonStyle.VotedListButtonStyle}
+      onPress={onPress}
+    >
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          borderRadius: 10,
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            flex: 0.3,
+          }}
+        >
+          <View style={VoteButtonStyle.VotevotedColorBoxStyle}></View>
+        </View>
+        <View
+          style={{
+            flex: 3,
+            flexDirection: "column",
+          }}
+        >
+          <View style={{ flex: 1, justifyContent: "center" }}>
+            <Text style={[textStyle.regular13, { color: "#090909" }]}>
+              MT장소{title}
+            </Text>
+          </View>
+          <View style={{ flex: 1, justifyContent: "center" }}>
+            <Text style={[textStyle.medium10, { color: "#9E9E9E" }]}>
+              23.04.03 마감{posttime}
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+          }}
+        >
+          <Text style={[textStyle.regular10, { color: "#4BB781" }]}>
+            투표완료{poststatus}
+          </Text>
         </View>
       </View>
       {children}

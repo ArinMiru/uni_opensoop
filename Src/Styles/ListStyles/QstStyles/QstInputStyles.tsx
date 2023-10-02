@@ -15,4 +15,20 @@ export default StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 10,
   },
+
+  /**
+   * 공지사항과 자유 게시판, 건의 게시판에 내용을 입력하는 인풋입니다.
+   */
+  QstContInputBoxStyle: {
+    width: deviceWidth * 0.84,
+    height: deviceHeight * 0.2,
+    backgroundColor: "#FFFFFF",
+    paddingTop: 10,
+    paddingEnd: 10,
+    paddingLeft: 8,
+    paddingRight: 8,
+    borderRadius: 8,
+    borderColor: "#8D9490",
+    borderWidth: 1,
+  },
 });
