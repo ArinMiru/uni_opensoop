@@ -7,16 +7,12 @@ import {
   parseNoticeData,
   NoticeData,
 } from "../../Utils/_private/ApiData/NoticeData";
-import { 
-  parseFreeData,
-  FreeData,
- } from "../../Utils/_private/ApiData/FreeData";
+import { parseFreeData, FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { RegiDataType } from "../../Utils/_private/RegiData/RegiUserData";
 import {
   SchlSrchData,
   parseSchlSrchData,
 } from "../../Utils/_private/RegiData/SchlSrchData";
-
 
 /* ------------------------------------------------------------------------------- */
 
@@ -147,9 +143,10 @@ export const passFindCheckpoint = async (MEMB_ID: string, MEMB_EM: string) => {
  * 비밀번호 찾기 인증번호 API 호출 함수
  */
 export const ecodeCheckpoint = async (
-  MEMB_ID: string, 
-  CERT_SEQ: string, 
-  INPUT_CD: string) => {
+  MEMB_ID: string,
+  CERT_SEQ: string,
+  INPUT_CD: string
+) => {
   const endpoint = "/UNI/ChkAndCertSvc";
   const data = {
     MEMB_ID,
@@ -354,12 +351,14 @@ export const freeCall = async (
 /* ------------------------------------------------------------------------------- */
 
 /**
+ * @jhbinny 생성
+ * @ArinMiru 패치 충돌 해결(23.10.03)
  *비밀번호 변경 서비스 호출 함수
  * @param MEMB_ID 사용자 아이디
  * @param PASS 변경할 비밀번호
  */
 
- export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
+export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
   const endpoint = "/MembPassUpdSvc"; //비밀번호변경 엔드포인트 URL
   const data = {
     MEMB_ID, //변경자 사용 아이디

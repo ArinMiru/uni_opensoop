@@ -1,6 +1,6 @@
 import { NavigationProp } from "@react-navigation/native";
 
-type UserDataField = "MEMB_ID" | "CERT_SEQ" | "MEMB_EM" | "INPUT_CD" // 필요한 필드를 여기에 추가
+type UserDataField = "MEMB_ID" | "CERT_SEQ" | "MEMB_EM" | "INPUT_CD"; // 필요한 필드를 여기에 추가
 
 export interface PassFindDataType {
   MEMB_ID: string;
@@ -36,6 +36,10 @@ export const setUserDataAndNavigate = (
 
 export default PassFindData;
 
+/**---------------------------------------------- */
+
+/** @jhbinny 생성 */
+/** @ArinMiru 패치 충돌 해결(23.10.03) */
 export interface MembPassDataType {
   MEMB_ID: string;
   PASS: string;
@@ -46,3 +50,4 @@ export const MembPassUpdSvc: MembPassDataType = {
   PASS: "",
 }; //다른 필드 초기화
 
+/**---------------------------------------------- */
