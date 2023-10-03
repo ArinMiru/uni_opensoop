@@ -2,7 +2,7 @@ import React from "react";
 import { View, KeyboardAvoidingView } from "react-native";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { BackIocnTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import {
   OpenFreSgsTitInputBox,
@@ -21,7 +21,7 @@ const MNoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const [photoButtonClicked, setphotoButtonClicked] = React.useState(false);
   return (
     <AccountBackground>
-      <BackIocnTopbarStyle
+      <BackIconTopbarStyle
         text="공지사항"
         onPress={() => navigation.goBack()}
       />

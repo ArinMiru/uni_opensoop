@@ -10,9 +10,8 @@ import textStyle from "../../../Styles/TextStyle";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import NoticePostStyles from "../../../Styles/ListStyles/NoticeStyles/NoticePostStyles";
 import { OpenLikeButtton } from "./OpenButton";
-// import ReadMore from "react-native-read-more-text"; @jhbinny
+import ReadMore from "react-native-read-more-text";
 
-//  프로퍼티 타입 정의
 interface CommonProps {
   MEMB_NM?: string;
   MEMB_CD?: string;
@@ -27,18 +26,17 @@ interface CommonProps {
 }
 
 export const NoticePostBoxView: React.FC<CommonProps> = ({
-  MEMB_NM, // 공지사항 멤버 이름
-  MEMB_CD, // 공지사항 멤버 코드
+  MEMB_NM,
+  MEMB_CD,
   MEMB_DEP_CD,
-  PostImage, // 공지사항 멤버 학과 코드
-  Title, // 공지사항 제목
-  PostContent, // 공지사항 내용
-  PostingTime, // 공지사항 작성 시간
-  postLike, // 공지사항 좋아요 수
+  PostImage,
+  Title,
+  PostContent,
+  PostingTime,
+  postLike,
   onPress,
   children,
 }) => {
-  /** @jhbinny 추가 코드 */
   const [isContentExpanded, setContentExpanded] = useState(false);
 
   const renderFooter = (handlePress: () => void, buttonText: string) => (
@@ -48,8 +46,6 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
       </Text>
     </TouchableOpacity>
   );
-
-  /** @jhbinny 추가 코드 */
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -82,8 +78,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
                 },
               ]}
             >
-              {MEMB_DEP_CD}
-              {"  "}
+              {MEMB_DEP_CD} {"  "}
             </Text>
             <Text
               style={[
@@ -111,14 +106,10 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
             flex: 1,
             flexDirection: "row",
             alignItems: "center",
+            paddingHorizontal: deviceWidth * 0.06,
           }}
         >
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-            }}
-          >
+          <View style={{ flex: 1, flexDirection: "row" }}>
             <Text style={[textStyle.regular10, { color: "#1E232C" }]}>
               {Title}
             </Text>
@@ -127,11 +118,8 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
           </View>
         </View>
       </ScrollView>
-
-      {/*  
-
       {isContentExpanded && (
-       <ScrollView>
+        <ScrollView>
           <ReadMore
             numberOfLines={0} // 전체 내용 보이도록 설정
             renderTruncatedFooter={() =>
@@ -146,11 +134,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
             </Text>
           </ReadMore>
         </ScrollView>
-
       )}
-
-      */}
-
       {isContentExpanded && (
         <TouchableOpacity
           style={{ margin: 30, alignSelf: "center" }}
