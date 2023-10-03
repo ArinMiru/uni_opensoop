@@ -2,7 +2,7 @@ import React from "react";
 import {
   MenuTopbarStyle,
   MenuTopbarStyleManager,
-  BackIocnTopbarStyle,
+  BackIconTopbarStyle,
   BackIconDelTopbarStyle,
   BackIconRegiTopbarStyle,
   BackIconEditTopbarStyle,
