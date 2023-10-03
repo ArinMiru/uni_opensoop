@@ -1,12 +1,11 @@
 import { NavigationProp } from "@react-navigation/native";
 
-type UserDataField = "MEMB_ID" | "CERT_SEQ" | "MEMB_EM" | "INPUT_CD"; // 필요한 필드를 여기에 추가
+type UserDataField = "MEMB_ID" | "CERT_SEQ" | "MEMB_EM" ; // 필요한 필드를 여기에 추가
 
 export interface PassFindDataType {
   MEMB_ID: string;
   CERT_SEQ: string;
   MEMB_EM: string;
-  INPUT_CD: string;
   // 다른 필드 정의
 }
 
@@ -14,7 +13,6 @@ export const PassFindData: PassFindDataType = {
   MEMB_ID: "",
   CERT_SEQ: "",
   MEMB_EM: "",
-  INPUT_CD: "",
   // 다른 필드 초기화
 };
 /**
