@@ -78,6 +78,7 @@ const NoTicePage = ({
             Title={item.TIT}
             PostingTime={item.CRE_DAT}
             postLike={item.LIKE_CNT}
+            PostContent={item.CONT}
           ></NoticePostBoxView>
         )}
         ItemSeparatorComponent={renderSeparator} // 항목 사이에 구분선 삽입

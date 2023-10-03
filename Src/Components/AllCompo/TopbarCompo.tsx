@@ -82,7 +82,7 @@ export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
 /*------------------------------------------------------------*/
 
 /**
- * BackIocnTopbarStyle
+ * BackIconTopbarStyle
  * BackIconDelTopbarStyle(미사용)
  * 뒤로가기 아이콘과 텍스트가 존재하는 TopbarStyle
  * 뒤로가기 + 텍스트 + X (일반사용자)

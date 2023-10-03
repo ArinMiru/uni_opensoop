@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Platform, View, Text } from "react-native";
 import { ListCategorieCompo } from "../../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
-import { BackIocnTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { FreeListIclucontnButton } from "../../../Components/ListCompo/FreCompo/FreButtonCompo";
@@ -19,7 +19,7 @@ const QstPostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const fontSize = Platform.OS === "ios" ? 9.5 : 9.5;
   return (
     <AccountBackground>
-      <BackIocnTopbarStyle text="게시판" />
+      <BackIconTopbarStyle text="게시판" />
       <View
         style={{
           flex: 1,

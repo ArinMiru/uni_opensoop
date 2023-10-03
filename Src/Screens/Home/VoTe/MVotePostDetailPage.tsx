@@ -10,7 +10,7 @@ import { ParamListBase } from "@react-navigation/native";
 import { BackIconDelTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { VoteUnSlctButton } from "../../../Components/VoteCompo/VoteButton";
 import { VoteRegiButton } from "../../../Components/VoteCompo/VoteButton";
-import { BackIocnTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 
 /**
  * @Dowon(김도원 생성)
@@ -37,7 +37,7 @@ const MVotePostDetailPage = ({
           // onPressDel={}
         />
       ) : (
-        <BackIocnTopbarStyle
+        <BackIconTopbarStyle
           text="투표"
           // onPress={}
         />
