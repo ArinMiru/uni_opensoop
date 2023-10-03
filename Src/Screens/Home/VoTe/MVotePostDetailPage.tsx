@@ -5,9 +5,7 @@ import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { VoteStatusButton } from "../../../Components/VoteCompo/VoteButton";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
 import { ParamListBase } from "@react-navigation/native";
-import { BackIconDelTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { VoteUnSlctButton } from "../../../Components/VoteCompo/VoteButton";
 import { VoteRegiButton } from "../../../Components/VoteCompo/VoteButton";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
@@ -30,18 +28,11 @@ const MVotePostDetailPage = ({
 }) => {
   return (
     <AccountBackground>
-      {["02", "03", "05"].includes(/* userData?.TIT_CD ?? */ "") ? (
-        //상단 userData 주석 api 포함 예정
-        <BackIconDelTopbarStyle
-          text="투표"
-          // onPressDel={}
-        />
-      ) : (
-        <BackIconTopbarStyle
-          text="투표"
-          // onPress={}
-        />
-      )}
+      <BackIconTopbarStyle
+        text="투표"
+        // onPress={}
+      />
+
       <View
         style={{
           flex: 1,
