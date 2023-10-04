@@ -29,7 +29,7 @@ const QstPostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         />
       </View>
       <View style={{ flex: 2, justifyContent: "center" }}>
-        <QstContInputBox text="텍스트를 입력해주세요." />
+        <QstContInputBox text="내용을 입력해주세요"></QstContInputBox>
       </View>
       <View
         style={{
