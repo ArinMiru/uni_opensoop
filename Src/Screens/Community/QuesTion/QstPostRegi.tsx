@@ -19,7 +19,7 @@ const QstPostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const fontSize = Platform.OS === "ios" ? 9.5 : 9.5;
   return (
     <AccountBackground>
-      <BackIconTopbarStyle text="게시판" />
+      <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
       <View
         style={{
           flex: 1,
@@ -36,7 +36,7 @@ const QstPostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         />
       </View>
       <View style={{ flex: 2, justifyContent: "center" }}>
-        <QstContInputBox></QstContInputBox>
+        <QstContInputBox text="내용을 입력해주세요"></QstContInputBox>
       </View>
       <View
         style={{
