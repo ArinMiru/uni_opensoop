@@ -203,6 +203,108 @@ export const ViewUnvottedButton: React.FC<ButtonProps> = ({
 };
 
 /**
+ * 투표게시물 등록 복수 선택 버튼
+ * VotePostRegiPage.tsx
+ */
+export const ViewDupleVoteButton: React.FC<ButtonProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  return (
+    <View
+      style={{
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center",
+        flex: 1,
+      }}
+    >
+      <TouchableOpacity
+        style={[
+          VoteButtonStyle.viewUnvottedButtonStyle,
+          { flexDirection: "row" },
+        ]}
+        onPress={onPress}
+      >
+        <Entypo name="circle" size={deviceWidth * 0.05} color="#4BB781" />
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          <Text
+            style={[
+              textStyle.medium13,
+              { color: "#212121" },
+              { lineHeight: deviceWidth * 0.06 },
+            ]}
+          >
+            복수선택
+          </Text>
+        </View>
+        {children}
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+/**
+ * 투표게시물 등록 익명 선택 버튼
+ * VotePostRegiPage.tsx
+ */
+export const ViewAnnymButton: React.FC<ButtonProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <TouchableOpacity
+        style={[
+          VoteButtonStyle.viewUnvottedButtonStyle,
+          { flexDirection: "row" },
+          { justifyContent: "center" },
+          { alignItems: "center" },
+        ]}
+        onPress={onPress}
+      >
+        <Entypo name="circle" size={deviceWidth * 0.05} color="#4BB781" />
+        <View
+          style={{
+            flex: 0.5,
+            alignItems: "center",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          <Text
+            style={[
+              textStyle.medium13,
+              { color: "#212121" },
+              { lineHeight: deviceWidth * 0.05 },
+            ]}
+          >
+            익명
+          </Text>
+        </View>
+        {children}
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+/**
  * 투표게시판 리스트 버튼(미투표)
  * 미투표 상태 게시물 버튼
  * VotePostListScreen.tsx

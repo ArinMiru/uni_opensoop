@@ -14,11 +14,11 @@ import {
 } from "../../../Components/ListCompo/OpenCompo/OpenButton";
 import { RegiButton } from "../../../Components/ListCompo/RegiButton";
 
-const MNoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
-  /**
-   * MNoticePostRegiPage 컴포넌트에서 사용되는 상태 변수 중 하나인 photoButtonClicked의 값을 변경하는 함수입니다.
-   */
+/** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
+
+const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const [photoButtonClicked, setphotoButtonClicked] = React.useState(false);
+  /** NoticePostRegiPage 컴포넌트에서 사용되는 상태 변수 중 하나인 photoButtonClicked의 값을 변경하는 함수입니다. */
   return (
     <AccountBackground>
       <BackIconTopbarStyle
@@ -77,4 +77,4 @@ const MNoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   );
 };
 
-export default MNoticePostRegi;
+export default NoticePostRegi;

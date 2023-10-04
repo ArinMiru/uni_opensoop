@@ -13,7 +13,7 @@ import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 /**
  * @Dowon(김도원 생성)
  * 투표 게시물 별 상세 페이지 (투표하는 페이지)
- * MVotePostDetailPage
+ * VotePostDetailPage
  * API -> 투표 조회 (연결)
  * 투표 조회에 모든 정보들 포함되어있음
  * 투표 버튼 클릭 후 별도 API 호출 필요 ( 실시간 투표 현황 업데이트 위함 )
@@ -21,7 +21,7 @@ import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
  * 어떤 투표 정보를 파싱해야하는지 작성해뒀음 (참고)
  */
 
-const MVotePostDetailPage = ({
+const VotePostDetailPage = ({
   navigation,
 }: {
   navigation: DrawerNavigationProp<ParamListBase>;
@@ -135,4 +135,4 @@ const MVotePostDetailPage = ({
   );
 };
 
-export default MVotePostDetailPage;
+export default VotePostDetailPage;
