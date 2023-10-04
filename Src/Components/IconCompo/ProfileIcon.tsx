@@ -15,3 +15,13 @@ export const OpenProfileIcon: React.FC<ProfileProps> = ({ children }) => {
     ></Ionicons>
   );
 };
+
+export const PostProfileIcon: React.FC<ProfileProps> = ({ children }) => {
+  return (
+    <Ionicons
+      name="person-circle-outline"
+      size={deviceWidth * 0.075}
+      color="#424C43"
+    ></Ionicons>
+  );
+};

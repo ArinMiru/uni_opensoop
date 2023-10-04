@@ -97,8 +97,10 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
           },
         ]}
       >
-        <OpenProfileIcon />
-        <Text style={[textStyle.semibold12, { color: "#4BB781", flex: 1 }]}>
+        <View style={{ flex: 0.9 }}>
+          <OpenProfileIcon />
+        </View>
+        <Text style={[textStyle.semibold12, { color: "#4BB781", flex: 7 }]}>
           닉네임{nickname}
         </Text>
         <Text
@@ -107,6 +109,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
             {
               color: "#000000",
               marginTop: deviceHeight * 0.02,
+              flex: 1,
             },
           ]}
         >

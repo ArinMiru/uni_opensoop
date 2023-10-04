@@ -32,6 +32,8 @@ import QstPostRegi from "../Screens/Community/QuesTion/QstPostRegi";
 import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
 import MNoticePostRegiPage from "../Screens/Home/NoTice/MNoticePostRegiPage";
 import SgsPostRegiPage from "../Screens/Community/SuggeStion/SgsPostRegiPage";
+import SgsPostClkToast from "../Screens/Community/SuggeStion/SqsPostClkToast";
+
 import VotePostPage from "../Screens/Home/VoTe/VotePostPage";
 import VotePostRegiPage from "../Screens/Home/VoTe/VotePostRegiPage";
 
@@ -76,6 +78,7 @@ type RootStackParamList = {
   SgsPostPage: undefined;
   MNoticePostRegiPage: undefined;
   SgsPostRegiPage: undefined;
+  SgsPostClkToast: undefined;
   VotePostPage: undefined;
   VotePostRegiPage: undefined;
 
@@ -265,6 +268,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="SgsPostRegiPage"
         component={SgsPostRegiPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SgsPostClkToast"
+        component={SgsPostClkToast}
         options={{ headerShown: false }}
       />
 

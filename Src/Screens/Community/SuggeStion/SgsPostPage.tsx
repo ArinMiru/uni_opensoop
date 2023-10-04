@@ -64,6 +64,7 @@ const SgsPostPage: React.FC<ScreenProps> = ({ navigation }) => {
         <SgsListContentButton
           title="비공개 게시물입니다."
           poststatus="답변 대기중"
+          onPress={() => navigation.navigate("SgsPostClkToast")}
           // 적절한 버튼 클릭 시 함수 생성하여 color props 사용하여 색깔 변경 및 페이지 이동 구현 예정
         />
       </View>
