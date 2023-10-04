@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
 import { ListCategorieCompo } from "../../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
-import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
-import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { SgsListContentButton } from "../../../Components/ListCompo/SgsCompo/SgsButtonCompo";
-import SgsPostRegiPage from "../SuggeStion/SgsPostRegiPage";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { ParamListBase } from "@react-navigation/native";
+import { DrawerActions } from "@react-navigation/native";
+import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 /**
  * @Dowon(김도원 생성)
  * SgsPostPage
@@ -28,12 +29,16 @@ interface ButtonProps {
   onPress: () => void;
 }
 
-const SgsPostPage: React.FC<ScreenProps> = ({ navigation }) => {
+const SgsPostPage = ({
+  navigation,
+}: {
+  navigation: DrawerNavigationProp<ParamListBase>;
+}) => {
   return (
     <AccountBackground>
-      <BackIconRegiTopbarStyle
+      <MenuTopbarStyle
         text="게시판"
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
         onPressRegi={() => navigation.navigate("SgsPostRegiPage")}
       />
       <View

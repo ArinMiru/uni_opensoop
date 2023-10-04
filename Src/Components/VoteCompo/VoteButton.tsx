@@ -85,6 +85,7 @@ export const VoteStatusPageButton: React.FC<ButtonProps> = ({
       >
         <Text style={[textStyle.medium13, { color: "#166D41" }]}>
           {votestatusnum}
+          {"명"}
         </Text>
       </View>
       {children}
