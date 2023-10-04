@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Platform, View, Text } from "react-native";
+import { View, Text } from "react-native";
 import { ListCategorieCompo } from "../../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
-import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
-import { FreeListIclucontnButton } from "../../../Components/ListCompo/FreCompo/FreButtonCompo";
+import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { QstContInputBox } from "../../../Components/ListCompo/QstCompo/QstInputCompo";
 import TextStyle from "../../../Styles/TextStyle";
 import { RegiButton } from "../../../Components/ListCompo/RegiButton";
 
-interface ButtonProps {
-  color: string;
-  onPress: () => void;
-}
-
 const QstPostRegi: React.FC<ScreenProps> = ({ navigation }) => {
-  const fontSize = Platform.OS === "ios" ? 9.5 : 9.5;
   return (
     <AccountBackground>
       <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
@@ -43,13 +36,19 @@ const QstPostRegi: React.FC<ScreenProps> = ({ navigation }) => {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          width: deviceWidth * 0.85,
+          width: deviceWidth * 0.82,
         }}
       >
-        <Text style={[TextStyle.medium09, { fontSize, color: "#828282" }]}>
+        <Text
+          style={[
+            TextStyle.medium09,
+            { color: "#828282" },
+            { textAlign: "left" },
+          ]}
+        >
           지식을 함께 나누며 해결해 나가는 즐거움을 느껴보세요. 이곳은 궁금증을
-          해결하{"\n"}기 위한 질문 게시판입니다. 다른 학생들에게 도움이 되는
-          질문들을 함께 공유해주{"\n"}시면 정말 감사하겠습니다.
+          해결하기 위한 질문 게시판입니다. 다른 학생들에게 도움이 되는 질문들을
+          함께 공유해주시면 정말 감사하겠습니다.
         </Text>
       </View>
       <View style={{ flex: 4 }}>
