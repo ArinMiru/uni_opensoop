@@ -4,6 +4,10 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 import PassFindData, { setUserDataAndNavigate } from "../../../Utils/_private/ApiData/PassFindData";
 import { MembPassFndSvc } from "../../../../Src/Services/_private/EndPointApiFuntion";
 
+/**
+ * 비밀번호 찾기(이메일 입력 창)
+ * 최서은 @holly1017 생성
+ */
 
 const PassFindForEmail: React.FC<ScreenProps> = ({ navigation }) => {
   const [userEmail, setUserEmail] = useState<string>("");
