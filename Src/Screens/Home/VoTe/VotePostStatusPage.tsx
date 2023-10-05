@@ -3,35 +3,19 @@ import { View, Text } from "react-native";
 import TextStyle from "../../../Styles/TextStyle";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
-import { VoteStatusButton } from "../../../Components/VoteCompo/VoteButton";
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { ParamListBase } from "@react-navigation/native";
-import { VoteUnSlctButton } from "../../../Components/VoteCompo/VoteButton";
-import { VoteRegiButton } from "../../../Components/VoteCompo/VoteButton";
+import { VoteStatusPageButton } from "../../../Components/VoteCompo/VoteButton";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { ScreenProps } from "../../../Navigations/StackNavigator";
 
 /**
  * @Dowon(김도원 생성)
- * 투표 게시물 별 상세 페이지 (투표하는 페이지)
- * MVotePostDetailPage
- * API -> 투표 조회 (연결)
- * 투표 조회에 모든 정보들 포함되어있음
- * 투표 버튼 클릭 후 별도 API 호출 필요 ( 실시간 투표 현황 업데이트 위함 )
- * 서비스 URL -> VotBubListSvc
- * 어떤 투표 정보를 파싱해야하는지 작성해뒀음 (참고)
+ * VotePostStatusPage
  */
 
-const MVotePostDetailPage = ({
-  navigation,
-}: {
-  navigation: DrawerNavigationProp<ParamListBase>;
-}) => {
+const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
-      <BackIconTopbarStyle
-        text="투표"
-        // onPress={}
-      />
+      <BackIconTopbarStyle text="투표" onPress={() => navigation.goBack()} />
 
       <View
         style={{
@@ -63,7 +47,7 @@ const MVotePostDetailPage = ({
       </View>
       <View
         style={{
-          flex: 3,
+          flex: 2,
           flexDirection: "column",
           width: deviceWidth * 1,
           justifyContent: "flex-end",
@@ -78,7 +62,8 @@ const MVotePostDetailPage = ({
             width: deviceWidth * 1,
           }}
         >
-          <VoteUnSlctButton text="VOT_INFO" />
+          <VoteStatusPageButton text="VOT_INFO" votestatusnum="5" />
+          {/** votestatusnum="VOT_SUB_TOT" */}
         </View>
         <View
           style={{
@@ -88,51 +73,24 @@ const MVotePostDetailPage = ({
             width: deviceWidth * 1,
           }}
         >
-          <VoteUnSlctButton text="VOT_INFO" />
-        </View>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "flex-start",
-            alignItems: "center",
-            width: deviceWidth * 1,
-          }}
-        >
-          <VoteUnSlctButton text="VOT_INFO" />
+          <VoteStatusPageButton text="VOT_INFO" votestatusnum="5" />
+          {/** votestatusnum="VOT_SUB_TOT" */}
         </View>
       </View>
       <View
         style={{
-          flex: 1,
-          width: deviceWidth * 1,
-          justifyContent: "flex-start",
-          alignContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <VoteRegiButton />
-      </View>
-      <View
-        style={{
-          flex: 3,
+          flex: 5,
           width: deviceWidth * 1,
           justifyContent: "flex-start",
           alignItems: "center",
           alignContent: "center",
         }}
       >
-        <VoteStatusButton />
-        {["02", "03", "05"].includes(/* userData?.TIT_CD ?? */ "") ? (
-          //상단 userData 주석 api 포함 예정
-          <VoteStatusButton
-          // onPressDel={}
-          />
-        ) : (
-          <View style={{ flex: 3, width: deviceWidth * 1 }}></View>
-        )}
+        <VoteStatusPageButton text="VOT_INFO" votestatusnum="5" />
+        {/** votestatusnum="VOT_SUB_TOT" */}
       </View>
     </AccountBackground>
   );
 };
 
-export default MVotePostDetailPage;
+export default VotPostStatusPage;

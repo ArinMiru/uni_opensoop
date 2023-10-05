@@ -64,14 +64,17 @@ export const AnswerInputBox: React.FC<TextTopProps> = ({
   );
 };
 
-export const QstContInputBox: React.FC<TextInputProps> = ({
+export const QstContInputBox: React.FC<TextTopProps> = ({
   children,
+  text,
   ...props
 }) => {
   return (
     <TextInput
       placeholderTextColor="#BDBDBD"
+      placeholder={text}
       style={[QstInputStyles.QstContInputBoxStyle, TextStyle.medium12]}
+      placeholder={text}
       textAlignVertical="top"
       multiline={true}
       {...props}
