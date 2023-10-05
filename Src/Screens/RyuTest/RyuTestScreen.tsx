@@ -12,8 +12,17 @@ import QstPostPage from "../Community/QuesTion/QstPostPage";
 const ListTest = () => {
   return (
     <SafeAreaView style={BackgroundStyle.AccountBackground}>
-      <QstListButton></QstListButton>
-      <QstListQstPushButton></QstListQstPushButton>
+      <QstListButton
+        nickname="테스트"
+        postanswer="답변하기"
+        postcontent="ㅁㄴㅇㄹㅁㄴㅇㄹ"
+      ></QstListButton>
+      <QstListQstPushButton
+        nickname="테스트"
+        postanswer="답변하기"
+        postcontent="ㅁㄴㅇㄹㅁㄴㅇㄹ"
+        postanswercontent="찜닭이닭"
+      ></QstListQstPushButton>
     </SafeAreaView>
   );
 };
