@@ -26,6 +26,7 @@ interface ButtonProps extends TextInputProps {
   nickname?: string;
   postanswer?: string;
   postcontent?: string;
+  postanswercontent?: string;
   onPress?: () => void;
 }
 
@@ -61,10 +62,7 @@ export const QstListButton: React.FC<ButtonProps> = ({
           }}
         >
           <Text
-            style={[
-              textStyle.semibold10,
-              { color: "#00B45A", left: "2%", textDecorationLine: "underline" },
-            ]}
+            style={[textStyle.semibold10, { color: "#00B45A", left: "2%" }]}
           >
             {nickname}
           </Text>
@@ -75,6 +73,7 @@ export const QstListButton: React.FC<ButtonProps> = ({
               textStyle.bold07,
               {
                 color: "#00841D",
+                textDecorationLine: "underline",
               },
             ]}
           >
@@ -129,6 +128,7 @@ export const QstListQstPushButton: React.FC<ButtonProps> = ({
   nickname,
   postcontent,
   postanswer,
+  postanswercontent,
 }) => {
   return (
     <View style={QstButtonStyles.QstListQstPushStyle}>
@@ -163,6 +163,7 @@ export const QstListQstPushButton: React.FC<ButtonProps> = ({
               textStyle.bold07,
               {
                 color: "#00841D",
+                textDecorationLine: "underline",
               },
             ]}
           >
@@ -221,7 +222,9 @@ export const QstListQstPushButton: React.FC<ButtonProps> = ({
           <Entypo name="level-down" size={16} color="#24B50C" />
         </View>
         <View style={{ flex: 1 }}>
-          <Text>찜닭이요</Text>
+          <Text style={[textStyle.medium09, { color: "#424C43" }]}>
+            {postanswercontent}
+          </Text>
         </View>
       </View>
       {children}

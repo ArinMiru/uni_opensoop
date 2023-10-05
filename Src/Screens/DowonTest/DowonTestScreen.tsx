@@ -26,7 +26,7 @@ import { OpenEdtDltButton } from "../../Components/IconCompo/OpenEdtDltIconButto
 import { SgsListContentButton } from "../../Components/ListCompo/SgsCompo/SgsButtonCompo";
 import { SgsDelButton } from "../../Components/ListCompo/SgsCompo/SgsCompo";
 import { NoticePostBoxView } from "../../Components/ListCompo/OpenCompo/NoticePostCompo";
-import MNoticePostRegi from "../Home/NoTice/MNoticePostRegiPage";
+import MNoticePostRegi from "../Home/NoTice/NoticePostRegiPage";
 import { BackIconRegiTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
 import { AccountBackground } from "../../Components/AllCompo/Background";
 import {
@@ -35,7 +35,7 @@ import {
   OpenPhotoDelBox,
   OpenPhotoComboBox,
 } from "../../Components/ListCompo/OpenCompo/OpenButton";
-import { deviceWidth } from "../../Utils/DeviceUtils";
+import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 import { RegiButton } from "../../Components/ListCompo/RegiButton";
 import { FreeListButton } from "../../Components/ListCompo/FreCompo/FreButton";
 import { FreeListIclucontnButton } from "../../Components/ListCompo/FreCompo/FreButtonCompo";
@@ -60,6 +60,11 @@ import { VoteInput } from "../../Components/VoteCompo/VoteTextInput";
 import { TextInput, TextInputProps } from "react-native";
 import { AddVoteOptionButton } from "../../Components/VoteCompo/VoteButton";
 import { BackIconTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
+import { ViewDupleVoteButton } from "../../Components/VoteCompo/VoteButton";
+import { ViewAnnymButton } from "../../Components/VoteCompo/VoteButton";
+import VoteBoxStyle from "../../Styles/VoteStyles/VoteBoxStyle";
+import { QstContInputBox } from "../../Components/ListCompo/QstCompo/QstInputCompo";
+import { Platform } from "react-native";
 
 /**
  * @Dowon(김도원 생성)
@@ -73,21 +78,42 @@ const DowonTestScreen = ({
 }) => {
   return (
     <AccountBackground>
-      <BackIconTopbarStyle text="투표" />
+      <BackIconTopbarStyle
+        text="투표"
+        // onPress={}
+      />
+
       <View
         style={{
           flex: 1,
           width: deviceWidth * 1,
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
         }}
       >
-        <SchdlVoteRegiTitInput text="제목을 입력하세요." />
+        <Text
+          style={[
+            TextStyle.bold25,
+            { marginLeft: deviceWidth * 0.06 },
+            { color: "#1E232C" },
+          ]}
+        >
+          {"VOT_TITLE"}
+        </Text>
+        <Text
+          style={[
+            TextStyle.medium09,
+            { marginRight: deviceWidth * 0.06 },
+            { color: "#9E9E9E" },
+          ]}
+        >
+          {"VOT_EXPR_DATE "} {"마감"}
+        </Text>
       </View>
       <View
         style={{
-          flex: 3,
+          flex: 2,
           flexDirection: "column",
           width: deviceWidth * 1,
           justifyContent: "flex-end",
@@ -102,7 +128,8 @@ const DowonTestScreen = ({
             width: deviceWidth * 1,
           }}
         >
-          <VoteInput text="텍스트" />
+          <VoteStatusPageButton text="VOT_INFO" votestatusnum="5" />
+          {/** votestatusnum="VOT_SUB_TOT" */}
         </View>
         <View
           style={{
@@ -112,40 +139,21 @@ const DowonTestScreen = ({
             width: deviceWidth * 1,
           }}
         >
-          <VoteInput text="텍스트" />
-        </View>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "flex-start",
-            alignItems: "center",
-            width: deviceWidth * 1,
-          }}
-        >
-          <AddVoteOptionButton />
+          <VoteStatusPageButton text="VOT_INFO" votestatusnum="5" />
+          {/** votestatusnum="VOT_SUB_TOT" */}
         </View>
       </View>
       <View
         style={{
-          flex: 1,
-          width: deviceWidth * 1,
-          justifyContent: "flex-start",
-          alignContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <VoteRegiButton />
-      </View>
-      <View
-        style={{
-          flex: 3,
+          flex: 5,
           width: deviceWidth * 1,
           justifyContent: "flex-start",
           alignItems: "center",
           alignContent: "center",
         }}
       >
-        <VoteStatusButton />
+        <VoteStatusPageButton text="VOT_INFO" votestatusnum="5" />
+        {/** votestatusnum="VOT_SUB_TOT" */}
       </View>
     </AccountBackground>
   );

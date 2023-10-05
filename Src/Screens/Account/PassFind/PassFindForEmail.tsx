@@ -2,8 +2,12 @@ import React,{ useState } from "react";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import PassFindData, { setUserDataAndNavigate } from "../../../Utils/_private/ApiData/PassFindData";
-import { passFindCheckpoint } from "../../../../Src/Services/_private/EndPointApiFuntion";
+import { MembPassFndSvc } from "../../../../Src/Services/_private/EndPointApiFuntion";
 
+/**
+ * 비밀번호 찾기(이메일 입력 창)
+ * 최서은 @holly1017 생성
+ */
 
 const PassFindForEmail: React.FC<ScreenProps> = ({ navigation }) => {
   const [userEmail, setUserEmail] = useState<string>("");
@@ -11,7 +15,7 @@ const PassFindForEmail: React.FC<ScreenProps> = ({ navigation }) => {
   const passEmailCheck = async () => {
     setUserDataAndNavigate("MEMB_EM", userEmail, navigation, "PassFindEcode");
     console.log(PassFindData.MEMB_EM);
-    const result = await passFindCheckpoint(PassFindData.MEMB_ID, PassFindData.MEMB_EM);
+    const result = await MembPassFndSvc(PassFindData.MEMB_ID, PassFindData.MEMB_EM);
   };
 
   return (
