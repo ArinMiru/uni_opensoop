@@ -51,4 +51,16 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  horizontalLine: {
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#8B8B8B",
+    width: "100%",
+  },
+
+  divideContentsLine: {
+    borderBottomWidth: 4,
+    opacity: 0.8,
+    borderBottomColor: "#E8E8E8",
+    width: "100%",
+  },
 });

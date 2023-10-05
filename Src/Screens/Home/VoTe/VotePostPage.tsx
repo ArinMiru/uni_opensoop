@@ -31,7 +31,7 @@ const VotePostPage = ({
       <MenuTopbarStyle
         text="투표"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-        onPressRegi={() => navigation.navigate("MVotePostRegiPage")}
+        onPressRegi={() => navigation.navigate("VotePostRegiPage")}
       />
       <ViewUnvottedButton />
       <View
