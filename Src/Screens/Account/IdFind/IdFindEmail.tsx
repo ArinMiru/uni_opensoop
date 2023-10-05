@@ -3,6 +3,10 @@ import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { MembIdFndSvc } from "../../../Services/_private/EndPointApiFuntion";
 
+/**
+ * 이메일로 아이디 찾기
+ * 최서은 @holly1017 생성
+ */
 
 const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
   const [userEmail, setUserEmail] = useState<string>(""); //문자열을 저장하는 변수 선언

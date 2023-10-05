@@ -1,5 +1,10 @@
 import { NavigationProp } from "@react-navigation/native";
 
+/**
+ * 비밀번호 찾기 데이터
+ * 최서은 @holly1017 생성
+ */
+
 type UserDataField = "MEMB_ID" | "CERT_SEQ" | "MEMB_EM" ; // 필요한 필드를 여기에 추가
 
 export interface PassFindDataType {
