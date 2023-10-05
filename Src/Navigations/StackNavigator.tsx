@@ -23,17 +23,19 @@ import PassFindChk from "../Screens/Account/PassFind/PassFindChk";
 import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
-import Topbartest from "../Screens/Account/IdFind/Topbartest";
 import DrawerNavigator from "./DrawerNavigator";
-import MNoticePostRegi from "../Screens/Home/NoTice/MNoticePostRegiPage";
+import NoticePostRegi from "../Screens/Home/NoTice/NoticePostRegiPage";
 import FrePostPage from "../Screens/Community/Free/FrePostPage";
 import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
 import QstPostRegi from "../Screens/Community/QuesTion/QstPostRegi";
 import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
-import MNoticePostRegiPage from "../Screens/Home/NoTice/MNoticePostRegiPage";
+import MNoticePostRegiPage from "../Screens/Home/NoTice/NoticePostRegiPage";
 import SgsPostRegiPage from "../Screens/Community/SuggeStion/SgsPostRegiPage";
+import SgsPostClkToast from "../Screens/Community/SuggeStion/SqsPostClkToast";
+
 import VotePostPage from "../Screens/Home/VoTe/VotePostPage";
 import VotePostRegiPage from "../Screens/Home/VoTe/VotePostRegiPage";
+import VotePostDetailPage from "../Screens/Home/VoTe/VotePostDetailPage";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -67,17 +69,18 @@ type RootStackParamList = {
   IdFindEmail: undefined;
   IdFindOut: undefined;
   NoticePage: undefined;
-  Topbartest: undefined;
   DrawerNavigator: undefined;
-  MNoticePostRegi: undefined;
+  NoticePostRegi: undefined;
   FrePostPage: undefined;
   QstPostPage: undefined;
   QstPostRegi: undefined;
   SgsPostPage: undefined;
   MNoticePostRegiPage: undefined;
   SgsPostRegiPage: undefined;
+  SgsPostClkToast: undefined;
   VotePostPage: undefined;
   VotePostRegiPage: undefined;
+  VotePostDetailPage: undefined;
 
   /**----------------------------------------------------------------------------*/
   /**----------------------------------------------------------------------------*/
@@ -216,20 +219,14 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name="Topbartest"
-        component={Topbartest}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
         name="DrawerNavigator"
         component={DrawerNavigator}
         options={{ headerShown: false }}
       />
 
       <Stack.Screen
-        name="MNoticePostRegi"
-        component={MNoticePostRegi}
+        name="NoticePostRegi"
+        component={NoticePostRegi}
         options={{ headerShown: false }}
       />
 
@@ -267,6 +264,11 @@ const StackNavigator = () => {
         component={SgsPostRegiPage}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="SgsPostClkToast"
+        component={SgsPostClkToast}
+        options={{ headerShown: false }}
+      />
 
       <Stack.Screen
         name="VotePostPage"
@@ -277,6 +279,12 @@ const StackNavigator = () => {
       <Stack.Screen
         name="VotePostRegiPage"
         component={VotePostRegiPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="VotePostDetailPage"
+        component={VotePostDetailPage}
         options={{ headerShown: false }}
       />
 

@@ -100,7 +100,7 @@ export const nickCheckpoint = async (NICK_NM: string) => {
  * 이메일로 아이디 찾기 API 호출 함수
  * @param MEMB_EM
  */
-export const emailCheckpoint = async (MEMB_EM: string) => {
+export const MembIdFndSvc = async (MEMB_EM: string) => {
   const endpoint = "/UNI/MembIdFndSvc";
   const data = {
     MEMB_EM,
@@ -123,7 +123,7 @@ export const emailCheckpoint = async (MEMB_EM: string) => {
  * @param MEMB_ID
  * @param MEMB_EM
  */
-export const passFindCheckpoint = async (MEMB_ID: string, MEMB_EM: string) => {
+export const MembPassFndSvc = async (MEMB_ID: string, MEMB_EM: string) => {
   const endpoint = "/UNI/MembPassFndSvc";
   const data = {
     MEMB_ID,
@@ -142,16 +142,14 @@ export const passFindCheckpoint = async (MEMB_ID: string, MEMB_EM: string) => {
 /**
  * 비밀번호 찾기 인증번호 API 호출 함수
  */
-export const ecodeCheckpoint = async (
+export const ChkAndCertSvc = async (
   MEMB_ID: string,
   CERT_SEQ: string,
-  INPUT_CD: string
 ) => {
   const endpoint = "/UNI/ChkAndCertSvc";
   const data = {
     MEMB_ID,
     CERT_SEQ,
-    INPUT_CD,
   };
   const result: AxiosResponse<UserData, any> | null =
     await sendLoginCredentials(endpoint, data);
