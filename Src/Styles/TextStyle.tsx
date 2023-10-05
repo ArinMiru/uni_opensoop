@@ -20,6 +20,12 @@ export default StyleSheet.create({
   */
 
   /*----------------medium---------------------*/
+  medium08: {
+    fontFamily: "Medium",
+    fontWeight: "500" /*medium*/,
+    fontSize: responsiveFontSize(16),
+  },
+
   medium09: {
     fontFamily: "Medium",
     fontWeight: "500" /*medium*/,

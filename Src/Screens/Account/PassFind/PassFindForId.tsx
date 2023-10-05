@@ -2,7 +2,11 @@ import React, {useState} from "react";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import PassFindData, { setUserDataAndNavigate } from "../../../Utils/_private/ApiData/PassFindData";
-import { passFindCheckpoint } from "../../../../Src/Services/_private/EndPointApiFuntion";
+
+/**
+ * 비밀번호 찾기(아이디 입력 창)
+ * 최서은 @holly1017 생성
+ */
 
 const PassFindForId: React.FC<ScreenProps> = ({ navigation }) => {
   const [userId, setUserId] = useState<string>("");
