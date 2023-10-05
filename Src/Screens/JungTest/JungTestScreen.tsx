@@ -16,7 +16,7 @@ import {
   SchdlEditDelButton,
   SchdlRegiTimeButton,
 } from "../../Components/SchdlCompo/SchdlCommonCompo";
-import { SchdlVoteRegiTilteInput } from "../../Components/SchdlCompo/SchdlInput";
+import { SchdlVoteRegiTitInput } from "../../Components/SchdlCompo/SchdlInput";
 import {
   ScdlEditIcon,
   SchldDelButton,
@@ -36,7 +36,7 @@ const ListTest = () => {
       <SchdlRegiDateButton date="8월 15일 (금)" />
       <SchdlEditDelButton />
       <SchdlRegiTimeButton />
-      <SchdlVoteRegiTilteInput text="제목을 입력하세요." />
+      <SchdlVoteRegiTitInput text="제목을 입력하세요." />
       <ScdlEditIcon />
       <SchldDelButton />
     </SafeAreaView>

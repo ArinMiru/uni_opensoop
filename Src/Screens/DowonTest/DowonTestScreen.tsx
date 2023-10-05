@@ -65,6 +65,7 @@ import { ViewAnnymButton } from "../../Components/VoteCompo/VoteButton";
 import VoteBoxStyle from "../../Styles/VoteStyles/VoteBoxStyle";
 import { QstContInputBox } from "../../Components/ListCompo/QstCompo/QstInputCompo";
 import { Platform } from "react-native";
+
 /**
  * @Dowon(김도원 생성)
  * DowonTestScreen
@@ -77,47 +78,82 @@ const DowonTestScreen = ({
 }) => {
   return (
     <AccountBackground>
-      <BackIconTopbarStyle text="게시판" />
+      <BackIconTopbarStyle
+        text="투표"
+        // onPress={}
+      />
+
       <View
         style={{
           flex: 1,
           width: deviceWidth * 1,
-          justifyContent: "center",
-          alignItems: "center",
-          alignContent: "center",
-        }}
-      >
-        <ListCategorieCompo
-          firsttext="자유"
-          secondtext="건의"
-          thirdtext="질문"
-        />
-      </View>
-      <View style={{ flex: 2, justifyContent: "center" }}>
-        <QstContInputBox text="텍스트를 입력해주세요." />
-      </View>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          width: deviceWidth * 0.82,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
         }}
       >
         <Text
           style={[
-            TextStyle.medium09,
-            { color: "#828282" },
-            { textAlign: "left" },
+            TextStyle.bold25,
+            { marginLeft: deviceWidth * 0.06 },
+            { color: "#1E232C" },
           ]}
         >
-          지식을 함께 나누며 해결해 나가는 즐거움을 느껴보세요. 이곳은 궁금증을
-          해결하기 위한 질문 게시판입니다. 다른 학생들에게 도움이 되는 질문들을
-          함께 공유해주시면 정말 감사하겠습니다.
+          {"VOT_TITLE"}
+        </Text>
+        <Text
+          style={[
+            TextStyle.medium09,
+            { marginRight: deviceWidth * 0.06 },
+            { color: "#9E9E9E" },
+          ]}
+        >
+          {"VOT_EXPR_DATE "} {"마감"}
         </Text>
       </View>
-      <View style={{ flex: 4 }}>
-        <RegiButton text="등록하기"></RegiButton>
+      <View
+        style={{
+          flex: 2,
+          flexDirection: "column",
+          width: deviceWidth * 1,
+          justifyContent: "flex-end",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "flex-end",
+            alignItems: "center",
+            width: deviceWidth * 1,
+          }}
+        >
+          <VoteStatusPageButton text="VOT_INFO" votestatusnum="5" />
+          {/** votestatusnum="VOT_SUB_TOT" */}
+        </View>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            width: deviceWidth * 1,
+          }}
+        >
+          <VoteStatusPageButton text="VOT_INFO" votestatusnum="5" />
+          {/** votestatusnum="VOT_SUB_TOT" */}
+        </View>
+      </View>
+      <View
+        style={{
+          flex: 5,
+          width: deviceWidth * 1,
+          justifyContent: "flex-start",
+          alignItems: "center",
+          alignContent: "center",
+        }}
+      >
+        <VoteStatusPageButton text="VOT_INFO" votestatusnum="5" />
+        {/** votestatusnum="VOT_SUB_TOT" */}
       </View>
     </AccountBackground>
   );

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
 import { ListCategorieCompo } from "../../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
-import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
-import { FreeListIclucontnButton } from "../../../Components/ListCompo/FreCompo/FreButtonCompo";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { QstListButton } from "../../../Components/ListCompo/QstCompo/QstButtonCompo";
-
+import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
+import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 /**
  * @Dowon(김도원 생성)
  * QstPostPage
@@ -32,10 +31,10 @@ interface ButtonProps {
 const QstPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
-      <BackIconRegiTopbarStyle
+      <MenuTopbarStyle
         text="게시판"
-        onPress={() => navigation.goBack()}
-        onPressRegi={() => navigation.navigate("NoticePage")}
+        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+        onPressRegi={() => navigation.navigate("QstPostRegi")}
       />
       <View
         style={{

@@ -72,6 +72,7 @@ export const QstContInputBox: React.FC<TextTopProps> = ({
   return (
     <TextInput
       placeholderTextColor="#BDBDBD"
+      placeholder={text}
       style={[QstInputStyles.QstContInputBoxStyle, TextStyle.medium12]}
       placeholder={text}
       textAlignVertical="top"

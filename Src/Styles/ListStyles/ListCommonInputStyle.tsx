@@ -35,4 +35,23 @@ export default StyleSheet.create({
     borderColor: "#8D9490",
     borderWidth: 1,
   },
+
+  FreeSqsCommentInputStyle: {
+    width: deviceWidth * 0.875,
+    height: deviceHeight * 0.049,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 100,
+    borderColor: "#E8E8E8",
+    borderWidth: 1,
+    paddingLeft: 10,
+  },
+
+  FreeSqsCommentButtonStyle: {
+    width: deviceWidth * 0.148,
+    height: deviceHeight * 0.039,
+    backgroundColor: "#4BB781",
+    borderRadius: 100,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });

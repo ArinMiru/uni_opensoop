@@ -12,7 +12,7 @@ import { RegiButton } from "../../../Components/ListCompo/RegiButton";
 const QstPostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
-      <BackIconTopbarStyle text="게시판" />
+      <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
       <View
         style={{
           flex: 1,
@@ -29,7 +29,7 @@ const QstPostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         />
       </View>
       <View style={{ flex: 2, justifyContent: "center" }}>
-        <QstContInputBox text="내용을 입력해주세요"></QstContInputBox>
+        <QstContInputBox text="텍스트를 입력해주세요"></QstContInputBox>
       </View>
       <View
         style={{

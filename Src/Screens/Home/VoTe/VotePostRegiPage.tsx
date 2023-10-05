@@ -2,8 +2,6 @@ import React from "react";
 import { View, Text } from "react-native";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { ParamListBase } from "@react-navigation/native";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { VoteInput } from "../../../Components/VoteCompo/VoteTextInput";
 import { SchdlVoteRegiTitInput } from "../../../Components/SchdlCompo/SchdlInput";
@@ -14,20 +12,17 @@ import {
 } from "../../../Components/VoteCompo/VoteButton";
 import VoteBoxStyle from "../../../Styles/VoteStyles/VoteBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
+import { ScreenProps } from "../../../Navigations/StackNavigator";
 /**
  * @Dowon(김도원 생성)
  * 투표 게시물 등록 페이지
  * [02, 03, 05] TIT_CD 에 맞는 사용자만 접근 가능 페이지
  */
 
-const VotePostRegiPage = ({
-  navigation,
-}: {
-  navigation: DrawerNavigationProp<ParamListBase>;
-}) => {
+const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
-      <BackIconTopbarStyle text="투표" />
+      <BackIconTopbarStyle text="투표" onPress={() => navigation.goBack()} />
       <View
         style={{
           flex: 1,

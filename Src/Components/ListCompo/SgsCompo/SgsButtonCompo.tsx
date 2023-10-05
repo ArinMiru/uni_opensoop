@@ -31,7 +31,7 @@ export const SgsListContentButton: React.FC<ButtonProps> = ({
   poststatus,
 }) => {
   return (
-    <SgsListButton>
+    <SgsListButton onPress={onPress}>
       <View
         style={{
           flex: 1,
@@ -41,19 +41,20 @@ export const SgsListContentButton: React.FC<ButtonProps> = ({
       >
         <View
           style={{
-            flex: 0.4,
+            flex: 0.6,
             alignItems: "center",
           }}
         >
           <SgsListLockIcon />
         </View>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 2 }}>
           <Text
             style={[
               textStyle.semibold12,
               {
                 color: "#424C43",
                 textAlign: "left",
+                width: "100%",
               },
             ]}
           >
