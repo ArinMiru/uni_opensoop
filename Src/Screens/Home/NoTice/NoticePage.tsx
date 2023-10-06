@@ -73,8 +73,8 @@ const NoTicePage = ({
         keyExtractor={(item) => item.CRE_SEQ.toString()} // "CRE_SEQ"를 문자열로 사용하여 고유 키로 지정
         renderItem={({ item }) => (
           <NoticePostBoxView
-            MEMB_CD={"학회장"}
-            MEMB_DEP_CD={"정보통신학과"}
+            MEMB_CD={item.TIT_NM}
+            MEMB_DEP_CD={item.MEMB_DEP_NM}
             Title={item.TIT}
             PostingTime={item.CRE_DAT}
             postLike={item.LIKE_CNT}

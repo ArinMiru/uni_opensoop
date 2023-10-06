@@ -109,12 +109,17 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
             paddingHorizontal: deviceWidth * 0.06,
           }}
         >
-          <View style={{ flex: 1, flexDirection: "row" }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+            }}
+          >
             <Text style={[textStyle.regular10, { color: "#1E232C" }]}>
               {Title}
             </Text>
             {!isContentExpanded &&
-              renderFooter(() => setContentExpanded(true), "더보기")}
+              renderFooter(() => setContentExpanded(true), "...더보기")}
           </View>
         </View>
       </ScrollView>
@@ -126,24 +131,28 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
               renderFooter(() => setContentExpanded(false), "간략히")
             }
             renderRevealedFooter={() =>
-              renderFooter(() => setContentExpanded(true), "더보기")
+              renderFooter(() => setContentExpanded(true), "...더보기")
             }
           >
-            <Text style={[textStyle.regular10, { color: "#1E232C" }]}>
-              {PostContent}
-            </Text>
+            <View
+              style={{
+                paddingHorizontal: deviceWidth * 0.06,
+                paddingLeft: deviceWidth * 0.06,
+              }}
+            >
+              <Text
+                style={[
+                  textStyle.regular10,
+                  {
+                    color: "#1E232C",
+                  },
+                ]}
+              >
+                {PostContent}
+              </Text>
+            </View>
           </ReadMore>
         </ScrollView>
-      )}
-      {isContentExpanded && (
-        <TouchableOpacity
-          style={{ margin: 30, alignSelf: "center" }}
-          onPress={() => setContentExpanded(false)}
-        >
-          <Text style={[textStyle.regular10, { color: "#737373" }]}>
-            {"  "}간략히
-          </Text>
-        </TouchableOpacity>
       )}
       <View style={{ flex: 1, flexDirection: "row" }}>
         <View
