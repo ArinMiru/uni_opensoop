@@ -7,7 +7,7 @@ import { SgsListContentButton } from "../../../Components/ListCompo/SgsCompo/Sgs
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { ParamListBase } from "@react-navigation/native";
 import { DrawerActions } from "@react-navigation/native";
-import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { MenuIconEditTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 /**
  * @Dowon(김도원 생성)
  * SgsPostPage
@@ -36,10 +36,10 @@ const SgsPostPage = ({
 }) => {
   return (
     <AccountBackground>
-      <MenuTopbarStyle
+      <MenuIconEditTopbarStyle
         text="게시판"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-        onPressRegi={() => navigation.navigate("SgsPostRegiPage")}
+        onPressEdit={() => navigation.navigate("SgsPostRegiPage")}
       />
       <View
         style={{
@@ -69,7 +69,7 @@ const SgsPostPage = ({
         <SgsListContentButton
           title="비공개 게시물입니다."
           poststatus="답변 대기중"
-          onPress={() => navigation.navigate("SgsPostClkToast")}
+          onPress={() => navigation.navigate("SgsPostDetailPage")}
           // 적절한 버튼 클릭 시 함수 생성하여 color props 사용하여 색깔 변경 및 페이지 이동 구현 예정
         />
       </View>
