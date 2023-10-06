@@ -19,8 +19,6 @@ export const MenuIcon: React.FC<MenuIconProps> = ({ onPress }) => {
       style={{
         justifyContent: "center",
         alignItems: "center",
-        width: deviceWidth * 0.1,
-        marginLeft: deviceWidth * 0.04,
       }}
       onPress={onPress}
     >
