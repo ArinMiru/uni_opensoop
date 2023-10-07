@@ -73,10 +73,7 @@ export const TopbarEditButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={[
-        TopbarEditDelRegiButtonStyle.TopbarEditButtonStyle,
-        { marginRight: deviceWidth * 0.06 },
-      ]}
+      style={[TopbarEditDelRegiButtonStyle.TopbarEditButtonStyle]}
       onPress={onPress}
     >
       <Text
