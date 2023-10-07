@@ -31,8 +31,9 @@ import QstPostRegi from "../Screens/Community/QuesTion/QstPostRegi";
 import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
 import MNoticePostRegiPage from "../Screens/Home/NoTice/NoticePostRegiPage";
 import SgsPostRegiPage from "../Screens/Community/SuggeStion/SgsPostRegiPage";
-import SgsPostClkToast from "../Screens/Community/SuggeStion/SqsPostClkToast";
-
+import SgsPostDetailPage from "../Screens/Community/SuggeStion/SgsPostDetailPage";
+import FrePostRegiPage from "../Screens/Community/Free/FrePostRegiPage";
+import FrePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
 import VotePostPage from "../Screens/Home/VoTe/VotePostPage";
 import VotePostRegiPage from "../Screens/Home/VoTe/VotePostRegiPage";
 import VotePostDetailPage from "../Screens/Home/VoTe/VotePostDetailPage";
@@ -77,7 +78,9 @@ type RootStackParamList = {
   SgsPostPage: undefined;
   MNoticePostRegiPage: undefined;
   SgsPostRegiPage: undefined;
-  SgsPostClkToast: undefined;
+  SgsPostDetailPage: undefined;
+  FrePostRegiPage: undefined;
+  FrePostDetailPage: undefined;
   VotePostPage: undefined;
   VotePostRegiPage: undefined;
   VotePostDetailPage: undefined;
@@ -265,11 +268,20 @@ const StackNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="SgsPostClkToast"
-        component={SgsPostClkToast}
+        name="SgsPostDetailPage"
+        component={SgsPostDetailPage}
         options={{ headerShown: false }}
       />
-
+      <Stack.Screen
+        name="FrePostRegiPage"
+        component={FrePostRegiPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="FrePostDetailPage"
+        component={FrePostDetailPage}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="VotePostPage"
         component={VotePostPage}

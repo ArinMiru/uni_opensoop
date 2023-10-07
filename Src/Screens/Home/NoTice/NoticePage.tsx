@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, FlatList, View } from "react-native";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
-import { noticeCall } from "../../../Services/_private/EndPointApiFuntion";
+import { openBubListCall } from "../../../Services/_private/NoticeApi";
 import { NoticeData } from "../../../Utils/_private/ApiData/NoticeData";
 import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
@@ -23,7 +23,7 @@ const NoTicePage = ({
   useEffect(() => {
     // 사용자 데이터가 존재하면 공지사항 데이터를 가져옵니다.
     if (userData !== null) {
-      noticeCall(
+      openBubListCall(
         userData.LOGIN_ID,
         userData.MEMB_SC_CD,
         userData.MEMB_DEP_CD,
@@ -73,8 +73,8 @@ const NoTicePage = ({
         keyExtractor={(item) => item.CRE_SEQ.toString()} // "CRE_SEQ"를 문자열로 사용하여 고유 키로 지정
         renderItem={({ item }) => (
           <NoticePostBoxView
-            MEMB_CD={"학회장"}
-            MEMB_DEP_CD={"정보통신학과"}
+            MEMB_CD={item.TIT_NM}
+            MEMB_DEP_CD={item.MEMB_DEP_NM}
             Title={item.TIT}
             PostingTime={item.CRE_DAT}
             postLike={item.LIKE_CNT}

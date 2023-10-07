@@ -11,6 +11,7 @@ import {
   TopbarRegiButton,
 } from "./TopbarEditDelRegiButton";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
+import { deviceWidth } from "../../Utils/DeviceUtils";
 
 const userData = getUserData();
 
@@ -233,11 +234,44 @@ export const MenuIconEditTopbarStyle: React.FC<inputProps> = ({
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
-      <TouchableOpacity onPress={onPress}>
-        <MenuIcon onPress={onPress} />
-      </TouchableOpacity>
-      <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
-      <TopbarEditButton onPress={onPressEdit} />
+      <View
+        style={{
+          width: deviceWidth * 0.2,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <TouchableOpacity onPress={onPress}>
+          <MenuIcon onPress={onPress} />
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          width: deviceWidth * 0.2,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={[
+            textStyle.semibold19,
+            {
+              color: "#FFFFFF",
+            },
+          ]}
+        >
+          {text}
+        </Text>
+      </View>
+      <View
+        style={{
+          width: deviceWidth * 0.2,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <TopbarEditButton onPress={onPressEdit} />
+      </View>
     </View>
   );
 };
