@@ -34,6 +34,7 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
     // 로그인 성공 시의 처리
     // userData 객체에 데이터 저장
+    console.log(result.data);
     setUserData(result.data); // 서버에서 받은 데이터로 userData 객체 설정
   } else {
     console.log("로그인 실패");
@@ -142,10 +143,7 @@ export const MembPassFndSvc = async (MEMB_ID: string, MEMB_EM: string) => {
 /**
  * 비밀번호 찾기 인증번호 API 호출 함수
  */
-export const ChkAndCertSvc = async (
-  MEMB_ID: string,
-  CERT_SEQ: string,
-) => {
+export const ChkAndCertSvc = async (MEMB_ID: string, CERT_SEQ: string) => {
   const endpoint = "/UNI/ChkAndCertSvc";
   const data = {
     MEMB_ID,
@@ -158,68 +156,6 @@ export const ChkAndCertSvc = async (
     console.log("인증번호 일치.");
   } else {
     console.log("인증번호 불일치.");
-  }
-};
-
-/* ------------------------------------------------------------------------------- */
-
-/**
- * 공지사항 데이터 호출 서비스 함수
- * @param LOGIN_ID 사용자 아이디
- * @param MEMB_SC_CD 사용자 학과 코드
- * @param MEMB_DEP_CD 사용자 학부 코드
- * @param TIT_CD 사용자 직책 코드
- * @returns Promise<NoticeData | null>
- */
-export const noticeCall = async (
-  LOGIN_ID: string,
-  MEMB_SC_CD: string,
-  MEMB_DEP_CD: string,
-  TIT_CD: string
-): Promise<NoticeData | null> => {
-  const endpoint = "/UNI/OpenBubListSvc";
-
-  // 로그인한 사용자의 데이터 가져오기
-  const userData = getUserData();
-
-  if (userData !== null) {
-    // userData가 null이 아닌 경우에만 요청 보내기
-
-    // 고정된 값으로 설정
-    const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 공지사항 수
-    const REQ_PAGE = 1; // 요청할 페이지 번호
-
-    const data = {
-      LOGIN_ID, // 사용자 아이디
-      MEMB_SC_CD, // 사용자 학과 코드
-      MEMB_DEP_CD, // 사용자 학부 코드
-      TIT_CD, // 사용자 직책 코드
-      LIST_UNIT_CNT, // 한 페이지에 표시할 공지사항 수
-      REQ_PAGE, // 요청할 페이지 번호
-    };
-
-    try {
-      // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
-        endpoint,
-        data
-      );
-
-      if (result !== null && result.data.RSLT_CD === "00") {
-        // 서버 응답이 성공적이면 데이터를 파싱합니다.
-        const noticeData: NoticeData = parseNoticeData(result.data);
-        return noticeData; // 파싱된 데이터를 반환합니다.
-      } else {
-        console.log("공지사항 데이터 가져오기 실패");
-        return null;
-      }
-    } catch (error) {
-      console.error("오류 발생:", error);
-      return null;
-    }
-  } else {
-    console.log("데이터를 가져올 수 없습니다.");
-    return null;
   }
 };
 
@@ -294,7 +230,7 @@ export const MembCertUpd = async (CERT_SEQ: string) => {
  * @param REQ_PAGE 요청페이지정보
  * @returns Promise<FreeData | null>
  */
-export const freeCall = async (
+export const FreeBubListSvc = async (
   LOGIN_ID: string,
   MEMB_SC_CD: string,
   MEMB_DEP_CD: string,

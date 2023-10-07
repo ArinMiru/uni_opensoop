@@ -6,7 +6,8 @@ import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { FreeListIclucontnButton } from "../../../Components/ListCompo/FreCompo/FreButtonCompo";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가'
-import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { MenuIconEditTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import FrePostRegiPage from "../Free/FrePostRegiPage";
 /**
  * @Dowon(김도원 생성)
  * FrePostPage
@@ -31,10 +32,10 @@ interface ButtonProps {
 const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
-      <MenuTopbarStyle
+      <MenuIconEditTopbarStyle
         text="게시판"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-        //  onPressRegi={() => navigation.navigate("FrePostRegiPage")}
+        onPressEdit={() => navigation.navigate("FrePostRegiPage")}
       />
       <View
         style={{
@@ -61,7 +62,13 @@ const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
         }}
         // View 제거 후 FlatList로 변경
       >
-        <FreeListIclucontnButton />
+        <FreeListIclucontnButton
+          nickname="니쿠네임"
+          freposttime="0일전"
+          fretit="제목은 김도원"
+          frecont="도리도리도리도리 도원도리"
+          onPress={() => navigation.navigate("FrePostDetailPage")}
+        />
       </View>
     </AccountBackground>
   );

@@ -22,6 +22,7 @@ interface ButtonProps extends TextInputProps {
   freposttime?: string;
   fretit?: string;
   frecont?: string;
+  like?: string;
   onPress?: () => void;
 }
 
@@ -55,6 +56,7 @@ export const FreEditDelButton: React.FC<ButtonProps> = ({ children }) => (
 export const FreLikeButtton: React.FC<ButtonProps> = ({
   children,
   onPress,
+  like,
 }) => {
   return (
     <TouchableOpacity
@@ -70,9 +72,8 @@ export const FreLikeButtton: React.FC<ButtonProps> = ({
           { lineHeight: deviceHeight * 0.0155 },
         ]}
       >
-        150
+        {like}
       </Text>
-      {children}
     </TouchableOpacity>
   );
 };
@@ -86,7 +87,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <FreeListButton>
+    <FreeListButton onPress={onPress}>
       <View
         style={[
           FreButtonStyles.horizontalLine,
@@ -101,7 +102,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
           <OpenProfileIcon />
         </View>
         <Text style={[textStyle.semibold12, { color: "#4BB781", flex: 7 }]}>
-          닉네임{nickname}
+          {nickname}
         </Text>
         <Text
           style={[
@@ -113,7 +114,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
             },
           ]}
         >
-          0초전{freposttime}
+          {freposttime}
         </Text>
       </View>
 
@@ -133,7 +134,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
             },
           ]}
         >
-          제목 없음{fretit}
+          {fretit}
         </Text>
       </View>
 
@@ -155,7 +156,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
             },
           ]}
         >
-          먹이를 찾아 산기슭을 어슬렁 거리는 김도원{frecont}
+          {frecont}
         </Text>
       </View>
       {children}
