@@ -1,7 +1,3 @@
-import { sendLoginCredentials } from "../../../Services/_private/Api.config";
-import { getUserData } from "../../../Utils/_private/ApiData/UserData";
-import { AxiosResponse } from 'axios';
-
 /**
  * 질문게시판 
  * 데이터 형식, 파싱 함수, API 호출 함수 개발
@@ -52,10 +48,10 @@ export function parseQuestData(rawData: any): QuestData {
                 TIT_NM: item.TIT_NM || '',              //직함 명, 없을 시 빈 문자열
                 NICK_NM: item.NICK_NM || '',            //닉네임, 없을 시 빈 문자열
                 MEMB_ID: item.MEMB_ID || '',            //게시자ID, 없을 시 빈 문자열
-                CRE_SEQ: typeof item.CRE_SEQ === 'number' ? item.CRE_SEQ : 0,        //게시일련번호, 숫자로 변환, 없을 시 빈 문자열
+                CRE_SEQ: item.CRE_SEQ || '',            //게시일련번호, 숫자로 변환, 없을 시 빈 문자열
                 TIT: item.TIT || '',                    //제목, 없을 시 빈 문자열
                 CONT: item.CONT || '',                  //내용, 없을 시 빈 문자열
-                LIKE_CNT: typeof item.LIKE_CNT === 'number' ? item.LIKE_CNT : 0,       //좋아요건수, 숫자로 변환, 없을 시 빈 문자열
+                LIKE_CNT: item.LIKE_CNT || '',          //좋아요건수, 숫자로 변환, 없을 시 빈 문자열
                 CRE_DAT: item.CRE_DAT || '',            //게시일시, 없을 시 빈 문자열
                 ANS_FREE: [],                           //답변 정보 배열 초기화
         };
@@ -72,65 +68,3 @@ export function parseQuestData(rawData: any): QuestData {
 }
 return questData;
 }
-
-/**
- * 질문게시판 조회 API 호출 함수
- * @param MEMB_ID 
- * @param MEMB_SC_CD 
- * @param MEMB_DEP_CD
- * @param TIT_CD
- * @param LIST_UNIT_CNT
- * @param REQ_PAGE
- */
-export const QuesBubListSvc = async (
-    MEMB_ID: string, 
-    MEMB_SC_CD: string,
-    MEMB_DEP_CD: string,
-    TIT_CD: string,
-    LIST_UNIT_CNT: number,
-    REQ_PAGE: number,
-    ):Promise<QuestData | null> => {
-    const endpoint = "/UNI/QuesBubListSvc";
-    const data = {
-        MEMB_ID,
-        MEMB_SC_CD,
-        MEMB_DEP_CD,
-        TIT_CD,
-        LIST_UNIT_CNT,
-        REQ_PAGE,
-      };
-
-    //로그인 사용자의 데이터 가져오기
-    const userData = getUserData();
-
-    if (userData !== null) {
-      // userData가 null이 아닌 경우에만 요청 보내기
-  
-      // 고정된 값으로 설정
-      const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 게시글 수
-      const REQ_PAGE = 1; // 요청할 페이지 번호
-
-    try {
-        // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
-        const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
-          endpoint,
-          data
-        );
-  
-        if (result !== null && result.data.RSLT_CD === "00") {
-          // 서버 응답이 성공적이면 데이터를 파싱합니다.
-          const questData: QuestData = parseQuestData(result.data);
-          return questData; // 파싱된 데이터를 반환합니다.
-        } else {
-          console.log("질문게시판 조회 성공");
-          return null;
-        }
-      } catch (error) {
-        console.error("질문게시판 조회 중 오류 발생:", error);
-        return null;
-      }
-    } else {
-        console.log("질문게시판 조회 실패");
-        return null;
-    }
-};
