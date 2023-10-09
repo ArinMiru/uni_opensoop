@@ -23,10 +23,11 @@ export const QuesBubListSvc = async (
     MEMB_SC_CD: string,
     MEMB_DEP_CD: string,
     TIT_CD: string,
-    LIST_UNIT_CNT: number,
-    REQ_PAGE: number,
     ):Promise<QuestData | null> => {
     const endpoint = "/UNI/QuesBubListSvc";
+    // 고정된 값으로 설정
+    const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 게시글 수
+    const REQ_PAGE = 1; // 요청할 페이지 번호
     const data = {
         MEMB_ID,
         MEMB_SC_CD,
@@ -41,10 +42,7 @@ export const QuesBubListSvc = async (
 
     if (userData !== null) {
       // userData가 null이 아닌 경우에만 요청 보내기
-  
-      // 고정된 값으로 설정
-      const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 게시글 수
-      const REQ_PAGE = 1; // 요청할 페이지 번호
+
 
     try {
         // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
