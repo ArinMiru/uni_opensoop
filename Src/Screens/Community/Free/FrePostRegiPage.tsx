@@ -2,7 +2,6 @@ import React from "react";
 import { View, KeyboardAvoidingView, Text } from "react-native";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import {
   OpenFreSgsTitInputBox,
@@ -11,11 +10,15 @@ import {
 import { RegiButton } from "../../../Components/ListCompo/RegiButton";
 import { ListCategorieCompo } from "../../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { FreeListLawButton } from "../../../Components/ListCompo/FreCompo/FreButton";
+import { BackIconDelTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 
 const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
-      <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
+      <BackIconDelTopbarStyle
+        text="게시판"
+        onPress={() => navigation.goBack()}
+      />
       <View
         style={{
           flex: 1,
