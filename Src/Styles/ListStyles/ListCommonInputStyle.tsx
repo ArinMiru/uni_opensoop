@@ -37,8 +37,8 @@ export default StyleSheet.create({
   },
 
   FreeSqsCommentInputStyle: {
-    width: deviceWidth * 0.875,
-    height: deviceHeight * 0.049,
+    width: deviceWidth * 1,
+    minHeight: deviceHeight * 0.049,
     backgroundColor: "#F6F6F6",
     borderRadius: 100,
     borderColor: "#E8E8E8",
@@ -48,7 +48,7 @@ export default StyleSheet.create({
 
   FreeSqsCommentButtonStyle: {
     width: deviceWidth * 0.148,
-    height: deviceHeight * 0.039,
+    minHeight: deviceHeight * 0.039,
     backgroundColor: "#4BB781",
     borderRadius: 100,
     alignItems: "center",
