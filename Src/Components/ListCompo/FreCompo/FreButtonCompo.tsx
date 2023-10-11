@@ -22,7 +22,7 @@ interface ButtonProps extends TextInputProps {
   freposttime?: string;
   fretit?: string;
   frecont?: string;
-  like?: string;
+  like?: number;
   onPress?: () => void;
 }
 
@@ -94,23 +94,30 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
           {
             flex: 1.5,
             flexDirection: "row",
+            justifyContent: "space-between",
             alignItems: "center",
           },
         ]}
       >
-        <View style={{ flex: 0.9 }}>
+        <View>
           <OpenProfileIcon />
         </View>
-        <Text style={[textStyle.semibold12, { color: "#4BB781", flex: 7 }]}>
-          {nickname}
-        </Text>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "flex-start",
+          }}
+        >
+          <Text style={[textStyle.semibold12, { color: "#4BB781" }]}>
+            {nickname}
+          </Text>
+        </View>
         <Text
           style={[
             textStyle.regular08,
             {
               color: "#000000",
               marginTop: deviceHeight * 0.02,
-              flex: 1,
             },
           ]}
         >
@@ -120,7 +127,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
 
       <View
         style={{
-          flex: 2,
+          flex: 1.5,
           width: "100%",
           justifyContent: "center",
         }}

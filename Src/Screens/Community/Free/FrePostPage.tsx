@@ -64,7 +64,7 @@ const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <FreeListIclucontnButton
           nickname="니쿠네임"
-          freposttime="0일전"
+          freposttime="2023-10-10"
           fretit="제목은 김도원"
           frecont="도리도리도리도리 도원도리"
           onPress={() => navigation.navigate("FrePostDetailPage")}
