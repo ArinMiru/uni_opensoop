@@ -69,8 +69,6 @@ export const CommentInput: React.FC<inputProps> = ({
   onPress,
   ...props
 }) => {
-  const maxLength = text ? text.length : 0;
-
   return (
     <View
       style={{
@@ -82,7 +80,6 @@ export const CommentInput: React.FC<inputProps> = ({
       <TextInput
         style={[ListCommonInputStyle.FreeSqsCommentInputStyle]}
         placeholder={text}
-        maxLength={30}
       ></TextInput>
       <TouchableOpacity
         style={[

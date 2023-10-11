@@ -1,3 +1,4 @@
+// @jeakyoung 생성
 // 자유게시판 데이터의 전체 형식을 정의하는 FreeData 인터페이스
 export interface FreeData {
     RSLT_CD: string;                            // 결과 코드

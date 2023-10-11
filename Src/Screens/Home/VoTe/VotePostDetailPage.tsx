@@ -6,9 +6,8 @@ import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { VoteStatusButton } from "../../../Components/VoteCompo/VoteButton";
 import { VoteUnSlctButton } from "../../../Components/VoteCompo/VoteButton";
 import { VoteRegiButton } from "../../../Components/VoteCompo/VoteButton";
-import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-
+import { BackIconDelTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 /**
  * @Dowon(김도원 생성)
  * 투표 게시물 별 상세 페이지 (투표하는 페이지)
@@ -23,7 +22,11 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 const VotePostDetailPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <AccountBackground>
-      <BackIconTopbarStyle text="투표" onPress={() => navigation.goBack()} />
+      <BackIconDelTopbarStyle
+        text="투표"
+        onPressDel={() => navigation.goBack()}
+        // onPressDel={() => navigation.navigate("POPUP 창으로 변경 필요")}
+      />
 
       <View
         style={{
