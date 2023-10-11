@@ -53,7 +53,8 @@ const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
           // 적절한 버튼 클릭 시 함수 생성하여 color props 사용하여 색깔 변경 및 페이지 이동 구현 예정
         />
       </View>
-      <View
+      {/*
+       <View
         style={{
           flex: 7,
           width: deviceWidth * 1,
@@ -70,6 +71,7 @@ const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
           onPress={() => navigation.navigate("FrePostDetailPage")}
         />
       </View>
+      */}
     </AccountBackground>
   );
 };
