@@ -11,6 +11,8 @@ import { deviceWidth } from "../../../Utils/DeviceUtils";
 import NoticePostStyles from "../../../Styles/ListStyles/NoticeStyles/NoticePostStyles";
 import { OpenLikeButtton } from "./OpenButton";
 import ReadMore from "react-native-read-more-text";
+import { OpenEdtDltButton } from "../../IconCompo/OpenEdtDltIconButton";
+import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 
 interface CommonProps {
   MEMB_NM?: string;
@@ -37,6 +39,8 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
   onPress,
   children,
 }) => {
+  const userData = getUserData();
+
   const [isContentExpanded, setContentExpanded] = useState(false);
 
   const renderFooter = (handlePress: () => void, buttonText: string) => (
@@ -52,46 +56,59 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
       <ScrollView>
         <View
           style={{
-            flex: 1,
-            justifyContent: "center",
-            flexDirection: "column",
+            flexDirection: "row",
           }}
         >
-          <Text
-            style={[
-              textStyle.bold12,
-              {
-                color: "#1E232C",
-                left: deviceWidth * 0.06,
-              },
-            ]}
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              flexDirection: "column",
+            }}
           >
-            안재경{MEMB_NM}
-          </Text>
-          <View style={{ flexDirection: "row" }}>
             <Text
               style={[
-                textStyle.bold11,
+                textStyle.bold12,
                 {
-                  color: "#BDBDBD",
+                  color: "#1E232C",
                   left: deviceWidth * 0.06,
                 },
               ]}
             >
-              {MEMB_DEP_CD} {"  "}
+              {MEMB_NM}
             </Text>
-            <Text
-              style={[
-                textStyle.bold11,
-                {
-                  color: "#BDBDBD",
-                  left: deviceWidth * 0.06,
-                },
-              ]}
-            >
-              {MEMB_CD}
-            </Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text
+                style={[
+                  textStyle.bold11,
+                  {
+                    color: "#BDBDBD",
+                    left: deviceWidth * 0.06,
+                  },
+                ]}
+              >
+                {MEMB_DEP_CD} {"  "}
+              </Text>
+              <Text
+                style={[
+                  textStyle.bold11,
+                  {
+                    color: "#BDBDBD",
+                    left: deviceWidth * 0.06,
+                  },
+                ]}
+              >
+                {MEMB_CD}
+              </Text>
+            </View>
           </View>
+          {["02", "03", "05"].includes(userData?.TIT_CD || "") ? (
+            <View style={{ justifyContent: "center" }}>
+              <OpenEdtDltButton onPress={onPress} />
+            </View>
+          ) : (
+            <View></View>
+          )}
         </View>
         <View
           style={[

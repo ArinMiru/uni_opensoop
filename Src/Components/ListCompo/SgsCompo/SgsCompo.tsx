@@ -1,12 +1,10 @@
 import React from "react";
-import { TouchableOpacity, Text, View, Platform } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 import textStyle from "../../../Styles/TextStyle";
-import OpenButtonStyle from "../../../Styles/ListStyles/OpenButtonStyle";
-import { Entypo } from "@expo/vector-icons";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyles";
 import { PostProfileIcon } from "../../../Components/IconCompo/ProfileIcon";
-
+import { ScrollView } from "react-native-gesture-handler";
 interface ButtonProps {
   children?: React.ReactNode;
   text?: string;
@@ -14,9 +12,9 @@ interface ButtonProps {
   sgsposttime?: string;
   sgstit?: string;
   sgscont?: string;
-  commtnick?: string;
-  comtt?: string;
-  commtime?: string;
+  sgsansnick?: string;
+  sgsanstit?: string;
+  sgsanstime?: string;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
@@ -86,155 +84,148 @@ export const SqsPost: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <View
-      style={{
-        width: deviceWidth * 0.868,
-        height: deviceHeight * 0.174,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <ScrollView>
       <View
-        style={[
-          SgsButtonStyles.horizontalLine,
-          {
-            flex: 1.5,
-            flexDirection: "row",
-            alignItems: "center",
-          },
-        ]}
+        style={{
+          width: deviceWidth * 0.868,
+          marginLeft: deviceWidth * 0.06,
+          marginRight: deviceWidth * 0.06,
+          minHeight: deviceHeight * 0.174,
+          marginTop: deviceHeight * 0.018,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <View style={{ flex: 1 }}>
-          <PostProfileIcon />
-        </View>
         <View
-          style={{
-            flex: 1.5,
-            height: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          style={[
+            SgsButtonStyles.horizontalLine,
+            {
+              flex: 1.5,
+              flexDirection: "row",
+              alignItems: "center",
+            },
+          ]}
         >
-          <Text style={[textStyle.semibold12, { color: "#4BB781" }]}>
-            {nickname}
-          </Text>
-        </View>
-        <View
-          style={{
-            flex: 1.5,
-            justifyContent: "center",
-            height: "100%",
-          }}
-        >
-          <Text
-            style={[
-              textStyle.regular08,
-              {
-                color: "#000000",
-              },
-            ]}
+          <View>
+            <PostProfileIcon />
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
           >
-            {sgsposttime}
+            <Text style={[textStyle.semibold12, { color: "#4BB781" }]}>
+              {nickname}
+            </Text>
+            <Text
+              style={[
+                textStyle.regular08,
+                { color: "#000000" },
+                { marginLeft: deviceWidth * 0.018 },
+              ]}
+            >
+              {sgsposttime}
+            </Text>
+          </View>
+        </View>
+
+        <View
+          style={{
+            flex: 2,
+            width: "100%",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={[textStyle.semibold12, { color: "#000000" }]}>
+            {sgstit}
           </Text>
         </View>
-        <View style={{ flex: 6 }}></View>
-      </View>
-
-      <View
-        style={{
-          flex: 2,
-          width: "100%",
-          justifyContent: "center",
-        }}
-      >
-        <Text
-          style={[
-            textStyle.semibold12,
-            {
-              color: "#000000",
-            },
-          ]}
+        <View
+          style={{
+            height: "auto",
+            width: "100%",
+            marginTop: deviceHeight * 0.018,
+          }}
         >
-          {sgstit}
-        </Text>
-      </View>
-
-      <View
-        style={{
-          flex: 2,
-          width: "100%",
-          justifyContent: "center",
-        }}
-      >
-        <Text
-          style={[
-            textStyle.regular10,
-            {
-              color: "#424C43",
-            },
-          ]}
+          <Text style={[textStyle.regular10, { color: "#424C43" }]}>
+            {sgscont}
+          </Text>
+        </View>
+        {children}
+        <View
+          style={{
+            width: "100%",
+            alignItems: "flex-end",
+          }}
         >
-          {sgscont}
-        </Text>
+          <SgsDelButton onPress={onPress} />
+        </View>
       </View>
-      {children}
-      <View
-        style={{
-          width: "100%",
-          alignItems: "flex-end",
-        }}
-      >
-        <SgsDelButton />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
 export const SqsComment: React.FC<ButtonProps> = ({
-  commtnick,
-  comtt,
-  commtime,
+  sgsansnick,
+  sgsanstit,
+  sgsanstime,
   onPress,
 }) => {
   return (
-    <View
-      style={{
-        width: deviceWidth * 0.862,
-        height: deviceHeight * 0.088,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <ScrollView>
       <View
         style={{
-          width: deviceWidth * 0.862,
-          height: deviceHeight * 0.045,
-          marginTop: "2%",
           flexDirection: "row",
-          alignItems: "center",
+          width: deviceWidth * 1,
+          marginLeft: deviceWidth * 0.06,
+          minHeight: deviceHeight * 0.05,
+          marginTop: deviceHeight * 0.018,
         }}
       >
-        <View style={{ flex: 1 }}>
+        <View>
           <PostProfileIcon />
         </View>
-        <View style={{ flex: 7.5 }}>
-          <View style={{ flexDirection: "column", flex: 1 }}>
-            <Text style={[textStyle.semibold10, { color: "#00B45A" }]}>
-              {commtnick}
-            </Text>
-          </View>
-          <View style={{ flexDirection: "column", flex: 1 }}>
-            <Text style={[textStyle.medium09, { color: "#424C43" }]}>
-              {comtt}
+        <View
+          style={{
+            flexDirection: "column",
+            width: deviceWidth * 0.7,
+            marginLeft: deviceWidth * 0.018,
+            height: "auto",
+          }}
+        >
+          <Text
+            style={[
+              textStyle.semibold10,
+              { color: "#00B45A" },
+              { lineHeight: deviceHeight * 0.031 },
+            ]}
+          >
+            {sgsansnick}
+          </Text>
+          <View
+            style={{
+              height: "auto",
+              marginTop: deviceHeight * 0.006,
+            }}
+          >
+            <Text
+              style={[
+                textStyle.medium09,
+                { color: "#424C43" },
+                { lineHeight: deviceHeight * 0.031 },
+              ]}
+            >
+              {sgsanstit}
             </Text>
           </View>
         </View>
-        <View style={{ flex: 1 }}>
+        <View>
           <Text style={[textStyle.regular07, { color: "#000000" }]}>
-            {commtime}
+            {sgsanstime}
           </Text>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };

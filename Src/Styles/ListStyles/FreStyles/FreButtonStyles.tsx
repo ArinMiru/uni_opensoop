@@ -9,6 +9,7 @@ export default StyleSheet.create({
     alignItems: "center",
     width: deviceWidth * 0.85,
     height: deviceHeight * 0.17,
+    marginBottom: "5%",
     backgroundColor: "#ffffff",
     borderRadius: 11,
     borderColor: "#4BB781",

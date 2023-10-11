@@ -17,7 +17,7 @@ interface ButtonProps {
 
 /**
  * TopbarStylePlusIcon
- * Top에 있는 글을 업로드하는 Plus아이콘 임미다. (공지사항, 투표에 해당)
+ * Top에 있는 글을 업로드하는 Plus아이콘 입니다. (공지사항, 투표에 해당)
  */
 export const TopbarStylePlusIcon: React.FC<ButtonProps> = ({
   children,
@@ -26,10 +26,8 @@ export const TopbarStylePlusIcon: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity
       style={{
-        justifyContent: "center",
-        alignItems: "center",
-        width: deviceWidth * 0.1,
-        marginRight: deviceWidth * 0.06,
+        alignItems: "flex-end",
+        right: deviceWidth * 0.06,
       }}
       onPress={onPress}
     >
