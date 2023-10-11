@@ -11,6 +11,7 @@ import {
 import { RegiButton } from "../../../Components/ListCompo/RegiButton";
 import { ListCategorieCompo } from "../../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import TextStyle from "../../../Styles/TextStyle";
+import { ScrollView } from "react-native-gesture-handler";
 
 const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
@@ -18,7 +19,7 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
       <View
         style={{
-          flex: 1,
+          height: deviceWidth * 0.18,
           width: deviceWidth * 1,
           justifyContent: "center",
           alignItems: "center",
@@ -35,53 +36,54 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
 
       <View
         style={{
-          width: deviceWidth * 1,
           flex: 1,
-          justifyContent: "center",
+          width: deviceWidth * 1,
+          justifyContent: "flex-start",
           alignItems: "center",
         }}
       >
         <OpenFreSgsTitInputBox text="제목을 입력하세요"></OpenFreSgsTitInputBox>
       </View>
 
-      <KeyboardAvoidingView
+      <View
         style={{
-          flex: 3,
           width: deviceWidth * 1,
           justifyContent: "center",
           alignItems: "center",
         }}
-        behavior="padding"
-        enabled
       >
         <OpenFreSgsContInputBox text="텍스트를 입력해주세요."></OpenFreSgsContInputBox>
-      </KeyboardAvoidingView>
-      <View
-        style={{
-          flex: 1,
-          width: deviceWidth * 0.84,
-          justifyContent: "center",
-        }}
-      >
-        <Text
-          style={[TextStyle.medium09, { color: "#939393", paddingTop: "1.5%" }]}
-        >
-          {"  "}학생회 임원들께 건의하는 게시판입니다. 학과 내 생활을 더욱
-          원활하게 만드는 아이디어를 제안해주세요. 학생회 임원들을 비난하지
-          않도록 주의 부탁드립니다. 익명으로 작성되며, 자유롭게 의견을
-          남겨주세요.
-        </Text>
       </View>
       <View
         style={{
           flex: 1,
+          width: deviceWidth * 0.82,
+          justifyContent: "center",
+        }}
+      >
+        <Text
+          style={[
+            TextStyle.medium09,
+            { color: "#939393" },
+            { paddingTop: deviceWidth * 0.02 },
+            { letterSpacing: -0.3 },
+            { textAlign: "left" },
+          ]}
+        >
+          학생회 임원들께 건의하는 게시판입니다. 학과 내 생활을 더욱 원활하게
+          만드는 아이디어를 제안해주세요. 학생회 임원들을 비난하지 않도록 주의
+          부탁드립니다. 익명으로 작성되며, 자유롭게 의견을 남겨주세요.
+        </Text>
+      </View>
+      <View
+        style={{
+          flex: 2,
           justifyContent: "center",
           alignItems: "center",
         }}
       >
         <RegiButton text="등록하기"></RegiButton>
       </View>
-      <View style={{ flex: 1, backgroundColor: "black" }}></View>
     </AccountBackground>
   );
 };

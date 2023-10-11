@@ -5,12 +5,13 @@ import { FlatList, View } from "react-native";
 import { FreeBubListCall } from "../../../Services/_private/FreeApi";
 import { ListCategorieCompo } from "../../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { FreeListIclucontnButton } from "../../../Components/ListCompo/FreCompo/FreButtonCompo";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가'
 import { MenuIconEditTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import FrePostRegiPage from "../Free/FrePostRegiPage";
+import { ScrollView } from "react-native-gesture-handler";
 /**
  * @Dowon(김도원 생성)
  * FrePostPage
@@ -27,8 +28,7 @@ import FrePostRegiPage from "../Free/FrePostRegiPage";
  * @jeakyoung(안재경) API 생성 함
  */
 
-  // 사용자 데이터와 자유게시판 데이터 상태를 정의합니다.
-  
+// 사용자 데이터와 자유게시판 데이터 상태를 정의합니다.
 
 interface ButtonProps {
   color: string;
@@ -37,7 +37,7 @@ interface ButtonProps {
 
 const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData(); // 현재 사용자 데이터
-  const [freeData, setFreeData] = useState<FreeData | null>(null); // 공지사항 데이터
+  const [freeData, setFreeData] = useState<FreeData | null>(null); // 자유게시판 데이터
 
   // 컴포넌트가 렌더링될 때 한 번만 실행되는 부분입니다.
   useEffect(() => {
@@ -68,8 +68,8 @@ const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
       />
       <View
         style={{
-          flex: 1,
           width: deviceWidth * 1,
+          height: deviceHeight * 0.1,
           justifyContent: "center",
           alignItems: "center",
           alignContent: "center",
@@ -82,18 +82,19 @@ const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
           // 적절한 버튼 클릭 시 함수 생성하여 color props 사용하여 색깔 변경 및 페이지 이동 구현 예정
         />
       </View>
-      <FlatList data={freeData?.FREE_BUB}
-      keyExtractor={(item) => item.CRE_SEQ.toString()}
-      renderItem={({item}) => (<FreeListIclucontnButton
-        nickname={item.NICK_NM}
-        freposttime={item.CRE_DAT}
-        fretit={item.TIT}
-        frecont={item.CONT}
-        onPress={() => navigation.navigate("FrePostDetailPage")}
-      />)}
-      
-        
-     />
+      <FlatList
+        data={freeData?.FREE_BUB}
+        keyExtractor={(item) => item.CRE_SEQ.toString()}
+        renderItem={({ item }) => (
+          <FreeListIclucontnButton
+            nickname={item.NICK_NM}
+            freposttime={item.CRE_DAT}
+            fretit={item.TIT}
+            frecont={item.CONT}
+            onPress={() => navigation.navigate("FrePostDetailPage")}
+          />
+        )}
+      />
     </AccountBackground>
   );
 };
