@@ -21,7 +21,10 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   const handleLogin = async () => {
     const result = await loginUser(LOGIN_ID, LOGIN_PASS);
 
-    if (getUserData()?.RSLT_CD === "00") {
+    // getUserData 함수를 호출하여 사용자 정보를 가져옴
+    const userData = getUserData();
+
+    if (userData?.RSLT_CD === "00") {
       navigation.navigate("DrawerNavigator");
     }
   };

@@ -2,12 +2,6 @@ import { sendLoginCredentials } from "./Api.config";
 import { setUserData } from "../../Utils/_private/ApiData/UserData";
 import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
-import { getUserData } from "../../Utils/_private/ApiData/UserData";
-import {
-  parseNoticeData,
-  NoticeData,
-} from "../../Utils/_private/ApiData/NoticeData";
-import { parseFreeData, FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { RegiDataType } from "../../Utils/_private/RegiData/RegiUserData";
 import {
   SchlSrchData,
@@ -34,7 +28,6 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
     // 로그인 성공 시의 처리
     // userData 객체에 데이터 저장
-    console.log(result.data);
     setUserData(result.data); // 서버에서 받은 데이터로 userData 객체 설정
   } else {
     console.log("로그인 실패");
@@ -80,6 +73,7 @@ export const idCheckpoint = async (MEMB_ID: string) => {
 /* ------------------------------------------------------------------------------- */
 
 /**
+ * @jeakyoung 생성
  * 닉네임 중복체크 API 호출 함수
  * @param NICK_NM
  */
@@ -201,6 +195,7 @@ export const SchlSrchCall = async (
 /* ------------------------------------------------------------------------------- */
 
 /**
+ * @jeakyoung 생성
  * 대학교 인증 API 호출 함수
  * @param CERT_SEQ
  */
@@ -215,70 +210,6 @@ export const MembCertUpd = async (CERT_SEQ: string) => {
     console.log("통신 성공");
   } else {
     console.log("통신 실패");
-  }
-};
-
-/* ------------------------------------------------------------------------------- */
-
-/**
- * 자유게시판 데이터 호출 서비스 함수
- * @param LOGIN_ID 사용자 아이디
- * @param MEMB_SC_CD 사용자 학과 코드
- * @param MEMB_DEP_CD 사용자 학부 코드
- * @param TIT_CD 사용자 직책 코드
- * @param LIST_UNIT_CNT 리스트 단위건수
- * @param REQ_PAGE 요청페이지정보
- * @returns Promise<FreeData | null>
- */
-export const FreeBubListSvc = async (
-  LOGIN_ID: string,
-  MEMB_SC_CD: string,
-  MEMB_DEP_CD: string,
-  TIT_CD: string
-): Promise<FreeData | null> => {
-  const endpoint = "/UNI/FreeBubListSvc";
-
-  // 로그인한 사용자의 데이터 가져오기
-  const userData = getUserData();
-
-  if (userData !== null) {
-    // userData가 null이 아닌 경우에만 요청 보내기
-
-    // 고정된 값으로 설정
-    const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 게시글 수
-    const REQ_PAGE = 1; // 요청할 페이지 번호
-
-    const data = {
-      LOGIN_ID, // 사용자 아이디
-      MEMB_SC_CD, // 사용자 학과 코드
-      MEMB_DEP_CD, // 사용자 학부 코드
-      TIT_CD, // 사용자 직책 코드
-      LIST_UNIT_CNT, // 한 페이지에 표시할 게시글 수
-      REQ_PAGE, // 요청할 페이지 번호
-    };
-
-    try {
-      // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
-        endpoint,
-        data
-      );
-
-      if (result !== null && result.data.RSLT_CD === "00") {
-        // 서버 응답이 성공적이면 데이터를 파싱합니다.
-        const freeData: FreeData = parseFreeData(result.data);
-        return freeData; // 파싱된 데이터를 반환합니다.
-      } else {
-        console.log("자유게시판 데이터 가져오기 실패");
-        return null;
-      }
-    } catch (error) {
-      console.error("오류 발생:", error);
-      return null;
-    }
-  } else {
-    console.log("데이터를 가져올 수 없습니다.");
-    return null;
   }
 };
 

@@ -48,6 +48,7 @@ export const ListCategorieCompo: React.FC<ButtonProps> = ({
         marginRight: deviceWidth * 0.14,
         width: deviceWidth * 0.7,
         justifyContent: "space-between",
+        alignContent: "center",
         alignItems: "center",
       }}
     >
