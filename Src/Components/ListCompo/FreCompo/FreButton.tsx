@@ -85,20 +85,22 @@ export const FreeListLawButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity style={OpenButtonStyle.PhotoLawStyle} onPress={onPress}>
-      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>
-        커뮤니티 이용규칙 보기
-      </Text>
-      <Entypo
-        style={{
-          marginLeft: deviceWidth * 0.01,
-          marginRight: deviceWidth * 0.02,
-        }}
-        name="chevron-right"
-        size={deviceWidth * 0.03}
-        color="#fff"
-      />
-      {children}
+    <TouchableOpacity style={OpenButtonStyle.LawStyle} onPress={onPress}>
+      <View>
+        <Text
+          style={[
+            textStyle.semibold08,
+            { color: "#ffffff" },
+            { marginLeft: deviceWidth * 0.073 },
+          ]}
+        >
+          커뮤니티 이용규칙
+        </Text>
+      </View>
+      <View style={{ marginRight: deviceWidth * 0.03 }}>
+        <Entypo name="chevron-right" size={deviceWidth * 0.03} color="#fff" />
+        {children}
+      </View>
     </TouchableOpacity>
   );
 };

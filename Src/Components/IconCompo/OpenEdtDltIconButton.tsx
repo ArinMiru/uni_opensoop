@@ -25,6 +25,7 @@ export const OpenEdtDltButton: React.FC<ButtonProps> = ({
       style={{
         justifyContent: "center",
         alignItems: "center",
+        marginRight: deviceWidth * 0.06,
       }}
       onPress={onPress}
     >

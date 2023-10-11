@@ -13,8 +13,6 @@ import {
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { deviceWidth } from "../../Utils/DeviceUtils";
 
-const userData = getUserData();
-
 //프로퍼티 타입 정의
 interface inputProps {
   children?: React.ReactNode; //리액트로 타입 명시
@@ -56,6 +54,7 @@ export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
   onPress,
   onPressRegi,
 }) => {
+  const userData = getUserData();
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
@@ -66,16 +65,24 @@ export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
       >
         <MenuIcon onPress={onPress} />
       </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+        }}
+      >
         <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
         {children}
       </View>
       {/* # 아래의 정보 처럼 사용자의 직함 코드를 이용하여 조건부로 렌더링 할 것. # */}
       {/* 02, 03, 05) 사용자 직함 코드(TIT_CD)를 이용하여 조건부 렌더링(@ArinMiru) */}
-      {["02", "03", "05"].includes(userData?.TIT_CD || "") && (
-        <TopbarStylePlusIcon onPress={onPressRegi} />
+      {["02", "03", "05"].includes(userData?.TIT_CD || "") ? (
+        <View style={{ flex: 1 }}>
+          <TopbarStylePlusIcon onPress={onPressRegi} />
+        </View>
+      ) : (
+        <View style={{ flex: 1 }}></View>
       )}
-      <View style={{ flex: 1 }}></View>
     </View>
   );
 };
@@ -83,12 +90,55 @@ export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
 /*------------------------------------------------------------*/
 
 /**
+ * 투표 페이지만 사용
  * BackIconTopbarStyle
  * BackIconDelTopbarStyle(미사용)
  * 뒤로가기 아이콘과 텍스트가 존재하는 TopbarStyle
  * 뒤로가기 + 텍스트 + X (일반사용자)
  * 뒤로가기 + 텍스트 + 삭제 (학회장, 부학회장, 관리자)
  * 투표 상세페이지 사용
+ * 뒤로가기 아이콘은 onPress를 통해 뒤로가기 기능을 수행한다.
+ * 텍스트는 뒤로가기 아이콘과 같은 라인에 존재한다.
+ * 텍스트는 문자열로 타입을 명시한다.
+ */
+export const BackIconDelTopbarStyle: React.FC<inputProps> = ({
+  children,
+  text,
+  onPress,
+  onPressDel,
+}) => {
+  const userData = getUserData();
+  // 컴포넌트의 타입을 정확하게 명시
+  return (
+    <View style={Styles.TopbarStyle}>
+      <View style={{ flex: 1 }}>
+        <TouchableOpacity onPress={onPress}>
+          <WhiteBackIconButton onPress={onPress} />
+        </TouchableOpacity>
+      </View>
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
+        {children}
+      </View>
+      {/* 02, 03, 05) 사용자 직함 코드(TIT_CD)를 이용하여 조건부 렌더링(@ArinMiru) */}
+      {["02", "03", "05"].includes(userData?.TIT_CD || "") ? (
+        <View style={{ flex: 1, alignItems: "flex-end" }}>
+          <TopbarDelButton onPress={onPressDel} />
+        </View>
+      ) : (
+        <View style={{ flex: 1 }}></View>
+      )}
+    </View>
+  );
+};
+
+/*------------------------------------------------------------*/
+
+/**
+ * BackIconDelTopbarStyle
+ * 뒤로가기 아이콘과 텍스트가 존재하는 TopbarStyle
+ * 뒤로가기 + 텍스트 + X
+ * 투표 페이지 제외 게시판 작성 페이지에서 사용
  * 뒤로가기 아이콘은 onPress를 통해 뒤로가기 기능을 수행한다.
  * 텍스트는 뒤로가기 아이콘과 같은 라인에 존재한다.
  * 텍스트는 문자열로 타입을 명시한다.
@@ -102,7 +152,7 @@ export const BackIconTopbarStyle: React.FC<inputProps> = ({
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
-      <View style={{ flex: 1, justifyContent: "center" }}>
+      <View style={{ flex: 1 }}>
         <TouchableOpacity onPress={onPress}>
           <WhiteBackIconButton onPress={onPress} />
         </TouchableOpacity>
@@ -111,11 +161,7 @@ export const BackIconTopbarStyle: React.FC<inputProps> = ({
         <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
         {children}
       </View>
-      {/* 02, 03, 05) 사용자 직함 코드(TIT_CD)를 이용하여 조건부 렌더링(@ArinMiru) */}
-      {["02", "03", "05"].includes(userData?.TIT_CD || "") && (
-        <TopbarDelButton onPress={onPressDel} />
-      )}
-      <View style={[{ flex: 1 }]}></View>
+      <View style={{ flex: 1 }}></View>
     </View>
   );
 };
@@ -193,6 +239,7 @@ export const MenuIconRegiTopbarStyle: React.FC<inputProps> = ({
   onPress,
   onPressRegi,
 }) => {
+  const userData = getUserData();
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
@@ -236,19 +283,15 @@ export const MenuIconEditTopbarStyle: React.FC<inputProps> = ({
     <View style={Styles.TopbarStyle}>
       <View
         style={{
-          width: deviceWidth * 0.2,
-          justifyContent: "center",
-          alignItems: "center",
+          flex: 1,
+          alignItems: "flex-start",
         }}
       >
-        <TouchableOpacity onPress={onPress}>
-          <MenuIcon onPress={onPress} />
-        </TouchableOpacity>
+        <MenuIcon onPress={onPress} />
       </View>
       <View
         style={{
-          width: deviceWidth * 0.2,
-          justifyContent: "center",
+          flex: 1,
           alignItems: "center",
         }}
       >
@@ -265,9 +308,9 @@ export const MenuIconEditTopbarStyle: React.FC<inputProps> = ({
       </View>
       <View
         style={{
-          width: deviceWidth * 0.2,
-          justifyContent: "center",
-          alignItems: "center",
+          flex: 1,
+          alignItems: "flex-end",
+          right: deviceWidth * 0.06,
         }}
       >
         <TopbarEditButton onPress={onPressEdit} />
