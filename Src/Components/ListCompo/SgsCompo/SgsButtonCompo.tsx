@@ -41,23 +41,15 @@ export const SgsListContentButton: React.FC<ButtonProps> = ({
       >
         <View
           style={{
-            flex: 0.6,
+            marginLeft: deviceWidth * 0.04,
+            marginRight: deviceWidth * 0.04,
             alignItems: "center",
           }}
         >
           <SgsListLockIcon />
         </View>
-        <View style={{ flex: 2 }}>
-          <Text
-            style={[
-              textStyle.semibold12,
-              {
-                color: "#424C43",
-                textAlign: "left",
-                width: "100%",
-              },
-            ]}
-          >
+        <View>
+          <Text style={[textStyle.semibold12, { color: "#424C43" }]}>
             {title}
           </Text>
         </View>
@@ -68,7 +60,7 @@ export const SgsListContentButton: React.FC<ButtonProps> = ({
               {
                 color: "#D72966",
                 textAlign: "right",
-                marginRight: deviceWidth * 0.02,
+                marginRight: deviceWidth * 0.04,
               },
             ]}
           >

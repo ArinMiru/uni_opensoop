@@ -3,7 +3,7 @@ import { View, KeyboardAvoidingView } from "react-native";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import {
   OpenFreSgsTitInputBox,
   OpenFreSgsContInputBox,
@@ -92,9 +92,11 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
       </KeyboardAvoidingView>
       <View
         style={{
-          flex: 1,
-          width: deviceWidth * 0.84,
-          justifyContent: "center",
+          flex: 2,
+          width: deviceWidth * 1,
+          marginTop: deviceHeight * 0.02,
+          marginRight: deviceWidth * 0.16,
+          justifyContent: "flex-start",
           alignItems: "flex-end",
         }}
       >
@@ -109,8 +111,8 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
 
       <View
         style={{
-          flex: 2,
-          justifyContent: "center",
+          flex: 1,
+          width: deviceWidth * 1,
           alignItems: "center",
         }}
       >

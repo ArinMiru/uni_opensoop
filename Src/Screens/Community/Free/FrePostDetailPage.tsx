@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { FreComment } from "../../../Components/ListCompo/FreCompo/FreCompo";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
@@ -11,10 +11,13 @@ import { ScrollView } from "react-native-gesture-handler";
 import { CommentInput } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
 import { KeyboardAvoidingView } from "react-native";
 import { Platform } from "react-native";
+import { getUserData } from "../../../Utils/_private/ApiData/UserData";
+import { FreeData } from "../../../Utils/_private/ApiData/FreeData";
 
 // 건의 게시판과 공통되는 화면이기 때문에 건의 게시판의 .style을 그대로 가져왔습니다.
 
 const FreePostClkToast: React.FC<ScreenProps> = ({ navigation }) => {
+  const [freeData, setFreeData] = useState<FreeData | null>(null); // 자유게시판 데이터
   return (
     <AccountBackground>
       <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
@@ -25,18 +28,9 @@ const FreePostClkToast: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <ScrollView>
           <FrePost
-            nickname="닉네임 제한 걸어"
+            nickname={"익명이"}
             fretit="해결함 닉네임 길이 제한 걸면됨"
-            frecont="해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!
-          해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!
-          해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!
-          해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!
-          해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!
-          해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!
-          해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!
-          해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!
-          해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!
-          해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!"
+            frecont="해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!"
             freposttime="0초전"
             frelike={100} // 좋아요 수 number로 받아오기
           />
@@ -47,21 +41,9 @@ const FreePostClkToast: React.FC<ScreenProps> = ({ navigation }) => {
             ]}
           ></View>
           <FreComment
-            ansnick="익명이"
-            anstit="한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에
-          한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에
-          한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에
-          한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에
-          한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에
-          한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에
-          한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에
-          한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에deviceWidth * 0.868deviceWidth * 0.868deviceWidth * 0.868deviceWidth * 0.868deviceWidth * 0.868
-          한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에deviceWidth * 0.868deviceWidth * 0.868deviceWidth * 0.868deviceWidth * 0.868deviceWidth * 0.868deviceWidth * 0.868deviceWidth * 0.868
-          한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에
-          한우를 먹고 싶나 오마0에
-          한우를 먹고 싶나 오마0에
-          한우를 먹고 싶나 오마0에"
-            anstime="10년전"
+            freansnick="익명이"
+            freanstit="한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에"
+            freanstime="10년전"
           />
           <CommentInput text="댓글을 입력하세요." />
         </ScrollView>
