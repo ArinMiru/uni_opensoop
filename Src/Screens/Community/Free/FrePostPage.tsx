@@ -53,6 +53,23 @@ const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
           // 적절한 버튼 클릭 시 함수 생성하여 color props 사용하여 색깔 변경 및 페이지 이동 구현 예정
         />
       </View>
+      <View
+        style={{
+          flex: 7,
+          width: deviceWidth * 1,
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+        // View 제거 후 FlatList로 변경
+      >
+        <FreeListIclucontnButton
+          nickname="니쿠네임"
+          freposttime="0일전"
+          fretit="제목은 김도원"
+          frecont="도리도리도리도리 도원도리"
+          onPress={() => navigation.navigate("FrePostDetailPage")}
+        />
+      </View>
     </AccountBackground>
   );
 };
