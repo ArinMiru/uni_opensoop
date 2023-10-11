@@ -1,8 +1,7 @@
 import React from "react";
-import { View, KeyboardAvoidingView, Text } from "react-native";
+import { View, KeyboardAvoidingView } from "react-native";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import {
   OpenFreSgsTitInputBox,
@@ -11,6 +10,8 @@ import {
 import { RegiButton } from "../../../Components/ListCompo/RegiButton";
 import { ListCategorieCompo } from "../../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { FreeListLawButton } from "../../../Components/ListCompo/FreCompo/FreButton";
+import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { ScrollView } from "react-native-gesture-handler";
 
 const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
@@ -18,7 +19,7 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
       <View
         style={{
-          flex: 1,
+          height: deviceWidth * 0.18,
           width: deviceWidth * 1,
           justifyContent: "center",
           alignItems: "center",
@@ -35,31 +36,28 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
 
       <View
         style={{
-          width: deviceWidth * 1,
           flex: 1,
-          justifyContent: "center",
+          width: deviceWidth * 1,
+          justifyContent: "flex-start",
           alignItems: "center",
         }}
       >
         <OpenFreSgsTitInputBox text="제목을 입력하세요"></OpenFreSgsTitInputBox>
       </View>
 
-      <KeyboardAvoidingView
+      <View
         style={{
-          flex: 3,
           width: deviceWidth * 1,
           justifyContent: "center",
           alignItems: "center",
         }}
-        behavior="padding"
-        enabled
       >
         <OpenFreSgsContInputBox text="텍스트를 입력해주세요."></OpenFreSgsContInputBox>
-      </KeyboardAvoidingView>
+      </View>
       <View
         style={{
           flex: 1,
-          width: deviceWidth * 0.84,
+          width: deviceWidth * 1,
           justifyContent: "center",
           alignItems: "flex-end",
         }}
@@ -68,14 +66,13 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       </View>
       <View
         style={{
-          flex: 1,
+          flex: 2,
           justifyContent: "center",
           alignItems: "center",
         }}
       >
         <RegiButton text="등록하기"></RegiButton>
       </View>
-      <View style={{ flex: 1, backgroundColor: "black" }}></View>
     </AccountBackground>
   );
 };

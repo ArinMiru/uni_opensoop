@@ -15,13 +15,7 @@ interface MenuIconProps {
  */
 export const MenuIcon: React.FC<MenuIconProps> = ({ onPress }) => {
   return (
-    <TouchableOpacity
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-      onPress={onPress}
-    >
+    <TouchableOpacity style={{ left: deviceWidth * 0.06 }} onPress={onPress}>
       <Feather name="menu" size={deviceWidth * 0.08} color="#ffffff" />
     </TouchableOpacity>
   );

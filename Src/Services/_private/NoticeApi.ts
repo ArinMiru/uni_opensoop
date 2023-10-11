@@ -60,38 +60,41 @@ export const openBubListCall = async (
 };
 
 export const openBubSvc = async (
-    userData: UserData, // userData 객체를 전달받도록 수정
-    CRE_SEQ: string,
-    PROC_TYPE: string,
-    TIT: string,
-    CONT: string,
-    IMAGE_INFO: string,
-    FILE_BASE64: string,
-    FILE_NM: string,
-    IMG_SEQ: string
-  ) => {
-    const endpoint = "/UNI/OpenBubSvc";
-    const data = {
-      LOGIN_ID: userData.LOGIN_ID, // userData 객체에서 필요한 값을 가져와 사용
-      PROC_TYPE,
-      CRE_SEQ,
-      MEMB_DEP_CD: userData.MEMB_DEP_CD,
-      MEMB_SC_CD: userData.MEMB_SC_CD,
-      TIT_CD: userData.TIT_CD,
-      TIT,
-      CONT,
-      IMAGE_INFO,
-      FILE_BASE64,
-      FILE_NM,
-      IMG_SEQ,
-    };
-    const result: AxiosResponse<UserData, any> | null =
-      await sendLoginCredentials(endpoint, data);
-  
-    if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
-    } else {
-      console.log("실패");
-    }
+  LOGIN_ID: string,
+  MEMB_DEP_CD: string,
+  MEMB_SC_CD: string,
+  TIT_CD: string,
+  PROC_TYPE: string,
+  TIT: string,
+  CONT: string,
+  CRE_SEQ?: number,
+  IMAGE_INFO?: string,
+  FILE_BASE64?: string,
+  FILE_NM?: string,
+  IMG_SEQ?: string
+) => {
+  const endpoint = "/UNI/OpenBubSvc";
+  const data = {
+    LOGIN_ID,
+    MEMB_DEP_CD,
+    MEMB_SC_CD,
+    TIT_CD,
+    PROC_TYPE,
+    TIT,
+    CONT,
+    IMAGE_INFO: "",
+    FILE_BASE64: "",
+    FILE_NM: "",
+    IMG_SEQ: "",
   };
-  
+  console.log(data);
+  const result: AxiosResponse<UserData, any> | null =
+    await sendLoginCredentials(endpoint, data);
+
+  if (result !== null && result.data.RSLT_CD === "00") {
+    console.log("성공");
+  } else {
+    console.log("실패");
+    console.log(result?.data);
+  }
+};
