@@ -13,8 +13,6 @@ import {
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { deviceWidth } from "../../Utils/DeviceUtils";
 
-const userData = getUserData();
-
 //프로퍼티 타입 정의
 interface inputProps {
   children?: React.ReactNode; //리액트로 타입 명시
@@ -56,6 +54,7 @@ export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
   onPress,
   onPressRegi,
 }) => {
+  const userData = getUserData();
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
@@ -108,6 +107,7 @@ export const BackIconDelTopbarStyle: React.FC<inputProps> = ({
   onPress,
   onPressDel,
 }) => {
+  const userData = getUserData();
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
@@ -239,6 +239,7 @@ export const MenuIconRegiTopbarStyle: React.FC<inputProps> = ({
   onPress,
   onPressRegi,
 }) => {
+  const userData = getUserData();
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>

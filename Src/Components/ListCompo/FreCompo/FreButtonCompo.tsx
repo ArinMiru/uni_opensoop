@@ -32,6 +32,7 @@ interface ButtonProps extends TextInputProps {
 export const FreEditDelButton: React.FC<ButtonProps> = ({ children }) => (
   <View
     style={{
+      marginTop: deviceHeight * 0.02,
       flexDirection: "row",
     }}
   >

@@ -4,7 +4,7 @@ import textStyle from "../../../Styles/TextStyle";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyles";
 import { PostProfileIcon } from "../../../Components/IconCompo/ProfileIcon";
-import { FreLikeButtton } from "../FreCompo/FreButtonCompo";
+import { FreEditDelButton, FreLikeButtton } from "../FreCompo/FreButtonCompo";
 import { ScrollView } from "react-native-gesture-handler";
 
 interface ButtonProps {
@@ -14,9 +14,9 @@ interface ButtonProps {
   fretit?: string;
   frecont?: string;
   frelike?: number;
-  ansnick?: string;
-  anstit?: string;
-  anstime?: string;
+  freansnick?: string;
+  freanstit?: string;
+  freanstime?: string;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
@@ -114,15 +114,23 @@ export const FrePost: React.FC<ButtonProps> = ({
           </Text>
         </View>
         {children}
+        <View
+          style={{
+            width: "100%",
+            alignItems: "flex-end",
+          }}
+        >
+          <FreEditDelButton onPress={onPress} />
+        </View>
       </View>
     </ScrollView>
   );
 };
 
 export const FreComment: React.FC<ButtonProps> = ({
-  ansnick,
-  anstit,
-  anstime,
+  freansnick,
+  freanstit,
+  freanstime,
   onPress,
 }) => {
   return (
@@ -154,7 +162,7 @@ export const FreComment: React.FC<ButtonProps> = ({
               { lineHeight: deviceHeight * 0.031 },
             ]}
           >
-            {ansnick}
+            {freansnick}
           </Text>
           <View
             style={{
@@ -169,13 +177,13 @@ export const FreComment: React.FC<ButtonProps> = ({
                 { lineHeight: deviceHeight * 0.031 },
               ]}
             >
-              {anstit}
+              {freanstit}
             </Text>
           </View>
         </View>
         <View>
           <Text style={[textStyle.regular07, { color: "#000000" }]}>
-            {anstime}
+            {freanstime}
           </Text>
         </View>
       </View>
