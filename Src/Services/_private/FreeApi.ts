@@ -7,8 +7,6 @@ import {
 } from "../../Utils/_private/ApiData/FreeData";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
 
-/* ------------------------------------------------------------------------------- */
-
 /**
  * @jeakyoung 생성
  * 자유게시판 데이터 호출 서비스 함수
@@ -72,13 +70,153 @@ export const FreeBubListCall = async (
     }
   };
 
+
+/* ------------------------------------------------------------------------------- */
+
+/**
+ * @jeakyoung 생성
+ * 자유게시판 답변 등록, 수정 삭제 데이터 호출 서비스 함수
+ * @param LOGIN_ID 사용자 아이디
+ * @param MEMB_SC_CD 사용자 학과 코드
+ * @param MEMB_DEP_CD 사용자 학부 코드
+ * @param TIT_CD 사용자 직책 코드
+ * @param PROC_TYPE 처리구분
+ * @param CRE_SEQ 게시 일련 번호
+ * @param ANS_SEQ 답변 일련 번호
+ * @param TIT   제목
+ * @param CONT  내용
+ * @returns Promise<FreeData | null>
+ */
+export const FreeAnsBubSvc = async (
+  LOGIN_ID: string,
+  MEMB_SC_CD: string,
+  MEMB_DEP_CD: string,
+  TIT_CD: string,
+  PROC_TYPE: string,
+  CRE_SEQ: number,
+  ANS_SEQ: number,
+  TIT: string,
+  CONT: string,
+): Promise<FreeData | null> => {
+  const endpoint = "/UNI/FreeAnsBubSvc";
+
+  // 로그인한 사용자의 데이터 가져오기
+  const userData = getUserData();
+
+  if (userData !== null) {
+    // userData가 null이 아닌 경우에만 요청 보내기
+
+    const data = {
+      LOGIN_ID, // 사용자 아이디
+      MEMB_SC_CD, // 사용자 학과 코드
+      MEMB_DEP_CD, // 사용자 학부 코드
+      TIT_CD, // 사용자 직책 코드
+      PROC_TYPE,
+      CRE_SEQ,
+      ANS_SEQ,
+      TIT,
+      CONT,
+    };
+
+    try {
+      // 서버에 자유게시판 데이터 요청을 보내고 응답을 기다립니다.
+      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+        endpoint,
+        data
+      );
+
+      if (result !== null && result.data.RSLT_CD === "00") {
+        // 서버 응답이 성공적이면 데이터를 파싱합니다.
+        const freeData: FreeData = parseFreeData(result.data);
+        return freeData; // 파싱된 데이터를 반환합니다.
+      } else {
+        console.log("자유게시판 답변 데이터 가져오기 실패");
+        return null;
+      }
+    } catch (error) {
+      console.error("오류 발생:", error);
+      return null;
+    }
+  } else {
+    console.log("데이터를 가져올 수 없습니다.");
+    return null;
+  }
+};
+
+
 /* ------------------------------------------------------------------------------- */
 
 /**
  * @jeakyoung 생성
  * 자유게시판 데이터 등록 서비스 함수
+ * PROC_TYPE 01
  */
-  export const freeBubSvc = async (
+  export const FreeBubRegi = async (
+    LOGIN_ID: string,
+    PROC_TYPE: string,
+    MEMB_SC_CD: string,
+    MEMB_DEP_CD: string,
+    TIT_CD: string,
+    TIT: string,
+    CONT: string,
+  ) => {
+    const endpoint = "/UNI/FreeBubSvc";
+    const data = {
+      LOGIN_ID,
+      PROC_TYPE,
+      MEMB_SC_CD,
+      MEMB_DEP_CD,
+      TIT_CD,
+      TIT,
+      CONT,
+    };
+
+    const result: AxiosResponse<UserData, any> | null =
+      await sendLoginCredentials(endpoint, data);
+
+    if (result !== null && result.data.RSLT_CD === "00") {
+      console.log("성공");
+    } else {
+      console.log("실패");
+    }
+  };
+ 
+  /* ------------------------------------------------------------------------------- */
+
+/**
+ * @jeakyoung 생성
+ * 자유게시판 데이터 삭제 서비스 함수
+ * PROC_TYPE 03
+ */
+  export const FreeBubDel = async (
+    userData: UserData, // userData 객체를 전달받도록 수정
+    CRE_SEQ: string,
+    PROC_TYPE: string,
+  ) => {
+    const endpoint = "/UNI/FreeBubSvc";
+    const data = {
+      LOGIN_ID: userData.LOGIN_ID, // userData 객체에서 필요한 값을 가져와 사용
+      PROC_TYPE,
+      CRE_SEQ,
+    };
+    const result: AxiosResponse<UserData, any> | null =
+      await sendLoginCredentials(endpoint, data);
+  
+    if (result !== null && result.data.RSLT_CD === "00") {
+      console.log("성공");
+    } else {
+      console.log("실패");
+    }
+  };
+ 
+  /* ------------------------------------------------------------------------------- */
+
+  /**
+ * @jeakyoung 생성
+ * 자유게시판 데이터 수정 서비스 함수
+ * PROC_TYPE 02
+ */
+  export const FreeBubEd = async (
     userData: UserData, // userData 객체를 전달받도록 수정
     CRE_SEQ: string,
     PROC_TYPE: string,
@@ -105,4 +243,5 @@ export const FreeBubListCall = async (
       console.log("실패");
     }
   };
-  
+ 
+  /* ------------------------------------------------------------------------------- */
