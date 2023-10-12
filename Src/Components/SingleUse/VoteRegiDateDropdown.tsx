@@ -10,13 +10,20 @@ import { deviceWidth, deviceHeight } from "../../Utils/DeviceUtils";
 import { Entypo } from "@expo/vector-icons";
 import TextStyle from "../../Styles/TextStyle";
 import GradeDropdownStyle from "../../Styles/DropdownStyles/GradeDropdownStyle";
+import VoteRegiDateDropdownStyle from "../../Styles/DropdownStyles/VoteRegiDateDropdownStyle";
 
 interface DropdownProps {
   onSelected?: (item: string) => void;
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({ onSelected }) => {
+export const VoteRegiDateDropDown: React.FC<DropdownProps> = ({
+  onSelected,
+}) => {
   const data = ["1학년", "2학년", "3학년", "4학년"];
+
+  const months = [...Array(12).keys()].map((i) => i + 1);
+  const dates = [...Array(31).keys()].map((i) => i + 1);
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const translateY = useRef(new Animated.Value(-30)).current;
@@ -53,9 +60,9 @@ export const Dropdown: React.FC<DropdownProps> = ({ onSelected }) => {
   };
 
   return (
-    <View style={GradeDropdownStyle.container}>
+    <View style={VoteRegiDateDropdownStyle.container}>
       <TouchableOpacity
-        style={GradeDropdownStyle.button}
+        style={VoteRegiDateDropdownStyle.button}
         onPress={handleToggleDropdown}
       >
         <View
@@ -96,16 +103,19 @@ export const Dropdown: React.FC<DropdownProps> = ({ onSelected }) => {
 
       {isOpen && (
         <Animated.View
-          style={[GradeDropdownStyle.dropdown, { transform: [{ translateY }] }]}
+          style={[
+            VoteRegiDateDropdownStyle.dropdown,
+            { transform: [{ translateY }] },
+          ]}
         >
           <ScrollView style={{ maxHeight: deviceHeight * 0.14 }}>
             {data.map((item, index) => (
               <TouchableOpacity
                 key={index}
-                style={GradeDropdownStyle.item}
+                style={VoteRegiDateDropdownStyle.item}
                 onPress={() => handleSelectItem(item)}
               >
-                <Text style={GradeDropdownStyle.itemText}>{item}</Text>
+                <Text style={VoteRegiDateDropdownStyle.itemText}>{item}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -115,4 +125,4 @@ export const Dropdown: React.FC<DropdownProps> = ({ onSelected }) => {
   );
 };
 
-export default Dropdown;
+export default VoteRegiDateDropDown;

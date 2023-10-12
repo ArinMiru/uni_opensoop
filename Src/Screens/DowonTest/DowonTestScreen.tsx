@@ -65,7 +65,7 @@ import { ViewAnnymButton } from "../../Components/VoteCompo/VoteButton";
 import VoteBoxStyle from "../../Styles/VoteStyles/VoteBoxStyle";
 import { QstContInputBox } from "../../Components/ListCompo/QstCompo/QstInputCompo";
 import { Platform } from "react-native";
-import { Dropdown } from "../../Components/SingleUse/Dropdown";
+import { GradeDropdown } from "../../Components/SingleUse/GradeDropdown";
 import { OnlyAccountButton } from "../../Components/AccountCompo/AccountButton";
 import { BlackBackIconButton } from "../../Components/IconCompo/BackIconButton";
 import textStyle from "../../Styles/TextStyle";
@@ -122,7 +122,7 @@ const DowonTestScreen = ({
         </Text>
       </View>
       <View style={{ flex: 3 }}>
-        <Dropdown onSelected={setSelectedGrade} />
+        <GradeDropdown onSelected={setSelectedGrade} />
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton
