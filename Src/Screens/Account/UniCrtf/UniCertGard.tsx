@@ -11,12 +11,7 @@ import { deviceHeight } from "../../../Utils/DeviceUtils";
 import { Dropdown } from "../../../Components/SingleUse/Dropdown";
 
 const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
-  const data = ["1학년", "2학년", "3학년", "4학년"];
-
-  const handleDropdownSelect = (selectedItem: string) => {
-    // 선택된 항목에 대한 처리 로직
-    console.log(`Selected item: ${selectedItem}`);
-  };
+  const [selectedGrade, setSelectedGrade] = useState<string | null>(null);
 
   return (
     <AccountBackground>
@@ -59,12 +54,7 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
         </Text>
       </View>
       <View style={{ flex: 3 }}>
-        <Dropdown
-          data={data}
-          onSelect={handleDropdownSelect}
-          defaultButtonText="학년"
-          rowStyle={{ borderBottomWidth: 1 }}
-        />
+        <Dropdown onSelected={setSelectedGrade} />
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton
