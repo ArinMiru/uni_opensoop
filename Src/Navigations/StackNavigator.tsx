@@ -37,6 +37,7 @@ import FrePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
 import VotePostPage from "../Screens/Home/VoTe/VotePostPage";
 import VotePostRegiPage from "../Screens/Home/VoTe/VotePostRegiPage";
 import VotePostDetailPage from "../Screens/Home/VoTe/VotePostDetailPage";
+import SchedulePage from "../Screens/Home/ScheDule/SchedulePage";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -84,6 +85,7 @@ type RootStackParamList = {
   VotePostPage: undefined;
   VotePostRegiPage: undefined;
   VotePostDetailPage: undefined;
+  SchedulPage: undefined;
 
   /**----------------------------------------------------------------------------*/
   /**----------------------------------------------------------------------------*/
@@ -297,6 +299,12 @@ const StackNavigator = () => {
       <Stack.Screen
         name="VotePostDetailPage"
         component={VotePostDetailPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="SchedulPage"
+        component={SchedulePage}
         options={{ headerShown: false }}
       />
 

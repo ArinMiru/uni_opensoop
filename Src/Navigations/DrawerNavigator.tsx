@@ -7,6 +7,7 @@ import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
 import FrePostPage from "../Screens/Community/Free/FrePostPage";
 import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
 import MVotePage from "../Screens/Home/VoTe/VotePostPage";
+import SchedulePage from "../Screens/Home/ScheDule/SchedulePage";
 import { View } from "react-native";
 import Constants from "expo-constants";
 import {
@@ -50,12 +51,12 @@ const CustomDrawerContent: React.FC<DrawerNavigatorProps> = ({
       <View
         style={{ flex: 1, justifyContent: "flex-end", alignItems: "center" }}
       >
-        <DrawerVoteButton onPress={() => navigation.navigate("공지사항")} />
+        <DrawerVoteButton onPress={() => navigation.navigate("투표")} />
       </View>
       <View
         style={{ flex: 1, justifyContent: "flex-end", alignItems: "center" }}
       >
-        <DrawerSchdlButton onPress={() => navigation.navigate("공지사항")} />
+        <DrawerSchdlButton onPress={() => navigation.navigate("일정")} />
       </View>
       <Drawerdivision text="게시판" />
 
@@ -109,6 +110,11 @@ function DrawerNavigator({ navigation }: DrawerNavigatorProps) {
         name="투표"
         component={MVotePage}
         options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+      name="일정"
+      component={SchedulePage}
+      options={{headerShown:false}}
       />
     </Drawer.Navigator>
   );
