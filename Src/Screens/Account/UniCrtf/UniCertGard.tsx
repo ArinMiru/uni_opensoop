@@ -8,7 +8,7 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
-import { Dropdown } from "../../../Components/SingleUse/Dropdown";
+import { GradeDropdown } from "../../../Components/SingleUse/GradeDropdown";
 
 const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
   const [selectedGrade, setSelectedGrade] = useState<string | null>(null);
@@ -54,7 +54,7 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
         </Text>
       </View>
       <View style={{ flex: 3 }}>
-        <Dropdown onSelected={setSelectedGrade} />
+        <GradeDropdown onSelected={setSelectedGrade} />
       </View>
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton

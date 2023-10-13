@@ -13,6 +13,7 @@ import {
 import VoteBoxStyle from "../../../Styles/VoteStyles/VoteBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
+import VoteRegiDateDropDown from "../../../Components/SingleUse/VoteRegiDateDropdown";
 /**
  * @Dowon(김도원 생성)
  * 투표 게시물 등록 페이지
@@ -106,33 +107,29 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             </Text>
           </View>
         </View>
-        <View style={{ flex: 1, alignItems: "center" }}>
-          <Text>마감기한 설정 픽커 삽입</Text>
-          {/** 마감기한 설정 픽커 삽입 필요 @ts7752 */}
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            backgroundColor: "#777777",
+          }}
+        >
+          <VoteRegiDateDropDown />
         </View>
       </View>
       <View
         style={{
-          flex: 1,
+          flex: 2,
           flexDirection: "row",
         }}
       >
-        <View
-          style={{
-            flex: 1,
-          }}
-        >
+        <View style={{ flex: 1 }}>
           <ViewDupleVoteButton />
         </View>
-        <View
-          style={{
-            flex: 1,
-          }}
-        >
+        <View style={{ flex: 1 }}>
           <ViewAnnymButton />
         </View>
       </View>
-      <View style={{ flex: 1 }}></View>
     </AccountBackground>
   );
 };

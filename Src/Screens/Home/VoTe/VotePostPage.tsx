@@ -36,7 +36,6 @@ const VotePostPage = ({
       <ViewUnvottedButton />
       <View
         style={{
-          flex: 1,
           width: deviceWidth * 1,
           justifyContent: "center",
           alignItems: "center",
@@ -53,41 +52,31 @@ const VotePostPage = ({
          * {["VG"].includes(VOT_GO_CD || "") && (
              <UnVotedListButton 
               title={voteData.VOT_TITLE} 
-              poststatus={"투표중"}
+              poststatus={"투표 중"}
               posttime={voteData.VOT_EXPR_DATE}
              />)
             ["VF"].includes(VOT_GO_CD || "") && (
               <VotedListButton
                title={voteData.VOT_TITLE}
-               poststatus={"투표종료"}
+               poststatus={"투표 종료"}
                posttime={voteData.VOT_EXPR_DATE}
               />)
             }
          */}
         {/**-------------------------------------------------------------- */}
         <UnVotedListButton
-          title={"개강총회 뒷풀이"} // 투표 게시물 제목 VOT_TITLE
-          poststatus={"미투표"} // 투표 여부 상태 VOT_GO_CD
-          posttime={"마감시간"} // 투표 게시물 마감시간 VOT_EXPR_DATE
+          title={"VOT_TITLE"} // 투표 게시물 제목 VOT_TITLE
+          poststatus={"투표 종료"} // 투표 여부 상태 VOT_GO_CD에 따른 상태 값 고정
+          posttime={"VOT_EXPR_DATE"} // 투표 게시물 마감시간 VOT_EXPR_DATE
+          onPress={() => navigation.navigate("VotePostDetailPage")}
         />
-        {/**-------------------------------------------------------------- */}
         <VotedListButton
-          title={"MT장소"} // 투표 게시물 제목 VOT_TITLE
-          poststatus={"투표완료"} // 투표 여부 상태 VOT_GO_CD
-          posttime={"마감시간"} // 투표 게시물 마감시간 VOT_EXPR_DATE
+          title={"VOT_TITLE"} // 투표 게시물 제목 VOT_TITLE
+          poststatus={"투표 중"} // 투표 여부 상태 VOT_GO_CD에 따른 상태 값 고정
+          posttime={"VOT_EXPR_DATE"} // 투표 게시물 마감시간 VOT_EXPR_DATE
+          onPress={() => navigation.navigate("VotePostDetailPage")}
         />
       </View>
-      {/**-------------------------------------------------------------- */}
-      <View
-        style={{
-          flex: 7,
-          width: deviceWidth * 1,
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}
-        //FlatList로 변경
-        // 구분선 X
-      ></View>
     </AccountBackground>
   );
 };
