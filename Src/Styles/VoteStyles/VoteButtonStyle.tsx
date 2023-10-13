@@ -115,7 +115,7 @@ export default StyleSheet.create({
    * 미투표 보기 버튼
    */
   viewUnvottedButtonStyle: {
-    width: deviceWidth * 0.265,
+    width: deviceWidth * 0.4,
     height: deviceHeight * 0.042,
     alignItems: "center",
     justifyContent: "center",
@@ -178,6 +178,7 @@ export default StyleSheet.create({
   VotedListButtonStyle: {
     width: deviceWidth * 0.862,
     height: deviceHeight * 0.093,
+    marginTop: deviceHeight * 0.03,
     alignItems: "center",
     justifyContent: "center",
     alignContent: "center",

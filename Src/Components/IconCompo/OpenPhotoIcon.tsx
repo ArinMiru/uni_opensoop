@@ -12,6 +12,7 @@ interface ButtonProps {
 
 /**
  * 공지사항에서 사용되는 사진 삭제 버튼 아이콘 입니다.
+ * X 표시가 되어있는 버튼 아이콘 입니다.
  */
 export const OpenPhotoDelIcon: React.FC<ButtonProps> = ({
   children,
