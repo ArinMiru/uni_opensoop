@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native";
@@ -20,6 +19,7 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import TextStyle from "../../../Styles/TextStyle";
+import EditDelCloseModalStyle from "../../../Styles/ModalStyles/EditDelCloseModalStyles";
 
 const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -36,6 +36,7 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
   }, []);
 
   const handleButtonPress = useCallback(() => {
+    console.log("Button pressed");
     setModalVisible(true);
     bottomSheetModalRef.current?.present();
   }, []);
@@ -54,9 +55,9 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
           snapPoints={snapPoints}
           onDismiss={handleCloseModal}
         >
-          <View style={ModalStyle.contentContainer}>
+          <View style={EditDelCloseModalStyle.contentContainer}>
             <TouchableOpacity
-              style={ModalStyle.editArea}
+              style={EditDelCloseModalStyle.editArea}
               onPress={handleEditPress}
             >
               <Text style={[TextStyle.medium14, { color: "#00A653" }]}>
@@ -64,7 +65,7 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={ModalStyle.delArea}
+              style={EditDelCloseModalStyle.delArea}
               onPress={handleDeletePress}
             >
               <Text style={[TextStyle.medium14, { color: "#F05151" }]}>
@@ -72,7 +73,7 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={ModalStyle.closeArea}
+              style={EditDelCloseModalStyle.closeArea}
               onPress={handleCloseModal}
             >
               <Text style={[TextStyle.medium14, { color: "#505050" }]}>
@@ -128,52 +129,12 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
         </View>
         {modalVisible && (
           <TouchableWithoutFeedback onPress={handleCloseModal}>
-            <View style={ModalStyle.overlay} />
+            <View style={EditDelCloseModalStyle.overlay} />
           </TouchableWithoutFeedback>
         )}
       </BottomSheetModalProvider>
     </AccountBackground>
   );
 };
-
-const ModalStyle = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
-
-  editArea: {
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    borderBottomWidth: 1,
-    borderBottomColor: "#DEDEDE",
-  },
-  delArea: {
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    borderBottomWidth: 1,
-    borderBottomColor: "#DEDEDE",
-  },
-  closeArea: {
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-    width: "100%",
-    height: "100%",
-  },
-  overlay: {
-    ...StyleSheet.absoluteFillObject, // 모달 바깥 영역을 덮도록 설정
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-});
 
 export default AccountLoginRegi;

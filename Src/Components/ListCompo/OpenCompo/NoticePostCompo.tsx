@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+import React, {
+  useState,
+  useRef,
+  useMemo,
+  useCallback,
+  useEffect,
+} from "react";
 import {
   Text,
   View,
@@ -13,6 +19,11 @@ import { OpenLikeButtton } from "./OpenButton";
 import ReadMore from "react-native-read-more-text";
 import { OpenEdtDltButton } from "../../IconCompo/OpenEdtDltIconButton";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
+import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from "@gorhom/bottom-sheet";
 
 interface CommonProps {
   MEMB_NM?: string;
@@ -50,6 +61,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
       </Text>
     </TouchableOpacity>
   );
+  const modalFunctions = ModalReuableFuction();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
