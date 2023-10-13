@@ -1,6 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import ModalScreen from "../Screens/ModalScreen/ModalScreen";
 import { StackNavigationProp } from "@react-navigation/stack";
 import AccountLogin from "../Screens/Account/SignIn/AccountLogin";
 import AccountLoginRegi from "../Screens/Account/SignIn/AccountLoginRegi";
@@ -49,7 +48,6 @@ import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
 
 type RootStackParamList = {
   //파라미터 전달 값 없음
-  ModalScreen: undefined;
   AccountLoginRegi: undefined;
   AccountLogin: undefined;
   RegiId: undefined;
@@ -135,18 +133,7 @@ const StackNavigator = () => {
         component={RegiChk}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="ModalScreen"
-        component={ModalScreen}
-        options={{
-          headerShown: false,
-          presentation: "modal",
-          cardStyle: {
-            flex: 0.2,
-            flexDirection: "column-reverse",
-          },
-        }}
-      />
+
       <Stack.Screen
         name="UniCertiEcode"
         component={UniCertiEcode}

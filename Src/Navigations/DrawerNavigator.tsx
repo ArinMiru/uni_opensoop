@@ -17,11 +17,11 @@ import {
   DrawerQstButton,
   DrawerVoteButton,
   DrawerSchdlButton,
-} from "../Components/DrawerCopmpo/DrawerButton";
+} from "../Components/DrawerCompo/DrawerButton";
 import {
   DrawerTextArea,
   Drawerdivision,
-} from "../Components/DrawerCopmpo/DrawerCompo";
+} from "../Components/DrawerCompo/DrawerCompo";
 import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
 
 // navigation의 타입을 DrawerNavigationProp로 명시적으로 지정
