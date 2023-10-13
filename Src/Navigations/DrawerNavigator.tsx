@@ -6,7 +6,7 @@ import { ParamListBase } from "@react-navigation/native";
 import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
 import FrePostPage from "../Screens/Community/Free/FrePostPage";
 import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
-import MVotePage from "../Screens/Home/VoTe/VotePostPage";
+import VotePostPage from "../Screens/Home/VoTe/VotePostPage";
 import SchedulePage from "../Screens/Home/ScheDule/SchedulePage";
 import { View } from "react-native";
 import Constants from "expo-constants";
@@ -17,11 +17,11 @@ import {
   DrawerQstButton,
   DrawerVoteButton,
   DrawerSchdlButton,
-} from "../Components/DrawerCopmpo/DrawerButton";
+} from "../Components/DrawerCompo/DrawerButton";
 import {
   DrawerTextArea,
   Drawerdivision,
-} from "../Components/DrawerCopmpo/DrawerCompo";
+} from "../Components/DrawerCompo/DrawerCompo";
 import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
 
 // navigation의 타입을 DrawerNavigationProp로 명시적으로 지정
@@ -108,13 +108,13 @@ function DrawerNavigator({ navigation }: DrawerNavigatorProps) {
       />
       <Drawer.Screen
         name="투표"
-        component={MVotePage}
+        component={VotePostPage}
         options={{ headerShown: false }}
       />
       <Drawer.Screen
-      name="일정"
-      component={SchedulePage}
-      options={{headerShown:false}}
+        name="일정"
+        component={SchedulePage}
+        options={{ headerShown: false }}
       />
     </Drawer.Navigator>
   );

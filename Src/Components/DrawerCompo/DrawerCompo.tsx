@@ -8,6 +8,7 @@ interface Textporops {
   text?: string;
 }
 
+// Drawer 메뉴에서 메뉴를 나타내는 컴포넌트
 export const DrawerTextArea: React.FC<Textporops> = ({ children }) => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -25,6 +26,7 @@ export const DrawerTextArea: React.FC<Textporops> = ({ children }) => {
   );
 };
 
+// Drawer 메뉴에서 구분선을 나타내는 컴포넌트
 export const Drawerdivision: React.FC<Textporops> = ({ children, text }) => {
   return (
     <View
