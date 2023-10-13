@@ -151,7 +151,11 @@ export const AddVoteOptionButton: React.FC<ButtonProps> = ({
 };
 
 /**
- * 투표게시판 미투표 보기 버튼
+ * 투표게시판 투표 진행 중 보기 버튼
+ * 투표 구분 코드로 투표 진행 중인 게시물 보여주는 버튼
+ * VOT_GO_CD 기준
+ * VB(투표 전), VC(투표 취소) , VF(투표 종료), VG(투표 중)
+ * 투표 종료와 투표 중만 사용 예정
  * VotePostListScreen.tsx
  */
 export const ViewUnvottedButton: React.FC<ButtonProps> = ({
@@ -162,7 +166,7 @@ export const ViewUnvottedButton: React.FC<ButtonProps> = ({
   return (
     <View
       style={{
-        flex: 1,
+        height: deviceWidth * 0.2,
         width: deviceWidth * 1,
         justifyContent: "center",
       }}
@@ -170,7 +174,7 @@ export const ViewUnvottedButton: React.FC<ButtonProps> = ({
       <TouchableOpacity
         style={[
           VoteButtonStyle.viewUnvottedButtonStyle,
-          { left: deviceWidth * 0.06 },
+          { left: deviceWidth * 0.07 },
           { flexDirection: "row" },
           { justifyContent: "center" },
           { alignItems: "center" },
@@ -181,20 +185,20 @@ export const ViewUnvottedButton: React.FC<ButtonProps> = ({
         <View
           style={{
             flex: 1,
-            alignItems: "center",
+            alignItems: "flex-start",
             justifyContent: "center",
             alignContent: "center",
+            paddingLeft: deviceWidth * 0.03,
           }}
         >
           <Text
             style={[
               textStyle.medium13,
               { color: "#212121" },
-              { left: deviceWidth * 0.01 },
               { lineHeight: deviceWidth * 0.06 },
             ]}
           >
-            미투표 보기
+            투표 진행 중
           </Text>
         </View>
         {children}
@@ -215,10 +219,11 @@ export const ViewDupleVoteButton: React.FC<ButtonProps> = ({
   return (
     <View
       style={{
+        flex: 1,
+        marginLeft: deviceWidth * 0.009,
         justifyContent: "center",
         alignContent: "center",
-        alignItems: "center",
-        flex: 1,
+        alignItems: "flex-start",
       }}
     >
       <TouchableOpacity
@@ -231,7 +236,6 @@ export const ViewDupleVoteButton: React.FC<ButtonProps> = ({
         <Entypo name="circle" size={deviceWidth * 0.05} color="#4BB781" />
         <View
           style={{
-            flex: 1,
             alignItems: "center",
             justifyContent: "center",
             alignContent: "center",
@@ -241,6 +245,7 @@ export const ViewDupleVoteButton: React.FC<ButtonProps> = ({
             style={[
               textStyle.medium13,
               { color: "#212121" },
+              { marginLeft: deviceWidth * 0.03 },
               { lineHeight: deviceWidth * 0.06 },
             ]}
           >
@@ -266,24 +271,22 @@ export const ViewAnnymButton: React.FC<ButtonProps> = ({
     <View
       style={{
         flex: 1,
+        marginLeft: deviceWidth * 0.13,
         justifyContent: "center",
         alignContent: "center",
-        alignItems: "center",
+        alignItems: "flex-start",
       }}
     >
       <TouchableOpacity
         style={[
           VoteButtonStyle.viewUnvottedButtonStyle,
           { flexDirection: "row" },
-          { justifyContent: "center" },
-          { alignItems: "center" },
         ]}
         onPress={onPress}
       >
         <Entypo name="circle" size={deviceWidth * 0.05} color="#4BB781" />
         <View
           style={{
-            flex: 0.5,
             alignItems: "center",
             justifyContent: "center",
             alignContent: "center",
@@ -293,7 +296,8 @@ export const ViewAnnymButton: React.FC<ButtonProps> = ({
             style={[
               textStyle.medium13,
               { color: "#212121" },
-              { lineHeight: deviceWidth * 0.05 },
+              { marginLeft: deviceWidth * 0.03 },
+              { lineHeight: deviceWidth * 0.06 },
             ]}
           >
             익명
@@ -345,12 +349,12 @@ export const UnVotedListButton: React.FC<ButtonProps> = ({
         >
           <View style={{ flex: 1, justifyContent: "center" }}>
             <Text style={[textStyle.regular13, { color: "#090909" }]}>
-              MT장소{title}
+              {title}
             </Text>
           </View>
           <View style={{ flex: 1, justifyContent: "center" }}>
             <Text style={[textStyle.medium10, { color: "#9E9E9E" }]}>
-              23.04.03 마감{posttime}
+              {posttime}
             </Text>
           </View>
         </View>
@@ -361,7 +365,7 @@ export const UnVotedListButton: React.FC<ButtonProps> = ({
           }}
         >
           <Text style={[textStyle.regular10, { color: "#D72966" }]}>
-            미투표{poststatus}
+            {poststatus}
           </Text>
         </View>
       </View>
@@ -410,12 +414,12 @@ export const VotedListButton: React.FC<ButtonProps> = ({
         >
           <View style={{ flex: 1, justifyContent: "center" }}>
             <Text style={[textStyle.regular13, { color: "#090909" }]}>
-              MT장소{title}
+              {title}
             </Text>
           </View>
           <View style={{ flex: 1, justifyContent: "center" }}>
             <Text style={[textStyle.medium10, { color: "#9E9E9E" }]}>
-              23.04.03 마감{posttime}
+              {posttime}
             </Text>
           </View>
         </View>
@@ -426,7 +430,7 @@ export const VotedListButton: React.FC<ButtonProps> = ({
           }}
         >
           <Text style={[textStyle.regular10, { color: "#4BB781" }]}>
-            투표완료{poststatus}
+            {poststatus}
           </Text>
         </View>
       </View>

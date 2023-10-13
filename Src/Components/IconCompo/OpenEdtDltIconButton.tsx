@@ -12,6 +12,7 @@ interface ButtonProps {
 /**
  * @ArinMiru(김도원 생성)
  * OpenEdtDltButton
+ * 공지사항 ... 아이콘 ( 관리자 권한일 때만 렌더링 )
  * OpenEdtDltButton 컴포넌트는 수정, 삭제 ModalScreen 을 렌더링하는 컴포넌트입니다.
  */
 
