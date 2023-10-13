@@ -144,8 +144,9 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
         <ScrollView>
           <ReadMore
             numberOfLines={0} // 전체 내용 보이도록 설정
-            renderTruncatedFooter={() =>
-              renderFooter(() => setContentExpanded(false), "간략히")
+            renderTruncatedFooter={
+              () => renderFooter(() => setContentExpanded(false), "간략히")
+              // @ts7752 : 삭제 요청
             }
             renderRevealedFooter={() =>
               renderFooter(() => setContentExpanded(true), "...더보기")

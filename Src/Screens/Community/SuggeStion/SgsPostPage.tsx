@@ -24,11 +24,6 @@ import { MenuIconEditTopbarStyle } from "../../../Components/AllCompo/TopbarComp
  * @jeakyoung(안재경) API 생성 예정
  */
 
-interface ButtonProps {
-  color: string;
-  onPress: () => void;
-}
-
 const SgsPostPage = ({
   navigation,
 }: {

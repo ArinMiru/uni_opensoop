@@ -42,7 +42,7 @@ const NoTicePage = ({
 
   // FlatList 항목들 사이에 구분선을 그리기 위한 함수
   const renderSeparator = () => (
-    <View style={{ height: 1, backgroundColor: "#ddd", marginVertical: 8 }} />
+    <View style={{ height: 1, backgroundColor: "#ddd", marginVertical: 4 }} />
   );
 
   /*-------------------------------------------------------------------*/
