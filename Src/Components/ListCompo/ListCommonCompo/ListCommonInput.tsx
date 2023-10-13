@@ -62,7 +62,7 @@ export const OpenFreSgsContInputBox: React.FC<inputProps> = ({
     />
   );
 };
-
+// 컴포넌트 이름 변경 AnsInput
 export const CommentInput: React.FC<inputProps> = ({
   children,
   text,

@@ -16,7 +16,7 @@ import { FreeData } from "../../../Utils/_private/ApiData/FreeData";
 
 // 건의 게시판과 공통되는 화면이기 때문에 건의 게시판의 .style을 그대로 가져왔습니다.
 
-const FreePostClkToast: React.FC<ScreenProps> = ({ navigation }) => {
+const FreePostDetailPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [freeData, setFreeData] = useState<FreeData | null>(null); // 자유게시판 데이터
   return (
     <AccountBackground>
@@ -52,4 +52,4 @@ const FreePostClkToast: React.FC<ScreenProps> = ({ navigation }) => {
   );
 };
 
-export default FreePostClkToast;
+export default FreePostDetailPage;

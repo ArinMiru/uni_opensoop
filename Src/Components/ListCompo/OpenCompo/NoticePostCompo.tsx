@@ -20,10 +20,6 @@ import ReadMore from "react-native-read-more-text";
 import { OpenEdtDltButton } from "../../IconCompo/OpenEdtDltIconButton";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
-import {
-  BottomSheetModal,
-  BottomSheetModalProvider,
-} from "@gorhom/bottom-sheet";
 
 interface CommonProps {
   MEMB_NM?: string;
@@ -156,8 +152,9 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
         <ScrollView>
           <ReadMore
             numberOfLines={0} // 전체 내용 보이도록 설정
-            renderTruncatedFooter={() =>
-              renderFooter(() => setContentExpanded(false), "간략히")
+            renderTruncatedFooter={
+              () => renderFooter(() => setContentExpanded(false), "간략히")
+              // @ts7752 : 삭제 요청
             }
             renderRevealedFooter={() =>
               renderFooter(() => setContentExpanded(true), "...더보기")

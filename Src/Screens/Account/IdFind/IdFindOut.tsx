@@ -12,7 +12,7 @@ const IdFindOut: React.FC<ScreenProps> = ({ navigation }) => {
       smalltext="확인하기"
       inputtext="아이디 출력(변경예정)" //Text OutPut
       buttontext="로그인하러 가기"
-      onPress={() => navigation.navigate("Topbartest")}
+      onPress={() => navigation.navigate("AccountLogin")}
       navigation={navigation}
     />
   );
