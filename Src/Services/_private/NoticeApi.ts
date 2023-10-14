@@ -23,7 +23,7 @@ export const openBubListCall = async (
 
     // 고정된 값으로 설정
     const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 공지사항 수
-    const REQ_PAGE = 1; // 요청할 페이지 번호
+    const REQ_PAGE = 2; // 요청할 페이지 번호
 
     const data = {
       LOGIN_ID, // 사용자 아이디
@@ -58,20 +58,25 @@ export const openBubListCall = async (
     return null;
   }
 };
-
-export const openBubSvc = async (
+/**
+ * 공지사항 게시글 등록 함수 
+ * @param LOGIN_ID 
+ * @param MEMB_DEP_CD 
+ * @param MEMB_SC_CD 
+ * @param TIT_CD 
+ * @param TIT 
+ * @param CONT 
+ * @param IMAGE_INFO 
+ * @param CRE_SEQ 
+ */
+export const openBubSvcNew = async (
   LOGIN_ID: string,
   MEMB_DEP_CD: string,
   MEMB_SC_CD: string,
   TIT_CD: string,
-  PROC_TYPE: string,
   TIT: string,
   CONT: string,
-  CRE_SEQ?: number,
-  IMAGE_INFO?: string,
-  FILE_BASE64?: string,
-  FILE_NM?: string,
-  IMG_SEQ?: string
+  IMAGE_INFO: ImageInfo[],
 ) => {
   const endpoint = "/UNI/OpenBubSvc";
   const data = {
@@ -79,13 +84,85 @@ export const openBubSvc = async (
     MEMB_DEP_CD,
     MEMB_SC_CD,
     TIT_CD,
-    PROC_TYPE,
     TIT,
     CONT,
-    IMAGE_INFO: "",
-    FILE_BASE64: "",
-    FILE_NM: "",
-    IMG_SEQ: "",
+    IMAGE_INFO,
+    PROC_TYPE: "01",
+  };
+  const result: AxiosResponse<UserData, any> | null =
+    await sendLoginCredentials(endpoint, data);
+
+  if (result !== null && result.data.RSLT_CD === "00") {
+    console.log("성공");
+  } else {
+    console.log("실패");
+    console.log(result?.data);
+  }
+};
+/**
+ * 공지사항 수정 함수 
+ * @param LOGIN_ID 
+ * @param MEMB_DEP_CD 
+ * @param MEMB_SC_CD 
+ * @param TIT_CD 
+ * @param TIT 
+ * @param CONT 
+ * @param IMAGE_INFO 
+ * @param CRE_SEQ 
+ */
+export const openBubSvcUpdate = async (
+  LOGIN_ID: string,
+  MEMB_DEP_CD: string,
+  MEMB_SC_CD: string,
+  TIT_CD: string,
+  TIT: string,
+  CONT: string,
+  IMAGE_INFO: ImageInfo[],
+  CRE_SEQ: number
+) => {
+  const endpoint = "/UNI/OpenBubSvc";
+  const data = {
+    LOGIN_ID,
+    MEMB_DEP_CD,
+    MEMB_SC_CD,
+    TIT_CD,
+    TIT,
+    CONT,
+    IMAGE_INFO,
+    CRE_SEQ,
+    PROC_TYPE: "02",
+  };
+  console.log(data);
+  const result: AxiosResponse<UserData, any> | null =
+    await sendLoginCredentials(endpoint, data);
+
+  if (result !== null && result.data.RSLT_CD === "00") {
+    console.log("성공");
+  } else {
+    console.log("실패");
+    console.log(result?.data);
+  }
+};
+/**
+ * 공지사항 삭제 함수
+ * @param LOGIN_ID 
+ * @param MEMB_DEP_CD 
+ * @param MEMB_SC_CD 
+ * @param CRE_SEQ 
+ */
+export const openBubSvcDel = async (
+  LOGIN_ID: string,
+  MEMB_DEP_CD: string,
+  MEMB_SC_CD: string,
+  CRE_SEQ?: number
+) => {
+  const endpoint = "/UNI/OpenBubSvc";
+  const data = {
+    LOGIN_ID,
+    MEMB_DEP_CD,
+    MEMB_SC_CD,
+    PROC_TYPE: "03",
+    CRE_SEQ: CRE_SEQ !== undefined ? CRE_SEQ : undefined, // CRE_SEQ가 정의된 경우에만 할당
   };
   console.log(data);
   const result: AxiosResponse<UserData, any> | null =

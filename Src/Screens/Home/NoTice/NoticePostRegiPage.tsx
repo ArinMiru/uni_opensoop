@@ -14,7 +14,7 @@ import {
 } from "../../../Components/ListCompo/OpenCompo/OpenButton";
 import { RegiButton } from "../../../Components/ListCompo/RegiButton";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
-import { openBubSvc } from "../../../Services/_private/NoticeApi";
+import { openBubSvcNew } from "../../../Services/_private/NoticeApi";
 
 /** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 
@@ -26,22 +26,51 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
 
   const handleRegiButtonPress = async () => {
     try {
+      // 필요한 데이터 가져오기
       const userData = getUserData();
 
       if (userData) {
-        // userData에서 필요한 값을 추출
-        const { LOGIN_ID, MEMB_DEP_CD, MEMB_SC_CD, TIT_CD } = userData;
+        const TIT = tit;
+        const CONT = cont;
 
-        // 여기서 사용자가 입력한 값을 서버로 전송
-        // 사용자 입력값과 userData를 사용하여 openBubSvc 호출
-        await openBubSvc(
-          LOGIN_ID,
-          MEMB_DEP_CD,
-          MEMB_SC_CD,
-          TIT_CD,
-          "01", // 아래에서 tit와 cont 값을 어떻게 설정하는지에 따라 변경할 수 있음
-          tit, // 사용자가 입력한 값으로 설정
-          cont // 사용자가 입력한 값으로 설정
+        // 사용자가 이미지를 업로드한 경우에만 이미지 정보를 구성
+        let IMAGE_INFO = [];
+
+        // 사용자가 이미지를 업로드한 경우
+
+        IMAGE_INFO = [
+          {
+            FILE_BASE64: "1. FILE_BASE64 값",
+            FILE_NM: "2. FILE_NM 값",
+            IMG_SEQ: 1,
+          },
+          {
+            FILE_BASE64: "3. FILE_BASE64 값",
+            FILE_NM: "4. FILE_NM 값",
+            IMG_SEQ: 2,
+          },
+        ];
+
+        // 데이터 객체 구성
+        const dataToSubmit = {
+          LOGIN_ID: userData.LOGIN_ID,
+          MEMB_DEP_CD: userData.MEMB_DEP_CD,
+          MEMB_SC_CD: userData.MEMB_SC_CD,
+          TIT_CD: userData.TIT_CD,
+          TIT,
+          CONT,
+          IMAGE_INFO,
+        };
+
+        // openBubSvc 함수에 데이터 전달
+        await openBubSvcNew(
+          dataToSubmit.LOGIN_ID,
+          dataToSubmit.MEMB_DEP_CD,
+          dataToSubmit.MEMB_SC_CD,
+          dataToSubmit.TIT_CD,
+          dataToSubmit.TIT,
+          dataToSubmit.CONT,
+          dataToSubmit.IMAGE_INFO
         );
 
         // 등록 후 필요한 네비게이션 이동 등의 작업 수행
