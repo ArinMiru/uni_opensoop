@@ -4,7 +4,6 @@ import {
   FlatList,
   View,
   TouchableOpacity,
-  Text,
   TouchableWithoutFeedback,
 } from "react-native";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
@@ -21,7 +20,6 @@ import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
-import TextStyle from "../../../Styles/TextStyle";
 import EditDelCloseModalStyle from "../../../Styles/ModalStyles/EditDelCloseModalStyles";
 import {
   EditModalCompo,
@@ -37,7 +35,7 @@ const NoTicePage = ({
   const modalFunctions = ModalReuableFuction();
   // 사용자 데이터와 공지사항 데이터 상태를 정의합니다.
   const userData = getUserData(); // 현재 사용자 데이터
-  const [noticeData, setNoticeData] = useState<NoticeData | null>(null); // 공지사항 데이터
+  const [sortedData, setSortedData] = useState<NoticeData | null>(null); // 정렬된 공지사항 데이터
 
   // 컴포넌트가 렌더링될 때 한 번만 실행되는 부분입니다.
   useEffect(() => {
@@ -51,14 +49,24 @@ const NoTicePage = ({
       )
         .then((data) => {
           if (data !== null) {
-            setNoticeData(data); // 가져온 데이터를 상태에 저장합니다.
+            // 데이터를 CRE_SEQ 기준으로 내림차순 정렬 예시
+            const sorted = { ...data };
+            if (sorted.OPEN_BUB) {
+              sorted.OPEN_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+            }
+            setSortedData(sorted);
           }
         })
         .catch((error) => {
           console.error("데이터 가져오기 오류:", error);
         });
     }
-  }, []); // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때만 호출됩니다.
+  }, []);
+
+  // 해당 게시글의 CRE_SEQ를 얻기 위한 함수 예시 특정 변수에 저장하는 로직을 변경 하여야 됌 아마도 Utils 디렉토리로 이동할 예정임
+  const handleItemPress = (creSeq: number) => {
+    console.log(creSeq);
+  };
 
   // FlatList 항목들 사이에 구분선을 그리기 위한 함수
   const renderSeparator = () => (
@@ -102,21 +110,24 @@ const NoTicePage = ({
         />
         {/* FlatList를 사용하여 공지사항 데이터 출력 */}
         <FlatList
-          data={noticeData?.OPEN_BUB}
-          keyExtractor={(item) => item.CRE_SEQ.toString()} // "CRE_SEQ"를 문자열로 사용하여 고유 키로 지정
+          data={sortedData?.OPEN_BUB}
+          keyExtractor={(item) => item.CRE_SEQ.toString()}
           renderItem={({ item }) => (
-            <NoticePostBoxView
-              MEMB_NM={item.MEMB_NM}
-              MEMB_CD={item.TIT_NM}
-              MEMB_DEP_CD={item.MEMB_DEP_NM}
-              Title={item.TIT}
-              PostingTime={item.CRE_DAT}
-              postLike={item.LIKE_CNT}
-              PostContent={item.CONT}
-              onPress={modalFunctions.handleButtonPress}
-            ></NoticePostBoxView>
+            <TouchableOpacity onPress={() => handleItemPress(item.CRE_SEQ)}>
+              {/* 해당 게시글의 CRE_SEQ 값을얻기 위한 예시 나중에 바텀시트 나오는 버튼 클릭 시 얻는걸로 변경하여야 됌 지금은 게시글 자체만 클릭해도 얻어 짐*/}
+              <NoticePostBoxView
+                MEMB_NM={item.MEMB_NM}
+                MEMB_CD={item.TIT_NM}
+                MEMB_DEP_CD={item.MEMB_DEP_NM}
+                Title={item.TIT}
+                PostingTime={item.CRE_DAT}
+                postLike={item.LIKE_CNT}
+                PostContent={item.CONT}
+                onPress={modalFunctions.handleButtonPress}
+              ></NoticePostBoxView>
+            </TouchableOpacity>
           )}
-          ItemSeparatorComponent={renderSeparator} // 항목 사이에 구분선 삽입
+          ItemSeparatorComponent={renderSeparator}
         />
         {modalFunctions.modalVisible && (
           <TouchableWithoutFeedback onPress={modalFunctions.handleCloseModal}>
