@@ -1,6 +1,6 @@
 // 공지사항 데이터의 전체 형식을 정의하는 NoticeData 인터페이스
 export interface NoticeData {
-  RSLT_CD: string; // 결과 코드
+  RSLT_CD?: string; // 결과 코드
   OPEN_BUB: NoticeItem[]; // 공지사항 아이템 배열
 }
 
