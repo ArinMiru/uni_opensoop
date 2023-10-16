@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, SafeAreaView,TextInputProps } from "react-native";
+import { Text, View, SafeAreaView, TextInputProps } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import BackgroundStyle from "../../Styles/BackgroundStyle";
 import { BlackBackIconButton } from "../IconCompo/BackIconButton";
@@ -18,6 +18,7 @@ interface CommonProps extends TextInputProps {
   smalltext?: string;
   buttontext?: string;
   inputtext?: string;
+  disable?: boolean;
   IconPress?: () => void;
   onPress?: () => void;
   navigation?: {
@@ -30,6 +31,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
   smalltext, // Account subheading Text
   buttontext, // Button안에 들어가는 Text
   inputtext, // 내용 작성 창에 들어가는 Text
+  disable,
   onPress,
   IconPress,
   ...props
@@ -70,7 +72,11 @@ export const RegiCommonView: React.FC<CommonProps> = ({
         <OnlyAccountInputCompoMarginTop3 text={inputtext} {...props} />
       </View>
       <View style={BackgroundStyle.accountButtonFlex}>
-        <OnlyAccountButton text={buttontext} onPress={onPress} />
+        <OnlyAccountButton
+          text={buttontext}
+          onPress={onPress}
+          disable={disable}
+        />
       </View>
       {children}
     </SafeAreaView>

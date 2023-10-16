@@ -1,4 +1,4 @@
-import { SafeAreaView } from "react-native";
+import { Keyboard, SafeAreaView, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 import styles from "../../Styles/BackgroundStyle";
 
@@ -13,6 +13,8 @@ interface BackgroundProps {
  */
 export const AccountBackground: React.FC<BackgroundProps> = ({ children }) => {
   return (
-    <SafeAreaView style={styles.AccountBackground}>{children}</SafeAreaView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.AccountBackground}>{children}</SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
