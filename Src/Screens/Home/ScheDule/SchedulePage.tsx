@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { LocaleConfig, Calendar } from "react-native-calendars";
 import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 
@@ -31,6 +31,7 @@ LocaleConfig.locales["kr"] = {
   today: "오늘",
 };
 LocaleConfig.defaultLocale = "kr";
+
 const SchedulePage = () => {
   // 월 이름 배열을 별도로 만들어 현재 월을 가져오도록 설정
   const monthNames = [
@@ -48,17 +49,26 @@ const SchedulePage = () => {
     "12월",
   ];
 
+  // 특정 날짜로 지정 (예: 10월 10일, 10월 15일)
+  const specificDates = {
+    "2023-10-10": { selected: true, marked: true, selectedColor: "red" },
+    "2023-10-15": { selected: true, marked: true, selectedColor: "red" },
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <MenuTopbarStyle text="일정" />
       <Calendar
         header={{
           visible: true,
+          format: "MM", // 이 부분을 "MM"으로 변경
           renderHeader: (date: Date) => {
             const month = monthNames[date.getMonth()];
             return month;
           },
         }}
+        markingType={"multi-dot"}
+        markedDates={specificDates}
         style={{ width: "100%", height: "50%" }}
       />
     </SafeAreaView>

@@ -1,4 +1,9 @@
-import { View } from "react-native";
+import {
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+} from "react-native";
 import React, { useState } from "react";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";

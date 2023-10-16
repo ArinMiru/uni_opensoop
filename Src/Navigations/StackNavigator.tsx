@@ -22,7 +22,6 @@ import PassFindChk from "../Screens/Account/PassFind/PassFindChk";
 import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
-import DrawerNavigator from "./DrawerNavigator";
 import NoticePostRegi from "../Screens/Home/NoTice/NoticePostRegiPage";
 import FrePostPage from "../Screens/Community/Free/FrePostPage";
 import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
@@ -37,6 +36,7 @@ import VotePostPage from "../Screens/Home/VoTe/VotePostPage";
 import VotePostRegiPage from "../Screens/Home/VoTe/VotePostRegiPage";
 import VotePostDetailPage from "../Screens/Home/VoTe/VotePostDetailPage";
 import SchedulePage from "../Screens/Home/ScheDule/SchedulePage";
+import BottomTabNavigations from "./BottomTabNavigations";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -84,6 +84,7 @@ type RootStackParamList = {
   VotePostRegiPage: undefined;
   VotePostDetailPage: undefined;
   SchedulPage: undefined;
+  BottomTabNavigations: undefined;
 
   /**----------------------------------------------------------------------------*/
   /**----------------------------------------------------------------------------*/
@@ -211,12 +212,6 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name="DrawerNavigator"
-        component={DrawerNavigator}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
         name="NoticePostRegi"
         component={NoticePostRegi}
         options={{ headerShown: false }}
@@ -292,6 +287,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="SchedulPage"
         component={SchedulePage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="BottomTabNavigations"
+        component={BottomTabNavigations}
         options={{ headerShown: false }}
       />
 

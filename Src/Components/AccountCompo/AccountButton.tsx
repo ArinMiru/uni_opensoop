@@ -11,6 +11,7 @@ interface ButtonProps {
   text?: string;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
+  disable?: boolean;
 }
 /**
  * @param param0
@@ -41,11 +42,14 @@ export const OnlyAccountButton: React.FC<ButtonProps> = ({
   children,
   text,
   onPress,
+  disable,
 }) => {
+  const buttonStyle = disable ? { opacity: 0.5 } : {};
   return (
     <TouchableOpacity
-      style={AccountButtonStyle.onlyAccountStyle}
+      style={[AccountButtonStyle.onlyAccountStyle, buttonStyle]}
       onPress={onPress}
+      disabled={disable}
     >
       <Text style={[textStyle.semibold13, { color: "#ffffff" }]}>{text}</Text>
       {children}
