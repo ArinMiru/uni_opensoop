@@ -1,12 +1,11 @@
 import React from "react";
-import { TouchableOpacity, Text, View, LogBox } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 import textStyle from "../../../Styles/TextStyle";
 import OpenButtonStyle from "../../../Styles/ListStyles/OpenButtonStyle";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { OpenPhotoDelIcon } from "../../IconCompo/OpenPhotoIcon";
-import { SafeAreaView } from "react-native-safe-area-context";
 interface ButtonProps {
   children?: React.ReactNode;
   text?: string;
