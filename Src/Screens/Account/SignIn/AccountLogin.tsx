@@ -25,7 +25,7 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
     const userData = getUserData();
 
     if (userData?.RSLT_CD === "00") {
-      navigation.navigate("DrawerNavigator");
+      navigation.navigate("BottomTabNavigations");
     }
   };
 
