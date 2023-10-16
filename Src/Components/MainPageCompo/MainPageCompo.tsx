@@ -59,7 +59,6 @@ export const MainOpenBub: React.FC<ButtonProps> = ({ children, onPress }) => {
               style={[
                 MainPageStyles.MainOpenBox,
                 { alignItems: "center" },
-                { backgroundColor: "#888888" },
                 { flexDirection: "row" },
               ]}
             >
@@ -80,12 +79,12 @@ export const MainOpenBub: React.FC<ButtonProps> = ({ children, onPress }) => {
                 >
                   <Text style={[textStyle.medium10, { color: "#121212" }]}>
                     {"[공지] 2021년 1학기 학회비 납부 안내"}
+                    {/**공지사항 제목 */}
                   </Text>
                 </View>
                 <View
                   style={{
                     flex: 1,
-                    backgroundColor: "#777777",
                     flexDirection: "column",
                     justifyContent: "flex-end",
                   }}
@@ -98,19 +97,24 @@ export const MainOpenBub: React.FC<ButtonProps> = ({ children, onPress }) => {
                   >
                     <Text style={[textStyle.bold09, { color: "#121212" }]}>
                       {"안재경"}
+                      {/**공지사항 작성자 */}
                     </Text>
                   </View>
-                  <View
-                    style={{
-                      alignItems: "flex-start",
-                      flexDirection: "row",
-                      marginLeft: deviceWidth * 0.025,
-                    }}
-                  >
-                    <Text style={[textStyle.bold08, { color: "#919191" }]}>
-                      {"정보통신학과"} {"학회장"}
-                    </Text>
-                    <MainOpenLikeStatus />
+                  <View>
+                    <View
+                      style={{
+                        alignItems: "flex-start",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        marginLeft: deviceWidth * 0.025,
+                      }}
+                    >
+                      <Text style={[textStyle.bold08, { color: "#919191" }]}>
+                        {"정보통신학과"} {"학회장"}
+                        {/**공지사항 작성자 학과, 직책 */}
+                      </Text>
+                      <MainOpenLikeStatus />
+                    </View>
                   </View>
                 </View>
               </View>
@@ -131,11 +135,65 @@ export const MainOpenBub: React.FC<ButtonProps> = ({ children, onPress }) => {
               style={[
                 MainPageStyles.MainOpenBox,
                 { alignItems: "center" },
-                { backgroundColor: "#666666" },
                 { flexDirection: "row" },
               ]}
             >
               <View style={[MainPageStyles.MainOpenPhotoBox]} />
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "flex-start",
+                    marginLeft: deviceWidth * 0.025,
+                  }}
+                >
+                  <Text style={[textStyle.medium10, { color: "#121212" }]}>
+                    {"[공지] 2021년 1학기 학회비 납부 안내"}
+                    {/**공지사항 제목 */}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <View
+                    style={{
+                      alignItems: "flex-start",
+                      marginLeft: deviceWidth * 0.025,
+                    }}
+                  >
+                    <Text style={[textStyle.bold09, { color: "#121212" }]}>
+                      {"안재경"}
+                      {/**공지사항 작성자 */}
+                    </Text>
+                  </View>
+                  <View>
+                    <View
+                      style={{
+                        alignItems: "flex-start",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        marginLeft: deviceWidth * 0.025,
+                      }}
+                    >
+                      <Text style={[textStyle.bold08, { color: "#919191" }]}>
+                        {"정보통신학과"} {"학회장"}
+                        {/**공지사항 작성자 학과, 직책 */}
+                      </Text>
+                      <MainOpenLikeStatus />
+                    </View>
+                  </View>
+                </View>
+              </View>
             </View>
           </TouchableOpacity>
         </View>
