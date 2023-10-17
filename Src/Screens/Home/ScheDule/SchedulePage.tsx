@@ -2,6 +2,8 @@ import { SafeAreaView } from "react-native";
 import React, { useState, useEffect } from "react";
 import { LocaleConfig, Calendar } from "react-native-calendars";
 import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { Background } from "../../../Components/AllCompo/Background";
+import Constants from "expo-constants";
 
 LocaleConfig.locales["kr"] = {
   monthNames: [
@@ -56,7 +58,9 @@ const SchedulePage = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView
+      style={[{ flex: 1 }, { paddingTop: Constants.statusBarHeight }]}
+    >
       <MenuTopbarStyle text="일정" />
       <Calendar
         header={{
