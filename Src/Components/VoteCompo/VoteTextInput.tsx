@@ -24,7 +24,7 @@ export const VoteInput: React.FC<inputProps> = ({
   const maxLength = text ? text.length : 0;
   return (
     <TextInput
-      placeholderTextColor="#8391A1"
+      placeholderTextColor="#BDBDBD"
       style={[Styles.VoteInputStyle, textStyle.medium13]}
       placeholder={text}
       {...props}

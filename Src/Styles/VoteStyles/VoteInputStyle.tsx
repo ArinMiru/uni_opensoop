@@ -9,14 +9,14 @@ export default StyleSheet.create({
    * 투표 선택지 만드는 Input
    */
   VoteInputStyle: {
-    width: deviceWidth * 0.75,
-    height: deviceHeight * 0.058,
+    width: deviceWidth * 0.775,
+    height: deviceHeight * 0.061,
     backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    borderRadius: 30,
-    borderColor: "#56BB89",
+    borderRadius: 5,
+    borderColor: "#BDBDBD",
     borderWidth: 1,
     paddingLeft: "5%",
     paddingRight: "5%",

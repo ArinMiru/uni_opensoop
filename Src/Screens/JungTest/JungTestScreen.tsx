@@ -2,43 +2,43 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BackgroundStyle from "../../Styles/BackgroundStyle";
 import {
-  SchdlTimeButton,
-  SchdlRegiDateButtonStyle,
-  SchdlSchdldayButton,
-  SchdlTodayButton,
-  SchdlBefoCliklEditButton,
-  SchdlAftrCliklEditButton,
-  SchdlBefoClikDelButton,
-  SchdlAftrClikDelButton,
-  SchdlRegiDateButton,
-} from "../../Components/SchdlCompo/SchdlButton";
-import {
-  SchdlEditDelButton,
-  SchdlRegiTimeButton,
-} from "../../Components/SchdlCompo/SchdlCommonCompo";
-import { SchdlVoteRegiTitInput } from "../../Components/SchdlCompo/SchdlInput";
-import {
-  ScdlEditIcon,
-  SchldDelButton,
-} from "../../Components/IconCompo/ScdlEditDelIcon";
+  VoteSlctButton,
+  VoteUnSlctButton,
+  VoteStatusPageButton,
+  VoteStatusButton,
+  VoteRegiButton,
+  AddVoteOptionButton,
+  ViewUnvottedButton,
+  ViewDupleVoteButton,
+  ViewAnnymButton,
+  UnVotedListButton,
+  VotedListButton,
+} from "../../Components/VoteCompo/VoteButton";
+import { VoteInput } from "../../Components/VoteCompo/VoteTextInput";
 
 const ListTest = () => {
   return (
     <SafeAreaView style={BackgroundStyle.AccountBackground}>
-      <SchdlTimeButton hour="00" minutes="00" />
-      <SchdlRegiDateButtonStyle />
-      <SchdlSchdldayButton today="15" />
-      <SchdlTodayButton event="20" />
-      <SchdlBefoCliklEditButton />
-      <SchdlAftrCliklEditButton />
-      <SchdlBefoClikDelButton />
-      <SchdlAftrClikDelButton />
-      <SchdlRegiDateButton date="8월 15일 (금)" />
-      <SchdlEditDelButton />
-      <SchdlRegiTimeButton />
-      <SchdlVoteRegiTitInput text="제목을 입력하세요." />
-      <ScdlEditIcon />
-      <SchldDelButton />
+      <VoteSlctButton text="김도one" />
+      <VoteUnSlctButton text="김도two" />
+      <VoteStatusPageButton text="김도three" votestatusnum="3" />
+      <VoteStatusButton />
+      <VoteRegiButton />
+      <AddVoteOptionButton />
+      <ViewUnvottedButton />
+      <ViewDupleVoteButton />
+      <ViewAnnymButton />
+      <UnVotedListButton
+        title="김도원 살인투표"
+        posttime="내일까지"
+        poststatus="투표중"
+      />
+      <VotedListButton
+        title="김도원 살인투표"
+        posttime="내일까지"
+        poststatus="투표종료"
+      />
+      <VoteInput text="내용을 입력하세요" />
     </SafeAreaView>
   );
 };
