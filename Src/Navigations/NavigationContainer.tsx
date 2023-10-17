@@ -10,4 +10,4 @@ export const NavigationContainerWrapper = () => {
   );
 };
 
-export default NavigationContainerWrapper;                    // 컴포넌트를 내보냅니다.
+export default NavigationContainerWrapper; // 컴포넌트를 내보냅니다.
