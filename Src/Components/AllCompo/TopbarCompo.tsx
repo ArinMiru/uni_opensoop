@@ -12,6 +12,7 @@ import {
 } from "./TopbarEditDelRegiButton";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { deviceWidth } from "../../Utils/DeviceUtils";
+import { Image } from "react-native";
 
 //프로퍼티 타입 정의
 interface inputProps {
@@ -34,8 +35,39 @@ interface DrawerScreenProps {
   text: string; //문자열로 타입 명시
   navigation?: any;
   onPress?: () => void;
+  onPressProfile?: () => void;
   onPressRegi?: () => void;
 }
+
+/*------------------------------------------------------------*/
+export const MainPageTopbarStyle: React.FC<DrawerScreenProps> = ({
+  children,
+  text,
+  navigation,
+  onPress,
+  onPressProfile,
+}) => {
+  // 컴포넌트의 타입을 정확하게 명시
+  return (
+    <View style={Styles.TopbarStyle}>
+      <View
+        style={{
+          flex: 1,
+        }}
+      ></View>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+        }}
+      >
+        <Text style={[textStyle.semibold19, { color: "#151515" }]}>{text}</Text>
+        {children}
+      </View>
+      <View style={{ flex: 1 }}></View>
+    </View>
+  );
+};
 
 /*------------------------------------------------------------*/
 
@@ -62,16 +94,14 @@ export const MenuTopbarStyle: React.FC<DrawerScreenProps> = ({
         style={{
           flex: 1,
         }}
-      >
-        <MenuIcon onPress={onPress} />
-      </View>
+      ></View>
       <View
         style={{
           flex: 1,
           alignItems: "center",
         }}
       >
-        <Text style={[textStyle.semibold19, { color: "#FFFFFF" }]}>{text}</Text>
+        <Text style={[textStyle.semibold19, { color: "#151515" }]}>{text}</Text>
         {children}
       </View>
       {/* # 아래의 정보 처럼 사용자의 직함 코드를 이용하여 조건부로 렌더링 할 것. # */}
