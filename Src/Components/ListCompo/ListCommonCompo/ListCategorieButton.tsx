@@ -34,7 +34,7 @@ export const FreBefoClikButton: React.FC<ButtonProps> = ({
       ]}
       onPress={onPress}
     >
-      <Text style={[textStyle.semibold10, { color: "#ffffff" }]}>{text} </Text>
+      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>{text} </Text>
       {children}
     </TouchableOpacity>
   );
@@ -54,7 +54,7 @@ export const SgsBefoClikButton: React.FC<ButtonProps> = ({
       ]}
       onPress={onPress}
     >
-      <Text style={[textStyle.semibold10, { color: "#ffffff" }]}>{text} </Text>
+      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>{text} </Text>
       {children}
     </TouchableOpacity>
   );
@@ -74,7 +74,7 @@ export const QstBefoClikButton: React.FC<ButtonProps> = ({
       ]}
       onPress={onPress}
     >
-      <Text style={[textStyle.semibold10, { color: "#ffffff" }]}>{text} </Text>
+      <Text style={[textStyle.semibold08, { color: "#ffffff" }]}>{text} </Text>
       {children}
     </TouchableOpacity>
   );

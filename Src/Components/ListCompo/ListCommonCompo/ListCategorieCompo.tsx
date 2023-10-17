@@ -45,26 +45,24 @@ export const ListCategorieCompo: React.FC<ButtonProps> = ({
       style={{
         flex: 1,
         flexDirection: "row",
-        marginRight: deviceWidth * 0.14,
-        width: deviceWidth * 0.7,
+        width: deviceWidth * 0.943,
         justifyContent: "space-between",
-        alignContent: "center",
         alignItems: "center",
       }}
     >
       <FreBefoClikButton
         text={firsttext}
-        color={selectedButton === "fre" ? "#4BB781" : "#A5DBC0"}
+        color={selectedButton === "fre" ? "#212121" : "#ECECEC"}
         onPress={() => handleButtonPress("fre")}
       />
       <SgsBefoClikButton
         text={secondtext}
-        color={selectedButton === "sgs" ? "#4BB781" : "#A5DBC0"}
+        color={selectedButton === "sgs" ? "#212121" : "#ECECEC"}
         onPress={() => handleButtonPress("sgs")}
       />
       <QstBefoClikButton
         text={thirdtext}
-        color={selectedButton === "qst" ? "#4BB781" : "#A5DBC0"}
+        color={selectedButton === "qst" ? "#212121" : "#ECECEC"}
         onPress={() => handleButtonPress("qst")}
       />
       {children}
