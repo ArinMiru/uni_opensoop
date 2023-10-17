@@ -31,6 +31,7 @@ interface CommonProps {
   PostingTime?: string;
   postLike?: number;
   onPress?: () => void;
+  likePress?: () => void;
   children?: React.ReactNode;
 }
 
@@ -44,6 +45,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
   PostingTime,
   postLike,
   onPress,
+  likePress,
   children,
 }) => {
   const userData = getUserData();
@@ -189,7 +191,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
             left: deviceWidth * 0.06,
           }}
         >
-          <OpenLikeButtton onPress={onPress} postLike={postLike} />
+          <OpenLikeButtton onPress={likePress} postLike={postLike} />
         </View>
         <View
           style={{

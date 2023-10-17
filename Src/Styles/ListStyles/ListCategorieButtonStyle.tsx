@@ -9,12 +9,12 @@ export default StyleSheet.create({
    */
 
   ListCategorieBefoButtonStyle: {
-    width: deviceWidth * 0.205,
-    height: deviceHeight * 0.045,
-    backgroundColor: "#A5DBC0",
+    width: deviceWidth * 0.296,
+    height: deviceHeight * 0.052,
+    backgroundColor: "#212121",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 100,
+    borderRadius: 5,
   },
 
   /**
@@ -26,7 +26,7 @@ export default StyleSheet.create({
   ListCategorieButtonStyle: {
     width: deviceWidth * 0.205,
     height: deviceHeight * 0.045,
-    backgroundColor: "#4BB781",
+    backgroundColor: "#ECECEC",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 100,
