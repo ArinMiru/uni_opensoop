@@ -35,7 +35,7 @@ export const VoteSlctButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity style={VoteButtonStyle.voteSlctStyle} onPress={onPress}>
-      <Text style={[textStyle.medium13, { color: "#166D41" }]}>{text} </Text>
+      <Text style={[textStyle.medium13, { color: "#A2A2A2" }]}>{text} </Text>
       {children}
     </TouchableOpacity>
   );
@@ -51,7 +51,7 @@ export const VoteUnSlctButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity style={VoteButtonStyle.voteUnSlctStyle} onPress={onPress}>
-      <Text style={[textStyle.medium13, { color: "#166D41" }]}>{text}</Text>
+      <Text style={[textStyle.medium13, { color: "#333333" }]}>{text}</Text>
       {children}
     </TouchableOpacity>
   );
@@ -75,7 +75,7 @@ export const VoteStatusPageButton: React.FC<ButtonProps> = ({
     >
       <View style={{ flex: 1 }}></View>
       <View style={{ flex: 1, alignItems: "center" }}>
-        <Text style={[textStyle.medium13, { color: "#166D41" }]}>{text}</Text>
+        <Text style={[textStyle.medium13, { color: "#333333" }]}>{text}</Text>
       </View>
       <View
         style={{
@@ -83,7 +83,7 @@ export const VoteStatusPageButton: React.FC<ButtonProps> = ({
           alignItems: "center",
         }}
       >
-        <Text style={[textStyle.medium13, { color: "#166D41" }]}>
+        <Text style={[textStyle.semibold13, { color: "#166D41" }]}>
           {votestatusnum}
           {"명"}
         </Text>
@@ -106,7 +106,7 @@ export const VoteStatusButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity style={VoteButtonStyle.voteStatusStyle} onPress={onPress}>
-      <Text style={[textStyle.regular13, { color: "#67B28A" }]}>투표현황</Text>
+      <Text style={[textStyle.medium13, { color: "#7A7A7A" }]}>투표현황</Text>
       {children}
     </TouchableOpacity>
   );
@@ -144,7 +144,7 @@ export const AddVoteOptionButton: React.FC<ButtonProps> = ({
       style={VoteButtonStyle.addVoteOptionStyle}
       onPress={onPress}
     >
-      <AntDesign name="plus" size={21} color="#FFFFFF" />
+      <AntDesign name="plus" size={21} color="#A2A2A2" />
       {children}
     </TouchableOpacity>
   );
@@ -193,12 +193,12 @@ export const ViewUnvottedButton: React.FC<ButtonProps> = ({
         >
           <Text
             style={[
-              textStyle.medium13,
-              { color: "#212121" },
+              textStyle.regular09,
+              { color: "#4BB781" },
               { lineHeight: deviceWidth * 0.06 },
             ]}
           >
-            투표 진행 중
+            투표중
           </Text>
         </View>
         {children}
@@ -243,8 +243,8 @@ export const ViewDupleVoteButton: React.FC<ButtonProps> = ({
         >
           <Text
             style={[
-              textStyle.medium13,
-              { color: "#212121" },
+              textStyle.regular11,
+              { color: "#000000" },
               { marginLeft: deviceWidth * 0.03 },
               { lineHeight: deviceWidth * 0.06 },
             ]}
@@ -294,8 +294,8 @@ export const ViewAnnymButton: React.FC<ButtonProps> = ({
         >
           <Text
             style={[
-              textStyle.medium13,
-              { color: "#212121" },
+              textStyle.regular11,
+              { color: "#000000" },
               { marginLeft: deviceWidth * 0.03 },
               { lineHeight: deviceWidth * 0.06 },
             ]}
@@ -338,9 +338,7 @@ export const UnVotedListButton: React.FC<ButtonProps> = ({
           style={{
             flex: 0.3,
           }}
-        >
-          <View style={VoteButtonStyle.VoteUnvotedColorBoxStyle}></View>
-        </View>
+        ></View>
         <View
           style={{
             flex: 3,
@@ -348,12 +346,12 @@ export const UnVotedListButton: React.FC<ButtonProps> = ({
           }}
         >
           <View style={{ flex: 1, justifyContent: "center" }}>
-            <Text style={[textStyle.regular13, { color: "#090909" }]}>
+            <Text style={[textStyle.semibold10, { color: "#090909" }]}>
               {title}
             </Text>
           </View>
           <View style={{ flex: 1, justifyContent: "center" }}>
-            <Text style={[textStyle.medium10, { color: "#9E9E9E" }]}>
+            <Text style={[textStyle.semibold08, { color: "#9E9E9E" }]}>
               {posttime}
             </Text>
           </View>
@@ -364,7 +362,7 @@ export const UnVotedListButton: React.FC<ButtonProps> = ({
             alignItems: "center",
           }}
         >
-          <Text style={[textStyle.regular10, { color: "#D72966" }]}>
+          <Text style={[textStyle.semibold08, { color: "#4BB781" }]}>
             {poststatus}
           </Text>
         </View>
@@ -403,9 +401,7 @@ export const VotedListButton: React.FC<ButtonProps> = ({
           style={{
             flex: 0.3,
           }}
-        >
-          <View style={VoteButtonStyle.VotevotedColorBoxStyle}></View>
-        </View>
+        ></View>
         <View
           style={{
             flex: 3,
@@ -413,12 +409,12 @@ export const VotedListButton: React.FC<ButtonProps> = ({
           }}
         >
           <View style={{ flex: 1, justifyContent: "center" }}>
-            <Text style={[textStyle.regular13, { color: "#090909" }]}>
+            <Text style={[textStyle.semibold10, { color: "#909090" }]}>
               {title}
             </Text>
           </View>
           <View style={{ flex: 1, justifyContent: "center" }}>
-            <Text style={[textStyle.medium10, { color: "#9E9E9E" }]}>
+            <Text style={[textStyle.semibold08, { color: "#C3C3C3" }]}>
               {posttime}
             </Text>
           </View>
@@ -429,7 +425,7 @@ export const VotedListButton: React.FC<ButtonProps> = ({
             alignItems: "center",
           }}
         >
-          <Text style={[textStyle.regular10, { color: "#4BB781" }]}>
+          <Text style={[textStyle.semibold08, { color: "#C3C3C3" }]}>
             {poststatus}
           </Text>
         </View>
