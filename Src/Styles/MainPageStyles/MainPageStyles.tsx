@@ -8,7 +8,7 @@ export default StyleSheet.create({
    */
   Background: {
     flex: 1,
-    backgroundColor: "#F8F8F8",
+    backgroundColor: "#DADADA",
     alignItems: "center",
     width: deviceWidth * 1,
     height: deviceHeight * 1,
@@ -68,15 +68,4 @@ export default StyleSheet.create({
   },
 
   /*------------------------------------------------------------------------*/
-
-  /**
-   * 메인 페이지 - 하단 메뉴 박스 스타일
-   */
-  BottomSheetBox: {
-    backgroundColor: "#FDFDFD",
-    borderTopWidth: 0.5,
-    borderTopColor: "#C3C3C3",
-    width: deviceWidth * 1,
-    height: deviceHeight * 0.0792,
-  },
 });

@@ -9,10 +9,9 @@ export default StyleSheet.create({
    * justifyContent, alignItems 참고 -> * https://joylee-developer.tistory.com/147
    */
   TopbarStyle: {
-    height: deviceHeight * 0.1,
+    height: deviceHeight * 0.0797,
     flexDirection: "row",
     width: deviceWidth * 1,
-    backgroundColor: "#4bb781" /*시그니처 Color*/,
     alignItems: "center",
     justifyContent: "space-between",
   },

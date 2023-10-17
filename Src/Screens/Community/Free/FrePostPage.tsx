@@ -68,7 +68,7 @@ const FrePostPage: React.FC<ScreenProps> = ({ navigation }) => {
       />
       <View
         style={{
-          width: deviceWidth * 1,
+          width: "100%",
           height: deviceHeight * 0.1,
           justifyContent: "center",
           alignItems: "center",

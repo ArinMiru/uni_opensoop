@@ -66,13 +66,13 @@ const VotePostPage = ({
         {/**-------------------------------------------------------------- */}
         <UnVotedListButton
           title={"VOT_TITLE"} // 투표 게시물 제목 VOT_TITLE
-          poststatus={"투표 종료"} // 투표 여부 상태 VOT_GO_CD에 따른 상태 값 고정
+          poststatus={"투표 중"} // 투표 여부 상태 VOT_GO_CD에 따른 상태 값 고정
           posttime={"VOT_EXPR_DATE"} // 투표 게시물 마감시간 VOT_EXPR_DATE
           onPress={() => navigation.navigate("VotePostDetailPage")}
         />
         <VotedListButton
           title={"VOT_TITLE"} // 투표 게시물 제목 VOT_TITLE
-          poststatus={"투표 중"} // 투표 여부 상태 VOT_GO_CD에 따른 상태 값 고정
+          poststatus={"투표 종료"} // 투표 여부 상태 VOT_GO_CD에 따른 상태 값 고정
           posttime={"VOT_EXPR_DATE"} // 투표 게시물 마감시간 VOT_EXPR_DATE
           onPress={() => navigation.navigate("VotePostDetailPage")}
         />
