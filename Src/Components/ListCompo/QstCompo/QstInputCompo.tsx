@@ -1,11 +1,9 @@
 import { View, Text, TouchableOpacity, TextInputProps } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import QstInputStyles from "../../../Styles/ListStyles/QstStyles/QstInputStyles";
 import TextStyle from "../../../Styles/TextStyle";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import QstButtonStyles from "../../../Styles/ListStyles/QstStyles/QstButtonStyles";
-import { Positions } from "react-native-calendars/src/expandableCalendar";
 
 interface TextTopProps extends TextInputProps {
   children?: React.ReactNode;
@@ -73,7 +71,11 @@ export const QstContInputBox: React.FC<TextTopProps> = ({
     <TextInput
       placeholderTextColor="#BDBDBD"
       placeholder={text}
-      style={[QstInputStyles.QstContInputBoxStyle, TextStyle.medium12]}
+      style={[
+        QstInputStyles.QstContInputBoxStyle,
+        TextStyle.medium12,
+        { height: "auto" },
+      ]}
       textAlignVertical="top"
       multiline={true}
       {...props}

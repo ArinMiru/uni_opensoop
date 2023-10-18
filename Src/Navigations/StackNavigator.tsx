@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StackNavigationProp } from "@react-navigation/stack";
+import HomePageScreen from "../Screens/Home/HomePage";
 import AccountLogin from "../Screens/Account/SignIn/AccountLogin";
 import AccountLoginRegi from "../Screens/Account/SignIn/AccountLoginRegi";
 import RegiId from "../Screens/Account/SignUp/RegiId";
@@ -23,11 +24,9 @@ import IdFindEmail from "../Screens/Account/IdFind/IdFindEmail";
 import IdFindOut from "../Screens/Account/IdFind/IdFindOut";
 import NoticePage from "../Screens/Home/NoTice/NoticePage";
 import NoticePostRegi from "../Screens/Home/NoTice/NoticePostRegiPage";
-import FrePostPage from "../Screens/Community/Free/FrePostPage";
-import QstPostPage from "../Screens/Community/QuesTion/QstPostPage";
-import QstPostRegi from "../Screens/Community/QuesTion/QstPostRegi";
-import SgsPostPage from "../Screens/Community/SuggeStion/SgsPostPage";
-import MNoticePostRegiPage from "../Screens/Home/NoTice/NoticePostRegiPage";
+import ListPostPage from "../Screens/Community/ListPostPage";
+import NoticePostRegiPage from "../Screens/Home/NoTice/NoticePostRegiPage";
+import QstPostRegiPage from "../Screens/Community/QuesTion/QstPostRegi";
 import SgsPostRegiPage from "../Screens/Community/SuggeStion/SgsPostRegiPage";
 import SgsPostDetailPage from "../Screens/Community/SuggeStion/SgsPostDetailPage";
 import FrePostRegiPage from "../Screens/Community/Free/FrePostRegiPage";
@@ -35,6 +34,7 @@ import FrePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
 import VotePostPage from "../Screens/Home/VoTe/VotePostPage";
 import VotePostRegiPage from "../Screens/Home/VoTe/VotePostRegiPage";
 import VotePostDetailPage from "../Screens/Home/VoTe/VotePostDetailPage";
+import VotePostStatusPage from "../Screens/Home/VoTe/VotePostStatusPage";
 import SchedulePage from "../Screens/Home/ScheDule/SchedulePage";
 import BottomTabNavigations from "./BottomTabNavigations";
 
@@ -50,6 +50,7 @@ type RootStackParamList = {
   //파라미터 전달 값 없음
   AccountLoginRegi: undefined;
   AccountLogin: undefined;
+  HomePageScreen: undefined;
   RegiId: undefined;
   RegiNmNic: undefined;
   RegiPass: undefined; //파라미터 전달 값 없음
@@ -71,11 +72,9 @@ type RootStackParamList = {
   NoticePage: undefined;
   DrawerNavigator: undefined;
   NoticePostRegi: undefined;
-  FrePostPage: undefined;
-  QstPostPage: undefined;
-  QstPostRegi: undefined;
-  SgsPostPage: undefined;
-  MNoticePostRegiPage: undefined;
+  ListPostPage: undefined;
+  NoticePostRegiPage: undefined;
+  QstPostRegiPage: undefined;
   SgsPostRegiPage: undefined;
   SgsPostDetailPage: undefined;
   FrePostRegiPage: undefined;
@@ -83,6 +82,7 @@ type RootStackParamList = {
   VotePostPage: undefined;
   VotePostRegiPage: undefined;
   VotePostDetailPage: undefined;
+  VotePostStatusPage: undefined;
   SchedulPage: undefined;
   BottomTabNavigations: undefined;
 
@@ -112,6 +112,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="AccountLogin"
         component={AccountLogin}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="HomePageScreen"
+        component={HomePageScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -218,34 +223,23 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name="FrePostPage"
-        component={FrePostPage}
+        name="ListPostPage"
+        component={ListPostPage}
         options={{ headerShown: false }}
       />
 
       <Stack.Screen
-        name="QstPostPage"
-        component={QstPostPage}
+        name="NoticePostRegiPage"
+        component={NoticePostRegiPage}
         options={{ headerShown: false }}
       />
 
       <Stack.Screen
-        name="QstPostRegi"
-        component={QstPostRegi}
+        name="QstPostRegiPage"
+        component={QstPostRegiPage}
         options={{ headerShown: false }}
       />
 
-      <Stack.Screen
-        name="SgsPostPage"
-        component={SgsPostPage}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="MNoticePostRegiPage"
-        component={MNoticePostRegiPage}
-        options={{ headerShown: false }}
-      />
       <Stack.Screen
         name="SgsPostRegiPage"
         component={SgsPostRegiPage}
@@ -281,6 +275,12 @@ const StackNavigator = () => {
       <Stack.Screen
         name="VotePostDetailPage"
         component={VotePostDetailPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="VotePostStatusPage"
+        component={VotePostStatusPage}
         options={{ headerShown: false }}
       />
 

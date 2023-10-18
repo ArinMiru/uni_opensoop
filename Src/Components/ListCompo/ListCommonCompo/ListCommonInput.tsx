@@ -56,8 +56,6 @@ export const OpenFreSgsContInputBox: React.FC<inputProps> = ({
       textAlignVertical="top"
       multiline={true}
       placeholder={text}
-      maxLength={250}
-      maxFontSizeMultiplier={10} // 최대 길이 설정
       {...props}
     />
   );
