@@ -12,6 +12,6 @@ export default StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     width: deviceWidth * 1,
-    height: deviceHeight * 0.8926,
+    height: deviceHeight * 0.921,
   },
 });

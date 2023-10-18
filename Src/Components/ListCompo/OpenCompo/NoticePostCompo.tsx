@@ -20,6 +20,7 @@ import ReadMore from "react-native-read-more-text";
 import { OpenEdtDltButton } from "../../IconCompo/OpenEdtDltIconButton";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
+import { OpenImageDotChk } from "./OpenImageDotchk";
 
 interface CommonProps {
   MEMB_NM?: string;
@@ -128,6 +129,39 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
         >
           {PostImage}
         </View>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View
+            style={{
+              flex: 0.5,
+              justifyContent: "center",
+              alignItems: "flex-start",
+              marginTop: "2%",
+              marginBottom: "2%",
+              left: deviceWidth * 0.06,
+            }}
+          >
+            <OpenLikeButtton onPress={likePress} postLike={postLike} />
+          </View>
+          <View style={{ alignItems: "center" }}>
+            <OpenImageDotChk />
+          </View>
+          <View
+            style={{
+              flex: 0.5,
+              justifyContent: "center",
+              alignItems: "flex-end",
+            }}
+          >
+            <Text
+              style={[
+                textStyle.bold08,
+                { color: "#BDBDBD", right: deviceWidth * 0.06 },
+              ]}
+            >
+              {PostingTime}
+            </Text>
+          </View>
+        </View>
         <View
           style={{
             flex: 1,
@@ -182,34 +216,6 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
           </ReadMore>
         </ScrollView>
       )}
-      <View style={{ flex: 1, flexDirection: "row" }}>
-        <View
-          style={{
-            flex: 0.5,
-            justifyContent: "center",
-            alignItems: "flex-start",
-            left: deviceWidth * 0.06,
-          }}
-        >
-          <OpenLikeButtton onPress={likePress} postLike={postLike} />
-        </View>
-        <View
-          style={{
-            flex: 0.5,
-            justifyContent: "center",
-            alignItems: "flex-end",
-          }}
-        >
-          <Text
-            style={[
-              textStyle.bold08,
-              { color: "#BDBDBD", right: deviceWidth * 0.06 },
-            ]}
-          >
-            {PostingTime}
-          </Text>
-        </View>
-      </View>
     </SafeAreaView>
   );
 };
