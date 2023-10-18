@@ -25,7 +25,6 @@ interface ButtonProps {
  * 게시글의 제목, 비공개 게시물 표시, 게시글의 내용을 보여줍니다.
  */
 export const SgsListContentButton: React.FC<ButtonProps> = ({
-  children,
   onPress,
   title,
   poststatus,
@@ -68,7 +67,6 @@ export const SgsListContentButton: React.FC<ButtonProps> = ({
           </Text>
         </View>
       </View>
-      {children}
     </SgsListButton>
   );
 };

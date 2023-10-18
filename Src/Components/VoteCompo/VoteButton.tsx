@@ -164,46 +164,29 @@ export const ViewUnvottedButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <View
-      style={{
-        height: deviceWidth * 0.2,
-        width: deviceWidth * 1,
-        justifyContent: "center",
-      }}
+    <TouchableOpacity
+      style={[
+        { flexDirection: "row" },
+        { justifyContent: "center" },
+        { alignItems: "center" },
+        { marginTop: deviceWidth * 0.04 },
+        { marginLeft: deviceWidth * 0.04 },
+        { marginBottom: -deviceWidth * 0.02 },
+      ]}
+      onPress={onPress}
     >
-      <TouchableOpacity
+      <Entypo name="circle" size={deviceWidth * 0.05} color="#4BB781" />
+      <Text
         style={[
-          VoteButtonStyle.viewUnvottedButtonStyle,
-          { left: deviceWidth * 0.07 },
-          { flexDirection: "row" },
-          { justifyContent: "center" },
-          { alignItems: "center" },
+          textStyle.regular10,
+          { color: "#4BB781" },
+          { marginLeft: deviceWidth * 0.02 },
         ]}
-        onPress={onPress}
       >
-        <Entypo name="circle" size={deviceWidth * 0.05} color="#4BB781" />
-        <View
-          style={{
-            flex: 1,
-            alignItems: "flex-start",
-            justifyContent: "center",
-            alignContent: "center",
-            paddingLeft: deviceWidth * 0.03,
-          }}
-        >
-          <Text
-            style={[
-              textStyle.regular09,
-              { color: "#4BB781" },
-              { lineHeight: deviceWidth * 0.06 },
-            ]}
-          >
-            투표중
-          </Text>
-        </View>
-        {children}
-      </TouchableOpacity>
-    </View>
+        투표중
+      </Text>
+      {children}
+    </TouchableOpacity>
   );
 };
 
