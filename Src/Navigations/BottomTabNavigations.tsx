@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, TouchableOpacity, Text } from "react-native";
+import HomePageScreen from "../Screens/Home/HomePage";
 import NoTicePage from "../Screens/Home/NoTice/NoticePage";
-import FrePostPage from "../Screens/Community/Free/FrePostPage";
+import ListPostPage from "../Screens/Community/ListPostPage";
 import SchedulePage from "../Screens/Home/ScheDule/SchedulePage"; // 경로 수정
 import VotePostPage from "../Screens/Home/VoTe/VotePostPage"; // 경로 수정
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
@@ -49,7 +50,7 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
               color={selectedIcon === "NoticePage" ? "#484C52" : "#D9D9D9"}
             />
           );
-        } else if (route.name === "FrePostPage") {
+        } else if (route.name === "ListPostPage") {
           iconComponent = (
             <FreeIcon
               style={{
@@ -76,10 +77,10 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
               color={selectedIcon === "VotePostPage" ? "#484C52" : "#D9D9D9"}
             />
           );
-        } else if (route.name === "JungTestScreen") {
+        } else if (route.name === "HomePageScreen") {
           iconComponent = (
             <BottomTabLogo
-              color={selectedIcon === "JungTestScreen" ? "#484C52" : "#D9D9D9"}
+              color={selectedIcon === "HomePageScreen" ? "#484C52" : "#D9D9D9"}
             />
           );
         }
@@ -117,13 +118,13 @@ const BottomTabNavigations = () => {
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="FrePostPage"
-        component={FrePostPage}
+        name="ListPostPage"
+        component={ListPostPage}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="JungTestScreen"
-        component={JungTestScreen}
+        name="HomePageScreen"
+        component={HomePageScreen}
         options={{ headerShown: false }}
       />
       <Tab.Screen

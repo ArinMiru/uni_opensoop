@@ -93,3 +93,27 @@ export const WhiteBackIconButton: React.FC<ButtonProps> = ({
     </TouchableOpacity>
   );
 };
+
+/**
+ * chevron-back 아이콘에 해당하는 버튼 영역
+ * White Back button
+ */
+export const GrayBackIconButton: React.FC<ButtonProps> = ({
+  children,
+  onPress,
+}) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Ionicons
+        style={{
+          marginLeft: deviceWidth * 0.06,
+          marginTop: deviceHeight * 0.002,
+        }}
+        name="chevron-back"
+        size={deviceWidth * 0.055}
+        color="#37424D"
+      />
+      {children}
+    </TouchableOpacity>
+  );
+};

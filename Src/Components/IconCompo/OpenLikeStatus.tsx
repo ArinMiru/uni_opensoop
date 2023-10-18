@@ -31,7 +31,7 @@ export const MainOpenLikeStatus: React.FC<LikeProps> = ({
           { marginLeft: deviceWidth * 0.01 },
         ]}
       >
-        {"150"}
+        {"LIKE_CNT"}
         {openpostLike}
       </Text>
     </View>
