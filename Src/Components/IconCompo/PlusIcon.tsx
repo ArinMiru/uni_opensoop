@@ -27,11 +27,12 @@ export const TopbarStylePlusIcon: React.FC<ButtonProps> = ({
     <TouchableOpacity
       style={{
         alignItems: "flex-end",
-        right: deviceWidth * 0.06,
+        marginRight: deviceWidth * 0.06,
+        marginTop: deviceWidth * 0.01,
       }}
       onPress={onPress}
     >
-      <Feather name="plus-circle" size={deviceWidth * 0.07} color="#ffffff" />
+      <Feather name="plus-circle" size={deviceWidth * 0.058} color="#424C43" />
     </TouchableOpacity>
   );
 };

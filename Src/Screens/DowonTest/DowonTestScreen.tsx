@@ -22,7 +22,7 @@ interface ScreenProps {
 const DowonTestScreen = ({}) => {
   return (
     <Background>
-      <MainPageTopbarStyle text={"공지사항"} />
+      <MainPageTopbarStyle MEMB_SC_NM="평택대학교" MEMB_DEP_NM="정보통신학과" />
       <View
         style={[
           NewBackgroundStyle.OnlyTopRadiusBackgroundStyle,
