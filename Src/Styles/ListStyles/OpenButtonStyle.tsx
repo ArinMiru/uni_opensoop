@@ -9,7 +9,6 @@ export default StyleSheet.create({
   PhotoLawStyle: {
     width: deviceWidth * 0.3625,
     height: deviceHeight * 0.0404,
-    marginRight: deviceWidth * 0.07,
     backgroundColor: "#A1A1A1",
     alignItems: "center",
     justifyContent: "flex-end",

@@ -29,11 +29,14 @@ export const PostProfileIcon: React.FC<ProfileProps> = ({}) => {
 
 export const ProfileIcon: React.FC<ProfileProps> = ({ onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity
+      style={{ marginRight: deviceWidth * 0.06 }}
+      onPress={onPress}
+    >
       <Ionicons
         name="ios-person-circle"
-        size={deviceWidth * 0.0468}
-        color="#28303F"
+        size={deviceWidth * 0.072}
+        color="#666970"
       ></Ionicons>
     </TouchableOpacity>
   );

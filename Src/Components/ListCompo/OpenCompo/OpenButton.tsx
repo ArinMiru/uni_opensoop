@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import textStyle from "../../../Styles/TextStyle";
 import OpenButtonStyle from "../../../Styles/ListStyles/OpenButtonStyle";
 import { Entypo } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { OpenPhotoDelIcon } from "../../IconCompo/OpenPhotoIcon";
@@ -50,23 +51,22 @@ export const OpenLikeButtton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity
-      style={OpenButtonStyle.OpenLikeButtonStyle}
-      onPress={onPress}
-    >
-      <AntDesign name="heart" size={deviceWidth * 0.041} color="#fff" />
+    <View>
+      <TouchableOpacity onPress={onPress}>
+        <Feather name="heart" size={deviceWidth * 0.057} color="#4BB781" />
+      </TouchableOpacity>
       <Text
         style={[
-          textStyle.semibold12,
-          { color: "#ffffff" },
-          { marginLeft: deviceWidth * 0.009 },
+          textStyle.bold10,
+          { color: "#222222" },
+          { marginLeft: deviceWidth * 0.001 },
+          { marginTop: deviceHeight * 0.007 },
           { lineHeight: deviceHeight * 0.022 },
         ]}
       >
-        {postLike}
+        {"좋아요"} {postLike} {"개"}
       </Text>
-      {children}
-    </TouchableOpacity>
+    </View>
   );
 };
 
