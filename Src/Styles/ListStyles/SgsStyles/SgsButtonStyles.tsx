@@ -63,4 +63,11 @@ export default StyleSheet.create({
     borderBottomColor: "#E8E8E8",
     width: "100%",
   },
+
+  divideSchdlContentsLine: {
+    borderBottomWidth: 4,
+    opacity: 0.8,
+    borderBottomColor: "#E8E8E8",
+    width: "100%",
+  },
 });

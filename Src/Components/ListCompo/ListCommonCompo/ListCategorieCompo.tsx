@@ -11,35 +11,17 @@ interface ButtonProps {
   firsttext?: string;
   secondtext?: string;
   thirdtext?: string;
-  navigation?: { navigate: (screenName: string) => void };
-  children?: React.ReactNode;
+  selectedCategory: string;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const ListCategorieCompo: React.FC<ButtonProps> = ({
   firsttext,
   secondtext,
   thirdtext,
-  children,
-  navigation,
+  selectedCategory,
+  setSelectedCategory,
 }) => {
-  const [selectedButton, setSelectedButton] = useState<string | null>(null);
-
-  const handleButtonPress = (buttonType: string) => {
-    setSelectedButton(buttonType);
-    switch (buttonType) {
-      case "fre":
-        navigation?.navigate("FrePostPage"); // 'FrePageName' 을 해당 페이지의 이름으로 변경하세요.
-        break;
-      case "sgs":
-        navigation?.navigate("SgsPostPage"); // 'SgsPageName' 을 해당 페이지의 이름으로 변경하세요.
-        break;
-      case "qst":
-        navigation?.navigate("QstPostPage"); // 'QstPageName' 을 해당 페이지의 이름으로 변경하세요.
-        break;
-      default:
-        break;
-    }
-  };
   return (
     <View
       style={{
@@ -52,20 +34,19 @@ export const ListCategorieCompo: React.FC<ButtonProps> = ({
     >
       <FreBefoClikButton
         text={firsttext}
-        color={selectedButton === "fre" ? "#212121" : "#ECECEC"}
-        onPress={() => handleButtonPress("fre")}
+        color={selectedCategory === "자유" ? "#212121" : "#ECECEC"}
+        onPress={() => setSelectedCategory("자유")}
       />
       <SgsBefoClikButton
         text={secondtext}
-        color={selectedButton === "sgs" ? "#212121" : "#ECECEC"}
-        onPress={() => handleButtonPress("sgs")}
+        color={selectedCategory === "건의" ? "#212121" : "#ECECEC"}
+        onPress={() => setSelectedCategory("건의")}
       />
       <QstBefoClikButton
         text={thirdtext}
-        color={selectedButton === "qst" ? "#212121" : "#ECECEC"}
-        onPress={() => handleButtonPress("qst")}
+        color={selectedCategory === "질문" ? "#212121" : "#ECECEC"}
+        onPress={() => setSelectedCategory("질문")}
       />
-      {children}
     </View>
   );
 };

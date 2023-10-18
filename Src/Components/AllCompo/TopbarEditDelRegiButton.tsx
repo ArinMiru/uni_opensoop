@@ -3,6 +3,8 @@ import { TouchableOpacity, Text } from "react-native";
 import { deviceWidth } from "../../Utils/DeviceUtils";
 import TopbarEditDelRegiButtonStyle from "../../Styles/TopbarStyles/TopbarEditDelRegiButtonStyle";
 import TextStyle from "../../Styles/TextStyle";
+import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 /** TopbarEditDelRegiButton
  * 공지사항, 투표, 게시판, 일정에 해당하는 Topbar에 있는 Edit, Delete, Register 버튼의 컴포넌트가 존재하는 코드 입니다.
@@ -27,8 +29,12 @@ interface ButtonProps {
 
 /**
  * TopbarDelButton
- * Topbar에 있는 Delete 아이콘
- * 공지사항, 투표, 게시판, 일정에 해당하는 Topbar에만 존재하는 코드 입니다.
+ * Topbar에 있는 Delete 아이콘 (쓰레기통)
+ *
+ * - 조건 렌더링 -
+ * (공지사항, 투표) 02, 03, 05
+ * (게시판) - All
+ *
  */
 export const TopbarDelButton: React.FC<ButtonProps> = ({
   children,
@@ -37,60 +43,25 @@ export const TopbarDelButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={[
-        TopbarEditDelRegiButtonStyle.TopbarDelButtonStyle,
-        { marginRight: deviceWidth * 0.06 },
-      ]}
+      style={{ marginRight: deviceWidth * 0.06 }}
       onPress={onPress}
     >
-      <Text
-        style={[
-          TextStyle.semibold12,
-          {
-            color: "#EB5288",
-            lineHeight: deviceWidth * 0.05,
-          },
-        ]}
-      >
-        {"삭제"}
-      </Text>
-      {children}
+      <Feather name="trash" size={deviceWidth * 0.04} color="#F05151" />
     </TouchableOpacity>
   );
 };
 
 /*------------------------------------------------------------*/
 
-/**
- * TopbarEditButton
- * Topbar에 있는 Edit 아이콘
- * 공지사항, 투표, 게시판, 일정에 해당하는 Topbar에만 존재하는 코드 입니다.
- */
+/*XXXXXXXXXXXXXXXXXXXXXXXXXX*/
 export const TopbarEditButton: React.FC<ButtonProps> = ({
   children,
   text,
   onPress,
 }) => {
-  return (
-    <TouchableOpacity
-      style={[TopbarEditDelRegiButtonStyle.TopbarEditButtonStyle]}
-      onPress={onPress}
-    >
-      <Text
-        style={[
-          TextStyle.semibold12,
-          {
-            color: "#4BB781",
-            lineHeight: deviceWidth * 0.05,
-          },
-        ]}
-      >
-        {"작성"}
-      </Text>
-      {children}
-    </TouchableOpacity>
-  );
+  return <TouchableOpacity onPress={onPress}></TouchableOpacity>;
 };
+/*XXXXXXXXXXXXXXXXXXXXXXXXXX*/
 
 /*------------------------------------------------------------*/
 
@@ -106,27 +77,10 @@ export const TopbarRegiButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={[
-        TopbarEditDelRegiButtonStyle.TopbarRegiButtonStyle,
-        {
-          marginRight: deviceWidth * 0.06,
-          justifyContent: "center",
-        },
-      ]}
+      style={{ marginRight: deviceWidth * 0.06 }}
       onPress={onPress}
     >
-      <Text
-        style={[
-          TextStyle.semibold12,
-          {
-            color: "#4BB781",
-            lineHeight: deviceWidth * 0.05,
-          },
-        ]}
-      >
-        {"등록"}
-      </Text>
-      {children}
+      <Ionicons name="send-sharp" size={deviceWidth * 0.045} color="#4BB781" />
     </TouchableOpacity>
   );
 };
