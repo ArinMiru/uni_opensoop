@@ -10,9 +10,6 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { openBubListCall } from "../../../Services/_private/NoticeApi";
 import { NoticeData } from "../../../Utils/_private/ApiData/NoticeData";
 import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
-import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { ParamListBase } from "@react-navigation/native"; // React Navigation v6의 경우
 import Constants from "expo-constants";
 import { NoticePostBoxView } from "../../../Components/ListCompo/OpenCompo/NoticePostCompo";
 import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
@@ -26,12 +23,10 @@ import {
   DelModalCompo,
   CloseModalCompo,
 } from "../../../Components/AllCompo/ModalCompo";
+import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
+import { ScreenProps } from "../../../Navigations/StackNavigator";
 
-const NoTicePage = ({
-  navigation,
-}: {
-  navigation: DrawerNavigationProp<ParamListBase>;
-}) => {
+const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const modalFunctions = ModalReuableFuction();
   // 사용자 데이터와 공지사항 데이터 상태를 정의합니다.
   const userData = getUserData(); // 현재 사용자 데이터
@@ -104,36 +99,45 @@ const NoTicePage = ({
         {/* 수정 바람 */}
         {/* 수정 완료 @ArinMiru김도원 23.10.03 */}
         <MenuTopbarStyle
-          text="공지사항"
-          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-          onPressRegi={() => navigation.navigate("MNoticePostRegiPage")}
+          Title="공지사항"
+          MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
+          MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
+          onPress={() => navigation.goBack()}
+          onPressRegi={() => navigation.navigate("NoticePostRegiPage")}
         />
-        {/* FlatList를 사용하여 공지사항 데이터 출력 */}
-        <FlatList
-          data={sortedData?.OPEN_BUB}
-          keyExtractor={(item) => item.CRE_SEQ.toString()}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => handleItemPress(item.CRE_SEQ)}>
-              {/* 해당 게시글의 CRE_SEQ 값을얻기 위한 예시 나중에 바텀시트 나오는 버튼 클릭 시 얻는걸로 변경하여야 됌 지금은 게시글 자체만 클릭해도 얻어 짐*/}
-              <NoticePostBoxView
-                MEMB_NM={item.MEMB_NM}
-                MEMB_CD={item.TIT_NM}
-                MEMB_DEP_CD={item.MEMB_DEP_NM}
-                Title={item.TIT}
-                PostingTime={item.CRE_DAT}
-                postLike={item.LIKE_CNT}
-                PostContent={item.CONT}
-                onPress={modalFunctions.handleButtonPress}
-              ></NoticePostBoxView>
-            </TouchableOpacity>
+        <View
+          style={[
+            NewBackgroundStyle.OnlyTopRadiusBackgroundStyle,
+            { alignItems: "center" },
+          ]}
+        >
+          {/* FlatList를 사용하여 공지사항 데이터 출력 */}
+          <FlatList
+            data={sortedData?.OPEN_BUB}
+            keyExtractor={(item) => item.CRE_SEQ.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => handleItemPress(item.CRE_SEQ)}>
+                {/* 해당 게시글의 CRE_SEQ 값을얻기 위한 예시 나중에 바텀시트 나오는 버튼 클릭 시 얻는걸로 변경하여야 됌 지금은 게시글 자체만 클릭해도 얻어 짐*/}
+                <NoticePostBoxView
+                  MEMB_NM={item.MEMB_NM}
+                  MEMB_CD={item.TIT_NM}
+                  MEMB_DEP_CD={item.MEMB_DEP_NM}
+                  Title={item.TIT}
+                  PostingTime={item.CRE_DAT}
+                  postLike={item.LIKE_CNT}
+                  PostContent={item.CONT}
+                  onPress={modalFunctions.handleButtonPress}
+                ></NoticePostBoxView>
+              </TouchableOpacity>
+            )}
+            ItemSeparatorComponent={renderSeparator}
+          />
+          {modalFunctions.modalVisible && (
+            <TouchableWithoutFeedback onPress={modalFunctions.handleCloseModal}>
+              <View style={EditDelCloseModalStyle.overlay} />
+            </TouchableWithoutFeedback>
           )}
-          ItemSeparatorComponent={renderSeparator}
-        />
-        {modalFunctions.modalVisible && (
-          <TouchableWithoutFeedback onPress={modalFunctions.handleCloseModal}>
-            <View style={EditDelCloseModalStyle.overlay} />
-          </TouchableWithoutFeedback>
-        )}
+        </View>
       </BottomSheetModalProvider>
     </SafeAreaView>
   );

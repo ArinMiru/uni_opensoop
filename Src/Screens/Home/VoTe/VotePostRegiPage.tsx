@@ -13,6 +13,8 @@ import {
 import VoteBoxStyle from "../../../Styles/VoteStyles/VoteBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
+import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
+import { Background } from "../../../Components/AllCompo/Background";
 import VoteRegiDateDropDown from "../../../Components/SingleUse/VoteRegiDateDropdown";
 /**
  * @Dowon(김도원 생성)
@@ -22,115 +24,116 @@ import VoteRegiDateDropDown from "../../../Components/SingleUse/VoteRegiDateDrop
 
 const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
-    <AccountBackground>
+    <Background>
       <BackIconTopbarStyle text="투표" onPress={() => navigation.goBack()} />
-      <View
-        style={{
-          flex: 1,
-          width: deviceWidth * 1,
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <SchdlVoteRegiTitInput text="제목을 입력하세요." />
-      </View>
-      <View
-        style={{
-          flex: 3,
-          flexDirection: "column",
-          width: deviceWidth * 1,
-          justifyContent: "flex-end",
-          alignItems: "center",
-        }}
-      >
+      <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View
           style={{
             flex: 1,
+            width: deviceWidth * 1,
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <SchdlVoteRegiTitInput text="제목을 입력하세요." />
+        </View>
+        <View
+          style={{
+            flex: 3,
+            flexDirection: "column",
+            width: deviceWidth * 1,
             justifyContent: "flex-end",
             alignItems: "center",
-            width: deviceWidth * 1,
-          }}
-        >
-          <VoteInput text="텍스트" />
-        </View>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            width: deviceWidth * 1,
-          }}
-        >
-          <VoteInput text="텍스트" />
-        </View>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "flex-start",
-            alignItems: "center",
-            width: deviceWidth * 1,
-          }}
-        >
-          <AddVoteOptionButton />
-        </View>
-      </View>
-      <View style={{ flex: 1 }}></View>
-      <View
-        style={{
-          flex: 1,
-          width: deviceWidth * 1,
-          justifyContent: "flex-start",
-        }}
-      >
-        <View
-          style={{
-            flex: 0.5,
-            justifyContent: "center",
           }}
         >
           <View
-            style={[
-              VoteBoxStyle.voteExprBox,
-              { left: deviceWidth * 0.1 },
-              { justifyContent: "center" },
-            ]}
+            style={{
+              flex: 1,
+              justifyContent: "flex-end",
+              alignItems: "center",
+              width: deviceWidth * 1,
+            }}
           >
-            <Text
+            <VoteInput text="텍스트" />
+          </View>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              width: deviceWidth * 1,
+            }}
+          >
+            <VoteInput text="텍스트" />
+          </View>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "flex-start",
+              alignItems: "center",
+              width: deviceWidth * 1,
+            }}
+          >
+            <AddVoteOptionButton />
+          </View>
+        </View>
+        <View style={{ flex: 1 }}></View>
+        <View
+          style={{
+            flex: 1,
+            width: deviceWidth * 1,
+            justifyContent: "flex-start",
+          }}
+        >
+          <View
+            style={{
+              flex: 0.5,
+              justifyContent: "center",
+            }}
+          >
+            <View
               style={[
-                TextStyle.medium10,
-                { color: "#67B28A", lineHeight: deviceHeight * 0.025 },
-                { textAlign: "center" },
+                VoteBoxStyle.voteExprBox,
+                { left: deviceWidth * 0.1 },
+                { justifyContent: "center" },
               ]}
             >
-              마감기한 설정
-            </Text>
+              <Text
+                style={[
+                  TextStyle.medium10,
+                  { color: "#67B28A", lineHeight: deviceHeight * 0.025 },
+                  { textAlign: "center" },
+                ]}
+              >
+                마감기한 설정
+              </Text>
+            </View>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+            }}
+          >
+            <VoteRegiDateDropDown />
           </View>
         </View>
         <View
           style={{
-            flex: 1,
-            alignItems: "center",
-            backgroundColor: "#777777",
+            flex: 3,
+            flexDirection: "row",
           }}
         >
-          <VoteRegiDateDropDown />
+          <View style={{ flex: 1 }}>
+            <ViewDupleVoteButton />
+          </View>
+          <View style={{ flex: 1 }}>
+            <ViewAnnymButton />
+          </View>
         </View>
       </View>
-      <View
-        style={{
-          flex: 2,
-          flexDirection: "row",
-        }}
-      >
-        <View style={{ flex: 1 }}>
-          <ViewDupleVoteButton />
-        </View>
-        <View style={{ flex: 1 }}>
-          <ViewAnnymButton />
-        </View>
-      </View>
-    </AccountBackground>
+    </Background>
   );
 };
 
