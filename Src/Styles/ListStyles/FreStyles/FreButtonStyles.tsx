@@ -7,23 +7,11 @@ export default StyleSheet.create({
    */
   FreeListButtonStyle: {
     alignItems: "center",
-    width: deviceWidth * 0.85,
-    height: deviceHeight * 0.17,
+    width: deviceWidth * 0.943,
+    height: deviceHeight * 0.12,
     marginBottom: "5%",
-    backgroundColor: "#ffffff",
-    borderRadius: 11,
-    borderColor: "#4BB781",
-    borderWidth: 1.2,
-    elevation: Platform.OS === "android" ? 3 : 0, // Android에서 그림자 효과
-    ...Platform.select({
-      // iOS에서 그림자 효과
-      ios: {
-        shadowColor: "black",
-        shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-      },
-    }),
+    backgroundColor: "#F8F8F8",
+    borderRadius: 5,
   },
 
   /*
@@ -67,13 +55,13 @@ export default StyleSheet.create({
     borderRadius: 30,
   },
 
-  /*
-   * 자유 게시판 리스트 화면 버튼에 들어가는 선 입니다.
-   **/
+  // /*
+  //  * 자유 게시판 리스트 화면 버튼에 들어가는 선 입니다.
+  //  **/
 
-  horizontalLine: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#8B8B8B",
-    width: "90%",
-  },
+  // horizontalLine: {
+  //   borderBottomWidth: 0.5,
+  //   borderBottomColor: "#8B8B8B",
+  //   width: "90%",
+  // },
 });
