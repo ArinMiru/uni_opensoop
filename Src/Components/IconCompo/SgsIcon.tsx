@@ -10,7 +10,7 @@ export const SgsListLockIcon: React.FC<ProfileProps> = ({ children }) => {
   return (
     <Fontisto
       name="locked"
-      size={deviceWidth * 0.05}
+      size={deviceWidth * 0.031}
       color="#4BB781"
     ></Fontisto>
   );

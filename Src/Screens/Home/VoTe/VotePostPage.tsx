@@ -31,7 +31,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPressRegi={() => navigation.navigate("VotePostRegiPage")}
       />
-      <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
+      <View style={[NewBackgroundStyle.BottomTabBackgroundStyle]}>
         <View style={{ flexDirection: "row" }}>
           <View
             style={{

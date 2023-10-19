@@ -11,7 +11,7 @@ export const OpenProfileIcon: React.FC<ProfileProps> = ({}) => {
   return (
     <Ionicons
       name="person-circle-outline"
-      size={deviceWidth * 0.056}
+      size={deviceWidth * 0.062}
       color="#424C43"
     ></Ionicons>
   );
