@@ -56,7 +56,7 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
               style={{
                 paddingTop: "20%",
               }}
-              color={selectedIcon === "FrePostPage" ? "#484C52" : "#D9D9D9"}
+              color={selectedIcon === "ListPostPage" ? "#484C52" : "#D9D9D9"}
             />
           );
         } else if (route.name === "SchedulePage") {
