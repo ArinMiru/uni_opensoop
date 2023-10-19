@@ -15,6 +15,7 @@ import FreButtonStyles from "../../../Styles/ListStyles/FreStyles/FreButtonStyle
 import { AntDesign } from "@expo/vector-icons";
 import textStyle from "../../../Styles/TextStyle";
 import { OpenProfileIcon } from "../../IconCompo/ProfileIcon";
+import { ChatIcon } from "../../IconCompo/ChatIcon";
 
 interface ButtonProps extends TextInputProps {
   children?: React.ReactNode;
@@ -22,6 +23,7 @@ interface ButtonProps extends TextInputProps {
   freposttime?: string;
   fretit?: string;
   frecont?: string;
+  grade?: string;
   like?: number;
   onPress?: () => void;
 }
@@ -85,87 +87,154 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
   freposttime,
   fretit,
   frecont,
+  grade,
+  like,
   onPress,
 }) => {
   return (
     <FreeListButton onPress={onPress}>
+      {/* 첫 번쨰 뷰 */}
+
       <View
         style={[
-          FreButtonStyles.horizontalLine,
           {
-            flex: 1.5,
+            flex: 1,
             flexDirection: "row",
-            justifyContent: "space-between",
             alignItems: "center",
           },
         ]}
       >
-        <View>
-          <OpenProfileIcon />
+        <View
+          style={{
+            flex: 5,
+            justifyContent: "center",
+            height: "100%",
+          }}
+        >
+          <Text
+            style={[
+              textStyle.semibold10,
+              {
+                color: "#000000",
+                marginLeft: deviceWidth * 0.034,
+              },
+            ]}
+          >
+            {fretit}
+          </Text>
         </View>
         <View
           style={{
-            flex: 1,
-            alignItems: "flex-start",
+            flex: 1.5,
+            height: "100%",
+            alignItems: "flex-end",
+            justifyContent: "center",
+            marginRight: deviceWidth * 0.034,
           }}
         >
-          <Text style={[textStyle.semibold12, { color: "#4BB781" }]}>
-            {nickname}
+          <Text
+            style={[
+              textStyle.semibold05,
+              {
+                color: "#919191",
+              },
+            ]}
+          >
+            {freposttime}
           </Text>
         </View>
+      </View>
+
+      {/* 두번 쨰 뷰 */}
+
+      <View
+        style={{
+          flex: 1,
+          width: "100%",
+          justifyContent: "center",
+        }}
+      >
         <Text
           style={[
             textStyle.regular08,
             {
-              color: "#000000",
-              marginTop: deviceHeight * 0.02,
-            },
-          ]}
-        >
-          {freposttime}
-        </Text>
-      </View>
-
-      <View
-        style={{
-          flex: 1.5,
-          width: "100%",
-          justifyContent: "center",
-        }}
-      >
-        <Text
-          style={[
-            textStyle.semibold12,
-            {
-              color: "#000000",
-              marginLeft: "5%",
-            },
-          ]}
-        >
-          {fretit}
-        </Text>
-      </View>
-
-      <View
-        style={{
-          flex: 2,
-          width: "100%",
-          borderBottomLeftRadius: 10,
-          borderBottomRightRadius: 10,
-          justifyContent: "center",
-        }}
-      >
-        <Text
-          style={[
-            textStyle.regular10,
-            {
-              color: "#424C43",
-              marginLeft: "5%",
+              color: "#969996",
+              marginLeft: deviceWidth * 0.034,
             },
           ]}
         >
           {frecont}
         </Text>
+      </View>
+
+      {/* 세번 쨰 뷰 */}
+
+      <View
+        style={{
+          flex: 1,
+          width: "100%",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          flexDirection: "row",
+        }}
+      >
+        <View
+          style={{
+            flex: 5,
+            width: "100%",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <View style={{ marginLeft: deviceWidth * 0.034 }}>
+            <OpenProfileIcon />
+          </View>
+          <View
+            style={{
+              alignItems: "flex-start",
+              marginLeft: deviceWidth * 0.02,
+            }}
+          >
+            <Text style={[textStyle.semibold08, { color: "#151515" }]}>
+              {nickname}
+            </Text>
+          </View>
+          <View
+            style={{
+              alignItems: "flex-start",
+              marginLeft: deviceWidth * 0.006,
+            }}
+          >
+            <Text style={[textStyle.semibold05, { color: "#919191" }]}>
+              {grade}
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{
+            flex: 1.5,
+            flexDirection: "row",
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            marginRight: deviceWidth * 0.034,
+          }}
+        >
+          <View>
+            <ChatIcon />
+          </View>
+          <View>
+            <Text
+              style={[
+                textStyle.semibold07,
+                { color: "#4BB781", marginLeft: deviceWidth * 0.018 },
+              ]}
+            >
+              8{like}
+            </Text>
+          </View>
+        </View>
       </View>
       {children}
     </FreeListButton>

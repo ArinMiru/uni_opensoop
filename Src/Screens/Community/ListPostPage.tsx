@@ -13,6 +13,7 @@ import { MenuTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
 import NewBackgroundStyle from "../../Styles/NewBackgroundStyle";
 import { Background } from "../../Components/AllCompo/Background";
 import { SgsListContentButton } from "../../Components/ListCompo/SgsCompo/SgsButtonCompo";
+import { QstListContentButton } from "../../Components/ListCompo/QstCompo/QstButtonCompo";
 
 const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData(); // 현재 사용자 데이터
@@ -123,6 +124,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
                 freposttime={item.CRE_DAT}
                 fretit={item.TIT}
                 frecont={item.CONT}
+                grade="1학년"
                 onPress={() => navigation.navigate("FrePostDetailPage")}
               />
             )}
@@ -132,6 +134,8 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
           <SgsListContentButton
             title="비공개 게시물입니다."
             poststatus="답변 대기중"
+            anonynick="익명"
+            sgsposttime="2021년2월2일"
             onPress={() => navigation.navigate("SgsPostDetailPage")}
           />
           /**
@@ -147,9 +151,11 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
          */
         )}
         {selectedCategory === "질문" && (
-          <SgsListContentButton
-            title="비공개 게시물입니다."
-            poststatus="답변 대기중"
+          <QstListContentButton
+            nickname="도원숙"
+            postcontent="안녕하세요 교수님 화장실 가도 될까요?"
+            grade="1학년"
+            qstposttime="2022년1웕5일"
             onPress={() => navigation.navigate("SgsPostDetailPage")}
           />
           /**
