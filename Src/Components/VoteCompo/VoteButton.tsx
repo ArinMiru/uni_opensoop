@@ -167,11 +167,8 @@ export const ViewUnvottedButton: React.FC<ButtonProps> = ({
     <TouchableOpacity
       style={[
         { flexDirection: "row" },
-        { justifyContent: "center" },
         { alignItems: "center" },
-        { marginTop: deviceWidth * 0.04 },
-        { marginLeft: deviceWidth * 0.04 },
-        { marginBottom: -deviceWidth * 0.02 },
+        { marginRight: deviceWidth * 0.08 },
       ]}
       onPress={onPress}
     >

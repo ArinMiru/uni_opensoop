@@ -18,7 +18,7 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <Background>
       <BackIconRegiTopbarStyle
-        Title="건의게시판"
+        Title="건의게시판 등록"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
