@@ -107,7 +107,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
         />
         <View
           style={[
-            NewBackgroundStyle.OnlyTopRadiusBackgroundStyle,
+            NewBackgroundStyle.BottomTabBackgroundStyle,
             { alignItems: "center" },
           ]}
         >
