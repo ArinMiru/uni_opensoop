@@ -8,7 +8,7 @@ export default StyleSheet.create({
    */
   Background: {
     flex: 1,
-    backgroundColor: "#DADADA",
+    backgroundColor: "#F2F2F2",
     alignItems: "center",
     width: deviceWidth * 1,
     height: deviceHeight * 1,

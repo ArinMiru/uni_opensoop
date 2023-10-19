@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View } from "react-native";
 import HomePageScreen from "../Screens/Home/HomePage";
 import NoTicePage from "../Screens/Home/NoTice/NoticePage";
 import ListPostPage from "../Screens/Community/ListPostPage";
@@ -14,8 +14,7 @@ import {
   VoteIcon,
   BottomTabLogo,
 } from "../Components/IconCompo/DrawerIcon";
-import { deviceHeight, deviceWidth } from "../Utils/DeviceUtils";
-import JungTestScreen from "../Screens/JungTest/JungTestScreen";
+import { deviceHeight } from "../Utils/DeviceUtils";
 
 const Tab = createBottomTabNavigator();
 

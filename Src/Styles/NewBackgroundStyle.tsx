@@ -9,9 +9,16 @@ export default StyleSheet.create({
    */
   OnlyTopRadiusBackgroundStyle: {
     backgroundColor: "#FFFFFF",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
     width: deviceWidth * 1,
     height: deviceHeight * 0.921,
+  },
+
+  /**
+   * 모든 페이지 - 상단 라운드 박스 스타일
+   */
+  BottomTabBackgroundStyle: {
+    backgroundColor: "#FFFFFF",
+    width: deviceWidth * 1,
+    height: deviceHeight * 0.79,
   },
 });
