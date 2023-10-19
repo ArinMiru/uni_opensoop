@@ -1,6 +1,6 @@
 import Styles from "../../Styles/TopbarStyles/TopbarStyle";
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import textStyle from "../../Styles/TextStyle";
 import { TopbarStylePlusIcon } from "../IconCompo/PlusIcon";
 import { TopbarDelButton, TopbarRegiButton } from "./TopbarEditDelRegiButton";
@@ -117,26 +117,11 @@ export const MenuTopbarStyle: React.FC<ButtonProps> = ({
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
-      <View style={{ flex: 0.23 }}></View>
-      <Image
-        style={{
-          resizeMode: "contain",
-          marginTop: deviceHeight * 0.01,
-          width: deviceWidth * 0.28,
-        }}
-        source={require("../../Assets/Images/TopbarLogoImage.png")}
-      ></Image>
-      <View style={{ marginTop: deviceWidth * 0.02 }}>
-        <AntDesign
-          name="minus"
-          size={deviceWidth * 0.05}
-          color={"#BABABA"}
-          style={{ transform: [{ rotate: "90deg" }] }}
-        />
-      </View>
+      <View style={{ flex: 0.1 }}></View>
       <View
         style={{
           flexDirection: "row",
+          alignItems: "center",
         }}
       >
         <Text
@@ -150,13 +135,23 @@ export const MenuTopbarStyle: React.FC<ButtonProps> = ({
         </Text>
         <Text
           style={[
-            textStyle.semibold08,
-            { marginLeft: deviceWidth * 0.01 },
-            { marginTop: deviceHeight * 0.01 },
+            textStyle.bold08,
+            { marginLeft: deviceWidth * 0.02 },
+            { marginTop: deviceHeight * 0.009 },
             { color: "#919191" },
           ]}
         >
-          {MEMB_SC_NM} {MEMB_DEP_NM}
+          {MEMB_SC_NM}
+        </Text>
+        <Text
+          style={[
+            textStyle.bold08,
+            { marginLeft: deviceWidth * 0.01 },
+            { marginTop: deviceHeight * 0.009 },
+            { color: "#919191" },
+          ]}
+        >
+          {MEMB_DEP_NM}
         </Text>
       </View>
       {["02", "03", "05"].includes(userData?.TIT_CD || "") ? (
