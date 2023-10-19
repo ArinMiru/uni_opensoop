@@ -19,9 +19,9 @@ import { VoteInput } from "../../Components/VoteCompo/VoteTextInput";
 const ListTest = () => {
   return (
     <SafeAreaView style={BackgroundStyle.AccountBackground}>
-      <VoteSlctButton text="김도one" />
-      <VoteUnSlctButton text="김도two" />
-      <VoteStatusPageButton text="김도three" votestatusnum="3" />
+      <VoteSlctButton text="투표 클릭 후" />
+      <VoteUnSlctButton text="투표 클릭 전" />
+      <VoteStatusPageButton text="투표 인원" votestatusnum="3" />
       <VoteStatusButton />
       <VoteRegiButton />
       <AddVoteOptionButton />

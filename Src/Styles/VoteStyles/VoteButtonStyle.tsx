@@ -49,13 +49,23 @@ export default StyleSheet.create({
   voteStatusPageStyle: {
     width: deviceWidth * 0.775,
     height: deviceHeight * 0.061,
-    backgroundColor: "#F8F8F8",
+    backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "space-between",
-    flexDirection: "row",
     borderRadius: 5,
-    borderColor: "#CDCDCD",
-    borderWidth: 0.5,
+    borderColor: "#EBEBEB",
+    borderWidth: 1,
+    flexDirection: "row",
+    elevation: Platform.OS === "android" ? 3 : 0, // Android에서 그림자 효과
+    ...Platform.select({
+      // iOS에서 그림자 효과
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+      },
+    }),
   },
 
   /**
@@ -122,8 +132,9 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     borderColor: "#CDCDCD",
-    backgroundColor: "#F8F8F8",
+    backgroundColor: "#FFFFFF",
     borderWidth: 0.5,
+    borderRadius: 5,
   },
 
   /**
@@ -138,7 +149,8 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignContent: "center",
-    backgroundColor: "#FAFAFA",
+    backgroundColor: "#ECECEC",
+    borderRadius: 5,
   },
 
   /*------------------------------------------------------------*/
