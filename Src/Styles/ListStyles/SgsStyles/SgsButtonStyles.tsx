@@ -8,22 +8,11 @@ export default StyleSheet.create({
    */
   SgsListButtonStyle: {
     alignItems: "center",
-    width: deviceWidth * 0.85,
-    height: deviceHeight * 0.058,
-    backgroundColor: "#ffffff",
-    borderRadius: 11,
-    borderColor: "#4BB781",
-    borderWidth: 1.2,
-    elevation: Platform.OS === "android" ? 3 : 0, // Android에서 그림자 효과
-    ...Platform.select({
-      // iOS에서 그림자 효과
-      ios: {
-        shadowColor: "black",
-        shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-      },
-    }),
+    width: deviceWidth * 0.943,
+    height: deviceHeight * 0.09,
+    marginBottom: "5%",
+    backgroundColor: "#F8F8F8",
+    borderRadius: 5,
   },
 
   /**

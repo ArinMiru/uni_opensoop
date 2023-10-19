@@ -4,7 +4,6 @@ import { ListCategorieCompo } from "../../../Components/ListCompo/ListCommonComp
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { QstListButton } from "../../../Components/ListCompo/QstCompo/QstButtonCompo";
 import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
 import { MenuIconEditTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
@@ -57,11 +56,6 @@ const QstPostPage: React.FC<ScreenProps> = ({ navigation }) => {
 
   return (
     <AccountBackground>
-      <MenuIconEditTopbarStyle
-        text="게시판"
-        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-        onPressRegi={() => navigation.navigate("QstPostRegi")}
-      />
       <View
         style={{
           flex: 1,
