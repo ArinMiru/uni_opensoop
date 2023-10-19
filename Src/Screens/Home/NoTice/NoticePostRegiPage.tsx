@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, KeyboardAvoidingView } from "react-native";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import {
   OpenFreSgsTitInputBox,
@@ -22,6 +22,7 @@ import { Background } from "../../../Components/AllCompo/Background";
 
 const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const [photoButtonClicked, setphotoButtonClicked] = React.useState(false);
+  const userData = getUserData();
   const [cont, setCont] = useState<string>("");
   const [tit, setTit] = useState<string>("");
   /** NoticePostRegiPage 컴포넌트에서 사용되는 상태 변수 중 하나인 photoButtonClicked의 값을 변경하는 함수입니다. */
@@ -29,7 +30,6 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const handleRegiButtonPress = async () => {
     try {
       // 필요한 데이터 가져오기
-      const userData = getUserData();
 
       if (userData) {
         const TIT = tit;
@@ -87,9 +87,12 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
 
   return (
     <Background>
-      <BackIconTopbarStyle
-        text="공지사항"
+      <BackIconRegiTopbarStyle
+        Title="공지사항 등록"
+        MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
+        MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
+        onPressRegi={handleRegiButtonPress}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View
@@ -108,7 +111,9 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         </View>
         <KeyboardAvoidingView
           style={{
+            flex: 3.5,
             width: deviceWidth * 1,
+            height: "auto",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -149,18 +154,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
           )}
         </View>
 
-        <View
-          style={{
-            flex: 2,
-            width: deviceWidth * 1,
-            alignItems: "center",
-          }}
-        >
-          <RegiButton
-            text="등록하기"
-            onPress={handleRegiButtonPress}
-          ></RegiButton>
-        </View>
+        <View style={{ flex: 2 }}></View>
       </View>
     </Background>
   );

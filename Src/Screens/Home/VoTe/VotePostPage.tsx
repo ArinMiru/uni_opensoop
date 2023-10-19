@@ -33,7 +33,16 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View style={{ flexDirection: "row" }}>
-          <ViewUnvottedButton />
+          <View
+            style={{
+              flex: 1,
+              marginTop: "5%",
+              alignContent: "center",
+              alignItems: "flex-end",
+            }}
+          >
+            <ViewUnvottedButton />
+          </View>
         </View>
         <View
           style={{
