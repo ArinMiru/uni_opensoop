@@ -1,10 +1,4 @@
-import {
-  View,
-  Platform,
-  TextInputProps,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import { View, TextInputProps, TouchableOpacity, Text } from "react-native";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import textStyle from "../../../Styles/TextStyle";
 import { OpenProfileIcon } from "../../IconCompo/ProfileIcon";

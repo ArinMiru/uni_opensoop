@@ -32,8 +32,8 @@ export const OpenEdtDltButton: React.FC<ButtonProps> = ({
     >
       <SimpleLineIcons
         name="options"
-        size={deviceWidth * 0.059}
-        color="#4BB781"
+        size={deviceWidth * 0.053}
+        color="#37424D"
       />
       {children}
     </TouchableOpacity>

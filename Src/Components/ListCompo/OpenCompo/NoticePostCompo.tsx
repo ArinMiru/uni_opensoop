@@ -79,7 +79,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
           >
             <Text
               style={[
-                textStyle.bold12,
+                textStyle.bold11,
                 {
                   color: "#1E232C",
                   left: deviceWidth * 0.06,
@@ -91,7 +91,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
             <View style={{ flexDirection: "row" }}>
               <Text
                 style={[
-                  textStyle.bold11,
+                  textStyle.bold10,
                   {
                     color: "#BDBDBD",
                     left: deviceWidth * 0.06,
@@ -102,7 +102,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
               </Text>
               <Text
                 style={[
-                  textStyle.bold11,
+                  textStyle.bold10,
                   {
                     color: "#BDBDBD",
                     left: deviceWidth * 0.06,

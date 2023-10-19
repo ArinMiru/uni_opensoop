@@ -16,6 +16,7 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import VoteRegiDateDropDown from "../../../Components/SingleUse/VoteRegiDateDropdown";
+import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 /**
  * @Dowon(김도원 생성)
  * 투표 게시물 등록 페이지
@@ -23,9 +24,15 @@ import VoteRegiDateDropDown from "../../../Components/SingleUse/VoteRegiDateDrop
  */
 
 const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
+  const userData = getUserData(); // 현재 사용자 데이터
   return (
     <Background>
-      <BackIconTopbarStyle text="투표" onPress={() => navigation.goBack()} />
+      <BackIconTopbarStyle
+        Title="투표"
+        MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
+        MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
+        onPress={() => navigation.goBack()}
+      />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View
           style={{
