@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import {
   OpenFreSgsTitInputBox,
   OpenFreSgsContInputBox,
@@ -51,7 +51,7 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <Background>
       <BackIconRegiTopbarStyle
-        Title="자유게시판"
+        Title="자유게시판 등록"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
@@ -65,7 +65,7 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <View
           style={{
-            flex: 1,
+            flex: 1.5,
             width: deviceWidth * 1,
             justifyContent: "center",
             alignItems: "center",
@@ -80,6 +80,8 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
 
         <View
           style={{
+            flex: 3.5,
+            height: "auto",
             width: deviceWidth * 1,
             justifyContent: "center",
             alignItems: "center",
@@ -93,21 +95,16 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         </View>
         <View
           style={{
-            flex: 1,
+            flex: 2,
             width: deviceWidth * 1,
-            justifyContent: "center",
+            marginTop: deviceHeight * 0.02,
+            justifyContent: "flex-start",
             alignItems: "flex-end",
           }}
         >
           <FreeListLawButton />
         </View>
-        <View
-          style={{
-            flex: 2,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        ></View>
+        <View style={{ flex: 2 }}></View>
       </View>
     </Background>
   );
