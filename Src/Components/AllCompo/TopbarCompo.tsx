@@ -371,7 +371,8 @@ export const BackIconRegiTopbarStyle: React.FC<ButtonProps> = ({
  */
 export const BackIconTopbarStyle: React.FC<ButtonProps> = ({
   children,
-
+  MEMB_SC_NM,
+  MEMB_DEP_NM,
   Title,
   onPress,
   onPressDel,
@@ -406,7 +407,7 @@ export const BackIconTopbarStyle: React.FC<ButtonProps> = ({
             { textAlign: "left" },
           ]}
         >
-          {"MEMB_SC_NM"} {"MEMB_DEP_NM"}
+          {MEMB_SC_NM} {MEMB_DEP_NM}
         </Text>
       </View>
       {["02", "03", "05"].includes(userData?.TIT_CD || "") ? (
