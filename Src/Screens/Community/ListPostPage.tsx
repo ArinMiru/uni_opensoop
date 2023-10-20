@@ -124,7 +124,6 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
                 freposttime={item.CRE_DAT}
                 fretit={item.TIT}
                 frecont={item.CONT}
-                grade="1학년"
                 onPress={() => navigation.navigate("FrePostDetailPage")}
               />
             )}
