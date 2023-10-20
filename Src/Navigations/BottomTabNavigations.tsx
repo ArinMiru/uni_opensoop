@@ -9,7 +9,7 @@ import VotePostPage from "../Screens/Home/VoTe/VotePostPage"; // 경로 수정
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import {
   FreeIcon,
-  HomeIcon,
+  NoticeIcon,
   SchdlIcon,
   VoteIcon,
   BottomTabLogo,
@@ -42,7 +42,7 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
         let iconComponent;
         if (route.name === "NoticePage") {
           iconComponent = (
-            <HomeIcon
+            <NoticeIcon
               style={{
                 paddingTop: "20%",
               }}
