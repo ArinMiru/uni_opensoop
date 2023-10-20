@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { deviceWidth, deviceHeight } from "../Utils/DeviceUtils";
 
 export default StyleSheet.create({
@@ -19,6 +19,6 @@ export default StyleSheet.create({
   BottomTabBackgroundStyle: {
     backgroundColor: "#FFFFFF",
     width: deviceWidth * 1,
-    height: deviceHeight * 0.79,
+    height: Platform.OS === "ios" ? "90.8%" : "91%", // 아이폰의 경우 91%, 안드로이드의 경우 89%로 설정
   },
 });
