@@ -102,7 +102,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
               </Text>
               <Text
                 style={[
-                  textStyle.bold10,
+                  textStyle.bold11,
                   {
                     color: "#BDBDBD",
                     left: deviceWidth * 0.06,
@@ -202,14 +202,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
                 paddingLeft: deviceWidth * 0.06,
               }}
             >
-              <Text
-                style={[
-                  textStyle.regular10,
-                  {
-                    color: "#1E232C",
-                  },
-                ]}
-              >
+              <Text style={[textStyle.regular10, { color: "#1E232C" }]}>
                 {PostContent}
               </Text>
             </View>
