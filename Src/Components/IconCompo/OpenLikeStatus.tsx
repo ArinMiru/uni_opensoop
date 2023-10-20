@@ -21,17 +21,14 @@ export const MainOpenLikeStatus: React.FC<LikeProps> = ({
         alignItems: "center",
       }}
     >
-      <AntDesign name="heart" size={deviceWidth * 0.041} color="#919191" />
+      <AntDesign name="heart" size={deviceWidth * 0.035} color="#919191" />
       <Text
         style={[
-          textStyle.semibold12,
+          textStyle.semibold10,
           { color: "#919191" },
-          { lineHeight: deviceWidth * 0.05 },
-          { textAlign: "center" },
           { marginLeft: deviceWidth * 0.01 },
         ]}
       >
-        {"LIKE_CNT"}
         {openpostLike}
       </Text>
     </View>
