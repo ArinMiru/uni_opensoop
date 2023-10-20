@@ -19,7 +19,7 @@ import { deviceHeight } from "../Utils/DeviceUtils";
 const Tab = createBottomTabNavigator();
 
 const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
-  const [selectedIcon, setSelectedIcon] = useState("NoticePage");
+  const [selectedIcon, setSelectedIcon] = useState("HomePageScreen");
 
   return (
     <View style={{ flexDirection: "row", backgroundColor: "lightgray" }}>
@@ -108,7 +108,7 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
 const BottomTabNavigations = () => {
   return (
     <Tab.Navigator
-      initialRouteName="NoticePage"
+      initialRouteName="HomePageScreen"
       tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tab.Screen
