@@ -3,8 +3,8 @@ import { TouchableOpacity, Text, View } from "react-native";
 import textStyle from "../../../Styles/TextStyle";
 import OpenButtonStyle from "../../../Styles/ListStyles/OpenButtonStyle";
 import { Entypo } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { OpenPhotoDelIcon } from "../../IconCompo/OpenPhotoIcon";
 interface ButtonProps {
@@ -50,10 +50,27 @@ export const OpenLikeButtton: React.FC<ButtonProps> = ({
   postLike,
   onPress,
 }) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState<number>(postLike || 0);
+
+  const handlePress = () => {
+    if (isLiked) {
+      setLikeCount(likeCount - 1);
+    } else {
+      setLikeCount(likeCount + 1);
+    }
+    setIsLiked(!isLiked);
+    if (onPress) onPress();
+  };
+
   return (
     <View>
-      <TouchableOpacity onPress={onPress}>
-        <Feather name="heart" size={deviceWidth * 0.057} color="#4BB781" />
+      <TouchableOpacity onPress={handlePress}>
+        <FontAwesome
+          name={isLiked ? "heart" : "heart-o"}
+          size={deviceWidth * 0.057}
+          color="#4BB781"
+        />
       </TouchableOpacity>
       <Text
         style={[
@@ -64,7 +81,7 @@ export const OpenLikeButtton: React.FC<ButtonProps> = ({
           { lineHeight: deviceHeight * 0.022 },
         ]}
       >
-        {"좋아요"} {postLike} {"개"}
+        {"좋아요"} {likeCount} {"개"}
       </Text>
     </View>
   );
