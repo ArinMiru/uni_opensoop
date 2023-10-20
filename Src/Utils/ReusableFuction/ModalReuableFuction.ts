@@ -5,8 +5,6 @@ export const ModalReuableFuction = () => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const snapPoints = useMemo(() => ["25%", "25%"], []);
-
   const handleEditPress = useCallback(() => {
     console.log("Edit button pressed");
   }, []);
@@ -29,7 +27,6 @@ export const ModalReuableFuction = () => {
   return {
     bottomSheetModalRef,
     modalVisible,
-    snapPoints,
     handleEditPress,
     handleDeletePress,
     handleButtonPress,
