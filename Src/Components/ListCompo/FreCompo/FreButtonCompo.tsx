@@ -106,7 +106,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
       >
         <View
           style={{
-            flex: 5,
+            flex: 1,
             justifyContent: "center",
             height: "100%",
           }}
@@ -121,26 +121,6 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
             ]}
           >
             {fretit}
-          </Text>
-        </View>
-        <View
-          style={{
-            flex: 1.5,
-            height: "100%",
-            alignItems: "flex-end",
-            justifyContent: "center",
-            marginRight: deviceWidth * 0.034,
-          }}
-        >
-          <Text
-            style={[
-              textStyle.semibold05,
-              {
-                color: "#919191",
-              },
-            ]}
-          >
-            {freposttime}
           </Text>
         </View>
       </View>
@@ -202,12 +182,19 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
           </View>
           <View
             style={{
-              alignItems: "flex-start",
-              marginLeft: deviceWidth * 0.006,
+              height: "100%",
+              marginLeft: deviceWidth * 0.01,
             }}
           >
-            <Text style={[textStyle.semibold05, { color: "#919191" }]}>
-              {grade}
+            <Text
+              style={[
+                textStyle.semibold06,
+                {
+                  color: "#919191",
+                },
+              ]}
+            >
+              {freposttime}
             </Text>
           </View>
         </View>
