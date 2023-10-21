@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native"; // useIsFocused 추가
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { QuestData } from "../../Utils/_private/ApiData/QuestData";
-import { QuesBubListSvc } from "../../Utils/_private/ApiData/QuestPostData";
+import { QuesBubListSvc } from "../../Services/_private/QusetPostData";
 import { FlatList, View } from "react-native";
 import { FreeBubListCall } from "../../Services/_private/FreeApi";
 import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
@@ -14,54 +15,84 @@ import NewBackgroundStyle from "../../Styles/NewBackgroundStyle";
 import { Background } from "../../Components/AllCompo/Background";
 import { SgsListContentButton } from "../../Components/ListCompo/SgsCompo/SgsButtonCompo";
 import { QstListContentButton } from "../../Components/ListCompo/QstCompo/QstButtonCompo";
+import { SugBubListData } from "../../Utils/_private/ApiData/SugBubListData";
+import { SugBubListSvc } from "../../Services/_private/SugBubListApi";
 
 const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
-  const userData = getUserData(); // 현재 사용자 데이터
+  const userData = getUserData();
   const [selectedCategory, setSelectedCategory] = useState("자유");
-  const [freeData, setFreeData] = useState<FreeData | null>(null); // 자유게시판 데이터
-  const [questData, setQuestData] = useState<QuestData | null>(null); // 질문게시판 데이터
+  const [freeData, setFreeData] = useState<FreeData | null>(null);
+  const [questData, setQuestData] = useState<QuestData | null>(null);
+  const [sugsData, setSugsData] = useState<SugBubListData | null>();
+  const isFocused = useIsFocused(); // 화면 포커스 여부 확인
 
   // 컴포넌트가 렌더링될 때 한 번만 실행되는 부분입니다.
   useEffect(() => {
-    if (selectedCategory === "자유") {
-      // 사용자 데이터가 존재하면 자유게시판 데이터를 가져옵니다.
-      if (userData !== null) {
-        FreeBubListCall(
-          userData.LOGIN_ID,
-          userData.MEMB_SC_CD,
-          userData.MEMB_DEP_CD,
-          userData.TIT_CD
-        )
-          .then((data) => {
-            if (data !== null) {
-              setFreeData(data); // 가져온 데이터를 상태에 저장합니다.
+    if (userData !== null && isFocused) {
+      // 화면 포커스일 때만 실행
+      // 자유게시판 데이터 가져오기
+      FreeBubListCall(
+        userData.LOGIN_ID,
+        userData.MEMB_SC_CD,
+        userData.MEMB_DEP_CD,
+        userData.TIT_CD
+      )
+        .then((data) => {
+          if (data !== null) {
+            const sorted = { ...data };
+            if (sorted.FREE_BUB) {
+              sorted.FREE_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
             }
-          })
-          .catch((error) => {
-            console.error("데이터 가져오기 오류:", error);
-          });
-      }
-    } else if (selectedCategory === "건의") {
-      //건의 카테고리 데이터 가져와야함
-    } else if (selectedCategory === "질문") {
-      if (userData !== null) {
-        QuesBubListSvc(
-          userData.LOGIN_ID,
-          userData.MEMB_SC_CD,
-          userData.MEMB_DEP_CD,
-          userData.TIT_CD
-        )
-          .then((data) => {
-            if (data !== null) {
-              setQuestData(data);
+            setFreeData(sorted);
+            console.log("실행");
+          }
+        })
+        .catch((error) => {
+          console.error("자유게시판 데이터 가져오기 오류:", error);
+        });
+
+      // 건의게시판 데이터 가져오기
+      SugBubListSvc(
+        userData.LOGIN_ID,
+        userData.MEMB_SC_CD,
+        userData.MEMB_DEP_CD,
+        userData.TIT_CD
+      )
+        .then((data) => {
+          if (data != null) {
+            const sorted = { ...data };
+            if (sorted.SUG_BUB) {
+              sorted.SUG_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
             }
-          })
-          .catch((error) => {
-            console.log("데이터 오류", error);
-          });
-      }
+            setSugsData(sorted);
+          }
+        })
+        .catch((error) => {
+          console.error("질문게시판 데이터 가져오기 오류", error);
+        });
+
+      // 질문게시판 데이터 가져오기
+      QuesBubListSvc(
+        userData.LOGIN_ID,
+        userData.MEMB_SC_CD,
+        userData.MEMB_DEP_CD,
+        userData.TIT_CD
+      )
+        .then((data) => {
+          if (data !== null) {
+            const sorted = { ...data };
+            if (sorted.QUES_BUB) {
+              sorted.QUES_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+            }
+            setQuestData(sorted);
+          }
+        })
+        .catch((error) => {
+          console.error("질문게시판 데이터 가져오기 오류:", error);
+        });
     }
-  }, []); // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때만 호출됩니다.
+  }, [userData, isFocused]); // isFocused와 userData 상태에 따라 실행
+
   return (
     <Background>
       {selectedCategory === "자유" && (
@@ -117,57 +148,66 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
         {selectedCategory === "자유" && (
           <FlatList
             data={freeData?.FREE_BUB}
-            keyExtractor={(item, index) => item.CRE_SEQ.toString() + index}
+            keyExtractor={(item) => item.CRE_SEQ.toString()}
             renderItem={({ item }) => (
               <FreeListIclucontnButton
                 nickname={item.NICK_NM}
                 freposttime={item.CRE_DAT}
                 fretit={item.TIT}
                 frecont={item.CONT}
-                onPress={() => navigation.navigate("FrePostDetailPage")}
+                onPress={() => {
+                  navigation.navigate("FrePostDetailPage", {
+                    CRE_SEQ: item.CRE_SEQ,
+                    NICK_NM: item.NICK_NM,
+                    LIKE_CNT: item.LIKE_CNT,
+                    CRE_DAT: item.CRE_DAT,
+                    CONT: item.CONT,
+                    TIT: item.TIT,
+                    AnsFree: item.ANS_FREE,
+                  });
+                }}
               />
             )}
           />
         )}
         {selectedCategory === "건의" && (
-          <SgsListContentButton
-            title="비공개 게시물입니다."
-            poststatus="답변 대기중"
-            anonynick="익명"
-            sgsposttime="2021년2월2일"
-            onPress={() => navigation.navigate("SgsPostDetailPage")}
+          <FlatList
+            data={sugsData?.SUG_BUB}
+            keyExtractor={(item) => item.CRE_SEQ.toString()}
+            renderItem={({ item }) => (
+              <SgsListContentButton
+                title={item.TIT}
+                poststatus={item.SEC_YN}
+                anonynick="익명"
+                sgsposttime={item.CRE_DAT}
+                onPress={() =>
+                  navigation.navigate("SgsPostDetailPage", {
+                    CRE_SEQ: item.CRE_SEQ,
+                    CONT: item.CONT,
+                    TIT: item.TIT,
+                    CRE_DAT: item.CRE_DAT,
+                    NICK_NM: item.NICK_NM,
+                    AnsFree: item.ANS_FREE,
+                  })
+                }
+              />
+            )}
           />
-          /**
-        <FlatList
-          data={sgsData?.SUG_BUB}
-          keyExtractor={(item, index) => item.CRE_SEQ.toString() + index}
-          renderItem={({ item }) => (
-            <View>
-              <Text>{item.NICK_NM}</Text>
-              <Text>{item.CONT}</Text>
-            </View>
-       
-         */
         )}
         {selectedCategory === "질문" && (
-          <QstListContentButton
-            nickname="도원숙"
-            postcontent="안녕하세요 교수님 화장실 가도 될까요?"
-            grade="1학년"
-            qstposttime="2022년1웕5일"
-            onPress={() => navigation.navigate("SgsPostDetailPage")}
+          <FlatList
+            data={questData?.QUES_BUB}
+            keyExtractor={(item) => item.CRE_SEQ.toString()}
+            renderItem={({ item }) => (
+              <QstListContentButton
+                nickname={item.NICK_NM}
+                postcontent={item.CONT}
+                grade="1학년"
+                qstposttime={item.CRE_DAT}
+                onPress={() => navigation.navigate("SgsPostDetailPage")}
+              />
+            )}
           />
-          /**
-        <FlatList
-          data={questData?.QUES_BUB}
-          keyExtractor={(item, index) => item.CRE_SEQ.toString() + index}
-          renderItem={({ item }) => (
-            <View>
-              <Text>{item.NICK_NM}</Text>
-              <Text>{item.CONT}</Text>
-            </View>
-       
-         */
         )}
       </View>
     </Background>

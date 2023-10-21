@@ -26,29 +26,27 @@ interface ButtonProps extends TextInputProps {
   grade?: string;
   like?: number;
   onPress?: () => void;
+  editOnPress?: () => void;
+  deleOnPress?: () => void;
 }
 
 /*
  *자유게시판에서 수정 삭제 버튼이 나란히 있는 영역의 컴포넌트 임댜.
  **/
-export const FreEditDelButton: React.FC<ButtonProps> = ({ children }) => (
+export const FreEditDelButton: React.FC<ButtonProps> = ({
+  children,
+  editOnPress,
+  deleOnPress,
+}) => (
   <View
     style={{
       marginTop: deviceHeight * 0.02,
       flexDirection: "row",
     }}
   >
-    <FreEditButton
-      onPress={() => {
-        /* 버튼 클릭 시 동작 */
-      }}
-    />
+    <FreEditButton onPress={editOnPress} />
     <View style={{ marginLeft: deviceWidth * 0.009 }}>
-      <FreDelButton
-        onPress={() => {
-          /* 버튼 클릭 시 동작 */
-        }}
-      />
+      <FreDelButton onPress={deleOnPress} />
     </View>
   </View>
 );
