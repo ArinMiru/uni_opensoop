@@ -1,6 +1,9 @@
 import { View, Platform, KeyboardAvoidingView } from "react-native";
 import React from "react";
-import { ScreenProps } from "../../../Navigations/StackNavigator";
+import {
+  ScreenProps,
+  RootStackParamList,
+} from "../../../Navigations/StackNavigator";
 import {
   SqsPost,
   SqsComment,
@@ -11,11 +14,36 @@ import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyles";
 import { CommentInput } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
 import { ScrollView } from "react-native-gesture-handler";
+import { SugBubListDel } from "../../../Services/_private/SugBubListApi";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/native";
 
-const SgsPostClkToast: React.FC<ScreenProps> = ({ navigation }) => {
+type FreePostDetailRouteProp = RouteProp<
+  RootStackParamList,
+  "SgsPostDetailPage"
+>;
+type FreePostDetailNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "SgsPostDetailPage"
+>;
+
+type FreePostDetailProps = {
+  route: FreePostDetailRouteProp;
+  navigation: FreePostDetailNavigationProp;
+};
+
+const SgsPostClkToast: React.FC<FreePostDetailProps> = ({
+  navigation,
+  route,
+}) => {
+  const { CRE_SEQ, CONT, TIT, NICK_NM, CRE_DAT, AnsFree } = route.params;
+  const sgsDel = () => {
+    SugBubListDel(CRE_SEQ);
+  };
   return (
     <AccountBackground>
       <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
+      {/* 수정 에러 뜸 */}
       <KeyboardAvoidingView
         style={{ flex: 1, marginBottom: deviceWidth * 0.02 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -23,10 +51,11 @@ const SgsPostClkToast: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <ScrollView>
           <SqsPost
-            nickname="닉네임"
-            sgstit="도원씨 안녕하세요"
-            sgscont="사실 안 안녕하다 이녀석아 ㅋㅋ"
-            sgsposttime="0초전"
+            nickname={NICK_NM}
+            sgstit={TIT}
+            sgscont={CONT}
+            sgsposttime={CRE_DAT}
+            onPress={sgsDel}
           />
           <View
             style={[
@@ -34,11 +63,16 @@ const SgsPostClkToast: React.FC<ScreenProps> = ({ navigation }) => {
               { marginTop: deviceHeight * 0.018 },
             ]}
           ></View>
-          <SqsComment
-            sgsansnick="익명이"
-            sgsanstit="한우를 먹고 싶나 오마에"
-            sgsanstime="10년전"
-          />
+          {AnsFree.sort((a, b) => b.ANS_SEQ - a.ANS_SEQ) // 내림차순 정렬
+            .map((comment) => (
+              <SqsComment
+                key={comment.ANS_SEQ}
+                sgsansnick={comment.ANS_MEMB_ID}
+                sgsanstit={comment.CONT}
+                sgsanstime={comment.CRE_DAT}
+              />
+            ))}
+
           <CommentInput text="댓글을 입력하세요." />
         </ScrollView>
       </KeyboardAvoidingView>

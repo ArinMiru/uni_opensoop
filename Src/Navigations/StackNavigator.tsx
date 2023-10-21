@@ -43,10 +43,11 @@ import BottomTabNavigations from "./BottomTabNavigations";
 import JungTestScreen from "../Screens/JungTest/JungTestScreen";
 import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
 import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
+import FreePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
 
-type RootStackParamList = {
+export type RootStackParamList = {
   //파라미터 전달 값 없음
   AccountLoginRegi: undefined;
   AccountLogin: undefined;
@@ -76,9 +77,35 @@ type RootStackParamList = {
   NoticePostRegiPage: undefined;
   QstPostRegiPage: undefined;
   SgsPostRegiPage: undefined;
-  SgsPostDetailPage: undefined;
+  SgsPostDetailPage: {
+    CRE_SEQ: number;
+    CONT: string;
+    TIT: string;
+    NICK_NM: string;
+    CRE_DAT: string;
+    AnsFree: {
+      ANS_MEMB_ID: string;
+      ANS_SEQ: number;
+      CONT: string;
+      CRE_DAT: string;
+      SEC_YN: string;
+    }[];
+  };
   FrePostRegiPage: undefined;
-  FrePostDetailPage: undefined;
+  FrePostDetailPage: {
+    CRE_SEQ: number;
+    CONT: string;
+    TIT: string;
+    NICK_NM: string;
+    LIKE_CNT: number;
+    CRE_DAT: string;
+    AnsFree: {
+      ANS_MEMB_ID: string;
+      ANS_SEQ: number;
+      CONT: string;
+      CRE_DAT: string;
+    }[];
+  };
   VotePostPage: undefined;
   VotePostRegiPage: undefined;
   VotePostDetailPage: undefined;
@@ -96,7 +123,7 @@ type RootStackParamList = {
 };
 
 export type ScreenProps = {
-  navigation: StackNavigationProp<RootStackParamList, "AccountLoginRegi">;
+  navigation: StackNavigationProp<RootStackParamList, keyof RootStackParamList>;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -257,7 +284,7 @@ const StackNavigator = () => {
       />
       <Stack.Screen
         name="FrePostDetailPage"
-        component={FrePostDetailPage}
+        component={FreePostDetailPage}
         options={{ headerShown: false }}
       />
       <Stack.Screen

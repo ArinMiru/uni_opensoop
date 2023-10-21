@@ -19,6 +19,8 @@ interface ButtonProps {
   freqstanstime?: string;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
+  editPress?: () => void;
+  delPress?: () => void;
 }
 
 // 건의 게시판과 공통되는 화면이기 때문에 건의 게시판의 .style을 그대로 가져왔습니다.
@@ -35,6 +37,8 @@ export const FrePost: React.FC<ButtonProps> = ({
   frecont,
   frelike,
   onPress,
+  editPress,
+  delPress,
 }) => {
   return (
     <ScrollView>
@@ -120,7 +124,7 @@ export const FrePost: React.FC<ButtonProps> = ({
             alignItems: "flex-end",
           }}
         >
-          <FreEditDelButton onPress={onPress} />
+          <FreEditDelButton editOnPress={editPress} deleOnPress={delPress} />
         </View>
       </View>
     </ScrollView>
