@@ -6,39 +6,21 @@ import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyles";
+import { FrePost } from "../../../Components/ListCompo/FreCompo/FreCompo";
+import { ScrollView } from "react-native-gesture-handler";
 import { CommentInput } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
-import { useRoute } from "@react-navigation/native";
-import { FreeBubDel } from "../../../Services/_private/FreeApi";
+import { KeyboardAvoidingView } from "react-native";
+import { Platform } from "react-native";
+import { getUserData } from "../../../Utils/_private/ApiData/UserData";
+import { FreeData } from "../../../Utils/_private/ApiData/FreeData";
 
-type FreePostDetailRouteProp = RouteProp<
-  RootStackParamList,
-  "FrePostDetailPage"
->;
-type FreePostDetailNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "FrePostDetailPage"
->;
+// 건의 게시판과 공통되는 화면이기 때문에 건의 게시판의 .style을 그대로 가져왔습니다.
 
-type FreePostDetailProps = {
-  route: FreePostDetailRouteProp;
-  navigation: FreePostDetailNavigationProp;
-};
-
-const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
-  route,
-  navigation,
-}) => {
-  const { CRE_SEQ, CONT, TIT, NICK_NM, LIKE_CNT, CRE_DAT, AnsFree } =
-    route.params;
-  console.log(CRE_SEQ);
-
-  const dellPress = () => {
-    FreeBubDel(CRE_SEQ);
-  };
-
+const FreePostDetailPage: React.FC<ScreenProps> = ({ navigation }) => {
+  const [freeData, setFreeData] = useState<FreeData | null>(null); // 자유게시판 데이터
   return (
     <AccountBackground>
-      <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />{/* 수정 에러 뜸 */}
+      <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
       <KeyboardAvoidingView
         style={{ flex: 1, marginBottom: deviceWidth * 0.02 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -46,12 +28,11 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
       >
         <ScrollView>
           <FrePost
-            nickname={NICK_NM}
-            fretit={TIT}
-            frecont={CONT}
-            freposttime={CRE_DAT}
-            frelike={LIKE_CNT} // 좋아요 수 number로 받아오기
-            delPress={dellPress}
+            nickname={"익명이"}
+            fretit="해결함 닉네임 길이 제한 걸면됨"
+            frecont="해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!"
+            freposttime="0초전"
+            frelike={100} // 좋아요 수 number로 받아오기
           />
           <View
             style={[
