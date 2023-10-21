@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-import { View, KeyboardAvoidingView, ScrollView, Platform } from "react-native";
-import { RouteProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { FreeData } from "../../../Utils/_private/ApiData/FreeData";
-import { RootStackParamList } from "../../../Navigations/StackNavigator";
-import {
-  FreComment,
-  FrePost,
-} from "../../../Components/ListCompo/FreCompo/FreCompo";
+import { View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScreenProps } from "../../../Navigations/StackNavigator";
+import { FreQstComment } from "../../../Components/ListCompo/FreCompo/FreCompo";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
@@ -65,15 +59,11 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
               { marginTop: deviceHeight * 0.018 },
             ]}
           ></View>
-          {AnsFree.sort((a, b) => b.ANS_SEQ - a.ANS_SEQ) // ANS_SEQ를 내림차순으로 정렬
-            .map((comment) => (
-              <FreComment
-                key={comment.ANS_SEQ} // 각 댓글의 ANS_SEQ를 고유한 키로 사용
-                freansnick={comment.ANS_MEMB_ID}
-                freanstit={comment.CONT}
-                freanstime={comment.CRE_DAT}
-              />
-            ))}
+          <FreQstComment
+            freqstansnick="익명이"
+            freqstanstit="한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에"
+            freqstanstime="10년전"
+          />
           <CommentInput text="댓글을 입력하세요." />
         </ScrollView>
       </KeyboardAvoidingView>
