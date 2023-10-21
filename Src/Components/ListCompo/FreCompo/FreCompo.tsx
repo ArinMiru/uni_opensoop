@@ -14,9 +14,9 @@ interface ButtonProps {
   fretit?: string;
   frecont?: string;
   frelike?: number;
-  freansnick?: string;
-  freanstit?: string;
-  freanstime?: string;
+  freqstansnick?: string;
+  freqstanstit?: string;
+  freqstanstime?: string;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
   editPress?: () => void;
@@ -131,10 +131,10 @@ export const FrePost: React.FC<ButtonProps> = ({
   );
 };
 
-export const FreComment: React.FC<ButtonProps> = ({
-  freansnick,
-  freanstit,
-  freanstime,
+export const FreQstComment: React.FC<ButtonProps> = ({
+  freqstansnick,
+  freqstanstit,
+  freqstanstime,
   onPress,
 }) => {
   return (
@@ -143,12 +143,12 @@ export const FreComment: React.FC<ButtonProps> = ({
         style={{
           flexDirection: "row",
           width: deviceWidth * 1,
-          marginLeft: deviceWidth * 0.06,
+          paddingLeft: deviceWidth * 0.06,
           minHeight: deviceHeight * 0.05,
-          marginTop: deviceHeight * 0.018,
+          paddingTop: deviceHeight * 0.018,
         }}
       >
-        <View>
+        <View style={{ justifyContent: "center" }}>
           <PostProfileIcon />
         </View>
         <View
@@ -159,14 +159,8 @@ export const FreComment: React.FC<ButtonProps> = ({
             height: "auto",
           }}
         >
-          <Text
-            style={[
-              textStyle.semibold10,
-              { color: "#00B45A" },
-              { lineHeight: deviceHeight * 0.031 },
-            ]}
-          >
-            {freansnick}
+          <Text style={[textStyle.semibold08, { color: "#151515" }]}>
+            {freqstansnick}
           </Text>
           <View
             style={{
@@ -174,20 +168,14 @@ export const FreComment: React.FC<ButtonProps> = ({
               marginTop: deviceHeight * 0.006,
             }}
           >
-            <Text
-              style={[
-                textStyle.medium09,
-                { color: "#424C43" },
-                { lineHeight: deviceHeight * 0.031 },
-              ]}
-            >
-              {freanstit}
+            <Text style={[textStyle.regular08, { color: "#151515" }]}>
+              {freqstanstit}
             </Text>
           </View>
         </View>
         <View>
-          <Text style={[textStyle.regular07, { color: "#000000" }]}>
-            {freanstime}
+          <Text style={[textStyle.semibold05, { color: "#919191" }]}>
+            {freqstanstime}
           </Text>
         </View>
       </View>
