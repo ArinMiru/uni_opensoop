@@ -17,6 +17,7 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { openBubSvcNew } from "../../../Services/_private/NoticeApi";
 import { Background } from "../../../Components/AllCompo/Background";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 /** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 
@@ -95,25 +96,27 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         onPressRegi={handleRegiButtonPress}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
-        <View
-          style={{
-            flex: 1.5,
-            width: deviceWidth * 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <OpenFreSgsTitInputBox
-            text="제목을 입력하세요"
-            value={tit}
-            onChangeText={(text) => setTit(text)}
-          ></OpenFreSgsTitInputBox>
-        </View>
+        <SafeAreaView>
+          <View
+            style={{
+              flex: 1.5,
+              width: deviceWidth * 1,
+              justifyContent: "center",
+              alignItems: "center",
+              paddingTop: deviceWidth * 0.06,
+            }}
+          >
+            <OpenFreSgsTitInputBox
+              text="제목을 입력하세요"
+              value={tit}
+              onChangeText={(text) => setTit(text)}
+            ></OpenFreSgsTitInputBox>
+          </View>
+        </SafeAreaView>
         <KeyboardAvoidingView
           style={{
-            flex: 3.5,
             width: deviceWidth * 1,
-            height: "auto",
+            paddingTop: deviceWidth * 0.099,
             justifyContent: "center",
             alignItems: "center",
           }}

@@ -25,6 +25,7 @@ import {
 } from "../../../Components/AllCompo/ModalCompo";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
+import { deviceHeight } from "../../../Utils/DeviceUtils";
 
 const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const modalFunctions = ModalReuableFuction();
@@ -87,7 +88,12 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
         <BottomSheetModal
           ref={modalFunctions.bottomSheetModalRef}
           index={1}
-          snapPoints={modalFunctions.snapPoints}
+          snapPoints={[
+            deviceHeight * 0.25,
+            deviceHeight * 0.25,
+            deviceHeight * 0.25,
+          ]}
+          enablePanDownToClose={true}
           onDismiss={modalFunctions.handleCloseModal}
         >
           <View style={EditDelCloseModalStyle.contentContainer}>

@@ -26,29 +26,27 @@ interface ButtonProps extends TextInputProps {
   grade?: string;
   like?: number;
   onPress?: () => void;
+  editOnPress?: () => void;
+  deleOnPress?: () => void;
 }
 
 /*
  *자유게시판에서 수정 삭제 버튼이 나란히 있는 영역의 컴포넌트 임댜.
  **/
-export const FreEditDelButton: React.FC<ButtonProps> = ({ children }) => (
+export const FreEditDelButton: React.FC<ButtonProps> = ({
+  children,
+  editOnPress,
+  deleOnPress,
+}) => (
   <View
     style={{
       marginTop: deviceHeight * 0.02,
       flexDirection: "row",
     }}
   >
-    <FreEditButton
-      onPress={() => {
-        /* 버튼 클릭 시 동작 */
-      }}
-    />
+    <FreEditButton onPress={editOnPress} />
     <View style={{ marginLeft: deviceWidth * 0.009 }}>
-      <FreDelButton
-        onPress={() => {
-          /* 버튼 클릭 시 동작 */
-        }}
-      />
+      <FreDelButton onPress={deleOnPress} />
     </View>
   </View>
 );
@@ -106,7 +104,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
       >
         <View
           style={{
-            flex: 5,
+            flex: 1,
             justifyContent: "center",
             height: "100%",
           }}
@@ -121,26 +119,6 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
             ]}
           >
             {fretit}
-          </Text>
-        </View>
-        <View
-          style={{
-            flex: 1.5,
-            height: "100%",
-            alignItems: "flex-end",
-            justifyContent: "center",
-            marginRight: deviceWidth * 0.034,
-          }}
-        >
-          <Text
-            style={[
-              textStyle.semibold05,
-              {
-                color: "#919191",
-              },
-            ]}
-          >
-            {freposttime}
           </Text>
         </View>
       </View>
@@ -202,12 +180,19 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
           </View>
           <View
             style={{
-              alignItems: "flex-start",
-              marginLeft: deviceWidth * 0.006,
+              height: "100%",
+              marginLeft: deviceWidth * 0.01,
             }}
           >
-            <Text style={[textStyle.semibold05, { color: "#919191" }]}>
-              {grade}
+            <Text
+              style={[
+                textStyle.semibold06,
+                {
+                  color: "#919191",
+                },
+              ]}
+            >
+              {freposttime}
             </Text>
           </View>
         </View>

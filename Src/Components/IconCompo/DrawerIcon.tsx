@@ -88,13 +88,17 @@ export const SchdlIcon: React.FC<DrawerIconProps> = ({
   );
 };
 
-export const NoticeIcon: React.FC<DrawerIconProps> = ({ children }) => {
+export const NoticeIcon: React.FC<DrawerIconProps> = ({
+  children,
+  color,
+  style,
+}) => {
   return (
     <AntDesign
       name="notification"
       size={deviceWidth * 0.065}
-      color="#4BB781"
-      style={{ marginRight: "5%" }}
+      color={color}
+      style={style}
     >
       {children}
     </AntDesign>
