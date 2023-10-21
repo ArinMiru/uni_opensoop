@@ -22,7 +22,7 @@ export const openBubListCall = async (
     // userData가 null이 아닌 경우에만 요청 보내기
 
     // 고정된 값으로 설정
-    const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 공지사항 수
+    const LIST_UNIT_CNT = 20; // 한 페이지에 표시할 공지사항 수
     const REQ_PAGE = 2; // 요청할 페이지 번호
 
     const data = {

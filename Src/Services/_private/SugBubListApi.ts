@@ -34,7 +34,7 @@ export const SugBubListSvc = async (
   //로그인 사용자의 데이터 가져오기
 
   if (userData !== null) {
-    const LIST_UNIT_CNT = 10; //한 페이지 안에 표시할 게시글 수
+    const LIST_UNIT_CNT = 20; //한 페이지 안에 표시할 게시글 수
     const REQ_PAGE = 1;
     const data = {
       LOGIN_ID,
