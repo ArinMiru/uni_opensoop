@@ -1,18 +1,17 @@
-import { useRef, useState, useMemo, useCallback } from "react";
+// ModalReuableFuction.js
+import { useRef, useState, useMemo, useCallback, useEffect } from "react";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 export const ModalReuableFuction = () => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const snapPoints = useMemo(() => ["25%", "25%"], []);
-
   const handleEditPress = useCallback(() => {
     console.log("Edit button pressed");
   }, []);
 
   const handleDeletePress = useCallback(() => {
-    console.log("Delete button pressed");
+    console.log("닫기");
   }, []);
 
   const handleButtonPress = useCallback(() => {
@@ -29,7 +28,6 @@ export const ModalReuableFuction = () => {
   return {
     bottomSheetModalRef,
     modalVisible,
-    snapPoints,
     handleEditPress,
     handleDeletePress,
     handleButtonPress,

@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { FreComment } from "../../../Components/ListCompo/FreCompo/FreCompo";
+import { FreQstComment } from "../../../Components/ListCompo/FreCompo/FreCompo";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
@@ -40,10 +40,10 @@ const FreePostDetailPage: React.FC<ScreenProps> = ({ navigation }) => {
               { marginTop: deviceHeight * 0.018 },
             ]}
           ></View>
-          <FreComment
-            freansnick="익명이"
-            freanstit="한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에"
-            freanstime="10년전"
+          <FreQstComment
+            freqstansnick="익명이"
+            freqstanstit="한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에"
+            freqstanstime="10년전"
           />
           <CommentInput text="댓글을 입력하세요." />
         </ScrollView>

@@ -29,17 +29,7 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
     try {
       const userData = getUserData();
       if (userData) {
-        const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
-
-        await FreeBubRegi(
-          LOGIN_ID,
-          "01",
-          MEMB_SC_CD,
-          MEMB_DEP_CD,
-          TIT_CD,
-          tit,
-          cont
-        );
+        await FreeBubRegi(tit, cont);
       } else {
         console.error("userData가 null입니다.");
       }
