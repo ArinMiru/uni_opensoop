@@ -1,18 +1,9 @@
-import React, {
-  useState,
-  useRef,
-  useMemo,
-  useCallback,
-  useEffect,
-} from "react";
+import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import {
-  BottomSheetModal,
-  BottomSheetModalProvider,
-} from "@gorhom/bottom-sheet";
-import { ModalReuableFuction } from "../../Utils/ReusableFuction/ModalReuableFuction";
 import TextStyle from "../../Styles/TextStyle";
 import EditDelCloseModalStyle from "../../Styles/ModalStyles/EditDelCloseModalStyles";
+import { FreQstComment } from "../ListCompo/FreCompo/FreCompo";
+import { ScrollView } from "react-native-gesture-handler";
 
 interface ButtonProps {
   EditonPress?: () => void;
@@ -50,5 +41,22 @@ export const CloseModalCompo: React.FC<ButtonProps> = ({ CloseonPress }) => {
     >
       <Text style={[TextStyle.medium14, { color: "#505050" }]}>닫기</Text>
     </TouchableOpacity>
+  );
+};
+
+export const QstModalCompo: React.FC<ButtonProps> = ({}) => {
+  return (
+    <View style={EditDelCloseModalStyle.qstArea}>
+      <View style={EditDelCloseModalStyle.ansArea}>
+        <Text style={[TextStyle.semibold10, { color: "#333333" }]}>댓글</Text>
+      </View>
+      <ScrollView style={{ flex: 6 }}>
+        <FreQstComment
+          freqstansnick="익명이"
+          freqstanstit="화장실은 죽어서 가십시오~~ 응가 뿌직뿌직 랄랄라"
+          freqstanstime="10년전"
+        />
+      </ScrollView>
+    </View>
   );
 };

@@ -1,37 +1,19 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { MainOpenBub } from "../../Components/MainPageCompo/MainPageCompo";
-import { Background } from "../../Components/AllCompo/Background";
-import NewBackgroundStyle from "../../Styles/NewBackgroundStyle";
-import { TopbarEditButton } from "../../Components/AllCompo/TopbarEditDelRegiButton";
-import {
-  MainPageTopbarStyle,
-  MenuTopbarStyle,
-} from "../../Components/AllCompo/TopbarCompo";
-import {
-  MainVoteBub,
-  MainSchdBub,
-} from "../../Components/MainPageCompo/MainPageCompo";
-import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
-import { BackIconTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
-import ProfilePageStyles from "../../Styles/MainPageStyles/ProfilePageStyles";
 import TextStyle from "../../Styles/TextStyle";
+import { deviceWidth } from "../../Utils/DeviceUtils";
+import { ScreenProps } from "../../Navigations/StackNavigator";
+import { Background } from "../../Components/AllCompo/Background";
+import { BackIconTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
 import {
   ProfilePageUserInfo,
   CertLogoutBox,
 } from "../../Components/ProfileCompo/ProfileCompo";
+import { getUserData } from "../../Utils/_private/ApiData/UserData";
 
-interface ScreenProps {
-  children?: React.ReactNode;
-  navigation?: { navigate: (screenName: string) => void };
-}
+const userData = getUserData(); // 현재 사용자 데이터
 
-/**
- * @Dowon(김도원 생성)
- * DowonTestScreen
- */
-
-const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
+const ProfilePage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <Background>
       <View style={{ justifyContent: "center" }}>
@@ -49,15 +31,15 @@ const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
         </View>
         <View style={{ alignItems: "center" }}>
           <ProfilePageUserInfo
-            PROF_IMG_PATH=""
-            MEMB_CD="2018143005"
-            MEMB_DEP_NM="정보통신학과"
-            MEMB_EM="hapje010@ptu.ac.kr"
-            MEMB_GRA="4학년"
-            MEMB_NM="김도원"
-            MEMB_SC_NM="평택대학교"
-            TIT_NM="재학생"
-            NICK_NUM="피카피카"
+            PROF_IMG_PATH={userData?.PROF_IMG_PATH || ""}
+            MEMB_CD={userData?.MEMB_NUM || ""}
+            MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
+            MEMB_EM={userData?.MEMB_EM || ""}
+            MEMB_GRA={userData?.MEMB_NUM || ""}
+            MEMB_NM={userData?.MEMB_NM || ""}
+            MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
+            TIT_NM={userData?.TIT_NM || ""}
+            NICK_NUM={userData?.NICK_NM || ""}
           />
         </View>
         <View
@@ -79,4 +61,4 @@ const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
   );
 };
 
-export default DowonTestScreen;
+export default ProfilePage;

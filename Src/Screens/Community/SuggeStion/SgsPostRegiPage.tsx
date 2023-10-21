@@ -11,6 +11,8 @@ import TextStyle from "../../../Styles/TextStyle";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { KeyboardAvoidingView } from "react-native";
 
 const userData = getUserData(); // 현재 사용자 데이터
 
@@ -30,45 +32,45 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           { alignItems: "center" },
         ]}
       >
-        <View
+        <SafeAreaView>
+          <View
+            style={{
+              width: deviceWidth * 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <OpenFreSgsTitInputBox text="제목을 입력하세요"></OpenFreSgsTitInputBox>
+          </View>
+        </SafeAreaView>
+        <KeyboardAvoidingView
           style={{
-            flex: 1,
             width: deviceWidth * 1,
             justifyContent: "center",
             alignItems: "center",
-          }}
-        >
-          <OpenFreSgsTitInputBox text="제목을 입력하세요"></OpenFreSgsTitInputBox>
-        </View>
-
-        <View
-          style={{
-            width: deviceWidth * 1,
-            justifyContent: "center",
-            alignItems: "center",
+            paddingTop: deviceWidth * 0.06,
           }}
         >
           <OpenFreSgsContInputBox text="텍스트를 입력해주세요."></OpenFreSgsContInputBox>
-          <View
-            style={{
-              width: deviceWidth * 0.82,
-              justifyContent: "center",
-            }}
+        </KeyboardAvoidingView>
+        <View
+          style={{
+            width: deviceWidth * 0.82,
+            justifyContent: "center",
+          }}
+        >
+          <Text
+            style={[
+              TextStyle.medium09,
+              { color: "#939393" },
+              { paddingTop: deviceWidth * 0.02 },
+              { letterSpacing: -0.3 },
+            ]}
           >
-            <Text
-              style={[
-                TextStyle.medium09,
-                { color: "#939393" },
-                { paddingTop: deviceWidth * 0.02 },
-                { letterSpacing: -0.3 },
-              ]}
-            >
-              학생회 임원들께 건의하는 게시판입니다. 학과 내 생활을 더욱
-              원활하게 만드는 아이디어를 제안해주세요. 학생회 임원들을 비난하지
-              않도록 주의 부탁드립니다. 익명으로 작성되며, 자유롭게 의견을
-              남겨주세요.
-            </Text>
-          </View>
+            학생회 임원들께 건의하는 게시판입니다. 학과 내 생활을 더욱 원활하게
+            만드는 아이디어를 제안해주세요. 학생회 임원들을 비난하지 않도록 주의
+            부탁드립니다. 익명으로 작성되며, 자유롭게 의견을 남겨주세요.
+          </Text>
         </View>
         <View
           style={{
