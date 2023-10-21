@@ -34,6 +34,7 @@ interface ButtonProps {
 const QstPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const [questData, setQuestData] = useState<QuestData | null>(null);
+  const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
 
   useEffect(() => {
     if (userData !== null) {

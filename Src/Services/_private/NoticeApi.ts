@@ -59,15 +59,15 @@ export const openBubListCall = async (
   }
 };
 /**
- * 공지사항 게시글 등록 함수 
- * @param LOGIN_ID 
- * @param MEMB_DEP_CD 
- * @param MEMB_SC_CD 
- * @param TIT_CD 
- * @param TIT 
- * @param CONT 
- * @param IMAGE_INFO 
- * @param CRE_SEQ 
+ * 공지사항 게시글 등록 함수
+ * @param LOGIN_ID
+ * @param MEMB_DEP_CD
+ * @param MEMB_SC_CD
+ * @param TIT_CD
+ * @param TIT
+ * @param CONT
+ * @param IMAGE_INFO
+ * @param CRE_SEQ
  */
 export const openBubSvcNew = async (
   LOGIN_ID: string,
@@ -76,7 +76,7 @@ export const openBubSvcNew = async (
   TIT_CD: string,
   TIT: string,
   CONT: string,
-  IMAGE_INFO: ImageInfo[],
+  IMAGE_INFO: ImageInfo[]
 ) => {
   const endpoint = "/UNI/OpenBubSvc";
   const data = {
@@ -100,15 +100,15 @@ export const openBubSvcNew = async (
   }
 };
 /**
- * 공지사항 수정 함수 
- * @param LOGIN_ID 
- * @param MEMB_DEP_CD 
- * @param MEMB_SC_CD 
- * @param TIT_CD 
- * @param TIT 
- * @param CONT 
- * @param IMAGE_INFO 
- * @param CRE_SEQ 
+ * 공지사항 수정 함수
+ * @param LOGIN_ID
+ * @param MEMB_DEP_CD
+ * @param MEMB_SC_CD
+ * @param TIT_CD
+ * @param TIT
+ * @param CONT
+ * @param IMAGE_INFO
+ * @param CRE_SEQ
  */
 export const openBubSvcUpdate = async (
   LOGIN_ID: string,
@@ -145,33 +145,54 @@ export const openBubSvcUpdate = async (
 };
 /**
  * 공지사항 삭제 함수
- * @param LOGIN_ID 
- * @param MEMB_DEP_CD 
- * @param MEMB_SC_CD 
- * @param CRE_SEQ 
+ * @param LOGIN_ID
+ * @param MEMB_DEP_CD
+ * @param MEMB_SC_CD
+ * @param CRE_SEQ
  */
-export const openBubSvcDel = async (
-  LOGIN_ID: string,
-  MEMB_DEP_CD: string,
-  MEMB_SC_CD: string,
-  CRE_SEQ?: number
-) => {
+export const openBubListDell = async (
+  CRE_SEQ: number
+): Promise<NoticeData | null> => {
   const endpoint = "/UNI/OpenBubSvc";
-  const data = {
-    LOGIN_ID,
-    MEMB_DEP_CD,
-    MEMB_SC_CD,
-    PROC_TYPE: "03",
-    CRE_SEQ: CRE_SEQ !== undefined ? CRE_SEQ : undefined, // CRE_SEQ가 정의된 경우에만 할당
-  };
-  console.log(data);
-  const result: AxiosResponse<UserData, any> | null =
-    await sendLoginCredentials(endpoint, data);
+  const userData = getUserData();
 
-  if (result !== null && result.data.RSLT_CD === "00") {
-    console.log("성공");
+  if (userData !== null) {
+    // userData가 null이 아닌 경우에만 요청 보내기
+
+    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
+    const PROC_TYPE = "03";
+    const data = {
+      LOGIN_ID, // 사용자 아이디
+      MEMB_SC_CD, // 사용자 학과 코드
+      MEMB_DEP_CD, // 사용자 학부 코드
+      TIT_CD, // 사용자 직책 코드
+      PROC_TYPE,
+      CRE_SEQ,
+    };
+    console.log(data);
+
+    try {
+      // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
+      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+        endpoint,
+        data
+      );
+
+      if (result !== null && result.data.RSLT_CD === "00") {
+        // 서버 응답이 성공적이면 데이터를 파싱합니다.
+        const noticeData: NoticeData = parseNoticeData(result.data);
+        console.log(noticeData.RSLT_CD);
+        return noticeData; // 파싱된 데이터를 반환합니다.
+      } else {
+        console.log("공지사항 데이터 가져오기 실패");
+        return null;
+      }
+    } catch (error) {
+      console.error("오류 발생:", error);
+      return null;
+    }
   } else {
-    console.log("실패");
-    console.log(result?.data);
+    console.log("데이터를 가져올 수 없습니다.");
+    return null;
   }
 };
