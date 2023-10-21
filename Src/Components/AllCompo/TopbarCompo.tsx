@@ -405,14 +405,7 @@ export const BackIconTopbarStyle: React.FC<ButtonProps> = ({
           {MEMB_SC_NM} {MEMB_DEP_NM}
         </Text>
       </View>
-      {["02", "03", "05"].includes(userData?.TIT_CD || "") ? (
-        <View style={{ flex: 1, alignItems: "flex-end" }}>
-          <TopbarDelButton onPress={onPressDel} />
-          {/** 쓰레기통 아이콘 */}
-        </View>
-      ) : (
-        <View style={{ flex: 1 }} />
-      )}
+      <View style={{ flex: 1 }} />
       {children}
     </View>
   );

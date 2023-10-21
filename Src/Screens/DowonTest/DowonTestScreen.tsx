@@ -12,7 +12,14 @@ import {
   MainVoteBub,
   MainSchdBub,
 } from "../../Components/MainPageCompo/MainPageCompo";
-import { deviceWidth } from "../../Utils/DeviceUtils";
+import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
+import { BackIconTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
+import ProfilePageStyles from "../../Styles/MainPageStyles/ProfilePageStyles";
+import TextStyle from "../../Styles/TextStyle";
+import {
+  ProfilePageUserInfo,
+  CertLogoutBox,
+} from "../../Components/ProfileCompo/ProfileCompo";
 
 interface ScreenProps {
   children?: React.ReactNode;
@@ -24,27 +31,49 @@ interface ScreenProps {
  * DowonTestScreen
  */
 
-const DowonTestScreen = ({}) => {
+const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <Background>
-      <MainPageTopbarStyle MEMB_SC_NM="평택대학교" MEMB_DEP_NM="정보통신학과" />
-      <View style={{ marginBottom: deviceWidth * 0.025 }}>
-        <MainOpenBub
-          Title="공지사항 제목"
-          MEMB_NM="안재경"
-          MEMB_DEP_NM="정보통신학과"
-          TIT_NM="학회장"
-        />
-      </View>
-      <View style={{ marginBottom: deviceWidth * 0.025 }}>
-        <MainVoteBub Title="테스트" VOT_GO_CD="2023-10-19" />
-      </View>
-      <View>
-        <MainSchdBub
-          STRT_SCHD_YMD="2023-10-18"
-          END_SCHD_YMD="2023-10-19"
-          Title="일정 제목 들어가는 곳"
-        />
+      <View style={{ justifyContent: "center" }}>
+        <BackIconTopbarStyle Title="프로필" MEMB_SC_NM="" MEMB_DEP_NM="" />
+        <View
+          style={{
+            marginLeft: deviceWidth * 0.085,
+            marginTop: deviceWidth * 0.001,
+            marginBottom: deviceWidth * 0.02,
+          }}
+        >
+          <Text style={[TextStyle.semibold15, { color: "#181D27" }]}>
+            {"회원정보"}
+          </Text>
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <ProfilePageUserInfo
+            PROF_IMG_PATH=""
+            MEMB_CD="2018143005"
+            MEMB_DEP_NM="정보통신학과"
+            MEMB_EM="hapje010@ptu.ac.kr"
+            MEMB_GRA="4학년"
+            MEMB_NM="김도원"
+            MEMB_SC_NM="평택대학교"
+            TIT_NM="재학생"
+            NICK_NUM="피카피카"
+          />
+        </View>
+        <View
+          style={{
+            marginLeft: deviceWidth * 0.085,
+            marginTop: deviceWidth * 0.04,
+            marginBottom: deviceWidth * 0.02,
+          }}
+        >
+          <Text style={[TextStyle.semibold15, { color: "#181D27" }]}>
+            {"기타"}
+          </Text>
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <CertLogoutBox />
+        </View>
       </View>
     </Background>
   );

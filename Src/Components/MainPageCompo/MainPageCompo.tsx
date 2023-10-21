@@ -75,12 +75,12 @@ export const MainSchdBub: React.FC<ButtonProps> = ({
   const totalWidth = deviceWidth - deviceWidth * 0.05; // 전체 사용 가능한 너비 (양쪽 마진 포함)
   let availableSpace = totalWidth - (firstTextWidth + secondTextWidth); // 두 텍스트 사이의 사용 가능한 공간
 
-  if (F_SCHD_TIT && F_SCHD_TIT.length >= 15) {
-    availableSpace -= 45;
+  if (F_SCHD_TIT && F_SCHD_TIT.length >= 9) {
+    availableSpace -= 35;
   }
 
-  if (S_SCHD_TIT && S_SCHD_TIT.length >= 15) {
-    availableSpace -= 45;
+  if (S_SCHD_TIT && S_SCHD_TIT.length >= 9) {
+    availableSpace -= 35;
   }
 
   const generateMiddleText = (space: number) => {

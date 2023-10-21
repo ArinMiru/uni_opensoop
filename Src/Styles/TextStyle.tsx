@@ -81,6 +81,12 @@ export default StyleSheet.create({
     fontSize: responsiveFontSize(10),
   },
 
+  semibold06: {
+    fontFamily: "SemiBold",
+    fontWeight: "600" /*semibold*/,
+    fontSize: responsiveFontSize(12),
+  },
+
   semibold07: {
     fontFamily: "SemiBold",
     fontWeight: "600" /*semibold*/,
