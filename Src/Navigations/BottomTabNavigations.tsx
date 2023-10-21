@@ -9,7 +9,7 @@ import VotePostPage from "../Screens/Home/VoTe/VotePostPage"; // 경로 수정
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import {
   FreeIcon,
-  HomeIcon,
+  NoticeIcon,
   SchdlIcon,
   VoteIcon,
   BottomTabLogo,
@@ -19,7 +19,7 @@ import { deviceHeight } from "../Utils/DeviceUtils";
 const Tab = createBottomTabNavigator();
 
 const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
-  const [selectedIcon, setSelectedIcon] = useState("NoticePage");
+  const [selectedIcon, setSelectedIcon] = useState("HomePageScreen");
 
   return (
     <View style={{ flexDirection: "row", backgroundColor: "lightgray" }}>
@@ -42,7 +42,7 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
         let iconComponent;
         if (route.name === "NoticePage") {
           iconComponent = (
-            <HomeIcon
+            <NoticeIcon
               style={{
                 paddingTop: "20%",
               }}
@@ -108,7 +108,7 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
 const BottomTabNavigations = () => {
   return (
     <Tab.Navigator
-      initialRouteName="NoticePage"
+      initialRouteName="HomePageScreen"
       tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tab.Screen
