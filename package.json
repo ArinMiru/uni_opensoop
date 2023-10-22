@@ -26,6 +26,7 @@
     "react-native": "0.72.4",
     "react-native-bottom-sheet": "^1.0.3",
     "react-native-calendars": "^1.1300.0",
+    "react-native-easy-toast": "^2.3.0",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-read-more-text": "^1.1.2",
