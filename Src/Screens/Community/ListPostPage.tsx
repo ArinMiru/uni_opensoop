@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useIsFocused } from "@react-navigation/native"; // useIsFocused 추가
+import { useIsFocused } from "@react-navigation/native";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { FreeData } from "../../Utils/_private/ApiData/FreeData";
-import { QuestData } from "../../Utils/_private/ApiData/QuestData";
 import { QuesBubListSvc } from "../../Services/_private/QusetPostData";
 import { FlatList, View } from "react-native";
 import { FreeBubListCall } from "../../Services/_private/FreeApi";
@@ -17,6 +16,8 @@ import { SgsListContentButton } from "../../Components/ListCompo/SgsCompo/SgsBut
 import { QstListContentButton } from "../../Components/ListCompo/QstCompo/QstButtonCompo";
 import { SugBubListData } from "../../Utils/_private/ApiData/SugBubListData";
 import { SugBubListSvc } from "../../Services/_private/SugBubListApi";
+import { QuestData } from "../../Utils/_private/ApiData/QuestData";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
@@ -24,11 +25,12 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [freeData, setFreeData] = useState<FreeData | null>(null);
   const [questData, setQuestData] = useState<QuestData | null>(null);
   const [sugsData, setSugsData] = useState<SugBubListData | null>();
-  const isFocused = useIsFocused(); // 화면 포커스 여부 확인
+  const [loading, setLoading] = useState<boolean>(true);
+  const isFocused = useIsFocused();
 
-  // 컴포넌트가 렌더링될 때 한 번만 실행되는 부분입니다.
   useEffect(() => {
     if (userData !== null && isFocused) {
+      setLoading(true);
       // 화면 포커스일 때만 실행
       // 자유게시판 데이터 가져오기
       FreeBubListCall(
@@ -68,7 +70,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
           }
         })
         .catch((error) => {
-          console.error("질문게시판 데이터 가져오기 오류", error);
+          console.error("건의게시판 데이터 가져오기 오류", error);
         });
 
       // 질문게시판 데이터 가져오기
@@ -86,12 +88,13 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
             }
             setQuestData(sorted);
           }
+          setLoading(false);
         })
         .catch((error) => {
           console.error("질문게시판 데이터 가져오기 오류:", error);
         });
     }
-  }, [userData, isFocused]); // isFocused와 userData 상태에 따라 실행
+  }, [userData, isFocused]);
 
   return (
     <Background>
@@ -145,9 +148,15 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
             setSelectedCategory={setSelectedCategory}
           />
         </View>
-        {selectedCategory === "자유" && (
+        <Spinner
+          // 로딩 상태에 따라 Spinner를 화면에 표시
+          visible={loading}
+          textContent={"로딩 중..."}
+          textStyle={{ color: "#FFF" }}
+        />
+        {selectedCategory === "자유" && freeData && (
           <FlatList
-            data={freeData?.FREE_BUB}
+            data={freeData.FREE_BUB}
             keyExtractor={(item) => item.CRE_SEQ.toString()}
             renderItem={({ item }) => (
               <FreeListIclucontnButton
@@ -170,9 +179,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
             )}
           />
         )}
-        {selectedCategory === "건의" && (
+        {selectedCategory === "건의" && sugsData && (
           <FlatList
-            data={sugsData?.SUG_BUB}
+            data={sugsData.SUG_BUB}
             keyExtractor={(item) => item.CRE_SEQ.toString()}
             renderItem={({ item }) => (
               <SgsListContentButton
@@ -194,9 +203,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
             )}
           />
         )}
-        {selectedCategory === "질문" && (
+        {selectedCategory === "질문" && questData && (
           <FlatList
-            data={questData?.QUES_BUB}
+            data={questData.QUES_BUB}
             keyExtractor={(item) => item.CRE_SEQ.toString()}
             renderItem={({ item }) => (
               <QstListContentButton
