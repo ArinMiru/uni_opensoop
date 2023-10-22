@@ -1,5 +1,5 @@
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
-import { sendLoginCredentials } from "./Api.config";
+import { sendApiData } from "./Api.config";
 import { AxiosResponse } from "axios";
 import { parseFreeData, FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
@@ -44,7 +44,7 @@ export const FreeBubListCall = async (
 
     try {
       // 서버에 자유게시판 데이터 요청을 보내고 응답을 기다립니다.
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
@@ -116,7 +116,7 @@ export const FreeAnsBubSvc = async (
 
     try {
       // 서버에 자유게시판 데이터 요청을 보내고 응답을 기다립니다.
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
@@ -163,7 +163,7 @@ export const FreeBubRegi = async (TIT: string, CONT: string) => {
     };
 
     const result: AxiosResponse<UserData, any> | null =
-      await sendLoginCredentials(endpoint, data);
+      await sendApiData(endpoint, data);
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
@@ -194,7 +194,7 @@ export const FreeBubDel = async (CRE_SEQ: number) => {
     };
     console.log(data);
     const result: AxiosResponse<UserData, any> | null =
-      await sendLoginCredentials(endpoint, data);
+      await sendApiData(endpoint, data);
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
     } else {
@@ -228,7 +228,7 @@ export const FreeBubEd = async (CRE_SEQ: string, TIT: string, CONT: string) => {
       CONT,
     };
     const result: AxiosResponse<UserData, any> | null =
-      await sendLoginCredentials(endpoint, data);
+      await sendApiData(endpoint, data);
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");

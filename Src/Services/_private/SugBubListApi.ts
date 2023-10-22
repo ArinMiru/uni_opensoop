@@ -4,7 +4,7 @@
  * 2023/10/06 장현빈 작성
  */
 import { AxiosResponse } from "axios";
-import { sendLoginCredentials } from "./Api.config";
+import { sendApiData } from "./Api.config";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import {
   SugBubListData,
@@ -46,7 +46,7 @@ export const SugBubListSvc = async (
     };
 
     try {
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
@@ -95,7 +95,7 @@ export const SugBubListNew = async (
     console.log(data);
 
     try {
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
@@ -147,7 +147,7 @@ export const SugBubListUp = async (
     };
 
     try {
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
@@ -188,7 +188,7 @@ export const SugBubListDel = async (
     };
 
     try {
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
