@@ -10,8 +10,6 @@ import { FreeListLawButton } from "../../../Components/ListCompo/FreCompo/FreBut
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import {
   FreeBubRegi,
-  FreeBubDel,
-  FreeBubEd,
 } from "../../../Services/_private/FreeApi";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";

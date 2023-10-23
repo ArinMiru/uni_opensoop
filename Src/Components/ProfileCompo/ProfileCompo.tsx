@@ -1,19 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { MainOpenBub } from "../../Components/MainPageCompo/MainPageCompo";
-import { Background } from "../../Components/AllCompo/Background";
-import NewBackgroundStyle from "../../Styles/NewBackgroundStyle";
-import { TopbarEditButton } from "../../Components/AllCompo/TopbarEditDelRegiButton";
-import {
-  MainPageTopbarStyle,
-  MenuTopbarStyle,
-} from "../../Components/AllCompo/TopbarCompo";
-import {
-  MainVoteBub,
-  MainSchdBub,
-} from "../../Components/MainPageCompo/MainPageCompo";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
-import { BackIconTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
 import ProfilePageStyles from "../../Styles/MainPageStyles/ProfilePageStyles";
 import TextStyle from "../../Styles/TextStyle";
 import { Image } from "react-native";
@@ -196,5 +183,42 @@ export const CertLogoutBox: React.FC<ButtonProps> = ({
   onPressTITCERT,
   onPressLOGOUT,
 }) => {
-  return <View style={[ProfilePageStyles.OntherBoxStyle]}></View>;
+  return (
+    <View
+      style={[ProfilePageStyles.OntherBoxStyle, { flexDirection: "column" }]}
+    >
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#999999",
+        }}
+      >
+        <Image
+          style={{
+            resizeMode: "contain",
+            width: deviceWidth * 0.099,
+          }}
+          source={require("../../Assets/Images/CRTicon.png")}
+        />
+      </View>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#888888",
+        }}
+      >
+        <Image
+          style={{
+            resizeMode: "contain",
+            width: deviceWidth * 0.099,
+          }}
+          source={require("../../Assets/Images/Logout.png")}
+        />
+      </View>
+    </View>
+  );
 };

@@ -1,4 +1,4 @@
-import { sendLoginCredentials } from "./Api.config";
+import { sendApiData } from "./Api.config";
 import { setUserData } from "../../Utils/_private/ApiData/UserData";
 import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
@@ -22,7 +22,7 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
     LOGIN_PASS, // 로그인 사용자 비밀번호
   };
   const result: AxiosResponse<UserData, any> | null =
-    await sendLoginCredentials(endpoint, data); // 로그인 시도 및 서버 응답 저장
+    await sendApiData(endpoint, data); // 로그인 시도 및 서버 응답 저장
 
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
@@ -46,7 +46,7 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
 export const registerUser = async (data: RegiDataType) => {
   const endpoint = "/UNI/MembRegSvc"; // 회원가입 엔드포인트 URL
 
-  const result = await sendLoginCredentials(endpoint, data); // 회원가입 시도 및 서버 응답 저장
+  const result = await sendApiData(endpoint, data); // 회원가입 시도 및 서버 응답 저장
 
   // 서버 응답(result)에 대한 처리
   return result; // 서버 응답을 반환합니다.
@@ -61,7 +61,7 @@ export const idCheckpoint = async (MEMB_ID: string) => {
     MEMB_ID,
   };
   const result: AxiosResponse<UserData, any> | null =
-    await sendLoginCredentials(endpoint, data);
+    await sendApiData(endpoint, data);
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
     console.log("사용할 수 있는 아이디 입니다.");
@@ -83,7 +83,7 @@ export const nickCheckpoint = async (NICK_NM: string) => {
     NICK_NM,
   };
   const result: AxiosResponse<UserData, any> | null =
-    await sendLoginCredentials(endpoint, data);
+    await sendApiData(endpoint, data);
   if (result !== null && result.data.RSLT_CD == "00") {
     console.log("사용할 수 있는 닉네임 입니다.");
   } else {
@@ -101,7 +101,7 @@ export const MembIdFndSvc = async (MEMB_EM: string) => {
     MEMB_EM,
   };
   const result: AxiosResponse<UserData, any> | null =
-    await sendLoginCredentials(endpoint, data);
+    await sendApiData(endpoint, data);
   console.log(data);
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
@@ -125,7 +125,7 @@ export const MembPassFndSvc = async (MEMB_ID: string, MEMB_EM: string) => {
     MEMB_EM,
   };
   const result: AxiosResponse<UserData, any> | null =
-    await sendLoginCredentials(endpoint, data);
+    await sendApiData(endpoint, data);
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
     console.log("인증번호를 발송합니다.");
@@ -144,7 +144,7 @@ export const ChkAndCertSvc = async (MEMB_ID: string, CERT_SEQ: string) => {
     CERT_SEQ,
   };
   const result: AxiosResponse<UserData, any> | null =
-    await sendLoginCredentials(endpoint, data);
+    await sendApiData(endpoint, data);
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
     console.log("인증번호 일치.");
@@ -172,7 +172,7 @@ export const SchlSrchCall = async (
 
   try {
     // 서버에 대학교명 데이터 요청을 보내고 응답을 기다립니다.
-    const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+    const result: AxiosResponse<any, any> | null = await sendApiData(
       endpoint,
       data
     );
@@ -205,7 +205,7 @@ export const MembCertUpd = async (CERT_SEQ: string) => {
     CERT_SEQ,
   };
   const result: AxiosResponse<UserData, any> | null =
-    await sendLoginCredentials(endpoint, data);
+    await sendApiData(endpoint, data);
   if (result !== null && result.data.RSLT_CD == "00") {
     console.log("통신 성공");
   } else {
@@ -230,7 +230,7 @@ export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
     PASS, //새로운 비밀번호
   };
 
-  const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+  const result: AxiosResponse<any, any> | null = await sendApiData(
     endpoint,
     data
   );

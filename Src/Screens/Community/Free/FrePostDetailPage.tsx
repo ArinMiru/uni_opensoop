@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { View, KeyboardAvoidingView, ScrollView, Platform } from "react-native";
-import { RouteProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../../Navigations/StackNavigator";
 import {
   FreQstComment,
   FrePost,
@@ -13,31 +10,35 @@ import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyles";
 import { CommentInput } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
 import { FreeBubDel } from "../../../Services/_private/FreeApi";
-
-type FreePostDetailRouteProp = RouteProp<
-  RootStackParamList,
-  "FrePostDetailPage"
->;
-type FreePostDetailNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "FrePostDetailPage"
->;
-
-type FreePostDetailProps = {
-  route: FreePostDetailRouteProp;
-  navigation: FreePostDetailNavigationProp;
-};
+import { FreeAnsBubNew } from "../../../Services/AnsApi/FreeAnsApi";
+import { getUserData } from "../../../Utils/_private/ApiData/UserData";
+import { FreePostDetailProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 
 const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
   route,
   navigation,
 }) => {
+  const [cont, setCont] = useState<string>("");
   const { CRE_SEQ, CONT, TIT, NICK_NM, LIKE_CNT, CRE_DAT, AnsFree } =
     route.params;
+
   console.log(CRE_SEQ);
 
   const dellPress = () => {
     FreeBubDel(CRE_SEQ);
+  };
+
+  const FreeAnsNewBut = async () => {
+    try {
+      const userData = getUserData();
+      if (userData != null) {
+        await FreeAnsBubNew(cont, CRE_SEQ);
+      } else {
+        console.error("userData가 null입니다.");
+      }
+    } catch (error) {
+      console.error("등록 오류", error);
+    }
   };
 
   return (
@@ -67,13 +68,18 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
           {AnsFree.sort((a, b) => b.ANS_SEQ - a.ANS_SEQ) // ANS_SEQ를 내림차순으로 정렬
             .map((comment) => (
               <FreQstComment
-                key={comment.ANS_SEQ} // 각 댓글의 ANS_SEQ를 고유한 키로 사용
+                key={comment.ANS_SEQ}
                 freqstansnick={comment.ANS_MEMB_ID}
                 freqstanstit={comment.CONT}
                 freqstanstime={comment.CRE_DAT}
               />
             ))}
-          <CommentInput text="댓글을 입력하세요." />
+          <CommentInput
+            text="댓글을 입력하세요."
+            value={cont}
+            onChangeText={(text) => setCont(text)}
+            onPress={FreeAnsNewBut}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
     </AccountBackground>
