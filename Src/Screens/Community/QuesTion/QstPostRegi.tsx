@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
@@ -14,6 +14,8 @@ import { KeyboardAvoidingView } from "react-native";
 const userData = getUserData(); // 현재 사용자 데이터
 
 const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
+  const [tit, setTit] = useState<string>("");
+
   return (
     <Background>
       <BackIconRegiTopbarStyle
