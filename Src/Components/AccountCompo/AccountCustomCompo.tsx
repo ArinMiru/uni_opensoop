@@ -4,7 +4,6 @@ import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 import { TextInput } from "react-native-gesture-handler";
 import AccountButtonStyle from "../../Styles/AccountStyles/AccountButtonStyle";
 import AccountInputStyle from "../../Styles/AccountStyles/AccountInputStyle";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 interface TextTopProps extends TextInputProps {
   children?: React.ReactNode;
@@ -16,34 +15,43 @@ interface TextTopProps extends TextInputProps {
 /*
 회원가입 화면에 flex 2의 범위를 가진 텍스트 인풋, 짧은 버튼이 가로정렬된 컴포넌트
 **/
-export const RegiDupleFlex2: React.FC<TextTopProps> = ({
+export const RegiDupleFlex2: React.FC<
+  TextTopProps & { validationMessage?: string; validationColor?: string }
+> = ({
   children,
   text,
   inputText,
   onPress,
+  validationMessage,
+  validationColor,
   ...props
 }) => (
-  <View style={{ flex: 2, flexDirection: "row" }}>
-    <TextInput
-      placeholderTextColor="#BDBDBD"
-      style={[
-        AccountInputStyle.srchDupleInputStyle,
-        textStyle.medium14,
-        { marginTop: deviceHeight * 0.03, marginRight: deviceWidth * 0.0375 },
-      ]}
-      placeholder={inputText}
-      {...props}
-    ></TextInput>
-    <TouchableOpacity
-      style={[
-        AccountButtonStyle.srchDupleButtonStyle,
-        { marginTop: deviceHeight * 0.03 },
-      ]}
-      onPress={onPress}
-    >
-      <Text style={[textStyle.semibold13, { color: "#fff" }]}>{text}</Text>
-      {children}
-    </TouchableOpacity>
+  <View style={{ flex: 2 }}>
+    <View style={{ flexDirection: "row" }}>
+      <TextInput
+        placeholderTextColor="#BDBDBD"
+        style={[
+          AccountInputStyle.srchDupleInputStyle,
+          textStyle.medium12,
+          { marginTop: deviceHeight * 0.04, marginRight: deviceWidth * 0.0375 },
+        ]}
+        placeholder={inputText}
+        {...props}
+      ></TextInput>
+      <TouchableOpacity
+        style={[
+          AccountButtonStyle.srchDupleButtonStyle,
+          { marginTop: deviceHeight * 0.04 },
+        ]}
+        onPress={onPress}
+      >
+        <Text style={[textStyle.semibold13, { color: "#fff" }]}>{text}</Text>
+        {children}
+      </TouchableOpacity>
+    </View>
+    <View style={{ paddingLeft: deviceHeight * 0.01 }}>
+      <Text style={{ color: validationColor }}>{validationMessage}</Text>
+    </View>
   </View>
 );
 
@@ -68,7 +76,7 @@ export const RegiDupleFlex3: React.FC<TextTopProps> = ({
       placeholderTextColor="#BDBDBD"
       style={[
         AccountInputStyle.srchDupleInputStyle,
-        textStyle.medium14,
+        textStyle.medium12,
         { marginTop: deviceHeight * 0.03, marginRight: deviceWidth * 0.0375 },
       ]}
       placeholder={inputText}
