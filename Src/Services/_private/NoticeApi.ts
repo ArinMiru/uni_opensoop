@@ -1,5 +1,5 @@
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
-import { sendLoginCredentials } from "./Api.config";
+import { sendApiData } from "./Api.config";
 import {
   NoticeData,
   parseNoticeData,
@@ -23,7 +23,7 @@ export const openBubListCall = async (
 
     // 고정된 값으로 설정
     const LIST_UNIT_CNT = 20; // 한 페이지에 표시할 공지사항 수
-    const REQ_PAGE = 2; // 요청할 페이지 번호
+    const REQ_PAGE = 1; // 요청할 페이지 번호
 
     const data = {
       LOGIN_ID, // 사용자 아이디
@@ -36,7 +36,7 @@ export const openBubListCall = async (
 
     try {
       // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
@@ -70,33 +70,37 @@ export const openBubListCall = async (
  * @param CRE_SEQ
  */
 export const openBubSvcNew = async (
-  LOGIN_ID: string,
-  MEMB_DEP_CD: string,
-  MEMB_SC_CD: string,
-  TIT_CD: string,
   TIT: string,
   CONT: string,
   IMAGE_INFO: ImageInfo[]
 ) => {
   const endpoint = "/UNI/OpenBubSvc";
-  const data = {
-    LOGIN_ID,
-    MEMB_DEP_CD,
-    MEMB_SC_CD,
-    TIT_CD,
-    TIT,
-    CONT,
-    IMAGE_INFO,
-    PROC_TYPE: "01",
-  };
-  const result: AxiosResponse<UserData, any> | null =
-    await sendLoginCredentials(endpoint, data);
+  const userData = getUserData();
+  if (userData !== null) {
+    const { LOGIN_ID, MEMB_DEP_CD, MEMB_SC_CD, TIT_CD } = userData;
+    const PROC_TYPE = "01";
+    const data = {
+      LOGIN_ID,
+      MEMB_DEP_CD,
+      MEMB_SC_CD,
+      TIT_CD,
+      TIT,
+      CONT,
+      IMAGE_INFO,
+      PROC_TYPE,
+    };
+    console.log(data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
 
-  if (result !== null && result.data.RSLT_CD === "00") {
-    console.log("성공");
-  } else {
-    console.log("실패");
-    console.log(result?.data);
+    if (result !== null && result.data.RSLT_CD === "00") {
+      console.log("성공");
+    } else {
+      console.log("실패");
+      console.log(result?.data);
+    }
   }
 };
 /**
@@ -133,8 +137,10 @@ export const openBubSvcUpdate = async (
     PROC_TYPE: "02",
   };
   console.log(data);
-  const result: AxiosResponse<UserData, any> | null =
-    await sendLoginCredentials(endpoint, data);
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
 
   if (result !== null && result.data.RSLT_CD === "00") {
     console.log("성공");
@@ -173,7 +179,7 @@ export const openBubListDell = async (
 
     try {
       // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
