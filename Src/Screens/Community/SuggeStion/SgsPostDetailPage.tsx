@@ -1,10 +1,6 @@
 import { View, Platform, KeyboardAvoidingView } from "react-native";
 import React from "react";
 import {
-  ScreenProps,
-  RootStackParamList,
-} from "../../../Navigations/StackNavigator";
-import {
   SqsPost,
   SqsComment,
 } from "../../../Components/ListCompo/SgsCompo/SgsCompo";
@@ -15,24 +11,9 @@ import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyle
 import { CommentInput } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
 import { ScrollView } from "react-native-gesture-handler";
 import { SugBubListDel } from "../../../Services/_private/SugBubListApi";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RouteProp } from "@react-navigation/native";
+import { SgsPostDetailProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 
-type FreePostDetailRouteProp = RouteProp<
-  RootStackParamList,
-  "SgsPostDetailPage"
->;
-type FreePostDetailNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "SgsPostDetailPage"
->;
-
-type FreePostDetailProps = {
-  route: FreePostDetailRouteProp;
-  navigation: FreePostDetailNavigationProp;
-};
-
-const SgsPostClkToast: React.FC<FreePostDetailProps> = ({
+const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
   navigation,
   route,
 }) => {

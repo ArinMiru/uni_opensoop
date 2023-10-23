@@ -78,6 +78,7 @@ export const CommentInput: React.FC<inputProps> = ({
       <TextInput
         style={[ListCommonInputStyle.FreeSqsCommentInputStyle]}
         placeholder={text}
+        {...props}
       ></TextInput>
       <TouchableOpacity
         style={[

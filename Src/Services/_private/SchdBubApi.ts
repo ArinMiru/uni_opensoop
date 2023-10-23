@@ -4,19 +4,14 @@ import {
   parseSchdBubData,
 } from "../../Utils/_private/ApiData/SchdBubData";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
-import { sendLoginCredentials } from "./Api.config";
+import { sendApiData } from "./Api.config";
 
-const userData = getUserData();
-
-export const SchdBubListSvc = async (
-  LOGIN_ID: string,
-  MEMB_SC_CD: string,
-  MEMB_DEP_CD: string,
-  TIT_CD: string
-): Promise<SchdBubData | null> => {
+export const SchdBubListSvc = async (): Promise<SchdBubData | null> => {
   const endpoint = "/UNI/SchdBubListSvc";
+  const userData = getUserData();
 
   if (userData !== null) {
+    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
     const data = {
       LOGIN_ID,
       MEMB_SC_CD,
@@ -24,14 +19,13 @@ export const SchdBubListSvc = async (
       TIT_CD,
     };
     try {
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
 
       if (result !== null && result.data.RSLT_CD === "00") {
         const SchdBubData: SchdBubData = parseSchdBubData(result.data);
-        console.log(SchdBubData);
         return SchdBubData;
       } else {
         console.log("일정 데이터 가져오기 실패");

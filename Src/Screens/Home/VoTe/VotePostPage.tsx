@@ -1,5 +1,5 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, FlatList } from "react-native";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { ViewUnvottedButton } from "../../../Components/VoteCompo/VoteButton";
@@ -9,20 +9,37 @@ import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-
-/**
- * @ArinMiru(김도원 생성)
- * @ArinMiru(23.10.03 김도원 수정)
- * API -> 투표 조회
- * 투표 조회에 모든 정보들 포함되어있음
- * 투표 버튼 클릭 후 별도 API 호출 필요 ( 실시간 투표 현황 업데이트 위함 )
- * 서비스 URL -> VotBubListSvc
- */
-
-/** const voteData = getvoteData */
+import { votBubListCall } from "../../../Services/_private/VoteApi";
+import { VoteData } from "../../../Utils/_private/ApiData/VoteData";
+import { useIsFocused } from "@react-navigation/native";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
-  const userData = getUserData(); // 현재 사용자 데이터
+  const userData = getUserData();
+  const isFocused = useIsFocused();
+  const [voteData, setVoteData] = useState<VoteData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (userData !== null && isFocused) {
+      setLoading(true);
+      votBubListCall()
+        .then((data) => {
+          if (data !== null) {
+            const sorted = { ...data };
+            if (sorted.VOTE_BUB) {
+              sorted.VOTE_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+            }
+            setVoteData(sorted);
+          }
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("투표 게시판 데이터 가져오기 오류:", error);
+        });
+    }
+  }, [userData, isFocused]);
+
   return (
     <Background>
       <MenuTopbarStyle
@@ -52,39 +69,56 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
             alignContent: "center",
           }}
         >
-          {/**-------------------------------------------------------------- */}
-          {/** FlatList로 리스트 나열 */}
-          {/** 각 항목에 맞게 코드 변경 */}
-          {/** poststatus 기준 */}
-          {/** UnVotedListButton / VotedListButton  선택 */}
-          {/** VB(투표 전), VC(투표 취소) , VF(투표 종료), VG(투표 중) */}
-          {/** 
-         * {["VG"].includes(VOT_GO_CD || "") && (
-             <UnVotedListButton 
-              title={voteData.VOT_TITLE} 
-              poststatus={"투표 중"}
-              posttime={voteData.VOT_EXPR_DATE}
-             />)
-            ["VF"].includes(VOT_GO_CD || "") && (
-              <VotedListButton
-               title={voteData.VOT_TITLE}
-               poststatus={"투표 종료"}
-               posttime={voteData.VOT_EXPR_DATE}
-              />)
-            }
-         */}
-          {/**-------------------------------------------------------------- */}
-          <UnVotedListButton
-            title={"VOT_TITLE"} // 투표 게시물 제목 VOT_TITLE
-            poststatus={"투표 중"} // 투표 여부 상태 VOT_GO_CD에 따른 상태 값 고정
-            posttime={"VOT_EXPR_DATE"} // 투표 게시물 마감시간 VOT_EXPR_DATE
-            onPress={() => navigation.navigate("VotePostDetailPage")}
+          <Spinner
+            // 로딩 상태에 따라 Spinner를 화면에 표시
+            visible={loading}
+            textContent={"로딩 중..."}
+            textStyle={{ color: "#FFF" }}
           />
-          <VotedListButton
-            title={"VOT_TITLE"} // 투표 게시물 제목 VOT_TITLE
-            poststatus={"투표 종료"} // 투표 여부 상태 VOT_GO_CD에 따른 상태 값 고정
-            posttime={"VOT_EXPR_DATE"} // 투표 게시물 마감시간 VOT_EXPR_DATE
-            onPress={() => navigation.navigate("VotePostDetailPage")}
+          <FlatList
+            data={voteData?.VOTE_BUB}
+            keyExtractor={(item) => item.CRE_SEQ.toString()}
+            renderItem={({ item }) => {
+              if (item.VOT_GO_CD === "VG") {
+                return (
+                  <UnVotedListButton
+                    title={item.VOTE_TITLE}
+                    poststatus={"투표 중"}
+                    posttime={item.VOT_EXPR_DATE}
+                    onPress={() => navigation.navigate("VotePostDetailPage")}
+                  />
+                );
+              } else if (item.VOT_GO_CD === "VB") {
+                return (
+                  <UnVotedListButton
+                    title={item.VOTE_TITLE}
+                    poststatus={"투표 전"}
+                    posttime={item.VOT_EXPR_DATE}
+                    onPress={() => navigation.navigate("VotePostDetailPage")}
+                  />
+                );
+              } else if (item.VOT_GO_CD === "VF") {
+                return (
+                  <VotedListButton
+                    title={item.VOTE_TITLE}
+                    poststatus={"투표 종료"}
+                    posttime={item.VOT_EXPR_DATE}
+                    onPress={() => navigation.navigate("VotePostDetailPage")}
+                  />
+                );
+              }
+              if (item.VOT_GO_CD === "VC") {
+                return (
+                  <UnVotedListButton
+                    title={item.VOTE_TITLE}
+                    poststatus={"투표 취소"}
+                    posttime={item.VOT_EXPR_DATE}
+                    onPress={() => navigation.navigate("VotePostDetailPage")}
+                  />
+                );
+              }
+              return null; // 아무 컴포넌트도 반환하지 않을 경우
+            }}
           />
         </View>
       </View>
