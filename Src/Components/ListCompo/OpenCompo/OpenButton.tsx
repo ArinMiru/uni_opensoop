@@ -7,6 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { OpenPhotoDelIcon } from "../../IconCompo/OpenPhotoIcon";
+import { MaterialIcons } from "@expo/vector-icons";
 interface ButtonProps {
   children?: React.ReactNode;
   text?: string;
@@ -99,7 +100,11 @@ export const OpenPhotoPlusBox: React.FC<ButtonProps> = ({
       style={[OpenButtonStyle.OpenPhotoBoxStyle]}
       onPress={onPress}
     >
-      <AntDesign name="plus" size={deviceWidth * 0.09} color="#4BB781" />
+      <MaterialIcons
+        name="add-photo-alternate"
+        size={deviceWidth * 0.085}
+        color="rgba(75, 183, 129, 0.5)"
+      />
     </TouchableOpacity>
   );
 };

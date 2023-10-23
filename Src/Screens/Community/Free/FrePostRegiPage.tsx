@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Text, KeyboardAvoidingView } from "react-native";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import {
@@ -16,6 +16,8 @@ import {
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
+import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
+import TextStyle from "../../../Styles/TextStyle";
 
 //@jeakyoung 생성 게시글 등록 API
 
@@ -63,6 +65,7 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           { alignItems: "center" },
         ]}
       >
+        {/* 첫번째 뷰 */}
         <View
           style={{
             flex: 1.5,
@@ -71,39 +74,61 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             alignItems: "center",
           }}
         >
-          <OpenFreSgsTitInputBox
-            text="제목을 입력하세요"
-            value={tit}
-            onChangeText={(text) => setTit(text)}
-          ></OpenFreSgsTitInputBox>
+          <View style={ListInputBoxStyle.FreQstOpenTitInputBoxStyle}>
+            <OpenFreSgsTitInputBox
+              text="제목을 입력하세요"
+              value={tit}
+              onChangeText={(text) => setTit(text)}
+            ></OpenFreSgsTitInputBox>
+            <Text
+              style={[
+                TextStyle.semibold08,
+                { color: "#919191", alignSelf: "flex-end", paddingTop: "2%" },
+              ]}
+            >
+              최소 5자 / 최대 30자
+            </Text>
+          </View>
         </View>
-
-        <View
+        {/* 두번째 뷰 */}
+        <KeyboardAvoidingView
           style={{
-            flex: 3.5,
+            flex: 1.7,
             height: "auto",
             width: deviceWidth * 1,
-            justifyContent: "center",
             alignItems: "center",
           }}
+          behavior="padding"
+          enabled
         >
-          <OpenFreSgsContInputBox
-            text="텍스트를 입력해주세요."
-            value={cont}
-            onChangeText={(text) => setCont(text)}
-          ></OpenFreSgsContInputBox>
-        </View>
+          <View style={ListInputBoxStyle.FreQstOpenContInputBoxStyle}>
+            <OpenFreSgsContInputBox
+              text="텍스트를 입력해주세요."
+              value={cont}
+              onChangeText={(text) => setCont(text)}
+            ></OpenFreSgsContInputBox>
+            <Text
+              style={[
+                TextStyle.semibold08,
+                { color: "#919191", alignSelf: "flex-end", paddingTop: "2%" },
+              ]}
+            >
+              최소 10자
+            </Text>
+          </View>
+        </KeyboardAvoidingView>
+        {/* 세번째 뷰 */}
         <View
           style={{
-            flex: 2,
+            flex: 1.5,
             width: deviceWidth * 1,
-            marginTop: deviceHeight * 0.02,
             justifyContent: "flex-start",
             alignItems: "flex-end",
           }}
         >
           <FreeListLawButton />
         </View>
+        {/* 네번째 뷰 */}
         <View style={{ flex: 2 }}></View>
       </View>
     </Background>

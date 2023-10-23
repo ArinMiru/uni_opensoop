@@ -15,11 +15,15 @@ interface inputProps extends TextInputProps {
   text?: string;
   inputText?: string;
   onPress?: () => void;
+  value: string;
+  onChangeText: (text: string) => void;
 }
 
 export const OpenFreSgsTitInputBox: React.FC<inputProps> = ({
   children,
   text,
+  value,
+  onChangeText,
   ...props
 }) => {
   // text 속성을 이용하여 최대 길이를 계산
@@ -30,7 +34,7 @@ export const OpenFreSgsTitInputBox: React.FC<inputProps> = ({
       placeholderTextColor="#BDBDBD"
       style={[
         ListCommonInputStyle.OpenFreSgsTitInputBoxStyle,
-        textStyle.medium14,
+        textStyle.medium10,
       ]}
       placeholder={text}
       maxLength={10} // 최대 길이 설정
@@ -51,7 +55,7 @@ export const OpenFreSgsContInputBox: React.FC<inputProps> = ({
       placeholderTextColor="#BDBDBD"
       style={[
         ListCommonInputStyle.OpenFreSgsContInputBoxStyle,
-        textStyle.medium12,
+        textStyle.medium10,
       ]}
       textAlignVertical="top"
       multiline={true}

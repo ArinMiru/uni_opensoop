@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, KeyboardAvoidingView } from "react-native";
+import { View, KeyboardAvoidingView, Text } from "react-native";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
@@ -17,7 +17,8 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { openBubSvcNew } from "../../../Services/_private/NoticeApi";
 import { Background } from "../../../Components/AllCompo/Background";
-
+import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
+import TextStyle from "../../../Styles/TextStyle";
 /** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 
 const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
@@ -95,6 +96,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         onPressRegi={handleRegiButtonPress}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
+        {/* 첫 번째 뷰 */}
         <View
           style={{
             flex: 1.5,
@@ -103,32 +105,55 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
             alignItems: "center",
           }}
         >
-          <OpenFreSgsTitInputBox
-            text="제목을 입력하세요"
-            value={tit}
-            onChangeText={(text) => setTit(text)}
-          ></OpenFreSgsTitInputBox>
+          <View style={ListInputBoxStyle.FreQstOpenTitInputBoxStyle}>
+            <OpenFreSgsTitInputBox
+              text="제목을 입력하세요"
+              value={tit}
+              onChangeText={(text) => setTit(text)}
+            ></OpenFreSgsTitInputBox>
+            <Text
+              style={[
+                TextStyle.semibold08,
+                { color: "#919191", alignSelf: "flex-end", paddingTop: "2%" },
+              ]}
+            >
+              최소 5자 / 최대 30자
+            </Text>
+          </View>
         </View>
+
+        {/* 두 번째 뷰 */}
         <KeyboardAvoidingView
           style={{
-            flex: 3.5,
+            flex: 1.7,
             width: deviceWidth * 1,
             height: "auto",
-            justifyContent: "center",
             alignItems: "center",
           }}
           behavior="padding"
           enabled
         >
-          <OpenFreSgsContInputBox
-            text="텍스트를 입력해주세요."
-            value={cont}
-            onChangeText={(text) => setCont(text)}
-          ></OpenFreSgsContInputBox>
+          <View style={ListInputBoxStyle.FreQstOpenContInputBoxStyle}>
+            <OpenFreSgsContInputBox
+              text="텍스트를 입력해주세요."
+              value={cont}
+              onChangeText={(text) => setCont(text)}
+            ></OpenFreSgsContInputBox>
+            <Text
+              style={[
+                TextStyle.semibold08,
+                { color: "#919191", alignSelf: "flex-end", paddingTop: "2%" },
+              ]}
+            >
+              최소 10자
+            </Text>
+          </View>
         </KeyboardAvoidingView>
+
+        {/* 세 번째 뷰 */}
         <View
           style={{
-            flex: 2,
+            flex: 1.5,
             width: deviceWidth * 1,
             justifyContent: "flex-start",
             alignItems: "center",
@@ -139,12 +164,10 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
           ) : (
             <View
               style={{
-                flex: 2,
+                flex: 1.5,
                 width: deviceWidth * 1,
-                marginTop: deviceHeight * 0.02,
                 justifyContent: "flex-start",
                 alignItems: "flex-end",
-                marginRight: deviceWidth * 0.17,
               }}
             >
               <OpenPhotoButton
@@ -154,6 +177,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
           )}
         </View>
 
+        {/* 네 번째 뷰 */}
         <View style={{ flex: 2 }}></View>
       </View>
     </Background>
