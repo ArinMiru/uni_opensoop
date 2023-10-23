@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, View, Text } from "react-native";
-import { ListCategorieCompo } from "../../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { DrawerActions } from "@react-navigation/native"; // DrawerActions 추가
-import { MenuIconEditTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { QuestData } from "../../../Utils/_private/ApiData/QuestData";
 import { QuesBubListSvc } from "../../../Utils/_private/ApiData/QuestPostData";
+import Spinner from "react-native-loading-spinner-overlay";
 
 /**
  * @Dowon(김도원 생성)
@@ -34,6 +32,7 @@ interface ButtonProps {
 const QstPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const [questData, setQuestData] = useState<QuestData | null>(null);
+  const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
 
   useEffect(() => {
     if (userData !== null) {

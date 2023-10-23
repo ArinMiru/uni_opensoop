@@ -1,26 +1,50 @@
-import { View } from "react-native";
-import React, { useEffect, useState } from "react";
-import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { FreQstComment } from "../../../Components/ListCompo/FreCompo/FreCompo";
+import React, { useState } from "react";
+import { View, KeyboardAvoidingView, ScrollView, Platform } from "react-native";
+import {
+  FreQstComment,
+  FrePost,
+} from "../../../Components/ListCompo/FreCompo/FreCompo";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyles";
-import { FrePost } from "../../../Components/ListCompo/FreCompo/FreCompo";
-import { ScrollView } from "react-native-gesture-handler";
 import { CommentInput } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
-import { KeyboardAvoidingView } from "react-native";
-import { Platform } from "react-native";
+import { FreeBubDel } from "../../../Services/_private/FreeApi";
+import { FreeAnsBubNew } from "../../../Services/AnsApi/FreeAnsApi";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
-import { FreeData } from "../../../Utils/_private/ApiData/FreeData";
+import { FreePostDetailProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 
-// 건의 게시판과 공통되는 화면이기 때문에 건의 게시판의 .style을 그대로 가져왔습니다.
+const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
+  route,
+  navigation,
+}) => {
+  const [cont, setCont] = useState<string>("");
+  const { CRE_SEQ, CONT, TIT, NICK_NM, LIKE_CNT, CRE_DAT, AnsFree } =
+    route.params;
 
-const FreePostDetailPage: React.FC<ScreenProps> = ({ navigation }) => {
-  const [freeData, setFreeData] = useState<FreeData | null>(null); // 자유게시판 데이터
+  console.log(CRE_SEQ);
+
+  const dellPress = () => {
+    FreeBubDel(CRE_SEQ);
+  };
+
+  const FreeAnsNewBut = async () => {
+    try {
+      const userData = getUserData();
+      if (userData != null) {
+        await FreeAnsBubNew(cont, CRE_SEQ);
+      } else {
+        console.error("userData가 null입니다.");
+      }
+    } catch (error) {
+      console.error("등록 오류", error);
+    }
+  };
+
   return (
     <AccountBackground>
       <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
+      {/* 수정 에러 뜸 */}
       <KeyboardAvoidingView
         style={{ flex: 1, marginBottom: deviceWidth * 0.02 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -28,11 +52,12 @@ const FreePostDetailPage: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <ScrollView>
           <FrePost
-            nickname={"익명이"}
-            fretit="해결함 닉네임 길이 제한 걸면됨"
-            frecont="해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!해결했다 텍스트 늘려봐ㅏㅏㅏㅏㅏㅏ!!"
-            freposttime="0초전"
-            frelike={100} // 좋아요 수 number로 받아오기
+            nickname={NICK_NM}
+            fretit={TIT}
+            frecont={CONT}
+            freposttime={CRE_DAT}
+            frelike={LIKE_CNT} // 좋아요 수 number로 받아오기
+            delPress={dellPress}
           />
           <View
             style={[
@@ -40,12 +65,21 @@ const FreePostDetailPage: React.FC<ScreenProps> = ({ navigation }) => {
               { marginTop: deviceHeight * 0.018 },
             ]}
           ></View>
-          <FreQstComment
-            freqstansnick="익명이"
-            freqstanstit="한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에한우를 먹고 싶나 오마0에"
-            freqstanstime="10년전"
+          {AnsFree.sort((a, b) => b.ANS_SEQ - a.ANS_SEQ) // ANS_SEQ를 내림차순으로 정렬
+            .map((comment) => (
+              <FreQstComment
+                key={comment.ANS_SEQ}
+                freqstansnick={comment.ANS_MEMB_ID}
+                freqstanstit={comment.CONT}
+                freqstanstime={comment.CRE_DAT}
+              />
+            ))}
+          <CommentInput
+            text="댓글을 입력하세요."
+            value={cont}
+            onChangeText={(text) => setCont(text)}
+            onPress={FreeAnsNewBut}
           />
-          <CommentInput text="댓글을 입력하세요." />
         </ScrollView>
       </KeyboardAvoidingView>
     </AccountBackground>

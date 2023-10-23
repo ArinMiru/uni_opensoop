@@ -12,75 +12,117 @@ import {
   OpenPhotoButton,
   OpenPhotoComboBox,
 } from "../../../Components/ListCompo/OpenCompo/OpenButton";
-import { RegiButton } from "../../../Components/ListCompo/RegiButton";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { openBubSvcNew } from "../../../Services/_private/NoticeApi";
 import { Background } from "../../../Components/AllCompo/Background";
+import { SafeAreaView } from "react-native-safe-area-context";
+import * as ImagePicker from "expo-image-picker";
+import * as ImageManipulator from "expo-image-manipulator";
+
+/** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
-/** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
+
+type ImageInfo = {
+  FILE_BASE64: string;
+  FILE_NM: string;
+  IMG_SEQ: number;
+};
 
 const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const [photoButtonClicked, setphotoButtonClicked] = React.useState(false);
   const userData = getUserData();
   const [cont, setCont] = useState<string>("");
   const [tit, setTit] = useState<string>("");
-  /** NoticePostRegiPage 컴포넌트에서 사용되는 상태 변수 중 하나인 photoButtonClicked의 값을 변경하는 함수입니다. */
+  const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
+  const [imageUri, setImageUri] = useState<string>();
+
+  const encodeImageToBase64 = async (imageUri: string) => {
+    try {
+      if (!imageUri) {
+        return null;
+      }
+
+      const response = await fetch(imageUri);
+      const blob = await response.blob();
+
+      const base64Data: string = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+      });
+
+      return base64Data;
+    } catch (error) {
+      console.error("Error encoding image to Base64:", error);
+      return null;
+    }
+  };
+
+  const uploadImage = async () => {
+    if (!status?.granted) {
+      const permissions = await requestPermission();
+      if (!permissions.granted) {
+        return null;
+      }
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      quality: 1,
+      aspect: [1, 1],
+    });
+    if (result.canceled) {
+      return null;
+    }
+
+    const resizedImage = await ImageManipulator.manipulateAsync(
+      result.assets[0].uri,
+      [{ resize: { width: 100, height: 100 } }],
+      { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
+    );
+
+    console.log(resizedImage);
+
+    setImageUri(resizedImage.uri);
+  };
 
   const handleRegiButtonPress = async () => {
     try {
-      // 필요한 데이터 가져오기
-
-      if (userData) {
-        const TIT = tit;
-        const CONT = cont;
-
-        // 사용자가 이미지를 업로드한 경우에만 이미지 정보를 구성
-        let IMAGE_INFO = [];
-
-        // 사용자가 이미지를 업로드한 경우
-
-        IMAGE_INFO = [
-          {
-            FILE_BASE64: "1. FILE_BASE64 값",
-            FILE_NM: "2. FILE_NM 값",
-            IMG_SEQ: 1,
-          },
-          {
-            FILE_BASE64: "3. FILE_BASE64 값",
-            FILE_NM: "4. FILE_NM 값",
-            IMG_SEQ: 2,
-          },
-        ];
-
-        // 데이터 객체 구성
-        const dataToSubmit = {
-          LOGIN_ID: userData.LOGIN_ID,
-          MEMB_DEP_CD: userData.MEMB_DEP_CD,
-          MEMB_SC_CD: userData.MEMB_SC_CD,
-          TIT_CD: userData.TIT_CD,
-          TIT,
-          CONT,
-          IMAGE_INFO,
-        };
-
-        // openBubSvc 함수에 데이터 전달
-        await openBubSvcNew(
-          dataToSubmit.LOGIN_ID,
-          dataToSubmit.MEMB_DEP_CD,
-          dataToSubmit.MEMB_SC_CD,
-          dataToSubmit.TIT_CD,
-          dataToSubmit.TIT,
-          dataToSubmit.CONT,
-          dataToSubmit.IMAGE_INFO
-        );
-
-        // 등록 후 필요한 네비게이션 이동 등의 작업 수행
-        // navigation.navigate("다음 화면");
-      } else {
+      if (!userData) {
         console.error("userData가 null입니다.");
+        return;
       }
+
+      const TIT = tit;
+      const CONT = cont;
+
+      let IMAGE_INFO: ImageInfo[] = [];
+
+      if (imageUri) {
+        const imageBase64 = await encodeImageToBase64(imageUri);
+        if (imageBase64 !== null) {
+          IMAGE_INFO.push({
+            FILE_BASE64: imageBase64,
+            FILE_NM: "image.jpg",
+            IMG_SEQ: 0,
+          });
+        }
+      }
+
+      const dataToSubmit = {
+        TIT,
+        CONT,
+        IMAGE_INFO,
+      };
+
+      await openBubSvcNew(
+        dataToSubmit.TIT,
+        dataToSubmit.CONT,
+        dataToSubmit.IMAGE_INFO
+      );
     } catch (error) {
       console.error("등록 오류:", error);
     }
@@ -173,6 +215,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
               <OpenPhotoButton
                 onPress={() => setphotoButtonClicked(!photoButtonClicked)}
               />
+              {/*onPress={ => {uploadImage} 얘 넣으면 base64로 인코딩 됨*/}
             </View>
           )}
         </View>

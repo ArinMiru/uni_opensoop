@@ -22,9 +22,11 @@ export default StyleSheet.create({
   QstContInputBoxStyle: {
     width: deviceWidth * 0.84,
     minHeight: deviceHeight * 0.2,
+    maxHeight: deviceHeight * 0.47,
     backgroundColor: "#FFFFFF",
     paddingTop: 8,
     paddingEnd: 8,
+    paddingBottom: 8,
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 8,

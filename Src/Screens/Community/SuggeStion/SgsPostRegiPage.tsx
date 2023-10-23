@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
@@ -11,10 +11,32 @@ import TextStyle from "../../../Styles/TextStyle";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
-
-const userData = getUserData(); // 현재 사용자 데이터
+import { SugBubListNew } from "../../../Services/_private/SugBubListApi";
 
 const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
+  const [cont, setCont] = useState<string>("");
+  const [tit, setTit] = useState<string>("");
+
+  const userData = getUserData(); // 현재 사용자 데이터
+
+  const handleRegiButtonPress = async () => {
+    try {
+      // 필요한 데이터 가져오기
+
+      if (userData) {
+        await SugBubListNew(tit, cont, "Y");
+
+        // 등록 후 필요한 네비게이션 이동 등의 작업 수행
+        // navigation.navigate("다음 화면");
+      } else {
+        console.error("userData가 null입니다.");
+      }
+    } catch (error) {
+      console.error("등록 오류:", error);
+    }
+    navigation.goBack();
+  };
+
   return (
     <Background>
       <BackIconRegiTopbarStyle
@@ -22,7 +44,7 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
-        onPressRegi={() => navigation.goBack()}
+        onPressRegi={handleRegiButtonPress}
       />
       <View
         style={[
@@ -38,7 +60,11 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             alignItems: "center",
           }}
         >
-          <OpenFreSgsTitInputBox text="제목을 입력하세요"></OpenFreSgsTitInputBox>
+          <OpenFreSgsTitInputBox
+            text="제목을 입력하세요"
+            value={tit}
+            onChangeText={(text) => setTit(text)}
+          ></OpenFreSgsTitInputBox>
         </View>
 
         <View
@@ -48,7 +74,11 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             alignItems: "center",
           }}
         >
-          <OpenFreSgsContInputBox text="텍스트를 입력해주세요."></OpenFreSgsContInputBox>
+          <OpenFreSgsContInputBox
+            text="텍스트를 입력해주세요."
+            value={cont}
+            onChangeText={(text) => setCont(text)}
+          ></OpenFreSgsContInputBox>
           <View
             style={{
               width: deviceWidth * 0.82,
