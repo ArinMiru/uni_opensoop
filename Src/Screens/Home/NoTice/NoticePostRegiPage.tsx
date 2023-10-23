@@ -212,9 +212,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
                 alignItems: "flex-end",
               }}
             >
-              <OpenPhotoButton
-                onPress={() => setphotoButtonClicked(!photoButtonClicked)}
-              />
+              <OpenPhotoButton onPressAddPhoto={uploadImage} />
               {/*onPress={ => {uploadImage} 얘 넣으면 base64로 인코딩 됨*/}
             </View>
           )}

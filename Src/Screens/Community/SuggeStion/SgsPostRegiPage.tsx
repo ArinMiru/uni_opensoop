@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, KeyboardAvoidingView } from "react-native";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
@@ -12,6 +12,7 @@ import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { SugBubListNew } from "../../../Services/_private/SugBubListApi";
+import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 
 const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [cont, setCont] = useState<string>("");
@@ -54,59 +55,78 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <View
           style={{
-            flex: 1,
+            flex: 1.5,
             width: deviceWidth * 1,
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <OpenFreSgsTitInputBox
-            text="제목을 입력하세요"
-            value={tit}
-            onChangeText={(text) => setTit(text)}
-          ></OpenFreSgsTitInputBox>
-        </View>
-
-        <View
-          style={{
-            width: deviceWidth * 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <OpenFreSgsContInputBox
-            text="텍스트를 입력해주세요."
-            value={cont}
-            onChangeText={(text) => setCont(text)}
-          ></OpenFreSgsContInputBox>
-          <View
-            style={{
-              width: deviceWidth * 0.82,
-              justifyContent: "center",
-            }}
-          >
+          <View style={ListInputBoxStyle.FreQstOpenTitInputBoxStyle}>
+            <OpenFreSgsTitInputBox
+              text="제목을 입력하세요"
+              value={tit}
+              onChangeText={(text) => setTit(text)}
+            ></OpenFreSgsTitInputBox>
             <Text
               style={[
-                TextStyle.medium09,
-                { color: "#939393" },
-                { paddingTop: deviceWidth * 0.02 },
-                { letterSpacing: -0.3 },
+                TextStyle.semibold08,
+                { color: "#919191", alignSelf: "flex-end", paddingTop: "2%" },
               ]}
             >
-              학생회 임원들께 건의하는 게시판입니다. 학과 내 생활을 더욱
-              원활하게 만드는 아이디어를 제안해주세요. 학생회 임원들을 비난하지
-              않도록 주의 부탁드립니다. 익명으로 작성되며, 자유롭게 의견을
-              남겨주세요.
+              최소 5자 / 최대 30자
             </Text>
           </View>
         </View>
-        <View
+        {/* 두번째 뷰 */}
+        <KeyboardAvoidingView
           style={{
-            flex: 2,
-            justifyContent: "center",
+            flex: 1.7,
+            width: deviceWidth * 1,
+            height: "auto",
             alignItems: "center",
           }}
-        ></View>
+          behavior="padding"
+          enabled
+        >
+          <View style={ListInputBoxStyle.FreQstOpenContInputBoxStyle}>
+            <OpenFreSgsContInputBox
+              text="텍스트를 입력해주세요."
+              value={cont}
+              onChangeText={(text) => setCont(text)}
+            ></OpenFreSgsContInputBox>
+            <Text
+              style={[
+                TextStyle.semibold08,
+                { color: "#919191", alignSelf: "flex-end", paddingTop: "2%" },
+              ]}
+            >
+              최소 10자
+            </Text>
+          </View>
+        </KeyboardAvoidingView>
+
+        {/* 세번째 뷰 */}
+        <View
+          style={{
+            width: deviceWidth * 0.82,
+            justifyContent: "flex-start",
+            alignItems: "center",
+            flex: 3.5,
+          }}
+        >
+          <Text
+            style={[
+              TextStyle.regular08,
+              { color: "#909090" },
+              { paddingTop: deviceWidth * 0.02 },
+              { letterSpacing: -0.3 },
+            ]}
+          >
+            학생회 임원들께 건의하는 게시판입니다. 학과 내 생활을 더욱 원활하게
+            만드는 아이디어를 제안해주세요. 학생회 임원들을 비난하지 않도록 주의
+            부탁드립니다. 익명으로 작성되며, 자유롭게 의견을 남겨주세요.
+          </Text>
+        </View>
       </View>
     </Background>
   );

@@ -16,6 +16,7 @@ interface ButtonProps {
   posttime?: string; // 투표게시판 리스트에서 투표 마감시간
   poststatus?: string; // 투표게시판 리스트에서 투표 상태(미투표, 투표환료)
   votestatusnum?: string; // 투표현황 버튼에서 투표현황 숫자
+  date?: string;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
@@ -411,6 +412,21 @@ export const VotedListButton: React.FC<ButtonProps> = ({
         </View>
       </View>
       {children}
+    </TouchableOpacity>
+  );
+};
+
+export const DateSltButton: React.FC<ButtonProps> = ({
+  children,
+  onPress,
+  date,
+}) => {
+  return (
+    <TouchableOpacity
+      style={VoteButtonStyle.DateSltButtonStyle}
+      onPress={onPress}
+    >
+      <Text style={[textStyle.regular13, { color: "#707070" }]}>{date}</Text>
     </TouchableOpacity>
   );
 };
