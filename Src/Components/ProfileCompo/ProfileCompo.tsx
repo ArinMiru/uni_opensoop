@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
+import { View, Text, TouchableOpacity } from "react-native";
+import { deviceWidth } from "../../Utils/DeviceUtils";
 import ProfilePageStyles from "../../Styles/MainPageStyles/ProfilePageStyles";
 import TextStyle from "../../Styles/TextStyle";
 import { Image } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 interface inputProps {
   children?: React.ReactNode;
@@ -60,7 +61,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           source={require("../../Assets/Images/profileimage.png")}
         />
         <View style={{ paddingLeft: deviceWidth * 0.03 }}>
-          <Text style={[TextStyle.semibold10, { color: "#151515" }]}>
+          <Text style={[TextStyle.semibold10, { color: "#303038" }]}>
             {MEMB_NM}
           </Text>
         </View>
@@ -93,7 +94,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           </Text>
         </View>
         <View style={{ marginRight: deviceWidth * 0.06 }}>
-          <Text style={[TextStyle.semibold13, { color: "#151515" }]}>
+          <Text style={[TextStyle.semibold13, { color: "#303038" }]}>
             {NICK_NUM}
           </Text>
         </View>
@@ -112,7 +113,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           </Text>
         </View>
         <View style={{ marginRight: deviceWidth * 0.06 }}>
-          <Text style={[TextStyle.semibold13, { color: "#151515" }]}>
+          <Text style={[TextStyle.semibold13, { color: "#303038" }]}>
             {MEMB_EM}
           </Text>
         </View>
@@ -131,7 +132,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           </Text>
         </View>
         <View style={{ marginRight: deviceWidth * 0.06 }}>
-          <Text style={[TextStyle.semibold13, { color: "#151515" }]}>
+          <Text style={[TextStyle.semibold13, { color: "#303038" }]}>
             {MEMB_CD}
           </Text>
         </View>
@@ -150,7 +151,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           </Text>
         </View>
         <View style={{ marginRight: deviceWidth * 0.06 }}>
-          <Text style={[TextStyle.semibold13, { color: "#151515" }]}>
+          <Text style={[TextStyle.semibold13, { color: "#303038" }]}>
             {MEMB_GRA}
           </Text>
         </View>
@@ -169,7 +170,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           </Text>
         </View>
         <View style={{ marginRight: deviceWidth * 0.06 }}>
-          <Text style={[TextStyle.semibold13, { color: "#151515" }]}>
+          <Text style={[TextStyle.semibold13, { color: "#303038" }]}>
             {TIT_NM}
           </Text>
         </View>
@@ -187,38 +188,90 @@ export const CertLogoutBox: React.FC<ButtonProps> = ({
     <View
       style={[ProfilePageStyles.OntherBoxStyle, { flexDirection: "column" }]}
     >
-      <View
+      <TouchableOpacity
         style={{
           flex: 1,
           flexDirection: "row",
           alignItems: "center",
-          backgroundColor: "#999999",
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
         }}
+        onPress={onPressTITCERT}
       >
         <Image
           style={{
             resizeMode: "contain",
-            width: deviceWidth * 0.099,
+            width: deviceWidth * 0.0999,
+            marginLeft: deviceWidth * 0.06,
           }}
-          source={require("../../Assets/Images/CRTicon.png")}
+          source={require("../../Assets/Images/CerticonImage.png")}
         />
-      </View>
-      <View
+        <View
+          style={{
+            paddingLeft: deviceWidth * 0.06,
+          }}
+        >
+          <Text style={[TextStyle.medium10, { color: "#303038" }]}>
+            {"학회장, 부학회장 인증"}
+          </Text>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "flex-end",
+            justifyContent: "center",
+            paddingRight: deviceWidth * 0.06,
+          }}
+        >
+          <Ionicons
+            name="chevron-forward"
+            size={deviceWidth * 0.045}
+            color="#37424D"
+          />
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
         style={{
           flex: 1,
           flexDirection: "row",
           alignItems: "center",
-          backgroundColor: "#888888",
+          borderBottomLeftRadius: 10,
+          borderBottomRightRadius: 10,
         }}
+        onPress={onPressLOGOUT}
       >
         <Image
           style={{
             resizeMode: "contain",
-            width: deviceWidth * 0.099,
+            width: deviceWidth * 0.0999,
+            marginLeft: deviceWidth * 0.06,
           }}
-          source={require("../../Assets/Images/Logout.png")}
+          source={require("../../Assets/Images/LogOuticonImage.png")}
         />
-      </View>
+        <View
+          style={{
+            paddingLeft: deviceWidth * 0.06,
+          }}
+        >
+          <Text style={[TextStyle.medium10, { color: "#F66565" }]}>
+            {"로그아웃"}
+          </Text>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "flex-end",
+            justifyContent: "center",
+            paddingRight: deviceWidth * 0.06,
+          }}
+        >
+          <Ionicons
+            name="chevron-forward"
+            size={deviceWidth * 0.045}
+            color="#37424D"
+          />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
