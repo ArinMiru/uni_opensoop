@@ -8,11 +8,18 @@ import {
 } from "../../Components/MainPageCompo/MainPageCompo";
 import { Background } from "../../Components/AllCompo/Background";
 import { MainPageTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
+import { ScreenProps } from "../../Navigations/StackNavigator";
+import { getUserData } from "../../Utils/_private/ApiData/UserData";
 
-const HomePageScreen = ({}) => {
+const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
+  const userData = getUserData(); // 현재 사용자 데이터
   return (
     <Background>
-      <MainPageTopbarStyle MEMB_SC_NM="평택대학교" MEMB_DEP_NM="정보통신학과" />
+      <MainPageTopbarStyle
+        MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
+        MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
+        onPressProfile={() => navigation.navigate("ProfilePage")}
+      />
       <View
         style={{
           height: "91%",
@@ -31,6 +38,7 @@ const HomePageScreen = ({}) => {
             S_Open_DEP_NM="정보통신학과"
             S_TIT_NM="부학회장"
             S_OpenPostLike={200}
+            onPress={() => navigation.navigate("NoticePage")}
           />
         </View>
         <View>
@@ -41,6 +49,7 @@ const HomePageScreen = ({}) => {
             S_VOT_TOT={200}
             F_VOT_GO_CD="2023-10-19"
             S_VOT_GO_CD="2023-10-20"
+            onPress={() => navigation.navigate("VotePostPage")}
           />
         </View>
         <View style={{ marginBottom: deviceWidth * 0.04 }}>
@@ -51,6 +60,7 @@ const HomePageScreen = ({}) => {
             S_END_SCHD_YMD="2023-10-19"
             F_SCHD_TIT="첫번째 일정 제목"
             S_SCHD_TIT="두번쨰 일정 제목"
+            onPress={() => navigation.navigate("SchedulPage")}
           />
         </View>
       </View>
