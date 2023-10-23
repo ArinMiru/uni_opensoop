@@ -21,8 +21,10 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
     LOGIN_ID, // 로그인 사용자 아이디
     LOGIN_PASS, // 로그인 사용자 비밀번호
   };
-  const result: AxiosResponse<UserData, any> | null =
-    await sendApiData(endpoint, data); // 로그인 시도 및 서버 응답 저장
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  ); // 로그인 시도 및 서버 응답 저장
 
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
@@ -60,14 +62,15 @@ export const idCheckpoint = async (MEMB_ID: string) => {
   const data = {
     MEMB_ID,
   };
-  const result: AxiosResponse<UserData, any> | null =
-    await sendApiData(endpoint, data);
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-    console.log("사용할 수 있는 아이디 입니다.");
-  } else {
-    console.log("중복된 아이디 입니다.");
+    return true;
   }
+  return false;
 };
 
 /* ------------------------------------------------------------------------------- */
@@ -77,18 +80,19 @@ export const idCheckpoint = async (MEMB_ID: string) => {
  * 닉네임 중복체크 API 호출 함수
  * @param NICK_NM
  */
-export const nickCheckpoint = async (NICK_NM: string) => {
+export const nickCheckpoint = async (NICK_NM: string): Promise<boolean> => {
   const endpoint = "/UNI/MembNicChkSvc";
   const data = {
     NICK_NM,
   };
-  const result: AxiosResponse<UserData, any> | null =
-    await sendApiData(endpoint, data);
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
   if (result !== null && result.data.RSLT_CD == "00") {
-    console.log("사용할 수 있는 닉네임 입니다.");
-  } else {
-    console.log("중복된 닉네임 입니다.");
+    return true;
   }
+  return false;
 };
 
 /**
@@ -100,8 +104,10 @@ export const MembIdFndSvc = async (MEMB_EM: string) => {
   const data = {
     MEMB_EM,
   };
-  const result: AxiosResponse<UserData, any> | null =
-    await sendApiData(endpoint, data);
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
   console.log(data);
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
@@ -124,8 +130,10 @@ export const MembPassFndSvc = async (MEMB_ID: string, MEMB_EM: string) => {
     MEMB_ID,
     MEMB_EM,
   };
-  const result: AxiosResponse<UserData, any> | null =
-    await sendApiData(endpoint, data);
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
     console.log("인증번호를 발송합니다.");
@@ -143,8 +151,10 @@ export const ChkAndCertSvc = async (MEMB_ID: string, CERT_SEQ: string) => {
     MEMB_ID,
     CERT_SEQ,
   };
-  const result: AxiosResponse<UserData, any> | null =
-    await sendApiData(endpoint, data);
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
     console.log("인증번호 일치.");
@@ -204,8 +214,10 @@ export const MembCertUpd = async (CERT_SEQ: string) => {
   const data = {
     CERT_SEQ,
   };
-  const result: AxiosResponse<UserData, any> | null =
-    await sendApiData(endpoint, data);
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
   if (result !== null && result.data.RSLT_CD == "00") {
     console.log("통신 성공");
   } else {

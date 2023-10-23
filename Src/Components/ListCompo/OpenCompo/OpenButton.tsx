@@ -13,6 +13,8 @@ interface ButtonProps {
   text?: string;
   postLike?: number;
   onPress?: () => void;
+  onPressDelPhoto?: () => void;
+  onPressAddPhoto?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
 
@@ -111,20 +113,24 @@ export const OpenPhotoPlusBox: React.FC<ButtonProps> = ({
 
 /**
  * 공지사항에서 사용하는 사진 삭제 컴포넌트입니다.
+ * @ts7752 요청 사항 수정 완료 => 수행 @ArinMiru / 2023-10-24 02:12
+ * @ts7752 확인 부탁드립니다.
  */
 export const OpenPhotoDelBox: React.FC<ButtonProps> = ({
-  children,
-  onPress,
+  onPressDelPhoto,
+  onPressAddPhoto,
 }) => {
   return (
-    <View
-      style={[
-        OpenButtonStyle.OpenPhotoBoxStyle,
-        { marginRight: deviceWidth * 0.02 },
-      ]}
-    >
-      <OpenPhotoDelIcon onPress={onPress}></OpenPhotoDelIcon>
-    </View>
+    <TouchableOpacity onPress={onPressAddPhoto}>
+      <View
+        style={[
+          OpenButtonStyle.OpenPhotoBoxStyle,
+          { marginRight: deviceWidth * 0.02 },
+        ]}
+      >
+        <OpenPhotoDelIcon onPress={onPressDelPhoto}></OpenPhotoDelIcon>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -155,7 +161,10 @@ export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
       }}
     >
       {photoList.map((_, index) => (
-        <OpenPhotoDelBox key={index} onPress={() => removePhotoBox(index)} />
+        <OpenPhotoDelBox
+          key={index}
+          onPressDelPhoto={() => removePhotoBox(index)}
+        />
       ))}
       {photoList.length < 4 && <OpenPhotoPlusBox onPress={addPhotoBox} />}
     </View>
