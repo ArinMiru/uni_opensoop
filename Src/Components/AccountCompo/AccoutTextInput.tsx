@@ -20,7 +20,7 @@ export const SrchDupleInput: React.FC<inputProps> = ({
   return (
     <TextInput
       placeholderTextColor="#8391A1"
-      style={[Styles.srchDupleInputStyle, textStyle.medium13]}
+      style={[Styles.srchDupleInputStyle, textStyle.medium12]}
       placeholder={text}
       {...props}
     />
@@ -39,7 +39,7 @@ export const OnlyAccountInputCompoMarginTop3: React.FC<inputProps> = ({
   return (
     <TextInput
       placeholderTextColor="#BDBDBD"
-      style={[Styles.onlyAccountInputStyleMarginTop3, textStyle.medium13]}
+      style={[Styles.onlyAccountInputStyleMarginTop3, textStyle.medium12]}
       placeholder={text}
       {...props}
     />
