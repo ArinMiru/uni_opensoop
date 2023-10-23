@@ -1,4 +1,4 @@
-import { sendLoginCredentials } from "./Api.config";
+import { sendApiData } from "./Api.config";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { AxiosResponse } from "axios";
 import {
@@ -49,7 +49,7 @@ export const QuesBubListSvc = async (
 
     try {
       // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
-      const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+      const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
@@ -88,7 +88,7 @@ export const QuesBubSvcNew = async (TIT: string, CONT: string) => {
     };
     console.log(data);
     const result: AxiosResponse<UserData, any> | null =
-      await sendLoginCredentials(endpoint, data);
+      await sendApiData(endpoint, data);
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
       console.log("등록 성공");
@@ -119,7 +119,7 @@ export const QuesBubSvcUp = async (
     };
     console.log(data);
     const result: AxiosResponse<UserData, any> | null =
-      await sendLoginCredentials(endpoint, data);
+      await sendApiData(endpoint, data);
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
       console.log("등록 성공");
@@ -141,7 +141,7 @@ export const QuesBubSvcDel = async (CRE_SEQ: number) => {
     };
     console.log(data);
     const result: AxiosResponse<UserData, any> | null =
-      await sendLoginCredentials(endpoint, data);
+      await sendApiData(endpoint, data);
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
       console.log("등록 성공");

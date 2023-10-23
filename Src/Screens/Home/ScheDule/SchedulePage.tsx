@@ -2,13 +2,18 @@ import { View, SafeAreaView } from "react-native";
 import React, { useState, useEffect } from "react";
 import { LocaleConfig, Calendar } from "react-native-calendars";
 import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
-import { Background } from "../../../Components/AllCompo/Background";
 import Constants from "expo-constants";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyles";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
+import { useIsFocused } from "@react-navigation/native";
+import { SchdBubData } from "../../../Utils/_private/ApiData/SchdBubData";
+import { SchdBubListSvc } from "../../../Services/_private/SchdBubApi";
+import Spinner from "react-native-loading-spinner-overlay";
+import moment from "moment"; // moment 라이브러리 추가
+
 LocaleConfig.locales["kr"] = {
   monthNames: [
     "1월",
@@ -39,7 +44,10 @@ LocaleConfig.locales["kr"] = {
 LocaleConfig.defaultLocale = "kr";
 
 const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
-  // 월 이름 배열을 별도로 만들어 현재 월을 가져오도록 설정
+  const isFocused = useIsFocused();
+  const [schdData, setSchdData] = useState<SchdBubData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const userData = getUserData();
   const monthNames = [
     "1월",
     "2월",
@@ -55,13 +63,60 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     "12월",
   ];
 
-  // 특정 날짜로 지정 (예: 10월 10일, 10월 15일)
-  const specificDates = {
-    "2023-10-10": { selected: true, marked: true, selectedColor: "#4BB781" },
-    "2023-10-15": { selected: true, marked: true, selectedColor: "#4BB781" },
-  };
+  useEffect(() => {
+    if (userData !== null && isFocused) {
+      setLoading(true);
+      SchdBubListSvc()
+        .then((data) => {
+          if (data !== null) {
+            const markedDates: {
+              [date: string]: {
+                selected: boolean;
+                marked: boolean;
+                selectedColor: string;
+              };
+            } = {};
+            data.SCHD_BUB.forEach((item) => {
+              const day = item.DAY;
+              const year = data.YEAR;
+              const month = data.MONTH;
+              const hasSchedule = Number(item.CNT) > 0;
 
-  const userData = getUserData(); // 현재 사용자 데이터
+              if (hasSchedule) {
+                markedDates[`${year}-${month}-${day}`] = {
+                  selected: true,
+                  marked: true,
+                  selectedColor: "#4BB781",
+                };
+              }
+            });
+
+            // 현재 날짜 표시
+            const today = moment().format("YYYY-MM-DD");
+            markedDates[today] = {
+              selected: true,
+              marked: true,
+              selectedColor: "red", // 빨간색으로 변경
+            };
+
+            setSchdData(data);
+            setSpecificDates(markedDates);
+          }
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("투표 게시판 데이터 가져오기 오류:", error);
+        });
+    }
+  }, [userData, isFocused]);
+
+  const [specificDates, setSpecificDates] = useState<{
+    [date: string]: {
+      selected: boolean;
+      marked: boolean;
+      selectedColor: string;
+    };
+  }>({});
 
   return (
     <SafeAreaView
@@ -80,10 +135,16 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
           { alignItems: "center" },
         ]}
       >
+        <Spinner
+          // 로딩 상태에 따라 Spinner를 화면에 표시
+          visible={loading}
+          textContent={"로딩 중..."}
+          textStyle={{ color: "#FFF" }}
+        />
         <Calendar
           header={{
             visible: true,
-            format: "MM", // 이 부분을 "MM"으로 변경
+            format: "MM",
             renderHeader: (date: Date) => {
               const month = monthNames[date.getMonth()];
               return month;
@@ -93,7 +154,6 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
           markedDates={specificDates}
           style={{
             width: deviceWidth * 1,
-
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
           }}
