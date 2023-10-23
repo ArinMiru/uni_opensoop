@@ -1,26 +1,14 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { MainOpenBub } from "../../Components/MainPageCompo/MainPageCompo";
 import { Background } from "../../Components/AllCompo/Background";
-import NewBackgroundStyle from "../../Styles/NewBackgroundStyle";
-import { TopbarEditButton } from "../../Components/AllCompo/TopbarEditDelRegiButton";
-import {
-  MainPageTopbarStyle,
-  MenuTopbarStyle,
-} from "../../Components/AllCompo/TopbarCompo";
-import {
-  MainVoteBub,
-  MainSchdBub,
-} from "../../Components/MainPageCompo/MainPageCompo";
-import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
+import { deviceWidth } from "../../Utils/DeviceUtils";
 import { BackIconTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
-import ProfilePageStyles from "../../Styles/MainPageStyles/ProfilePageStyles";
 import TextStyle from "../../Styles/TextStyle";
 import {
   ProfilePageUserInfo,
   CertLogoutBox,
 } from "../../Components/ProfileCompo/ProfileCompo";
-
+import { DelToastMessageBox } from "../../Components/ToastMessageCompo/ToastMessageBox";
 interface ScreenProps {
   children?: React.ReactNode;
   navigation?: { navigate: (screenName: string) => void };
@@ -48,6 +36,7 @@ const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
           </Text>
         </View>
         <View style={{ alignItems: "center" }}>
+          <DelToastMessageBox />
           <ProfilePageUserInfo
             PROF_IMG_PATH=""
             MEMB_CD="2018143005"
