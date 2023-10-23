@@ -37,6 +37,8 @@ import VotePostDetailPage from "../Screens/Home/VoTe/VotePostDetailPage";
 import VotePostStatusPage from "../Screens/Home/VoTe/VotePostStatusPage";
 import SchedulePage from "../Screens/Home/ScheDule/SchedulePage";
 import BottomTabNavigations from "./BottomTabNavigations";
+import ProfilePage from "../Screens/Home/ProfilePage";
+import TitleCodeCerti from "../Screens/Home/TitleCodeCerti";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -112,6 +114,8 @@ export type RootStackParamList = {
   VotePostStatusPage: undefined;
   SchedulPage: undefined;
   BottomTabNavigations: undefined;
+  ProfilePage: undefined;
+  TitleCodeCerti: undefined;
 
   /**----------------------------------------------------------------------------*/
   /**----------------------------------------------------------------------------*/
@@ -146,6 +150,19 @@ const StackNavigator = () => {
         component={HomePageScreen}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name="ProfilePage"
+        component={ProfilePage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="TitleCodeCerti"
+        component={TitleCodeCerti}
+        options={{ headerShown: false }}
+      />
+
       <Stack.Screen
         name="RegiId"
         component={RegiId}
