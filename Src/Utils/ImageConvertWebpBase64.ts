@@ -1,6 +1,6 @@
 import * as ImageManipulator from "expo-image-manipulator";
 import * as FileSystem from "expo-file-system";
-import { sendLoginCredentials } from "../Services/_private/Api.config";
+import { sendApiData } from "../Services/_private/Api.config";
 
 async function convertToWebPAndEncode(imageUri: string) {
   try {
@@ -20,7 +20,7 @@ async function convertToWebPAndEncode(imageUri: string) {
     /* ------------------------------------------------------------------------------- */
 
     // 인코딩된 문자열을 서버로 전송합니다.
-    const serverResponse = await sendLoginCredentials("/UNI/OpenBubSvc", {
+    const serverResponse = await sendApiData("/UNI/OpenBubSvc", {
       image: base64Data,
     });
 

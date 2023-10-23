@@ -27,18 +27,20 @@ import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { openBubListDell } from "../../../Services/_private/NoticeApi";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
+import { useIsFocused } from "@react-navigation/native";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const modalFunctions = ModalReuableFuction();
-  // 사용자 데이터와 공지사항 데이터 상태를 정의합니다.
-  const userData = getUserData(); // 현재 사용자 데이터
-  const [sortedData, setSortedData] = useState<NoticeData | null>(null); // 정렬된 공지사항 데이터
+  const isFocused = useIsFocused();
+  const userData = getUserData();
+  const [sortedData, setSortedData] = useState<NoticeData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
 
-  // 컴포넌트가 렌더링될 때 한 번만 실행되는 부분입니다.
   useEffect(() => {
-    // 사용자 데이터가 존재하면 공지사항 데이터를 가져옵니다.
-    if (userData !== null) {
+    if (isFocused && userData !== null) {
+      setLoading(true);
       openBubListCall(
         userData.LOGIN_ID,
         userData.MEMB_SC_CD,
@@ -47,19 +49,24 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
       )
         .then((data) => {
           if (data !== null) {
-            // 데이터를 CRE_SEQ 기준으로 내림차순 정렬 예시
             const sorted = { ...data };
             if (sorted.OPEN_BUB) {
               sorted.OPEN_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
             }
             setSortedData(sorted);
           }
+          // 데이터를 성공적으로 가져왔을 때 로딩 상태를 비활성화
+          setLoading(false);
         })
         .catch((error) => {
+          // 데이터 가져오기 오류 시 로딩 상태를 비활성화
+
           console.error("데이터 가져오기 오류:", error);
         });
     }
-  }, []);
+  }, [userData, isFocused]);
+
+  // 화면 포커스와 sortedData가 변경될 때마다 데이터를 다시 가져오도록 설정
 
   // FlatList 항목들 사이에 구분선을 그리기 위한 함수
   const renderSeparator = () => (
@@ -76,14 +83,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
     openBubListDell(selectedCreSeq);
     modalFunctions.handleCloseModal();
   };
-
-  /*-------------------------------------------------------------------*/
-
-  /**
-   * @ArinMiru(김도원)
-   * 02(학회장),03(부학회장),05(관리자) 경우 MenuTopbarStyleManger 노출
-   * 이외의 경우 MenuTopbarStyle 노출
-   */
 
   return (
     <SafeAreaView
@@ -109,8 +108,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
             <CloseModalCompo CloseonPress={modalFunctions.handleCloseModal} />
           </View>
         </BottomSheetModal>
-        {/* 수정 바람 */}
-        {/* 수정 완료 @ArinMiru김도원 23.10.03 */}
         <MenuTopbarStyle
           Title="공지사항"
           MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
@@ -124,7 +121,12 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
             { alignItems: "center" },
           ]}
         >
-          {/* FlatList를 사용하여 공지사항 데이터 출력 */}
+          <Spinner
+            // 로딩 상태에 따라 Spinner를 화면에 표시
+            visible={loading}
+            textContent={"로딩 중..."}
+            textStyle={{ color: "#FFF" }}
+          />
           <FlatList
             data={sortedData?.OPEN_BUB}
             keyExtractor={(item) => item.CRE_SEQ.toString()}
