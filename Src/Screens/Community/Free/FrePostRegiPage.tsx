@@ -8,9 +8,7 @@ import {
 } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
 import { FreeListLawButton } from "../../../Components/ListCompo/FreCompo/FreButton";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
-import {
-  FreeBubRegi,
-} from "../../../Services/_private/FreeApi";
+import { FreeBubRegi } from "../../../Services/_private/FreeApi";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
