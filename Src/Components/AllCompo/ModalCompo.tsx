@@ -4,6 +4,7 @@ import TextStyle from "../../Styles/TextStyle";
 import EditDelCloseModalStyle from "../../Styles/ModalStyles/EditDelCloseModalStyles";
 import { FreQstComment } from "../ListCompo/FreCompo/FreCompo";
 import { ScrollView } from "react-native-gesture-handler";
+import DateSltModalStyle from "../../Styles/ModalStyles/DateSltModalStyle";
 
 interface ButtonProps {
   EditonPress?: () => void;
@@ -57,6 +58,19 @@ export const QstModalCompo: React.FC<ButtonProps> = ({}) => {
           freqstanstime="10년전"
         />
       </ScrollView>
+    </View>
+  );
+};
+
+export const DateSltModlCompo: React.FC<ButtonProps> = ({}) => {
+  return (
+    <View style={DateSltModalStyle.dateArea}>
+      <View style={{ flex: 2 }}></View>
+      <View style={{ flex: 1 }}>
+        <TouchableOpacity style={DateSltModalStyle.button}>
+          <Text style={TextStyle.regular13}>확인</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
