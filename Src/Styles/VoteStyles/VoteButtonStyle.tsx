@@ -101,7 +101,7 @@ export default StyleSheet.create({
   addVoteOptionStyle: {
     width: deviceWidth * 0.775,
     height: deviceHeight * 0.061,
-    backgroundColor: "#ECECEC",
+    backgroundColor: "#F7F7F7",
     alignItems: "center",
     justifyContent: "center",
     alignContent: "center",
@@ -151,6 +151,15 @@ export default StyleSheet.create({
     alignContent: "center",
     backgroundColor: "#ECECEC",
     borderRadius: 5,
+  },
+
+  DateSltButtonStyle: {
+    backgroundColor: "#F7F7F7",
+    width: deviceWidth * 0.775,
+    height: deviceHeight * 0.061,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   /*------------------------------------------------------------*/

@@ -10,11 +10,14 @@ import { Background } from "../../../Components/AllCompo/Background";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAvoidingView } from "react-native";
+import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
+import { OpenFreSgsTitInputBox } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
 
 const userData = getUserData(); // 현재 사용자 데이터
 
 const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [tit, setTit] = useState<string>("");
+  const [cont, setCont] = useState<string>("");
 
   return (
     <Background>
@@ -31,26 +34,42 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           { alignItems: "center" },
         ]}
       >
-        <SafeAreaView>
-          <KeyboardAvoidingView
-            style={{
-              justifyContent: "center",
-            }}
-          >
-            <QstContInputBox text="텍스트를 입력해주세요"></QstContInputBox>
-          </KeyboardAvoidingView>
-        </SafeAreaView>
-        <View
+        <KeyboardAvoidingView
           style={{
+            flex: 1.5,
+            width: deviceWidth * 1,
             justifyContent: "center",
             alignItems: "center",
+          }}
+        >
+          <View style={ListInputBoxStyle.FreQstOpenTitInputBoxStyle}>
+            <OpenFreSgsTitInputBox
+              text="질문을 입력하세요"
+              value={tit}
+              onChangeText={(text) => setTit(text)}
+            ></OpenFreSgsTitInputBox>
+            <Text
+              style={[
+                TextStyle.semibold08,
+                { color: "#919191", alignSelf: "flex-end", paddingTop: "2%" },
+              ]}
+            >
+              최소 5자 / 최대 30자
+            </Text>
+          </View>
+        </KeyboardAvoidingView>
+        <View
+          style={{
+            justifyContent: "flex-start",
+            alignItems: "center",
             width: deviceWidth * 0.82,
+            flex: 5.2,
           }}
         >
           <Text
             style={[
-              TextStyle.medium09,
-              { color: "#828282" },
+              TextStyle.regular08,
+              { color: "#909090" },
               { textAlign: "left" },
             ]}
           >
@@ -59,7 +78,6 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             되는 질문들을 함께 공유해주시면 정말 감사하겠습니다.
           </Text>
         </View>
-        <View style={{ flex: 3.5 }}></View>
       </View>
     </Background>
   );
