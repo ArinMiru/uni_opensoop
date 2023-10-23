@@ -19,10 +19,10 @@ import { Background } from "../../../Components/AllCompo/Background";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
-
-/** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
+
+/** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 
 type ImageInfo = {
   FILE_BASE64: string;

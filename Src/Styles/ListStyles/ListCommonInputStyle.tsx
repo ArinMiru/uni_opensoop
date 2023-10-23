@@ -9,7 +9,7 @@ export default StyleSheet.create({
    */
   OpenFreSgsTitInputBoxStyle: {
     width: deviceWidth * 0.843,
-    height: deviceHeight * 0.065,
+    minHeight: deviceHeight * 0.176,
     backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
