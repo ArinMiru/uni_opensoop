@@ -163,6 +163,7 @@ export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
       {photoList.map((_, index) => (
         <OpenPhotoDelBox
           key={index}
+          onPressAddPhoto={onPress}
           onPressDelPhoto={() => removePhotoBox(index)}
         />
       ))}
