@@ -39,6 +39,7 @@ import SchedulePage from "../Screens/Home/ScheDule/SchedulePage";
 import BottomTabNavigations from "./BottomTabNavigations";
 import ProfilePage from "../Screens/Home/ProfilePage";
 import TitleCodeCerti from "../Screens/Home/TitleCodeCerti";
+import NoticeEditPage from "../Screens/Home/NoTice/NoticeEditPage";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -116,6 +117,16 @@ export type RootStackParamList = {
   BottomTabNavigations: undefined;
   ProfilePage: undefined;
   TitleCodeCerti: undefined;
+  NoticeEditPage: {
+      CRE_SEQ: number;
+      CONT: string;
+      TIT: string;
+      ImageInfo: {
+        FILE_BASE64: string;
+        FILE_NM: string;
+        IMG_SEQ: number;
+      }[];
+  };
 
   /**----------------------------------------------------------------------------*/
   /**----------------------------------------------------------------------------*/
@@ -336,6 +347,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="BottomTabNavigations"
         component={BottomTabNavigations}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NoticeEditPage"
+        component={NoticeEditPage}
         options={{ headerShown: false }}
       />
 

@@ -29,3 +29,16 @@ export type FreePostDetailProps = {
   route: FreePostDetailRouteProp;
   navigation: FreePostDetailNavigationProp;
 };
+
+/* ---------------------------------------------------------------------------------------- */
+
+type NoticeEditRouteProp = RouteProp<RootStackParamList, "NoticeEditPage">;
+type NoticeEditNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "NoticeEditPage"
+>;
+
+export type NoticeEditProps = {
+  route: NoticeEditRouteProp;
+  navigation: NoticeEditNavigationProp;
+};
