@@ -7,6 +7,7 @@ import React from "react";
 import { TextInput, TextInputProps } from "react-native";
 //프로퍼티 타입 정의
 interface inputProps extends TextInputProps {
+  inputtext?: string; //내용 작성 창에 들어가는 Text
   text?: string; //문자열로 타입 명시
 }
 /* 중복 확인 Input
