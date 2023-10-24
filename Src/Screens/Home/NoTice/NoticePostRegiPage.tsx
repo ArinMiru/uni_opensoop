@@ -16,7 +16,7 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { openBubSvcNew } from "../../../Services/_private/NoticeApi";
 import { Background } from "../../../Components/AllCompo/Background";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
@@ -106,7 +106,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         if (imageBase64 !== null) {
           IMAGE_INFO.push({
             FILE_BASE64: imageBase64,
-            FILE_NM: "image.jpg",
+            FILE_NM: "image.webp",
             IMG_SEQ: 0,
           });
         }
@@ -202,7 +202,11 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
           }}
         >
           {photoButtonClicked ? (
-            <OpenPhotoComboBox />
+            <OpenPhotoComboBox
+              onPress={() => {
+                uploadImage();
+              }}
+            />
           ) : (
             <View
               style={{
@@ -212,8 +216,9 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
                 alignItems: "flex-end",
               }}
             >
-              <OpenPhotoButton onPressAddPhoto={uploadImage} />
-              {/*onPress={ => {uploadImage} 얘 넣으면 base64로 인코딩 됨*/}
+              <OpenPhotoButton
+                onPress={() => setphotoButtonClicked(!photoButtonClicked)}
+              />
             </View>
           )}
         </View>
