@@ -47,7 +47,7 @@ export default StyleSheet.create({
   },
 
   accountButtonFlex: {
-    flex: 4,
+    flex: 6,
     width: deviceWidth * 1,
     alignItems: "center",
   },
