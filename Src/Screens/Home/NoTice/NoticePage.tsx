@@ -83,6 +83,30 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
     openBubListDell(selectedCreSeq);
     modalFunctions.handleCloseModal();
   };
+  const modalItemEdit = () => {
+    if (sortedData && selectedCreSeq) {
+      // 선택한 CRE_SEQ에 해당하는 아이템을 찾기
+      const selectedNotice = sortedData.OPEN_BUB.find(
+        (item) => item.CRE_SEQ === selectedCreSeq
+      );
+      if (selectedNotice) {
+        // IMAGE_INFO 데이터 구성
+        const IMAGE_INFO = selectedNotice.IMAGE_INFO.map((image) => ({
+          FILE_BASE64: image.FILE_PATH, // 여기에 필요한 값을 제공해야 합니다.
+          FILE_NM: "image.webp", // 여기에 필요한 값을 제공해야 합니다.
+          IMG_SEQ: Number(image.IMG_SEQ), // IMG_SEQ를 숫자로 변환
+        }));
+
+        navigation.navigate("NoticeEditPage", {
+          CRE_SEQ: selectedNotice.CRE_SEQ,
+          CONT: selectedNotice.CONT,
+          TIT: selectedNotice.TIT,
+          ImageInfo: IMAGE_INFO,
+        });
+      }
+    }
+    modalFunctions.handleCloseModal();
+  };
 
   return (
     <SafeAreaView
@@ -103,7 +127,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           onDismiss={modalFunctions.handleCloseModal}
         >
           <View style={EditDelCloseModalStyle.contentContainer}>
-            <EditModalCompo EditonPress={modalFunctions.handleEditPress} />
+            <EditModalCompo EditonPress={modalItemEdit} />
             <DelModalCompo DelonPress={modalItemDel} />
             <CloseModalCompo CloseonPress={modalFunctions.handleCloseModal} />
           </View>
