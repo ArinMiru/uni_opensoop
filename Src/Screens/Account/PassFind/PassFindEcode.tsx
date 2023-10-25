@@ -1,7 +1,9 @@
-import React,{ useState }  from "react";
+import React, { useState } from "react";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import PassFindData, { setUserDataAndNavigate } from "../../../Utils/_private/ApiData/PassFindData";
+import PassFindData, {
+  setUserDataAndNavigate,
+} from "../../../Utils/_private/ApiData/PassFindData";
 import { ChkAndCertSvc } from "../../../../Src/Services/_private/EndPointApiFuntion";
 
 /**
@@ -13,10 +15,18 @@ const PassFindEcode: React.FC<ScreenProps> = ({ navigation }) => {
   const [userEcode, setUserEcode] = useState<string>("");
 
   const passEcodeCheck = async () => {
-    setUserDataAndNavigate("CERT_SEQ", userEcode, navigation, "PassFindNewPass");
+    setUserDataAndNavigate(
+      "CERT_SEQ",
+      userEcode,
+      navigation,
+      "PassFindNewPass"
+    );
     console.log(PassFindData.CERT_SEQ);
-    const result = await ChkAndCertSvc(PassFindData.MEMB_ID, PassFindData.CERT_SEQ);
-  }
+    const result = await ChkAndCertSvc(
+      PassFindData.MEMB_ID,
+      PassFindData.CERT_SEQ
+    );
+  };
 
   return (
     <RegiCommonView
@@ -28,6 +38,7 @@ const PassFindEcode: React.FC<ScreenProps> = ({ navigation }) => {
       value={userEcode}
       onChangeText={(text) => setUserEcode(text)}
       onPress={passEcodeCheck}
+      keyboardType="numeric"
     />
   );
 };

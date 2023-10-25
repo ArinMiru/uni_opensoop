@@ -92,6 +92,8 @@ const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
           value={userSchSrch}
           onChangeText={filterInput}
           onPress={SrchCheck}
+          keyboardType="default"
+          autoCapitalize="none"
         ></RegiDupleFlex3>
         <ScrollView
           style={{

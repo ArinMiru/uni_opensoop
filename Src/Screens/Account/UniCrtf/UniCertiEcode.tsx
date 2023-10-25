@@ -12,6 +12,7 @@ const UniCertiEcode: React.FC<ScreenProps> = ({ navigation }) => {
       buttontext="완료"
       onPress={() => navigation.navigate("UniCertiChk")}
       navigation={navigation}
+      keyboardType="numeric"
     />
   );
 };

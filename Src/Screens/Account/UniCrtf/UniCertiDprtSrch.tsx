@@ -64,7 +64,11 @@ const UniCertiDprtSrch: React.FC<ScreenProps> = ({ navigation }) => {
           </Text>
         </View>
         <View style={BackgroundStyle.accountInputFlex}>
-          <OnlyAccountInputCompoMarginTop3 text={"학과/전공"} />
+          <OnlyAccountInputCompoMarginTop3
+            text={"학과/전공"}
+            autoCapitalize="none"
+            keyboardType="default"
+          />
         </View>
         <View style={BackgroundStyle.accountButtonFlex}>
           <OnlyAccountButton text={"검색"} />

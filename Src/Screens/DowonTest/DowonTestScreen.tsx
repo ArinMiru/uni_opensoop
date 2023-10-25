@@ -21,6 +21,7 @@ import BackgroundStyle from "../../Styles/BackgroundStyle";
 import { BlackBackIconButton } from "../../Components/IconCompo/BackIconButton";
 import { OnlyAccountInputCompoMarginTop3 } from "../../Components/AccountCompo/AccoutTextInput";
 import { OnlyAccountButton } from "../../Components/AccountCompo/AccountButton";
+import { ListAnsTextInput } from "../../Components/AllCompo/ListAnsTextInputCompo";
 
 interface ScreenProps {
   children?: React.ReactNode;
@@ -70,6 +71,7 @@ const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
         </View>
         <View style={BackgroundStyle.accountButtonFlex}>
           <OnlyAccountButton text={"검색"} />
+          <ListAnsTextInput />
         </View>
       </SafeAreaView>
     </TouchableWithoutFeedback>
