@@ -17,28 +17,25 @@ import SchdlButtonStyle from "../../Styles/SchdlStyles/SchdlButtonStyle";
 interface ButtonProps extends TextInputProps {
   children?: React.ReactNode;
   onPress?: () => void;
+  onPressEdit?: () => void;
+  onPressDel?: () => void;
 }
 
 /*
  *일정페이지의 수정 삭제가 나란히 있는 버튼 영역 컴포넌트 입니다.
  **/
-export const SchdlEditDelButton: React.FC<ButtonProps> = ({ children }) => (
+export const SchdlEditDelButton: React.FC<ButtonProps> = ({
+  onPressDel,
+  onPressEdit,
+}) => (
   <View
     style={{
       flexDirection: "row",
     }}
   >
-    <SchdlBefoCliklEditButton
-      onPress={() => {
-        /* 버튼 클릭 시 동작 */
-      }}
-    />
+    <SchdlBefoCliklEditButton onPress={onPressEdit} />
     <View style={{ marginLeft: deviceWidth * 0.009 }}>
-      <SchdlBefoClikDelButton
-        onPress={() => {
-          /* 버튼 클릭 시 동작 */
-        }}
-      />
+      <SchdlBefoClikDelButton onPress={onPressDel} />
     </View>
   </View>
 );

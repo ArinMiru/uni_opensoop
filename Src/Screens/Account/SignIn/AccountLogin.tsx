@@ -94,6 +94,7 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           value={LOGIN_ID}
           onChangeText={(text) => setLOGIN_ID(text)}
           keyboardType="default"
+          autoCapitalize="none"
           onFocus={() => setIsFocused(true)} // 포커스될 때
           onBlur={() => setIsFocused(false)} // 포커스가 해제될 때
         />
@@ -103,6 +104,7 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           text="비밀번호"
           value={LOGIN_PASS}
           onChangeText={(text) => setLOGIN_PASS(text)}
+          autoCapitalize="none"
           keyboardType="default"
           secureTextEntry={true}
           onFocus={() => setIsFocused(true)}
