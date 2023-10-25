@@ -93,7 +93,7 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
           text="아이디"
           value={LOGIN_ID}
           onChangeText={(text) => setLOGIN_ID(text)}
-          keyboardType="default"
+          keyboardType="email-address"
           autoCapitalize="none"
           onFocus={() => setIsFocused(true)} // 포커스될 때
           onBlur={() => setIsFocused(false)} // 포커스가 해제될 때
