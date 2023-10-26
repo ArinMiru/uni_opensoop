@@ -12,7 +12,7 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { FreePostDetailProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
-import { currentPlatform } from "../../../Utils/DeviceUtils";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
   route,
@@ -44,28 +44,28 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
 
   return (
     <Background>
-      <BackIconTopbarStyle
-        Title="자유게시판"
-        MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
-        MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
-        onPress={() => navigation.goBack()}
-      />
-      <KeyboardAvoidingView
-        style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle, { flex: 1 }]}
-        behavior={Platform.OS === "ios" ? "height" : undefined}
-        enabled={true} 
+      <KeyboardAwareScrollView
+        keyboardShouldPersistTaps={"always"}
+        contentContainerStyle={{
+          flexGrow: 1, // this will fix scrollview scroll issue by passing parent view width and height to it
+        }}
       >
+        <BackIconTopbarStyle
+          Title="자유게시판"
+          MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
+          MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
+          onPress={() => navigation.goBack()}
+        />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <View>
-            <FrePost
-              nickname={NICK_NM}
-              fretit={TIT}
-              frecont={CONT}
-              freposttime={CRE_DAT}
-              frelike={LIKE_CNT}
-              delPress={dellPress}
-            />
-          </View>
+          <FrePost
+            nickname={NICK_NM}
+            fretit={TIT}
+            frecont={CONT}
+            freposttime={CRE_DAT}
+            frelike={LIKE_CNT}
+            delPress={dellPress}
+          />
+
           <View style={{ alignItems: "center" }}>
             {AnsFree.sort((a, b) => b.ANS_SEQ - a.ANS_SEQ).map((comment) => (
               <FreQstComment
@@ -77,10 +77,14 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
             ))}
           </View>
         </ScrollView>
-        <View style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
-          <ListAnsTextInput autoCapitalize="none" keyboardType="default" />
-        </View>
-      </KeyboardAvoidingView>
+        <ListAnsTextInput
+          autoCapitalize="none"
+          keyboardType="default"
+          value={cont}
+          onChangeText={(text) => setCont(text)}
+          onPress={FreeAnsNewBut}
+        />
+      </KeyboardAwareScrollView>
     </Background>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -14,11 +14,13 @@ import { ScrollView } from "react-native-gesture-handler";
 import { ListAnsTextInput } from "../AllCompo/ListAnsTextInputCompo";
 import DateSltModalStyle from "../../Styles/ModalStyles/DateSltModalStyle";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { FlatList } from "react-native";
 
 interface ButtonProps {
   EditonPress?: () => void;
   DelonPress?: () => void;
   CloseonPress?: () => void;
+  modalData?: any;
 }
 
 export const EditModalCompo: React.FC<ButtonProps> = ({ EditonPress }) => {
@@ -54,7 +56,7 @@ export const CloseModalCompo: React.FC<ButtonProps> = ({ CloseonPress }) => {
   );
 };
 
-export const QstModalCompo: React.FC<ButtonProps> = ({}) => {
+export const QstModalCompo: React.FC<ButtonProps> = ({ modalData }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={EditDelCloseModalStyle.qstArea}>
@@ -70,13 +72,29 @@ export const QstModalCompo: React.FC<ButtonProps> = ({}) => {
             댓글
           </Text>
         </View>
-        <KeyboardAwareScrollView>
-          <FreQstComment
-            freqstansnick="익명이"
-            freqstanstit="화장실은 죽어서 가십시오~~ 응가 뿌직뿌직 랄랄라"
-            freqstanstime="10년전"
-          />
-        </KeyboardAwareScrollView>
+        <View
+          style={{
+            flex: 7,
+            backgroundColor: "#fff",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          {modalData && (
+            <FlatList
+              data={modalData.ANS_FREE}
+              keyExtractor={(item) => item.ANS_SEQ.toString()}
+              renderItem={({ item }) => (
+                <View>
+                  <Text>댓글 작성자: {item.ANS_MEMB_ID}</Text>
+                  <Text>댓글 내용: {item.CONT}</Text>
+                  <Text>댓글 시간: {item.CRE_DAT}</Text>
+                  {/* 기타 데이터 표시 */}
+                </View>
+              )}
+            />
+          )}
+        </View>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

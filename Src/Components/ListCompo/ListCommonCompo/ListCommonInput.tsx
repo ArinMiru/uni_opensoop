@@ -22,8 +22,6 @@ interface inputProps extends TextInputProps {
 export const OpenFreSgsTitInputBox: React.FC<inputProps> = ({
   children,
   text,
-  value,
-  onChangeText,
   ...props
 }) => {
   // text 속성을 이용하여 최대 길이를 계산

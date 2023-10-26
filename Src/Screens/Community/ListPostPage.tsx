@@ -274,12 +274,21 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
               data={questData.QUES_BUB}
               keyExtractor={(item) => item.CRE_SEQ.toString()}
               renderItem={({ item }) => (
-                <QstListContentButton
+                <FreeListIclucontnButton
                   nickname={item.NICK_NM}
-                  postcontent={item.CONT}
-                  grade="1학년"
-                  qstposttime={item.CRE_DAT}
-                  onPress={modalFunctions.handleButtonPress}
+                  freposttime={item.CRE_DAT}
+                  fretit={item.TIT}
+                  frecont={item.CONT}
+                  onPress={() => {
+                    // 1. 각 항목을 클릭했을 때 해당 게시글 데이터 추출
+                    const postData = {
+                      CRE_SEQ: item.CRE_SEQ,
+                      AnsFree: item.ANS_FREE,
+                    };
+                    console.log(postData);
+                    // 2. 공통 컴포넌트로 데이터 전달
+                    modalFunctions.handleButtonPress(postData);
+                  }}
                 />
               )}
             />
