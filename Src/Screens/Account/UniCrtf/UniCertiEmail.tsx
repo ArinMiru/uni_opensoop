@@ -37,6 +37,8 @@ const UniCertiEmail: React.FC<ScreenProps> = ({ navigation }) => {
       smalltext="입력하기"
       inputtext="이메일"
       buttontext="인증번호 전송"
+      keyboardType="email-address"
+      autoCapitalize="none"
       onPress={UserDetailSave}
       onChangeText={(text) => {
         setUserDetail(text);

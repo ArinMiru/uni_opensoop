@@ -4,21 +4,21 @@ import {
   FreQstComment,
   FrePost,
 } from "../../../Components/ListCompo/FreCompo/FreCompo";
-import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
-import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
-import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyles";
-import { CommentInput } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
+import { ListAnsTextInput } from "../../../Components/AllCompo/ListAnsTextInputCompo";
 import { FreeBubDel } from "../../../Services/_private/FreeApi";
 import { FreeAnsBubNew } from "../../../Services/AnsApi/FreeAnsApi";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { FreePostDetailProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
+import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
+import { Background } from "../../../Components/AllCompo/Background";
 
 const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
   route,
   navigation,
 }) => {
   const [cont, setCont] = useState<string>("");
+  const userData = getUserData();
   const { CRE_SEQ, CONT, TIT, NICK_NM, LIKE_CNT, CRE_DAT, AnsFree } =
     route.params;
 
@@ -42,31 +42,31 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
   };
 
   return (
-    <AccountBackground>
-      <BackIconTopbarStyle text="게시판" onPress={() => navigation.goBack()} />
-      {/* 수정 에러 뜸 */}
+    <Background>
+      <BackIconTopbarStyle
+        Title="자유게시판"
+        MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
+        MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
+        onPress={() => navigation.goBack()}
+      />
       <KeyboardAvoidingView
-        style={{ flex: 1, marginBottom: deviceWidth * 0.02 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "android" ? -600 : 0}
+        style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle, { flex: 1 }]}
+        behavior={Platform.select({ ios: "padding", android: "height" })}
+        keyboardVerticalOffset={Platform.OS === "android" ? -310 : 0} // 이 값을 조절하여 원하는 결과를 얻을 수 있습니다.
       >
-        <ScrollView>
-          <FrePost
-            nickname={NICK_NM}
-            fretit={TIT}
-            frecont={CONT}
-            freposttime={CRE_DAT}
-            frelike={LIKE_CNT} // 좋아요 수 number로 받아오기
-            delPress={dellPress}
-          />
-          <View
-            style={[
-              SgsButtonStyles.divideContentsLine,
-              { marginTop: deviceHeight * 0.018 },
-            ]}
-          ></View>
-          {AnsFree.sort((a, b) => b.ANS_SEQ - a.ANS_SEQ) // ANS_SEQ를 내림차순으로 정렬
-            .map((comment) => (
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <View>
+            <FrePost
+              nickname={NICK_NM}
+              fretit={TIT}
+              frecont={CONT}
+              freposttime={CRE_DAT}
+              frelike={LIKE_CNT}
+              delPress={dellPress}
+            />
+          </View>
+          <View style={{ alignItems: "center" }}>
+            {AnsFree.sort((a, b) => b.ANS_SEQ - a.ANS_SEQ).map((comment) => (
               <FreQstComment
                 key={comment.ANS_SEQ}
                 freqstansnick={comment.ANS_MEMB_ID}
@@ -74,15 +74,13 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
                 freqstanstime={comment.CRE_DAT}
               />
             ))}
-          <CommentInput
-            text="댓글을 입력하세요."
-            value={cont}
-            onChangeText={(text) => setCont(text)}
-            onPress={FreeAnsNewBut}
-          />
+          </View>
         </ScrollView>
+        <KeyboardAvoidingView>
+          <ListAnsTextInput autoCapitalize="none" keyboardType="default" />
+        </KeyboardAvoidingView>
       </KeyboardAvoidingView>
-    </AccountBackground>
+    </Background>
   );
 };
 

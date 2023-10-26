@@ -72,7 +72,7 @@ export type RootStackParamList = {
   PassFindNewPass: undefined;
   PassFindChk: undefined;
   IdFindEmail: undefined;
-  IdFindOut: undefined;
+  IdFindOut: { memberId: string };
   NoticePage: undefined;
   DrawerNavigator: undefined;
   NoticePostRegi: undefined;
@@ -138,6 +138,7 @@ export type RootStackParamList = {
 };
 
 export type ScreenProps = {
+  route: any;
   navigation: StackNavigationProp<RootStackParamList, keyof RootStackParamList>;
 };
 

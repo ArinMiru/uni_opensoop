@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, KeyboardAvoidingView } from "react-native";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
+import { deviceWidth } from "../../../Utils/DeviceUtils";
 import {
   OpenFreSgsTitInputBox,
   OpenFreSgsContInputBox,
@@ -92,6 +92,8 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
               text="텍스트를 입력해주세요."
               value={cont}
               onChangeText={(text) => setCont(text)}
+              keyboardType="default"
+              autoCapitalize="none"
             ></OpenFreSgsContInputBox>
             <Text
               style={[
