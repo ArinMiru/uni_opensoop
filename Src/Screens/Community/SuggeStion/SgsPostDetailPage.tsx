@@ -1,5 +1,5 @@
 import { View, Platform, KeyboardAvoidingView } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import {
   SgsPost,
   SgsComment,
@@ -12,29 +12,16 @@ import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { ListAnsTextInput } from "../../../Components/AllCompo/ListAnsTextInputCompo";
-import { SugAnsBubNew } from "../../../Services/AnsApi/SugAnsApi";
+import { deviceHeight } from "../../../Utils/DeviceUtils";
 
 const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
   navigation,
   route,
 }) => {
   const userData = getUserData();
-  const [ansCont, setAnsCont] = useState<string>("");
   const { CRE_SEQ, CONT, TIT, NICK_NM, CRE_DAT, AnsFree } = route.params;
   const sgsDel = () => {
     SugBubListDel(CRE_SEQ);
-  };
-  const SugAnsNew = async () => {
-    try {
-      const userData = getUserData();
-      if (userData != null) {
-        await SugAnsBubNew(ansCont, CRE_SEQ);
-      } else {
-        console.error("userData가 null입니다.");
-      }
-    } catch (error) {
-      console.error("등록 오류", error);
-    }
   };
   return (
     <Background>
@@ -58,7 +45,9 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
               sgsposttime={CRE_DAT}
             />
           </View>
-          <View style={{ alignItems: "center" }}>
+          <View
+            style={{ alignItems: "center", paddingBottom: deviceHeight * 0.09 }}
+          >
             {AnsFree.sort((a, b) => b.ANS_SEQ - a.ANS_SEQ).map((comment) => (
               <SgsComment
                 key={comment.ANS_SEQ}
@@ -70,13 +59,7 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
           </View>
         </ScrollView>
         <KeyboardAvoidingView>
-          <ListAnsTextInput
-            autoCapitalize="none"
-            keyboardType="default"
-            value={ansCont}
-            onChangeText={(text) => setAnsCont(text)}
-            onPress={SugAnsNew}
-          />
+          <ListAnsTextInput autoCapitalize="none" keyboardType="default" />
         </KeyboardAvoidingView>
       </KeyboardAvoidingView>
     </Background>
