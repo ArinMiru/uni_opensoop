@@ -1,23 +1,49 @@
-import { View, Text } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
-import { deviceHeight } from "../../../Utils/DeviceUtils";
-import { Image } from "react-native";
 import { RegiDupleFlex3 } from "../../../Components/AccountCompo/AccountCustomCompo";
 import { SchlSrchCall } from "../../../Services/_private/EndPointApiFuntion";
 
 const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
   const [userSchSrch, setUserSchSrch] = useState<string>("");
+  const [searchResults, setSearchResults] = useState<Array<string>>([]);
+  const [isNextButtonActive, setIsNextButtonActive] = useState<boolean>(false);
 
   const SrchCheck = async () => {
-    const result = await SchlSrchCall(userSchSrch);
+    if (userSchSrch.length >= 2) {
+      const result = await SchlSrchCall(userSchSrch);
+      console.log("결과:", result); // 로그를 출력합니다.
+      if (result && result.SCH_NM_INFO) {
+        const schNames = result.SCH_NM_INFO.map((item) => item.SCH_NM);
+        setSearchResults(schNames);
+      } else {
+        setSearchResults([]);
+      }
+    }
   };
+
+  const selectSchool = (name: string) => {
+    setUserSchSrch(name);
+    setSearchResults([]);
+    setIsNextButtonActive(true);
+  };
+
+  const filterInput = (text: string) => {
+    const regex = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]+$/;
+    if (regex.test(text) || text === "") {
+      setUserSchSrch(text);
+    }
+  };
+
+  useEffect(() => {
+    setIsNextButtonActive(userSchSrch.length >= 2);
+  }, [userSchSrch]);
 
   return (
     <AccountBackground>
@@ -64,14 +90,40 @@ const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
           inputText="학교"
           text="검색"
           value={userSchSrch}
-          onChangeText={(text) => setUserSchSrch(text)}
+          onChangeText={filterInput}
           onPress={SrchCheck}
+          keyboardType="default"
+          autoCapitalize="none"
         ></RegiDupleFlex3>
+        <ScrollView
+          style={{
+            maxHeight: deviceHeight * 0.14,
+            position: "absolute",
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
+            marginTop: "17.8%",
+          }}
+        >
+          {searchResults.slice(0, 10).map((name, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => selectSchool(name)}
+              style={{
+                padding: 10,
+                backgroundColor: "#f7f8f9",
+                width: deviceWidth * 0.5625,
+              }}
+            >
+              <Text>{name}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
-      <View style={{ flex: 4, justifyContent: "flex-start" }}>
+      <View style={{ flex: 6, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
           onPress={() => navigation.navigate("UniCertiDprtSrch")}
+          disable={!isNextButtonActive}
         />
       </View>
     </AccountBackground>
