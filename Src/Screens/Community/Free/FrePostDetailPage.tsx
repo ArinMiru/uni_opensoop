@@ -12,6 +12,7 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { FreePostDetailProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
+import { currentPlatform } from "../../../Utils/DeviceUtils";
 
 const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
   route,
@@ -51,8 +52,8 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
       />
       <KeyboardAvoidingView
         style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle, { flex: 1 }]}
-        behavior={Platform.select({ ios: "padding", android: "height" })}
-        keyboardVerticalOffset={Platform.OS === "android" ? -310 : 0} // 이 값을 조절하여 원하는 결과를 얻을 수 있습니다.
+        behavior={Platform.OS === "ios" ? "height" : undefined}
+        enabled={true} 
       >
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View>
@@ -76,9 +77,9 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
             ))}
           </View>
         </ScrollView>
-        <KeyboardAvoidingView>
+        <View style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
           <ListAnsTextInput autoCapitalize="none" keyboardType="default" />
-        </KeyboardAvoidingView>
+        </View>
       </KeyboardAvoidingView>
     </Background>
   );
