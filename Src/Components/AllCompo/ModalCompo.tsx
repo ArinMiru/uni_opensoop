@@ -1,10 +1,19 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+  SafeAreaView,
+} from "react-native";
 import TextStyle from "../../Styles/TextStyle";
 import EditDelCloseModalStyle from "../../Styles/ModalStyles/EditDelCloseModalStyles";
 import { FreQstComment } from "../ListCompo/FreCompo/FreCompo";
 import { ScrollView } from "react-native-gesture-handler";
+import { ListAnsTextInput } from "../AllCompo/ListAnsTextInputCompo";
 import DateSltModalStyle from "../../Styles/ModalStyles/DateSltModalStyle";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 interface ButtonProps {
   EditonPress?: () => void;
@@ -47,18 +56,29 @@ export const CloseModalCompo: React.FC<ButtonProps> = ({ CloseonPress }) => {
 
 export const QstModalCompo: React.FC<ButtonProps> = ({}) => {
   return (
-    <View style={EditDelCloseModalStyle.qstArea}>
-      <View style={EditDelCloseModalStyle.ansArea}>
-        <Text style={[TextStyle.semibold10, { color: "#333333" }]}>댓글</Text>
-      </View>
-      <ScrollView style={{ flex: 6 }}>
-        <FreQstComment
-          freqstansnick="익명이"
-          freqstanstit="화장실은 죽어서 가십시오~~ 응가 뿌직뿌직 랄랄라"
-          freqstanstime="10년전"
-        />
-      </ScrollView>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={EditDelCloseModalStyle.qstArea}>
+        <View style={EditDelCloseModalStyle.ansArea}>
+          <Text
+            style={[
+              TextStyle.semibold11,
+              { color: "#333333" },
+              { marginTop: "2%" },
+              { marginBottom: "2%" },
+            ]}
+          >
+            댓글
+          </Text>
+        </View>
+        <KeyboardAwareScrollView>
+          <FreQstComment
+            freqstansnick="익명이"
+            freqstanstit="화장실은 죽어서 가십시오~~ 응가 뿌직뿌직 랄랄라"
+            freqstanstime="10년전"
+          />
+        </KeyboardAwareScrollView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

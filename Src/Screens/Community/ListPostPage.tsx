@@ -19,12 +19,16 @@ import { SugBubListSvc } from "../../Services/_private/SugBubListApi";
 import { QuestData } from "../../Utils/_private/ApiData/QuestData";
 import Spinner from "react-native-loading-spinner-overlay";
 import { ModalReuableFuction } from "../../Utils/ReusableFuction/ModalReuableFuction";
+import { useModal } from "../../Screens/ModalContext";
+
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
 import EditDelCloseModalStyle from "../../Styles/ModalStyles/EditDelCloseModalStyles";
 import { QstModalCompo } from "../../Components/AllCompo/ModalCompo";
+import { ListAnsTextInput } from "../../Components/AllCompo/ListAnsTextInputCompo";
+import { useNavigation } from "@react-navigation/native";
 
 const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
@@ -35,6 +39,29 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const isFocused = useIsFocused();
   const modalFunctions = ModalReuableFuction();
+  const appNavigation = useNavigation();
+
+  const { isModalVisible, setIsModalVisible } = useModal();
+
+  // 모달을 열 때
+  const openModal = () => {
+    setIsModalVisible(true);
+    // ... 모달 열기 관련 코드
+  };
+
+  // 모달을 닫을 때
+  const closeModal = () => {
+    setIsModalVisible(false);
+    // ... 모달 닫기 관련 코드
+  };
+
+  useEffect(() => {
+    // 모달의 상태에 따라 바텀탭 네비게이션 가시성 조정
+    const setOptions = appNavigation.setOptions({
+      tabBarVisible: !isModalVisible,
+    });
+    return setOptions;
+  }, [isModalVisible, appNavigation]);
 
   useEffect(() => {
     if (userData !== null && isFocused) {
@@ -107,16 +134,15 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <Background>
       <BottomSheetModalProvider>
+        {isModalVisible && <ListAnsTextInput />}
         <BottomSheetModal
           ref={modalFunctions.bottomSheetModalRef}
           index={1}
-          snapPoints={[
-            deviceHeight * 0.5,
-            deviceHeight * 0.5,
-            deviceHeight * 0.5,
-          ]}
+          snapPoints={["50%", "95%"]}
           enablePanDownToClose={true}
-          onDismiss={modalFunctions.handleCloseModal}
+          onDismiss={() => {
+            modalFunctions.handleCloseModal();
+          }}
         >
           <View style={EditDelCloseModalStyle.contentContainer}>
             <QstModalCompo />
@@ -207,26 +233,42 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
             <FlatList
               data={sugsData.SUG_BUB}
               keyExtractor={(item) => item.CRE_SEQ.toString()}
-              renderItem={({ item }) => (
-                <SgsListContentButton
-                  title={item.TIT}
-                  poststatus={item.SEC_YN}
-                  anonynick="익명"
-                  sgsposttime={item.CRE_DAT}
-                  onPress={() =>
-                    navigation.navigate("SgsPostDetailPage", {
-                      CRE_SEQ: item.CRE_SEQ,
-                      CONT: item.CONT,
-                      TIT: item.TIT,
-                      CRE_DAT: item.CRE_DAT,
-                      NICK_NM: item.NICK_NM,
-                      AnsFree: item.ANS_FREE,
-                    })
-                  }
-                />
-              )}
+              renderItem={({ item }) => {
+                const canAccess =
+                  userData?.TIT_CD === "05" || // 관리자
+                  userData?.TIT_CD === "02" || // 학회장
+                  userData?.TIT_CD === "03" || // 부학회장
+                  item.MEMB_ID === userData?.LOGIN_ID; // 게시물 작성자와 현재 사용자의 아이디가 같은 경우
+                return (
+                  <SgsListContentButton
+                    title={canAccess ? item.TIT : "비공개 게시물입니다."}
+                    poststatus={""}
+                    anonynick={canAccess ? item.NICK_NM : "재학생"}
+                    sgsposttime={item.CRE_DAT}
+                    postUserId={item.MEMB_ID}
+                    currentUserId={userData?.LOGIN_ID}
+                    TIT_CD={userData?.TIT_CD}
+                    onPress={() => {
+                      if (canAccess) {
+                        navigation.navigate("SgsPostDetailPage", {
+                          CRE_SEQ: item.CRE_SEQ,
+                          CONT: item.CONT,
+                          TIT: item.TIT,
+                          CRE_DAT: item.CRE_DAT,
+                          NICK_NM: item.NICK_NM,
+                          AnsFree: item.ANS_FREE,
+                        });
+                      } else {
+                        // 접근 권한이 없는 경우, 사용자에게 알림을 표시할 수 있습니다.
+                        alert("해당 게시물에 접근 권한이 없습니다.");
+                      }
+                    }}
+                  />
+                );
+              }}
             />
           )}
+
           {selectedCategory === "질문" && questData && (
             <FlatList
               data={questData.QUES_BUB}

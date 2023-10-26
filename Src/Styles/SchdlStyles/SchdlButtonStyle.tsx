@@ -63,4 +63,12 @@ export default StyleSheet.create({
     backgroundColor: "#BDBDBD",
     borderRadius: 1,
   },
+
+  /*
+   * 일정페이지에서 수정, 삭제 버튼 스타일입니다.
+   **/
+  SchdlDetailBoxStyle: {
+    width: deviceWidth * 1,
+    minHeight: deviceHeight * 0.29,
+  },
 });
