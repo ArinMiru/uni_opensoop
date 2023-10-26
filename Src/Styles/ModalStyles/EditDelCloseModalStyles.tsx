@@ -48,7 +48,6 @@ export default StyleSheet.create({
   ansArea: {
     justifyContent: "center",
     alignItems: "center",
-    flex: 0.16,
     borderBottomWidth: 1,
     borderBottomColor: "#BDBDBD",
     width: "100%",

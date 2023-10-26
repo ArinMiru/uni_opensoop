@@ -1,7 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import PassFindData, { setUserDataAndNavigate } from "../../../Utils/_private/ApiData/PassFindData";
+import PassFindData, {
+  setUserDataAndNavigate,
+} from "../../../Utils/_private/ApiData/PassFindData";
 
 /**
  * 비밀번호 찾기(아이디 입력 창)
@@ -14,7 +16,7 @@ const PassFindForId: React.FC<ScreenProps> = ({ navigation }) => {
   const passFindUserDataSave = () => {
     setUserDataAndNavigate("MEMB_ID", userId, navigation, "PassFindForEmail"); //같은 역할을 하는 함수를 만들 예정
     console.log(PassFindData.MEMB_ID);
-  }
+  };
 
   return (
     <RegiCommonView
@@ -26,6 +28,8 @@ const PassFindForId: React.FC<ScreenProps> = ({ navigation }) => {
       value={userId}
       onChangeText={(text) => setUserId(text)}
       onPress={passFindUserDataSave}
+      keyboardType="default"
+      autoCapitalize="none"
     />
   );
 };

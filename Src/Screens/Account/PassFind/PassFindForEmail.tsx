@@ -1,7 +1,9 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import PassFindData, { setUserDataAndNavigate } from "../../../Utils/_private/ApiData/PassFindData";
+import PassFindData, {
+  setUserDataAndNavigate,
+} from "../../../Utils/_private/ApiData/PassFindData";
 import { MembPassFndSvc } from "../../../../Src/Services/_private/EndPointApiFuntion";
 
 /**
@@ -15,7 +17,10 @@ const PassFindForEmail: React.FC<ScreenProps> = ({ navigation }) => {
   const passEmailCheck = async () => {
     setUserDataAndNavigate("MEMB_EM", userEmail, navigation, "PassFindEcode");
     console.log(PassFindData.MEMB_EM);
-    const result = await MembPassFndSvc(PassFindData.MEMB_ID, PassFindData.MEMB_EM);
+    const result = await MembPassFndSvc(
+      PassFindData.MEMB_ID,
+      PassFindData.MEMB_EM
+    );
   };
 
   return (
@@ -28,6 +33,8 @@ const PassFindForEmail: React.FC<ScreenProps> = ({ navigation }) => {
       value={userEmail}
       onChangeText={(text) => setUserEmail(text)}
       onPress={passEmailCheck}
+      keyboardType="email-address"
+      autoCapitalize="none"
     />
   );
 };

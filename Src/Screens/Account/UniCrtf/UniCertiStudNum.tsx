@@ -12,6 +12,7 @@ const UniCertiStudNum: React.FC<ScreenProps> = ({ navigation }) => {
       buttontext="다음"
       onPress={() => navigation.navigate("UniCertiEmail")}
       navigation={navigation}
+      keyboardType="number-pad"
     />
   );
 };

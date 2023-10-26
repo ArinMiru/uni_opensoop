@@ -1,18 +1,31 @@
-import { View, SafeAreaView } from "react-native";
+import { View, SafeAreaView, ScrollView, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 import { LocaleConfig, Calendar } from "react-native-calendars";
 import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import Constants from "expo-constants";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyles";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { useIsFocused } from "@react-navigation/native";
 import { SchdBubData } from "../../../Utils/_private/ApiData/SchdBubData";
 import { SchdBubListSvc } from "../../../Services/_private/SchdBubApi";
 import Spinner from "react-native-loading-spinner-overlay";
-import moment from "moment"; // moment 라이브러리 추가
+import moment from "moment";
+import SchdlButtonStyle from "../../../Styles/SchdlStyles/SchdlButtonStyle";
+import TextStyle from "../../../Styles/TextStyle";
+import {
+  ScdlEditIcon,
+  SchldDelButton,
+} from "../../../Components/IconCompo/ScdlEditDelIcon";
+import {
+  SchdlBefoCliklEditButton,
+  SchdlAftrCliklEditButton,
+  SchdlBefoClikDelButton,
+  SchdlAftrClikDelButton,
+} from "../../../Components/SchdlCompo/SchdlButton";
+import { Octicons } from "@expo/vector-icons";
 
 LocaleConfig.locales["kr"] = {
   monthNames: [
@@ -48,6 +61,28 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
   const [schdData, setSchdData] = useState<SchdBubData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const userData = getUserData();
+
+  const [isEditClicked, setIsEditClicked] = useState(false);
+  const [isDeleteClicked, setIsDeleteClicked] = useState(false);
+
+  const handleEditClick = () => {
+    if (isEditClicked) {
+      setIsEditClicked(false);
+    } else {
+      setIsEditClicked(true);
+      setIsDeleteClicked(false);
+    }
+  };
+
+  const handleDeleteClick = () => {
+    if (isDeleteClicked) {
+      setIsDeleteClicked(false);
+    } else {
+      setIsDeleteClicked(true);
+      setIsEditClicked(false);
+    }
+  };
+
   const monthNames = [
     "1월",
     "2월",
@@ -159,6 +194,128 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
           }}
         />
         <View style={[SgsButtonStyles.divideSchdlContentsLine]} />
+        <View style={{ flexDirection: "row", height: deviceHeight * 0.06 }}>
+          <View style={{ flex: 1, marginTop: deviceHeight * 0.009 }}>
+            <Text
+              style={[
+                TextStyle.semibold15,
+                { color: "#1E232C" },
+                { marginLeft: deviceWidth * 0.08 },
+                { lineHeight: deviceHeight * 0.06 },
+              ]}
+            >
+              {"15"}
+              {"일"}
+            </Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "flex-end",
+              marginTop: deviceHeight * 0.009,
+            }}
+          >
+            <View
+              style={{ flexDirection: "row", marginRight: deviceWidth * 0.08 }}
+            >
+              {isEditClicked ? (
+                <SchdlAftrCliklEditButton onPress={handleEditClick} />
+              ) : (
+                <SchdlBefoCliklEditButton onPress={handleEditClick} />
+              )}
+              {isDeleteClicked ? (
+                <SchdlAftrClikDelButton onPress={handleDeleteClick} />
+              ) : (
+                <SchdlBefoClikDelButton onPress={handleDeleteClick} />
+              )}
+            </View>
+          </View>
+        </View>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ScrollView>
+            <View
+              style={[SchdlButtonStyle.SchdlDetailBoxStyle, { height: "auto" }]}
+            >
+              {/** FlatList */}
+              <View style={{ flexDirection: "column", marginTop: "5%" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    marginLeft: "5%",
+                  }}
+                >
+                  <View style={{ flex: 0.4 }}>
+                    <View
+                      style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {isEditClicked ? (
+                        <ScdlEditIcon />
+                      ) : isDeleteClicked ? (
+                        <SchldDelButton />
+                      ) : (
+                        <Octicons
+                          name="dot-fill"
+                          size={deviceWidth * 0.05}
+                          color="#4BB781"
+                        />
+                      )}
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      alignContent: "center",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginLeft: "2%",
+                    }}
+                  >
+                    <Text
+                      style={[
+                        TextStyle.medium12,
+                        { color: "#1A3628" },
+                        { textAlign: "left" },
+                      ]}
+                    >
+                      {"예비 수강 신청 기간"}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      justifyContent: "flex-end",
+                      marginLeft: "auto",
+                      paddingRight: deviceWidth * 0.08,
+                      alignContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text
+                      style={[
+                        TextStyle.semibold10,
+                        { color: "#1A3628" },
+                        { textAlign: "right" },
+                      ]}
+                    >
+                      {"11월 15일"} {"~"} {"11월 19일"}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              {/** FlatList */}
+            </View>
+          </ScrollView>
+        </View>
       </View>
     </SafeAreaView>
   );

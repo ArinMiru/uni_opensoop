@@ -15,6 +15,7 @@ import {
   BottomTabLogo,
 } from "../Components/IconCompo/DrawerIcon";
 import { deviceHeight } from "../Utils/DeviceUtils";
+import { useModal } from "../Screens/ModalContext";
 
 const Tab = createBottomTabNavigator();
 
@@ -106,10 +107,11 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
 };
 
 const BottomTabNavigations = () => {
+  const { isTabBarVisible } = useModal(); // Custom Hook 사용
   return (
     <Tab.Navigator
       initialRouteName="HomePageScreen"
-      tabBar={(props) => <CustomTabBar {...props} />}
+      tabBar={(props) => (isTabBarVisible ? <CustomTabBar {...props} /> : null)} // 조건부 렌더링
     >
       <Tab.Screen
         name="NoticePage"
