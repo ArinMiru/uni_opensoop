@@ -10,6 +10,7 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { setUserDataAndNavigate } from "../../../Utils/_private/RegiData/RegiUserData";
 import AccountInputStyle from "../../../Styles/AccountStyles/AccountInputStyle";
 import TextStyle from "../../../Styles/TextStyle";
+import { Image } from "react-native";
 
 const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
   const [pass, setPass] = useState<string>("");
@@ -146,6 +147,17 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
           disable={!isButtonEnabled}
         />
       </View>
+      <Image
+        source={require("../../../Assets/Images/LogoImage.png")}
+        style={{
+          position: "absolute",
+          resizeMode: "contain",
+          width: deviceWidth * 0.5,
+          height: deviceHeight * 0.5,
+          bottom: deviceHeight * -0.11,
+          right: deviceWidth * -0.08,
+        }}
+      />
     </AccountBackground>
   );
 };
