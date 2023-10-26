@@ -13,6 +13,12 @@ export default StyleSheet.create({
     height: deviceHeight * 0.921,
   },
 
+  ListDetailBackgroundStyle: {
+    backgroundColor: "#FFFFFF",
+    width: deviceWidth * 1,
+    height: deviceHeight * 0.921,
+  },
+
   /**
    * 모든 페이지 - 상단 라운드 박스 스타일
    */

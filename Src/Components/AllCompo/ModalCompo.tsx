@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import TextStyle from "../../Styles/TextStyle";
 import EditDelCloseModalStyle from "../../Styles/ModalStyles/EditDelCloseModalStyles";
-import { FreQstComment } from "../ListCompo/FreCompo/FreCompo";
+import { QstComment } from "../ListCompo/FreCompo/FreCompo";
 import { ScrollView } from "react-native-gesture-handler";
 import { ListAnsTextInput } from "../AllCompo/ListAnsTextInputCompo";
 import DateSltModalStyle from "../../Styles/ModalStyles/DateSltModalStyle";
@@ -71,10 +71,10 @@ export const QstModalCompo: React.FC<ButtonProps> = ({}) => {
           </Text>
         </View>
         <KeyboardAwareScrollView>
-          <FreQstComment
+          <QstComment
             freqstansnick="익명이"
             freqstanstit="화장실은 죽어서 가십시오~~ 응가 뿌직뿌직 랄랄라"
-            freqstanstime="10년전"
+            freqstanstime="2023-10-16"
           />
         </KeyboardAwareScrollView>
       </SafeAreaView>

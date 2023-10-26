@@ -12,6 +12,7 @@ import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { ListAnsTextInput } from "../../../Components/AllCompo/ListAnsTextInputCompo";
+import { deviceHeight } from "../../../Utils/DeviceUtils";
 
 const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
   navigation,
@@ -44,7 +45,9 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
               sgsposttime={CRE_DAT}
             />
           </View>
-          <View style={{ alignItems: "center" }}>
+          <View
+            style={{ alignItems: "center", paddingBottom: deviceHeight * 0.09 }}
+          >
             {AnsFree.sort((a, b) => b.ANS_SEQ - a.ANS_SEQ).map((comment) => (
               <SgsComment
                 key={comment.ANS_SEQ}
