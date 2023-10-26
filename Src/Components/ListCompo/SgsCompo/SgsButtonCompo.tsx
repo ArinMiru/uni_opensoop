@@ -1,13 +1,7 @@
-import {
-  View,
-  Platform,
-  TextInputProps,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import { View, Text } from "react-native";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import { SgsListButton, SgsTimeBox } from "./SgsCompo";
-import { SgsListLockIcon } from "../../IconCompo/SgsIcon";
+import { SgsListLockIcon, SgsListUnLockIcon } from "../../IconCompo/SgsIcon";
 import textStyle from "../../../Styles/TextStyle";
 import { OpenProfileIcon } from "../../IconCompo/ProfileIcon";
 
@@ -15,9 +9,11 @@ interface ButtonProps {
   children?: React.ReactNode;
   title?: string;
   poststatus?: string;
-  grade?: string;
   sgsposttime?: string;
   anonynick?: string;
+  postUserId?: string; // 게시물 작성자 ID
+  currentUserId?: string; // 현재 로그인한 사용자 ID
+  TIT_CD?: string;
   onPress?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
@@ -32,9 +28,11 @@ export const SgsListContentButton: React.FC<ButtonProps> = ({
   onPress,
   title,
   sgsposttime,
-  grade,
   anonynick,
   poststatus,
+  postUserId,
+  currentUserId,
+  TIT_CD,
 }) => {
   return (
     <SgsListButton onPress={onPress}>
@@ -48,7 +46,12 @@ export const SgsListContentButton: React.FC<ButtonProps> = ({
         ]}
       >
         <View style={{ marginLeft: deviceWidth * 0.034 }}>
-          <SgsListLockIcon />
+          {postUserId === currentUserId ||
+          (TIT_CD && ["02", "03", "05"].includes(TIT_CD)) ? (
+            <SgsListUnLockIcon />
+          ) : (
+            <SgsListLockIcon />
+          )}
         </View>
         <View
           style={{

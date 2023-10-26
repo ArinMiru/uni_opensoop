@@ -79,6 +79,7 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
         <OnlyAccountInputCompoMarginTop3
           text="새로운 비밀번호"
           value={newPassword}
+          secureTextEntry={true}
           onChangeText={(text) => {
             const filteredText = removeExceptChars(text);
             setNewPassword(filteredText);
@@ -106,6 +107,9 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
         </View>
         <OnlyAccountInputCompoMarginTop3
           text="새로운 비밀번호 확인"
+          keyboardType="default"
+          autoCapitalize="none"
+          secureTextEntry={true}
           value={confirmPassword}
           onChangeText={(text) => {
             const filteredText = removeExceptChars(text);

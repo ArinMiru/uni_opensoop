@@ -9,12 +9,26 @@ import { MembIdFndSvc } from "../../../Services/_private/EndPointApiFuntion";
  */
 
 const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
-  const [userEmail, setUserEmail] = useState<string>(""); //문자열을 저장하는 변수 선언
+  const [userEmail, setUserEmail] = useState<string>("");
+
+  const isValidEmail = (email: string) => {
+    return email.includes("@") && email.endsWith(".ac.kr");
+  };
 
   const emailCheck = async () => {
-    const result = await MembIdFndSvc(userEmail);
-    navigation.navigate("IdFindOut");
-    //emailCheckpoint 함수를 호출, userEmail을 전달하고 그 값을 result에 저장
+    if (!isValidEmail(userEmail)) {
+      alert("올바른 이메일 형식을 입력해주세요.");
+      return;
+    }
+
+    const fullEmail = `${userEmail}`;
+    const responseData = await MembIdFndSvc(fullEmail);
+    if (responseData) {
+      navigation.navigate("IdFindOut", { memberId: responseData.MEMB_ID });
+    }
+     else {
+      alert("등록되어 있지 않은 이메일입니다.");
+    }
   };
 
   return (
@@ -27,6 +41,9 @@ const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
       value={userEmail}
       onChangeText={(text) => setUserEmail(text)}
       onPress={emailCheck}
+      autoCapitalize="none"
+      keyboardType="email-address"
+      placeholder="아이디@대학교.ac.kr"
     />
   );
 };
