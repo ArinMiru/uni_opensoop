@@ -115,38 +115,38 @@ export const openBubSvcNew = async (
  * @param CRE_SEQ
  */
 export const openBubSvcUpdate = async (
-  LOGIN_ID: string,
-  MEMB_DEP_CD: string,
-  MEMB_SC_CD: string,
-  TIT_CD: string,
   TIT: string,
   CONT: string,
   IMAGE_INFO: ImageInfo[],
   CRE_SEQ: number
 ) => {
-  const endpoint = "/UNI/OpenBubSvc";
-  const data = {
-    LOGIN_ID,
-    MEMB_DEP_CD,
-    MEMB_SC_CD,
-    TIT_CD,
-    TIT,
-    CONT,
-    IMAGE_INFO,
-    CRE_SEQ,
-    PROC_TYPE: "02",
-  };
-  console.log(data);
-  const result: AxiosResponse<UserData, any> | null = await sendApiData(
-    endpoint,
-    data
-  );
+  const userData = getUserData();
+  if (userData !== null) {
+    const { LOGIN_ID, MEMB_DEP_CD, MEMB_SC_CD, TIT_CD } = userData;
+    const endpoint = "/UNI/OpenBubSvc";
+    const data = {
+      LOGIN_ID,
+      MEMB_DEP_CD,
+      MEMB_SC_CD,
+      TIT_CD,
+      TIT,
+      CONT,
+      IMAGE_INFO,
+      CRE_SEQ,
+      PROC_TYPE: "02",
+    };
+    console.log(data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
 
-  if (result !== null && result.data.RSLT_CD === "00") {
-    console.log("성공");
-  } else {
-    console.log("실패");
-    console.log(result?.data);
+    if (result !== null && result.data.RSLT_CD === "00") {
+      console.log("성공");
+    } else {
+      console.log("실패");
+      console.log(result?.data);
+    }
   }
 };
 /**

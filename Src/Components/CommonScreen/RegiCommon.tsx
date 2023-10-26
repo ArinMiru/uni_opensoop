@@ -20,7 +20,7 @@ interface CommonProps extends TextInputProps {
   bigtext?: string;
   smalltext?: string;
   buttontext?: string;
-  inputtext?: string;
+  inputtext: React.ReactNode;
   disable?: boolean;
   IconPress?: () => void;
   onPress?: () => void;

@@ -101,21 +101,15 @@ export const nickCheckpoint = async (NICK_NM: string): Promise<boolean> => {
  */
 export const MembIdFndSvc = async (MEMB_EM: string) => {
   const endpoint = "/UNI/MembIdFndSvc";
-  const data = {
-    MEMB_EM,
-  };
+  const data = { MEMB_EM };
   const result: AxiosResponse<UserData, any> | null = await sendApiData(
     endpoint,
     data
   );
-  console.log(data);
   if (result !== null && result.data.RSLT_CD === "00") {
-    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-    console.log("등록되어 있는 이메일 입니다.");
-    console.log(result.data);
+    return result.data; // 전체 데이터 반환
   } else {
-    console.log("등록되어 있지 않은 이메일 입니다.");
-    console.log(result?.data);
+    return null;
   }
 };
 

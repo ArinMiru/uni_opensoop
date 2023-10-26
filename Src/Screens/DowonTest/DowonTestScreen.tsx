@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { Background } from "../../Components/AllCompo/Background";
-import { deviceWidth } from "../../Utils/DeviceUtils";
+import { deviceWidth, deviceHeight } from "../../Utils/DeviceUtils";
 import { BackIconTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
 import TextStyle from "../../Styles/TextStyle";
 import {
@@ -9,6 +9,20 @@ import {
   CertLogoutBox,
 } from "../../Components/ProfileCompo/ProfileCompo";
 import { DelToastMessageBox } from "../../Components/ToastMessageCompo/ToastMessageBox";
+import { RegiCommonView } from "../../Components/CommonScreen/RegiCommon";
+import {
+  SafeAreaView,
+  TextInputProps,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import textStyle from "../../Styles/TextStyle";
+import BackgroundStyle from "../../Styles/BackgroundStyle";
+import { BlackBackIconButton } from "../../Components/IconCompo/BackIconButton";
+import { OnlyAccountInputCompoMarginTop3 } from "../../Components/AccountCompo/AccoutTextInput";
+import { OnlyAccountButton } from "../../Components/AccountCompo/AccountButton";
+import { ListAnsTextInput } from "../../Components/AllCompo/ListAnsTextInputCompo";
+
 interface ScreenProps {
   children?: React.ReactNode;
   navigation?: { navigate: (screenName: string) => void };
@@ -21,50 +35,46 @@ interface ScreenProps {
 
 const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
   return (
-    <Background>
-      <View style={{ justifyContent: "center" }}>
-        <BackIconTopbarStyle Title="프로필" MEMB_SC_NM="" MEMB_DEP_NM="" />
-        <View
-          style={{
-            marginLeft: deviceWidth * 0.085,
-            marginTop: deviceWidth * 0.001,
-            marginBottom: deviceWidth * 0.02,
-          }}
-        >
-          <Text style={[TextStyle.semibold15, { color: "#181D27" }]}>
-            {"회원정보"}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={BackgroundStyle.AccountBackground}>
+        <View style={BackgroundStyle.backIconFlex}>
+          <BlackBackIconButton />
+        </View>
+        <View style={BackgroundStyle.titleTextFlex}>
+          <Text
+            style={[
+              textStyle.bold25,
+              {
+                color: "#4BB781",
+                marginLeft: deviceWidth * 0.1,
+                lineHeight: deviceWidth * 0.09,
+              },
+            ]}
+          >
+            {"학과/전공"}
+          </Text>
+          <Text
+            style={[
+              textStyle.medium20,
+              {
+                color: "#424C43",
+                lineHeight: deviceHeight * 0.0459,
+                marginLeft: deviceWidth * 0.01,
+              },
+            ]}
+          >
+            {"선택하기"}
           </Text>
         </View>
-        <View style={{ alignItems: "center" }}>
-          <DelToastMessageBox />
-          <ProfilePageUserInfo
-            PROF_IMG_PATH=""
-            MEMB_CD="2018143005"
-            MEMB_DEP_NM="정보통신학과"
-            MEMB_EM="hapje010@ptu.ac.kr"
-            MEMB_GRA="4학년"
-            MEMB_NM="김도원"
-            MEMB_SC_NM="평택대학교"
-            TIT_NM="재학생"
-            NICK_NUM="피카피카"
-          />
+        <View style={BackgroundStyle.accountInputFlex}>
+          <OnlyAccountInputCompoMarginTop3 text={"학과/전공"} />
         </View>
-        <View
-          style={{
-            marginLeft: deviceWidth * 0.085,
-            marginTop: deviceWidth * 0.04,
-            marginBottom: deviceWidth * 0.02,
-          }}
-        >
-          <Text style={[TextStyle.semibold15, { color: "#181D27" }]}>
-            {"기타"}
-          </Text>
+        <View style={BackgroundStyle.accountButtonFlex}>
+          <OnlyAccountButton text={"검색"} />
+          <ListAnsTextInput />
         </View>
-        <View style={{ alignItems: "center" }}>
-          <CertLogoutBox />
-        </View>
-      </View>
-    </Background>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
