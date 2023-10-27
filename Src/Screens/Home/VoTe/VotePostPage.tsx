@@ -124,7 +124,15 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                     title={item.VOTE_TITLE}
                     poststatus={"투표 중"}
                     posttime={item.VOT_EXPR_DATE}
-                    onPress={() => navigation.navigate("VotePostDetailPage")}
+                    onPress={() =>
+                      navigation.navigate("VotePostDetailPage", {
+                        VOT_TITLE: item.VOTE_TITLE,
+                        VOT_DESC: item.VOT_DESC,
+                        VOT_EXPR_DATE: item.VOT_EXPR_DATE,
+                        VOT_INFO: item.VOT_INFO,
+                        CRE_SEQ: item.CRE_SEQ,
+                      })
+                    }
                   />
                 );
               } else if (item.VOT_GO_CD === "VB") {
@@ -133,7 +141,15 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                     title={item.VOTE_TITLE}
                     poststatus={"투표 전"}
                     posttime={item.VOT_EXPR_DATE}
-                    onPress={() => navigation.navigate("VotePostDetailPage")}
+                    onPress={() =>
+                      navigation.navigate("VotePostDetailPage", {
+                        VOT_TITLE: item.VOTE_TITLE,
+                        VOT_DESC: item.VOT_DESC,
+                        VOT_EXPR_DATE: item.VOT_EXPR_DATE,
+                        VOT_INFO: item.VOT_INFO,
+                        CRE_SEQ: item.CRE_SEQ,
+                      })
+                    }
                   />
                 );
               } else if (item.VOT_GO_CD === "VF") {
@@ -142,7 +158,15 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                     title={item.VOTE_TITLE}
                     poststatus={"투표 종료"}
                     posttime={item.VOT_EXPR_DATE}
-                    onPress={() => navigation.navigate("VotePostDetailPage")}
+                    onPress={() =>
+                      navigation.navigate("VotePostDetailPage", {
+                        VOT_TITLE: item.VOTE_TITLE,
+                        VOT_DESC: item.VOT_DESC,
+                        VOT_EXPR_DATE: item.VOT_EXPR_DATE,
+                        VOT_INFO: item.VOT_INFO,
+                        CRE_SEQ: item.CRE_SEQ,
+                      })
+                    }
                   />
                 );
               }
@@ -152,7 +176,15 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                     title={item.VOTE_TITLE}
                     poststatus={"투표 취소"}
                     posttime={item.VOT_EXPR_DATE}
-                    onPress={() => navigation.navigate("VotePostDetailPage")}
+                    onPress={() =>
+                      navigation.navigate("VotePostDetailPage", {
+                        VOT_TITLE: item.VOTE_TITLE,
+                        VOT_DESC: item.VOT_DESC,
+                        VOT_EXPR_DATE: item.VOT_EXPR_DATE,
+                        VOT_INFO: item.VOT_INFO,
+                        CRE_SEQ: item.CRE_SEQ,
+                      })
+                    }
                   />
                 );
               }

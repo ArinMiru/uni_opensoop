@@ -11,7 +11,7 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
-
+import { VotePostDetailProp } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 /**
  * @Dowon(김도원 생성)
  * 투표 게시물 별 상세 페이지 (투표하는 페이지)
@@ -23,8 +23,16 @@ import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
  * 어떤 투표 정보를 파싱해야하는지 작성해뒀음 (참고)
  */
 
-const VotePostDetailPage: React.FC<ScreenProps> = ({ navigation }) => {
+const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
+  navigation,
+  route,
+}) => {
   const userData = getUserData(); // 현재 사용자 데이터
+  const { VOT_TITLE,VOT_DESC, VOT_INFO, VOT_EXPR_DATE, CRE_SEQ } = route.params;
+  if (userData !== null) {
+    const { LOGIN_ID } = userData;
+  }
+
   return (
     <Background>
       <BackIconTopbarStyle text="투표" onPress={() => navigation.goBack()} />
@@ -45,7 +53,7 @@ const VotePostDetailPage: React.FC<ScreenProps> = ({ navigation }) => {
               { color: "#1E232C" },
             ]}
           >
-            {"VOT_TITLE"}
+            {VOT_TITLE}
           </Text>
           <Text
             style={[
@@ -54,7 +62,7 @@ const VotePostDetailPage: React.FC<ScreenProps> = ({ navigation }) => {
               { color: "#9E9E9E" },
             ]}
           >
-            {"VOT_EXPR_DATE "} {"마감"}
+            {VOT_EXPR_DATE} {"마감"}
           </Text>
         </View>
         <View
