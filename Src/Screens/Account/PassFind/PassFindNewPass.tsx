@@ -8,6 +8,7 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import AccountInputStyle from "../../../Styles/AccountStyles/AccountInputStyle";
 import textStyle from "../../../Styles/TextStyle";
+import { Image } from "react-native";
 
 const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
   const [newPassword, setNewPassword] = useState<string>("");
@@ -126,6 +127,17 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
           text="다음"
           onPress={() => navigation.navigate("PassFindChk")}
           disable={!isButtonEnabled}
+        />
+        <Image
+          source={require("../../../Assets/Images/LogoImage.png")}
+          style={{
+            position: "absolute",
+            resizeMode: "contain",
+            width: deviceWidth * 0.5,
+            height: deviceHeight * 0.5,
+            bottom: deviceHeight * -0.11,
+            right: deviceWidth * -0.08,
+          }}
         />
       </View>
     </AccountBackground>

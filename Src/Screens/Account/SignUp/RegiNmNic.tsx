@@ -12,6 +12,7 @@ import RegiUserData, {
 } from "../../../Utils/_private/RegiData/RegiUserData";
 import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 import { nickCheckpoint } from "../../../Services/_private/EndPointApiFuntion";
+import { Image } from "react-native";
 
 const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
   const [userRegiNick, setUserRegNick] = useState<string>("");
@@ -85,6 +86,17 @@ const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
           disable={!isFormComplete()}
         />
       </View>
+      <Image
+        source={require("../../../Assets/Images/LogoImage.png")}
+        style={{
+          position: "absolute",
+          resizeMode: "contain",
+          width: deviceWidth * 0.5,
+          height: deviceHeight * 0.5,
+          bottom: deviceHeight * -0.11,
+          right: deviceWidth * -0.08,
+        }}
+      />
     </AccountBackground>
   );
 };
