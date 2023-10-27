@@ -76,7 +76,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const handleItemPree = (creseq: number) => {
     setSelectedCreSeq(creseq);
     console.log(selectedCreSeq);
-    modalFunctions.handleButtonPress();
+    modalFunctions.handleButtonPress(creseq);
   };
 
   const modalItemDel = () => {
