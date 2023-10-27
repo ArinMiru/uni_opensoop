@@ -4,13 +4,14 @@ import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
 import { RegiDupleFlex2 } from "../../../Components/AccountCompo/AccountCustomCompo";
 import RegiUserData, {
   setUserDataAndNavigate,
 } from "../../../Utils/_private/RegiData/RegiUserData";
 import { idCheckpoint } from "../../../Services/_private/EndPointApiFuntion";
+import { Image } from "react-native";
 
 const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
   const [userRegiId, setUserRegiId] = useState<string>("");
@@ -72,6 +73,17 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
           disable={!isFormComplete()}
         />
       </View>
+      <Image
+        source={require("../../../Assets/Images/LogoImage.png")}
+        style={{
+          position: "absolute",
+          resizeMode: "contain",
+          width: deviceWidth * 0.5,
+          height: deviceHeight * 0.5,
+          bottom: deviceHeight * -0.11,
+          right: deviceWidth * -0.08,
+        }}
+      />
     </AccountBackground>
   );
 };

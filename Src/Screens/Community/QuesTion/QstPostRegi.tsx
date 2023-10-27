@@ -3,21 +3,33 @@ import { View, Text } from "react-native";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { QstContInputBox } from "../../../Components/ListCompo/QstCompo/QstInputCompo";
 import TextStyle from "../../../Styles/TextStyle";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAvoidingView } from "react-native";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import { OpenFreSgsTitInputBox } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
+import { quesBubSvcNew } from "../../../Services/_private/QusetPostData";
 
 const userData = getUserData(); // 현재 사용자 데이터
 
 const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
-  const [tit, setTit] = useState<string>("");
-  const [cont, setCont] = useState<string>("");
+  const [quesTit, setQuesTit] = useState<string>("");
+
+  const quesNew = async () => {
+    try {
+      const userData = getUserData();
+      if (userData != null) {
+        await quesBubSvcNew(quesTit);
+        console.log("TIT : ", quesTit);
+      } else {
+        console.error("userData가 null입니다.");
+      }
+    } catch (error) {
+      console.error("등록 오류", error);
+    }
+  };
 
   return (
     <Background>
@@ -26,7 +38,7 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
-        onPressRegi={() => navigation.goBack()}
+        onPressRegi={quesNew}
       />
       <View
         style={[
@@ -45,8 +57,8 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           <View style={ListInputBoxStyle.FreQstOpenTitInputBoxStyle}>
             <OpenFreSgsTitInputBox
               text="질문을 입력하세요"
-              value={tit}
-              onChangeText={(text) => setTit(text)}
+              value={quesTit}
+              onChangeText={(text) => setQuesTit(text)}
             ></OpenFreSgsTitInputBox>
             <Text
               style={[

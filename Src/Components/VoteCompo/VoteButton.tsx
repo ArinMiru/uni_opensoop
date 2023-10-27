@@ -7,7 +7,7 @@ import textStyle from "../../Styles/TextStyle";
 import VoteButtonStyle from "../../Styles/VoteStyles/VoteButtonStyle";
 import { AntDesign } from "@expo/vector-icons";
 import { deviceWidth } from "../../Utils/DeviceUtils";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, Ionicons } from "@expo/vector-icons";
 
 interface ButtonProps {
   children?: React.ReactNode;
@@ -161,7 +161,6 @@ export const AddVoteOptionButton: React.FC<ButtonProps> = ({
  */
 export const ViewUnvottedButton: React.FC<ButtonProps> = ({
   children,
-  text,
   onPress,
 }) => {
   return (
@@ -173,7 +172,11 @@ export const ViewUnvottedButton: React.FC<ButtonProps> = ({
       ]}
       onPress={onPress}
     >
-      <Entypo name="circle" size={deviceWidth * 0.05} color="#4BB781" />
+      <Ionicons
+        name="ios-radio-button-off"
+        size={deviceWidth * 0.05}
+        color="#4BB781"
+      />
       <Text
         style={[
           textStyle.regular10,
@@ -200,7 +203,6 @@ export const ViewDupleVoteButton: React.FC<ButtonProps> = ({
   return (
     <View
       style={{
-        flex: 1,
         marginLeft: deviceWidth * 0.009,
         justifyContent: "center",
         alignContent: "center",
@@ -251,8 +253,7 @@ export const ViewAnnymButton: React.FC<ButtonProps> = ({
   return (
     <View
       style={{
-        flex: 1,
-        marginLeft: deviceWidth * 0.13,
+        marginLeft: deviceWidth * 0.009,
         justifyContent: "center",
         alignContent: "center",
         alignItems: "flex-start",
@@ -281,7 +282,7 @@ export const ViewAnnymButton: React.FC<ButtonProps> = ({
               { lineHeight: deviceWidth * 0.06 },
             ]}
           >
-            익명
+            복수선택
           </Text>
         </View>
         {children}
