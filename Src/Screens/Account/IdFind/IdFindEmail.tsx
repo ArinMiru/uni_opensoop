@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { MembIdFndSvc } from "../../../Services/_private/EndPointApiFuntion";
+import { Image } from "react-native";
 
 /**
  * 이메일로 아이디 찾기
@@ -25,8 +26,7 @@ const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
     const responseData = await MembIdFndSvc(fullEmail);
     if (responseData) {
       navigation.navigate("IdFindOut", { memberId: responseData.MEMB_ID });
-    }
-     else {
+    } else {
       alert("등록되어 있지 않은 이메일입니다.");
     }
   };

@@ -5,6 +5,7 @@ import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButto
 import { GreenCheckIcon } from "../../../Components/IconCompo/CheckIcon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import textStyle from "../../../Styles/TextStyle";
+import { Image } from "react-native";
 
 const RegiChk: React.FC<ScreenProps> = ({ navigation }) => {
   return (

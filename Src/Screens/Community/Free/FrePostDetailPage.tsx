@@ -12,6 +12,7 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { FreePostDetailProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
+import { deviceHeight } from "../../../Utils/DeviceUtils";
 
 const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
   route,
@@ -50,9 +51,9 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
         onPress={() => navigation.goBack()}
       />
       <KeyboardAvoidingView
-        style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle, { flex: 1 }]}
-        behavior={Platform.select({ ios: "padding", android: "height" })}
-        keyboardVerticalOffset={Platform.OS === "android" ? -310 : 0} // 이 값을 조절하여 원하는 결과를 얻을 수 있습니다.
+        style={[NewBackgroundStyle.ListDetailBackgroundStyle, { flex: 1 }]}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        enabled={true}
       >
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View>
@@ -65,7 +66,9 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
               delPress={dellPress}
             />
           </View>
-          <View style={{ alignItems: "center" }}>
+          <View
+            style={{ alignItems: "center", paddingBottom: deviceHeight * 0.09 }}
+          >
             {AnsFree.sort((a, b) => b.ANS_SEQ - a.ANS_SEQ).map((comment) => (
               <FreQstComment
                 key={comment.ANS_SEQ}
@@ -77,7 +80,13 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
           </View>
         </ScrollView>
         <KeyboardAvoidingView>
-          <ListAnsTextInput autoCapitalize="none" keyboardType="default" />
+          <ListAnsTextInput
+            autoCapitalize="none"
+            keyboardType="default"
+            value={cont}
+            onChangeText={(text) => setCont(text)}
+            onPress={FreeAnsNewBut}
+          />
         </KeyboardAvoidingView>
       </KeyboardAvoidingView>
     </Background>
