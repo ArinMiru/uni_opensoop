@@ -13,6 +13,7 @@ import { BlackBackIconButton } from "../IconCompo/BackIconButton";
 import { OnlyAccountInputCompoMarginTop3 } from "../AccountCompo/AccoutTextInput";
 import { OnlyAccountButton } from "../AccountCompo/AccountButton";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
+import { Image } from "react-native";
 
 //  프로퍼티 타입 정의
 interface CommonProps extends TextInputProps {
@@ -83,6 +84,17 @@ export const RegiCommonView: React.FC<CommonProps> = ({
           />
         </View>
         {children}
+        <Image
+          source={require("../../Assets/Images/LogoImage.png")}
+          style={{
+            position: "absolute",
+            resizeMode: "contain",
+            width: deviceWidth * 0.5,
+            height: deviceHeight * 0.5,
+            bottom: deviceHeight * -0.11,
+            right: deviceWidth * -0.08,
+          }}
+        />
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

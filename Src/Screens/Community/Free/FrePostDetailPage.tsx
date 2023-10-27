@@ -12,7 +12,6 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { FreePostDetailProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
 
 const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
@@ -80,9 +79,15 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
             ))}
           </View>
         </ScrollView>
-        <View style={{ bottom: 0, left: 0, right: 0 }}>
-          <ListAnsTextInput autoCapitalize="none" keyboardType="default" />
-        </View>
+        <KeyboardAvoidingView>
+          <ListAnsTextInput
+            autoCapitalize="none"
+            keyboardType="default"
+            value={cont}
+            onChangeText={(text) => setCont(text)}
+            onPress={FreeAnsNewBut}
+          />
+        </KeyboardAvoidingView>
       </KeyboardAvoidingView>
     </Background>
   );

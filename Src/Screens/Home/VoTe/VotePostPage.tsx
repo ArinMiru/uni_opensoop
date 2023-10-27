@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, Text } from "react-native";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { ViewUnvottedButton } from "../../../Components/VoteCompo/VoteButton";
@@ -13,12 +13,21 @@ import { votBubListCall } from "../../../Services/_private/VoteApi";
 import { VoteData } from "../../../Utils/_private/ApiData/VoteData";
 import { useIsFocused } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
+import textStyle from "../../../Styles/TextStyle";
 
 const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const isFocused = useIsFocused();
   const [voteData, setVoteData] = useState<VoteData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const [isButtonOn, setIsButtonOn] = useState<boolean>(false); // 1. 상태 관리
+
+  const filteredVoteData = isButtonOn
+    ? voteData?.VOTE_BUB.filter((item) => item.VOT_GO_CD === "VG")
+    : voteData?.VOTE_BUB;
 
   useEffect(() => {
     if (userData !== null && isFocused) {
@@ -58,7 +67,37 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
               alignItems: "flex-end",
             }}
           >
-            <ViewUnvottedButton />
+            <TouchableOpacity
+              style={[
+                { flexDirection: "row" },
+                { alignItems: "center" },
+                { marginRight: deviceWidth * 0.08 },
+              ]}
+              onPress={() => setIsButtonOn(!isButtonOn)}
+            >
+              {isButtonOn ? (
+                <Ionicons
+                  name="ios-radio-button-on"
+                  size={deviceWidth * 0.05}
+                  color="#4BB781"
+                />
+              ) : (
+                <Ionicons
+                  name="ios-radio-button-off"
+                  size={deviceWidth * 0.05}
+                  color="#4BB781"
+                />
+              )}
+              <Text
+                style={[
+                  textStyle.regular10,
+                  { color: "#4BB781" },
+                  { marginLeft: deviceWidth * 0.02 },
+                ]}
+              >
+                투표중
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
         <View
@@ -76,7 +115,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
             textStyle={{ color: "#FFF" }}
           />
           <FlatList
-            data={voteData?.VOTE_BUB}
+            data={filteredVoteData} // 3. 필터링된 데이터 사용
             keyExtractor={(item) => item.CRE_SEQ.toString()}
             renderItem={({ item }) => {
               if (item.VOT_GO_CD === "VG") {
