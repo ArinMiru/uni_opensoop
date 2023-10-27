@@ -9,6 +9,7 @@ import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
 import { GradeDropdown } from "../../../Components/SingleUse/GradeDropdown";
+import { Image } from "react-native";
 
 const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
   const [selectedGrade, setSelectedGrade] = useState<string | null>(null);
@@ -62,6 +63,17 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
           onPress={() => navigation.navigate("UniCertiStudNum")}
         />
       </View>
+      <Image
+        source={require("../../../Assets/Images/LogoImage.png")}
+        style={{
+          position: "absolute",
+          resizeMode: "contain",
+          width: deviceWidth * 0.5,
+          height: deviceHeight * 0.5,
+          bottom: deviceHeight * -0.11,
+          right: deviceWidth * -0.08,
+        }}
+      />
     </AccountBackground>
   );
 };

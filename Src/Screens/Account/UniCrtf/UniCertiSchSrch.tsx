@@ -9,6 +9,7 @@ import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { RegiDupleFlex3 } from "../../../Components/AccountCompo/AccountCustomCompo";
 import { SchlSrchCall } from "../../../Services/_private/EndPointApiFuntion";
+import { Image } from "react-native";
 
 const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
   const [userSchSrch, setUserSchSrch] = useState<string>("");
@@ -126,6 +127,17 @@ const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
           disable={!isNextButtonActive}
         />
       </View>
+      <Image
+        source={require("../../../Assets/Images/LogoImage.png")}
+        style={{
+          position: "absolute",
+          resizeMode: "contain",
+          width: deviceWidth * 0.5,
+          height: deviceHeight * 0.5,
+          bottom: deviceHeight * -0.11,
+          right: deviceWidth * -0.08,
+        }}
+      />
     </AccountBackground>
   );
 };
