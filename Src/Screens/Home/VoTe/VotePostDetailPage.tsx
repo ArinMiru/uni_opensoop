@@ -1,41 +1,76 @@
-import React from "react";
-import { View, Text } from "react-native";
-import TextStyle from "../../../Styles/TextStyle";
-import { deviceWidth } from "../../../Utils/DeviceUtils";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import textStyle from "../../../Styles/TextStyle";
+import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { VoteStatusButton } from "../../../Components/VoteCompo/VoteButton";
-import { VoteUnSlctButton } from "../../../Components/VoteCompo/VoteButton";
+import {
+  VoteSlctButton,
+  VoteUnSlctButton,
+  VoteuntocheButton,
+} from "../../../Components/VoteCompo/VoteButton";
 import { VoteRegiButton } from "../../../Components/VoteCompo/VoteButton";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { VotePostDetailProp } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
-/**
- * @Dowon(김도원 생성)
- * 투표 게시물 별 상세 페이지 (투표하는 페이지)
- * VotePostDetailPage
- * API -> 투표 조회 (연결)
- * 투표 조회에 모든 정보들 포함되어있음
- * 투표 버튼 클릭 후 별도 API 호출 필요 ( 실시간 투표 현황 업데이트 위함 )
- * 서비스 URL -> VotBubListSvc
- * 어떤 투표 정보를 파싱해야하는지 작성해뒀음 (참고)
- */
+import VoteButtonStyle from "../../../Styles/VoteStyles/VoteButtonStyle";
+
+interface VoteItem {
+  index: number;
+  text: string;
+}
 
 const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
   navigation,
   route,
 }) => {
   const userData = getUserData(); // 현재 사용자 데이터
-  const { VOT_TITLE,VOT_DESC, VOT_INFO, VOT_EXPR_DATE, CRE_SEQ } = route.params;
+  const {
+    VOT_TITLE,
+    VOT_DESC,
+    VOT_INFO,
+    VOT_EXPR_DATE,
+    CRE_SEQ,
+    VOT_TYPE_CD,
+    VOT_SEL_SEQ,
+  } = route.params;
+  let LOGIN_ID = "";
+
   if (userData !== null) {
-    const { LOGIN_ID } = userData;
+    LOGIN_ID = userData.LOGIN_ID;
   }
+
+  const voteList: VoteItem[] = VOT_INFO.split(",").map((item, index) => {
+    const [_, text] = item.split(":");
+    return { index, text };
+  });
+
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+
+  const handleItemClick = (index: number) => {
+    if (VOT_TYPE_CD === "2") {
+      const selectedIndex = selectedItems.indexOf(index);
+      if (selectedIndex === -1) {
+        setSelectedItems([...selectedItems, index]);
+      } else {
+        setSelectedItems(selectedItems.filter((item) => item !== index));
+      }
+    } else {
+      setSelectedItems([index]);
+    }
+  };
 
   return (
     <Background>
-      <BackIconTopbarStyle text="투표" onPress={() => navigation.goBack()} />
+      <BackIconTopbarStyle
+        Title="투표"
+        MEMB_DEP_NM={userData?.MEMB_DEP_NM ?? ""}
+        MEMB_SC_NM={userData?.MEMB_SC_NM ?? ""}
+        onPress={() => navigation.goBack()}
+      />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View
           style={{
@@ -48,7 +83,7 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
         >
           <Text
             style={[
-              TextStyle.bold25,
+              textStyle.bold25,
               { marginLeft: deviceWidth * 0.06 },
               { color: "#1E232C" },
             ]}
@@ -57,7 +92,7 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
           </Text>
           <Text
             style={[
-              TextStyle.medium09,
+              textStyle.medium09,
               { marginRight: deviceWidth * 0.06 },
               { color: "#9E9E9E" },
             ]}
@@ -67,43 +102,41 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
         </View>
         <View
           style={{
-            flex: 3,
+            flex: 4,
             flexDirection: "column",
             width: deviceWidth * 1,
-            justifyContent: "flex-end",
+            justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "flex-end",
-              alignItems: "center",
-              width: deviceWidth * 1,
-            }}
-          >
-            <VoteUnSlctButton text="VOT_INFO" />
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              width: deviceWidth * 1,
-            }}
-          >
-            <VoteUnSlctButton text="VOT_INFO" />
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "flex-start",
-              alignItems: "center",
-              width: deviceWidth * 1,
-            }}
-          >
-            <VoteUnSlctButton text="VOT_INFO" />
-          </View>
+          {voteList.map((item) => {
+            const isSelected = selectedItems.includes(item.index);
+            return (
+              <TouchableOpacity
+                key={item.index}
+                style={[
+                  isSelected
+                    ? VoteButtonStyle.voteSlctStyle
+                    : VoteButtonStyle.voteUnSlctStyle,
+                  { marginBottom: deviceHeight * 0.03 },
+                ]}
+                onPress={() => handleItemClick(item.index)}
+              >
+                {isSelected ? (
+                  <VoteSlctButton text={item.text} />
+                ) : (
+                  <Text
+                    style={[
+                      textStyle.medium13,
+                      { color: isSelected ? "#A2A2A2" : "#333333" },
+                    ]}
+                  >
+                    {item.text}
+                  </Text>
+                )}
+              </TouchableOpacity>
+            );
+          })}
         </View>
         <View
           style={{
@@ -117,10 +150,9 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
           <VoteRegiButton />
         </View>
         {["02", "03", "05"].includes(userData?.TIT_CD ?? "") ? (
-          //상단 userData 주석 api 포함 예정
           <View
             style={{
-              flex: 3,
+              flex: 3.5,
               width: deviceWidth * 1,
               justifyContent: "flex-start",
               alignItems: "center",
@@ -134,7 +166,7 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
         ) : (
           <View
             style={{
-              flex: 3,
+              flex: 2,
               width: deviceWidth * 1,
               justifyContent: "flex-start",
               alignItems: "center",

@@ -130,6 +130,8 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                         VOT_DESC: item.VOT_DESC,
                         VOT_EXPR_DATE: item.VOT_EXPR_DATE,
                         VOT_INFO: item.VOT_INFO,
+                        VOT_TYPE_CD: item.VOTE_TYPE_CD,
+                        VOT_SEL_SEQ: item.VOT_SEL_SEQ,
                         CRE_SEQ: item.CRE_SEQ,
                       })
                     }
@@ -147,6 +149,8 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                         VOT_DESC: item.VOT_DESC,
                         VOT_EXPR_DATE: item.VOT_EXPR_DATE,
                         VOT_INFO: item.VOT_INFO,
+                        VOT_TYPE_CD: item.VOTE_TYPE_CD,
+                        VOT_SEL_SEQ: item.VOT_SEL_SEQ,
                         CRE_SEQ: item.CRE_SEQ,
                       })
                     }
@@ -164,6 +168,8 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                         VOT_DESC: item.VOT_DESC,
                         VOT_EXPR_DATE: item.VOT_EXPR_DATE,
                         VOT_INFO: item.VOT_INFO,
+                        VOT_TYPE_CD: item.VOTE_TYPE_CD,
+                        VOT_SEL_SEQ: item.VOT_SEL_SEQ,
                         CRE_SEQ: item.CRE_SEQ,
                       })
                     }
@@ -182,6 +188,8 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                         VOT_DESC: item.VOT_DESC,
                         VOT_EXPR_DATE: item.VOT_EXPR_DATE,
                         VOT_INFO: item.VOT_INFO,
+                        VOT_TYPE_CD: item.VOTE_TYPE_CD,
+                        VOT_SEL_SEQ: item.VOT_SEL_SEQ,
                         CRE_SEQ: item.CRE_SEQ,
                       })
                     }

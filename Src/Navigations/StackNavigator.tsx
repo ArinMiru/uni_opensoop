@@ -112,26 +112,28 @@ export type RootStackParamList = {
   VotePostPage: undefined;
   VotePostRegiPage: undefined;
   VotePostDetailPage: {
-      VOT_TITLE: string;
-      VOT_EXPR_DATE: string;
-      VOT_DESC: string;
-      VOT_INFO : string;
-      CRE_SEQ : number;
-  }
+    VOT_TITLE: string;
+    VOT_EXPR_DATE: string;
+    VOT_DESC: string;
+    VOT_INFO: string;
+    VOT_TYPE_CD: string;
+    VOT_SEL_SEQ: string;
+    CRE_SEQ: number;
+  };
   VotePostStatusPage: undefined;
   SchedulPage: undefined;
   BottomTabNavigations: undefined;
   ProfilePage: undefined;
   TitleCodeCerti: undefined;
   NoticeEditPage: {
-      CRE_SEQ: number;
-      CONT: string;
-      TIT: string;
-      ImageInfo: {
-        FILE_BASE64: string;
-        FILE_NM: string;
-        IMG_SEQ: number;
-      }[];
+    CRE_SEQ: number;
+    CONT: string;
+    TIT: string;
+    ImageInfo: {
+      FILE_BASE64: string;
+      FILE_NM: string;
+      IMG_SEQ: number;
+    }[];
   };
 
   /**----------------------------------------------------------------------------*/

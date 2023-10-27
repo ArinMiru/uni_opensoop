@@ -59,6 +59,22 @@ export const VoteUnSlctButton: React.FC<ButtonProps> = ({
 };
 
 /**
+ * 투표 선택 후 상태 버튼
+ */
+export const VoteuntocheButton: React.FC<ButtonProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  return (
+    <View style={VoteButtonStyle.voteSlctStyle}>
+      <Text style={[textStyle.medium13, { color: "#A2A2A2" }]}>{text} </Text>
+      {children}
+    </View>
+  );
+};
+
+/**
  * 투표 현황 페이지 버튼
  * 투표 현황 페이지에서 투표현황보여주는 박스(버튼)
  * VoteStatusScreen.tsx
