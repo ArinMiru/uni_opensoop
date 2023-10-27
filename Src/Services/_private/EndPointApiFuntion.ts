@@ -7,6 +7,10 @@ import {
   SchlSrchData,
   parseSchlSrchData,
 } from "../../Utils/_private/RegiData/SchlSrchData";
+import {
+  DprtSrchData,
+  parseDprtSrchData,
+} from "../../Utils/_private/RegiData/DprtSrchData"
 
 /* ------------------------------------------------------------------------------- */
 
@@ -188,6 +192,49 @@ export const SchlSrchCall = async (
       return schlsrchdata; // 파싱된 데이터를 반환합니다.
     } else {
       console.log("대학교명이 존재하지 않습니다.");
+      return null;
+    }
+  } catch (error) {
+    console.error("오류 발생:", error);
+    return null;
+  }
+};
+
+/* ------------------------------------------------------------------------------- */
+
+/**
+ * 학과명 데이터 호출 서비스 함수
+ * @param SCH_CD 대학교 코드
+ * @param SCH_NM 대학교 이름
+ * @param DPRT_CD 학과 코드
+ * @param DPRT_NM 학과 이름
+ * @returns Promise<DprtSrchData | null>
+ */
+export const DprtSrchCall = async (
+  SCH_NM: string,
+  DPRT_NM: string
+): Promise<DprtSrchData | null> => {
+  const endpoint = "/UNI/DprtSrch";
+
+  const data = {
+    SCH_NM, // 대학교 이름
+    DPRT_NM, // 학과 이름
+  };
+
+  try {
+    // 서버에 학과명 데이터 요청을 보내고 응답을 기다립니다.
+    const result: AxiosResponse<any, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
+
+    if (result !== null && result.data.RSLT_CD === "00") {
+      // 서버 응답이 성공적이면 데이터를 파싱합니다.
+      const dprtsrchdata: DprtSrchData = parseDprtSrchData(result.data);
+      console.log(result.data);
+      return dprtsrchdata; // 파싱된 데이터를 반환합니다.
+    } else {
+      console.log("학과명이 존재하지 않습니다.");
       return null;
     }
   } catch (error) {

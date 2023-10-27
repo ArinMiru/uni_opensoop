@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import {
@@ -15,6 +15,7 @@ import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButto
 import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
+import { DprtSrchCall } from "../../../Services/_private/EndPointApiFuntion";
 import { Image } from "react-native";
 
 interface CommonProps extends TextInputProps {
