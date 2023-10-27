@@ -22,6 +22,7 @@ import { BlackBackIconButton } from "../../Components/IconCompo/BackIconButton";
 import { OnlyAccountInputCompoMarginTop3 } from "../../Components/AccountCompo/AccoutTextInput";
 import { OnlyAccountButton } from "../../Components/AccountCompo/AccountButton";
 import { ListAnsTextInput } from "../../Components/AllCompo/ListAnsTextInputCompo";
+import { Image } from "react-native";
 
 interface ScreenProps {
   children?: React.ReactNode;
@@ -71,8 +72,18 @@ const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
         </View>
         <View style={BackgroundStyle.accountButtonFlex}>
           <OnlyAccountButton text={"검색"} />
-          <ListAnsTextInput />
         </View>
+        <Image
+          source={require("../../Assets/Images/LogoImage.png")}
+          style={{
+            position: "absolute",
+            resizeMode: "contain",
+            width: deviceWidth * 0.5,
+            height: deviceHeight * 0.5,
+            bottom: deviceHeight * -0.11,
+            right: deviceWidth * -0.08,
+          }}
+        />
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

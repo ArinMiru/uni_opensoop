@@ -169,15 +169,11 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           <View
             style={{
               flex: 3,
-              flexDirection: "row",
+              flexDirection: "column",
             }}
           >
-            <View style={{ flex: 1 }}>
-              <ViewDupleVoteButton />
-            </View>
-            <View style={{ flex: 1 }}>
-              <ViewAnnymButton />
-            </View>
+            <ViewDupleVoteButton />
+            <ViewAnnymButton />
           </View>
         </View>
         {modalFunctions.modalVisible && (

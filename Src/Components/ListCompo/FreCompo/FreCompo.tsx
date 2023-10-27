@@ -206,3 +206,77 @@ export const FreQstComment: React.FC<ButtonProps> = ({
     </View>
   );
 };
+
+export const QstComment: React.FC<ButtonProps> = ({
+  freqstansnick,
+  freqstanstit,
+  freqstanstime,
+}) => {
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        width: deviceWidth * 0.868,
+        minHeight: deviceHeight * 0.09,
+        marginTop: deviceHeight * 0.017,
+      }}
+    >
+      <View>
+        <FreSgsAnsProfileIcon />
+      </View>
+      <View
+        style={{
+          flexDirection: "column",
+        }}
+      >
+        <View style={{ marginLeft: deviceWidth * 0.02 }}>
+          <Text
+            style={[
+              textStyle.semibold09,
+              { color: "#151515" },
+              { paddingTop: deviceHeight * 0.006 },
+              { lineHeight: deviceWidth * 0.04 },
+            ]}
+          >
+            {freqstansnick}
+          </Text>
+        </View>
+        <View
+          style={{
+            height: "auto",
+            width: deviceWidth * 0.55,
+            marginLeft: deviceWidth * 0.02,
+            marginTop: deviceHeight * 0.0,
+          }}
+        >
+          <Text
+            style={[
+              textStyle.regular12,
+              { color: "#151515" },
+              { lineHeight: deviceWidth * 0.055 },
+            ]}
+          >
+            {freqstanstit}
+          </Text>
+        </View>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "flex-start",
+          alignItems: "flex-end",
+        }}
+      >
+        <Text
+          style={[
+            textStyle.semibold08,
+            { color: "#919191" },
+            { textAlign: "left" },
+          ]}
+        >
+          {freqstanstime}
+        </Text>
+      </View>
+    </View>
+  );
+};

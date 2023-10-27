@@ -1,10 +1,11 @@
 // ModalReuableFuction.js
-import { useRef, useState, useMemo, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback } from "react";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 export const ModalReuableFuction = () => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalData, setModalData] = useState(null);
 
   const handleEditPress = useCallback(() => {
     console.log("Edit button pressed");
@@ -14,8 +15,9 @@ export const ModalReuableFuction = () => {
     console.log("닫기");
   }, []);
 
-  const handleButtonPress = useCallback(() => {
+  const handleButtonPress = useCallback((dataToPass: any) => {
     console.log("Button pressed");
+    setModalData(dataToPass); // 데이터 설정
     setModalVisible(true);
     bottomSheetModalRef.current?.present();
   }, []);
@@ -28,6 +30,7 @@ export const ModalReuableFuction = () => {
   return {
     bottomSheetModalRef,
     modalVisible,
+    modalData, // 데이터 상태를 반환
     handleEditPress,
     handleDeletePress,
     handleButtonPress,

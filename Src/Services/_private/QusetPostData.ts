@@ -71,12 +71,13 @@ export const QuesBubListSvc = async (
     return null;
   }
 };
-export const QuesBubSvcNew = async (TIT: string, CONT: string) => {
+export const quesBubSvcNew = async (TIT: string) => {
   const userData = getUserData();
   const endpoint = "/UNI/QuesBubSvc";
   if (userData !== null) {
     const PROC_TYPE = "01";
     const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
+    const CONT = "";
     const data = {
       TIT,
       CONT,
@@ -87,8 +88,10 @@ export const QuesBubSvcNew = async (TIT: string, CONT: string) => {
       PROC_TYPE,
     };
     console.log(data);
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
       console.log("등록 성공");
@@ -118,8 +121,10 @@ export const QuesBubSvcUp = async (
       PROC_TYPE,
     };
     console.log(data);
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
       console.log("등록 성공");
@@ -140,8 +145,10 @@ export const QuesBubSvcDel = async (CRE_SEQ: number) => {
       PROC_TYPE,
     };
     console.log(data);
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
       console.log("등록 성공");

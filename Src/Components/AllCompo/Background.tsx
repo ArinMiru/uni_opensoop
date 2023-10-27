@@ -2,6 +2,7 @@ import { Keyboard, SafeAreaView, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 import styles from "../../Styles/BackgroundStyle";
 import MainPageStyles from "../../Styles/MainPageStyles/MainPageStyles";
+import { ScrollView } from "react-native-gesture-handler";
 
 interface BackgroundProps {
   children?: React.ReactNode;
@@ -15,7 +16,12 @@ interface BackgroundProps {
 export const AccountBackground: React.FC<BackgroundProps> = ({ children }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={styles.AccountBackground}>{children}</SafeAreaView>
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
+      >
+        <SafeAreaView style={styles.AccountBackground}>{children}</SafeAreaView>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 };
