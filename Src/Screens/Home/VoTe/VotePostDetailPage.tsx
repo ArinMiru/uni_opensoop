@@ -50,14 +50,20 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
 
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
+  console.log("VOTE_TYPE_CD 값:", VOT_TYPE_CD); // VOT_TYPE_CD 값 확인
+
   const handleItemClick = (index: number) => {
-    if (VOT_TYPE_CD === "2") {
-      const selectedIndex = selectedItems.indexOf(index);
-      if (selectedIndex === -1) {
-        setSelectedItems([...selectedItems, index]);
+    console.log("클릭된 항목의 인덱스:", index); // 클릭된 항목의 인덱스 확인
+    if (VOT_TYPE_CD === "02") {
+      const updatedSelectedItems = [...selectedItems];
+      if (updatedSelectedItems.includes(index)) {
+        const indexToRemove = updatedSelectedItems.indexOf(index);
+        updatedSelectedItems.splice(indexToRemove, 1);
       } else {
-        setSelectedItems(selectedItems.filter((item) => item !== index));
+        updatedSelectedItems.push(index);
       }
+      setSelectedItems(updatedSelectedItems);
+      console.log("업데이트된 selectedItems:", updatedSelectedItems); // 업데이트된 selectedItems 확인
     } else {
       setSelectedItems([index]);
     }
@@ -123,14 +129,11 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
                 onPress={() => handleItemClick(item.index)}
               >
                 {isSelected ? (
-                  <VoteSlctButton text={item.text} />
+                  <Text style={[textStyle.medium13, { color: "#A2A2A2" }]}>
+                    {item.text}
+                  </Text>
                 ) : (
-                  <Text
-                    style={[
-                      textStyle.medium13,
-                      { color: isSelected ? "#A2A2A2" : "#333333" },
-                    ]}
-                  >
+                  <Text style={[textStyle.medium13, { color: "#333333" }]}>
                     {item.text}
                   </Text>
                 )}
