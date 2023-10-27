@@ -1,5 +1,5 @@
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
-import { sendLoginCredentials } from "../_private/Api.config";
+import { sendApiData } from "../_private/Api.config";
 import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
 
@@ -24,7 +24,7 @@ export const FreeAnsBubNew = async (
     console.log(data);
 
     const result: AxiosResponse<UserData, any> | null =
-      await sendLoginCredentials(endpoint, data);
+      await sendApiData(endpoint, data);
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
@@ -55,7 +55,7 @@ export const FreeAnsBubDel = async (CRE_SEQ: number) => {
     };
     console.log(data);
     const result: AxiosResponse<UserData, any> | null =
-      await sendLoginCredentials(endpoint, data);
+      await sendApiData(endpoint, data);
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
     } else {
@@ -93,7 +93,7 @@ export const FreeAnsBubEd = async (
       CONT,
     };
     const result: AxiosResponse<UserData, any> | null =
-      await sendLoginCredentials(endpoint, data);
+      await sendApiData(endpoint, data);
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");

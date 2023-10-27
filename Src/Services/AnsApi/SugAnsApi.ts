@@ -9,6 +9,7 @@ export const SugAnsBubNew = async (CONT: string, CRE_SEQ: number) => {
   if (userData != null) {
     const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
     const PROC_TYPE = "01";
+    const SEC_YN = "N";
     const data = {
       LOGIN_ID,
       PROC_TYPE,
@@ -17,11 +18,14 @@ export const SugAnsBubNew = async (CONT: string, CRE_SEQ: number) => {
       TIT_CD,
       CONT,
       CRE_SEQ,
+      SEC_YN,
     };
     console.log(data);
 
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
@@ -51,8 +55,10 @@ export const SugAnsBubDel = async (CRE_SEQ: number) => {
       CRE_SEQ,
     };
     console.log(data);
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
     } else {
@@ -89,8 +95,10 @@ export const SugAnsBubEd = async (
       TIT,
       CONT,
     };
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
