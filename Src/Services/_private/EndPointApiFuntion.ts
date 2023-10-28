@@ -10,7 +10,7 @@ import {
 import {
   DprtSrchData,
   parseDprtSrchData,
-} from "../../Utils/_private/RegiData/DprtSrchData"
+} from "../../Utils/_private/RegiData/DprtSrchData";
 
 /* ------------------------------------------------------------------------------- */
 
@@ -20,23 +20,26 @@ import {
  * @param LOGIN_PASS 사용자 비밀번호
  */
 export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
-  const endpoint = "/UNI/LoginSvc"; // 로그인 엔드포인트 URL
+  const endpoint = "/UNI/LoginSvc";
   const data = {
-    LOGIN_ID, // 로그인 사용자 아이디
-    LOGIN_PASS, // 로그인 사용자 비밀번호
+    LOGIN_ID,
+    LOGIN_PASS,
   };
   const result: AxiosResponse<UserData, any> | null = await sendApiData(
     endpoint,
     data
-  ); // 로그인 시도 및 서버 응답 저장
+  );
 
-  if (result !== null && result.data.RSLT_CD === "00") {
-    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-    // 로그인 성공 시의 처리
-    // userData 객체에 데이터 저장
-    setUserData(result.data); // 서버에서 받은 데이터로 userData 객체 설정
+  if (result !== null) {
+    if (result.data.RSLT_CD === "00") {
+      setUserData(result.data);
+      return "00"; // 로그인 성공
+    } else {
+      return result.data.RSLT_CD; // 로그인 실패
+    }
   } else {
     console.log("로그인 실패");
+    return null;
   }
 };
 

@@ -10,9 +10,24 @@ import { Background } from "../../Components/AllCompo/Background";
 import { MainPageTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
 import { ScreenProps } from "../../Navigations/StackNavigator";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
+import { BackHandler } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
 const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
-  const userData = getUserData(); // 현재 사용자 데이터
+  const userData = getUserData();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        navigation.navigate("AccountLogin");
+        return true;
+      };
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [navigation])
+  );
+
   return (
     <Background>
       <MainPageTopbarStyle
