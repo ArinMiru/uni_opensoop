@@ -17,7 +17,7 @@ interface ButtonProps {
   poststatus?: string; // 투표게시판 리스트에서 투표 상태(미투표, 투표환료)
   votestatusnum?: string; // 투표현황 버튼에서 투표현황 숫자
   date?: string;
-  onPress?: () => void;
+  onPress?: () => any;
   navigation?: { navigate: (screenName: string) => void };
 }
 

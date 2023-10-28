@@ -116,7 +116,7 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
           }}
         >
           {voteList.map((item) => {
-            const isSelected = selectedItems.includes(item.index);
+            const isSelected = selectedItems.includes(item.index + 1);
             return (
               <TouchableOpacity
                 key={item.index}
@@ -126,7 +126,7 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
                     : VoteButtonStyle.voteUnSlctStyle,
                   { marginBottom: deviceHeight * 0.03 },
                 ]}
-                onPress={() => handleItemClick(item.index)}
+                onPress={() => handleItemClick(item.index + 1)}
               >
                 {isSelected ? (
                   <Text style={[textStyle.medium13, { color: "#A2A2A2" }]}>
