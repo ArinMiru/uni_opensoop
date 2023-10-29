@@ -175,7 +175,17 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
             }}
           >
             <VoteStatusButton
-              onPress={() => navigation.navigate("VotePostStatusPage")}
+              onPress={() =>
+                navigation.navigate("VotePostStatusPage", {
+                  VOT_TITLE: VOT_TITLE,
+                  VOT_DESC: VOT_DESC,
+                  VOT_INFO: VOT_INFO,
+                  VOT_EXPR_DATE: VOT_EXPR_DATE,
+                  CRE_SEQ: CRE_SEQ,
+                  VOT_TYPE_CD: VOT_TYPE_CD,
+                  VOT_SEL_SEQ: VOT_SEL_SEQ,
+                })
+              }
             />
           </View>
         ) : (
