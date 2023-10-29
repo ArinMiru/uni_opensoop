@@ -248,7 +248,7 @@ export const MainSchdNoBox: React.FC<ButtonProps> = ({ onPress }) => {
           marginTop: deviceWidth * 0.03,
         }}
       >
-        <Text style={[textStyle.semibold14, { color: "#181D27" }]}>
+        <Text style={[textStyle.semibold11, { color: "#181D27" }]}>
           {"오늘 일정이 없습니다."}
         </Text>
       </View>

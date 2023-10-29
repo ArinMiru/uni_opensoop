@@ -1,6 +1,10 @@
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { sendApiData } from "./Api.config";
 import { VoteData, parseVoteData } from "../../Utils/_private/ApiData/VoteData";
+import {
+  VoteStatData,
+  parseVoteStatData,
+} from "../../Utils/_private/ApiData/VoteStatData";
 import { AxiosResponse } from "axios";
 
 export const votBubListCall = async (): Promise<VoteData | null> => {
@@ -84,6 +88,33 @@ export const votBubListDetailupCall = async (
     }
   } else {
     console.log("userData가 null입니다.");
+    return null;
+  }
+};
+
+export const votBubStatCall = async (
+  CRE_SEQ: number
+): Promise<VoteStatData | null> => {
+  const endpoint = "/UNI/VotBubStatSvc";
+  const data = { CRE_SEQ };
+
+  try {
+    const result: AxiosResponse<any, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
+    console.log("서버로부터의 응답:", result);
+
+    if (result && result.data.RSLT_CD === "00") {
+      const voteStatData: VoteStatData = parseVoteStatData(result.data);
+      console.log("파싱된 데이터:", voteStatData);
+      return voteStatData;
+    } else {
+      console.log("투표 통계 데이터 가져오기 실패");
+      return null;
+    }
+  } catch (error) {
+    console.error("votBubStatCall 함수에서 오류 발생:", error);
     return null;
   }
 };

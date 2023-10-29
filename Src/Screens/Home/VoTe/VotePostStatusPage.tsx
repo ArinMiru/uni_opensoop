@@ -3,12 +3,15 @@ import { View, Text } from "react-native";
 import TextStyle from "../../../Styles/TextStyle";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
-import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { VoteStatusPageButton } from "../../../Components/VoteCompo/VoteButton";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
+import {
+  votBubStatCall,
+  votBubListCall,
+} from "../../../Services/_private/VoteApi";
 
 /**
  * @Dowon(김도원 생성)
@@ -16,9 +19,15 @@ import { Background } from "../../../Components/AllCompo/Background";
  */
 
 const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation }) => {
+  const userData = getUserData();
   return (
     <Background>
-      <BackIconTopbarStyle text="투표" onPress={() => navigation.goBack()} />
+      <BackIconTopbarStyle
+        Title="투표현황"
+        MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
+        MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
+        onPress={() => navigation.goBack()}
+      />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View
           style={{
