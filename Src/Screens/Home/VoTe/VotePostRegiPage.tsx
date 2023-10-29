@@ -23,6 +23,7 @@ import { DateSltModlCompo } from "../../../Components/AllCompo/ModalCompo";
 import DatePickerModal from "react-native-modal-datetime-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+import { votBubRegiCall } from "../../../Services/_private/VoteApi";
 
 /**
  * @Dowon(김도원 생성)
@@ -30,10 +31,20 @@ import { Ionicons } from "@expo/vector-icons";
  * [02, 03, 05] TIT_CD 에 맞는 사용자만 접근 가능 페이지
  */
 
+type UserVoteInput = {
+  VOT_TITLE: string;
+  VOT_TYPE_CD: string;
+  VOT_GO_CD: string;
+  VOT_EXPR_DATE: string;
+  VOT_DESC: string;
+  VOT_INFO: string;
+};
+
 const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
   const [isButtonOn, setIsButtonOn] = useState<boolean>(false);
+  const [voteTitle, setVoteTitle] = useState<string>(""); // 투표 제목 상태
 
   const modalFunctions = ModalReuableFuction();
   const modalItemDel = () => {
@@ -72,6 +83,33 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
     }
   };
 
+  const getFormattedDate = () => {
+    const date = new Date(selectedDate);
+    return `${date.getFullYear()}-${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+  };
+
+  const getVoteInfo = () => {
+    return voteInputs.map((_, index) => `${index + 1}:${_}`).join(",");
+  };
+
+  const registerVote = async () => {
+    const VOT_INFO = getVoteInfo();
+    const VOT_EXPR_DATE = getFormattedDate();
+
+    const voteItem = {
+      VOTE_TITLE: voteTitle,
+      VOT_TYPE_CD: "",
+      VOT_GO_CD: "",
+      VOT_EXPR_DATE: VOT_EXPR_DATE,
+      VOT_DESC: "",
+      VOT_INFO: VOT_INFO,
+      VOT_SEL_SEQ: "",
+      CRE_SEQ: "",
+    };
+  };
+
   return (
     <Background>
       <BottomSheetModalProvider>
@@ -95,7 +133,7 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
           MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
           onPress={() => navigation.goBack()}
-          onPressRegi={() => navigation.navigate("VotePostPage")}
+          onPressRegi={registerVote}
         />
         <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
           <View
@@ -107,7 +145,11 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-            <SchdlVoteRegiTitInput text="제목을 입력하세요." />
+            <SchdlVoteRegiTitInput
+              text="제목을 입력하세요."
+              value={voteTitle}
+              onChangeText={setVoteTitle}
+            />
           </View>
           <View
             style={{
@@ -128,7 +170,7 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
                   width: deviceWidth * 1,
                 }}
               >
-                <VoteInput text="텍스트" />
+                <VoteInput text="텍스트" value="" />
               </View>
             ))}
             {voteInputs.length < 4 && (

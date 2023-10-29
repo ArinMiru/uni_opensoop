@@ -132,12 +132,6 @@ export const votBubRegiCall = async (
 
   if (userData !== null) {
     const {
-      MEMB_SC_NM,
-      MEMB_DEP_NM,
-      TIT_NM,
-      NICK_NM,
-      MEMB_ID,
-      CRE_SEQ,
       VOTE_TITLE,
       VOT_TYPE_CD,
       VOT_GO_CD,
@@ -192,12 +186,6 @@ export const votBubEditCall = async (
 
   if (userData !== null) {
     const {
-      MEMB_SC_NM,
-      MEMB_DEP_NM,
-      TIT_NM,
-      NICK_NM,
-      MEMB_ID,
-      CRE_SEQ,
       VOTE_TITLE,
       VOT_TYPE_CD,
       VOT_GO_CD,
