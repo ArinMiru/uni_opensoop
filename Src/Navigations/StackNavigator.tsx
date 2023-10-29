@@ -111,8 +111,24 @@ export type RootStackParamList = {
   };
   VotePostPage: undefined;
   VotePostRegiPage: undefined;
-  VotePostDetailPage: undefined;
-  VotePostStatusPage: undefined;
+  VotePostDetailPage: {
+    VOT_TITLE: string;
+    VOT_EXPR_DATE: string;
+    VOT_DESC: string;
+    VOT_INFO: string;
+    VOT_TYPE_CD: string;
+    VOT_SEL_SEQ: string;
+    CRE_SEQ: number;
+  };
+  VotePostStatusPage: {
+    VOT_TITLE: string;
+    VOT_DESC: string;
+    VOT_INFO: string;
+    VOT_EXPR_DATE: string;
+    CRE_SEQ: number;
+    VOT_TYPE_CD: string;
+    VOT_SEL_SEQ: string;
+  };
   SchedulPage: undefined;
   BottomTabNavigations: undefined;
   ProfilePage: undefined;
