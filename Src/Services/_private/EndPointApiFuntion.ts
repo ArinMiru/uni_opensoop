@@ -2,12 +2,14 @@ import { sendApiData } from "./Api.config";
 import { setUserData } from "../../Utils/_private/ApiData/UserData";
 import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
-import { RegiDataType } from "../../Utils/_private/RegiData/RegiUserData";
 import {
   SchlSrchData,
   parseSchlSrchData,
 } from "../../Utils/_private/RegiData/SchlSrchData";
-
+import {
+  DprtData,
+  parseDprtSrchData,
+} from "../../Utils/_private/RegiData/DprtSrchData";
 /* ------------------------------------------------------------------------------- */
 
 /**
@@ -45,14 +47,34 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
  * @param MEMB_NM 사용자 이름
  * 아직 완전하게 구현하지 않았음
  */
-export const registerUser = async (data: RegiDataType) => {
-  const endpoint = "/UNI/MembRegSvc"; // 회원가입 엔드포인트 URL
+export const registerUser = async (
+  MEMB_ID: string,
+  MEMB_NM: string,
+  MEMB_PASS: string
+): Promise<boolean> => {
+  return new Promise(async (resolve) => {
+    const endpoint = "/UNI/MembRegSvc"; // 회원가입 엔드포인트 URL
+    const data = {
+      MEMB_ID,
+      MEMB_NM,
+      MEMB_PASS,
+    };
 
-  const result = await sendApiData(endpoint, data); // 회원가입 시도 및 서버 응답 저장
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
 
-  // 서버 응답(result)에 대한 처리
-  return result; // 서버 응답을 반환합니다.
+    if (result !== null && result.data.RSLT_CD === "00") {
+      console.log("성공");
+      resolve(true);
+    } else {
+      console.log("실패");
+      resolve(false);
+    }
+  });
 };
+
 /**
  * ID 중복체크 API 호출 함수
  * @param MEMB_ID
@@ -230,7 +252,7 @@ export const MembCertUpd = async (CERT_SEQ: string) => {
  */
 
 export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
-  const endpoint = "/MembPassUpdSvc"; //비밀번호변경 엔드포인트 URL
+  const endpoint = "/UNI/MembPassUpdSvc"; //비밀번호변경 엔드포인트 URL
   const data = {
     MEMB_ID, //변경자 사용 아이디
     PASS, //새로운 비밀번호
@@ -249,5 +271,34 @@ export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
     console.log("비밀번호가 변경되었습니다.");
   } else {
     console.log("다른 새로운 비밀번호를 입력해주세요.");
+  }
+};
+
+/* ------------------------------------------------------------------------------- */
+
+export const DprtSrch = async (SCH_CD: number): Promise<DprtData | null> => {
+  const endpoint = "/UNI/DprtSrch";
+  const data = {
+    SCH_CD,
+  };
+
+  try {
+    // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
+    const result: AxiosResponse<any, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
+
+    if (result !== null && result.data.RSLT_CD === "00") {
+      // 서버 응답이 성공적이면 데이터를 파싱합니다.
+      const dprtData: DprtData = parseDprtSrchData(result.data);
+      return dprtData; // 파싱된 데이터를 반환합니다.
+    } else {
+      console.log("공지사항 데이터 가져오기 실패");
+      return null;
+    }
+  } catch (error) {
+    console.error("오류 발생:", error);
+    return null;
   }
 };

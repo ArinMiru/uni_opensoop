@@ -42,3 +42,5 @@ export type NoticeEditProps = {
   route: NoticeEditRouteProp;
   navigation: NoticeEditNavigationProp;
 };
+
+
