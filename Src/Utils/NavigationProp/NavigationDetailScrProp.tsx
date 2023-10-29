@@ -1,5 +1,5 @@
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RouteProp } from "@react-navigation/native";
+import { Route, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../../Navigations/StackNavigator";
 
 type SgsPostDetailRouteProp = RouteProp<
@@ -42,3 +42,16 @@ export type NoticeEditProps = {
   route: NoticeEditRouteProp;
   navigation: NoticeEditNavigationProp;
 };
+
+/* ---------------------------------------------------------------------------------------- */
+
+type VotePostDetailRoutePageProp = RouteProp<RootStackParamList, "VotePostDetailPage">;
+type VotePostDetailNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "VotePostDetailPage"
+>;
+
+export type VotePostDetailProp = {
+  route: VotePostDetailRoutePageProp;
+  navigation: VotePostDetailNavigationProp;
+}

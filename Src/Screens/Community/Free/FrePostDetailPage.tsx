@@ -34,7 +34,7 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
       const userData = getUserData();
       if (userData != null) {
         await FreeAnsBubNew(cont, CRE_SEQ);
-      } else {
+      } else {-885
         console.error("userData가 null입니다.");
       }
     } catch (error) {

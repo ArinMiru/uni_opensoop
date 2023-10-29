@@ -6,7 +6,7 @@ export default StyleSheet.create({
    * 질문게시판에서 사용하는 답변 인풋 스타일
    */
   AnswerInputBoxStyle: {
-    width: deviceWidth * 0.875,
+    width: deviceWidth * 0.92,
     height: deviceHeight * 0.065,
     backgroundColor: "#F6F6F6",
     borderRadius: 5,
