@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { MembIdFndSvc } from "../../../Services/_private/EndPointApiFuntion";
-import { Image } from "react-native";
+import { Alert } from "react-native";
 
 /**
  * 이메일로 아이디 찾기
@@ -18,7 +18,7 @@ const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
 
   const emailCheck = async () => {
     if (!isValidEmail(userEmail)) {
-      alert("올바른 이메일 형식을 입력해주세요.");
+      Alert.alert("오류", "올바른 이메일 형식을 입력해주세요.");
       return;
     }
 
@@ -27,7 +27,7 @@ const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
     if (responseData) {
       navigation.navigate("IdFindOut", { memberId: responseData.MEMB_ID });
     } else {
-      alert("등록되어 있지 않은 이메일입니다.");
+      Alert.alert("오류", "등록되어 있지 않은 이메일입니다.");
     }
   };
 

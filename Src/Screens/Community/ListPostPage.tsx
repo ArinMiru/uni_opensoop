@@ -35,7 +35,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState("자유");
   const [freeData, setFreeData] = useState<FreeData | null>(null);
   const [questData, setQuestData] = useState<QuestData | null>(null);
-  const [sugsData, setSugsData] = useState<SugBubListData | null>();
+  const [sugsData, setSugsData] = useState<SugBubListData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const isFocused = useIsFocused();
   const modalFunctions = ModalReuableFuction();

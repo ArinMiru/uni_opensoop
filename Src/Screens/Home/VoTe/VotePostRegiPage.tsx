@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, TouchableWithoutFeedback } from "react-native";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
-import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { VoteInput } from "../../../Components/VoteCompo/VoteTextInput";
 import { SchdlVoteRegiTitInput } from "../../../Components/SchdlCompo/SchdlInput";
 import {
   ViewDupleVoteButton,
-  ViewAnnymButton,
   AddVoteOptionButton,
 } from "../../../Components/VoteCompo/VoteButton";
 import VoteBoxStyle from "../../../Styles/VoteStyles/VoteBoxStyle";
@@ -18,11 +16,6 @@ import { Background } from "../../../Components/AllCompo/Background";
 import { DateSltButton } from "../../../Components/VoteCompo/VoteButton";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import {
-  EditModalCompo,
-  DelModalCompo,
-  CloseModalCompo,
-} from "../../../Components/AllCompo/ModalCompo";
-import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
@@ -30,6 +23,8 @@ import EditDelCloseModalStyle from "../../../Styles/ModalStyles/EditDelCloseModa
 import { openBubListDell } from "../../../Services/_private/NoticeApi";
 import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
 import { DateSltModlCompo } from "../../../Components/AllCompo/ModalCompo";
+import DatePickerModal from "react-native-modal-datetime-picker";
+
 /**
  * @Dowon(김도원 생성)
  * 투표 게시물 등록 페이지
@@ -44,6 +39,30 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const modalItemDel = () => {
     openBubListDell(selectedCreSeq);
     modalFunctions.handleCloseModal();
+  };
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string>(
+    `${new Date().getFullYear()}년 ${
+      new Date().getMonth() + 1
+    }월 ${new Date().getDate()}일`
+  );
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date: Date) => {
+    // date의 타입을 Date로 지정합니다.
+    const formattedDate = `${date.getFullYear()}년 ${
+      date.getMonth() + 1
+    }월 ${date.getDate()}일`;
+    setSelectedDate(formattedDate);
+    hideDatePicker();
   };
 
   return (
@@ -65,7 +84,7 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         </BottomSheetModal>
 
         <BackIconTopbarStyle
-          Title="투표"
+          Title="투표 등록"
           MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
           MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
           onPress={() => navigation.goBack()}
@@ -160,21 +179,32 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
                 alignItems: "center",
               }}
             >
-              <DateSltButton
-                date="2024년 2월 24일"
-                onPress={modalFunctions.handleButtonPress}
+              <DateSltButton date={selectedDate} onPress={showDatePicker} />
+              {/**    
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                locale="ko-KR"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
               />
+              */}
             </View>
           </View>
           <View
             style={{
-              flex: 3,
+              flex: 1,
+              justifyContent: "center",
               flexDirection: "column",
             }}
           >
             <ViewDupleVoteButton />
-            <ViewAnnymButton />
           </View>
+          <View
+            style={{
+              flex: 2,
+            }}
+          ></View>
         </View>
         {modalFunctions.modalVisible && (
           <TouchableWithoutFeedback onPress={modalFunctions.handleCloseModal}>
