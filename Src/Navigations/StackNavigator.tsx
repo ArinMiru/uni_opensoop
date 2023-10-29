@@ -56,16 +56,16 @@ export type RootStackParamList = {
   AccountLogin: undefined;
   HomePageScreen: undefined;
   RegiId: undefined;
-  RegiNmNic: undefined;
-  RegiPass: undefined; //파라미터 전달 값 없음
-  RegiChk: undefined;
-  UniCertiDprtSrch: undefined;
-  UniCertiEcode: undefined;
-  UniCertiEmail: undefined;
-  UniCertiStudNum: undefined;
-  UniCertiGrad: undefined;
-  UniCertiChk: undefined;
-  UniCertiSchSrch: undefined;
+  RegiNmNic: { MEMB_ID: string };
+  RegiPass: { MEMB_ID: string; MEMB_NM: string };
+  RegiChk: { MEMB_ID: string };
+  UniCertiDprtSrch: { MEMB_ID: string; SCH_CD: number };
+  UniCertiEcode: { MEMB_ID: string };
+  UniCertiEmail: { MEMB_ID: string };
+  UniCertiStudNum: { MEMB_ID: string };
+  UniCertiGrad: { MEMB_ID: string };
+  UniCertiChk: { MEMB_ID: string };
+  UniCertiSchSrch: { MEMB_ID: string };
   PassFindEcode: undefined;
   PassFindForEmail: undefined;
   PassFindForId: undefined;
@@ -112,26 +112,36 @@ export type RootStackParamList = {
   VotePostPage: undefined;
   VotePostRegiPage: undefined;
   VotePostDetailPage: {
-      VOT_TITLE: string;
-      VOT_EXPR_DATE: string;
-      VOT_DESC: string;
-      VOT_INFO : string;
-      CRE_SEQ : number;
-  }
-  VotePostStatusPage: undefined;
+    VOT_TITLE: string;
+    VOT_EXPR_DATE: string;
+    VOT_DESC: string;
+    VOT_INFO: string;
+    VOT_TYPE_CD: string;
+    VOT_SEL_SEQ: string;
+    CRE_SEQ: number;
+  };
+  VotePostStatusPage: {
+    VOT_TITLE: string;
+    VOT_DESC: string;
+    VOT_INFO: string;
+    VOT_EXPR_DATE: string;
+    CRE_SEQ: number;
+    VOT_TYPE_CD: string;
+    VOT_SEL_SEQ: string;
+  };
   SchedulPage: undefined;
   BottomTabNavigations: undefined;
   ProfilePage: undefined;
   TitleCodeCerti: undefined;
   NoticeEditPage: {
-      CRE_SEQ: number;
-      CONT: string;
-      TIT: string;
-      ImageInfo: {
-        FILE_BASE64: string;
-        FILE_NM: string;
-        IMG_SEQ: number;
-      }[];
+    CRE_SEQ: number;
+    CONT: string;
+    TIT: string;
+    ImageInfo: {
+      FILE_BASE64: string;
+      FILE_NM: string;
+      IMG_SEQ: number;
+    }[];
   };
 
   /**----------------------------------------------------------------------------*/

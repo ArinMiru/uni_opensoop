@@ -204,6 +204,58 @@ export const MainSchdBub: React.FC<ButtonProps> = ({
   );
 };
 
+export const MainSchdNoBox: React.FC<ButtonProps> = ({ onPress }) => {
+  return (
+    <View
+      style={[
+        MainPageStyles.MainSchdlContentBox,
+        { justifyContent: "flex-start" },
+      ]}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginTop: deviceWidth * 0.009,
+        }}
+      >
+        <Text
+          style={[
+            textStyle.bold16,
+            { color: "#333333" },
+            { marginLeft: deviceWidth * 0.05 },
+          ]}
+        >
+          {"일정"}
+        </Text>
+        <View
+          style={{
+            marginRight: deviceWidth * 0.05,
+          }}
+        >
+          <TouchableOpacity onPress={onPress}>
+            <Text style={[textStyle.semibold10, { color: "#4BB781" }]}>
+              {"더보기"}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: deviceWidth * 0.03,
+        }}
+      >
+        <Text style={[textStyle.semibold11, { color: "#181D27" }]}>
+          {"오늘 일정이 없습니다."}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
 export const MainVoteBub: React.FC<ButtonProps> = ({
   navigation,
   onPress,
@@ -214,6 +266,30 @@ export const MainVoteBub: React.FC<ButtonProps> = ({
   F_VOT_TOT,
   S_VOT_TOT,
 }) => {
+  const getVoteStatusStyle = (VOT_GO_CD?: string) => {
+    let textStyleResult: any[] = [textStyle.semibold08];
+    let textContent: string = ""; // 텍스트 내용을 저장할 변수
+
+    switch (VOT_GO_CD) {
+      case "VG":
+        textStyleResult.push({ color: "#4BB781" });
+        textContent = "투표중";
+        break;
+      case "VF":
+        textStyleResult.push({ color: "#C3C3C3" });
+        textContent = "투표종료";
+        break;
+      default:
+        textContent = "오류"; // 만약 VG나 VF가 아닐 경우의 기본 텍스트
+        break;
+    }
+
+    return { style: textStyleResult, text: textContent };
+  };
+
+  const firstVoteStatus = getVoteStatusStyle(F_VOT_GO_CD);
+  const secondVoteStatus = getVoteStatusStyle(S_VOT_GO_CD);
+
   return (
     <View style={[MainPageStyles.MainVotContentsBox]}>
       <View
@@ -263,22 +339,17 @@ export const MainVoteBub: React.FC<ButtonProps> = ({
               { marginLeft: deviceWidth * 0.02 },
             ]}
           >
-            {"총 득표 수"}
-            {""}
-            {F_VOT_TOT}
-            {""}
-            {"명"}
+            {"총 득표 수"} {F_VOT_TOT} {"명"}
           </Text>
         </View>
         <View style={{ alignItems: "flex-end", justifyContent: "center" }}>
           <Text
             style={[
-              textStyle.semibold08,
-              { color: "#D55582" }, // 투표 VOT_GO_CD에 따른 color 상태값 변경 로직 추가
+              ...firstVoteStatus.style,
               { marginRight: deviceWidth * 0.051 },
             ]}
           >
-            {F_VOT_GO_CD}
+            {firstVoteStatus.text}
           </Text>
         </View>
       </View>
@@ -300,22 +371,17 @@ export const MainVoteBub: React.FC<ButtonProps> = ({
               { marginLeft: deviceWidth * 0.02 },
             ]}
           >
-            {"총 득표 수"}
-            {""}
-            {S_VOT_TOT}
-            {""}
-            {"명"}
+            {"총 득표 수"} {S_VOT_TOT} {"명"}
           </Text>
         </View>
         <View style={{ alignItems: "flex-end", justifyContent: "center" }}>
           <Text
             style={[
-              textStyle.semibold08,
-              { color: "#D55582" }, // 투표 VOT_GO_CD에 따른 color 상태값 변경 로직 추가
+              ...secondVoteStatus.style,
               { marginRight: deviceWidth * 0.051 },
             ]}
           >
-            {S_VOT_GO_CD}
+            {secondVoteStatus.text}
           </Text>
         </View>
       </View>
