@@ -4,21 +4,29 @@ import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButton";
-import { ScreenProps } from "../../../Navigations/StackNavigator";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { RegiDupleFlex3 } from "../../../Components/AccountCompo/AccountCustomCompo";
 import { SchlSrchCall } from "../../../Services/_private/EndPointApiFuntion";
 import { Image } from "react-native";
+import { RegiSchlSrchProps } from "../../../Utils/NavigationProp/AccountScrProp";
 
-const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
+const UniCertiSchSrch: React.FC<RegiSchlSrchProps> = ({
+  navigation,
+  route,
+}) => {
   const [userSchSrch, setUserSchSrch] = useState<string>("");
   const [searchResults, setSearchResults] = useState<Array<string>>([]);
   const [isNextButtonActive, setIsNextButtonActive] = useState<boolean>(false);
+  const [selectedSchoolCode, setSelectedSchoolCode] = useState<string>("");
+  const [searchResultData, setSearchResultData] = useState<any>(null); // 추가
+
+  const { MEMB_ID } = route.params;
 
   const SrchCheck = async () => {
     if (userSchSrch.length >= 2) {
       const result = await SchlSrchCall(userSchSrch);
+      setSearchResultData(result); // 'result' 값을 상태로 저장
       console.log("결과:", result); // 로그를 출력합니다.
       if (result && result.SCH_NM_INFO) {
         const schNames = result.SCH_NM_INFO.map((item) => item.SCH_NM);
@@ -30,9 +38,16 @@ const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   const selectSchool = (name: string) => {
-    setUserSchSrch(name);
-    setSearchResults([]);
-    setIsNextButtonActive(true);
+    const selectedSchoolInfo = searchResultData.SCH_NM_INFO.find(
+      (item: { SCH_CD: number; SCH_NM: string }) => item.SCH_NM === name
+    );
+    if (selectedSchoolInfo) {
+      const SCH_CD = selectedSchoolInfo.SCH_CD;
+      setSelectedSchoolCode(SCH_CD);
+      setUserSchSrch(name);
+      setSearchResults([]);
+      setIsNextButtonActive(true);
+    }
   };
 
   const filterInput = (text: string) => {
@@ -56,7 +71,7 @@ const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <BlackBackIconButton
           text=""
-          onPress={() => navigation.navigate("RegiChk")}
+          onPress={() => navigation.goBack()}
           navigation={navigation}
         ></BlackBackIconButton>
       </View>
@@ -123,7 +138,9 @@ const UniCertiSchSrch: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={{ flex: 6, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
-          onPress={() => navigation.navigate("UniCertiDprtSrch")}
+          onPress={() =>
+            navigation.navigate("UniCertiDprtSrch", { MEMB_ID: MEMB_ID, SCH_CD: selectedSchoolCode })
+          }
           disable={!isNextButtonActive}
         />
       </View>

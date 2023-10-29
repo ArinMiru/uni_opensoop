@@ -11,10 +11,21 @@ import { setUserDataAndNavigate } from "../../../Utils/_private/RegiData/RegiUse
 import AccountInputStyle from "../../../Styles/AccountStyles/AccountInputStyle";
 import TextStyle from "../../../Styles/TextStyle";
 import { Image } from "react-native";
+import { RegiPassProps } from "../../../Utils/NavigationProp/AccountScrProp";
+import { registerUser } from "../../../Services/_private/EndPointApiFuntion";
 
-const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
+interface ServerResponse {
+  RSLT_CD: string;
+  // 다른 필요한 속성도 추가
+}
+
+const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
   const [pass, setPass] = useState<string>("");
   const [configPass, setConfigPass] = useState<string>("");
+  const [data, setData] = useState<ServerResponse | null>(null);
+
+  const { MEMB_ID, MEMB_NM } = route.params;
+  console.log(MEMB_ID, MEMB_NM);
 
   const removeExceptChars = (text: string) => {
     // @, $, !, %, *, ?, &, #, 영어 알파벳, 숫자 외의 문자들을 제거
@@ -60,7 +71,18 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
     pass.length >= 8 && configPass.length >= 8 && pass === configPass;
 
   const regiPassData = () => {
-    setUserDataAndNavigate("PASS", pass, navigation, "RegiChk");
+    registerUser(MEMB_ID, MEMB_NM, pass)
+      .then((isSuccess) => {
+        if (isSuccess) {
+          navigation.navigate("RegiChk", {MEMB_ID: MEMB_ID});
+        } else {
+          console.log("실패");
+        }
+      })
+      .catch((error) => {
+        // 오류 처리
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -74,7 +96,7 @@ const RegiPass: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <BlackBackIconButton
           text=""
-          onPress={() => navigation.navigate("RegiNmNic")}
+          onPress={() => navigation.goBack()}
           navigation={navigation}
         ></BlackBackIconButton>
       </View>

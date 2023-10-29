@@ -5,7 +5,6 @@ import {
   Text,
   View,
   SafeAreaView,
-  TextInputProps,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
@@ -17,27 +16,47 @@ import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButto
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { DprtSrchCall } from "../../../Services/_private/EndPointApiFuntion";
 import { Image } from "react-native";
+import { RegiDprtSrchProps } from "../../../Utils/NavigationProp/AccountScrProp";
+import { DprtData } from "../../../Utils/_private/RegiData/DprtSrchData";
+import { DprtSrch } from "../../../Services/_private/EndPointApiFuntion";
 
-interface CommonProps extends TextInputProps {
-  children?: React.ReactNode;
-  bigtext?: string;
-  smalltext?: string;
-  buttontext?: string;
-  inputtext?: string;
-  disable?: boolean;
-  IconPress?: () => void;
-  onPress?: () => void;
-  navigation?: {
-    navigate: (screenName: string) => void;
-  };
-}
+const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
+  navigation,
+  route,
+}) => {
+  const [dprtData, setDprtData] = useState<DprtData | null>(null); // 서버에서 넘어온 데이터 기본
+  const [dprtDetailData, setDprtDetailData] = useState<
+    DprtData["DPRT_NM_INFO"] //서버에서 넘어온 학과명 데이터 상세
+  >([]);
+  const { SCH_CD, MEMB_ID } = route.params;
+  console.log(SCH_CD, MEMB_ID);
 
-const UniCertiDprtSrch: React.FC<ScreenProps> = ({ navigation }) => {
+  useEffect(() => {
+    DprtSrch(SCH_CD)
+      .then((data) => {
+        if (data !== null && data.RSLT_CD === "00") {
+          setDprtData(data);
+          if (Array.isArray(data.DPRT_NM_INFO)) {
+            setDprtDetailData(data.DPRT_NM_INFO);
+          } else {
+            setDprtDetailData([]);
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("데이터 가져오기 오류:", error);
+      });
+  }, [SCH_CD]);
+
+  useEffect(() => {
+    console.log(dprtData);
+  }, [dprtDetailData]); // dprtDetailData가 업데이트 될 때 로그 출력
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={BackgroundStyle.AccountBackground}>
         <View style={BackgroundStyle.backIconFlex}>
-          <BlackBackIconButton />
+          <BlackBackIconButton onPress={() => navigation.goBack()} />
         </View>
         <View style={BackgroundStyle.titleTextFlex}>
           <Text

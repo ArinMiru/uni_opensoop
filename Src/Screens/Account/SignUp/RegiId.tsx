@@ -36,11 +36,6 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
     return userRegiId !== "" && isIdChecked;
   };
 
-  const RegiUserDataSave = () => {
-    setUserDataAndNavigate("MEMB_ID", userRegiId, navigation, "RegiNmNic");
-    console.log(RegiUserData.MEMB_ID);
-  };
-
   return (
     <AccountBackground>
       <View
@@ -52,7 +47,7 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <BlackBackIconButton
           text=""
-          onPress={() => navigation.navigate("AccountLoginRegi")}
+          onPress={() => navigation.goBack()}
           navigation={navigation}
         ></BlackBackIconButton>
       </View>
@@ -69,7 +64,7 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={{ flex: 6, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
-          onPress={RegiUserDataSave}
+          onPress={() => navigation.navigate("RegiNmNic", {MEMB_ID: userRegiId})}
           disable={!isFormComplete()}
         />
       </View>
