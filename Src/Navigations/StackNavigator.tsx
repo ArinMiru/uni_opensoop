@@ -56,16 +56,16 @@ export type RootStackParamList = {
   AccountLogin: undefined;
   HomePageScreen: undefined;
   RegiId: undefined;
-  RegiNmNic: undefined;
-  RegiPass: undefined; //파라미터 전달 값 없음
-  RegiChk: undefined;
-  UniCertiDprtSrch: undefined;
-  UniCertiEcode: undefined;
-  UniCertiEmail: undefined;
-  UniCertiStudNum: undefined;
-  UniCertiGrad: undefined;
-  UniCertiChk: undefined;
-  UniCertiSchSrch: undefined;
+  RegiNmNic: { MEMB_ID: string };
+  RegiPass: { MEMB_ID: string; MEMB_NM: string };
+  RegiChk: { MEMB_ID: string };
+  UniCertiDprtSrch: { MEMB_ID: string; SCH_CD: number };
+  UniCertiEcode: { MEMB_ID: string };
+  UniCertiEmail: { MEMB_ID: string };
+  UniCertiStudNum: { MEMB_ID: string };
+  UniCertiGrad: { MEMB_ID: string };
+  UniCertiChk: { MEMB_ID: string };
+  UniCertiSchSrch: { MEMB_ID: string };
   PassFindEcode: undefined;
   PassFindForEmail: undefined;
   PassFindForId: undefined;
