@@ -29,8 +29,8 @@ export const ListAnsTextInput: React.FC<inputProps> = ({
         flexDirection: "row-reverse",
         alignItems: "center",
         width: "100%",
-        paddingHorizontal: 23,
-        backgroundColor: "#F2F2F2",
+        paddingHorizontal: 13,
+        backgroundColor: "#FFFFFF",
       }}
     >
       <TextInput
@@ -48,7 +48,7 @@ export const ListAnsTextInput: React.FC<inputProps> = ({
         }}
       >
         <TouchableOpacity
-          style={{ marginRight: deviceWidth * 0.1 }}
+          style={{ marginRight: deviceWidth * 0.07 }}
           onPress={onPress}
         >
           <Ionicons

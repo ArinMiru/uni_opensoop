@@ -13,13 +13,17 @@ import RegiUserData, {
 import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountCompo/AccoutTextInput";
 import { nickCheckpoint } from "../../../Services/_private/EndPointApiFuntion";
 import { Image } from "react-native";
+import { RegiRegiNmNicProps } from "../../../Utils/NavigationProp/AccountScrProp";
 
-const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
+const RegiNmNic: React.FC<RegiRegiNmNicProps> = ({ navigation, route }) => {
   const [userRegiNick, setUserRegNick] = useState<string>("");
   const [nickValidationMessage, setNickValidationMessage] =
     useState<string>("");
   const [nickValidationColor, setNickValidationColor] = useState<string>("");
   const [isNickChecked, setIsNickChecked] = useState<boolean>(false); // 닉네임 중복확인이 완료되었는지 확인하는 상태
+
+  const { MEMB_ID } = route.params;
+  console.log(MEMB_ID);
 
   const NickCheck = async () => {
     const isAvailable = await nickCheckpoint(userRegiNick);
@@ -57,7 +61,7 @@ const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <BlackBackIconButton
           text=""
-          onPress={() => navigation.navigate("RegiId")}
+          onPress={() => navigation.goBack()}
           navigation={navigation}
         ></BlackBackIconButton>
       </View>
@@ -82,7 +86,12 @@ const RegiNmNic: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <OnlyAccountButton
           text="다음"
-          onPress={RegiUserDataSave}
+          onPress={() =>
+            navigation.navigate("RegiPass", {
+              MEMB_ID: MEMB_ID,
+              MEMB_NM: userRegiNick,
+            })
+          }
           disable={!isFormComplete()}
         />
       </View>

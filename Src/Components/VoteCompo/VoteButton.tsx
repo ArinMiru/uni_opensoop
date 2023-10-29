@@ -17,7 +17,7 @@ interface ButtonProps {
   poststatus?: string; // 투표게시판 리스트에서 투표 상태(미투표, 투표환료)
   votestatusnum?: string; // 투표현황 버튼에서 투표현황 숫자
   date?: string;
-  onPress?: () => void;
+  onPress?: () => any;
   navigation?: { navigate: (screenName: string) => void };
 }
 
@@ -55,6 +55,22 @@ export const VoteUnSlctButton: React.FC<ButtonProps> = ({
       <Text style={[textStyle.medium13, { color: "#333333" }]}>{text}</Text>
       {children}
     </TouchableOpacity>
+  );
+};
+
+/**
+ * 투표 선택 후 상태 버튼
+ */
+export const VoteuntocheButton: React.FC<ButtonProps> = ({
+  children,
+  text,
+  onPress,
+}) => {
+  return (
+    <View style={VoteButtonStyle.voteSlctStyle}>
+      <Text style={[textStyle.medium13, { color: "#A2A2A2" }]}>{text} </Text>
+      {children}
+    </View>
   );
 };
 

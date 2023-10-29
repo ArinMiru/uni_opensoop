@@ -8,9 +8,9 @@ import {
   parseSchlSrchData,
 } from "../../Utils/_private/RegiData/SchlSrchData";
 import {
-  DprtSrchData,
+  DprtData,
   parseDprtSrchData,
-} from "../../Utils/_private/RegiData/DprtSrchData"
+} from "../../Utils/_private/RegiData/DprtSrchData";
 
 /* ------------------------------------------------------------------------------- */
 
@@ -20,23 +20,26 @@ import {
  * @param LOGIN_PASS 사용자 비밀번호
  */
 export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
-  const endpoint = "/UNI/LoginSvc"; // 로그인 엔드포인트 URL
+  const endpoint = "/UNI/LoginSvc";
   const data = {
-    LOGIN_ID, // 로그인 사용자 아이디
-    LOGIN_PASS, // 로그인 사용자 비밀번호
+    LOGIN_ID,
+    LOGIN_PASS,
   };
   const result: AxiosResponse<UserData, any> | null = await sendApiData(
     endpoint,
     data
-  ); // 로그인 시도 및 서버 응답 저장
+  );
 
-  if (result !== null && result.data.RSLT_CD === "00") {
-    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-    // 로그인 성공 시의 처리
-    // userData 객체에 데이터 저장
-    setUserData(result.data); // 서버에서 받은 데이터로 userData 객체 설정
+  if (result !== null) {
+    if (result.data.RSLT_CD === "00") {
+      setUserData(result.data);
+      return "00"; // 로그인 성공
+    } else {
+      return result.data.RSLT_CD; // 로그인 실패
+    }
   } else {
     console.log("로그인 실패");
+    return null;
   }
 };
 
@@ -203,49 +206,6 @@ export const SchlSrchCall = async (
 /* ------------------------------------------------------------------------------- */
 
 /**
- * 학과명 데이터 호출 서비스 함수
- * @param SCH_CD 대학교 코드
- * @param SCH_NM 대학교 이름
- * @param DPRT_CD 학과 코드
- * @param DPRT_NM 학과 이름
- * @returns Promise<DprtSrchData | null>
- */
-export const DprtSrchCall = async (
-  SCH_NM: string,
-  DPRT_NM: string
-): Promise<DprtSrchData | null> => {
-  const endpoint = "/UNI/DprtSrch";
-
-  const data = {
-    SCH_NM, // 대학교 이름
-    DPRT_NM, // 학과 이름
-  };
-
-  try {
-    // 서버에 학과명 데이터 요청을 보내고 응답을 기다립니다.
-    const result: AxiosResponse<any, any> | null = await sendApiData(
-      endpoint,
-      data
-    );
-
-    if (result !== null && result.data.RSLT_CD === "00") {
-      // 서버 응답이 성공적이면 데이터를 파싱합니다.
-      const dprtsrchdata: DprtSrchData = parseDprtSrchData(result.data);
-      console.log(result.data);
-      return dprtsrchdata; // 파싱된 데이터를 반환합니다.
-    } else {
-      console.log("학과명이 존재하지 않습니다.");
-      return null;
-    }
-  } catch (error) {
-    console.error("오류 발생:", error);
-    return null;
-  }
-};
-
-/* ------------------------------------------------------------------------------- */
-
-/**
  * @jeakyoung 생성
  * 대학교 인증 API 호출 함수
  * @param CERT_SEQ
@@ -296,5 +256,34 @@ export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
     console.log("비밀번호가 변경되었습니다.");
   } else {
     console.log("다른 새로운 비밀번호를 입력해주세요.");
+  }
+};
+
+/* ------------------------------------------------------------------------------- */
+
+export const DprtSrch = async (SCH_CD: number): Promise<DprtData | null> => {
+  const endpoint = "/UNI/DprtSrch";
+  const data = {
+    SCH_CD,
+  };
+
+  try {
+    // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
+    const result: AxiosResponse<any, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
+
+    if (result !== null && result.data.RSLT_CD === "00") {
+      // 서버 응답이 성공적이면 데이터를 파싱합니다.
+      const dprtData: DprtData = parseDprtSrchData(result.data);
+      return dprtData; // 파싱된 데이터를 반환합니다.
+    } else {
+      console.log("공지사항 데이터 가져오기 실패");
+      return null;
+    }
+  } catch (error) {
+    console.error("오류 발생:", error);
+    return null;
   }
 };
