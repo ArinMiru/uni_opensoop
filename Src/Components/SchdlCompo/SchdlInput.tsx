@@ -28,7 +28,7 @@ export const SchdlVoteRegiTitInput: React.FC<inputProps> = ({
         },
       ]}
       placeholder={text}
-      maxLength={10} // 최대 길이 설정
+      maxLength={maxLength} // 최대 길이 설정
       {...props}
     />
   );

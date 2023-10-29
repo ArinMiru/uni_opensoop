@@ -23,7 +23,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [voteData, setVoteData] = useState<VoteData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const [isButtonOn, setIsButtonOn] = useState<boolean>(false); // 1. 상태 관리
+  const [isButtonOn, setIsButtonOn] = useState<boolean>(false);
 
   const filteredVoteData = isButtonOn
     ? voteData?.VOTE_BUB.filter((item) => item.VOT_GO_CD === "VG")

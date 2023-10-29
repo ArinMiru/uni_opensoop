@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, TouchableWithoutFeedback } from "react-native";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
-import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { VoteInput } from "../../../Components/VoteCompo/VoteTextInput";
 import { SchdlVoteRegiTitInput } from "../../../Components/SchdlCompo/SchdlInput";
-import {
-  ViewDupleVoteButton,
-  AddVoteOptionButton,
-} from "../../../Components/VoteCompo/VoteButton";
+import { AddVoteOptionButton } from "../../../Components/VoteCompo/VoteButton";
 import VoteBoxStyle from "../../../Styles/VoteStyles/VoteBoxStyle";
-import TextStyle from "../../../Styles/TextStyle";
+import textStyle from "../../../Styles/TextStyle";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
@@ -24,6 +21,8 @@ import { openBubListDell } from "../../../Services/_private/NoticeApi";
 import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
 import { DateSltModlCompo } from "../../../Components/AllCompo/ModalCompo";
 import DatePickerModal from "react-native-modal-datetime-picker";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
 /**
  * @Dowon(김도원 생성)
@@ -32,8 +31,9 @@ import DatePickerModal from "react-native-modal-datetime-picker";
  */
 
 const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
-  const userData = getUserData(); // 현재 사용자 데이터
+  const userData = getUserData();
   const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
+  const [isButtonOn, setIsButtonOn] = useState<boolean>(false);
 
   const modalFunctions = ModalReuableFuction();
   const modalItemDel = () => {
@@ -57,12 +57,19 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   const handleConfirm = (date: Date) => {
-    // date의 타입을 Date로 지정합니다.
     const formattedDate = `${date.getFullYear()}년 ${
       date.getMonth() + 1
     }월 ${date.getDate()}일`;
     setSelectedDate(formattedDate);
     hideDatePicker();
+  };
+
+  const [voteInputs, setVoteInputs] = useState<number[]>([1, 2]);
+
+  const handleAddVoteInput = () => {
+    if (voteInputs.length < 4) {
+      setVoteInputs((prev) => [...prev, prev.length + 1]);
+    }
   };
 
   return (
@@ -83,11 +90,12 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           </View>
         </BottomSheetModal>
 
-        <BackIconTopbarStyle
+        <BackIconRegiTopbarStyle
           Title="투표 등록"
           MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
           MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
           onPress={() => navigation.goBack()}
+          onPressRegi={() => navigation.navigate("VotePostPage")}
         />
         <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
           <View
@@ -106,42 +114,37 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
               flex: 3,
               flexDirection: "column",
               width: deviceWidth * 1,
-              justifyContent: "flex-end",
+              justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "flex-end",
-                alignItems: "center",
-                width: deviceWidth * 1,
-              }}
-            >
-              <VoteInput text="텍스트" />
-            </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                width: deviceWidth * 1,
-              }}
-            >
-              <VoteInput text="텍스트" />
-            </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "flex-start",
-                alignItems: "center",
-                width: deviceWidth * 1,
-              }}
-            >
-              <AddVoteOptionButton />
-            </View>
+            {voteInputs.map((_, index) => (
+              <View
+                key={index}
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: deviceWidth * 1,
+                }}
+              >
+                <VoteInput text="텍스트" />
+              </View>
+            ))}
+            {voteInputs.length < 4 && (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: deviceWidth * 1,
+                }}
+              >
+                <AddVoteOptionButton onPress={handleAddVoteInput} />
+              </View>
+            )}
           </View>
-          <View style={{ flex: 1 }}></View>
+          <View style={{ flex: 0.3 }}></View>
           <View
             style={{
               flex: 1,
@@ -164,7 +167,7 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
               >
                 <Text
                   style={[
-                    TextStyle.medium10,
+                    textStyle.medium10,
                     { color: "#67B28A", lineHeight: deviceHeight * 0.025 },
                     { textAlign: "center" },
                   ]}
@@ -196,13 +199,45 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
               flex: 1,
               justifyContent: "center",
               flexDirection: "column",
+              width: deviceWidth * 1,
+              marginLeft: deviceWidth * 0.11,
             }}
           >
-            <ViewDupleVoteButton />
+            <TouchableOpacity
+              style={[
+                { flexDirection: "row" },
+                { alignItems: "center" },
+                { marginRight: deviceWidth * 0.08 },
+              ]}
+              onPress={() => setIsButtonOn(!isButtonOn)}
+            >
+              {isButtonOn ? (
+                <Ionicons
+                  name="ios-radio-button-on"
+                  size={deviceWidth * 0.05}
+                  color="#4BB781"
+                />
+              ) : (
+                <Ionicons
+                  name="ios-radio-button-off"
+                  size={deviceWidth * 0.05}
+                  color="#4BB781"
+                />
+              )}
+              <Text
+                style={[
+                  textStyle.regular10,
+                  { color: "#4BB781" },
+                  { marginLeft: deviceWidth * 0.02 },
+                ]}
+              >
+                복수 선택
+              </Text>
+            </TouchableOpacity>
           </View>
           <View
             style={{
-              flex: 2,
+              flex: 3,
             }}
           ></View>
         </View>
