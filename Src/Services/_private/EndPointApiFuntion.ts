@@ -8,7 +8,7 @@ import {
   parseSchlSrchData,
 } from "../../Utils/_private/RegiData/SchlSrchData";
 import {
-  DprtSrchData,
+  DprtData,
   parseDprtSrchData,
 } from "../../Utils/_private/RegiData/DprtSrchData";
 
@@ -206,49 +206,6 @@ export const SchlSrchCall = async (
 /* ------------------------------------------------------------------------------- */
 
 /**
- * 학과명 데이터 호출 서비스 함수
- * @param SCH_CD 대학교 코드
- * @param SCH_NM 대학교 이름
- * @param DPRT_CD 학과 코드
- * @param DPRT_NM 학과 이름
- * @returns Promise<DprtSrchData | null>
- */
-export const DprtSrchCall = async (
-  SCH_NM: string,
-  DPRT_NM: string
-): Promise<DprtSrchData | null> => {
-  const endpoint = "/UNI/DprtSrch";
-
-  const data = {
-    SCH_NM, // 대학교 이름
-    DPRT_NM, // 학과 이름
-  };
-
-  try {
-    // 서버에 학과명 데이터 요청을 보내고 응답을 기다립니다.
-    const result: AxiosResponse<any, any> | null = await sendApiData(
-      endpoint,
-      data
-    );
-
-    if (result !== null && result.data.RSLT_CD === "00") {
-      // 서버 응답이 성공적이면 데이터를 파싱합니다.
-      const dprtsrchdata: DprtSrchData = parseDprtSrchData(result.data);
-      console.log(result.data);
-      return dprtsrchdata; // 파싱된 데이터를 반환합니다.
-    } else {
-      console.log("학과명이 존재하지 않습니다.");
-      return null;
-    }
-  } catch (error) {
-    console.error("오류 발생:", error);
-    return null;
-  }
-};
-
-/* ------------------------------------------------------------------------------- */
-
-/**
  * @jeakyoung 생성
  * 대학교 인증 API 호출 함수
  * @param CERT_SEQ
@@ -299,5 +256,34 @@ export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
     console.log("비밀번호가 변경되었습니다.");
   } else {
     console.log("다른 새로운 비밀번호를 입력해주세요.");
+  }
+};
+
+/* ------------------------------------------------------------------------------- */
+
+export const DprtSrch = async (SCH_CD: number): Promise<DprtData | null> => {
+  const endpoint = "/UNI/DprtSrch";
+  const data = {
+    SCH_CD,
+  };
+
+  try {
+    // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
+    const result: AxiosResponse<any, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
+
+    if (result !== null && result.data.RSLT_CD === "00") {
+      // 서버 응답이 성공적이면 데이터를 파싱합니다.
+      const dprtData: DprtData = parseDprtSrchData(result.data);
+      return dprtData; // 파싱된 데이터를 반환합니다.
+    } else {
+      console.log("공지사항 데이터 가져오기 실패");
+      return null;
+    }
+  } catch (error) {
+    console.error("오류 발생:", error);
+    return null;
   }
 };
