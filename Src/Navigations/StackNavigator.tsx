@@ -40,6 +40,7 @@ import BottomTabNavigations from "./BottomTabNavigations";
 import ProfilePage from "../Screens/Home/ProfilePage";
 import TitleCodeCerti from "../Screens/Home/TitleCodeCerti";
 import NoticeEditPage from "../Screens/Home/NoTice/NoticeEditPage";
+import FrePostDetailLawPage from "../Screens/Community/Free/FrePostDetailLawPage";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -108,6 +109,7 @@ export type RootStackParamList = {
     }[];
   };
   FrePostRegiPage: undefined;
+  FrePostDetailLawPage: undefined;
   FrePostDetailPage: {
     CRE_SEQ: number;
     CONT: string;
@@ -340,6 +342,13 @@ const StackNavigator = () => {
         component={FrePostRegiPage}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name="FrePostDetailLawPage"
+        component={FrePostDetailLawPage}
+        options={{ headerShown: false }}
+      />
+
       <Stack.Screen
         name="FrePostDetailPage"
         component={FreePostDetailPage}

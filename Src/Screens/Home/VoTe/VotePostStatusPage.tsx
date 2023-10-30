@@ -39,7 +39,6 @@ interface VoteStatItem {
 const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
   const userData = getUserData();
   const [voteStatData, setVoteStatData] = useState<VoteStatData | null>(null);
-
   const {
     VOT_TITLE,
     VOT_DESC,
@@ -49,6 +48,8 @@ const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
     VOT_TYPE_CD,
     VOT_SEL_SEQ,
   } = route.params;
+
+  const formattedVOT_EXPR_DATE = VOT_EXPR_DATE.split(" ")[0];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -106,7 +107,7 @@ const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
               { color: "#9E9E9E" },
             ]}
           >
-            {VOT_EXPR_DATE} {"마감"}
+            {formattedVOT_EXPR_DATE} {"마감"}
           </Text>
         </View>
         <View
