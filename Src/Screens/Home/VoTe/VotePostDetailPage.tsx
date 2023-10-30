@@ -37,6 +37,8 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
     LOGIN_ID = userData.LOGIN_ID;
   }
 
+  const formattedVOT_EXPR_DATE = VOT_EXPR_DATE.split(" ")[0];
+
   const voteList: VoteItem[] = VOT_INFO.split(",").map((item, index) => {
     const [_, text] = item.split(":");
     return { index, text };
@@ -115,7 +117,7 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
               { color: "#9E9E9E" },
             ]}
           >
-            {VOT_EXPR_DATE} {"마감"}
+            {formattedVOT_EXPR_DATE} {"마감"}
           </Text>
         </View>
         <View
@@ -128,7 +130,7 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
           }}
         >
           {voteList.map((item) => {
-            const isSelected = selectedItems.includes(item.index + 1);
+            const isSelected = selectedItems.includes(item.index);
             return (
               <TouchableOpacity
                 key={item.index}
@@ -138,7 +140,7 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
                     : VoteButtonStyle.voteUnSlctStyle,
                   { marginBottom: deviceHeight * 0.03 },
                 ]}
-                onPress={() => handleItemClick(item.index + 1)}
+                onPress={() => handleItemClick(item.index)}
               >
                 {isSelected ? (
                   <Text style={[textStyle.medium13, { color: "#A2A2A2" }]}>

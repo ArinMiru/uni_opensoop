@@ -20,7 +20,6 @@ interface inputProps extends TextInputProps {
 }
 
 export const OpenFreSgsTitInputBox: React.FC<inputProps> = ({
-  children,
   text,
   ...props
 }) => {
@@ -42,7 +41,6 @@ export const OpenFreSgsTitInputBox: React.FC<inputProps> = ({
 };
 
 export const OpenFreSgsContInputBox: React.FC<inputProps> = ({
-  children,
   text,
   ...props
 }) => {
@@ -64,7 +62,6 @@ export const OpenFreSgsContInputBox: React.FC<inputProps> = ({
 };
 // 컴포넌트 이름 변경 AnsInput
 export const CommentInput: React.FC<inputProps> = ({
-  children,
   text,
   onPress,
   ...props
@@ -104,7 +101,6 @@ export const CommentInput: React.FC<inputProps> = ({
         >
           등록
         </Text>
-        {children}
       </TouchableOpacity>
     </View>
   );

@@ -3,7 +3,6 @@ import {
   SafeAreaView,
   FlatList,
   View,
-  TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
@@ -29,6 +28,7 @@ import { openBubListDell } from "../../../Services/_private/NoticeApi";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
 import { useIsFocused } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
+import { Alert } from "react-native";
 
 const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const modalFunctions = ModalReuableFuction();
@@ -38,15 +38,11 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
 
-  useEffect(() => {
-    if (isFocused && userData !== null) {
+  const fetchNoticeData = () => {
+    if (userData !== null) {
       setLoading(true);
-      openBubListCall(
-        userData.LOGIN_ID,
-        userData.MEMB_SC_CD,
-        userData.MEMB_DEP_CD,
-        userData.TIT_CD
-      )
+      let page = 1; // 시작 페이지 번호
+      openBubListCall(page)
         .then((data) => {
           if (data !== null) {
             const sorted = { ...data };
@@ -55,20 +51,23 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
             }
             setSortedData(sorted);
           }
-          // 데이터를 성공적으로 가져왔을 때 로딩 상태를 비활성화
           setLoading(false);
         })
         .catch((error) => {
-          // 데이터 가져오기 오류 시 로딩 상태를 비활성화
-
+          setLoading(false);
           console.error("데이터 가져오기 오류:", error);
+          Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
         });
+      page += 1;
+    }
+  };
+
+  useEffect(() => {
+    if (isFocused) {
+      fetchNoticeData(); // 화면에 처음 들어올 때 데이터 로딩
     }
   }, [userData, isFocused]);
 
-  // 화면 포커스와 sortedData가 변경될 때마다 데이터를 다시 가져오도록 설정
-
-  // FlatList 항목들 사이에 구분선을 그리기 위한 함수
   const renderSeparator = () => (
     <View style={{ height: 1, backgroundColor: "#ddd", marginVertical: 4 }} />
   );
@@ -90,11 +89,10 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
         (item) => item.CRE_SEQ === selectedCreSeq
       );
       if (selectedNotice) {
-        // IMAGE_INFO 데이터 구성
         const IMAGE_INFO = selectedNotice.IMAGE_INFO.map((image) => ({
-          FILE_BASE64: image.FILE_PATH, // 여기에 필요한 값을 제공해야 합니다.
-          FILE_NM: "image.webp", // 여기에 필요한 값을 제공해야 합니다.
-          IMG_SEQ: Number(image.IMG_SEQ), // IMG_SEQ를 숫자로 변환
+          FILE_BASE64: image.FILE_PATH,
+          FILE_NM: "image.webp",
+          IMG_SEQ: Number(image.IMG_SEQ),
         }));
 
         navigation.navigate("NoticeEditPage", {
@@ -169,6 +167,8 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
               );
             }}
             ItemSeparatorComponent={renderSeparator}
+            onRefresh={fetchNoticeData}
+            refreshing={loading}
           />
           {modalFunctions.modalVisible && (
             <TouchableWithoutFeedback onPress={modalFunctions.handleCloseModal}>
