@@ -8,22 +8,16 @@ import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
 
 // 로그인한 사용자의 데이터 가져오기
-const userData = getUserData();
 
-export const openBubListCall = async (
-  LOGIN_ID: string,
-  MEMB_SC_CD: string,
-  MEMB_DEP_CD: string,
-  TIT_CD: string
-): Promise<NoticeData | null> => {
+export const openBubListCall = async (REQ_PAGE: number): Promise<NoticeData | null> => {
   const endpoint = "/UNI/OpenBubListSvc";
-
+  const userData = getUserData();
   if (userData !== null) {
     // userData가 null이 아닌 경우에만 요청 보내기
+    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
 
     // 고정된 값으로 설정
-    const LIST_UNIT_CNT = 20; // 한 페이지에 표시할 공지사항 수
-    const REQ_PAGE = 1; // 요청할 페이지 번호
+    const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 공지사항 수
 
     const data = {
       LOGIN_ID, // 사용자 아이디

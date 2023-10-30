@@ -6,7 +6,7 @@ import { QuesBubListSvc } from "../../Services/_private/QusetPostData";
 import { FlatList, View, TouchableWithoutFeedback } from "react-native";
 import { FreeBubListCall } from "../../Services/_private/FreeApi";
 import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
-import { deviceHeight } from "../../Utils/DeviceUtils";
+import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 import { FreeListIclucontnButton } from "../../Components/ListCompo/FreCompo/FreButtonCompo";
 import { ScreenProps } from "../../Navigations/StackNavigator";
 import { MenuTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
@@ -209,23 +209,30 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
               data={freeData.FREE_BUB}
               keyExtractor={(item) => item.CRE_SEQ.toString()}
               renderItem={({ item }) => (
-                <FreeListIclucontnButton
-                  nickname={item.NICK_NM}
-                  freposttime={item.CRE_DAT}
-                  fretit={item.TIT}
-                  frecont={item.CONT}
-                  onPress={() => {
-                    navigation.navigate("FrePostDetailPage", {
-                      CRE_SEQ: item.CRE_SEQ,
-                      NICK_NM: item.NICK_NM,
-                      LIKE_CNT: item.LIKE_CNT,
-                      CRE_DAT: item.CRE_DAT,
-                      CONT: item.CONT,
-                      TIT: item.TIT,
-                      AnsFree: item.ANS_FREE,
-                    });
+                <View
+                  style={{
+                    width: deviceWidth * 1,
+                    alignItems: "center",
                   }}
-                />
+                >
+                  <FreeListIclucontnButton
+                    nickname={item.NICK_NM}
+                    freposttime={item.CRE_DAT}
+                    fretit={item.TIT}
+                    frecont={item.CONT}
+                    onPress={() => {
+                      navigation.navigate("FrePostDetailPage", {
+                        CRE_SEQ: item.CRE_SEQ,
+                        NICK_NM: item.NICK_NM,
+                        LIKE_CNT: item.LIKE_CNT,
+                        CRE_DAT: item.CRE_DAT,
+                        CONT: item.CONT,
+                        TIT: item.TIT,
+                        AnsFree: item.ANS_FREE,
+                      });
+                    }}
+                  />
+                </View>
               )}
             />
           )}
@@ -240,30 +247,37 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
                   userData?.TIT_CD === "03" || // 부학회장
                   item.MEMB_ID === userData?.LOGIN_ID; // 게시물 작성자와 현재 사용자의 아이디가 같은 경우
                 return (
-                  <SgsListContentButton
-                    title={canAccess ? item.TIT : "비공개 게시물입니다."}
-                    poststatus={""}
-                    anonynick={canAccess ? item.NICK_NM : "재학생"}
-                    sgsposttime={item.CRE_DAT}
-                    postUserId={item.MEMB_ID}
-                    currentUserId={userData?.LOGIN_ID}
-                    TIT_CD={userData?.TIT_CD}
-                    onPress={() => {
-                      if (canAccess) {
-                        navigation.navigate("SgsPostDetailPage", {
-                          CRE_SEQ: item.CRE_SEQ,
-                          CONT: item.CONT,
-                          TIT: item.TIT,
-                          CRE_DAT: item.CRE_DAT,
-                          NICK_NM: item.NICK_NM,
-                          AnsFree: item.ANS_FREE,
-                        });
-                      } else {
-                        // 접근 권한이 없는 경우, 사용자에게 알림을 표시할 수 있습니다.
-                        alert("해당 게시물에 접근 권한이 없습니다.");
-                      }
+                  <View
+                    style={{
+                      width: deviceWidth * 1,
+                      alignItems: "center",
                     }}
-                  />
+                  >
+                    <SgsListContentButton
+                      title={canAccess ? item.TIT : "비공개 게시물입니다."}
+                      poststatus={""}
+                      anonynick={canAccess ? item.NICK_NM : "재학생"}
+                      sgsposttime={item.CRE_DAT}
+                      postUserId={item.MEMB_ID}
+                      currentUserId={userData?.LOGIN_ID}
+                      TIT_CD={userData?.TIT_CD}
+                      onPress={() => {
+                        if (canAccess) {
+                          navigation.navigate("SgsPostDetailPage", {
+                            CRE_SEQ: item.CRE_SEQ,
+                            CONT: item.CONT,
+                            TIT: item.TIT,
+                            CRE_DAT: item.CRE_DAT,
+                            NICK_NM: item.NICK_NM,
+                            AnsFree: item.ANS_FREE,
+                          });
+                        } else {
+                          // 접근 권한이 없는 경우, 사용자에게 알림을 표시할 수 있습니다.
+                          alert("해당 게시물에 접근 권한이 없습니다.");
+                        }
+                      }}
+                    />
+                  </View>
                 );
               }}
             />
@@ -274,22 +288,29 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
               data={questData.QUES_BUB}
               keyExtractor={(item) => item.CRE_SEQ.toString()}
               renderItem={({ item }) => (
-                <FreeListIclucontnButton
-                  nickname={item.NICK_NM}
-                  freposttime={item.CRE_DAT}
-                  fretit={item.TIT}
-                  frecont={item.CONT}
-                  onPress={() => {
-                    // 1. 각 항목을 클릭했을 때 해당 게시글 데이터 추출
-                    const postData = {
-                      CRE_SEQ: item.CRE_SEQ,
-                      AnsFree: item.ANS_FREE,
-                    };
-                    console.log(postData);
-                    // 2. 공통 컴포넌트로 데이터 전달
-                    modalFunctions.handleButtonPress(postData);
+                <View
+                  style={{
+                    width: deviceWidth * 1,
+                    alignItems: "center",
                   }}
-                />
+                >
+                  <FreeListIclucontnButton
+                    nickname={item.NICK_NM}
+                    freposttime={item.CRE_DAT}
+                    fretit={item.TIT}
+                    frecont={item.CONT}
+                    onPress={() => {
+                      // 1. 각 항목을 클릭했을 때 해당 게시글 데이터 추출
+                      const postData = {
+                        CRE_SEQ: item.CRE_SEQ,
+                        AnsFree: item.ANS_FREE,
+                      };
+                      console.log(postData);
+                      // 2. 공통 컴포넌트로 데이터 전달
+                      modalFunctions.handleButtonPress(postData);
+                    }}
+                  />
+                </View>
               )}
             />
           )}

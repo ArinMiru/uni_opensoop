@@ -65,6 +65,9 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
               text="제목을 입력하세요"
               value={tit}
               onChangeText={(text) => setTit(text)}
+              keyboardType="default"
+              keyboardAppearance="default"
+              autoCapitalize="none"
             ></OpenFreSgsTitInputBox>
             <Text
               style={[
@@ -93,6 +96,7 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
               value={cont}
               onChangeText={(text) => setCont(text)}
               keyboardType="default"
+              keyboardAppearance="default"
               autoCapitalize="none"
             ></OpenFreSgsContInputBox>
             <Text
@@ -114,7 +118,9 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             alignItems: "flex-end",
           }}
         >
-          <FreeListLawButton />
+          <FreeListLawButton
+            onPress={() => navigation.navigate("FrePostDetailLawPage")}
+          />
         </View>
         {/* 네번째 뷰 */}
         <View style={{ flex: 2 }}></View>

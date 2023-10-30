@@ -1,6 +1,10 @@
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { sendApiData } from "./Api.config";
-import { VoteData, parseVoteData } from "../../Utils/_private/ApiData/VoteData";
+import {
+  VoteData,
+  parseVoteData,
+  VoteItem,
+} from "../../Utils/_private/ApiData/VoteData";
 import {
   VoteStatData,
   parseVoteStatData,
@@ -61,7 +65,7 @@ export const votBubListDetailupCall = async (
   const userData = getUserData();
 
   if (userData !== null) {
-    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
+    const { LOGIN_ID } = userData;
     const data = {
       LOGIN_ID,
       CRE_SEQ,
@@ -115,6 +119,151 @@ export const votBubStatCall = async (
     }
   } catch (error) {
     console.error("votBubStatCall 함수에서 오류 발생:", error);
+    return null;
+  }
+};
+
+/** PROC_TYPE 01 투표 등록 */
+export const votBubRegiCall = async (
+  voteItem: VoteItem
+): Promise<string | null> => {
+  const endpoint = "/UNI/VotBubRegi";
+  const userData = getUserData();
+
+  if (userData !== null) {
+    const {
+      VOTE_TITLE,
+      VOT_TYPE_CD,
+      VOT_GO_CD,
+      VOT_EXPR_DATE,
+      VOT_DESC,
+      VOT_INFO,
+    } = voteItem;
+    const data = {
+      LOGIN_ID: userData.LOGIN_ID,
+      PROC_TYPE: "01",
+      MEMB_SC_CD: userData.MEMB_SC_CD,
+      MEMB_DEP_CD: userData.MEMB_DEP_CD,
+      TIT_CD: userData.TIT_CD,
+      VOTE_TITLE,
+      VOT_TYPE_CD,
+      VOT_GO_CD,
+      VOT_CRE_DATE: new Date().toISOString().slice(0, 10),
+      VOT_EXPR_DATE,
+      VOT_DESC,
+      VOT_INFO,
+    };
+
+    try {
+      const result: AxiosResponse<any, any> | null = await sendApiData(
+        endpoint,
+        data
+      );
+
+      if (result !== null && result.data.RSLT_CD === "00") {
+        console.log("투표가 정상적으로 등록되었습니다.");
+        return "정상적으로 등록되었습니다.";
+      } else {
+        console.log("투표 등록 실패");
+        return "투표 등록에 실패하였습니다.";
+      }
+    } catch (error) {
+      console.error("투표 등록 중 오류 발생:", error);
+      return null;
+    }
+  } else {
+    console.log("userData가 null입니다.");
+    return null;
+  }
+};
+
+/** PROC_TYPE : 02 수정 */
+export const votBubEditCall = async (
+  voteItem: VoteItem
+): Promise<string | null> => {
+  const endpoint = "/UNI/VotBubEdit";
+  const userData = getUserData();
+
+  if (userData !== null) {
+    const {
+      VOTE_TITLE,
+      VOT_TYPE_CD,
+      VOT_GO_CD,
+      VOT_EXPR_DATE,
+      VOT_DESC,
+      VOT_INFO,
+    } = voteItem;
+    const data = {
+      LOGIN_ID: userData.LOGIN_ID,
+      PROC_TYPE: "02",
+      MEMB_SC_CD: userData.MEMB_SC_CD,
+      MEMB_DEP_CD: userData.MEMB_DEP_CD,
+      TIT_CD: userData.TIT_CD,
+      VOTE_TITLE,
+      VOT_TYPE_CD,
+      VOT_GO_CD,
+      VOT_CRE_DATE: new Date().toISOString().slice(0, 10),
+      VOT_EXPR_DATE,
+      VOT_DESC,
+      VOT_INFO,
+    };
+
+    try {
+      const result: AxiosResponse<any, any> | null = await sendApiData(
+        endpoint,
+        data
+      );
+
+      if (result !== null && result.data.RSLT_CD === "00") {
+        console.log("투표가 정상적으로 수정되었습니다.");
+        return "정상적으로 수정되었습니다.";
+      } else {
+        console.log("투표 수정 실패");
+        return "투표 수정에 실패하였습니다.";
+      }
+    } catch (error) {
+      console.error("투표 수정 중 오류 발생:", error);
+      return null;
+    }
+  } else {
+    console.log("userData가 null입니다.");
+    return null;
+  }
+};
+
+/** PROC_TYPE : 03 삭제 */
+export const votBubDeleteCall = async (
+  CRE_SEQ: number
+): Promise<string | null> => {
+  const endpoint = "/UNI/VotBubDelete";
+  const userData = getUserData();
+
+  if (userData !== null) {
+    const data = {
+      LOGIN_ID: userData.LOGIN_ID,
+      PROC_TYPE: "03",
+      CRE_SEQ,
+    };
+
+    try {
+      const result: AxiosResponse<any, any> | null = await sendApiData(
+        endpoint,
+        data
+      );
+
+      if (result !== null && result.data.RSLT_CD === "00") {
+        console.log("투표가 정상적으로 삭제되었습니다.");
+        return "정상적으로 삭제되었습니다.";
+      } else {
+        console.log("투표 삭제 실패");
+        return "투표 삭제에 실패하였습니다.";
+      }
+    } catch (error) {
+      console.error("투표 삭제 중 오류 발생:", error);
+      return null;
+    }
+  } else {
+    console.log("userData가 null입니다.");
     return null;
   }
 };
