@@ -49,22 +49,27 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
   const [selectedItems, setSelectedItems] =
     useState<number[]>(initialSelectedItems);
 
-  console.log("VOTE_TYPE_CD 값:", VOT_TYPE_CD); // VOT_TYPE_CD 값 확인
+  console.log("초기 selectedItems:", selectedItems);
+  console.log("VOTE_TYPE_CD 값:", VOT_TYPE_CD);
 
   const handleItemClick = (index: number) => {
-    console.log("클릭된 항목의 인덱스:", index); // 클릭된 항목의 인덱스 확인
-    if (VOT_TYPE_CD === "02") {
-      const updatedSelectedItems = [...selectedItems];
-      if (updatedSelectedItems.includes(index)) {
-        const indexToRemove = updatedSelectedItems.indexOf(index);
-        updatedSelectedItems.splice(indexToRemove, 1);
+    console.log("클릭된 항목의 인덱스:", index);
+    if (initialSelectedItems[0] != -1 || index >= 0) {
+      console.log("초기 selectedItems:", initialSelectedItems);
+      if (VOT_TYPE_CD === "02") {
+        const updatedSelectedItems = [...selectedItems];
+        console.log("VOT_TYOE_CD == 02 selectedItems:", initialSelectedItems);
+        if (updatedSelectedItems.includes(index)) {
+          const indexToRemove = updatedSelectedItems.indexOf(index);
+          updatedSelectedItems.splice(indexToRemove);
+        } else {
+          updatedSelectedItems.push(index);
+        }
+        setSelectedItems(updatedSelectedItems);
+        console.log("업데이트된 selectedItems:", updatedSelectedItems);
       } else {
-        updatedSelectedItems.push(index);
+        setSelectedItems([index]);
       }
-      setSelectedItems(updatedSelectedItems);
-      console.log("업데이트된 selectedItems:", updatedSelectedItems); // 업데이트된 selectedItems 확인
-    } else {
-      setSelectedItems([index]);
     }
   };
 

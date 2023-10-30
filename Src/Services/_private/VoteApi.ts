@@ -79,6 +79,7 @@ export const votBubListDetailupCall = async (
       );
 
       // 서버 응답 확인을 위한 로그 추가
+      console.log("서버로부터의 응답:", data);
       console.log("서버로부터의 응답:", result);
 
       if (result !== null && result.data.RSLT_CD === "00") {

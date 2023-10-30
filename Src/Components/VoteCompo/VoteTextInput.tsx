@@ -21,7 +21,6 @@ export const VoteInput: React.FC<inputProps> = ({
   ...props
 }) => {
   // text 속성을 이용하여 최대 길이를 계산
-  const maxLength = text ? text.length : 0;
   return (
     <TextInput
       placeholderTextColor="#BDBDBD"
