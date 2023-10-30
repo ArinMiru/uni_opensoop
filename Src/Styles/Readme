@@ -16,5 +16,18 @@ StyleSheet 라이브러리를 사용할 예정 입니다.
 BackgroundStyle.tsx
 ButtonStyle.tsx
 TextInputStyle.tsx
-TopbarStyle.tsx
+TopbarStyleStyle.tsx
 파일 생성 완료 
+
+-----------------------------------------------------------------------------------------------   
+
+!-- 9월 14일자 --!
+
+@김도원 
+
+해당 디렉토리 하기 파일 삭제 예정
+/Styles/BackgroundStyle.tsx
+/Styles/ButtonStyle.tsx
+/Styles/TextInputStyle.tsx
+
+-----------------------------------------------------------------------------------------------   

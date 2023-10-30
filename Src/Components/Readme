@@ -65,5 +65,5 @@ Alert.tsx
 Background.tsx
 Button.tsx
 TextInput.tsx
-Topbar.tsx
+TopbarStyle.tsx
 파일 생성 완료 
