@@ -40,6 +40,7 @@ import BottomTabNavigations from "./BottomTabNavigations";
 import ProfilePage from "../Screens/Home/ProfilePage";
 import TitleCodeCerti from "../Screens/Home/TitleCodeCerti";
 import NoticeEditPage from "../Screens/Home/NoTice/NoticeEditPage";
+import FrePostDetailLawPage from "../Screens/Community/Free/FrePostDetailLawPage";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -60,10 +61,23 @@ export type RootStackParamList = {
   RegiPass: { MEMB_ID: string; MEMB_NM: string };
   RegiChk: { MEMB_ID: string };
   UniCertiDprtSrch: { MEMB_ID: string; SCH_CD: number };
-  UniCertiEcode: { MEMB_ID: string };
-  UniCertiEmail: { MEMB_ID: string };
-  UniCertiStudNum: { MEMB_ID: string };
-  UniCertiGrad: { MEMB_ID: string };
+  UniCertiEcode: { CERT_SEQ: string };
+  UniCertiEmail: {
+    MEMB_ID: string;
+    MEMB_SC_CD: number;
+    MEMB_DEP_CD: string;
+    MEMB_NUM: string;
+  };
+  UniCertiStudNum: {
+    MEMB_ID: string;
+    MEMB_SC_CD: number;
+    MEMB_DEP_CD: string;
+  };
+  UniCertiGrad: {
+    MEMB_ID: string;
+    MEMB_SC_CD: number;
+    MEMB_DEP_CD: string;
+  };
   UniCertiChk: { MEMB_ID: string };
   UniCertiSchSrch: { MEMB_ID: string };
   PassFindEcode: undefined;
@@ -95,6 +109,7 @@ export type RootStackParamList = {
     }[];
   };
   FrePostRegiPage: undefined;
+  FrePostDetailLawPage: undefined;
   FrePostDetailPage: {
     CRE_SEQ: number;
     CONT: string;
@@ -327,6 +342,13 @@ const StackNavigator = () => {
         component={FrePostRegiPage}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name="FrePostDetailLawPage"
+        component={FrePostDetailLawPage}
+        options={{ headerShown: false }}
+      />
+
       <Stack.Screen
         name="FrePostDetailPage"
         component={FreePostDetailPage}

@@ -243,9 +243,9 @@ export const MainSchdNoBox: React.FC<ButtonProps> = ({ onPress }) => {
       </View>
       <View
         style={{
+          flex: 0.8,
           justifyContent: "center",
           alignItems: "center",
-          marginTop: deviceWidth * 0.03,
         }}
       >
         <Text style={[textStyle.semibold11, { color: "#181D27" }]}>

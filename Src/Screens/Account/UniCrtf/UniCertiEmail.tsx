@@ -1,47 +1,37 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
-import { ScreenProps } from "../../../Navigations/StackNavigator";
-import RegiUserData, {
-  setUserDataAndNavigate,
-} from "../../../Utils/_private/RegiData/RegiUserData";
-import { MembCertUpd } from "../../../Services/_private/EndPointApiFuntion";
+import { membUniCertUpd } from "../../../Services/_private/EndPointApiFuntion";
 import { isEmailValid } from "../../../Utils/SingleUse/Email";
+import { RegiCertEmailProps } from "../../../Utils/NavigationProp/AccountScrProp";
 
-const UniCertiEmail: React.FC<ScreenProps> = ({ navigation }) => {
-  const [UserDetail, setUserDetail] = useState<string>("");
+const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
+  const [email, setEmail] = useState<string>("");
   const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
+  const { MEMB_DEP_CD, MEMB_ID, MEMB_NUM } = route.params;
+  const MEMB_SC_CD = route.params.MEMB_SC_CD.toString();
 
   const validateEmail = (email: string) => {
     const isValid = isEmailValid(email);
     setIsValidEmail(isValid);
     return isValid;
   };
-
-  const UserDetailSave = () => {
-    if (isValidEmail) {
-      setUserDataAndNavigate(
-        "CERT_SEQ",
-        UserDetail,
-        navigation,
-        "UniCertiEcode"
-      );
-      MembCertUpd(UserDetail);
-    }
+  const regiCertEmail = () => {
+    membUniCertUpd(MEMB_ID, MEMB_SC_CD, MEMB_DEP_CD, MEMB_NUM, email);
   };
-
   return (
     <RegiCommonView
-      IconPress={() => navigation.navigate("UniCertiStudNum")}
+      IconPress={() => navigation.goBack()}
       bigtext="이메일"
       smalltext="입력하기"
       inputtext="이메일"
       buttontext="인증번호 전송"
       keyboardType="email-address"
       autoCapitalize="none"
-      onPress={UserDetailSave}
+      onPress={() => navigation.navigate("UniCertiEcode")}
+      value={email}
       onChangeText={(text) => {
-        setUserDetail(text);
+        setEmail(text);
         validateEmail(text); // 입력이 변경되면 이메일 유효성 검사 수행
       }}
       navigation={navigation}

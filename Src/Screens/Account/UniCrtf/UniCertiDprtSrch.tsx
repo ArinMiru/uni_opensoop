@@ -15,7 +15,7 @@ import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { Image } from "react-native";
 import { RegiDprtSrchProps } from "../../../Utils/NavigationProp/AccountScrProp";
 import { DprtData } from "../../../Utils/_private/RegiData/DprtSrchData";
-import { DprtSrch } from "../../../Services/_private/EndPointApiFuntion";
+import { dprtSrch } from "../../../Services/_private/EndPointApiFuntion";
 
 const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
   navigation,
@@ -25,11 +25,15 @@ const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
   const [dprtDetailData, setDprtDetailData] = useState<
     DprtData["DPRT_NM_INFO"] //서버에서 넘어온 학과명 데이터 상세
   >([]);
+  const [selectedDprt, setSelectedDprt] = useState<
+    DprtData["DPRT_NM_INFO"][0] | null
+  >(null);
+  const [selectedDprtCode, setSelectedDprtCode] = useState<string>("");
   const { SCH_CD, MEMB_ID } = route.params;
   console.log(SCH_CD, MEMB_ID);
 
-  useEffect(() => {
-    DprtSrch(SCH_CD)
+  const dprtSrchcall = () => {
+    dprtSrch(SCH_CD)
       .then((data) => {
         if (data !== null && data.RSLT_CD === "00") {
           setDprtData(data);
@@ -43,11 +47,20 @@ const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
       .catch((error) => {
         console.error("데이터 가져오기 오류:", error);
       });
-  }, [SCH_CD]);
-
+  };
   useEffect(() => {
     console.log(dprtData);
-  }, [dprtDetailData]); // dprtDetailData가 업데이트 될 때 로그 출력
+  }, []);
+  const handleDprtSelect = (dprt: DprtData["DPRT_NM_INFO"][0]) => {
+    setSelectedDprtCode(dprt.DPRT_CD);
+    if (selectedDprt !== null) {
+      navigation.navigate("UniCertiGrad", {
+        MEMB_ID: MEMB_ID,
+        MEMB_SC_CD: SCH_CD,
+        MEMB_DEP_CD: selectedDprtCode,
+      });
+    }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -89,7 +102,7 @@ const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
           />
         </View>
         <View style={BackgroundStyle.accountButtonFlex}>
-          <OnlyAccountButton text={"검색"} />
+          <OnlyAccountButton text={"검색"} onPress={dprtSrchcall} />
         </View>
         <Image
           source={require("../../../Assets/Images/LogoImage.png")}

@@ -38,7 +38,6 @@ export const ListAnsTextInput: React.FC<inputProps> = ({
         style={[QstInputStyles.AnswerInputBoxStyle, textStyle.medium11]}
         placeholder={"답변을 입력해주세요"}
         keyboardType="default"
-        autoFocus={true}
         {...props}
       />
       <View
