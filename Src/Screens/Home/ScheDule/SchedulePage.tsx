@@ -171,7 +171,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
-        onPressRegi={() => navigation.navigate("NoticePostRegiPage")}
+        onPressRegi={() => navigation.navigate("SchedulePostRegiPage")}
       />
       <View
         style={[
