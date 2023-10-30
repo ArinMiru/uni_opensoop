@@ -36,7 +36,6 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const [isButtonOn, setIsButtonOn] = useState<boolean>(false);
   const [voteTitle, setVoteTitle] = useState<string>(""); // 투표 제목 상태
-  const [voteInfo, setVoteInfo] = useState<string>("");
   const [voteInfos, setVoteInfos] = useState<string[]>(["", "", "", ""]);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -93,13 +92,10 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
 
     const voteItem = {
       VOTE_TITLE: voteTitle,
-      VOT_TYPE_CD: "",
-      VOT_GO_CD: "",
+      VOT_TYPE_CD: isButtonOn ? "02" : "01",
       VOT_EXPR_DATE: VOT_EXPR_DATE,
       VOT_DESC: "",
-      VOT_INFO: voteInfo,
-      VOT_SEL_SEQ: "",
-      CRE_SEQ: "",
+      VOT_INFO: voteInfos,
     };
   };
 

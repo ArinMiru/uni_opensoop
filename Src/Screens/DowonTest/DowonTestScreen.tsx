@@ -23,6 +23,8 @@ import { OnlyAccountInputCompoMarginTop3 } from "../../Components/AccountCompo/A
 import { OnlyAccountButton } from "../../Components/AccountCompo/AccountButton";
 import { ListAnsTextInput } from "../../Components/AllCompo/ListAnsTextInputCompo";
 import { Image } from "react-native";
+import { SchdlRegiTimeButton } from "../../Components/SchdlCompo/SchdlCommonCompo";
+import { SchdlTimeButton } from "../../Components/SchdlCompo/SchdlButton";
 
 interface ScreenProps {
   children?: React.ReactNode;
@@ -71,7 +73,7 @@ const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
           <OnlyAccountInputCompoMarginTop3 text={"학과/전공"} />
         </View>
         <View style={BackgroundStyle.accountButtonFlex}>
-          <OnlyAccountButton text={"검색"} />
+          <SchdlTimeButton startDate="2023-10-22" endDate="2023-10-31" />
         </View>
         <Image
           source={require("../../Assets/Images/LogoImage.png")}
