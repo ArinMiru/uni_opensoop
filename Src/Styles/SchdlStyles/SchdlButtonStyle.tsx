@@ -6,7 +6,7 @@ export default StyleSheet.create({
    * 일정 페이지에서 시간을 선택하는 버튼의 스타일 입니다..
    */
   SchdlTimeButtonStyle: {
-    width: deviceWidth * 0.3,
+    width: deviceWidth * 0.36,
     height: deviceHeight * 0.058,
     backgroundColor: "#F7F8F9",
     borderRadius: 8,
