@@ -8,11 +8,14 @@ import SchdlButtonStyle from "../../Styles/SchdlStyles/SchdlButtonStyle";
 interface ButtonProps {
   children?: React.ReactNode;
   hour?: string;
-  minutes?: string;
+  startDate?: string;
+  endDate?: string;
   event?: string;
   today?: string;
   date?: string;
   onPress?: () => void;
+  onPressStartDate?: () => void;
+  onPressEndDate?: () => void;
   navigation?: { navigate: (screenName: string) => void };
 }
 
@@ -20,61 +23,52 @@ interface ButtonProps {
  * 일정페이지에서 시간을 선택하는 버튼입미다.
  */
 export const SchdlTimeButton: React.FC<ButtonProps> = ({
-  children,
-  onPress,
-  hour,
-  minutes,
+  onPressStartDate,
+  onPressEndDate,
+  startDate,
+  endDate,
 }) => {
   return (
-    <TouchableOpacity
-      style={[
-        SchdlButtonStyle.SchdlTimeButtonStyle,
-        {
-          flexDirection: "row",
-          alignContent: "center",
-          justifyContent: "space-evenly",
-        },
-      ]}
-      onPress={onPress}
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        width: deviceWidth * 0.82,
+        justifyContent: "space-evenly",
+      }}
     >
-      <Text
+      <TouchableOpacity
         style={[
-          textStyle.semibold14,
+          SchdlButtonStyle.SchdlTimeButtonStyle,
           {
-            color: "#666666",
-            marginLeft: "14%",
-            lineHeight: deviceHeight * 0.03,
+            alignContent: "center",
+            alignItems: "center",
+            justifyContent: "center",
           },
         ]}
+        onPress={onPressStartDate}
       >
-        {hour}
-      </Text>
-      <Text
+        <Text style={[textStyle.semibold14, { color: "#666666" }]}>
+          {startDate}
+        </Text>
+      </TouchableOpacity>
+      <View style={SchdlButtonStyle.TimeLineStyle}></View>
+      <TouchableOpacity
         style={[
-          textStyle.semibold14,
+          SchdlButtonStyle.SchdlTimeButtonStyle,
           {
-            color: "#666666",
-            lineHeight: deviceHeight * 0.03,
+            alignContent: "center",
+            alignItems: "center",
+            justifyContent: "center",
           },
         ]}
+        onPress={onPressEndDate}
       >
-        :
-      </Text>
-      <Text
-        style={[
-          textStyle.semibold14,
-          {
-            color: "#666666",
-            lineHeight: deviceHeight * 0.03,
-            marginRight: "14%",
-          },
-        ]}
-      >
-        {minutes}
-      </Text>
-
-      {children}
-    </TouchableOpacity>
+        <Text style={[textStyle.semibold14, { color: "#666666" }]}>
+          {endDate}
+        </Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
