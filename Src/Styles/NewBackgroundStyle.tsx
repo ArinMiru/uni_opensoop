@@ -24,7 +24,7 @@ export default StyleSheet.create({
    */
   BottomTabBackgroundStyle: {
     backgroundColor: "#FFFFFF",
-    width: deviceWidth * 1,
+    width: "100%",
     height: Platform.OS === "ios" ? "90.4%" : "91%", // 아이폰의 경우 91%, 안드로이드의 경우 89%로 설정
   },
 });

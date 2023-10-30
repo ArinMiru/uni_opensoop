@@ -2,7 +2,6 @@ import { sendApiData } from "./Api.config";
 import { setUserData } from "../../Utils/_private/ApiData/UserData";
 import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
-import { RegiDataType } from "../../Utils/_private/RegiData/RegiUserData";
 import {
   SchlSrchData,
   parseSchlSrchData,
@@ -52,14 +51,34 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
  * @param MEMB_NM 사용자 이름
  * 아직 완전하게 구현하지 않았음
  */
-export const registerUser = async (data: RegiDataType) => {
-  const endpoint = "/UNI/MembRegSvc"; // 회원가입 엔드포인트 URL
+export const registerUser = async (
+  MEMB_ID: string,
+  MEMB_NM: string,
+  MEMB_PASS: string
+): Promise<boolean> => {
+  return new Promise(async (resolve) => {
+    const endpoint = "/UNI/MembRegSvc"; // 회원가입 엔드포인트 URL
+    const data = {
+      MEMB_ID,
+      MEMB_NM,
+      MEMB_PASS,
+    };
 
-  const result = await sendApiData(endpoint, data); // 회원가입 시도 및 서버 응답 저장
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
 
-  // 서버 응답(result)에 대한 처리
-  return result; // 서버 응답을 반환합니다.
+    if (result !== null && result.data.RSLT_CD === "00") {
+      console.log("성공");
+      resolve(true);
+    } else {
+      console.log("실패");
+      resolve(false);
+    }
+  });
 };
+
 /**
  * ID 중복체크 API 호출 함수
  * @param MEMB_ID
@@ -210,10 +229,20 @@ export const SchlSrchCall = async (
  * 대학교 인증 API 호출 함수
  * @param CERT_SEQ
  */
-export const MembCertUpd = async (CERT_SEQ: string) => {
+export const membUniCertUpd = async (
+  MEMB_ID: string,
+  MEMB_SC_CD: string,
+  MEMB_DEP_CD: string,
+  MEMB_NUM: string,
+  MEMB_EM: string
+) => {
   const endpoint = "/UNI/MembUniCertUpdSvc";
   const data = {
-    CERT_SEQ,
+    MEMB_ID,
+    MEMB_SC_CD,
+    MEMB_DEP_CD,
+    MEMB_NUM,
+    MEMB_EM,
   };
   const result: AxiosResponse<UserData, any> | null = await sendApiData(
     endpoint,
@@ -261,7 +290,7 @@ export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
 
 /* ------------------------------------------------------------------------------- */
 
-export const DprtSrch = async (SCH_CD: number): Promise<DprtData | null> => {
+export const dprtSrch = async (SCH_CD: number): Promise<DprtData | null> => {
   const endpoint = "/UNI/DprtSrch";
   const data = {
     SCH_CD,
