@@ -36,6 +36,7 @@ import VotePostRegiPage from "../Screens/Home/VoTe/VotePostRegiPage";
 import VotePostDetailPage from "../Screens/Home/VoTe/VotePostDetailPage";
 import VotePostStatusPage from "../Screens/Home/VoTe/VotePostStatusPage";
 import SchedulePage from "../Screens/Home/ScheDule/SchedulePage";
+import SchedulePostRegiPage from "../Screens/Home/ScheDule/ScheduleRegiPage";
 import BottomTabNavigations from "./BottomTabNavigations";
 import ProfilePage from "../Screens/Home/ProfilePage";
 import TitleCodeCerti from "../Screens/Home/TitleCodeCerti";
@@ -145,6 +146,7 @@ export type RootStackParamList = {
     VOT_SEL_SEQ: string;
   };
   SchedulPage: undefined;
+  SchedulePostRegiPage: undefined;
   BottomTabNavigations: undefined;
   ProfilePage: undefined;
   TitleCodeCerti: undefined;
@@ -383,6 +385,13 @@ const StackNavigator = () => {
         component={SchedulePage}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name="SchedulePostRegiPage"
+        component={SchedulePostRegiPage}
+        options={{ headerShown: false }}
+      />
+
       <Stack.Screen
         name="BottomTabNavigations"
         component={BottomTabNavigations}
