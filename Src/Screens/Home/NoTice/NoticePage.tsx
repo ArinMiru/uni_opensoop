@@ -41,12 +41,8 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   useEffect(() => {
     if (isFocused && userData !== null) {
       setLoading(true);
-      openBubListCall(
-        userData.LOGIN_ID,
-        userData.MEMB_SC_CD,
-        userData.MEMB_DEP_CD,
-        userData.TIT_CD
-      )
+      let page = 1; // 시작 페이지 번호
+      openBubListCall(page)
         .then((data) => {
           if (data !== null) {
             const sorted = { ...data };
@@ -63,6 +59,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
 
           console.error("데이터 가져오기 오류:", error);
         });
+      page += 1;
     }
   }, [userData, isFocused]);
 

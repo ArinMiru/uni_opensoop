@@ -61,9 +61,18 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
   const [schdData, setSchdData] = useState<SchdBubData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const userData = getUserData();
-
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null); // 추가: 선택한 날짜 상태
+
+  const dateSelect = (date: string) => {
+    setSelectedDate(date);
+    scheduleForDate(date);
+    console.log(date);
+  };
+  const scheduleForDate = (date: string) => {
+    //로직 추가
+  };
 
   const handleEditClick = () => {
     if (isEditClicked) {
@@ -192,6 +201,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
           }}
+          onDayPress={(day) => dateSelect(day.dateString)}
         />
         <View style={[SgsButtonStyles.divideSchdlContentsLine]} />
         <View style={{ flexDirection: "row", height: deviceHeight * 0.06 }}>
