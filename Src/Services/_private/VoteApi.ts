@@ -65,7 +65,7 @@ export const votBubListDetailupCall = async (
   const userData = getUserData();
 
   if (userData !== null) {
-    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
+    const { LOGIN_ID } = userData;
     const data = {
       LOGIN_ID,
       CRE_SEQ,

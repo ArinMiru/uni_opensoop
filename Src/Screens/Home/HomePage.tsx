@@ -20,6 +20,7 @@ import { NoticeItem } from "../../Utils/_private/ApiData/NoticeData";
 import { SchdBubItem } from "../../Utils/_private/ApiData/SchdBubData";
 import { SCHD_BuB_Item } from "../../Utils/_private/ApiData/SchdBubDtlListSvc";
 
+
 const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const [notices, setNotices] = useState<NoticeItem[]>([]);
