@@ -1,12 +1,5 @@
-import {
-  View,
-  Platform,
-  TextInputProps,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import { View, TextInputProps } from "react-native";
 import { deviceWidth, deviceHeight } from "../../Utils/DeviceUtils";
-import textStyle from "../../Styles/TextStyle";
 import {
   SchdlBefoClikDelButton,
   SchdlBefoCliklEditButton,
@@ -16,6 +9,8 @@ import SchdlButtonStyle from "../../Styles/SchdlStyles/SchdlButtonStyle";
 
 interface ButtonProps extends TextInputProps {
   children?: React.ReactNode;
+  startDate?: string;
+  endDate?: string;
   onPress?: () => void;
   onPressEdit?: () => void;
   onPressDel?: () => void;
@@ -41,6 +36,7 @@ export const SchdlEditDelButton: React.FC<ButtonProps> = ({
 );
 
 /*
+ * 사용 X
  * 일정 게시판의 시간을 정하는 버튼 - 버튼 컴포넌트 입니다.
  **/
 export const SchdlRegiTimeButton: React.FC<ButtonProps> = ({
@@ -57,12 +53,14 @@ export const SchdlRegiTimeButton: React.FC<ButtonProps> = ({
       }}
     >
       <View>
-        <SchdlTimeButton hour="00" minutes="00" />
+        <SchdlTimeButton endDate="2023-10-31" />
       </View>
+      {/** 시작날짜 */}
       <View style={SchdlButtonStyle.TimeLineStyle}></View>
       <View>
-        <SchdlTimeButton hour="00" minutes="00" />
+        <SchdlTimeButton endDate="2023-10-31" />
       </View>
+      {/** 종료날짜 */}
     </View>
   );
 };
