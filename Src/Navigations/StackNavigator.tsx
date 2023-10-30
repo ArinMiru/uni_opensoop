@@ -40,6 +40,7 @@ import BottomTabNavigations from "./BottomTabNavigations";
 import ProfilePage from "../Screens/Home/ProfilePage";
 import TitleCodeCerti from "../Screens/Home/TitleCodeCerti";
 import NoticeEditPage from "../Screens/Home/NoTice/NoticeEditPage";
+import FrePostDetailLawPage from "../Screens/Community/Free/FrePostDetailLawPage";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -56,16 +57,29 @@ export type RootStackParamList = {
   AccountLogin: undefined;
   HomePageScreen: undefined;
   RegiId: undefined;
-  RegiNmNic: undefined;
-  RegiPass: undefined; //파라미터 전달 값 없음
-  RegiChk: undefined;
-  UniCertiDprtSrch: undefined;
-  UniCertiEcode: undefined;
-  UniCertiEmail: undefined;
-  UniCertiStudNum: undefined;
-  UniCertiGrad: undefined;
-  UniCertiChk: undefined;
-  UniCertiSchSrch: undefined;
+  RegiNmNic: { MEMB_ID: string };
+  RegiPass: { MEMB_ID: string; MEMB_NM: string };
+  RegiChk: { MEMB_ID: string };
+  UniCertiDprtSrch: { MEMB_ID: string; SCH_CD: number };
+  UniCertiEcode: { CERT_SEQ: string };
+  UniCertiEmail: {
+    MEMB_ID: string;
+    MEMB_SC_CD: number;
+    MEMB_DEP_CD: string;
+    MEMB_NUM: string;
+  };
+  UniCertiStudNum: {
+    MEMB_ID: string;
+    MEMB_SC_CD: number;
+    MEMB_DEP_CD: string;
+  };
+  UniCertiGrad: {
+    MEMB_ID: string;
+    MEMB_SC_CD: number;
+    MEMB_DEP_CD: string;
+  };
+  UniCertiChk: { MEMB_ID: string };
+  UniCertiSchSrch: { MEMB_ID: string };
   PassFindEcode: undefined;
   PassFindForEmail: undefined;
   PassFindForId: undefined;
@@ -95,6 +109,7 @@ export type RootStackParamList = {
     }[];
   };
   FrePostRegiPage: undefined;
+  FrePostDetailLawPage: undefined;
   FrePostDetailPage: {
     CRE_SEQ: number;
     CONT: string;
@@ -111,21 +126,37 @@ export type RootStackParamList = {
   };
   VotePostPage: undefined;
   VotePostRegiPage: undefined;
-  VotePostDetailPage: undefined;
-  VotePostStatusPage: undefined;
+  VotePostDetailPage: {
+    VOT_TITLE: string;
+    VOT_EXPR_DATE: string;
+    VOT_DESC: string;
+    VOT_INFO: string;
+    VOT_TYPE_CD: string;
+    VOT_SEL_SEQ: string;
+    CRE_SEQ: number;
+  };
+  VotePostStatusPage: {
+    VOT_TITLE: string;
+    VOT_DESC: string;
+    VOT_INFO: string;
+    VOT_EXPR_DATE: string;
+    CRE_SEQ: number;
+    VOT_TYPE_CD: string;
+    VOT_SEL_SEQ: string;
+  };
   SchedulPage: undefined;
   BottomTabNavigations: undefined;
   ProfilePage: undefined;
   TitleCodeCerti: undefined;
   NoticeEditPage: {
-      CRE_SEQ: number;
-      CONT: string;
-      TIT: string;
-      ImageInfo: {
-        FILE_BASE64: string;
-        FILE_NM: string;
-        IMG_SEQ: number;
-      }[];
+    CRE_SEQ: number;
+    CONT: string;
+    TIT: string;
+    ImageInfo: {
+      FILE_BASE64: string;
+      FILE_NM: string;
+      IMG_SEQ: number;
+    }[];
   };
 
   /**----------------------------------------------------------------------------*/
@@ -311,6 +342,13 @@ const StackNavigator = () => {
         component={FrePostRegiPage}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name="FrePostDetailLawPage"
+        component={FrePostDetailLawPage}
+        options={{ headerShown: false }}
+      />
+
       <Stack.Screen
         name="FrePostDetailPage"
         component={FreePostDetailPage}

@@ -23,7 +23,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [voteData, setVoteData] = useState<VoteData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const [isButtonOn, setIsButtonOn] = useState<boolean>(false); // 1. 상태 관리
+  const [isButtonOn, setIsButtonOn] = useState<boolean>(false);
 
   const filteredVoteData = isButtonOn
     ? voteData?.VOTE_BUB.filter((item) => item.VOT_GO_CD === "VG")
@@ -120,40 +120,55 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
             renderItem={({ item }) => {
               if (item.VOT_GO_CD === "VG") {
                 return (
-                  <UnVotedListButton
-                    title={item.VOTE_TITLE}
-                    poststatus={"투표 중"}
-                    posttime={item.VOT_EXPR_DATE}
-                    onPress={() => navigation.navigate("VotePostDetailPage")}
-                  />
-                );
-              } else if (item.VOT_GO_CD === "VB") {
-                return (
-                  <UnVotedListButton
-                    title={item.VOTE_TITLE}
-                    poststatus={"투표 전"}
-                    posttime={item.VOT_EXPR_DATE}
-                    onPress={() => navigation.navigate("VotePostDetailPage")}
-                  />
+                  <View
+                    style={{
+                      width: deviceWidth * 1,
+                      alignItems: "center",
+                    }}
+                  >
+                    <UnVotedListButton
+                      title={item.VOTE_TITLE}
+                      poststatus={"투표 중"}
+                      posttime={item.VOT_EXPR_DATE}
+                      onPress={() =>
+                        navigation.navigate("VotePostDetailPage", {
+                          VOT_TITLE: item.VOTE_TITLE,
+                          VOT_DESC: item.VOT_DESC,
+                          VOT_EXPR_DATE: item.VOT_EXPR_DATE,
+                          VOT_INFO: item.VOT_INFO,
+                          VOT_TYPE_CD: item.VOT_TYPE_CD,
+                          VOT_SEL_SEQ: item.VOT_SEL_SEQ,
+                          CRE_SEQ: item.CRE_SEQ,
+                        })
+                      }
+                    />
+                  </View>
                 );
               } else if (item.VOT_GO_CD === "VF") {
                 return (
-                  <VotedListButton
-                    title={item.VOTE_TITLE}
-                    poststatus={"투표 종료"}
-                    posttime={item.VOT_EXPR_DATE}
-                    onPress={() => navigation.navigate("VotePostDetailPage")}
-                  />
-                );
-              }
-              if (item.VOT_GO_CD === "VC") {
-                return (
-                  <UnVotedListButton
-                    title={item.VOTE_TITLE}
-                    poststatus={"투표 취소"}
-                    posttime={item.VOT_EXPR_DATE}
-                    onPress={() => navigation.navigate("VotePostDetailPage")}
-                  />
+                  <View
+                    style={{
+                      width: deviceWidth * 1,
+                      alignItems: "center",
+                    }}
+                  >
+                    <VotedListButton
+                      title={item.VOTE_TITLE}
+                      poststatus={"투표 종료"}
+                      posttime={item.VOT_EXPR_DATE}
+                      onPress={() =>
+                        navigation.navigate("VotePostDetailPage", {
+                          VOT_TITLE: item.VOTE_TITLE,
+                          VOT_DESC: item.VOT_DESC,
+                          VOT_EXPR_DATE: item.VOT_EXPR_DATE,
+                          VOT_INFO: item.VOT_INFO,
+                          VOT_TYPE_CD: item.VOT_TYPE_CD,
+                          VOT_SEL_SEQ: item.VOT_SEL_SEQ,
+                          CRE_SEQ: item.CRE_SEQ,
+                        })
+                      }
+                    />
+                  </View>
                 );
               }
               return null; // 아무 컴포넌트도 반환하지 않을 경우

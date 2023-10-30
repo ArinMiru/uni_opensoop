@@ -29,8 +29,8 @@ export const ListAnsTextInput: React.FC<inputProps> = ({
         flexDirection: "row-reverse",
         alignItems: "center",
         width: "100%",
-        paddingHorizontal: 23,
-        backgroundColor: "#F2F2F2",
+        paddingHorizontal: 13,
+        backgroundColor: "#FFFFFF",
       }}
     >
       <TextInput
@@ -38,7 +38,6 @@ export const ListAnsTextInput: React.FC<inputProps> = ({
         style={[QstInputStyles.AnswerInputBoxStyle, textStyle.medium11]}
         placeholder={"답변을 입력해주세요"}
         keyboardType="default"
-        autoFocus={true}
         {...props}
       />
       <View
@@ -48,7 +47,7 @@ export const ListAnsTextInput: React.FC<inputProps> = ({
         }}
       >
         <TouchableOpacity
-          style={{ marginRight: deviceWidth * 0.1 }}
+          style={{ marginRight: deviceWidth * 0.07 }}
           onPress={onPress}
         >
           <Ionicons

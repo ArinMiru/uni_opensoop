@@ -47,7 +47,7 @@ export function parseNoticeData(rawData: any): NoticeData {
         CONT: item.CONT || "", // 공지사항 내용, 없을 경우 빈 문자열
         LIKE_CNT: typeof item.LIKE_CNT === "number" ? item.LIKE_CNT : 0, // 숫자로 변환, 없을 경우 0
         CRE_DAT: item.CRE_DAT || "", // 작성 일자, 없을 경우 빈 문자열
-        MEMB_SC_NM: item.MEMB_SC_CD || "", // 작성자 학교 이름
+        MEMB_SC_NM: item.MEMB_SC_NM || "", // 작성자 학교 이름
         MEMB_DEP_NM: item.MEMB_DEP_NM || "", // 작성자 학과 이름
         TIT_NM: item.TIT_NM || "", // 작성자 직책명, 없을 경우 빈 문자열
         NICK_NM: item.NICK_NM || "", // 작성자 닉네임, 없을 경우 빈 문자열

@@ -1,11 +1,8 @@
-import React from "react";
-import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
-import { ScreenProps } from "../../../Navigations/StackNavigator";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
   SafeAreaView,
-  TextInputProps,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
@@ -16,27 +13,60 @@ import { OnlyAccountInputCompoMarginTop3 } from "../../../Components/AccountComp
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { Image } from "react-native";
+import { RegiDprtSrchProps } from "../../../Utils/NavigationProp/AccountScrProp";
+import { DprtData } from "../../../Utils/_private/RegiData/DprtSrchData";
+import { dprtSrch } from "../../../Services/_private/EndPointApiFuntion";
 
-interface CommonProps extends TextInputProps {
-  children?: React.ReactNode;
-  bigtext?: string;
-  smalltext?: string;
-  buttontext?: string;
-  inputtext?: string;
-  disable?: boolean;
-  IconPress?: () => void;
-  onPress?: () => void;
-  navigation?: {
-    navigate: (screenName: string) => void;
+const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
+  navigation,
+  route,
+}) => {
+  const [dprtData, setDprtData] = useState<DprtData | null>(null); // 서버에서 넘어온 데이터 기본
+  const [dprtDetailData, setDprtDetailData] = useState<
+    DprtData["DPRT_NM_INFO"] //서버에서 넘어온 학과명 데이터 상세
+  >([]);
+  const [selectedDprt, setSelectedDprt] = useState<
+    DprtData["DPRT_NM_INFO"][0] | null
+  >(null);
+  const [selectedDprtCode, setSelectedDprtCode] = useState<string>("");
+  const { SCH_CD, MEMB_ID } = route.params;
+  console.log(SCH_CD, MEMB_ID);
+
+  const dprtSrchcall = () => {
+    dprtSrch(SCH_CD)
+      .then((data) => {
+        if (data !== null && data.RSLT_CD === "00") {
+          setDprtData(data);
+          if (Array.isArray(data.DPRT_NM_INFO)) {
+            setDprtDetailData(data.DPRT_NM_INFO);
+          } else {
+            setDprtDetailData([]);
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("데이터 가져오기 오류:", error);
+      });
   };
-}
+  useEffect(() => {
+    console.log(dprtData);
+  }, []);
+  const handleDprtSelect = (dprt: DprtData["DPRT_NM_INFO"][0]) => {
+    setSelectedDprtCode(dprt.DPRT_CD);
+    if (selectedDprt !== null) {
+      navigation.navigate("UniCertiGrad", {
+        MEMB_ID: MEMB_ID,
+        MEMB_SC_CD: SCH_CD,
+        MEMB_DEP_CD: selectedDprtCode,
+      });
+    }
+  };
 
-const UniCertiDprtSrch: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={BackgroundStyle.AccountBackground}>
         <View style={BackgroundStyle.backIconFlex}>
-          <BlackBackIconButton />
+          <BlackBackIconButton onPress={() => navigation.goBack()} />
         </View>
         <View style={BackgroundStyle.titleTextFlex}>
           <Text
@@ -72,7 +102,7 @@ const UniCertiDprtSrch: React.FC<ScreenProps> = ({ navigation }) => {
           />
         </View>
         <View style={BackgroundStyle.accountButtonFlex}>
-          <OnlyAccountButton text={"검색"} />
+          <OnlyAccountButton text={"검색"} onPress={dprtSrchcall} />
         </View>
         <Image
           source={require("../../../Assets/Images/LogoImage.png")}

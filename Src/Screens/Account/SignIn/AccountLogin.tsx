@@ -54,13 +54,17 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   }, []);
 
   const handleLogin = async () => {
-    const result = await loginUser(LOGIN_ID, LOGIN_PASS);
+    const resultCode = await loginUser(LOGIN_ID, LOGIN_PASS);
 
-    // getUserData 함수를 호출하여 사용자 정보를 가져옴
-    const userData = getUserData();
-
-    if (userData?.RSLT_CD === "00") {
-      navigation.navigate("BottomTabNavigations");
+    if (resultCode === "00") {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "BottomTabNavigations" }],
+      });
+    } else if (resultCode === "01") {
+      Alert.alert("로그인 오류", "아이디나 비밀번호가 잘못되었습니다.");
+    } else {
+      Alert.alert("오류", "알 수 없는 오류가 발생했습니다.");
     }
   };
 

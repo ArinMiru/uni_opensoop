@@ -1,18 +1,101 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, BackHandler, Text } from "react-native";
 import { deviceWidth } from "../../Utils/DeviceUtils";
 import {
   MainOpenBub,
   MainVoteBub,
   MainSchdBub,
+  MainSchdNoBox,
 } from "../../Components/MainPageCompo/MainPageCompo";
 import { Background } from "../../Components/AllCompo/Background";
 import { MainPageTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
 import { ScreenProps } from "../../Navigations/StackNavigator";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
+import { useFocusEffect } from "@react-navigation/native";
+import { openBubListCall } from "../../Services/_private/NoticeApi";
+import { votBubListCall } from "../../Services/_private/VoteApi";
+import { SchdBubDtlListSvc } from "../../Services/_private/SchdBubApi";
+import { VoteItem } from "../../Utils/_private/ApiData/VoteData";
+import { NoticeItem } from "../../Utils/_private/ApiData/NoticeData";
+import { SchdBubItem } from "../../Utils/_private/ApiData/SchdBubData";
+import { SCHD_BuB_Item } from "../../Utils/_private/ApiData/SchdBubDtlListSvc";
+
 
 const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
-  const userData = getUserData(); // 현재 사용자 데이터
+  const userData = getUserData();
+  const [notices, setNotices] = useState<NoticeItem[]>([]);
+  const [votes, setVotes] = useState<VoteItem[]>([]);
+  const [schedules, setSchedules] = useState<SCHD_BuB_Item[]>([]);
+  const [todaySchedules, setTodaySchedules] = useState<SCHD_BuB_Item[]>([]);
+
+  useEffect(() => {
+    const fetchNoticeData = async () => {
+      const noticeData = await openBubListCall(
+        userData?.LOGIN_ID || "",
+        userData?.MEMB_SC_CD || "",
+        userData?.MEMB_DEP_CD || "",
+        userData?.TIT_CD || ""
+      );
+      if (noticeData && noticeData.OPEN_BUB) {
+        setNotices(noticeData.OPEN_BUB.slice(0, 2));
+      }
+    };
+
+    const fetchVoteData = async () => {
+      const voteData = await votBubListCall();
+      if (voteData && voteData.VOTE_BUB) {
+        setVotes(voteData.VOTE_BUB.slice(0, 2));
+      }
+    };
+
+    const fetchScheduleData = async () => {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, "0");
+      const dd = String(today.getDate()).padStart(2, "0");
+      const formattedToday = `${yyyy}-${mm}-${dd}`;
+
+      const scheduleData = await SchdBubDtlListSvc(formattedToday);
+      if (scheduleData !== null) {
+        setSchedules(scheduleData.SCHD_BUB);
+      } else {
+        setSchedules([]);
+      }
+    };
+
+    fetchNoticeData();
+    fetchVoteData();
+    fetchScheduleData();
+  }, []);
+
+  useEffect(() => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    const formattedToday = `${yyyy}-${mm}-${dd}`;
+
+    const filteredSchedules = schedules.filter(
+      (schedule) =>
+        schedule.STRT_SCHD_YMD <= formattedToday &&
+        schedule.END_SCHD_YMD >= formattedToday
+    );
+
+    setTodaySchedules(filteredSchedules);
+  }, [schedules]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        navigation.navigate("AccountLogin");
+        return true;
+      };
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [navigation])
+  );
+
   return (
     <Background>
       <MainPageTopbarStyle
@@ -28,40 +111,44 @@ const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <View>
           <MainOpenBub
-            F_Open_Tit="공지사항 1제목"
-            F_Open_MEMB_NM="안재경"
-            F_Open_DEP_NM="정보통신학과"
-            F_TIT_NM="학회장"
-            F_OpenPostLike={100}
-            S_Open_Tit="공지사항 2제목"
-            S_Open_MEMB_NM="장현빈"
-            S_Open_DEP_NM="정보통신학과"
-            S_TIT_NM="부학회장"
-            S_OpenPostLike={200}
+            F_Open_Tit={notices[0]?.TIT || "공지사항 1제목"}
+            F_Open_MEMB_NM={notices[0]?.MEMB_NM || "작성자 이름"}
+            F_Open_DEP_NM={notices[0]?.MEMB_DEP_NM || "학과 이름"}
+            F_TIT_NM={notices[0]?.TIT_NM || "직책 이름"}
+            F_OpenPostLike={notices[0]?.LIKE_CNT || 100}
+            S_Open_Tit={notices[1]?.TIT || "공지사항 2제목"}
+            S_Open_MEMB_NM={notices[1]?.MEMB_NM || "작성자 이름"}
+            S_Open_DEP_NM={notices[1]?.MEMB_DEP_NM || "학과 이름"}
+            S_TIT_NM={notices[1]?.TIT_NM || "직책 이름"}
+            S_OpenPostLike={notices[1]?.LIKE_CNT || 200}
             onPress={() => navigation.navigate("NoticePage")}
           />
         </View>
         <View>
           <MainVoteBub
-            F_VOT_TIT="1번쨰 투표 제목"
-            S_VOT_TIT="2번쨰 투표 제목"
-            F_VOT_TOT={100}
-            S_VOT_TOT={200}
-            F_VOT_GO_CD="2023-10-19"
-            S_VOT_GO_CD="2023-10-20"
+            F_VOT_TIT={votes[0]?.VOTE_TITLE || "1번째 투표 제목"}
+            S_VOT_TIT={votes[1]?.VOTE_TITLE || "2번째 투표 제목"}
+            //  F_VOT_TOT={votes[0]?.VOT_COUNT || 100} // 개발 예정
+            //  S_VOT_TOT={votes[1]?.VOT_COUNT || 200} // 개발 예정
+            F_VOT_GO_CD={votes[0]?.VOT_GO_CD || "2023-10-19"}
+            S_VOT_GO_CD={votes[1]?.VOT_GO_CD || "2023-10-20"}
             onPress={() => navigation.navigate("VotePostPage")}
           />
         </View>
         <View style={{ marginBottom: deviceWidth * 0.04 }}>
-          <MainSchdBub
-            F_STRT_SCHD_YMD="2023-10-18"
-            F_END_SCHD_YMD="2023-10-19"
-            S_STRT_SCHD_YMD="2023-10-18"
-            S_END_SCHD_YMD="2023-10-19"
-            F_SCHD_TIT="첫번째 일정 제목"
-            S_SCHD_TIT="두번쨰 일정 제목"
-            onPress={() => navigation.navigate("SchedulPage")}
-          />
+          {todaySchedules && todaySchedules.length > 0 ? (
+            <MainSchdBub
+              F_STRT_SCHD_YMD={todaySchedules[0]?.STRT_SCHD_YMD || "시작 날짜"}
+              F_END_SCHD_YMD={todaySchedules[0]?.END_SCHD_YMD || "종료 날짜"}
+              S_STRT_SCHD_YMD={todaySchedules[1]?.STRT_SCHD_YMD || "시작 날짜"}
+              S_END_SCHD_YMD={todaySchedules[1]?.END_SCHD_YMD || "종료 날짜"}
+              F_SCHD_TIT={todaySchedules[0]?.TIT || "첫번째 일정 제목"}
+              S_SCHD_TIT={todaySchedules[1]?.TIT || "두번째 일정 제목"}
+              onPress={() => navigation.navigate("SchedulPage")}
+            />
+          ) : (
+            <MainSchdNoBox onPress={() => navigation.navigate("SchedulPage")} />
+          )}
         </View>
       </View>
     </Background>

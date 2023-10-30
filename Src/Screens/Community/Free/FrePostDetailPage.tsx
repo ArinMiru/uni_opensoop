@@ -35,6 +35,7 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
       if (userData != null) {
         await FreeAnsBubNew(cont, CRE_SEQ);
       } else {
+        -885;
         console.error("userData가 null입니다.");
       }
     } catch (error) {
@@ -83,6 +84,7 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
           <ListAnsTextInput
             autoCapitalize="none"
             keyboardType="default"
+            keyboardAppearance="default"
             value={cont}
             onChangeText={(text) => setCont(text)}
             onPress={FreeAnsNewBut}

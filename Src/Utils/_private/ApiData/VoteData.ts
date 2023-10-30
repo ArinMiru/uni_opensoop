@@ -11,7 +11,7 @@ export interface VoteItem {
   MEMB_ID: string;
   CRE_SEQ: number;
   VOTE_TITLE: string;
-  VOTE_TYPE_CD: string;
+  VOT_TYPE_CD: string;
   VOT_GO_CD: string;
   VOT_EXPR_DATE: string;
   VOT_DESC: string;
@@ -20,6 +20,7 @@ export interface VoteItem {
 }
 
 export function parseVoteData(rawData: any): VoteData {
+  console.log("원본 rawData:", rawData); // 여기에 추가
   const voteData: VoteData = {
     RSLT_CD: rawData.RSLT_CD || "",
     VOTE_BUB: [],
@@ -41,7 +42,7 @@ export function parseVoteData(rawData: any): VoteData {
         MEMB_ID: item.MEMB_ID || "",
         CRE_SEQ: item.CRE_SEQ || "",
         VOTE_TITLE: item.VOT_TITLE || "",
-        VOTE_TYPE_CD: item.VOTE_TYPE_CD || "",
+        VOT_TYPE_CD: item.VOT_TYPE_CD || "",
         VOT_GO_CD: item.VOT_GO_CD || "",
         VOT_DESC: item.VOT_DESC || "",
         VOT_EXPR_DATE: item.VOT_EXPR_DATE || "",

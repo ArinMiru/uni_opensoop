@@ -6,8 +6,10 @@ import { GreenCheckIcon } from "../../../Components/IconCompo/CheckIcon";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import textStyle from "../../../Styles/TextStyle";
 import { Image } from "react-native";
+import { RegiChkProps } from "../../../Utils/NavigationProp/AccountScrProp";
 
-const RegiChk: React.FC<ScreenProps> = ({ navigation }) => {
+const RegiChk: React.FC<RegiChkProps> = ({ navigation, route }) => {
+  const { MEMB_ID } = route.params;
   return (
     <AccountBackground>
       <View style={{ flex: 3, justifyContent: "flex-end" }}>
@@ -25,7 +27,7 @@ const RegiChk: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
-          onPress={() => navigation.navigate("UniCertiSchSrch")}
+          onPress={() => navigation.navigate("UniCertiSchSrch", { MEMB_ID })}
           navigation={navigation}
         />
       </View>
