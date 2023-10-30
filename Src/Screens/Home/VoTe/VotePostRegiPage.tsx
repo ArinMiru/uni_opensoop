@@ -20,7 +20,7 @@ import EditDelCloseModalStyle from "../../../Styles/ModalStyles/EditDelCloseModa
 import { openBubListDell } from "../../../Services/_private/NoticeApi";
 import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
 import { DateSltModlCompo } from "../../../Components/AllCompo/ModalCompo";
-import DatePickerModal from "react-native-modal-datetime-picker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { votBubRegiCall } from "../../../Services/_private/VoteApi";
@@ -225,7 +225,7 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
               }}
             >
               <DateSltButton date={selectedDate} onPress={showDatePicker} />
-              {/**    
+
               <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="date"
@@ -233,7 +233,6 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
                 onConfirm={handleConfirm}
                 onCancel={hideDatePicker}
               />
-              */}
             </View>
           </View>
           <View
