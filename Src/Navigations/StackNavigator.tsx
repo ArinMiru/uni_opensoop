@@ -60,10 +60,23 @@ export type RootStackParamList = {
   RegiPass: { MEMB_ID: string; MEMB_NM: string };
   RegiChk: { MEMB_ID: string };
   UniCertiDprtSrch: { MEMB_ID: string; SCH_CD: number };
-  UniCertiEcode: { MEMB_ID: string };
-  UniCertiEmail: { MEMB_ID: string };
-  UniCertiStudNum: { MEMB_ID: string };
-  UniCertiGrad: { MEMB_ID: string };
+  UniCertiEcode: { CERT_SEQ: string };
+  UniCertiEmail: {
+    MEMB_ID: string;
+    MEMB_SC_CD: number;
+    MEMB_DEP_CD: string;
+    MEMB_NUM: string;
+  };
+  UniCertiStudNum: {
+    MEMB_ID: string;
+    MEMB_SC_CD: number;
+    MEMB_DEP_CD: string;
+  };
+  UniCertiGrad: {
+    MEMB_ID: string;
+    MEMB_SC_CD: number;
+    MEMB_DEP_CD: string;
+  };
   UniCertiChk: { MEMB_ID: string };
   UniCertiSchSrch: { MEMB_ID: string };
   PassFindEcode: undefined;

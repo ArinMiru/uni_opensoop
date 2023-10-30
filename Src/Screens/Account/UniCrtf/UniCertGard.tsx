@@ -4,16 +4,19 @@ import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButton";
-import { ScreenProps } from "../../../Navigations/StackNavigator";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
 import { GradeDropdown } from "../../../Components/SingleUse/GradeDropdown";
 import { Image } from "react-native";
+import { RegiCertiGradProps } from "../../../Utils/NavigationProp/AccountScrProp";
 
-const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
+const PassFindNewPass: React.FC<RegiCertiGradProps> = ({
+  navigation,
+  route,
+}) => {
   const [selectedGrade, setSelectedGrade] = useState<string | null>(null);
-
+  const { MEMB_SC_CD, MEMB_ID, MEMB_DEP_CD } = route.params;
   return (
     <AccountBackground>
       <View
@@ -24,7 +27,7 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
       >
         <BlackBackIconButton
           text=""
-          onPress={() => navigation.navigate("UniCertiDprtSrch")}
+          onPress={() => navigation.goBack()}
           navigation={navigation}
         ></BlackBackIconButton>
       </View>
@@ -60,7 +63,13 @@ const PassFindNewPass: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={{ flex: 4, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
-          onPress={() => navigation.navigate("UniCertiStudNum")}
+          onPress={() =>
+            navigation.navigate("UniCertiStudNum", {
+              MEMB_DEP_CD: MEMB_DEP_CD,
+              MEMB_ID: MEMB_ID,
+              MEMB_SC_CD: MEMB_SC_CD,
+            })
+          }
         />
       </View>
       <Image
