@@ -26,6 +26,11 @@ import {
   SchdlAftrClikDelButton,
 } from "../../../Components/SchdlCompo/SchdlButton";
 import { Octicons } from "@expo/vector-icons";
+import { SchdBubDtlListSvc } from "../../../Services/_private/SchdBubApi";
+import {
+  SCHD_BuB_Item,
+  parseSchdbubDtlListData,
+} from "../../../Utils/_private/ApiData/SchdBubDtlListSvc";
 
 LocaleConfig.locales["kr"] = {
   monthNames: [
@@ -63,6 +68,10 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
+  const [scheduleDetails, setScheduleDetails] = useState<SCHD_BuB_Item | null>(
+    null
+  );
+
   const [selectedDate, setSelectedDate] = useState<string | null>(
     moment().format("YYYY-MM-DD") // 초기값을 오늘 날짜로 설정
   );
@@ -73,7 +82,16 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     console.log(date);
   };
   const scheduleForDate = (date: string) => {
-    //로직 추가
+    SchdBubDtlListSvc(date)
+      .then((data) => {
+        if (data !== null) {
+          console.log(data);
+          setScheduleDetails(parseSchdbubDtlListData(data).SCHD_BUB[0]);
+        }
+      })
+      .catch((error) => {
+        console.error("특정 날짜의 일정 데이터 가져오기 오류:", error);
+      });
   };
 
   const handleEditClick = () => {
@@ -163,6 +181,90 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
       selectedColor: string;
     };
   }>({});
+
+  const renderScheduleForDate = (date: string) => {
+    const schedule = schdData?.SCHD_BUB.find(
+      (item) => item.DAY === moment(date).format("DD")
+    );
+    if (schedule && Number(schedule.CNT) > 0) {
+      return (
+        <View style={{ flexDirection: "column", marginTop: "5%" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              marginLeft: "5%",
+            }}
+          >
+            <View style={{ marginRight: deviceWidth * 0.03 }}>
+              {isEditClicked ? (
+                <ScdlEditIcon />
+              ) : isDeleteClicked ? (
+                <SchldDelButton />
+              ) : (
+                <Octicons
+                  name="dot-fill"
+                  size={deviceWidth * 0.05}
+                  color="#4BB781"
+                />
+              )}
+            </View>
+            <View
+              style={{
+                alignContent: "center",
+                alignItems: "center",
+                justifyContent: "center",
+                marginLeft: "2%",
+              }}
+            >
+              <Text
+                style={[
+                  TextStyle.medium12,
+                  { color: "#1A3628" },
+                  { textAlign: "left" },
+                ]}
+              >
+                {}
+              </Text>
+            </View>
+            <View
+              style={{
+                justifyContent: "flex-end",
+                marginLeft: "auto",
+                marginRight: deviceWidth * 0.04,
+                alignContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={[
+                  TextStyle.semibold10,
+                  { color: "#1A3628" },
+                  { textAlign: "right" },
+                ]}
+              >
+                {"MM월 DD일"} {"~"} {"MM월 DD일"}
+                {/* {moment(schedule."STRT_SCHD_YMD").format("MM-DD")} ~ {moment(schedule.END_SCHD_YMD).format("MM-DD")} */}
+              </Text>
+            </View>
+          </View>
+        </View>
+      );
+    } else {
+      return (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={[TextStyle.semibold14]}>일정 없음</Text>
+        </View>
+      );
+    }
+  };
 
   return (
     <SafeAreaView
@@ -254,77 +356,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
             <View
               style={[SchdlButtonStyle.SchdlDetailBoxStyle, { height: "auto" }]}
             >
-              {/** FlatList */}
-              <View style={{ flexDirection: "column", marginTop: "5%" }}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "flex-start",
-                    alignItems: "center",
-                    marginLeft: "5%",
-                  }}
-                >
-                  <View style={{ flex: 0.4 }}>
-                    <View
-                      style={{
-                        flex: 1,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      {isEditClicked ? (
-                        <ScdlEditIcon />
-                      ) : isDeleteClicked ? (
-                        <SchldDelButton />
-                      ) : (
-                        <Octicons
-                          name="dot-fill"
-                          size={deviceWidth * 0.05}
-                          color="#4BB781"
-                        />
-                      )}
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      alignContent: "center",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginLeft: "2%",
-                    }}
-                  >
-                    <Text
-                      style={[
-                        TextStyle.medium12,
-                        { color: "#1A3628" },
-                        { textAlign: "left" },
-                      ]}
-                    >
-                      {"예비 수강 신청 기간"}
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      justifyContent: "flex-end",
-                      marginLeft: "auto",
-                      paddingRight: deviceWidth * 0.08,
-                      alignContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Text
-                      style={[
-                        TextStyle.semibold10,
-                        { color: "#1A3628" },
-                        { textAlign: "right" },
-                      ]}
-                    >
-                      {"11월 15일"} {"~"} {"11월 19일"}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-              {/** FlatList */}
+              {selectedDate && renderScheduleForDate(selectedDate)}
             </View>
           </ScrollView>
         </View>
