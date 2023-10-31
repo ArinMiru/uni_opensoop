@@ -1,5 +1,5 @@
-import { View, SafeAreaView, ScrollView, Text } from "react-native";
 import React, { useState, useEffect } from "react";
+import { View, SafeAreaView, ScrollView, Text, Dimensions } from "react-native";
 import { LocaleConfig, Calendar } from "react-native-calendars";
 import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import Constants from "expo-constants";
@@ -81,12 +81,15 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     scheduleForDate(date);
     console.log(date);
   };
+
   const scheduleForDate = (date: string) => {
     SchdBubDtlListSvc(date)
       .then((data) => {
         if (data !== null) {
           console.log(data);
-          setScheduleDetails(parseSchdbubDtlListData(data).SCHD_BUB[0]);
+          const parsedData = parseSchdbubDtlListData(data).SCHD_BUB[0];
+          setScheduleDetails(parsedData);
+          console.log("scheduleDetails:", parsedData);
         }
       })
       .catch((error) => {
@@ -183,13 +186,29 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
   }>({});
 
   const renderScheduleForDate = (date: string) => {
-    const schedule = schdData?.SCHD_BUB.find(
+    const daySchedules = schdData?.SCHD_BUB.filter(
       (item) => item.DAY === moment(date).format("DD")
     );
-    if (schedule && Number(schedule.CNT) > 0) {
+
+    // 데이터가 없으면 "일정 없음"을 반환
+    if (!daySchedules || daySchedules.length === 0) {
       return (
-        <View style={{ flexDirection: "column", marginTop: "5%" }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={[TextStyle.semibold14]}>일정 없음</Text>
+        </View>
+      );
+    }
+    return (
+      <View style={{ flexDirection: "column", marginTop: "5%" }}>
+        {daySchedules.map((schedule, index) => (
           <View
+            key={index}
             style={{
               flexDirection: "row",
               justifyContent: "flex-start",
@@ -225,7 +244,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
                   { textAlign: "left" },
                 ]}
               >
-                {}
+                {scheduleDetails?.TIT}
               </Text>
             </View>
             <View
@@ -244,26 +263,15 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
                   { textAlign: "right" },
                 ]}
               >
-                {"MM월 DD일"} {"~"} {"MM월 DD일"}
-                {/* {moment(schedule."STRT_SCHD_YMD").format("MM-DD")} ~ {moment(schedule.END_SCHD_YMD).format("MM-DD")} */}
+                {moment(scheduleDetails?.STRT_SCHD_YMD).format("M월 D일")}
+                {" ~ "}
+                {moment(scheduleDetails?.END_SCHD_YMD).format("M월 D일")}
               </Text>
             </View>
           </View>
-        </View>
-      );
-    } else {
-      return (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Text style={[TextStyle.semibold14]}>일정 없음</Text>
-        </View>
-      );
-    }
+        ))}
+      </View>
+    );
   };
 
   return (
