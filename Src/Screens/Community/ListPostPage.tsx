@@ -3,12 +3,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { QuesBubListSvc } from "../../Services/_private/QusetPostData";
-import {
-  FlatList,
-  View,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-} from "react-native";
+import { FlatList, View, TouchableWithoutFeedback, Alert } from "react-native";
 import { FreeBubListCall } from "../../Services/_private/FreeApi";
 import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
@@ -25,7 +20,6 @@ import { QuestData } from "../../Utils/_private/ApiData/QuestData";
 import Spinner from "react-native-loading-spinner-overlay";
 import { ModalReuableFuction } from "../../Utils/ReusableFuction/ModalReuableFuction";
 import { useModal } from "../../Screens/ModalContext";
-
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -34,6 +28,7 @@ import EditDelCloseModalStyle from "../../Styles/ModalStyles/EditDelCloseModalSt
 import { QstModalCompo } from "../../Components/AllCompo/ModalCompo";
 import { ListAnsTextInput } from "../../Components/AllCompo/ListAnsTextInputCompo";
 import { useNavigation } from "@react-navigation/native";
+import { KeyboardAvoidingView } from "react-native";
 
 const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
