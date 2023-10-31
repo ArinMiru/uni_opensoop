@@ -20,7 +20,6 @@ import { QuestData } from "../../Utils/_private/ApiData/QuestData";
 import Spinner from "react-native-loading-spinner-overlay";
 import { ModalReuableFuction } from "../../Utils/ReusableFuction/ModalReuableFuction";
 import { useModal } from "../../Screens/ModalContext";
-
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -29,6 +28,7 @@ import EditDelCloseModalStyle from "../../Styles/ModalStyles/EditDelCloseModalSt
 import { QstModalCompo } from "../../Components/AllCompo/ModalCompo";
 import { ListAnsTextInput } from "../../Components/AllCompo/ListAnsTextInputCompo";
 import { useNavigation } from "@react-navigation/native";
+import { KeyboardAvoidingView } from "react-native";
 
 const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
@@ -199,19 +199,26 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <Background>
       <BottomSheetModalProvider>
-        {isModalVisible && <ListAnsTextInput />}
+        {isModalVisible}
         <BottomSheetModal
           ref={modalFunctions.bottomSheetModalRef}
           index={1}
-          snapPoints={["50%", "95%"]}
+          snapPoints={["80%", "80%"]}
           enablePanDownToClose={true}
           onDismiss={() => {
             modalFunctions.handleCloseModal();
           }}
         >
-          <View style={EditDelCloseModalStyle.contentContainer}>
+          <KeyboardAvoidingView
+            style={EditDelCloseModalStyle.contentContainer}
+            behavior="padding"
+            keyboardVerticalOffset={deviceHeight * 0.2}
+          >
             <QstModalCompo />
-          </View>
+            <KeyboardAvoidingView>
+              <ListAnsTextInput />
+            </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
         </BottomSheetModal>
         {selectedCategory === "자유" && (
           <MenuTopbarStyle

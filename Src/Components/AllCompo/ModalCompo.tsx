@@ -70,13 +70,13 @@ export const QstModalCompo: React.FC<ButtonProps> = ({}) => {
             댓글
           </Text>
         </View>
-        <KeyboardAwareScrollView>
+        <ScrollView>
           <QstComment
             freqstansnick="익명이"
             freqstanstit="화장실은 죽어서 가십시오~~ 응가 뿌직뿌직 랄랄라"
             freqstanstime="2023-10-16"
           />
-        </KeyboardAwareScrollView>
+        </ScrollView>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
