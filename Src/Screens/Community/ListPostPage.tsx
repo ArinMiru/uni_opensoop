@@ -3,7 +3,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { QuesBubListSvc } from "../../Services/_private/QusetPostData";
-import { FlatList, View, TouchableWithoutFeedback } from "react-native";
+import { FlatList, View, TouchableWithoutFeedback, Alert } from "react-native";
 import { FreeBubListCall } from "../../Services/_private/FreeApi";
 import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
@@ -33,10 +33,23 @@ import { useNavigation } from "@react-navigation/native";
 const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const [selectedCategory, setSelectedCategory] = useState("자유");
-  const [freeData, setFreeData] = useState<FreeData | null>(null);
-  const [questData, setQuestData] = useState<QuestData | null>(null);
-  const [sugsData, setSugsData] = useState<SugBubListData | null>(null);
+  const [freeData, setFreeData] = useState<FreeData>({
+    RSLT_CD: "",
+    FREE_BUB: [],
+  });
+
+  const [questData, setQuestData] = useState<QuestData | null>({
+    RSLT_CD: "",
+    QUES_BUB: [],
+  });
+  const [sugsData, setSugsData] = useState<SugBubListData | null>({
+    RSLT_CD: "",
+    SUG_BUB: [],
+  });
   const [loading, setLoading] = useState<boolean>(true);
+  const [freePage, setFreePage] = useState<number>(1);
+  const [questPage, setQuestPage] = useState<number>(1); // 추가
+  const [sugPage, setSugPage] = useState<number>(1); // 추가
   const isFocused = useIsFocused();
   const modalFunctions = ModalReuableFuction();
   const appNavigation = useNavigation();
@@ -63,73 +76,125 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
     return setOptions;
   }, [isModalVisible, appNavigation]);
 
-  useEffect(() => {
-    if (userData !== null && isFocused) {
-      setLoading(true);
-      // 화면 포커스일 때만 실행
-      // 자유게시판 데이터 가져오기
-      FreeBubListCall(
-        userData.LOGIN_ID,
-        userData.MEMB_SC_CD,
-        userData.MEMB_DEP_CD,
-        userData.TIT_CD
-      )
-        .then((data) => {
-          if (data !== null) {
-            const sorted = { ...data };
-            if (sorted.FREE_BUB) {
-              sorted.FREE_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+  const fetchData = (category: string, page: number) => {
+    setLoading(true);
+    switch (category) {
+      case "자유":
+        FreeBubListCall(page)
+          .then((data) => {
+            if (data !== null) {
+              const sorted = { ...data };
+              if (sorted.FREE_BUB) {
+                sorted.FREE_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+              }
+              setFreeData((prevData) => {
+                return {
+                  ...prevData,
+                  FREE_BUB: [...prevData.FREE_BUB, ...sorted.FREE_BUB],
+                };
+              });
             }
-            setFreeData(sorted);
-            console.log("실행");
-          }
-        })
-        .catch((error) => {
-          console.error("자유게시판 데이터 가져오기 오류:", error);
-        });
+            setLoading(false);
+          })
+          .catch((error) => {
+            setLoading(false);
+            console.error("데이터 가져오기 오류:", error);
+            Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
+          });
+        break;
+      case "질문":
+        QuesBubListSvc(page)
+          .then((data) => {
+            if (data !== null) {
+              const sorted = { ...data };
+              if (sorted.QUES_BUB) {
+                sorted.QUES_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+              }
+              setQuestData((prevData) => {
+                if (prevData) {
+                  return {
+                    ...prevData,
+                    QUES_BUB: [...prevData.QUES_BUB, ...sorted.QUES_BUB],
+                    RSLT_CD: prevData.RSLT_CD,
+                  };
+                } else {
+                  return {
+                    QUES_BUB: sorted.QUES_BUB,
+                    RSLT_CD: "00", 
+                  };
+                }
+              });
+            }
+            setLoading(false);
+          })
+          .catch((error) => {
+            setLoading(false);
+            console.error("데이터 가져오기 오류:", error);
+            Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
+          });
 
-      // 건의게시판 데이터 가져오기
-      SugBubListSvc(
-        userData.LOGIN_ID,
-        userData.MEMB_SC_CD,
-        userData.MEMB_DEP_CD,
-        userData.TIT_CD
-      )
-        .then((data) => {
-          if (data != null) {
-            const sorted = { ...data };
-            if (sorted.SUG_BUB) {
-              sorted.SUG_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+        break;
+      case "건의":
+        SugBubListSvc(page)
+          .then((data) => {
+            if (data !== null) {
+              const sorted = { ...data };
+              if (sorted.SUG_BUB) {
+                sorted.SUG_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+              }
+              setSugsData((prevData) => {
+                if (prevData) {
+                  return {
+                    ...prevData,
+                    SUG_BUB: [...prevData.SUG_BUB, ...sorted.SUG_BUB],
+                    RSLT_CD: prevData.RSLT_CD, 
+                  };
+                } else {
+                  return {
+                    SUG_BUB: sorted.SUG_BUB,
+                    RSLT_CD: "00",
+                  };
+                }
+              });
             }
-            setSugsData(sorted);
-          }
-        })
-        .catch((error) => {
-          console.error("건의게시판 데이터 가져오기 오류", error);
-        });
-
-      // 질문게시판 데이터 가져오기
-      QuesBubListSvc(
-        userData.LOGIN_ID,
-        userData.MEMB_SC_CD,
-        userData.MEMB_DEP_CD,
-        userData.TIT_CD
-      )
-        .then((data) => {
-          if (data !== null) {
-            const sorted = { ...data };
-            if (sorted.QUES_BUB) {
-              sorted.QUES_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
-            }
-            setQuestData(sorted);
-          }
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("질문게시판 데이터 가져오기 오류:", error);
-        });
+            setLoading(false);
+          })
+          .catch((error) => {
+            setLoading(false);
+            console.error("데이터 가져오기 오류:", error);
+            Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
+          });
+        break;
+      default:
+        break;
     }
-  }, [userData, isFocused]);
+  };
+
+  useEffect(() => {
+    const categories = ["자유", "건의", "질문"];
+    categories.forEach((category) => {
+      fetchData(category, 1);
+    });
+  }, []);
+
+  const fetchNextPage = () => {
+    if (selectedCategory === "자유") {
+      fetchData(selectedCategory, freePage + 1);
+    } else if (selectedCategory === "질문") {
+      fetchData(selectedCategory, questPage + 1);
+    } else if (selectedCategory === "건의") {
+      fetchData(selectedCategory, sugPage + 1);
+    }
+  };
+  const loadNewPage = () => {
+    if (selectedCategory === "자유") {
+      fetchData(selectedCategory, 1); 
+    } else if (selectedCategory === "질문") {
+      fetchData(selectedCategory, 1); 
+    } else if (selectedCategory === "건의") {
+      fetchData(selectedCategory, 1); 
+    }
+  };
 
   return (
     <Background>
@@ -234,6 +299,10 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
                   />
                 </View>
               )}
+              onEndReached={fetchNextPage}
+              onEndReachedThreshold={0.1}
+              onRefresh={loadNewPage}
+              refreshing={loading}
             />
           )}
           {selectedCategory === "건의" && sugsData && (
@@ -280,6 +349,10 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
                   </View>
                 );
               }}
+              onEndReached={fetchNextPage}
+              onEndReachedThreshold={0.1}
+              onRefresh={loadNewPage}
+              refreshing={loading}
             />
           )}
 
@@ -300,18 +373,20 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
                     fretit={item.TIT}
                     frecont={item.CONT}
                     onPress={() => {
-                      // 1. 각 항목을 클릭했을 때 해당 게시글 데이터 추출
                       const postData = {
                         CRE_SEQ: item.CRE_SEQ,
                         AnsFree: item.ANS_FREE,
                       };
                       console.log(postData);
-                      // 2. 공통 컴포넌트로 데이터 전달
                       modalFunctions.handleButtonPress(postData);
                     }}
                   />
                 </View>
               )}
+              onEndReached={fetchNextPage}
+              onEndReachedThreshold={0.1}
+              onRefresh={loadNewPage}
+              refreshing={loading}
             />
           )}
         </View>
