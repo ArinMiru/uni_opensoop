@@ -3,7 +3,12 @@ import { useIsFocused } from "@react-navigation/native";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { QuesBubListSvc } from "../../Services/_private/QusetPostData";
-import { FlatList, View, TouchableWithoutFeedback } from "react-native";
+import {
+  FlatList,
+  View,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+} from "react-native";
 import { FreeBubListCall } from "../../Services/_private/FreeApi";
 import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
@@ -134,19 +139,26 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <Background>
       <BottomSheetModalProvider>
-        {isModalVisible && <ListAnsTextInput />}
+        {isModalVisible}
         <BottomSheetModal
           ref={modalFunctions.bottomSheetModalRef}
           index={1}
-          snapPoints={["50%", "95%"]}
+          snapPoints={["80%", "80%"]}
           enablePanDownToClose={true}
           onDismiss={() => {
             modalFunctions.handleCloseModal();
           }}
         >
-          <View style={EditDelCloseModalStyle.contentContainer}>
+          <KeyboardAvoidingView
+            style={EditDelCloseModalStyle.contentContainer}
+            behavior="padding"
+            keyboardVerticalOffset={deviceHeight * 0.2}
+          >
             <QstModalCompo />
-          </View>
+            <KeyboardAvoidingView>
+              <ListAnsTextInput />
+            </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
         </BottomSheetModal>
         {selectedCategory === "자유" && (
           <MenuTopbarStyle
