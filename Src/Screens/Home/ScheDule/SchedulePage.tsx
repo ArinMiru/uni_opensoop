@@ -63,7 +63,9 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<string | null>(null); // 추가: 선택한 날짜 상태
+  const [selectedDate, setSelectedDate] = useState<string | null>(
+    moment().format("YYYY-MM-DD") // 초기값을 오늘 날짜로 설정
+  );
 
   const dateSelect = (date: string) => {
     setSelectedDate(date);
@@ -214,7 +216,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
                 { lineHeight: deviceHeight * 0.06 },
               ]}
             >
-              {"15"}
+              {selectedDate ? moment(selectedDate).format("DD") : "날짜 선택"}
               {"일"}
             </Text>
           </View>
