@@ -292,7 +292,7 @@ export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
 
 /* ------------------------------------------------------------------------------- */
 
-export const dprtSrch = async (SCH_CD: number): Promise<DprtData | null> => {
+export const dprtSrch = async (SCH_CD: string): Promise<DprtData | null> => {
   const endpoint = "/UNI/DprtSrch";
   const data = {
     SCH_CD,
@@ -329,13 +329,13 @@ export const dprtSrch = async (SCH_CD: number): Promise<DprtData | null> => {
  * @param TIT_CD
  */
 export const MembLikeUpdSvc = async (
-  LOGIN_ID: string, 
+  LOGIN_ID: string,
   PROC_TYPE: string,
   CERT_SEQ: string,
   MEMB_SC_CD: string,
   MEMB_DEP_CD: string,
-  TIT_CD: string,
-  ) => {
+  TIT_CD: string
+) => {
   const endpoint = "/UNI/MembLikeUpdSvc";
   const data = {
     LOGIN_ID,
