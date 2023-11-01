@@ -68,12 +68,14 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-  const [scheduleDetails, setScheduleDetails] = useState<SCHD_BuB_Item | null>(
-    null
-  );
+  const [scheduleDetails, setScheduleDetails] = useState<
+    SCHD_BuB_Item[] | null
+  >(null);
+  const [hasScheduleForSelectedDate, setHasScheduleForSelectedDate] =
+    useState<boolean>(false);
 
   const [selectedDate, setSelectedDate] = useState<string | null>(
-    moment().format("YYYY-MM-DD") // 초기값을 오늘 날짜로 설정
+    moment().format("YYYY-MM-DD")
   );
 
   const dateSelect = (date: string) => {
@@ -86,10 +88,8 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     SchdBubDtlListSvc(date)
       .then((data) => {
         if (data !== null) {
-          console.log(data);
-          const parsedData = parseSchdbubDtlListData(data).SCHD_BUB[0];
+          const parsedData = parseSchdbubDtlListData(data).SCHD_BUB;
           setScheduleDetails(parsedData);
-          console.log("scheduleDetails:", parsedData);
         }
       })
       .catch((error) => {
@@ -158,12 +158,11 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
               }
             });
 
-            // 현재 날짜 표시
             const today = moment().format("YYYY-MM-DD");
             markedDates[today] = {
               selected: true,
               marked: true,
-              selectedColor: "red", // 빨간색으로 변경
+              selectedColor: "red",
             };
 
             setSchdData(data);
@@ -185,13 +184,41 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     };
   }>({});
 
+  const renderButtons = () => {
+    if (!scheduleDetails || scheduleDetails.length === 0) {
+      return null;
+    }
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "flex-end",
+          marginTop: deviceHeight * 0.009,
+        }}
+      >
+        <View style={{ flexDirection: "row", marginRight: deviceWidth * 0.08 }}>
+          {isEditClicked ? (
+            <SchdlAftrCliklEditButton onPress={handleEditClick} />
+          ) : (
+            <SchdlBefoCliklEditButton onPress={handleEditClick} />
+          )}
+          {isDeleteClicked ? (
+            <SchdlAftrClikDelButton onPress={handleDeleteClick} />
+          ) : (
+            <SchdlBefoClikDelButton onPress={handleDeleteClick} />
+          )}
+        </View>
+      </View>
+    );
+  };
+
   const renderScheduleForDate = (date: string) => {
     const daySchedules = schdData?.SCHD_BUB.filter(
-      (item) => item.DAY === moment(date).format("DD")
+      (item) => item.DAY === moment(date).format("DD") && Number(item.CNT) > 0
     );
 
-    // 데이터가 없으면 "일정 없음"을 반환
-    if (!daySchedules || daySchedules.length === 0) {
+    if (!daySchedules || !scheduleDetails) {
       return (
         <View
           style={{
@@ -204,15 +231,17 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
         </View>
       );
     }
+
     return (
       <View style={{ flexDirection: "column", marginTop: "5%" }}>
-        {daySchedules.map((schedule, index) => (
+        {scheduleDetails.map((detail, index) => (
           <View
             key={index}
             style={{
               flexDirection: "row",
               justifyContent: "flex-start",
               alignItems: "center",
+              marginTop: "1%",
               marginLeft: "5%",
             }}
           >
@@ -244,7 +273,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
                   { textAlign: "left" },
                 ]}
               >
-                {scheduleDetails?.TIT}
+                {detail.TIT}
               </Text>
             </View>
             <View
@@ -263,9 +292,9 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
                   { textAlign: "right" },
                 ]}
               >
-                {moment(scheduleDetails?.STRT_SCHD_YMD).format("M월 D일")}
+                {moment(detail.STRT_SCHD_YMD).format("M월 D일")}
                 {" ~ "}
-                {moment(scheduleDetails?.END_SCHD_YMD).format("M월 D일")}
+                {moment(detail.END_SCHD_YMD).format("M월 D일")}
               </Text>
             </View>
           </View>
@@ -330,29 +359,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
               {"일"}
             </Text>
           </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "flex-end",
-              marginTop: deviceHeight * 0.009,
-            }}
-          >
-            <View
-              style={{ flexDirection: "row", marginRight: deviceWidth * 0.08 }}
-            >
-              {isEditClicked ? (
-                <SchdlAftrCliklEditButton onPress={handleEditClick} />
-              ) : (
-                <SchdlBefoCliklEditButton onPress={handleEditClick} />
-              )}
-              {isDeleteClicked ? (
-                <SchdlAftrClikDelButton onPress={handleDeleteClick} />
-              ) : (
-                <SchdlBefoClikDelButton onPress={handleDeleteClick} />
-              )}
-            </View>
-          </View>
+          {renderButtons()}
         </View>
         <View
           style={{
