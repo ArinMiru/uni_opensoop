@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { View, KeyboardAvoidingView, Text } from "react-native";
-import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
-import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
+import { deviceWidth } from "../../../Utils/DeviceUtils";
 import {
   OpenFreSgsTitInputBox,
   OpenFreSgsContInputBox,
@@ -61,34 +60,6 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
     }
   };
 
-  const uploadImage = async () => {
-    if (!status?.granted) {
-      const permissions = await requestPermission();
-      if (!permissions.granted) {
-        return null;
-      }
-    }
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: false,
-      quality: 1,
-      aspect: [1, 1],
-    });
-    if (result.canceled) {
-      return null;
-    }
-
-    const resizedImage = await ImageManipulator.manipulateAsync(
-      result.assets[0].uri,
-      [{ resize: { width: 100, height: 100 } }],
-      { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
-    );
-
-    console.log(resizedImage);
-
-    setImageUri(resizedImage.uri);
-  };
-
   const handleRegiButtonPress = async () => {
     try {
       if (!userData) {
@@ -117,7 +88,8 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         CONT,
         IMAGE_INFO,
       };
-
+      console.log(IMAGE_INFO);
+      // 이미지를 서버로 전송 (이미지는 Base64로 인코딩된 이미지)
       await openBubSvcNew(
         dataToSubmit.TIT,
         dataToSubmit.CONT,
@@ -126,6 +98,33 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
     } catch (error) {
       console.error("등록 오류:", error);
     }
+  };
+
+  const uploadImage = async () => {
+    if (!status?.granted) {
+      const permissions = await requestPermission();
+      if (!permissions.granted) {
+        return null;
+      }
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      aspect: [1, 1],
+    });
+    if (result.canceled) {
+      return null;
+    }
+
+    const resizedImage = await ImageManipulator.manipulateAsync(
+      result.assets[0].uri,
+      [{ resize: { width: 1172, height: 2532 } }],
+      { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
+    );
+
+    console.log(resizedImage);
+
+    setImageUri(resizedImage.uri);
   };
 
   return (

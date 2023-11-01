@@ -4,6 +4,7 @@ import {
   FlatList,
   View,
   TouchableWithoutFeedback,
+  Image,
 } from "react-native";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { openBubListCall } from "../../../Services/_private/NoticeApi";
@@ -30,26 +31,43 @@ import { useIsFocused } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { Alert } from "react-native";
 
+function decodeBase64Image(base64String: string) {
+  return `data:image/jpeg;base64,${base64String}`;
+}
+
 const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const modalFunctions = ModalReuableFuction();
   const isFocused = useIsFocused();
   const userData = getUserData();
-  const [sortedData, setSortedData] = useState<NoticeData | null>(null);
+  const [sortedData, setSortedData] = useState<NoticeData>({
+    RSLT_CD: undefined,
+    OPEN_BUB: [],
+  });
+  const [data, setData] = useState<NoticeData>({
+    RSLT_CD: undefined,
+    OPEN_BUB: [],
+  });
+
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
+  const [page, setPage] = useState<number>(1); // 페이지 번호 상태
 
-  const fetchNoticeData = () => {
+  const fetchNoticeData = (defaultPage: number) => {
     if (userData !== null) {
       setLoading(true);
-      let page = 1; // 시작 페이지 번호
-      openBubListCall(page)
+      openBubListCall(defaultPage)
         .then((data) => {
           if (data !== null) {
             const sorted = { ...data };
             if (sorted.OPEN_BUB) {
               sorted.OPEN_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
             }
-            setSortedData(sorted);
+            setData((prevData) => {
+              return {
+                ...prevData,
+                OPEN_BUB: [...prevData.OPEN_BUB, ...sorted.OPEN_BUB],
+              };
+            });
           }
           setLoading(false);
         })
@@ -58,23 +76,28 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           console.error("데이터 가져오기 오류:", error);
           Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
         });
-      page += 1;
     }
   };
 
   useEffect(() => {
-    if (isFocused) {
-      fetchNoticeData(); // 화면에 처음 들어올 때 데이터 로딩
-    }
-  }, [userData, isFocused]);
+    fetchNoticeData(1);
+  }, []);
+
+  const loadNewPage = () => {
+    fetchNoticeData(1);
+  };
+
+  const nextPage = () => {
+    setPage(page + 1);
+    fetchNoticeData(page);
+  };
 
   const renderSeparator = () => (
     <View style={{ height: 1, backgroundColor: "#ddd", marginVertical: 4 }} />
   );
 
-  const handleItemPree = (creseq: number) => {
+  const handleItemPress = (creseq: number) => {
     setSelectedCreSeq(creseq);
-    console.log(selectedCreSeq);
     modalFunctions.handleButtonPress(creseq);
   };
 
@@ -82,9 +105,9 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
     openBubListDell(selectedCreSeq);
     modalFunctions.handleCloseModal();
   };
+
   const modalItemEdit = () => {
     if (sortedData && selectedCreSeq) {
-      // 선택한 CRE_SEQ에 해당하는 아이템을 찾기
       const selectedNotice = sortedData.OPEN_BUB.find(
         (item) => item.CRE_SEQ === selectedCreSeq
       );
@@ -144,13 +167,12 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           ]}
         >
           <Spinner
-            // 로딩 상태에 따라 Spinner를 화면에 표시
             visible={loading}
             textContent={"로딩 중..."}
             textStyle={{ color: "#FFF" }}
           />
           <FlatList
-            data={sortedData?.OPEN_BUB}
+            data={data?.OPEN_BUB}
             keyExtractor={(item) => item.CRE_SEQ.toString()}
             renderItem={({ item }) => {
               return (
@@ -162,12 +184,14 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
                   PostingTime={item.CRE_DAT}
                   postLike={item.LIKE_CNT}
                   PostContent={item.CONT}
-                  onPress={() => handleItemPree(item.CRE_SEQ)}
+                  onPress={() => handleItemPress(item.CRE_SEQ)}
                 />
               );
             }}
             ItemSeparatorComponent={renderSeparator}
-            onRefresh={fetchNoticeData}
+            onEndReached={nextPage}
+            onEndReachedThreshold={0.1}
+            onRefresh={loadNewPage}
             refreshing={loading}
           />
           {modalFunctions.modalVisible && (
