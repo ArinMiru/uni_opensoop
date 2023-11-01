@@ -218,7 +218,11 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
       (item) => item.DAY === moment(date).format("DD") && Number(item.CNT) > 0
     );
 
-    if (!daySchedules || !scheduleDetails) {
+    if (
+      !daySchedules ||
+      scheduleDetails === null ||
+      daySchedules.length === 0
+    ) {
       return (
         <View
           style={{
