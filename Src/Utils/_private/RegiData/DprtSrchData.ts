@@ -1,5 +1,5 @@
 export interface DprtData {
-  SCH_CD: number;
+  SCH_CD: string;
   SCH_NM: string;
   DPRT_CD: string;
   DPRT_NM: string;
