@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Platform,
+} from "react-native";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
@@ -10,6 +16,7 @@ import { RegiDupleFlex3 } from "../../../Components/AccountCompo/AccountCustomCo
 import { SchlSrchCall } from "../../../Services/_private/EndPointApiFuntion";
 import { Image } from "react-native";
 import { RegiSchlSrchProps } from "../../../Utils/NavigationProp/AccountScrProp";
+import { Dimensions } from "react-native";
 
 const UniCertiSchSrch: React.FC<RegiSchlSrchProps> = ({
   navigation,
@@ -19,7 +26,12 @@ const UniCertiSchSrch: React.FC<RegiSchlSrchProps> = ({
   const [searchResults, setSearchResults] = useState<Array<string>>([]);
   const [isNextButtonActive, setIsNextButtonActive] = useState<boolean>(false);
   const [selectedSchoolCode, setSelectedSchoolCode] = useState<string>("");
-  const [searchResultData, setSearchResultData] = useState<any>(null); // 추가
+  const [searchResultData, setSearchResultData] = useState<any>(null);
+  const { width: deviceWidth, height: deviceHeight } = Dimensions.get("window");
+  console.log("deviceWidth:", deviceWidth);
+  console.log("deviceHeight:", deviceHeight);
+  const marginTopValue =
+    Platform.OS === "ios" && deviceHeight <= 667 ? "18%" : "20%";
 
   const { MEMB_ID } = route.params;
 
@@ -117,7 +129,7 @@ const UniCertiSchSrch: React.FC<RegiSchlSrchProps> = ({
             position: "absolute",
             borderBottomLeftRadius: 10,
             borderBottomRightRadius: 10,
-            marginTop: "17.8%",
+            marginTop: marginTopValue,
           }}
         >
           {searchResults.slice(0, 10).map((name, index) => (
@@ -128,6 +140,10 @@ const UniCertiSchSrch: React.FC<RegiSchlSrchProps> = ({
                 padding: 10,
                 backgroundColor: "#f7f8f9",
                 width: deviceWidth * 0.5625,
+                height: deviceHeight * 0.05,
+                alignSelf: "center",
+                marginTop: 10,
+                borderRadius: 10,
               }}
             >
               <Text>{name}</Text>
@@ -139,7 +155,10 @@ const UniCertiSchSrch: React.FC<RegiSchlSrchProps> = ({
         <OnlyAccountButton
           text="다음"
           onPress={() =>
-            navigation.navigate("UniCertiDprtSrch", { MEMB_ID: MEMB_ID, SCH_CD: selectedSchoolCode })
+            navigation.navigate("UniCertiDprtSrch", {
+              MEMB_ID: MEMB_ID,
+              SCH_CD: selectedSchoolCode,
+            })
           }
           disable={!isNextButtonActive}
         />
