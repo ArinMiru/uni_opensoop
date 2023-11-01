@@ -16,10 +16,7 @@ import { UserData } from "../../Utils/_private/ApiData/UserData";
  * @returns Promise<FreeData | null>
  */
 export const FreeBubListCall = async (
-  LOGIN_ID: string,
-  MEMB_SC_CD: string,
-  MEMB_DEP_CD: string,
-  TIT_CD: string
+  REQ_PAGE: number
 ): Promise<FreeData | null> => {
   const endpoint = "/UNI/FreeBubListSvc";
 
@@ -28,10 +25,10 @@ export const FreeBubListCall = async (
 
   if (userData !== null) {
     // userData가 null이 아닌 경우에만 요청 보내기
+    const { LOGIN_ID, MEMB_DEP_CD, MEMB_SC_CD, TIT_CD } = userData;
 
     // 고정된 값으로 설정
-    const LIST_UNIT_CNT = 20; // 한 페이지에 표시할 게시글 수
-    const REQ_PAGE = 1; // 요청할 페이지 번호
+    const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 게시글 수
 
     const data = {
       LOGIN_ID, // 사용자 아이디
@@ -162,8 +159,10 @@ export const FreeBubRegi = async (TIT: string, CONT: string) => {
       CONT,
     };
 
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
@@ -193,8 +192,10 @@ export const FreeBubDel = async (CRE_SEQ: number) => {
       CRE_SEQ,
     };
     console.log(data);
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
     } else {
@@ -227,8 +228,10 @@ export const FreeBubEd = async (CRE_SEQ: string, TIT: string, CONT: string) => {
       TIT,
       CONT,
     };
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");

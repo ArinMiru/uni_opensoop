@@ -23,10 +23,7 @@ import {
  */
 
 export const SugBubListSvc = async (
-  LOGIN_ID: string,
-  MEMB_SC_CD: string,
-  MEMB_DEP_CD: string,
-  TIT_CD: string
+  REQ_PAGE : number
 ): Promise<SugBubListData | null> => {
   const userData = getUserData();
   const endpoint = "/UNI/SugBubListSvc";
@@ -34,8 +31,8 @@ export const SugBubListSvc = async (
   //로그인 사용자의 데이터 가져오기
 
   if (userData !== null) {
-    const LIST_UNIT_CNT = 20; //한 페이지 안에 표시할 게시글 수
-    const REQ_PAGE = 1;
+    const LIST_UNIT_CNT = 10; //한 페이지 안에 표시할 게시글 수
+    const {LOGIN_ID,MEMB_DEP_CD,MEMB_SC_CD,TIT_CD} = userData
     const data = {
       LOGIN_ID,
       MEMB_SC_CD,

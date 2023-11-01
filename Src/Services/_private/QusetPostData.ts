@@ -23,28 +23,25 @@ import { UserData } from "../../Utils/_private/ApiData/UserData";
  * @param REQ_PAGE
  */
 export const QuesBubListSvc = async (
-  MEMB_ID: string,
-  MEMB_SC_CD: string,
-  MEMB_DEP_CD: string,
-  TIT_CD: string
+  REQ_PAGE: number
 ): Promise<QuestData | null> => {
   const endpoint = "/UNI/QuesBubListSvc";
-  // 고정된 값으로 설정
-  const LIST_UNIT_CNT = 20; // 한 페이지에 표시할 게시글 수
-  const REQ_PAGE = 1; // 요청할 페이지 번호
-  const data = {
-    MEMB_ID,
-    MEMB_SC_CD,
-    MEMB_DEP_CD,
-    TIT_CD,
-    LIST_UNIT_CNT,
-    REQ_PAGE,
-  };
-
-  //로그인 사용자의 데이터 가져오기
   const userData = getUserData();
-
+  // 고정된 값으로 설정
   if (userData !== null) {
+    const { LOGIN_ID, MEMB_DEP_CD, MEMB_SC_CD, TIT_CD } = userData;
+    const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 게시글 수
+    const data = {
+      LOGIN_ID,
+      MEMB_SC_CD,
+      MEMB_DEP_CD,
+      TIT_CD,
+      LIST_UNIT_CNT,
+      REQ_PAGE,
+    };
+
+    //로그인 사용자의 데이터 가져오기
+
     // userData가 null이 아닌 경우에만 요청 보내기
 
     try {

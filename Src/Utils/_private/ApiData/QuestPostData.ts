@@ -1,4 +1,4 @@
-import { sendLoginCredentials } from "../../../Services/_private/Api.config";
+import { sendApiData } from "../../../Services/_private/Api.config";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { AxiosResponse } from 'axios';
 import { QuestData, parseQuestData } from "../ApiData/QuestData";
@@ -46,7 +46,7 @@ export const QuesBubListSvc = async (
 
     try {
         // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
-        const result: AxiosResponse<any, any> | null = await sendLoginCredentials(
+        const result: AxiosResponse<any, any> | null = await sendApiData(
           endpoint,
           data
         );
