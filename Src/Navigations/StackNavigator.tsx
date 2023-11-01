@@ -61,22 +61,22 @@ export type RootStackParamList = {
   RegiNmNic: { MEMB_ID: string };
   RegiPass: { MEMB_ID: string; MEMB_NM: string };
   RegiChk: { MEMB_ID: string };
-  UniCertiDprtSrch: { MEMB_ID: string; SCH_CD: number };
+  UniCertiDprtSrch: { MEMB_ID: string; SCH_CD: string };
   UniCertiEcode: { CERT_SEQ: string };
   UniCertiEmail: {
     MEMB_ID: string;
-    MEMB_SC_CD: number;
+    MEMB_SC_CD: string;
     MEMB_DEP_CD: string;
     MEMB_NUM: string;
   };
   UniCertiStudNum: {
     MEMB_ID: string;
-    MEMB_SC_CD: number;
+    MEMB_SC_CD: string;
     MEMB_DEP_CD: string;
   };
   UniCertiGrad: {
     MEMB_ID: string;
-    MEMB_SC_CD: number;
+    MEMB_SC_CD: string;
     MEMB_DEP_CD: string;
   };
   UniCertiChk: { MEMB_ID: string };
