@@ -23,7 +23,6 @@ export const ListAnsTextInput: React.FC<inputProps> = ({
   return (
     <View
       style={{
-        position: "absolute",
         height: deviceHeight * 0.1,
         bottom: deviceHeight * 0.00005,
         flexDirection: "row-reverse",

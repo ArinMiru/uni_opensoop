@@ -164,6 +164,8 @@ export const MembPassFndSvc = async (MEMB_ID: string, MEMB_EM: string) => {
 
 /**
  * 비밀번호 찾기 인증번호 API 호출 함수
+ * @param MEMB_ID
+ * @param CERT_SEQ
  */
 export const ChkAndCertSvc = async (MEMB_ID: string, CERT_SEQ: string) => {
   const endpoint = "/UNI/ChkAndCertSvc";
@@ -314,5 +316,43 @@ export const dprtSrch = async (SCH_CD: number): Promise<DprtData | null> => {
   } catch (error) {
     console.error("오류 발생:", error);
     return null;
+  }
+};
+
+/**
+ * 좋아요 누적 공통 API 호출 함수
+ * @param LOGIN_ID
+ * @param PROC_TYPE
+ * @param CRE_SEQ
+ * @param MEMB_SC_CD
+ * @param MEMB_DEP_CD
+ * @param TIT_CD
+ */
+export const MembLikeUpdSvc = async (
+  LOGIN_ID: string, 
+  PROC_TYPE: string,
+  CERT_SEQ: string,
+  MEMB_SC_CD: string,
+  MEMB_DEP_CD: string,
+  TIT_CD: string,
+  ) => {
+  const endpoint = "/UNI/MembLikeUpdSvc";
+  const data = {
+    LOGIN_ID,
+    PROC_TYPE,
+    CERT_SEQ,
+    MEMB_SC_CD,
+    MEMB_DEP_CD,
+    TIT_CD,
+  };
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
+  if (result !== null && result.data.RSLT_CD === "00") {
+    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+    console.log("통신 성공.");
+  } else {
+    console.log("통신 실패.");
   }
 };
