@@ -5,7 +5,7 @@ import textStyle from "../../Styles/TextStyle";
 import { deviceWidth } from "../../Utils/DeviceUtils";
 import MainPageStyles from "../../Styles/MainPageStyles/MainPageStyles";
 import { MainOpenLikeStatus } from "../IconCompo/OpenLikeStatus";
-
+import { Image } from "react-native";
 interface ButtonProps {
   children?: React.ReactNode;
   Title?: string;
@@ -28,8 +28,8 @@ interface ButtonProps {
   F_VOT_TIT?: string;
   S_VOT_TIT?: string;
   VOT_TOT?: number;
-  F_VOT_TOT?: number;
-  S_VOT_TOT?: number;
+  F_VOT_TOT?: string;
+  S_VOT_TOT?: string;
   VOT_GO_CD?: string;
   F_VOT_GO_CD?: string;
   S_VOT_GO_CD?: string;
@@ -339,7 +339,7 @@ export const MainVoteBub: React.FC<ButtonProps> = ({
               { marginLeft: deviceWidth * 0.02 },
             ]}
           >
-            {"총 득표 수"} {F_VOT_TOT} {"명"}
+            {F_VOT_TOT}
           </Text>
         </View>
         <View style={{ alignItems: "flex-end", justifyContent: "center" }}>
@@ -371,7 +371,7 @@ export const MainVoteBub: React.FC<ButtonProps> = ({
               { marginLeft: deviceWidth * 0.02 },
             ]}
           >
-            {"총 득표 수"} {S_VOT_TOT} {"명"}
+            {S_VOT_TOT}
           </Text>
         </View>
         <View style={{ alignItems: "flex-end", justifyContent: "center" }}>
@@ -461,9 +461,13 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
             ]}
           >
             <TouchableOpacity onPress={onPressPhoto}>
-              <View style={[MainPageStyles.MainOpenPhotoBox]}>
-                {F_Open_Photo}
-              </View>
+              <Image
+                source={{ uri: F_Open_Photo }}
+                style={[
+                  MainPageStyles.MainOpenPhotoBox,
+                  { resizeMode: "contain" },
+                ]}
+              />
             </TouchableOpacity>
             <View
               style={{
@@ -545,7 +549,13 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
             ]}
           >
             <TouchableOpacity onPress={onPressPhoto}>
-              <View style={[MainPageStyles.MainOpenPhotoBox]} />
+              <Image
+                source={{ uri: S_Open_Photo }}
+                style={[
+                  MainPageStyles.MainOpenPhotoBox,
+                  { resizeMode: "contain" },
+                ]}
+              />
             </TouchableOpacity>
             <View
               style={{
@@ -564,7 +574,6 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                 <TouchableOpacity onPress={onPressOpenBubTitle}>
                   <Text style={[textStyle.medium10, { color: "#121212" }]}>
                     {S_Open_Tit}
-                    {/**공지사항 제목 */}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -584,7 +593,6 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                   >
                     <Text style={[textStyle.bold09, { color: "#121212" }]}>
                       {S_Open_MEMB_NM}
-                      {/**공지사항 작성자 */}
                     </Text>
                   </View>
                   <View>
@@ -598,7 +606,6 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                     >
                       <Text style={[textStyle.bold08, { color: "#919191" }]}>
                         {S_Open_MEMB_NM} {S_TIT_NM}
-                        {/**공지사항 작성자 학과, 직책 */}
                       </Text>
                     </View>
                   </View>

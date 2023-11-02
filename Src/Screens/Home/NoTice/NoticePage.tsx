@@ -30,6 +30,7 @@ import { deviceHeight } from "../../../Utils/DeviceUtils";
 import { useIsFocused } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { Alert } from "react-native";
+import { timeSince } from "../../../Utils/timeUtils";
 
 function decodeBase64Image(base64String: string) {
   return `data:image/jpeg;base64,${base64String}`;
@@ -58,14 +59,12 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
       openBubListCall(defaultPage)
         .then((data) => {
           if (data !== null) {
-            const sorted = { ...data };
-            if (sorted.OPEN_BUB) {
-              sorted.OPEN_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
-            }
             setData((prevData) => {
+              const updatedOpenBub = [...prevData.OPEN_BUB, ...data.OPEN_BUB];
+              updatedOpenBub.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ); // 새로 추가된 데이터를 포함하여 전체 배열을 다시 정렬
               return {
                 ...prevData,
-                OPEN_BUB: [...prevData.OPEN_BUB, ...sorted.OPEN_BUB],
+                OPEN_BUB: updatedOpenBub,
               };
             });
           }
@@ -173,7 +172,9 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           />
           <FlatList
             data={data?.OPEN_BUB}
-            keyExtractor={(item) => item.CRE_SEQ.toString()}
+            keyExtractor={(item, index) =>
+              item.CRE_SEQ.toString() + "-" + index
+            }
             renderItem={({ item }) => {
               return (
                 <NoticePostBoxView
@@ -181,7 +182,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
                   MEMB_CD={item.TIT_NM}
                   MEMB_DEP_CD={item.MEMB_DEP_NM}
                   Title={item.TIT}
-                  PostingTime={item.CRE_DAT}
+                  PostingTime={timeSince(item.CRE_DAT)}
                   postLike={item.LIKE_CNT}
                   PostContent={item.CONT}
                   onPress={() => handleItemPress(item.CRE_SEQ)}
