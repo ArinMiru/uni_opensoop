@@ -1,5 +1,8 @@
 import { sendApiData } from "./Api.config";
-import { setUserData, getUserData } from "../../Utils/_private/ApiData/UserData";
+import {
+  setUserData,
+  getUserData,
+} from "../../Utils/_private/ApiData/UserData";
 import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
 import {
@@ -328,35 +331,75 @@ export const dprtSrch = async (SCH_CD: string): Promise<DprtData | null> => {
  * @param MEMB_DEP_CD
  * @param TIT_CD
  */
-export const MembLikeUpdSvc = async (CER_SEQ: number) => {
+export const MembLikeUpdSvc = async (CRE_SEQ: number) => {
   const endpoint = "/UNI/MembLikeUpdSvc";
   const userData = getUserData();
-  
+
   if (userData != null) {
-    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD, } = userData;
+    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
     const PROC_TYPE = "01"; // 공지게시판 고정
     const data = {
       LOGIN_ID,
       PROC_TYPE,
-      CER_SEQ,
+      CRE_SEQ,
       MEMB_SC_CD,
       MEMB_DEP_CD,
       TIT_CD,
-  };
-  console.log(data);
-  const result: AxiosResponse<UserData, any> | null = await sendApiData(
-    endpoint,
-    data
-  );
-  if (result !== null && result.data.RSLT_CD === "00") {
-    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-    console.log("서버 통신 성공.");
-    return result.data;
-  } else {
-    console.log("서버 통신 실패.");
-    return null;
+    };
+    console.log(data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
+    if (result !== null && result.data.RSLT_CD === "00") {
+      // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+      console.log("서버 통신 성공.");
+      return result.data;
+    } else {
+      console.log("서버 통신 실패.");
+      return null;
+    }
   }
-}
+};
+
+/**
+ * 좋아요 누적 공통 API 호출 함수
+ * @param LOGIN_ID
+ * @param PROC_TYPE
+ * @param CRE_SEQ
+ * @param MEMB_SC_CD
+ * @param MEMB_DEP_CD
+ * @param TIT_CD
+ */
+export const MembLikeMinusUpdSvc = async (CRE_SEQ: number) => {
+  const endpoint = "/UNI/MembLikeMinusUpdSvc";
+  const userData = getUserData();
+
+  if (userData != null) {
+    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
+    const PROC_TYPE = "01"; // 공지게시판 고정
+    const data = {
+      LOGIN_ID,
+      PROC_TYPE,
+      CRE_SEQ,
+      MEMB_SC_CD,
+      MEMB_DEP_CD,
+      TIT_CD,
+    };
+    console.log(data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
+    if (result !== null && result.data.RSLT_CD === "00") {
+      // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+      console.log("서버 통신 성공.");
+      return result.data;
+    } else {
+      console.log("서버 통신 실패.");
+      return null;
+    }
+  }
 };
 
 /* ------------------------------------------------------------------------------- */
@@ -368,7 +411,11 @@ export const MembLikeUpdSvc = async (CER_SEQ: number) => {
  * @param APP_NOTICE_YN
  * @param DEP_NOTICE_YN
  */
-export const MembAlmInfoUpd = async (MEMB_ID: string, APP_NOTICE_YN: string, DEP_NOTICE_YN: string) => {
+export const MembAlmInfoUpd = async (
+  MEMB_ID: string,
+  APP_NOTICE_YN: string,
+  DEP_NOTICE_YN: string
+) => {
   const endpoint = "/UNI/MembAlmInfoUpd";
   const data = {
     MEMB_ID,

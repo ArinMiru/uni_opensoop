@@ -13,6 +13,8 @@ interface ButtonProps {
   text?: string;
   postLike?: number;
   onPress?: () => void;
+  onLikePress?: () => void;
+  onDislikePress?: () => void;
   onPressDelPhoto?: () => void;
   onPressAddPhoto?: () => void;
   navigation?: { navigate: (screenName: string) => void };
@@ -51,6 +53,8 @@ export const OpenPhotoButton: React.FC<ButtonProps> = ({
 export const OpenLikeButtton: React.FC<ButtonProps> = ({
   children,
   postLike,
+  onLikePress,
+  onDislikePress,
   onPress,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -58,12 +62,16 @@ export const OpenLikeButtton: React.FC<ButtonProps> = ({
 
   const handlePress = () => {
     if (isLiked) {
+      // 좋아요를 취소하는 경우
       setLikeCount(likeCount - 1);
+      setIsLiked(false);
+      if (onDislikePress) onDislikePress();
     } else {
+      // 좋아요를 누르는 경우
       setLikeCount(likeCount + 1);
+      setIsLiked(true);
+      if (onLikePress) onLikePress();
     }
-    setIsLiked(!isLiked);
-    if (onPress) onPress();
   };
 
   return (
