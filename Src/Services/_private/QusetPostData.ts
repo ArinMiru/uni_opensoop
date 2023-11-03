@@ -68,6 +68,8 @@ export const QuesBubListSvc = async (
     return null;
   }
 };
+
+/** 등록 */
 export const quesBubSvcNew = async (TIT: string) => {
   const userData = getUserData();
   const endpoint = "/UNI/QuesBubSvc";
@@ -97,6 +99,8 @@ export const quesBubSvcNew = async (TIT: string) => {
     }
   }
 };
+
+/** 수정 */
 export const QuesBubSvcUp = async (
   CRE_SEQ: number,
   TIT: string,
@@ -130,6 +134,8 @@ export const QuesBubSvcUp = async (
     }
   }
 };
+
+/** 삭제 */
 export const QuesBubSvcDel = async (CRE_SEQ: number) => {
   const userData = getUserData();
   const endpoint = "/UNI/QuesBubSvc";
