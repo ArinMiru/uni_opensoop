@@ -23,7 +23,7 @@ import {
  */
 
 export const SugBubListSvc = async (
-  REQ_PAGE : number
+  REQ_PAGE: number
 ): Promise<SugBubListData | null> => {
   const userData = getUserData();
   const endpoint = "/UNI/SugBubListSvc";
@@ -32,7 +32,7 @@ export const SugBubListSvc = async (
 
   if (userData !== null) {
     const LIST_UNIT_CNT = 10; //한 페이지 안에 표시할 게시글 수
-    const {LOGIN_ID,MEMB_DEP_CD,MEMB_SC_CD,TIT_CD} = userData
+    const { LOGIN_ID, MEMB_DEP_CD, MEMB_SC_CD, TIT_CD } = userData;
     const data = {
       LOGIN_ID,
       MEMB_SC_CD,
@@ -67,6 +67,7 @@ export const SugBubListSvc = async (
   }
 };
 
+/** 등록 */
 export const SugBubListNew = async (
   TIT: string,
   CONT: string,
@@ -117,6 +118,7 @@ export const SugBubListNew = async (
   }
 };
 
+/** 수정 */
 export const SugBubListUp = async (
   CRE_SEQ: number,
   TIT: string,
@@ -167,6 +169,8 @@ export const SugBubListUp = async (
     return null;
   }
 };
+
+/** 삭제 */
 export const SugBubListDel = async (
   CRE_SEQ: number
 ): Promise<SugBubListData | null> => {
