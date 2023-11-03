@@ -204,6 +204,128 @@ export const MainSchdBub: React.FC<ButtonProps> = ({
   );
 };
 
+export const OneMainSchdBub: React.FC<ButtonProps> = ({
+  navigation,
+  onPress,
+  Title,
+  F_SCHD_TIT,
+  S_SCHD_TIT,
+  F_STRT_SCHD_YMD,
+  F_END_SCHD_YMD,
+  S_STRT_SCHD_YMD,
+  S_END_SCHD_YMD,
+}) => {
+  const [firstTextWidth, setFirstTextWidth] = useState(0);
+  const [secondTextWidth, setSecondTextWidth] = useState(0);
+
+  const handleFirstTextLayout = (event: any) => {
+    const width = event.nativeEvent.layout.width;
+    setFirstTextWidth(width);
+  };
+
+  const handleSecondTextLayout = (event: any) => {
+    const width = event.nativeEvent.layout.width;
+    setSecondTextWidth(width);
+  };
+
+  const totalWidth = deviceWidth - deviceWidth * 0.05; // 전체 사용 가능한 너비 (양쪽 마진 포함)
+  let availableSpace = totalWidth - (firstTextWidth + secondTextWidth); // 두 텍스트 사이의 사용 가능한 공간
+
+  if (F_SCHD_TIT && F_SCHD_TIT.length >= 9) {
+    availableSpace -= 35;
+  }
+
+  if (S_SCHD_TIT && S_SCHD_TIT.length >= 9) {
+    availableSpace -= 35;
+  }
+
+  const generateMiddleText = (space: number) => {
+    const dashWidth = 6;
+    const numOfDashes = Math.floor(space / dashWidth);
+    return "-".repeat(numOfDashes);
+  };
+
+  const middleText = generateMiddleText(availableSpace);
+
+  useEffect(() => {
+    // 상태 업데이트 후 컴포넌트를 다시 렌더링
+  }, [firstTextWidth, secondTextWidth]);
+
+  return (
+    <View style={[MainPageStyles.MainSchdlContentBox]}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginTop: deviceWidth * 0.009,
+        }}
+      >
+        <Text
+          style={[
+            textStyle.bold16,
+            { color: "#333333" },
+            { marginLeft: deviceWidth * 0.05 },
+          ]}
+        >
+          {"일정"}
+        </Text>
+        <View
+          style={{
+            marginRight: deviceWidth * 0.05,
+          }}
+        >
+          <TouchableOpacity onPress={onPress}>
+            <Text style={[textStyle.semibold10, { color: "#4BB781" }]}>
+              {"더보기"}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={{ flex: 1, alignItems: "center", flexDirection: "row" }}>
+        <Text
+          onLayout={handleFirstTextLayout}
+          style={[
+            textStyle.medium10,
+            { color: "#151515" },
+            { marginLeft: deviceWidth * 0.05 },
+          ]}
+        >
+          {F_STRT_SCHD_YMD}
+          {" ~ "}
+          {F_END_SCHD_YMD}
+        </Text>
+        <Text
+          style={[
+            textStyle.semibold08,
+            { color: "#919191" },
+            { marginLeft: deviceWidth * 0.09 },
+          ]}
+        >
+          {middleText}
+        </Text>
+        <View
+          style={{
+            alignItems: "flex-end",
+            justifyContent: "center",
+          }}
+        >
+          <Text
+            onLayout={handleSecondTextLayout}
+            style={[
+              textStyle.semibold08,
+              { color: "#424C43" },
+              { marginLeft: deviceWidth * 0.049 },
+            ]}
+          >
+            {F_SCHD_TIT}
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+
 export const MainSchdNoBox: React.FC<ButtonProps> = ({ onPress }) => {
   return (
     <View

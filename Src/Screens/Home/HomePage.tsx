@@ -6,6 +6,7 @@ import {
   MainVoteBub,
   MainSchdBub,
   MainSchdNoBox,
+  OneMainSchdBub,
 } from "../../Components/MainPageCompo/MainPageCompo";
 import { Background } from "../../Components/AllCompo/Background";
 import { MainPageTopbarStyle } from "../../Components/AllCompo/TopbarCompo";
@@ -140,15 +141,36 @@ const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
         </View>
         <View style={{ marginBottom: deviceWidth * 0.04 }}>
           {todaySchedules && todaySchedules.length > 0 ? (
-            <MainSchdBub
-              F_STRT_SCHD_YMD={todaySchedules[0]?.STRT_SCHD_YMD || "시작 날짜"}
-              F_END_SCHD_YMD={todaySchedules[0]?.END_SCHD_YMD || "종료 날짜"}
-              S_STRT_SCHD_YMD={todaySchedules[1]?.STRT_SCHD_YMD || "시작 날짜"}
-              S_END_SCHD_YMD={todaySchedules[1]?.END_SCHD_YMD || "종료 날짜"}
-              F_SCHD_TIT={todaySchedules[0]?.TIT || "첫번째 일정 제목"}
-              S_SCHD_TIT={todaySchedules[1]?.TIT || "두번째 일정 제목"}
-              onPress={() => navigation.navigate("SchedulPage")}
-            />
+            todaySchedules.length === 1 ? (
+              <OneMainSchdBub
+                F_STRT_SCHD_YMD={
+                  todaySchedules[0]?.STRT_SCHD_YMD.split(" ")[0] || "시작 날짜"
+                }
+                F_END_SCHD_YMD={
+                  todaySchedules[0]?.END_SCHD_YMD.split(" ")[0] || "종료 날짜"
+                }
+                F_SCHD_TIT={todaySchedules[0]?.TIT || "일정 제목"}
+                onPress={() => navigation.navigate("SchedulPage")}
+              />
+            ) : (
+              <MainSchdBub
+                F_STRT_SCHD_YMD={
+                  todaySchedules[0]?.STRT_SCHD_YMD.split(" ")[0] || "시작 날짜"
+                }
+                F_END_SCHD_YMD={
+                  todaySchedules[0]?.END_SCHD_YMD.split(" ")[0] || "종료 날짜"
+                }
+                S_STRT_SCHD_YMD={
+                  todaySchedules[1]?.STRT_SCHD_YMD.split(" ")[0] || "시작 날짜"
+                }
+                S_END_SCHD_YMD={
+                  todaySchedules[1]?.END_SCHD_YMD.split(" ")[0] || "종료 날짜"
+                }
+                F_SCHD_TIT={todaySchedules[0]?.TIT || "첫번째 일정 제목"}
+                S_SCHD_TIT={todaySchedules[1]?.TIT || "두번째 일정 제목"}
+                onPress={() => navigation.navigate("SchedulPage")}
+              />
+            )
           ) : (
             <MainSchdNoBox onPress={() => navigation.navigate("SchedulPage")} />
           )}
