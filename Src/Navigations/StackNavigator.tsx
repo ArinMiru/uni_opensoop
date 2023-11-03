@@ -30,7 +30,6 @@ import QstPostRegiPage from "../Screens/Community/QuesTion/QstPostRegi";
 import SgsPostRegiPage from "../Screens/Community/SuggeStion/SgsPostRegiPage";
 import SgsPostDetailPage from "../Screens/Community/SuggeStion/SgsPostDetailPage";
 import FrePostRegiPage from "../Screens/Community/Free/FrePostRegiPage";
-import FrePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
 import VotePostPage from "../Screens/Home/VoTe/VotePostPage";
 import VotePostRegiPage from "../Screens/Home/VoTe/VotePostRegiPage";
 import VotePostDetailPage from "../Screens/Home/VoTe/VotePostDetailPage";
@@ -42,13 +41,14 @@ import ProfilePage from "../Screens/Home/ProfilePage";
 import TitleCodeCerti from "../Screens/Home/TitleCodeCerti";
 import NoticeEditPage from "../Screens/Home/NoTice/NoticeEditPage";
 import FrePostDetailLawPage from "../Screens/Community/Free/FrePostDetailLawPage";
+import FreePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
 import JungTestScreen from "../Screens/JungTest/JungTestScreen";
 import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
 import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
-import FreePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
+
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
 
@@ -415,7 +415,14 @@ const StackNavigator = () => {
       <Stack.Screen
         name="DowonTestScreen"
         component={DowonTestScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          presentation: "modal",
+          cardStyle: {
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+          },
+          cardOverlayEnabled: true,
+        }}
       />
 
       <Stack.Screen

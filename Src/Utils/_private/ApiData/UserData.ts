@@ -1,6 +1,6 @@
 // UserData 인터페이스 정의
 export interface UserData {
-  MEMB_ID: any;
+  MEMB_ID: string;
   RSLT_CD: string; // 로그인 처리에 대한 서버 응답 결과 코드
   LOGIN_ID: string; // 사용자의 로그인 아이디
   MEMB_NM: string; // 사용자의 이름
@@ -16,12 +16,14 @@ export interface UserData {
   MEMB_EM: string; // 사용자의 이메일
   PROF_IMG_PATH: string; // 사용자의 프로필 이미지 경로
   COLL_CERT_IND: string; // 대학생 인증 여부
+  APP_NOTICE_YN: string; // 앱 알림 여부
+  DEP_NOTICE_YN: string; // 공지사항 알림 여부
   LIST_UNIT_CNT: number; // LIST_UNIT_CNT 추가
   REQ_PAGE: number; // REQ_PAGE 추가
 }
 
 let userData: UserData | null = {
-  MEMB_ID: null, // 또는 기본값을 지정하십시오.
+  MEMB_ID: "",
   RSLT_CD: "",
   LOGIN_ID: "",
   MEMB_NM: "",
@@ -37,6 +39,8 @@ let userData: UserData | null = {
   MEMB_EM: "",
   PROF_IMG_PATH: "",
   COLL_CERT_IND: "",
+  APP_NOTICE_YN: "",
+  DEP_NOTICE_YN: "",
   LIST_UNIT_CNT: 10, // 항상 고정된 값
   REQ_PAGE: 1, // 항상 고정된 값
 };
