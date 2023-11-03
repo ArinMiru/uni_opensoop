@@ -26,7 +26,10 @@ import {
   SchdlAftrClikDelButton,
 } from "../../../Components/SchdlCompo/SchdlButton";
 import { Octicons } from "@expo/vector-icons";
-import { SchdBubDtlListSvc } from "../../../Services/_private/SchdBubApi";
+import {
+  SchdBubDtlListSvc,
+  schdBubSvcDel,
+} from "../../../Services/_private/SchdBubApi";
 import {
   SCHD_BuB_Item,
   parseSchdbubDtlListData,
@@ -82,6 +85,10 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     setSelectedDate(date);
     scheduleForDate(date);
     console.log(date);
+  };
+
+  const schedulebutton = () => {
+    schdBubSvcDel(16);
   };
 
   const scheduleForDate = (date: string) => {
@@ -164,7 +171,6 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
               marked: true,
               selectedColor: "red",
             };
-
             setSchdData(data);
             setSpecificDates(markedDates);
           }
@@ -253,7 +259,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
               {isEditClicked ? (
                 <ScdlEditIcon />
               ) : isDeleteClicked ? (
-                <SchldDelButton />
+                <SchldDelButton onPress={schedulebutton} />
               ) : (
                 <Octicons
                   name="dot-fill"

@@ -4,7 +4,7 @@ export interface SchdBubDtlListData {
 }
 
 export interface SCHD_BuB_Item {
-  SRE_SEQ: string;
+  CRE_SEQ: string; //😡😡😡😡😡😡😡😡😡😡😡
   TIT: string;
   CONT: string;
   STRT_SCHD_YMD: string;
@@ -21,7 +21,7 @@ export function parseSchdbubDtlListData(rawData: any): SchdBubDtlListData {
   if (Array.isArray(rawData.SCHD_BUB)) {
     SchdBubDtlListData.SCHD_BUB = rawData.SCHD_BUB.map((item: any) => {
       const SCHD_BuB_Item: SCHD_BuB_Item = {
-        SRE_SEQ: item.SRE_SEQ || "",
+        CRE_SEQ: item.CRE_SEQ || "",
         TIT: item.TIT || "",
         CONT: item.CONT || "",
         STRT_SCHD_YMD: item.STRT_SCHD_YMD || "",

@@ -17,9 +17,8 @@ import { votBubListCall } from "../../Services/_private/VoteApi";
 import { SchdBubDtlListSvc } from "../../Services/_private/SchdBubApi";
 import { VoteItem } from "../../Utils/_private/ApiData/VoteData";
 import { NoticeItem } from "../../Utils/_private/ApiData/NoticeData";
-import { SchdBubItem } from "../../Utils/_private/ApiData/SchdBubData";
 import { SCHD_BuB_Item } from "../../Utils/_private/ApiData/SchdBubDtlListSvc";
-
+import { timeUntilVoteEnds } from "../../Utils/voteTimeUtil";
 
 const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
@@ -30,12 +29,8 @@ const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     const fetchNoticeData = async () => {
-      const noticeData = await openBubListCall(
-        userData?.LOGIN_ID || "",
-        userData?.MEMB_SC_CD || "",
-        userData?.MEMB_DEP_CD || "",
-        userData?.TIT_CD || ""
-      );
+      const REQ_PAGE = 1;
+      const noticeData = await openBubListCall(REQ_PAGE);
       if (noticeData && noticeData.OPEN_BUB) {
         setNotices(noticeData.OPEN_BUB.slice(0, 2));
       }
@@ -128,8 +123,16 @@ const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
           <MainVoteBub
             F_VOT_TIT={votes[0]?.VOTE_TITLE || "1번째 투표 제목"}
             S_VOT_TIT={votes[1]?.VOTE_TITLE || "2번째 투표 제목"}
-            //  F_VOT_TOT={votes[0]?.VOT_COUNT || 100} // 개발 예정
-            //  S_VOT_TOT={votes[1]?.VOT_COUNT || 200} // 개발 예정
+            F_VOT_TOT={`마감 ${
+              votes[0]?.VOT_EXPR_DATE
+                ? timeUntilVoteEnds(votes[0]?.VOT_EXPR_DATE)
+                : "날짜 정보 없음"
+            }`}
+            S_VOT_TOT={`마감 ${
+              votes[1]?.VOT_EXPR_DATE
+                ? timeUntilVoteEnds(votes[1]?.VOT_EXPR_DATE)
+                : "날짜 정보 없음"
+            }`}
             F_VOT_GO_CD={votes[0]?.VOT_GO_CD || "2023-10-19"}
             S_VOT_GO_CD={votes[1]?.VOT_GO_CD || "2023-10-20"}
             onPress={() => navigation.navigate("VotePostPage")}

@@ -1,5 +1,5 @@
 import { sendApiData } from "./Api.config";
-import { setUserData } from "../../Utils/_private/ApiData/UserData";
+import { setUserData, getUserData } from "../../Utils/_private/ApiData/UserData";
 import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
 import {
@@ -328,22 +328,52 @@ export const dprtSrch = async (SCH_CD: string): Promise<DprtData | null> => {
  * @param MEMB_DEP_CD
  * @param TIT_CD
  */
-export const MembLikeUpdSvc = async (
-  LOGIN_ID: string,
-  PROC_TYPE: string,
-  CERT_SEQ: string,
-  MEMB_SC_CD: string,
-  MEMB_DEP_CD: string,
-  TIT_CD: string
-) => {
+export const MembLikeUpdSvc = async (CER_SEQ: number) => {
   const endpoint = "/UNI/MembLikeUpdSvc";
+  const userData = getUserData();
+  
+  if (userData != null) {
+    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD, } = userData;
+    const PROC_TYPE = "01"; // 공지게시판 고정
+    const data = {
+      LOGIN_ID,
+      PROC_TYPE,
+      CER_SEQ,
+      MEMB_SC_CD,
+      MEMB_DEP_CD,
+      TIT_CD,
+  };
+  console.log(data);
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
+  if (result !== null && result.data.RSLT_CD === "00") {
+    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+    console.log("서버 통신 성공.");
+    return result.data;
+  } else {
+    console.log("서버 통신 실패.");
+    return null;
+  }
+}
+};
+
+/* ------------------------------------------------------------------------------- */
+
+/**
+ * @jeakyoung 생성
+ * 알림정보수정 API 호출 함수
+ * @param MEMB_ID
+ * @param APP_NOTICE_YN
+ * @param DEP_NOTICE_YN
+ */
+export const MembAlmInfoUpd = async (MEMB_ID: string, APP_NOTICE_YN: string, DEP_NOTICE_YN: string) => {
+  const endpoint = "/UNI/MembAlmInfoUpd";
   const data = {
-    LOGIN_ID,
-    PROC_TYPE,
-    CERT_SEQ,
-    MEMB_SC_CD,
-    MEMB_DEP_CD,
-    TIT_CD,
+    MEMB_ID,
+    APP_NOTICE_YN,
+    DEP_NOTICE_YN,
   };
   const result: AxiosResponse<UserData, any> | null = await sendApiData(
     endpoint,
@@ -351,8 +381,10 @@ export const MembLikeUpdSvc = async (
   );
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-    console.log("통신 성공.");
+    console.log("등록 성공");
   } else {
-    console.log("통신 실패.");
+    console.log("등록실패");
   }
 };
+
+/* ------------------------------------------------------------------------------- */
