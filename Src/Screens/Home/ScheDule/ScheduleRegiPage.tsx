@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Alert } from "react-native";
+import { View, Text } from "react-native";
 import VoteBoxStyle from "../../../Styles/VoteStyles/VoteBoxStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
@@ -8,10 +8,10 @@ import { SchdlVoteRegiTitInput } from "../../../Components/SchdlCompo/SchdlInput
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
-import { DateSltButton } from "../../../Components/VoteCompo/VoteButton";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { SchdlTimeButton } from "../../../Components/SchdlCompo/SchdlButton";
+import { schdBubSvcNew } from "../../../Services/_private/SchdBubApi";
 
 /**
  * @Dowon(김도원 생성)
@@ -55,6 +55,20 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
     setDatePickerVisibility(false);
   };
 
+  const schNew = async () => {
+    try {
+      const userData = getUserData();
+      if (userData != null) {
+        await schdBubSvcNew(schdTitle, selectedStartDate, selectedEndDate);
+        console.log("TIT : ", schdTitle);
+      } else {
+        console.error("userData가 null입니다.");
+      }
+    } catch (error) {
+      console.error("등록 오류", error);
+    }
+  };
+
   const formatDate = (date: Date) => {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -70,9 +84,8 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       const nextDay = new Date(date);
       nextDay.setDate(date.getDate() + 1);
       const nextFormattedDate = formatDate(nextDay);
-      setSelectedEndDate(nextFormattedDate);
+      setSelectedStartDate(nextFormattedDate);
     }
-
     hideDatePicker();
   };
 
@@ -82,16 +95,12 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       const prevDay = new Date(date);
       prevDay.setDate(date.getDate() - 1);
       const prevFormattedDate = formatDate(prevDay);
-      setSelectedStartDate(prevFormattedDate);
-      setSelectedEndDate(formattedDate);
+      setSelectedEndDate(prevFormattedDate);
     } else {
       setSelectedEndDate(formattedDate);
     }
-
     hideDatePicker();
   };
-
-  const registerSchd = async () => {};
 
   return (
     <Background>
@@ -100,7 +109,7 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
-        onPressRegi={registerSchd}
+        onPressRegi={schNew}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View

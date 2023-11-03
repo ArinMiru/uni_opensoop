@@ -21,6 +21,7 @@ import { OpenEdtDltButton } from "../../IconCompo/OpenEdtDltIconButton";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
 import { OpenImageDotChk } from "./OpenImageDotchk";
+import { Image } from "react-native";
 
 interface CommonProps {
   MEMB_NM?: string;
@@ -121,14 +122,14 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
             <View></View>
           )}
         </View>
-        <View
+        <Image
+          source={{ uri: PostImage }}
           style={[
             NoticePostStyles.NoticePostImageBoxStyle,
             { backgroundColor: "#999999" },
+            { resizeMode: "contain" },
           ]}
-        >
-          {PostImage}
-        </View>
+        />
         <View style={{ flex: 1, flexDirection: "row" }}>
           <View
             style={{
@@ -188,9 +189,8 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
         <ScrollView>
           <ReadMore
             numberOfLines={0} // 전체 내용 보이도록 설정
-            renderTruncatedFooter={
-              () => renderFooter(() => setContentExpanded(false), "간략히")
-              // @ts7752 : 삭제 요청
+            renderTruncatedFooter={() =>
+              renderFooter(() => setContentExpanded(false), "간략히")
             }
             renderRevealedFooter={() =>
               renderFooter(() => setContentExpanded(true), "...더보기")
