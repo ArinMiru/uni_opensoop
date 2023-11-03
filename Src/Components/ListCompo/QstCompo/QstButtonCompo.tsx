@@ -22,6 +22,7 @@ interface ButtonProps extends TextInputProps {
   title?: string;
   nickname?: string;
   postanswer?: string;
+  postanswercount?:number;
   postcontent?: string;
   postanswercontent?: string;
   qstposttime?: string;
@@ -41,9 +42,8 @@ export const QstListContentButton: React.FC<ButtonProps> = ({
   nickname,
   postcontent,
   postanswer,
-  grade,
+  postanswercount,
   qstposttime,
-  title,
 }) => {
   return (
     <QstListButton onPress={onPress}>
@@ -151,7 +151,7 @@ export const QstListContentButton: React.FC<ButtonProps> = ({
                 { color: "#4BB781", marginLeft: deviceWidth * 0.018 },
               ]}
             >
-              8{postanswer}
+              {postanswercount}
             </Text>
           </View>
         </View>

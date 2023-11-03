@@ -70,7 +70,7 @@ export const SchdBubDtlListSvc = async (
         const SchdBubDtlListData: SchdBubDtlListData = parseSchdbubDtlListData(
           result.data
         );
-        console.log(data);
+        console.log(SchdBubDtlListData);
         return SchdBubDtlListData;
       } else {
         console.log("일정 상세 데이터 가져오기 실패");
@@ -86,14 +86,21 @@ export const SchdBubDtlListSvc = async (
   }
 };
 
-export const schdBubSvcNew = async (TIT: string, CONT: string) => {
+export const schdBubSvcNew = async (
+  TIT: string,
+  STRT_SCHD_YMD: string,
+  END_SCHD_YMD: string
+) => {
   const userData = getUserData();
   const endpoint = "/UNI/SchdBubSvc";
   if (userData !== null) {
     const PROC_TYPE = "01";
+    const CONT = "";
     const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
     const data = {
       TIT,
+      STRT_SCHD_YMD,
+      END_SCHD_YMD,
       CONT,
       LOGIN_ID,
       MEMB_SC_CD,
@@ -108,7 +115,7 @@ export const schdBubSvcNew = async (TIT: string, CONT: string) => {
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("등록 성공");
-    } else{
+    } else {
       console.log("등록 실패");
     }
   }

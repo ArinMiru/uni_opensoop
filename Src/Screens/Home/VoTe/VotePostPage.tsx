@@ -16,6 +16,7 @@ import Spinner from "react-native-loading-spinner-overlay";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import textStyle from "../../../Styles/TextStyle";
+import { timeUntilVoteEnds } from "../../../Utils/voteTimeUtil";
 
 const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
@@ -129,7 +130,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                     <UnVotedListButton
                       title={item.VOTE_TITLE}
                       poststatus={"투표 중"}
-                      posttime={item.VOT_EXPR_DATE}
+                      posttime={timeUntilVoteEnds(item.VOT_EXPR_DATE)}
                       onPress={() =>
                         navigation.navigate("VotePostDetailPage", {
                           VOT_TITLE: item.VOTE_TITLE,
@@ -155,7 +156,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                     <VotedListButton
                       title={item.VOTE_TITLE}
                       poststatus={"투표 종료"}
-                      posttime={item.VOT_EXPR_DATE}
+                      posttime={timeUntilVoteEnds(item.VOT_EXPR_DATE)}
                       onPress={() =>
                         navigation.navigate("VotePostDetailPage", {
                           VOT_TITLE: item.VOTE_TITLE,
