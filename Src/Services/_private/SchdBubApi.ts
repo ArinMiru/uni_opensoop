@@ -70,7 +70,7 @@ export const SchdBubDtlListSvc = async (
         const SchdBubDtlListData: SchdBubDtlListData = parseSchdbubDtlListData(
           result.data
         );
-        console.log(data);
+        console.log(SchdBubDtlListData);
         return SchdBubDtlListData;
       } else {
         console.log("일정 상세 데이터 가져오기 실패");
