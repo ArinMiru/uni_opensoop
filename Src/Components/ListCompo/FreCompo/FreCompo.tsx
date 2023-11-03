@@ -221,7 +221,7 @@ export const QstComment: React.FC<ButtonProps> = ({
         marginTop: deviceHeight * 0.017,
       }}
     >
-      <View>
+      <View style={{ flex: 0.5 }}>
         <FreSgsAnsProfileIcon />
       </View>
       <View
@@ -265,6 +265,7 @@ export const QstComment: React.FC<ButtonProps> = ({
           flex: 1,
           justifyContent: "flex-start",
           alignItems: "flex-end",
+          paddingLeft: deviceWidth * 0.02,
         }}
       >
         <Text

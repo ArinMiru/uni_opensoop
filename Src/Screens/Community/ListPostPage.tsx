@@ -18,6 +18,7 @@ import { SugBubListData } from "../../Utils/_private/ApiData/SugBubListData";
 import { SugBubListSvc } from "../../Services/_private/SugBubListApi";
 import { QuestData } from "../../Utils/_private/ApiData/QuestData";
 import Spinner from "react-native-loading-spinner-overlay";
+import { timeSince } from "../../Utils/timeUtils";
 
 const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
@@ -220,7 +221,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
         {selectedCategory === "자유" && freeData && (
           <FlatList
             data={freeData.FREE_BUB}
-            keyExtractor={(item) => item.CRE_SEQ.toString()}
+            keyExtractor={(item, index) =>
+              item.CRE_SEQ.toString() + "-" + index
+            }
             renderItem={({ item }) => (
               <View
                 style={{
@@ -230,7 +233,8 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
               >
                 <FreeListIclucontnButton
                   nickname={item.NICK_NM}
-                  freposttime={item.CRE_DAT}
+                  freposttime={timeSince(item.CRE_DAT)}
+                  frepostanscount={20}
                   fretit={item.TIT}
                   frecont={item.CONT}
                   onPress={() => {
@@ -256,7 +260,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
         {selectedCategory === "건의" && sugsData && (
           <FlatList
             data={sugsData.SUG_BUB}
-            keyExtractor={(item) => item.CRE_SEQ.toString()}
+            keyExtractor={(item, index) =>
+              item.CRE_SEQ.toString() + "-" + index
+            }
             renderItem={({ item }) => {
               const canAccess =
                 userData?.TIT_CD === "05" || // 관리자
@@ -274,7 +280,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
                     title={canAccess ? item.TIT : "비공개 게시물입니다."}
                     poststatus={""}
                     anonynick={canAccess ? item.NICK_NM : "재학생"}
-                    sgsposttime={item.CRE_DAT}
+                    sgsposttime={timeSince(item.CRE_DAT)}
                     postUserId={item.MEMB_ID}
                     currentUserId={userData?.LOGIN_ID}
                     TIT_CD={userData?.TIT_CD}
@@ -307,7 +313,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
         {selectedCategory === "질문" && questData && (
           <FlatList
             data={questData.QUES_BUB}
-            keyExtractor={(item) => item.CRE_SEQ.toString()}
+            keyExtractor={(item, index) =>
+              item.CRE_SEQ.toString() + "-" + index
+            }
             renderItem={({ item }) => (
               <View
                 style={{
@@ -315,17 +323,18 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
                   alignItems: "center",
                 }}
               >
-                <FreeListIclucontnButton
+                <QstListContentButton
                   nickname={item.NICK_NM}
-                  freposttime={item.CRE_DAT}
-                  fretit={item.TIT}
-                  frecont={item.CONT}
+                  qstposttime={timeSince(item.CRE_DAT)}
+                  postanswercount={10}
+                  postcontent={item.CONT}
                   onPress={() => {
                     const postData = {
                       CRE_SEQ: item.CRE_SEQ,
                       AnsFree: item.ANS_FREE,
                     };
                     console.log(postData);
+                    navigation.navigate("DowonTestScreen");
                   }}
                 />
               </View>

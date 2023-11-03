@@ -358,3 +358,33 @@ export const MembLikeUpdSvc = async (CER_SEQ: number) => {
   }
 }
 };
+
+/* ------------------------------------------------------------------------------- */
+
+/**
+ * @jeakyoung 생성
+ * 알림정보수정 API 호출 함수
+ * @param MEMB_ID
+ * @param APP_NOTICE_YN
+ * @param DEP_NOTICE_YN
+ */
+export const MembAlmInfoUpd = async (MEMB_ID: string, APP_NOTICE_YN: string, DEP_NOTICE_YN: string) => {
+  const endpoint = "/UNI/MembAlmInfoUpd";
+  const data = {
+    MEMB_ID,
+    APP_NOTICE_YN,
+    DEP_NOTICE_YN,
+  };
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
+  if (result !== null && result.data.RSLT_CD === "00") {
+    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
+    console.log("등록 성공");
+  } else {
+    console.log("등록실패");
+  }
+};
+
+/* ------------------------------------------------------------------------------- */
