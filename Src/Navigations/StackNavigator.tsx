@@ -44,6 +44,11 @@ import FrePostDetailLawPage from "../Screens/Community/Free/FrePostDetailLawPage
 import FreePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
 
 /**----------------------------------------------------------------------------*/
+import FreEditPostPage from "../Screens/Community/Free/FreEditPostPage";
+import QstEditPostPage from "../Screens/Community/QuesTion/QstEditPostPage";
+import SgsEditPostPage from "../Screens/Community/SuggeStion/SgsEditPostPage";
+import VoteEditPostPage from "../Screens/Home/VoTe/VoteEditPostPage";
+
 /**----------------------------------------------------------------------------*/
 import JungTestScreen from "../Screens/JungTest/JungTestScreen";
 import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
@@ -162,6 +167,10 @@ export type RootStackParamList = {
   };
 
   /**----------------------------------------------------------------------------*/
+  FreEditPostPage: undefined;
+  QstEditPostPage: undefined;
+  SgsEditPostPage: undefined;
+  VoteEditPostPage: undefined;
   /**----------------------------------------------------------------------------*/
   JungTestScreen: undefined;
   DowonTestScreen: undefined;
@@ -404,6 +413,26 @@ const StackNavigator = () => {
       />
 
       {/**-------------------------------------------------------------------------------*/}
+      <Stack.Screen
+        name="FreEditPostPage"
+        component={FreEditPostPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="QstEditPostPage"
+        component={QstEditPostPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SgsEditPostPage"
+        component={SgsEditPostPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="VoteEditPostPage"
+        component={VoteEditPostPage}
+        options={{ headerShown: false }}
+      />
       {/**---------위에서부터 추가-----------------------------------------------------------*/}
 
       <Stack.Screen

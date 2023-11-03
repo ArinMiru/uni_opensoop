@@ -30,7 +30,10 @@ import { deviceHeight } from "../../../Utils/DeviceUtils";
 import { useIsFocused } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { Alert } from "react-native";
-import { MembLikeUpdSvc } from "../../../Services/_private/EndPointApiFuntion";
+import {
+  MembLikeUpdSvc,
+  MembLikeMinusUpdSvc,
+} from "../../../Services/_private/EndPointApiFuntion";
 
 function decodeBase64Image(base64String: string) {
   return `data:image/jpeg;base64,${base64String}`;
@@ -52,7 +55,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
   const [page, setPage] = useState<number>(1); // 페이지 번호 상태
-  const [likeCount, setLikeCount] = useState<number>(0); // 좋아요 수 상태
 
   const fetchNoticeData = (defaultPage: number) => {
     if (userData !== null) {
@@ -131,12 +133,13 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
     modalFunctions.handleCloseModal();
   };
 
-  const accumulateLike = async (creseq: number) => { // 서닝이가 만들었다 -> 한줄한줄 주석 남겨 놓아야 함
+  const accumulateLike = async (creseq: number) => {
+    // 서닝이가 만들었다 -> 한줄한줄 주석 남겨 놓아야 함
     try {
-    const responseData = await MembLikeUpdSvc(creseq);
+      const responseData = await MembLikeUpdSvc(creseq);
 
-    if(responseData) {
-      const updatedData = data; //수정
+      if (responseData) {
+        const updatedData = data; //수정
         const selectedNotice = updatedData.OPEN_BUB.find(
           (item) => item.CRE_SEQ === creseq
         );
@@ -147,15 +150,37 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
         }
       } else {
         // 서버 응답이 실패한 경우
-        console.log(data)
+        console.log(data);
         console.error("좋아요 누적 실패");
       }
-    }
-    catch(error){
+    } catch (error) {
       console.log("좋아요 누적 오류", error);
     }
-  }
+  };
 
+  const accumulateMinusLike = async (creseq: number) => {
+    try {
+      const responseData = await MembLikeMinusUpdSvc(creseq);
+
+      if (responseData) {
+        const updatedData = data;
+        const selectedNotice = updatedData.OPEN_BUB.find(
+          (item) => item.CRE_SEQ === creseq
+        );
+        if (selectedNotice) {
+          selectedNotice.LIKE_CNT -= 1;
+          setData(updatedData);
+          console.log(data);
+        }
+      } else {
+        // 서버 응답이 실패한 경우
+        console.log(data);
+        console.error("좋아요 차감 실패");
+      }
+    } catch (error) {
+      console.log("좋아요 차감 오류", error);
+    }
+  };
 
   return (
     <SafeAreaView
@@ -201,7 +226,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           />
           <FlatList
             data={data?.OPEN_BUB}
-            keyExtractor={(item) => item.CRE_SEQ.toString()}
+            keyExtractor={(item, index) => item.CRE_SEQ.toString() + index}
             renderItem={({ item }) => {
               return (
                 <NoticePostBoxView
@@ -213,8 +238,8 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
                   postLike={item.LIKE_CNT}
                   PostContent={item.CONT}
                   onPress={() => handleItemPress(item.CRE_SEQ)}
-                  likePress={() => accumulateLike(item.CRE_SEQ)}
-                
+                  onLikePress={() => accumulateLike(item.CRE_SEQ)}
+                  onDislikePress={() => accumulateMinusLike(item.CRE_SEQ)}
                 />
               );
             }}
