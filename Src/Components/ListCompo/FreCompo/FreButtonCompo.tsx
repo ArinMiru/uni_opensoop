@@ -21,6 +21,7 @@ interface ButtonProps extends TextInputProps {
   children?: React.ReactNode;
   nickname?: string;
   freposttime?: string;
+  frepostanscount?: number;
   fretit?: string;
   frecont?: string;
   grade?: string;
@@ -85,6 +86,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
   freposttime,
   fretit,
   frecont,
+  frepostanscount,
   grade,
   like,
   onPress,
@@ -218,7 +220,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
                 { color: "#4BB781", marginLeft: deviceWidth * 0.018 },
               ]}
             >
-              8{like}
+              {frepostanscount}
             </Text>
           </View>
         </View>
