@@ -16,7 +16,7 @@ import Spinner from "react-native-loading-spinner-overlay";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import textStyle from "../../../Styles/TextStyle";
-import { timeUntilVoteEnds } from "../../../Utils/voteTimeUtil";
+import { timeUntilVoteEnds } from "../../../Utils/voteTimeUtil";
 
 const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
