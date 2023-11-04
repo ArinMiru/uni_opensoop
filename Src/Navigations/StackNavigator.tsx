@@ -50,9 +50,7 @@ import SgsEditPostPage from "../Screens/Community/SuggeStion/SgsEditPostPage";
 import VoteEditPostPage from "../Screens/Home/VoTe/VoteEditPostPage";
 
 /**----------------------------------------------------------------------------*/
-import JungTestScreen from "../Screens/JungTest/JungTestScreen";
-import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
-import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
+import QstAnsModalPage from "../Screens/QstAnsModal/QstAnsModalPage";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -167,14 +165,38 @@ export type RootStackParamList = {
   };
 
   /**----------------------------------------------------------------------------*/
-  FreEditPostPage: undefined;
-  QstEditPostPage: undefined;
-  SgsEditPostPage: undefined;
-  VoteEditPostPage: undefined;
+  FreEditPostPage: {
+    CRE_SEQ: number;
+    CONT: string;
+    TIT: string;
+    NICK_NM: string;
+    LIKE_CNT: number;
+    CRE_DAT: string;
+  };
+  QstEditPostPage: {
+    CRE_SEQ: number;
+    TIT: string;
+    NICK_NM: string;
+    CRE_DAT: string;
+  };
+  SgsEditPostPage: {
+    CRE_SEQ: number;
+    CONT: string;
+    TIT: string;
+    NICK_NM: string;
+    CRE_DAT: string;
+  };
+  VoteEditPostPage: {
+    VOT_TITLE: string;
+    VOT_EXPR_DATE: string;
+    VOT_DESC: string;
+    VOT_INFO: string;
+    VOT_TYPE_CD: string;
+    VOT_SEL_SEQ: string;
+    CRE_SEQ: number;
+  };
   /**----------------------------------------------------------------------------*/
-  JungTestScreen: undefined;
-  DowonTestScreen: undefined;
-  RyuTestScreen: undefined;
+  QstAnsModalPage: undefined;
   /**----------------------------------------------------------------------------*/
   /**----------------------------------------------------------------------------*/
 };
@@ -434,16 +456,9 @@ const StackNavigator = () => {
         options={{ headerShown: false }}
       />
       {/**---------위에서부터 추가-----------------------------------------------------------*/}
-
       <Stack.Screen
-        name="JungTestScreen"
-        component={JungTestScreen}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="DowonTestScreen"
-        component={DowonTestScreen}
+        name="QstAnsModalPage"
+        component={QstAnsModalPage}
         options={{
           headerShown: false,
           presentation: "modal",
@@ -453,15 +468,6 @@ const StackNavigator = () => {
           cardOverlayEnabled: true,
         }}
       />
-
-      <Stack.Screen
-        name="RyuTestScreen"
-        component={RyuTestScreen}
-        options={{ headerShown: false }}
-      />
-
-      {/**----------위에서부터 추가-----------------------------------------------------------*/}
-      {/**-------------------------------------------------------------------------------*/}
     </Stack.Navigator>
   );
 };
