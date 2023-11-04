@@ -19,7 +19,7 @@ import { SchdBubDtlListSvc } from "../../Services/_private/SchdBubApi";
 import { VoteItem } from "../../Utils/_private/ApiData/VoteData";
 import { NoticeItem } from "../../Utils/_private/ApiData/NoticeData";
 import { SCHD_BuB_Item } from "../../Utils/_private/ApiData/SchdBubDtlListSvc";
-import { timeUntilVoteEnds } from "../../Utils/voteTimeUtil";
+import { timeUntilVoteEnds } from "../../Utils/voteTimeUtil";
 
 const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
