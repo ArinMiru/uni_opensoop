@@ -129,46 +129,57 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const accumulateLike = async (creseq: number) => {
     // 서닝이가 만들었다 -> 한줄한줄 주석 남겨 놓아야 함
     try {
+      // 1. 좋아요 누적 요청을 보냄
       const responseData = await MembLikeUpdSvc(creseq);
 
       if (responseData) {
-        const updatedData = data; //수정
+        // 2. 성공적으로 서버 응답을 받은 경우
+        const updatedData = data; // 기존 데이터를 복사
+        // 3. 증가할 게시물을 찾습니다. 즉 해당하는 CRE_SEQ 값의 게시글을 찾으러 떠남
         const selectedNotice = updatedData.OPEN_BUB.find(
           (item) => item.CRE_SEQ === creseq
         );
         if (selectedNotice) {
-          selectedNotice.LIKE_CNT += 1; // 좋아요 수 1 증가
+          // 4. 게시물의 좋아요 수를 1 증가
+          selectedNotice.LIKE_CNT += 1;
+          // 5. 업데이트된 데이터로 상태를 업데이트
           setData(updatedData);
+          console.log("좋아요 누적 성공");
         }
       } else {
-        // 서버 응답이 실패한 경우
+        // 6. 서버 응답이 실패한 경우
         console.error("좋아요 누적 실패");
       }
     } catch (error) {
+      // 7. 오류가 발생한 경우
       console.log("좋아요 누적 오류", error);
     }
   };
 
   const accumulateMinusLike = async (creseq: number) => {
     try {
+      // 1. 좋아요 차감 요청을 보냅니다
       const responseData = await MembLikeMinusUpdSvc(creseq);
 
       if (responseData) {
-        const updatedData = data;
+        // 2. 성공적으로 서버 응답을 받은 경우
+        const updatedData = data; // 기존에 저장되어 있던 데이터를 복사
+        // 3. 차감할 게시물을 찾습니다. 즉 해당하는 CRE_SEQ 값의 게시글을 찾으러 떠남
         const selectedNotice = updatedData.OPEN_BUB.find(
           (item) => item.CRE_SEQ === creseq
         );
         if (selectedNotice) {
+          // 4. 게시물의 좋아요 수를 1 감소
           selectedNotice.LIKE_CNT -= 1;
+          // 5. 업데이트된 데이터로 상태를 업데이트
           setData(updatedData);
-          console.log(data);
         }
       } else {
-        // 서버 응답이 실패한 경우
-        console.log(data);
+        // 6. 서버 응답이 실패한 경우
         console.error("좋아요 차감 실패");
       }
     } catch (error) {
+      // 7. 오류가 발생한 경우
       console.log("좋아요 차감 오류", error);
     }
   };
