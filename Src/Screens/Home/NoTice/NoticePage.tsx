@@ -27,7 +27,6 @@ import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { openBubListDell } from "../../../Services/_private/NoticeApi";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
-import { useIsFocused } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { Alert } from "react-native";
 import {
@@ -35,13 +34,8 @@ import {
   MembLikeMinusUpdSvc,
 } from "../../../Services/_private/EndPointApiFuntion";
 
-function decodeBase64Image(base64String: string) {
-  return `data:image/jpeg;base64,${base64String}`;
-}
-
 const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const modalFunctions = ModalReuableFuction();
-  const isFocused = useIsFocused();
   const userData = getUserData();
   const [sortedData, setSortedData] = useState<NoticeData>({
     RSLT_CD: undefined,
@@ -51,7 +45,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
     RSLT_CD: undefined,
     OPEN_BUB: [],
   });
-
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
   const [page, setPage] = useState<number>(1); // 페이지 번호 상태
@@ -77,7 +70,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
         })
         .catch((error) => {
           setLoading(false);
-          console.error("데이터 가져오기 오류:", error);
           Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
         });
     }
@@ -85,6 +77,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     fetchNoticeData(1);
+    console.log(data);
   }, []);
 
   const loadNewPage = () => {
@@ -146,11 +139,9 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
         if (selectedNotice) {
           selectedNotice.LIKE_CNT += 1; // 좋아요 수 1 증가
           setData(updatedData);
-          console.log(data);
         }
       } else {
         // 서버 응답이 실패한 경우
-        console.log(data);
         console.error("좋아요 누적 실패");
       }
     } catch (error) {
@@ -228,6 +219,9 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
             data={data?.OPEN_BUB}
             keyExtractor={(item, index) => item.CRE_SEQ.toString() + index}
             renderItem={({ item }) => {
+              const imagePaths = item.IMAGE_INFO.map(
+                (imageInfo) => imageInfo.FILE_PATH
+              );
               return (
                 <NoticePostBoxView
                   MEMB_NM={item.MEMB_NM}
@@ -237,6 +231,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
                   PostingTime={item.CRE_DAT}
                   postLike={item.LIKE_CNT}
                   PostContent={item.CONT}
+                  PostImage={imagePaths}
                   onPress={() => handleItemPress(item.CRE_SEQ)}
                   onLikePress={() => accumulateLike(item.CRE_SEQ)}
                   onDislikePress={() => accumulateMinusLike(item.CRE_SEQ)}
