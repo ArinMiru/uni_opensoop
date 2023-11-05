@@ -18,6 +18,7 @@ interface ButtonProps {
   onPressDelPhoto?: () => void;
   onPressAddPhoto?: () => void;
   navigation?: { navigate: (screenName: string) => void };
+  selectedImage?: string;
 }
 
 /**
@@ -148,6 +149,7 @@ export const OpenPhotoDelBox: React.FC<ButtonProps> = ({
 export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
   children,
   onPress,
+  selectedImage,
 }) => {
   const [photoList, setPhotoList] = React.useState([0]);
 
@@ -173,7 +175,7 @@ export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
           key={index}
           onPressAddPhoto={onPress}
           onPressDelPhoto={() => removePhotoBox(index)}
-        />
+        ></OpenPhotoDelBox>
       ))}
       {photoList.length < 4 && <OpenPhotoPlusBox onPress={addPhotoBox} />}
     </View>
