@@ -67,6 +67,8 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
               delPress={dellPress}
             />
           </View>
+          <View style={{ height: "2%" }}></View>
+
           <View
             style={{ alignItems: "center", paddingBottom: deviceHeight * 0.09 }}
           >

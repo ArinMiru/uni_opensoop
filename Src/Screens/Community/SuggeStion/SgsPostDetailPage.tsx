@@ -59,6 +59,7 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
               sgsposttime={CRE_DAT}
             />
           </View>
+          <View style={{ height: "2%" }}></View>
           <View
             style={{ alignItems: "center", paddingBottom: deviceHeight * 0.09 }}
           >

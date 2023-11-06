@@ -73,7 +73,7 @@ export const MainPageTopbarStyle: React.FC<ButtonProps> = ({
           </Text>
           <Text
             style={[
-              textStyle.semibold08,
+              textStyle.bold08,
               { marginLeft: deviceWidth * 0.01 },
               { marginTop: deviceHeight * 0.012 },
               { lineHeight: deviceHeight * 0.031 },

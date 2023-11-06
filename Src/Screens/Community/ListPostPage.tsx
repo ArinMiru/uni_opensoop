@@ -334,7 +334,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
                       AnsFree: item.ANS_FREE,
                     };
                     console.log(postData);
-                    navigation.navigate("DowonTestScreen");
+                    navigation.navigate("QstAnsModalPage");
                   }}
                 />
               </View>
