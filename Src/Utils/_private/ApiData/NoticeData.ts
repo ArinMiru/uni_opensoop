@@ -19,6 +19,7 @@ export interface NoticeItem {
   MEMB_DEP_NM: string; // 공지사항 작성 일자
   TIT_NM: string; // 공지사항 작성자 직책명
   NICK_NM: string; // 공지사항 작성자 닉네임
+  LIKE_YN: string; // 좋아요 이력 Y / N
   IMAGE_INFO: ImageInfo[]; // 이미지 정보 배열
 }
 
@@ -51,6 +52,7 @@ export function parseNoticeData(rawData: any): NoticeData {
         MEMB_DEP_NM: item.MEMB_DEP_NM || "", // 작성자 학과 이름
         TIT_NM: item.TIT_NM || "", // 작성자 직책명, 없을 경우 빈 문자열
         NICK_NM: item.NICK_NM || "", // 작성자 닉네임, 없을 경우 빈 문자열
+        LIKE_YN: item.LIKE_YN || "", // 좋아요 이력 Y / N
         IMAGE_INFO: [], // 이미지 정보 배열 초기화
       };
 
