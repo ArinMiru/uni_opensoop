@@ -4,7 +4,7 @@ export interface SchdBubDtlListData {
 }
 
 export interface SCHD_BuB_Item {
-  CRE_SEQ: string; //😡😡😡😡😡😡😡😡😡😡😡
+  CRE_SEQ: string;
   TIT: string;
   CONT: string;
   STRT_SCHD_YMD: string;
