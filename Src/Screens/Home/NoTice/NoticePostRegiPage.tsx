@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, KeyboardAvoidingView, Text } from "react-native";
+import { View, KeyboardAvoidingView, Text, Image } from "react-native";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
@@ -35,7 +35,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const [cont, setCont] = useState<string>("");
   const [tit, setTit] = useState<string>("");
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
-  const [imageUri, setImageUri] = useState<string>();
+  const [imageUris, setImageUris] = useState<string[]>([]);
 
   const encodeImageToBase64 = async (imageUri: string) => {
     try {
@@ -72,14 +72,16 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
 
       let IMAGE_INFO: ImageInfo[] = [];
 
-      if (imageUri) {
-        const imageBase64 = await encodeImageToBase64(imageUri);
-        if (imageBase64 !== null) {
-          IMAGE_INFO.push({
-            FILE_BASE64: imageBase64,
-            FILE_NM: "image.webp",
-            IMG_SEQ: 0,
-          });
+      for (const imageUri of imageUris) {
+        if (imageUri) {
+          const imageBase64 = await encodeImageToBase64(imageUri);
+          if (imageBase64 !== null) {
+            IMAGE_INFO.push({
+              FILE_BASE64: imageBase64,
+              FILE_NM: "image.webp",
+              IMG_SEQ: 0,
+            });
+          }
         }
       }
 
@@ -101,6 +103,9 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   const uploadImage = async () => {
+    if (imageUris.length >= 4) {
+      return;
+    }
     if (!status?.granted) {
       const permissions = await requestPermission();
       if (!permissions.granted) {
@@ -124,7 +129,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
 
     console.log(resizedImage);
 
-    setImageUri(resizedImage.uri);
+    setImageUris((prevImageUris) => [...prevImageUris, resizedImage.uri]);
   };
 
   return (
