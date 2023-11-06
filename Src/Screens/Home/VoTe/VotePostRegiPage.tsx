@@ -15,7 +15,7 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
-import { votBubRegiCall } from "../../../Services/_private/VoteApi";
+import { votBubRegi } from "../../../Services/_private/VoteApi";
 
 /**
  * @Dowon(김도원 생성)
@@ -39,11 +39,7 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [voteInfos, setVoteInfos] = useState<string[]>(["", "", "", ""]);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<string>(
-    `${new Date().getFullYear()}년 ${
-      new Date().getMonth() + 1
-    }월 ${new Date().getDate()}일`
-  );
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -54,9 +50,11 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   const handleConfirm = (date: Date) => {
-    const formattedDate = `${date.getFullYear()}년 ${
-      date.getMonth() + 1
-    }월 ${date.getDate()}일`;
+    const formattedDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
     setSelectedDate(formattedDate);
     hideDatePicker();
   };
@@ -70,10 +68,11 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   const getFormattedDate = () => {
-    const date = new Date(selectedDate);
-    return `${date.getFullYear()}-${(date.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+    const date = selectedDate;
+    const formattedDate = `${date.getFullYear()}년 ${
+      date.getMonth() + 1
+    }월 ${date.getDate()}일`;
+    return formattedDate;
   };
 
   const getVoteInfo = () => {
@@ -97,6 +96,14 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       VOT_DESC: "",
       VOT_INFO: voteInfos,
     };
+    console.log(voteItem);
+    votBubRegi(
+      voteItem.VOTE_TITLE,
+      voteItem.VOT_TYPE_CD,
+      voteItem.VOT_EXPR_DATE,
+      voteItem.VOT_DESC,
+      voteItem.VOT_INFO
+    );
   };
 
   return (
@@ -201,7 +208,7 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-            <DateSltButton date={selectedDate} onPress={showDatePicker} />
+            <DateSltButton date={getFormattedDate()} onPress={showDatePicker} />
 
             <DateTimePickerModal
               isVisible={isDatePickerVisible}
