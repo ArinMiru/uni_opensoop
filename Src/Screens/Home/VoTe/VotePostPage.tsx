@@ -13,7 +13,7 @@ import { votBubListCall } from "../../../Services/_private/VoteApi";
 import { VoteData } from "../../../Utils/_private/ApiData/VoteData";
 import { useIsFocused } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import textStyle from "../../../Styles/TextStyle";
 import { timeUntilVoteEnds } from "../../../Utils/voteTimeUtil";
@@ -59,21 +59,22 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
         onPressRegi={() => navigation.navigate("VotePostRegiPage")}
       />
       <View style={[NewBackgroundStyle.BottomTabBackgroundStyle]}>
-        <View style={{ flexDirection: "row" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            width: deviceWidth * 0.881,
+            alignSelf: "center",
+          }}
+        >
           <View
             style={{
               flex: 1,
               marginTop: "5%",
-              alignContent: "center",
-              alignItems: "flex-end",
+              marginBottom: "5%",
             }}
           >
             <TouchableOpacity
-              style={[
-                { flexDirection: "row" },
-                { alignItems: "center" },
-                { marginRight: deviceWidth * 0.08 },
-              ]}
+              style={[{ flexDirection: "row" }, { alignItems: "center" }]}
               onPress={() => setIsButtonOn(!isButtonOn)}
             >
               {isButtonOn ? (
@@ -96,7 +97,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                   { marginLeft: deviceWidth * 0.02 },
                 ]}
               >
-                투표중
+                진행중인 투표만 보기
               </Text>
             </TouchableOpacity>
           </View>

@@ -91,18 +91,19 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
             <View style={{ flexDirection: "row" }}>
               <Text
                 style={[
-                  textStyle.bold10,
+                  textStyle.semibold10,
                   {
                     color: "#BDBDBD",
                     left: deviceWidth * 0.06,
                   },
                 ]}
               >
-                {MEMB_DEP_CD} {"  "}
+                {MEMB_DEP_CD}
+                {"  "}
               </Text>
               <Text
                 style={[
-                  textStyle.bold11,
+                  textStyle.semibold10,
                   {
                     color: "#BDBDBD",
                     left: deviceWidth * 0.06,
@@ -141,15 +142,21 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
             )}
           </Swiper>
         </View>
-        <View style={{ flex: 1, flexDirection: "row" }}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            paddingTop: "2%",
+            paddingBottom: "2%",
+          }}
+        >
           <View
             style={{
               flex: 0.5,
               justifyContent: "center",
               alignItems: "flex-start",
-              marginTop: "2%",
-              marginBottom: "2%",
               left: deviceWidth * 0.06,
+              height: "100%",
             }}
           >
             <OpenLikeButtton
@@ -164,7 +171,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
           <View
             style={{
               flex: 0.5,
-              justifyContent: "center",
+              justifyContent: "flex-end",
               alignItems: "flex-end",
             }}
           >
@@ -195,8 +202,13 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
             <Text style={[textStyle.regular10, { color: "#1E232C" }]}>
               {Title}
             </Text>
-            {!isContentExpanded &&
-              renderFooter(() => setContentExpanded(true), "...더보기")}
+            {!isContentExpanded && (
+              <TouchableOpacity onPress={() => setContentExpanded(true)}>
+                <Text style={[textStyle.medium10, { color: "#A4A4A4" }]}>
+                  ...더보기
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </ScrollView>
