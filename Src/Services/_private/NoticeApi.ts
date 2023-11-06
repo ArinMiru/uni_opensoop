@@ -9,7 +9,9 @@ import { UserData } from "../../Utils/_private/ApiData/UserData";
 
 // 로그인한 사용자의 데이터 가져오기
 
-export const openBubListCall = async (REQ_PAGE: number): Promise<NoticeData | null> => {
+export const openBubListCall = async (
+  REQ_PAGE: number
+): Promise<NoticeData | null> => {
   const endpoint = "/UNI/OpenBubListSvc";
   const userData = getUserData();
   if (userData !== null) {

@@ -27,7 +27,6 @@ import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { openBubListDell } from "../../../Services/_private/NoticeApi";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
-import { useIsFocused } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { Alert } from "react-native";
 import {
@@ -35,13 +34,8 @@ import {
   MembLikeMinusUpdSvc,
 } from "../../../Services/_private/EndPointApiFuntion";
 
-function decodeBase64Image(base64String: string) {
-  return `data:image/jpeg;base64,${base64String}`;
-}
-
 const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const modalFunctions = ModalReuableFuction();
-  const isFocused = useIsFocused();
   const userData = getUserData();
   const [sortedData, setSortedData] = useState<NoticeData>({
     RSLT_CD: undefined,
@@ -51,7 +45,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
     RSLT_CD: undefined,
     OPEN_BUB: [],
   });
-
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
   const [page, setPage] = useState<number>(1); // 페이지 번호 상태
@@ -77,7 +70,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
         })
         .catch((error) => {
           setLoading(false);
-          console.error("데이터 가져오기 오류:", error);
           Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
         });
     }
@@ -85,6 +77,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     fetchNoticeData(1);
+    console.log(data);
   }, []);
 
   const loadNewPage = () => {
@@ -136,48 +129,57 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const accumulateLike = async (creseq: number) => {
     // 서닝이가 만들었다 -> 한줄한줄 주석 남겨 놓아야 함
     try {
+      // 1. 좋아요 누적 요청을 보냄
       const responseData = await MembLikeUpdSvc(creseq);
 
       if (responseData) {
-        const updatedData = data; //수정
+        // 2. 성공적으로 서버 응답을 받은 경우
+        const updatedData = data; // 기존 데이터를 복사
+        // 3. 증가할 게시물을 찾습니다. 즉 해당하는 CRE_SEQ 값의 게시글을 찾으러 떠남
         const selectedNotice = updatedData.OPEN_BUB.find(
           (item) => item.CRE_SEQ === creseq
         );
         if (selectedNotice) {
-          selectedNotice.LIKE_CNT += 1; // 좋아요 수 1 증가
+          // 4. 게시물의 좋아요 수를 1 증가
+          selectedNotice.LIKE_CNT += 1;
+          // 5. 업데이트된 데이터로 상태를 업데이트
           setData(updatedData);
-          console.log(data);
+          console.log("좋아요 누적 성공");
         }
       } else {
-        // 서버 응답이 실패한 경우
-        console.log(data);
+        // 6. 서버 응답이 실패한 경우
         console.error("좋아요 누적 실패");
       }
     } catch (error) {
+      // 7. 오류가 발생한 경우
       console.log("좋아요 누적 오류", error);
     }
   };
 
   const accumulateMinusLike = async (creseq: number) => {
     try {
+      // 1. 좋아요 차감 요청을 보냅니다
       const responseData = await MembLikeMinusUpdSvc(creseq);
 
       if (responseData) {
-        const updatedData = data;
+        // 2. 성공적으로 서버 응답을 받은 경우
+        const updatedData = data; // 기존에 저장되어 있던 데이터를 복사
+        // 3. 차감할 게시물을 찾습니다. 즉 해당하는 CRE_SEQ 값의 게시글을 찾으러 떠남
         const selectedNotice = updatedData.OPEN_BUB.find(
           (item) => item.CRE_SEQ === creseq
         );
         if (selectedNotice) {
+          // 4. 게시물의 좋아요 수를 1 감소
           selectedNotice.LIKE_CNT -= 1;
+          // 5. 업데이트된 데이터로 상태를 업데이트
           setData(updatedData);
-          console.log(data);
         }
       } else {
-        // 서버 응답이 실패한 경우
-        console.log(data);
+        // 6. 서버 응답이 실패한 경우
         console.error("좋아요 차감 실패");
       }
     } catch (error) {
+      // 7. 오류가 발생한 경우
       console.log("좋아요 차감 오류", error);
     }
   };
@@ -228,6 +230,9 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
             data={data?.OPEN_BUB}
             keyExtractor={(item, index) => item.CRE_SEQ.toString() + index}
             renderItem={({ item }) => {
+              const imagePaths = item.IMAGE_INFO.map(
+                (imageInfo) => imageInfo.FILE_PATH
+              );
               return (
                 <NoticePostBoxView
                   MEMB_NM={item.MEMB_NM}
@@ -237,6 +242,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
                   PostingTime={item.CRE_DAT}
                   postLike={item.LIKE_CNT}
                   PostContent={item.CONT}
+                  PostImage={imagePaths}
                   onPress={() => handleItemPress(item.CRE_SEQ)}
                   onLikePress={() => accumulateLike(item.CRE_SEQ)}
                   onDislikePress={() => accumulateMinusLike(item.CRE_SEQ)}

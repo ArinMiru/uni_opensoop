@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useMemo,
-  useCallback,
-  useEffect,
-} from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -22,12 +16,13 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
 import { OpenImageDotChk } from "./OpenImageDotchk";
 import { Image } from "react-native";
+import Swiper from "react-native-swiper";
 
 interface CommonProps {
   MEMB_NM?: string;
   MEMB_CD?: string;
   MEMB_DEP_CD?: string;
-  PostImage?: string;
+  PostImage?: string[];
   Title?: string;
   PostContent?: string;
   PostingTime?: string;
@@ -126,14 +121,26 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
             <View></View>
           )}
         </View>
-        <Image
-          source={{ uri: PostImage }}
-          style={[
-            NoticePostStyles.NoticePostImageBoxStyle,
-            { backgroundColor: "#999999" },
-            { resizeMode: "contain" },
-          ]}
-        />
+        <View style={[NoticePostStyles.NoticePostImageBoxStyle]}>
+          <Swiper showsButtons={false} style={{}}>
+            {PostImage ? (
+              PostImage.map((image, index) => (
+                <Image
+                  key={index}
+                  source={{ uri: image }}
+                  resizeMode="stretch"
+                  style={[NoticePostStyles.NoticePostImageBoxStyle]}
+                />
+              ))
+            ) : (
+              <Image
+                source={require("../../../../assets/icon.png")}
+                resizeMode="stretch"
+                style={[NoticePostStyles.NoticePostImageBoxStyle]}
+              />
+            )}
+          </Swiper>
+        </View>
         <View style={{ flex: 1, flexDirection: "row" }}>
           <View
             style={{
