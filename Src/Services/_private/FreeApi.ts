@@ -166,8 +166,10 @@ export const FreeBubRegi = async (TIT: string, CONT: string) => {
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
+      return result;
     } else {
       console.log("실패");
+      return null;
     }
   }
 };
