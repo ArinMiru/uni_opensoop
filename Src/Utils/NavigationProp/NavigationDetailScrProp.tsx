@@ -45,7 +45,10 @@ export type NoticeEditProps = {
 
 /* ---------------------------------------------------------------------------------------- */
 
-type VotePostDetailRoutePageProp = RouteProp<RootStackParamList, "VotePostDetailPage">;
+type VotePostDetailRoutePageProp = RouteProp<
+  RootStackParamList,
+  "VotePostDetailPage"
+>;
 type VotePostDetailNavigationProp = StackNavigationProp<
   RootStackParamList,
   "VotePostDetailPage"
@@ -54,4 +57,19 @@ type VotePostDetailNavigationProp = StackNavigationProp<
 export type VotePostDetailProp = {
   route: VotePostDetailRoutePageProp;
   navigation: VotePostDetailNavigationProp;
-}
+};
+/* ---------------------------------------------------------------------------------------- */
+
+type SchdEditPostPageRoutePageProp = RouteProp<
+  RootStackParamList,
+  "SchdEditPostPage"
+>;
+type SchdEditPostPageNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "SchdEditPostPage"
+>;
+
+export type SchdEditPostPageProp = {
+  route: SchdEditPostPageRoutePageProp;
+  navigation: SchdEditPostPageNavigationProp;
+};
