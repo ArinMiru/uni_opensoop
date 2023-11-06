@@ -25,7 +25,7 @@ const ProfilePage: React.FC<ScreenProps> = ({ navigation }) => {
         <View
           style={{
             marginLeft: deviceWidth * 0.085,
-            marginTop: deviceWidth * 0.001,
+            marginTop: deviceWidth * 0.02,
             marginBottom: deviceWidth * 0.02,
           }}
         >

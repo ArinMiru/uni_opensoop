@@ -115,7 +115,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: false,
-      aspect: [1, 1],
+      aspect: [4, 3],
     });
     if (result.canceled) {
       return null;
@@ -126,8 +126,6 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
       [{ resize: { width: 1172, height: 2532 } }],
       { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
     );
-
-    console.log(resizedImage);
 
     setImageUris((prevImageUris) => [...prevImageUris, resizedImage.uri]);
   };

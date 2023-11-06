@@ -58,6 +58,7 @@ export default StyleSheet.create({
     borderColor: "#EBEBEB",
     borderWidth: 1,
     flexDirection: "row",
+    marginBottom: deviceHeight * 0.03,
     elevation: Platform.OS === "android" ? 3 : 0, // Android에서 그림자 효과
     ...Platform.select({
       // iOS에서 그림자 효과
@@ -129,7 +130,7 @@ export default StyleSheet.create({
   UnVotedListButtonStyle: {
     width: deviceWidth * 0.881,
     height: deviceHeight * 0.077,
-    marginTop: deviceHeight * 0.03,
+    marginBottom: deviceHeight * 0.03,
     alignItems: "center",
     justifyContent: "center",
     alignContent: "center",
@@ -147,11 +148,11 @@ export default StyleSheet.create({
   VotedListButtonStyle: {
     width: deviceWidth * 0.881,
     height: deviceHeight * 0.077,
-    marginTop: deviceHeight * 0.03,
+    marginBottom: deviceHeight * 0.03,
     alignItems: "center",
     justifyContent: "center",
     alignContent: "center",
-    backgroundColor: "#ECECEC",
+    backgroundColor: "#F8F8F8",
     borderRadius: 5,
   },
 

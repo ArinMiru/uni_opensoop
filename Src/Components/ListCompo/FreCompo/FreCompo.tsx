@@ -70,7 +70,7 @@ export const FrePost: React.FC<ButtonProps> = ({
             alignItems: "center",
           }}
         >
-          <Text style={[textStyle.semibold12, { color: "#151515" }]}>
+          <Text style={[textStyle.semibold11, { color: "#151515" }]}>
             {nickname}
           </Text>
         </View>
@@ -94,7 +94,7 @@ export const FrePost: React.FC<ButtonProps> = ({
           justifyContent: "center",
         }}
       >
-        <Text style={[textStyle.semibold14, { color: "#333333" }]}>
+        <Text style={[textStyle.semibold12, { color: "#333333", left: "1%" }]}>
           {fretit}
         </Text>
       </View>
@@ -105,7 +105,7 @@ export const FrePost: React.FC<ButtonProps> = ({
           marginTop: deviceHeight * 0.01,
         }}
       >
-        <Text style={[textStyle.regular11, { color: "#151515" }]}>
+        <Text style={[textStyle.regular11, { color: "#151515", left: "1%" }]}>
           {frecont}
         </Text>
       </View>
@@ -157,8 +157,10 @@ export const FreQstComment: React.FC<ButtonProps> = ({
       style={{
         flexDirection: "row",
         width: deviceWidth * 0.868,
-        minHeight: deviceHeight * 0.09,
+        minHeight: deviceHeight * 0.065,
         marginTop: deviceHeight * 0.017,
+        borderBottomWidth: 1,
+        borderBottomColor: "#F2F2F2",
       }}
     >
       <View>
@@ -173,7 +175,7 @@ export const FreQstComment: React.FC<ButtonProps> = ({
         <View style={{ marginLeft: deviceWidth * 0.02 }}>
           <Text
             style={[
-              textStyle.semibold09,
+              textStyle.semibold10,
               { color: "#151515" },
               { lineHeight: deviceWidth * 0.04 },
             ]}
@@ -188,7 +190,7 @@ export const FreQstComment: React.FC<ButtonProps> = ({
             marginTop: deviceHeight * 0.001,
           }}
         >
-          <Text style={[textStyle.regular12, { color: "#151515" }]}>
+          <Text style={[textStyle.regular11, { color: "#151515" }]}>
             {freqstanstit}
           </Text>
         </View>
@@ -199,7 +201,7 @@ export const FreQstComment: React.FC<ButtonProps> = ({
           paddingTop: deviceHeight * 0.006,
         }}
       >
-        <Text style={[textStyle.semibold08, { color: "#919191" }]}>
+        <Text style={[textStyle.semibold07, { color: "#919191" }]}>
           {freqstanstime}
         </Text>
       </View>

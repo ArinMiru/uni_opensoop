@@ -118,7 +118,7 @@ export const SgsPost: React.FC<ButtonProps> = ({
             alignItems: "center",
           }}
         >
-          <Text style={[textStyle.semibold12, { color: "#151515" }]}>
+          <Text style={[textStyle.semibold11, { color: "#151515" }]}>
             {nickname}
           </Text>
         </View>
@@ -128,7 +128,7 @@ export const SgsPost: React.FC<ButtonProps> = ({
             alignItems: "flex-end",
           }}
         >
-          <Text style={[textStyle.regular08, { color: "#000000" }]}>
+          <Text style={[textStyle.semibold08, { color: "#919191" }]}>
             {sgsposttime}
           </Text>
         </View>
@@ -142,7 +142,7 @@ export const SgsPost: React.FC<ButtonProps> = ({
           justifyContent: "center",
         }}
       >
-        <Text style={[textStyle.semibold14, { color: "#333333" }]}>
+        <Text style={[textStyle.semibold12, { color: "#333333", left: "1%" }]}>
           {sgstit}
         </Text>
       </View>
@@ -153,7 +153,7 @@ export const SgsPost: React.FC<ButtonProps> = ({
           marginTop: deviceHeight * 0.01,
         }}
       >
-        <Text style={[textStyle.regular11, { color: "#151515" }]}>
+        <Text style={[textStyle.regular11, { color: "#151515", left: "1%" }]}>
           {sgscont}
         </Text>
       </View>
@@ -206,8 +206,10 @@ export const SgsComment: React.FC<ButtonProps> = ({
       style={{
         flexDirection: "row",
         width: deviceWidth * 0.868,
-        minHeight: deviceHeight * 0.09,
+        minHeight: deviceHeight * 0.065,
         marginTop: deviceHeight * 0.017,
+        borderBottomWidth: 1,
+        borderBottomColor: "#F2F2F2",
       }}
     >
       <View>
@@ -222,7 +224,7 @@ export const SgsComment: React.FC<ButtonProps> = ({
         <View style={{ marginLeft: deviceWidth * 0.02 }}>
           <Text
             style={[
-              textStyle.semibold09,
+              textStyle.semibold10,
               { color: "#151515" },
               { lineHeight: deviceWidth * 0.04 },
             ]}
@@ -237,7 +239,7 @@ export const SgsComment: React.FC<ButtonProps> = ({
             marginTop: deviceHeight * 0.001,
           }}
         >
-          <Text style={[textStyle.regular12, { color: "#151515" }]}>
+          <Text style={[textStyle.regular11, { color: "#151515" }]}>
             {sgsanstit}
           </Text>
         </View>
@@ -245,10 +247,9 @@ export const SgsComment: React.FC<ButtonProps> = ({
       <View
         style={{
           justifyContent: "flex-start",
-          paddingTop: deviceHeight * 0.006,
         }}
       >
-        <Text style={[textStyle.semibold08, { color: "#919191" }]}>
+        <Text style={[textStyle.semibold07, { color: "#919191" }]}>
           {sgsanstime}
         </Text>
       </View>

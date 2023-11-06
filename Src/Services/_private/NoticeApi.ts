@@ -95,7 +95,6 @@ export const openBubSvcNew = async (
       console.log("성공");
     } else {
       console.log("실패");
-      console.log(result?.data);
     }
   }
 };
