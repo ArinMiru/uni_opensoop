@@ -36,6 +36,7 @@ import VotePostDetailPage from "../Screens/Home/VoTe/VotePostDetailPage";
 import VotePostStatusPage from "../Screens/Home/VoTe/VotePostStatusPage";
 import SchedulePage from "../Screens/Home/ScheDule/SchedulePage";
 import SchedulePostRegiPage from "../Screens/Home/ScheDule/ScheduleRegiPage";
+import SchdEditPostPage from "../Screens/Home/ScheDule/SchdEditPostPage";
 import BottomTabNavigations from "./BottomTabNavigations";
 import ProfilePage from "../Screens/Home/ProfilePage";
 import TitleCodeCerti from "../Screens/Home/TitleCodeCerti";
@@ -149,6 +150,12 @@ export type RootStackParamList = {
   };
   SchedulPage: undefined;
   SchedulePostRegiPage: undefined;
+  SchdEditPostPage: {
+    TIT: string;
+    STRT_SCHD_YMD: string;
+    END_SCHD_YMD: string;
+    CRE_SEQ: string;
+  };
   BottomTabNavigations: undefined;
   ProfilePage: undefined;
   TitleCodeCerti: undefined;
@@ -410,6 +417,12 @@ const StackNavigator = () => {
       <Stack.Screen
         name="SchedulePostRegiPage"
         component={SchedulePostRegiPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="SchdEditPostPage"
+        component={SchdEditPostPage}
         options={{ headerShown: false }}
       />
 

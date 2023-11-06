@@ -100,30 +100,35 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
         <View
           style={{
             flex: 1,
-            width: deviceWidth * 1,
+            width: deviceWidth * 0.775,
             flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
+            justifyContent: "center",
+            alignSelf: "center",
           }}
         >
-          <Text
-            style={[
-              textStyle.bold25,
-              { marginLeft: deviceWidth * 0.06 },
-              { color: "#1E232C" },
-            ]}
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "flex-end",
+              marginBottom: "3%",
+            }}
           >
-            {VOT_TITLE}
-          </Text>
-          <Text
-            style={[
-              textStyle.medium09,
-              { marginRight: deviceWidth * 0.06 },
-              { color: "#9E9E9E" },
-            ]}
+            <Text style={[textStyle.bold23, { color: "#1E232C" }]}>
+              {VOT_TITLE}
+            </Text>
+          </View>
+          <View
+            style={{
+              flex: 0.4,
+              justifyContent: "flex-end",
+              alignItems: "flex-end",
+              marginBottom: "4%",
+            }}
           >
-            {formattedVOT_EXPR_DATE} {"마감"}
-          </Text>
+            <Text style={[textStyle.medium09, { color: "#9E9E9E" }]}>
+              {formattedVOT_EXPR_DATE} {"마감"}
+            </Text>
+          </View>
         </View>
         <View
           style={{

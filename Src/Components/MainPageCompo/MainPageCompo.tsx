@@ -120,7 +120,7 @@ export const MainSchdBub: React.FC<ButtonProps> = ({
           }}
         >
           <TouchableOpacity onPress={onPress}>
-            <Text style={[textStyle.semibold10, { color: "#4BB781" }]}>
+            <Text style={[textStyle.bold10, { color: "#4BB781" }]}>
               {"더보기"}
             </Text>
           </TouchableOpacity>
@@ -258,7 +258,7 @@ export const OneMainSchdBub: React.FC<ButtonProps> = ({
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          marginTop: deviceWidth * 0.009,
+          marginTop: deviceWidth * 0.02,
         }}
       >
         <Text
@@ -276,7 +276,7 @@ export const OneMainSchdBub: React.FC<ButtonProps> = ({
           }}
         >
           <TouchableOpacity onPress={onPress}>
-            <Text style={[textStyle.semibold10, { color: "#4BB781" }]}>
+            <Text style={[textStyle.bold10, { color: "#4BB781" }]}>
               {"더보기"}
             </Text>
           </TouchableOpacity>
@@ -357,7 +357,7 @@ export const MainSchdNoBox: React.FC<ButtonProps> = ({ onPress }) => {
           }}
         >
           <TouchableOpacity onPress={onPress}>
-            <Text style={[textStyle.semibold10, { color: "#4BB781" }]}>
+            <Text style={[textStyle.bold10, { color: "#4BB781" }]}>
               {"더보기"}
             </Text>
           </TouchableOpacity>
@@ -419,7 +419,7 @@ export const MainVoteBub: React.FC<ButtonProps> = ({
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          marginTop: deviceWidth * 0.009,
+          marginTop: deviceWidth * 0.02,
         }}
       >
         <Text
@@ -437,7 +437,7 @@ export const MainVoteBub: React.FC<ButtonProps> = ({
           }}
         >
           <TouchableOpacity onPress={onPress}>
-            <Text style={[textStyle.semibold10, { color: "#4BB781" }]}>
+            <Text style={[textStyle.bold10, { color: "#4BB781" }]}>
               {"더보기"}
             </Text>
           </TouchableOpacity>
@@ -562,7 +562,7 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
           }}
         >
           <TouchableOpacity onPress={onPress}>
-            <Text style={[textStyle.semibold10, { color: "#4BB781" }]}>
+            <Text style={[textStyle.bold10, { color: "#4BB781" }]}>
               {"더보기"}
             </Text>
           </TouchableOpacity>
@@ -606,7 +606,7 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                 }}
               >
                 <TouchableOpacity onPress={onPressOpenBubTitle}>
-                  <Text style={[textStyle.medium10, { color: "#121212" }]}>
+                  <Text style={[textStyle.bold10, { color: "#121212" }]}>
                     {F_Open_Tit}
                     {/**공지사항 제목 */}
                   </Text>
@@ -626,7 +626,7 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                       marginLeft: deviceWidth * 0.025,
                     }}
                   >
-                    <Text style={[textStyle.bold09, { color: "#121212" }]}>
+                    <Text style={[textStyle.semibold09, { color: "#121212" }]}>
                       {F_Open_MEMB_NM}
                       {/**공지사항 작성자 */}
                     </Text>
@@ -640,7 +640,7 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                         marginLeft: deviceWidth * 0.025,
                       }}
                     >
-                      <Text style={[textStyle.bold08, { color: "#919191" }]}>
+                      <Text style={[textStyle.medium08, { color: "#919191" }]}>
                         {F_Open_DEP_NM} {F_TIT_NM}
                         {/**공지사항 작성자 학과, 직책 */}
                       </Text>
@@ -694,7 +694,7 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                 }}
               >
                 <TouchableOpacity onPress={onPressOpenBubTitle}>
-                  <Text style={[textStyle.medium10, { color: "#121212" }]}>
+                  <Text style={[textStyle.bold10, { color: "#121212" }]}>
                     {S_Open_Tit}
                   </Text>
                 </TouchableOpacity>
@@ -713,7 +713,7 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                       marginLeft: deviceWidth * 0.025,
                     }}
                   >
-                    <Text style={[textStyle.bold09, { color: "#121212" }]}>
+                    <Text style={[textStyle.semibold09, { color: "#121212" }]}>
                       {S_Open_MEMB_NM}
                     </Text>
                   </View>
@@ -726,7 +726,7 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                         marginLeft: deviceWidth * 0.025,
                       }}
                     >
-                      <Text style={[textStyle.bold08, { color: "#919191" }]}>
+                      <Text style={[textStyle.medium08, { color: "#919191" }]}>
                         {S_Open_MEMB_NM} {S_TIT_NM}
                       </Text>
                     </View>
