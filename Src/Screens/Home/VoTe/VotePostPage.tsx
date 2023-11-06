@@ -58,8 +58,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPressRegi={() => navigation.navigate("VotePostRegiPage")}
       />
-      <ScrollView>
-        <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
+        <View style={[NewBackgroundStyle.BottomTabBackgroundStyle]}>
           <View style={{ flexDirection: "row" }}>
             <View
               style={{
@@ -97,7 +96,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                     { marginLeft: deviceWidth * 0.02 },
                   ]}
                 >
-                  투표중
+                  진행중인 투표만 보기
                 </Text>
               </TouchableOpacity>
             </View>
@@ -178,7 +177,6 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
             />
           </View>
         </View>
-      </ScrollView>
     </Background>
   );
 };
