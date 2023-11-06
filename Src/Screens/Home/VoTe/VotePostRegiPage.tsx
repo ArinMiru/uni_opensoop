@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableWithoutFeedback } from "react-native";
+import { View, Text, TouchableWithoutFeedback, Alert } from "react-native";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { VoteInput } from "../../../Components/VoteCompo/VoteTextInput";
@@ -72,9 +72,9 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
 
   const getFormattedDate = () => {
     const date = selectedDate;
-    const formattedDate = `${date.getFullYear()}년 ${
+    const formattedDate = `${date.getFullYear()}-${
       date.getMonth() + 1
-    }월 ${date.getDate()}일`;
+    }-${date.getDate()}`;
     return formattedDate;
   };
 
@@ -99,14 +99,21 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       VOT_DESC: "",
       VOT_INFO: voteInfos,
     };
-    console.log(voteItem);
-    votBubRegi(
+    const result = await votBubRegi(
       voteItem.VOTE_TITLE,
       voteItem.VOT_TYPE_CD,
       voteItem.VOT_EXPR_DATE,
       voteItem.VOT_DESC,
       voteItem.VOT_INFO
     );
+
+    if (result && result.data.RSLT_CD === "00") {
+      navigation.goBack();
+      Alert.alert("성공", "투표가 성공적으로 등록 되었습니다");
+    } else {
+      navigation.goBack();
+      Alert.alert("실패", "투표 등록에 실패 하였습니다");
+    }
   };
 
   return (

@@ -131,8 +131,8 @@ export const votBubRegi = async (
   VOT_EXPR_DATE: string,
   VOT_DESC: string,
   VOT_INFO: string[]
-): Promise<string | null> => {
-  const endpoint = "/UNI/VotBubRegi";
+) => {
+  const endpoint = "/UNI/VotBubSvc";
   const userData = getUserData();
 
   if (userData !== null) {
@@ -153,21 +153,16 @@ export const votBubRegi = async (
       VOT_INFO,
     };
     console.log(data);
-    try {
-      const result: AxiosResponse<any, any> | null = await sendApiData(
-        endpoint,
-        data
-      );
-      console.log(result);
-      if (result !== null && result.data.RSLT_CD === "00") {
-        console.log("투표가 정상적으로 등록되었습니다.");
-        return "정상적으로 등록되었습니다.";
-      } else {
-        console.log("투표 등록 실패");
-        return "투표 등록에 실패하였습니다.";
-      }
-    } catch (error) {
-      console.error("투표 등록 중 오류 발생:", error);
+
+    const result: AxiosResponse<any, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
+    if (result !== null && result.data.RSLT_CD === "00") {
+      console.log("투표가 정상적으로 등록되었습니다.");
+      return result;
+    } else {
+      console.log("투표 등록 실패");
       return null;
     }
   } else {
@@ -180,7 +175,7 @@ export const votBubRegi = async (
 export const votBubEditCall = async (
   voteItem: VoteItem
 ): Promise<string | null> => {
-  const endpoint = "/UNI/VotBubEdit";
+  const endpoint = "/UNI/VotBubSvc";
   const userData = getUserData();
 
   if (userData !== null) {
@@ -234,7 +229,7 @@ export const votBubEditCall = async (
 export const votBubDeleteCall = async (
   CRE_SEQ: number
 ): Promise<string | null> => {
-  const endpoint = "/UNI/VotBubDelete";
+  const endpoint = "/UNI/VotBubSvc";
   const userData = getUserData();
 
   if (userData !== null) {
