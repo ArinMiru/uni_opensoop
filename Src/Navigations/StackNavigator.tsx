@@ -47,7 +47,6 @@ import FreePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
 import FreEditPostPage from "../Screens/Community/Free/FreEditPostPage";
 import QstEditPostPage from "../Screens/Community/QuesTion/QstEditPostPage";
 import SgsEditPostPage from "../Screens/Community/SuggeStion/SgsEditPostPage";
-import VoteEditPostPage from "../Screens/Home/VoTe/VoteEditPostPage";
 
 /**----------------------------------------------------------------------------*/
 import QstAnsModalPage from "../Screens/QstAnsModal/QstAnsModalPage";
@@ -185,15 +184,6 @@ export type RootStackParamList = {
     TIT: string;
     NICK_NM: string;
     CRE_DAT: string;
-  };
-  VoteEditPostPage: {
-    VOT_TITLE: string;
-    VOT_EXPR_DATE: string;
-    VOT_DESC: string;
-    VOT_INFO: string;
-    VOT_TYPE_CD: string;
-    VOT_SEL_SEQ: string;
-    CRE_SEQ: number;
   };
   /**----------------------------------------------------------------------------*/
   QstAnsModalPage: undefined;
@@ -448,11 +438,6 @@ const StackNavigator = () => {
       <Stack.Screen
         name="SgsEditPostPage"
         component={SgsEditPostPage}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="VoteEditPostPage"
-        component={VoteEditPostPage}
         options={{ headerShown: false }}
       />
       {/**---------위에서부터 추가-----------------------------------------------------------*/}
