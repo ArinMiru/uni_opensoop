@@ -59,21 +59,22 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
         onPressRegi={() => navigation.navigate("VotePostRegiPage")}
       />
       <View style={[NewBackgroundStyle.BottomTabBackgroundStyle]}>
-        <View style={{ flexDirection: "row" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            width: deviceWidth * 0.881,
+            alignSelf: "center",
+          }}
+        >
           <View
             style={{
               flex: 1,
               marginTop: "5%",
-              alignContent: "center",
-              alignItems: "flex-end",
+              marginBottom: "5%",
             }}
           >
             <TouchableOpacity
-              style={[
-                { flexDirection: "row" },
-                { alignItems: "center" },
-                { marginRight: deviceWidth * 0.08 },
-              ]}
+              style={[{ flexDirection: "row" }, { alignItems: "center" }]}
               onPress={() => setIsButtonOn(!isButtonOn)}
             >
               {isButtonOn ? (
@@ -96,7 +97,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                   { marginLeft: deviceWidth * 0.02 },
                 ]}
               >
-                투표중
+                진행중인 투표만 보기
               </Text>
             </TouchableOpacity>
           </View>

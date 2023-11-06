@@ -47,7 +47,7 @@ export const FreSgsProfileIcon: React.FC<ProfileProps> = ({ onPress }) => {
     <View style={{ marginRight: deviceWidth * 0.009 }}>
       <Ionicons
         name="ios-person-circle"
-        size={deviceWidth * 0.09}
+        size={deviceWidth * 0.08}
         color="#666970"
       ></Ionicons>
     </View>

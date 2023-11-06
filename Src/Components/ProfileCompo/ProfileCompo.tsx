@@ -47,10 +47,10 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           flexDirection: "row",
           alignItems: "center",
           borderBottomWidth: 0.5,
-          marginRight: "8%",
-          marginLeft: "8%",
+          marginRight: "7%",
+          marginLeft: "7%",
           marginTop: deviceWidth * 0.02,
-          borderBottomColor: "#4BB781",
+          borderBottomColor: "#B4B4B4",
         }}
       >
         <Image
@@ -68,13 +68,14 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
         <View
           style={{
             paddingLeft: deviceWidth * 0.01,
+            marginTop: "1%",
           }}
         >
           <Text style={[TextStyle.semibold08, { color: "#919191" }]}>
             {MEMB_SC_NM}
           </Text>
         </View>
-        <View style={{ paddingLeft: deviceWidth * 0.005 }}>
+        <View style={{ paddingLeft: deviceWidth * 0.005, marginTop: "1%" }}>
           <Text style={[TextStyle.semibold08, { color: "#919191" }]}>
             {MEMB_DEP_NM}
           </Text>
@@ -94,7 +95,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           </Text>
         </View>
         <View style={{ marginRight: deviceWidth * 0.06 }}>
-          <Text style={[TextStyle.semibold13, { color: "#303038" }]}>
+          <Text style={[TextStyle.semibold11, { color: "#303038" }]}>
             {NICK_NUM}
           </Text>
         </View>
@@ -113,7 +114,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           </Text>
         </View>
         <View style={{ marginRight: deviceWidth * 0.06 }}>
-          <Text style={[TextStyle.semibold13, { color: "#303038" }]}>
+          <Text style={[TextStyle.semibold11, { color: "#303038" }]}>
             {MEMB_EM}
           </Text>
         </View>
@@ -132,7 +133,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           </Text>
         </View>
         <View style={{ marginRight: deviceWidth * 0.06 }}>
-          <Text style={[TextStyle.semibold13, { color: "#303038" }]}>
+          <Text style={[TextStyle.semibold11, { color: "#303038" }]}>
             {MEMB_CD}
           </Text>
         </View>
@@ -151,7 +152,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           </Text>
         </View>
         <View style={{ marginRight: deviceWidth * 0.06 }}>
-          <Text style={[TextStyle.semibold13, { color: "#303038" }]}>
+          <Text style={[TextStyle.semibold11, { color: "#303038" }]}>
             {MEMB_GRA}
           </Text>
         </View>
@@ -170,7 +171,7 @@ export const ProfilePageUserInfo: React.FC<inputProps> = ({
           </Text>
         </View>
         <View style={{ marginRight: deviceWidth * 0.06 }}>
-          <Text style={[TextStyle.semibold13, { color: "#303038" }]}>
+          <Text style={[TextStyle.semibold11, { color: "#303038" }]}>
             {TIT_NM}
           </Text>
         </View>
@@ -253,7 +254,7 @@ export const CertLogoutBox: React.FC<ButtonProps> = ({
             paddingLeft: deviceWidth * 0.06,
           }}
         >
-          <Text style={[TextStyle.medium10, { color: "#F66565" }]}>
+          <Text style={[TextStyle.semibold10, { color: "#F66565" }]}>
             {"로그아웃"}
           </Text>
         </View>

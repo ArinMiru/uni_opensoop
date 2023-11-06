@@ -100,7 +100,7 @@ export const VoteStatusPageButton: React.FC<ButtonProps> = ({
           alignItems: "center",
         }}
       >
-        <Text style={[textStyle.semibold13, { color: "#166D41" }]}>
+        <Text style={[textStyle.semibold13, { color: "#4BB781" }]}>
           {votestatusnum}
           {"명"}
         </Text>
@@ -407,12 +407,12 @@ export const VotedListButton: React.FC<ButtonProps> = ({
           }}
         >
           <View style={{ flex: 1, justifyContent: "center" }}>
-            <Text style={[textStyle.semibold10, { color: "#909090" }]}>
+            <Text style={[textStyle.semibold10, { color: "#ABABAB" }]}>
               {title}
             </Text>
           </View>
           <View style={{ flex: 1, justifyContent: "center" }}>
-            <Text style={[textStyle.semibold08, { color: "#C3C3C3" }]}>
+            <Text style={[textStyle.semibold08, { color: "#D6D6D6" }]}>
               {posttime}
             </Text>
           </View>
@@ -423,7 +423,7 @@ export const VotedListButton: React.FC<ButtonProps> = ({
             alignItems: "center",
           }}
         >
-          <Text style={[textStyle.semibold08, { color: "#C3C3C3" }]}>
+          <Text style={[textStyle.semibold08, { color: "#D6D6D6" }]}>
             {poststatus}
           </Text>
         </View>
