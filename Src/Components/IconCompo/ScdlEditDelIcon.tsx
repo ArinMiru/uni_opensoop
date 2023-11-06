@@ -7,6 +7,9 @@ import { View } from "react-native";
 
 interface ProfileProps {
   onPress?: () => void;
+  navigation?: {
+    navigate: (screenName: string) => void;
+  };
 }
 
 /**
