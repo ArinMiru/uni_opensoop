@@ -16,6 +16,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { votBubRegi } from "../../../Services/_private/VoteApi";
+import VoteInputStyle from "../../../Styles/VoteStyles/VoteInputStyle";
+import { VoteTitInput } from "../../../Components/VoteCompo/VoteTextInput";
 
 /**
  * @Dowon(김도원 생성)
@@ -40,6 +42,7 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [tit, setTit] = useState<string>("");
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -118,18 +121,30 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View
           style={{
-            flex: 1,
+            flex: 1.5,
             width: deviceWidth * 1,
-            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <SchdlVoteRegiTitInput
-            text="제목을 입력하세요."
-            value={voteTitle}
-            onChangeText={(text) => setVoteTitle(text)}
-          />
+          <View style={VoteInputStyle.VoteTitInputAreaStyle}>
+            <VoteTitInput
+              text="투표 제목을 입력하세요"
+              value={tit}
+              onChangeText={(text) => setTit(text)}
+              keyboardType="default"
+              keyboardAppearance="default"
+              autoCapitalize="none"
+            ></VoteTitInput>
+            <Text
+              style={[
+                textStyle.semibold08,
+                { color: "#919191", alignSelf: "flex-end", paddingTop: "2%" },
+              ]}
+            >
+              최소 5자 / 최대 30자
+            </Text>
+          </View>
         </View>
         <View
           style={{
@@ -173,14 +188,14 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         <View style={{ flex: 0.3 }}></View>
         <View
           style={{
-            flex: 1,
+            flex: 1.4,
             width: deviceWidth * 1,
             justifyContent: "flex-start",
           }}
         >
           <View
             style={{
-              flex: 0.5,
+              flex: 0.7,
               justifyContent: "center",
             }}
           >
@@ -239,21 +254,21 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             {isButtonOn ? (
               <Ionicons
                 name="ios-radio-button-on"
-                size={deviceWidth * 0.05}
+                size={deviceWidth * 0.07}
                 color="#4BB781"
               />
             ) : (
               <Ionicons
                 name="ios-radio-button-off"
-                size={deviceWidth * 0.05}
+                size={deviceWidth * 0.07}
                 color="#4BB781"
               />
             )}
             <Text
               style={[
-                textStyle.regular10,
+                textStyle.regular12,
                 { color: "#4BB781" },
-                { marginLeft: deviceWidth * 0.02 },
+                { marginLeft: deviceWidth * 0.015 },
               ]}
             >
               복수 선택
