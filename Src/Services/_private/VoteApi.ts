@@ -19,7 +19,7 @@ export const votBubListCall = async (): Promise<VoteData | null> => {
     // userData가 null이 아닌 경우에만 요청 보내기
 
     // 고정된 값으로 설정
-    const LIST_UNIT_CNT = 20; // 한 페이지에 표시할 공지사항 수
+    const LIST_UNIT_CNT = 10; // 한 페이지에 표시할 수
     const REQ_PAGE = 1; // 요청할 페이지 번호
     const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
     const data = {
@@ -125,42 +125,40 @@ export const votBubStatCall = async (
 };
 
 /** PROC_TYPE 01 투표 등록 */
-export const votBubRegiCall = async (
-  voteItem: VoteItem
+export const votBubRegi = async (
+  VOT_TITLE: string,
+  VOT_TYPE_CD: string,
+  VOT_EXPR_DATE: string,
+  VOT_DESC: string,
+  VOT_INFO: string[]
 ): Promise<string | null> => {
   const endpoint = "/UNI/VotBubRegi";
   const userData = getUserData();
 
   if (userData !== null) {
-    const {
-      VOTE_TITLE,
-      VOT_TYPE_CD,
-      VOT_GO_CD,
-      VOT_EXPR_DATE,
-      VOT_DESC,
-      VOT_INFO,
-    } = voteItem;
+    const PROC_TYPE = "01";
+    const { LOGIN_ID, MEMB_DEP_CD, MEMB_SC_CD, TIT_CD } = userData;
+    const VOT_CRE_DATE = new Date().toISOString().slice(0, 10);
     const data = {
-      LOGIN_ID: userData.LOGIN_ID,
-      PROC_TYPE: "01",
-      MEMB_SC_CD: userData.MEMB_SC_CD,
-      MEMB_DEP_CD: userData.MEMB_DEP_CD,
-      TIT_CD: userData.TIT_CD,
-      VOTE_TITLE,
+      LOGIN_ID,
+      PROC_TYPE,
+      MEMB_SC_CD,
+      MEMB_DEP_CD,
+      TIT_CD,
+      VOT_TITLE,
       VOT_TYPE_CD,
-      VOT_GO_CD,
-      VOT_CRE_DATE: new Date().toISOString().slice(0, 10),
+      VOT_CRE_DATE,
       VOT_EXPR_DATE,
       VOT_DESC,
       VOT_INFO,
     };
-
+    console.log(data);
     try {
       const result: AxiosResponse<any, any> | null = await sendApiData(
         endpoint,
         data
       );
-
+      console.log(result);
       if (result !== null && result.data.RSLT_CD === "00") {
         console.log("투표가 정상적으로 등록되었습니다.");
         return "정상적으로 등록되었습니다.";
