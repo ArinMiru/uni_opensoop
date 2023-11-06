@@ -13,7 +13,7 @@ import { votBubListCall } from "../../../Services/_private/VoteApi";
 import { VoteData } from "../../../Utils/_private/ApiData/VoteData";
 import { useIsFocused } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import textStyle from "../../../Styles/TextStyle";
 import { timeUntilVoteEnds } from "../../../Utils/voteTimeUtil";
@@ -58,125 +58,127 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPressRegi={() => navigation.navigate("VotePostRegiPage")}
       />
-      <View style={[NewBackgroundStyle.BottomTabBackgroundStyle]}>
-        <View style={{ flexDirection: "row" }}>
+      <ScrollView>
+        <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
+          <View style={{ flexDirection: "row" }}>
+            <View
+              style={{
+                flex: 1,
+                marginTop: "5%",
+                alignContent: "center",
+                alignItems: "flex-end",
+              }}
+            >
+              <TouchableOpacity
+                style={[
+                  { flexDirection: "row" },
+                  { alignItems: "center" },
+                  { marginRight: deviceWidth * 0.08 },
+                ]}
+                onPress={() => setIsButtonOn(!isButtonOn)}
+              >
+                {isButtonOn ? (
+                  <Ionicons
+                    name="ios-radio-button-on"
+                    size={deviceWidth * 0.05}
+                    color="#4BB781"
+                  />
+                ) : (
+                  <Ionicons
+                    name="ios-radio-button-off"
+                    size={deviceWidth * 0.05}
+                    color="#4BB781"
+                  />
+                )}
+                <Text
+                  style={[
+                    textStyle.regular10,
+                    { color: "#4BB781" },
+                    { marginLeft: deviceWidth * 0.02 },
+                  ]}
+                >
+                  투표중
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
           <View
             style={{
-              flex: 1,
-              marginTop: "5%",
+              width: deviceWidth * 1,
+              justifyContent: "center",
+              alignItems: "center",
               alignContent: "center",
-              alignItems: "flex-end",
             }}
           >
-            <TouchableOpacity
-              style={[
-                { flexDirection: "row" },
-                { alignItems: "center" },
-                { marginRight: deviceWidth * 0.08 },
-              ]}
-              onPress={() => setIsButtonOn(!isButtonOn)}
-            >
-              {isButtonOn ? (
-                <Ionicons
-                  name="ios-radio-button-on"
-                  size={deviceWidth * 0.05}
-                  color="#4BB781"
-                />
-              ) : (
-                <Ionicons
-                  name="ios-radio-button-off"
-                  size={deviceWidth * 0.05}
-                  color="#4BB781"
-                />
-              )}
-              <Text
-                style={[
-                  textStyle.regular10,
-                  { color: "#4BB781" },
-                  { marginLeft: deviceWidth * 0.02 },
-                ]}
-              >
-                투표중
-              </Text>
-            </TouchableOpacity>
+            <Spinner
+              // 로딩 상태에 따라 Spinner를 화면에 표시
+              visible={loading}
+              textContent={"로딩 중..."}
+              textStyle={{ color: "#FFF" }}
+            />
+            <FlatList
+              data={filteredVoteData} // 3. 필터링된 데이터 사용
+              keyExtractor={(item) => item.CRE_SEQ.toString()}
+              renderItem={({ item }) => {
+                if (item.VOT_GO_CD === "VG") {
+                  return (
+                    <View
+                      style={{
+                        width: deviceWidth * 1,
+                        alignItems: "center",
+                      }}
+                    >
+                      <UnVotedListButton
+                        title={item.VOTE_TITLE}
+                        poststatus={"투표 중"}
+                        posttime={timeUntilVoteEnds(item.VOT_EXPR_DATE)}
+                        onPress={() =>
+                          navigation.navigate("VotePostDetailPage", {
+                            VOT_TITLE: item.VOTE_TITLE,
+                            VOT_DESC: item.VOT_DESC,
+                            VOT_EXPR_DATE: item.VOT_EXPR_DATE,
+                            VOT_INFO: item.VOT_INFO,
+                            VOT_TYPE_CD: item.VOT_TYPE_CD,
+                            VOT_SEL_SEQ: item.VOT_SEL_SEQ,
+                            CRE_SEQ: item.CRE_SEQ,
+                          })
+                        }
+                      />
+                    </View>
+                  );
+                } else if (item.VOT_GO_CD === "VF") {
+                  return (
+                    <View
+                      style={{
+                        width: deviceWidth * 1,
+                        alignItems: "center",
+                      }}
+                    >
+                      <VotedListButton
+                        title={item.VOTE_TITLE}
+                        poststatus={"투표 종료"}
+                        posttime={timeUntilVoteEnds(item.VOT_EXPR_DATE)}
+                        onPress={() =>
+                          navigation.navigate("VotePostDetailPage", {
+                            VOT_TITLE: item.VOTE_TITLE,
+                            VOT_DESC: item.VOT_DESC,
+                            VOT_EXPR_DATE: item.VOT_EXPR_DATE,
+                            VOT_INFO: item.VOT_INFO,
+                            VOT_TYPE_CD: item.VOT_TYPE_CD,
+                            VOT_SEL_SEQ: item.VOT_SEL_SEQ,
+                            CRE_SEQ: item.CRE_SEQ,
+                          })
+                        }
+                      />
+                    </View>
+                  );
+                }
+                return null; // 아무 컴포넌트도 반환하지 않을 경우
+              }}
+            />
           </View>
         </View>
-        <View
-          style={{
-            width: deviceWidth * 1,
-            justifyContent: "center",
-            alignItems: "center",
-            alignContent: "center",
-          }}
-        >
-          <Spinner
-            // 로딩 상태에 따라 Spinner를 화면에 표시
-            visible={loading}
-            textContent={"로딩 중..."}
-            textStyle={{ color: "#FFF" }}
-          />
-          <FlatList
-            data={filteredVoteData} // 3. 필터링된 데이터 사용
-            keyExtractor={(item) => item.CRE_SEQ.toString()}
-            renderItem={({ item }) => {
-              if (item.VOT_GO_CD === "VG") {
-                return (
-                  <View
-                    style={{
-                      width: deviceWidth * 1,
-                      alignItems: "center",
-                    }}
-                  >
-                    <UnVotedListButton
-                      title={item.VOTE_TITLE}
-                      poststatus={"투표 중"}
-                      posttime={timeUntilVoteEnds(item.VOT_EXPR_DATE)}
-                      onPress={() =>
-                        navigation.navigate("VotePostDetailPage", {
-                          VOT_TITLE: item.VOTE_TITLE,
-                          VOT_DESC: item.VOT_DESC,
-                          VOT_EXPR_DATE: item.VOT_EXPR_DATE,
-                          VOT_INFO: item.VOT_INFO,
-                          VOT_TYPE_CD: item.VOT_TYPE_CD,
-                          VOT_SEL_SEQ: item.VOT_SEL_SEQ,
-                          CRE_SEQ: item.CRE_SEQ,
-                        })
-                      }
-                    />
-                  </View>
-                );
-              } else if (item.VOT_GO_CD === "VF") {
-                return (
-                  <View
-                    style={{
-                      width: deviceWidth * 1,
-                      alignItems: "center",
-                    }}
-                  >
-                    <VotedListButton
-                      title={item.VOTE_TITLE}
-                      poststatus={"투표 종료"}
-                      posttime={timeUntilVoteEnds(item.VOT_EXPR_DATE)}
-                      onPress={() =>
-                        navigation.navigate("VotePostDetailPage", {
-                          VOT_TITLE: item.VOTE_TITLE,
-                          VOT_DESC: item.VOT_DESC,
-                          VOT_EXPR_DATE: item.VOT_EXPR_DATE,
-                          VOT_INFO: item.VOT_INFO,
-                          VOT_TYPE_CD: item.VOT_TYPE_CD,
-                          VOT_SEL_SEQ: item.VOT_SEL_SEQ,
-                          CRE_SEQ: item.CRE_SEQ,
-                        })
-                      }
-                    />
-                  </View>
-                );
-              }
-              return null; // 아무 컴포넌트도 반환하지 않을 경우
-            }}
-          />
-        </View>
-      </View>
+      </ScrollView>
     </Background>
   );
 };
