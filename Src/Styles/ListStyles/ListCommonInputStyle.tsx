@@ -15,7 +15,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     paddingLeft: 10,
     borderBottomWidth: 0.5,
-    borderBlockColor: "#BDBDBD",
+    borderColor: "#BDBDBD",
   },
 
   /**
