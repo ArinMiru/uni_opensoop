@@ -14,6 +14,7 @@ import { SchdBubListSvc } from "../../../Services/_private/SchdBubApi";
 import Spinner from "react-native-loading-spinner-overlay";
 import moment from "moment";
 import SchdlButtonStyle from "../../../Styles/SchdlStyles/SchdlButtonStyle";
+import SchdEditPostPage from "../ScheDule/SchdEditPostPage";
 import TextStyle from "../../../Styles/TextStyle";
 import {
   ScdlEditIcon,
@@ -257,7 +258,16 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
           >
             <View style={{ marginRight: deviceWidth * 0.03 }}>
               {isEditClicked ? (
-                <ScdlEditIcon />
+                <ScdlEditIcon
+                  onPress={() =>
+                    navigation.navigate("SchdEditPostPage", {
+                      TIT: detail.TIT,
+                      STRT_SCHD_YMD: detail.STRT_SCHD_YMD,
+                      END_SCHD_YMD: detail.END_SCHD_YMD,
+                      CRE_SEQ: detail.CRE_SEQ,
+                    })
+                  }
+                />
               ) : isDeleteClicked ? (
                 <SchldDelButton onPress={schedulebutton} />
               ) : (

@@ -42,7 +42,7 @@ const getKeyboardHeight = () => {
   }
 };
 
-const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
+const QstAnsModalPage: React.FC<ScreenProps> = ({ navigation }) => {
   const inputY = useSharedValue(0);
   const modalY = useSharedValue(deviceHeight); // 모달의 Y 위치를 저장하는 shared value
   const backgroundOpacity = useSharedValue(0); // 배경의 opacity를 저장하는 shared value
@@ -147,4 +147,4 @@ const DowonTestScreen: React.FC<ScreenProps> = ({ navigation }) => {
   );
 };
 
-export default DowonTestScreen;
+export default QstAnsModalPage;

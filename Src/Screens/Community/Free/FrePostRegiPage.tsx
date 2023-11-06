@@ -27,7 +27,13 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
     try {
       const userData = getUserData();
       if (userData) {
-        await FreeBubRegi(tit, cont);
+        const responseData = await FreeBubRegi(tit, cont);
+
+        if (responseData) {
+          navigation.navigate("ListPostPage");
+          setCont("");  
+          setTit("");
+        }
       } else {
         console.error("userData가 null입니다.");
       }
@@ -42,7 +48,10 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         Title="자유게시판 등록"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
-        onPress={() => navigation.goBack()}
+        //onPress={() => navigation.goBack()} 
+        // 이전 게시물을 작성을 완료한 후, FrePostRegiPage에서 뒤로가기 시
+        // 게시물 작성 기록이 사라짐
+        onPress={() => navigation.navigate("ListPostPage")}
         onPressRegi={handleRegiButtonPress}
       />
       <View
