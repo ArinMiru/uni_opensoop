@@ -203,6 +203,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
               onPress={() => {
                 uploadImage();
               }}
+              selectedImage={imageUris[imageUris.length - 1]}
             />
           ) : (
             <View
