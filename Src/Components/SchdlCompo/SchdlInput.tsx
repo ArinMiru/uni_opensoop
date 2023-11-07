@@ -36,6 +36,7 @@ export const SchdlVoteEditTitInput: React.FC<inputProps> = ({
   return (
     <TextInput
       placeholderTextColor="#BDBDBD"
+      defaultValue={text}
       style={[
         SchdlInputStyle.SchdlVoteRegiTilteInputStyle,
         textStyle.medium14,
@@ -44,7 +45,6 @@ export const SchdlVoteEditTitInput: React.FC<inputProps> = ({
       {...props}
     >
       {children}
-      <Text>{text}</Text>
     </TextInput>
   );
 };
