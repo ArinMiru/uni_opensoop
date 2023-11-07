@@ -171,9 +171,6 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
               postLike={postLike}
             />
           </View>
-          <View style={{ alignItems: "center" }}>
-            <OpenImageDotChk />
-          </View>
           <View
             style={{
               flex: 0.5,

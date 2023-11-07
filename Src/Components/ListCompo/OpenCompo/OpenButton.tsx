@@ -135,14 +135,14 @@ export const OpenPhotoDelBox: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity onPress={onPressAddPhoto}>
       <Image
-        source={{uri : postRegiImage}}
+        source={{ uri: postRegiImage }}
         style={[
           OpenButtonStyle.OpenPhotoBoxStyle,
           { marginRight: deviceWidth * 0.02 },
         ]}
         resizeMode="stretch"
       />
-        <OpenPhotoDelIcon onPress={onPressDelPhoto}></OpenPhotoDelIcon>
+      <OpenPhotoDelIcon onPress={onPressDelPhoto}></OpenPhotoDelIcon>
     </TouchableOpacity>
   );
 };
@@ -179,7 +179,8 @@ export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
           key={index}
           onPressAddPhoto={onPress}
           onPressDelPhoto={() => removePhotoBox(index)}
-        ></OpenPhotoDelBox>
+          postRegiImage={selectedImage}
+        />
       ))}
       {photoList.length < 4 && <OpenPhotoPlusBox onPress={addPhotoBox} />}
     </View>
