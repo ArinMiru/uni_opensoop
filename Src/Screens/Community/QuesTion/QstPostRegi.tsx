@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
@@ -21,8 +21,14 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
     try {
       const userData = getUserData();
       if (userData != null) {
-        await quesBubSvcNew(quesTit);
-        console.log("TIT : ", quesTit);
+        const result = await quesBubSvcNew(quesTit);
+        if (result && result.data.RSLT_CD === "00") {
+          navigation.goBack();
+          Alert.alert("성공", "등록 성공");
+        } else {
+          navigation.goBack();
+          Alert.alert("실패", "등록 실패");
+        }
       } else {
         console.error("userData가 null입니다.");
       }

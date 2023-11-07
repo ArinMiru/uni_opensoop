@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import VoteBoxStyle from "../../../Styles/VoteStyles/VoteBoxStyle";
 import textStyle from "../../../Styles/TextStyle";
@@ -16,17 +16,20 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { SchdlTimeButton } from "../../../Components/SchdlCompo/SchdlButton";
 import { schdBubSvcNew } from "../../../Services/_private/SchdBubApi";
 import { SchdEditPostPageProp } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
+import {
+  formatDateString,
+  handleDateConfirm,
+} from "../../../Utils/ReusableFuction/DateFormat";
 
 const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
   navigation,
   route,
 }) => {
+  const { TIT, STRT_SCHD_YMD, END_SCHD_YMD, CRE_SEQ } = route.params;
   const userData = getUserData();
-  const [schdTitle, setSchdTitle] = useState<string>("");
+  const [schdTitle, setSchdTitle] = useState<string>(TIT);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [dateType, setDateType] = useState<"start" | "end">("start");
-  const { TIT, STRT_SCHD_YMD, END_SCHD_YMD, CRE_SEQ } = route.params;
-  console.log(CRE_SEQ);
   const showStartDatePicker = () => {
     setDateType("start");
     setDatePickerVisibility(true);
@@ -37,14 +40,12 @@ const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
     setDatePickerVisibility(true);
   };
 
-  const [selectedStartDate, setSelectedStartDate] =
-    useState<string>(STRT_SCHD_YMD);
-
-  const [selectedEndDate, setSelectedEndDate] = useState<string>(END_SCHD_YMD);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
+  const [selectedStartDate, setSelectedStartDate] = useState<string>(
+    formatDateString(STRT_SCHD_YMD)
+  );
+  const [selectedEndDate, setSelectedEndDate] = useState<string>(
+    formatDateString(END_SCHD_YMD)
+  );
 
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
@@ -64,43 +65,30 @@ const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
     }
   };
 
-  const formatDate = (date: Date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
-
   const handleStartDateConfirm = (date: Date) => {
-    const formattedDate = formatDate(date);
-    setSelectedStartDate(formattedDate);
-
-    if (new Date(formattedDate) >= new Date(selectedEndDate)) {
-      const nextDay = new Date(date);
-      nextDay.setDate(date.getDate() + 1);
-      const nextFormattedDate = formatDate(nextDay);
-      setSelectedStartDate(nextFormattedDate);
-    }
-    hideDatePicker();
+    handleDateConfirm(
+      selectedStartDate,
+      selectedEndDate,
+      date,
+      setSelectedStartDate,
+      hideDatePicker
+    );
   };
 
   const handleEndDateConfirm = (date: Date) => {
-    const formattedDate = formatDate(date);
-    if (new Date(formattedDate) < new Date(selectedStartDate)) {
-      const prevDay = new Date(date);
-      prevDay.setDate(date.getDate() - 1);
-      const prevFormattedDate = formatDate(prevDay);
-      setSelectedEndDate(prevFormattedDate);
-    } else {
-      setSelectedEndDate(formattedDate);
-    }
-    hideDatePicker();
+    handleDateConfirm(
+      selectedStartDate,
+      selectedEndDate,
+      date,
+      setSelectedEndDate,
+      hideDatePicker
+    );
   };
 
   return (
     <Background>
       <BackIconRegiTopbarStyle
-        Title="일정 등록"
+        Title="일정 수정"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
@@ -117,7 +105,7 @@ const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
           }}
         >
           <SchdlVoteEditTitInput
-            text={TIT}
+            text={schdTitle}
             value={schdTitle}
             onChangeText={(text) => setSchdTitle(text)}
           />
