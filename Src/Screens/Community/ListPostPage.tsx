@@ -52,6 +52,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
               }
               if (page === 1) {
                 setFreeData({ RSLT_CD: "", FREE_BUB: [] });
+                setFreePage(1);
               }
               setFreeData((prevData) => {
                 return {
@@ -78,6 +79,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
               }
               if (page === 1) {
                 setQuestData({ RSLT_CD: "", QUES_BUB: [] });
+                setQuestPage(1);
               }
               setQuestData((prevData) => {
                 if (prevData) {
@@ -113,6 +115,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
               }
               if (page === 1) {
                 setSugsData({ RSLT_CD: "", SUG_BUB: [] });
+                setSugPage(1);
               }
               setSugsData((prevData) => {
                 if (prevData) {
