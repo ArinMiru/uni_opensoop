@@ -54,23 +54,40 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
 
   const handleItemClick = (index: number) => {
     console.log("클릭된 항목의 인덱스:", index);
-    if (initialSelectedItems[0] != -1 || index >= 0) {
-      console.log("초기 selectedItems:", initialSelectedItems);
+
+    // setSelectedItems를 통해 selectedItems 상태를 업데이트하는 함수
+    setSelectedItems((prevSelectedItems) => {
+      // 이전 선택된 아이템들의 복사본을 만든다.
+      let updatedSelectedItems = [...prevSelectedItems];
+
+      // 만약 초기 선택이 -1이면, 즉, 아무것도 선택되지 않은 상태라면 배열을 비운다.
+      if (updatedSelectedItems.length === 1 && updatedSelectedItems[0] === -1) {
+        updatedSelectedItems = [];
+      }
+
+      // 중복 선택이 가능한 투표 (VOT_TYPE_CD === "02")인 경우 로직
       if (VOT_TYPE_CD === "02") {
-        const updatedSelectedItems = [...selectedItems];
-        console.log("VOT_TYOE_CD == 02 selectedItems:", initialSelectedItems);
-        if (updatedSelectedItems.includes(index)) {
-          const indexToRemove = updatedSelectedItems.indexOf(index);
-          updatedSelectedItems.splice(indexToRemove);
+        // 현재 클릭된 항목이 이미 선택된 항목들 중에 있는지 확인
+        const selectedIndex = updatedSelectedItems.indexOf(index);
+        if (selectedIndex > -1) {
+          // 이미 선택되어 있다면, 그 항목을 선택된 항목들의 목록에서 제거
+          console.log(index + " 번 항목이 이미 선택되었으므로 제거합니다.");
+          updatedSelectedItems.splice(selectedIndex, 1);
         } else {
+          // 선택되어 있지 않다면, 새로운 항목을 선택된 항목들의 목록에 추가
+          console.log(index + " 번 항목을 선택합니다.");
           updatedSelectedItems.push(index);
         }
-        setSelectedItems(updatedSelectedItems);
-        console.log("업데이트된 selectedItems:", updatedSelectedItems);
       } else {
-        setSelectedItems([index]);
+        // 중복 선택이 불가능한 투표인 경우 단일 선택만 가능
+        console.log("단일 선택 모드에서 " + index + " 번 항목을 선택합니다.");
+        updatedSelectedItems = [index];
       }
-    }
+
+      // 최종적으로 업데이트된 selectedItems 상태를 로그로 출력
+      console.log("업데이트된 selectedItems:", updatedSelectedItems);
+      return updatedSelectedItems;
+    });
   };
 
   const handleSubmitVote = async () => {
