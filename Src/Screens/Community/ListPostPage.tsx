@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useIsFocused } from "@react-navigation/native";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { QuesBubListSvc } from "../../Services/_private/QusetPostData";
@@ -51,6 +50,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
               if (sorted.FREE_BUB) {
                 sorted.FREE_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
               }
+              if (page === 1) {
+                setFreeData({ RSLT_CD: "", FREE_BUB: [] });
+              }
               setFreeData((prevData) => {
                 return {
                   ...prevData,
@@ -73,6 +75,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
               const sorted = { ...data };
               if (sorted.QUES_BUB) {
                 sorted.QUES_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+              }
+              if (page === 1) {
+                setQuestData({ RSLT_CD: "", QUES_BUB: [] });
               }
               setQuestData((prevData) => {
                 if (prevData) {
@@ -105,6 +110,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
               const sorted = { ...data };
               if (sorted.SUG_BUB) {
                 sorted.SUG_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+              }
+              if (page === 1) {
+                setSugsData({ RSLT_CD: "", SUG_BUB: [] });
               }
               setSugsData((prevData) => {
                 if (prevData) {
