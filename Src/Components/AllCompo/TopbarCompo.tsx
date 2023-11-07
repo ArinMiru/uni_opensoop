@@ -11,6 +11,7 @@ import { GrayBackIconButton } from "../IconCompo/BackIconButton";
 import { deviceHeight } from "../../Utils/DeviceUtils";
 import { ProfileIcon } from "../IconCompo/ProfileIcon";
 import { AntDesign } from "@expo/vector-icons";
+import { ListEdtDltButton } from "../ListCompo/ListCompos";
 
 //프로퍼티 타입 정의
 interface ButtonProps {
@@ -24,6 +25,7 @@ interface ButtonProps {
   onPressDel?: () => void;
   onPressRegi?: () => void;
   onPressEdit?: () => void;
+  onPressEditDel?: () => void;
 }
 
 /*------------------------------------------------------------*/
@@ -394,6 +396,59 @@ export const BackIconTopbarStyle: React.FC<ButtonProps> = ({
         </Text>
       </View>
       <View style={{ flex: 1 }} />
+      {children}
+    </View>
+  );
+};
+
+/**
+ * BackIconRegiTopbarStyle
+ * 뒤로가기 + 텍스트 + ...
+ * 게시판 DetailPage에서 사용
+ */
+export const BackIconEditDelTopbarStyle: React.FC<ButtonProps> = ({
+  children,
+  Title,
+  MEMB_SC_NM,
+  MEMB_DEP_NM,
+  onPress,
+  onPressEditDel,
+}) => {
+  // 컴포넌트의 타입을 정확하게 명시
+  return (
+    <View style={Styles.TopbarStyle}>
+      <GrayBackIconButton onPress={onPress} />
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={[
+            textStyle.semibold13,
+            { color: "#151515" },
+            { marginLeft: deviceWidth * 0.01 },
+          ]}
+        >
+          {Title}
+        </Text>
+        <Text
+          style={[
+            textStyle.semibold08,
+            { marginLeft: deviceWidth * 0.01 },
+            { marginTop: deviceHeight * 0.01 },
+            { color: "#919191" },
+            { textAlign: "left" },
+          ]}
+        >
+          {MEMB_SC_NM} {MEMB_DEP_NM}
+        </Text>
+      </View>
+      <View style={{ flex: 1, alignItems: "flex-end" }}>
+        <ListEdtDltButton onPress={onPressEditDel} />
+      </View>
       {children}
     </View>
   );

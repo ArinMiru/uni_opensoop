@@ -4,7 +4,7 @@ import {
   SgsPost,
   SgsComment,
 } from "../../../Components/ListCompo/SgsCompo/SgsCompo";
-import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { BackIconEditDelTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { ScrollView } from "react-native-gesture-handler";
 import { SugBubListDel } from "../../../Services/_private/SugBubListApi";
 import { SgsPostDetailProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
@@ -39,7 +39,7 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
   };
   return (
     <Background>
-      <BackIconTopbarStyle
+      <BackIconEditDelTopbarStyle
         Title="건의게시판"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
