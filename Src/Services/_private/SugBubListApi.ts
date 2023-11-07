@@ -72,7 +72,7 @@ export const SugBubListNew = async (
   TIT: string,
   CONT: string,
   SEC_YN: string
-): Promise<SugBubListData | null> => {
+): Promise<any | null> => {
   const userData = getUserData();
   const endpoint = "/UNI/SugBubSvc";
 

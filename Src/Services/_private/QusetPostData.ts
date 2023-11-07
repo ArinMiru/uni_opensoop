@@ -70,7 +70,7 @@ export const QuesBubListSvc = async (
 };
 
 /** 등록 */
-export const quesBubSvcNew = async (TIT: string) => {
+export const quesBubSvcNew = async (TIT: string): Promise<any | null> => {
   const userData = getUserData();
   const endpoint = "/UNI/QuesBubSvc";
   if (userData !== null) {
@@ -87,7 +87,7 @@ export const quesBubSvcNew = async (TIT: string) => {
       PROC_TYPE,
     };
     console.log(data);
-    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    const result: AxiosResponse<any, any> | null = await sendApiData(
       endpoint,
       data
     );

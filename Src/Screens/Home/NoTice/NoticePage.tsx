@@ -59,6 +59,12 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
             if (sorted.OPEN_BUB) {
               sorted.OPEN_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
             }
+            if (defaultPage === 1) {
+              setData({
+                RSLT_CD: undefined,
+                OPEN_BUB: [],
+              });
+            }
             setData((prevData) => {
               return {
                 ...prevData,
@@ -228,7 +234,9 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           />
           <FlatList
             data={data?.OPEN_BUB}
-            keyExtractor={(item, index) => item.CRE_SEQ.toString() + index}
+            keyExtractor={(item, index) =>
+              item.CRE_SEQ.toString() + "-" + index
+            }
             renderItem={({ item }) => {
               const imagePaths = item.IMAGE_INFO.map(
                 (imageInfo) => imageInfo.FILE_PATH

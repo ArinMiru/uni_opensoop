@@ -23,8 +23,14 @@ const QstEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
     try {
       const userData = getUserData();
       if (userData != null) {
-        await quesBubSvcNew(quesTit);
-        console.log("TIT : ", quesTit);
+        const result = await quesBubSvcNew(quesTit);
+        if (result && result.data.RSLT_CD === "00") {
+          navigation.goBack();
+          Alert.alert("성공", "수정 성공");
+        } else {
+          navigation.goBack();
+          Alert.alert("실패", "수정 실패");
+        }
       } else {
         console.error("userData가 null입니다.");
       }
@@ -36,7 +42,7 @@ const QstEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   return (
     <Background>
       <BackIconRegiTopbarStyle
-        Title="질문게시판 등록"
+        Title="질문게시판 수정"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
