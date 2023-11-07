@@ -146,9 +146,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           (item) => item.CRE_SEQ === creseq
         );
         if (selectedNotice) {
-          // 4. 게시물의 좋아요 수를 1 증가
-          selectedNotice.LIKE_CNT += 1;
-          // 5. 업데이트된 데이터로 상태를 업데이트
           setData(updatedData);
           console.log("좋아요 누적 성공");
         }
@@ -175,9 +172,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           (item) => item.CRE_SEQ === creseq
         );
         if (selectedNotice) {
-          // 4. 게시물의 좋아요 수를 1 감소
-          selectedNotice.LIKE_CNT -= 1;
-          // 5. 업데이트된 데이터로 상태를 업데이트
           setData(updatedData);
         }
       } else {
