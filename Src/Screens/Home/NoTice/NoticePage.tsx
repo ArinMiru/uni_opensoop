@@ -228,7 +228,9 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           />
           <FlatList
             data={data?.OPEN_BUB}
-            keyExtractor={(item, index) => item.CRE_SEQ.toString() + index}
+            keyExtractor={(item, index) =>
+              item.CRE_SEQ.toString() + "-" + index
+            }
             renderItem={({ item }) => {
               const imagePaths = item.IMAGE_INFO.map(
                 (imageInfo) => imageInfo.FILE_PATH
