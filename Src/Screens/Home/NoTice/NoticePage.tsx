@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   SafeAreaView,
   FlatList,
@@ -133,60 +133,68 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   const accumulateLike = async (creseq: number) => {
-    // 서닝이가 만들었다 -> 한줄한줄 주석 남겨 놓아야 함
     try {
-      // 1. 좋아요 누적 요청을 보냄
+      // 'MembLikeUpdSvc' 함수에 'creseq' 값을 인자로 넘겨 좋아요 요청을 비동기적으로 보낸다.
       const responseData = await MembLikeUpdSvc(creseq);
 
+      // 'responseData'가 존재하면, 즉 요청에 성공적으로 응답을 받았다면 아래 로직을 수행한다.
       if (responseData) {
-        // 2. 성공적으로 서버 응답을 받은 경우
-        const updatedData = data; // 기존 데이터를 복사
-        // 3. 증가할 게시물을 찾습니다. 즉 해당하는 CRE_SEQ 값의 게시글을 찾으러 떠남
+        // 현재 상태인 'data'의 복사본을 'updatedData'에 할당한다.
+        const updatedData = data;
+        // 'updatedData' 내의 'OPEN_BUB' 배열을 순회하며 'creseq'와 일치하는 'CRE_SEQ' 속성을 가진 객체를 찾는다.
         const selectedNotice = updatedData.OPEN_BUB.find(
           (item) => item.CRE_SEQ === creseq
         );
+        // 일치하는 게시물이 있다면,
         if (selectedNotice) {
-          // 4. 게시물의 좋아요 수를 1 증가
-          selectedNotice.LIKE_CNT += 1;
-          // 5. 업데이트된 데이터로 상태를 업데이트
+          // 'selectedNotice'의 좋아요 수를 증가시키는 등의 추가 작업이 필요할 수 있다.
+          // 현재 예시에서는 그러한 작업이 생략되어 있으며, 단순히 'data' 상태를 'updatedData'로 갱신한다.
           setData(updatedData);
+          // 콘솔에 성공 메시지를 출력한다.
           console.log("좋아요 누적 성공");
         }
       } else {
-        // 6. 서버 응답이 실패한 경우
+        // 'responseData'가 없다면, 요청이 실패한 것으로 간주하고 콘솔에 실패 메시지를 출력한다.
         console.error("좋아요 누적 실패");
       }
     } catch (error) {
-      // 7. 오류가 발생한 경우
+      // 요청 과정 중에 오류가 발생하면, catch 블록이 실행되며 콘솔에 오류 내용을 출력한다.
       console.log("좋아요 누적 오류", error);
     }
   };
 
+  // 좋아요 차감 기능을 수행하는 비동기 함수
   const accumulateMinusLike = async (creseq: number) => {
     try {
-      // 1. 좋아요 차감 요청을 보냅니다
+      // 1. 좋아요 차감 API를 호출합니다.
       const responseData = await MembLikeMinusUpdSvc(creseq);
 
       if (responseData) {
-        // 2. 성공적으로 서버 응답을 받은 경우
-        const updatedData = data; // 기존에 저장되어 있던 데이터를 복사
-        // 3. 차감할 게시물을 찾습니다. 즉 해당하는 CRE_SEQ 값의 게시글을 찾으러 떠남
+        // 2. API 호출이 성공적으로 완료되면, 현재 상태의 데이터를 복사하여 새로운 객체에 할당합니다.
+        const updatedData = data; // 'data'는 상태 데이터를 나타내며, 이전 상태를 참조합니다.
+
+        // 3. 차감된 좋아요 수를 반영할 게시물을 찾습니다. 이때 'CRE_SEQ' 값이 매개변수로 전달된 'creseq'와 일치하는 게시물을 찾습니다.
         const selectedNotice = updatedData.OPEN_BUB.find(
           (item) => item.CRE_SEQ === creseq
         );
+
+        // 4. 해당 게시물이 존재하면, 좋아요 수를 차감합니다.
         if (selectedNotice) {
-          // 4. 게시물의 좋아요 수를 1 감소
-          selectedNotice.LIKE_CNT -= 1;
-          // 5. 업데이트된 데이터로 상태를 업데이트
+          selectedNotice.LIKE_CNT -= 1; // 'LIKE_CNT'를 감소시키는 로직이 필요합니다.
+
+          // 5. 상태를 업데이트합니다. 이는 리액트 컴포넌트의 상태를 새로운 값으로 설정하는 부분입니다.
           setData(updatedData);
+
+          // 6. 차감 성공 메시지를 콘솔에 출력합니다.
+          console.log("좋아요 차감 성공");
         }
       } else {
-        // 6. 서버 응답이 실패한 경우
+        // 7. API 호출에 실패했을 때, 오류 메시지를 콘솔에 출력합니다.
         console.error("좋아요 차감 실패");
       }
     } catch (error) {
-      // 7. 오류가 발생한 경우
-      console.log("좋아요 차감 오류", error);
+      // 8. 예외가 발생했을 때, 오류 메시지를 콘솔에 출력합니다.
+      console.error("좋아요 차감 오류", error);
     }
   };
 
