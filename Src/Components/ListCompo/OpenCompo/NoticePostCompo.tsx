@@ -17,6 +17,7 @@ import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuable
 import { OpenImageDotChk } from "./OpenImageDotchk";
 import { Image } from "react-native";
 import Swiper from "react-native-swiper";
+import SwiperStyle from "../../../Styles/SwiperStyles/SwiperStyle";
 
 interface CommonProps {
   MEMB_NM?: string;
@@ -123,7 +124,12 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
           )}
         </View>
         <View style={[NoticePostStyles.NoticePostImageBoxStyle]}>
-          <Swiper showsButtons={false} style={{}}>
+          <Swiper
+            showsButtons={false}
+            style={SwiperStyle.wrapper}
+            dotStyle={SwiperStyle.dotStyle}
+            activeDotStyle={SwiperStyle.activeDotStyle}
+          >
             {PostImage ? (
               PostImage.map((image, index) => (
                 <Image
