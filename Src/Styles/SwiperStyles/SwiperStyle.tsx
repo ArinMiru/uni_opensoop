@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 
 export default StyleSheet.create({
   wrapper: {
@@ -18,7 +17,7 @@ export default StyleSheet.create({
     borderRadius: 4,
     marginLeft: 3,
     marginRight: 3,
-    bottom: 10, // 위치 조정
+    bottom: -45, // 위치 조정
   },
   activeDotStyle: {
     backgroundColor: "#4BB781", // 활성 인디케이터 색상
@@ -27,6 +26,6 @@ export default StyleSheet.create({
     borderRadius: 4,
     marginLeft: 3,
     marginRight: 3,
-    bottom: 10, // 위치 조정
+    bottom: -45, // 위치 조정
   },
 });
