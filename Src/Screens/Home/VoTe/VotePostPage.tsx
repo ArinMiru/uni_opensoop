@@ -104,7 +104,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
         <View
           style={{
             width: deviceWidth * 1,
-            backgroundColor: "#888888",
+            backgroundColor: "#FFFFFF",
             justifyContent: "center",
             alignItems: "center",
             alignContent: "center",
