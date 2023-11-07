@@ -7,7 +7,10 @@ import { VoteStatusButton } from "../../../Components/VoteCompo/VoteButton";
 import { VoteRegiButton } from "../../../Components/VoteCompo/VoteButton";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
-import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import {
+  BackIconTopbarStyle,
+  BackIconDelTopbarStyle,
+} from "../../../Components/AllCompo/TopbarCompo";
 import { VotePostDetailProp } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 import VoteButtonStyle from "../../../Styles/VoteStyles/VoteButtonStyle";
 import { votBubListDetailupCall } from "../../../Services/_private/VoteApi";
@@ -107,11 +110,12 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
 
   return (
     <Background>
-      <BackIconTopbarStyle
+      <BackIconDelTopbarStyle
         Title="투표"
         MEMB_DEP_NM={userData?.MEMB_DEP_NM ?? ""}
         MEMB_SC_NM={userData?.MEMB_SC_NM ?? ""}
         onPress={() => navigation.goBack()}
+        onPressDel={() => navigation.navigate("VotePostPage")}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View

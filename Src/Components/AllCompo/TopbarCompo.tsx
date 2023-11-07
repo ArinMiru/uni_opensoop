@@ -180,39 +180,26 @@ export const BackIconDelTopbarStyle: React.FC<ButtonProps> = ({
   Title,
   MEMB_SC_NM,
   MEMB_DEP_NM,
+  onPress,
   onPressDel,
 }) => {
   const userData = getUserData();
   // 컴포넌트의 타입을 정확하게 명시
   return (
     <View style={Styles.TopbarStyle}>
-      <View style={{ flex: 0.23 }}></View>
-      <Image
-        style={{
-          resizeMode: "contain",
-          marginTop: deviceHeight * 0.01,
-          width: deviceWidth * 0.28,
-        }}
-        source={require("../../Assets/Images/TopbarLogoImage.png")}
-      ></Image>
-      <View style={{ marginTop: deviceWidth * 0.02 }}>
-        <AntDesign
-          name="minus"
-          size={deviceWidth * 0.05}
-          color={"#BABABA"}
-          style={{ transform: [{ rotate: "90deg" }] }}
-        />
-      </View>
+      <GrayBackIconButton onPress={onPress} />
       <View
         style={{
           flexDirection: "row",
+          justifyContent: "flex-start",
+          alignItems: "center",
         }}
       >
         <Text
           style={[
             textStyle.semibold13,
             { color: "#151515" },
-            { marginLeft: deviceWidth * 0.02 },
+            { marginLeft: deviceWidth * 0.01 },
           ]}
         >
           {Title}
@@ -223,6 +210,7 @@ export const BackIconDelTopbarStyle: React.FC<ButtonProps> = ({
             { marginLeft: deviceWidth * 0.01 },
             { marginTop: deviceHeight * 0.01 },
             { color: "#919191" },
+            { textAlign: "left" },
           ]}
         >
           {MEMB_SC_NM} {MEMB_DEP_NM}

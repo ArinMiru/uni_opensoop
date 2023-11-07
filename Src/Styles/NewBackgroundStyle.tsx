@@ -6,6 +6,9 @@ import Constants from "expo-constants";
 const hightvalue =
   Platform.OS === "ios" && deviceHeight <= 667 ? "90.8%" : "91%";
 
+const voteHightValue =
+  Platform.OS === "ios" && deviceHeight <= 667 ? "85%" : "84%";
+
 const containerhightvalue =
   Platform.OS === "ios" && deviceHeight <= 667 ? "90.8%" : "91%";
 
@@ -47,7 +50,13 @@ export default StyleSheet.create({
   BottomTabBackgroundStyle: {
     backgroundColor: "#FFFFFF",
     width: "100%",
-    height: hightvalue, // 아이폰의 경우 91%, 안드로이드의 경우 89%로 설정
+    height: hightvalue,
+  },
+
+  VoteTabBackgroundStyle: {
+    backgroundColor: "#FFFFFF",
+    width: "100%",
+    height: voteHightValue,
   },
 
   /**
