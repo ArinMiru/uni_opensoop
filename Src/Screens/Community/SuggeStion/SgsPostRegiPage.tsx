@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, KeyboardAvoidingView } from "react-native";
+import { View, Text, KeyboardAvoidingView, Alert } from "react-native";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
@@ -22,20 +22,21 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
 
   const handleRegiButtonPress = async () => {
     try {
-      // 필요한 데이터 가져오기
-
       if (userData) {
-        await SugBubListNew(tit, cont, "Y");
-
-        // 등록 후 필요한 네비게이션 이동 등의 작업 수행
-        // navigation.navigate("다음 화면");
+        const result = await SugBubListNew(tit, cont, "Y");
+        if (result && result.data.RSLT_CD === "00") {
+          navigation.goBack();
+          Alert.alert("성공", "등록 성공");
+        } else {
+          navigation.goBack();
+          Alert.alert("실패", "등록 실패");
+        }
       } else {
         console.error("userData가 null입니다.");
       }
     } catch (error) {
       console.error("등록 오류:", error);
     }
-    navigation.goBack();
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, KeyboardAvoidingView, Text, Image } from "react-native";
+import { View, KeyboardAvoidingView, Text, Image, Alert } from "react-native";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
@@ -70,9 +70,10 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
       const TIT = tit;
       const CONT = cont;
 
-      let IMAGE_INFO: ImageInfo[] = [];
+      const IMAGE_INFO: ImageInfo[] = [];
 
-      for (const imageUri of imageUris) {
+      for (let i = 0; i < imageUris.length; i++) {
+        const imageUri = imageUris[i];
         if (imageUri) {
           const imageBase64 = await encodeImageToBase64(imageUri);
           if (imageBase64 !== null) {
@@ -84,19 +85,12 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
           }
         }
       }
-
-      const dataToSubmit = {
-        TIT,
-        CONT,
-        IMAGE_INFO,
-      };
-      console.log(IMAGE_INFO);
-      // 이미지를 서버로 전송 (이미지는 Base64로 인코딩된 이미지)
-      await openBubSvcNew(
-        dataToSubmit.TIT,
-        dataToSubmit.CONT,
-        dataToSubmit.IMAGE_INFO
-      );
+      console.log("이미지 정보 : ", IMAGE_INFO);
+      const result = await openBubSvcNew(TIT, CONT, IMAGE_INFO);
+      if (result && result.data.RSLT_CD === "00") {
+        navigation.goBack();
+        Alert.alert("성공", "공지사항 등록 성공");
+      }
     } catch (error) {
       console.error("등록 오류:", error);
     }
@@ -104,6 +98,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
 
   const uploadImage = async () => {
     if (imageUris.length >= 4) {
+      Alert.alert("경고", "이미지는 최대 4개까지 가능 합니다.");
       return;
     }
     if (!status?.granted) {
@@ -123,8 +118,8 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
 
     const resizedImage = await ImageManipulator.manipulateAsync(
       result.assets[0].uri,
-      [{ resize: { width: 1172, height: 2532 } }],
-      { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
+      [],
+      { format: ImageManipulator.SaveFormat.JPEG }
     );
 
     setImageUris((prevImageUris) => [...prevImageUris, resizedImage.uri]);

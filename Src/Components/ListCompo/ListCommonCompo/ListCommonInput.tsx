@@ -34,7 +34,7 @@ export const OpenFreSgsTitInputBox: React.FC<inputProps> = ({
         textStyle.medium10,
       ]}
       placeholder={text}
-      maxLength={10} // 최대 길이 설정
+      maxLength={30} // 최대 길이 설정
       {...props}
     />
   );

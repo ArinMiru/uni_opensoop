@@ -27,10 +27,14 @@ const SgsEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
       // 필요한 데이터 가져오기
 
       if (userData) {
-        await SugBubListNew(tit, cont, "Y");
-
-        // 등록 후 필요한 네비게이션 이동 등의 작업 수행
-        // navigation.navigate("다음 화면");
+        const result = await SugBubListNew(tit, cont, "Y");
+        if (result && result.data.RSLT_CD === "00") {
+          navigation.goBack();
+          Alert.alert("성공", "수정 성공");
+        } else {
+          navigation.goBack();
+          Alert.alert("실패", "수정 실패");
+        }
       } else {
         console.error("userData가 null입니다.");
       }
