@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, KeyboardAvoidingView } from "react-native";
+import { View, Text, KeyboardAvoidingView, Alert } from "react-native";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import {
@@ -27,12 +27,14 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
     try {
       const userData = getUserData();
       if (userData) {
-        const responseData = await FreeBubRegi(tit, cont);
+        const result = await FreeBubRegi(tit, cont);
 
-        if (responseData) {
-          navigation.navigate("ListPostPage");
-          setCont("");  
-          setTit("");
+        if (result && result.data.RSLT_CD === "00") {
+          navigation.goBack();
+          Alert.alert("성공", "등록 성공");
+        } else {
+          navigation.goBack();
+          Alert.alert("실패", "등록 실패");
         }
       } else {
         console.error("userData가 null입니다.");

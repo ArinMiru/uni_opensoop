@@ -29,7 +29,14 @@ const FreEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
     try {
       const userData = getUserData();
       if (userData) {
-        await FreeBubRegi(tit, cont);
+        const result = await FreeBubRegi(tit, cont);
+        if (result && result.data.RSLT_CD === "00") {
+          navigation.goBack();
+          Alert.alert("성공", "수정 성공");
+        } else {
+          navigation.goBack();
+          Alert.alert("실패", "수정 실패");
+        }
       } else {
         console.error("userData가 null입니다.");
       }
