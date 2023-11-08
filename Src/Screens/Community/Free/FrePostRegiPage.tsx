@@ -14,6 +14,7 @@ import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
+import { useModal } from "../../../Screens/ModalContext";
 
 //@jeakyoung 생성 게시글 등록 API
 
@@ -21,6 +22,8 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData(); // 현재 사용자 데이터
   const [cont, setCont] = useState<string>("");
   const [tit, setTit] = useState<string>("");
+
+  const { setTabBarVisible } = useModal();
 
   // 등록 버튼을 누르면 호출되는 함수
   const handleRegiButtonPress = async () => {
@@ -43,18 +46,25 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         Alert.alert("성공", "게시물 등록 성공", [
           {
             text: "확인",
-            onPress: () =>
+            onPress: () => {
+              console.log("게시글 등록 성공, 탭 바를 보이게 설정합니다.");
+              setTabBarVisible(true);
               navigation.navigate("ListPostPage", {
                 selectedCategory: "자유",
-              }),
+              });
+            },
           },
         ]);
       } else {
+        console.log("게시글 등록 실패, 탭 바를 보이게 설정합니다.");
+        setTabBarVisible(true);
         navigation.goBack();
         Alert.alert("실패", "게시물 등록 실패");
       }
     } catch (error) {
+      console.log("게시글 등록 중 오류 발생, 탭 바를 보이게 설정합니다.");
       console.error("등록 오류", error);
+      setTabBarVisible(true);
     }
   };
   return (
@@ -63,9 +73,10 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         Title="자유게시판 등록"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
-        onPress={() =>
-          navigation.navigate("ListPostPage", { selectedCategory: "자유" })
-        }
+        onPress={() => {
+          setTabBarVisible(true);
+          navigation.navigate("ListPostPage", { selectedCategory: "자유" });
+        }}
         onPressRegi={handleRegiButtonPress}
       />
       <View
