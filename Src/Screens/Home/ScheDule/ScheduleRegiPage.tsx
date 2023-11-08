@@ -182,6 +182,7 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
               <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="date"
+                display="inline"
                 locale="ko-KR"
                 onConfirm={
                   dateType === "start"
