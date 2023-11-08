@@ -58,22 +58,22 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPressRegi={() => navigation.navigate("VotePostRegiPage")}
       />
-      <View style={[NewBackgroundStyle.BottomTabBackgroundStyle]}>
-        <View style={{ flexDirection: "row" }}>
+      <View style={[NewBackgroundStyle.VoteTabBackgroundStyle]}>
+        <View
+          style={{
+            flexDirection: "row",
+            width: deviceWidth * 0.881,
+            alignSelf: "center",
+          }}
+        >
           <View
             style={{
-              flex: 1,
-              marginTop: "5%",
-              alignContent: "center",
-              alignItems: "flex-end",
+              marginTop: "4%",
+              marginBottom: "4%",
             }}
           >
             <TouchableOpacity
-              style={[
-                { flexDirection: "row" },
-                { alignItems: "center" },
-                { marginRight: deviceWidth * 0.08 },
-              ]}
+              style={[{ flexDirection: "row" }, { alignItems: "center" }]}
               onPress={() => setIsButtonOn(!isButtonOn)}
             >
               {isButtonOn ? (
@@ -96,7 +96,7 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
                   { marginLeft: deviceWidth * 0.02 },
                 ]}
               >
-                투표중
+                진행중인 투표만 보기
               </Text>
             </TouchableOpacity>
           </View>
@@ -104,20 +104,22 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
         <View
           style={{
             width: deviceWidth * 1,
+            backgroundColor: "#FFFFFF",
             justifyContent: "center",
             alignItems: "center",
             alignContent: "center",
           }}
         >
           <Spinner
-            // 로딩 상태에 따라 Spinner를 화면에 표시
             visible={loading}
             textContent={"로딩 중..."}
             textStyle={{ color: "#FFF" }}
           />
           <FlatList
             data={filteredVoteData} // 3. 필터링된 데이터 사용
-            keyExtractor={(item) => item.CRE_SEQ.toString()}
+            keyExtractor={(item, index) =>
+              item.CRE_SEQ.toString() + "-" + index
+            }
             renderItem={({ item }) => {
               if (item.VOT_GO_CD === "VG") {
                 return (

@@ -8,10 +8,12 @@ import { FontAwesome } from "@expo/vector-icons";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { OpenPhotoDelIcon } from "../../IconCompo/OpenPhotoIcon";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Image } from "react-native";
 interface ButtonProps {
   children?: React.ReactNode;
   text?: string;
   postLike?: number;
+  postRegiImage?: string;
   onPress?: () => void;
   onLikePress?: () => void;
   onDislikePress?: () => void;
@@ -126,19 +128,21 @@ export const OpenPhotoPlusBox: React.FC<ButtonProps> = ({
  * @ts7752 확인 부탁드립니다.
  */
 export const OpenPhotoDelBox: React.FC<ButtonProps> = ({
+  postRegiImage,
   onPressDelPhoto,
   onPressAddPhoto,
 }) => {
   return (
     <TouchableOpacity onPress={onPressAddPhoto}>
-      <View
+      <Image
+        source={{ uri: postRegiImage }}
         style={[
           OpenButtonStyle.OpenPhotoBoxStyle,
           { marginRight: deviceWidth * 0.02 },
         ]}
-      >
-        <OpenPhotoDelIcon onPress={onPressDelPhoto}></OpenPhotoDelIcon>
-      </View>
+        resizeMode="stretch"
+      />
+      <OpenPhotoDelIcon onPress={onPressDelPhoto}></OpenPhotoDelIcon>
     </TouchableOpacity>
   );
 };
@@ -175,7 +179,8 @@ export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
           key={index}
           onPressAddPhoto={onPress}
           onPressDelPhoto={() => removePhotoBox(index)}
-        ></OpenPhotoDelBox>
+          postRegiImage={selectedImage}
+        />
       ))}
       {photoList.length < 4 && <OpenPhotoPlusBox onPress={addPhotoBox} />}
     </View>

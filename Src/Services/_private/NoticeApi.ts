@@ -85,18 +85,22 @@ export const openBubSvcNew = async (
       IMAGE_INFO,
       PROC_TYPE,
     };
-    console.log(data);
-    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    const result: AxiosResponse<any, any> | null = await sendApiData(
       endpoint,
       data
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
+      console.log(result.data);
+      return result;
     } else {
-      console.log("실패");
       console.log(result?.data);
+      console.log("실패");
+      return null;
     }
+  } else {
+    return null;
   }
 };
 /**

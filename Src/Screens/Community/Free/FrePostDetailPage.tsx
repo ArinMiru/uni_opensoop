@@ -4,7 +4,7 @@ import {
   FreQstComment,
   FrePost,
 } from "../../../Components/ListCompo/FreCompo/FreCompo";
-import { BackIconTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { BackIconEditDelTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { ListAnsTextInput } from "../../../Components/AllCompo/ListAnsTextInputCompo";
 import { FreeBubDel } from "../../../Services/_private/FreeApi";
 import { FreeAnsBubNew } from "../../../Services/AnsApi/FreeAnsApi";
@@ -45,7 +45,7 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
 
   return (
     <Background>
-      <BackIconTopbarStyle
+      <BackIconEditDelTopbarStyle
         Title="자유게시판"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
@@ -67,6 +67,8 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
               delPress={dellPress}
             />
           </View>
+          <View style={{ height: "2%" }}></View>
+
           <View
             style={{ alignItems: "center", paddingBottom: deviceHeight * 0.09 }}
           >

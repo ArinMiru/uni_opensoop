@@ -36,6 +36,7 @@ import VotePostDetailPage from "../Screens/Home/VoTe/VotePostDetailPage";
 import VotePostStatusPage from "../Screens/Home/VoTe/VotePostStatusPage";
 import SchedulePage from "../Screens/Home/ScheDule/SchedulePage";
 import SchedulePostRegiPage from "../Screens/Home/ScheDule/ScheduleRegiPage";
+import SchdEditPostPage from "../Screens/Home/ScheDule/SchdEditPostPage";
 import BottomTabNavigations from "./BottomTabNavigations";
 import ProfilePage from "../Screens/Home/ProfilePage";
 import TitleCodeCerti from "../Screens/Home/TitleCodeCerti";
@@ -47,12 +48,9 @@ import FreePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
 import FreEditPostPage from "../Screens/Community/Free/FreEditPostPage";
 import QstEditPostPage from "../Screens/Community/QuesTion/QstEditPostPage";
 import SgsEditPostPage from "../Screens/Community/SuggeStion/SgsEditPostPage";
-import VoteEditPostPage from "../Screens/Home/VoTe/VoteEditPostPage";
 
 /**----------------------------------------------------------------------------*/
-import JungTestScreen from "../Screens/JungTest/JungTestScreen";
-import DowonTestScreen from "../Screens/DowonTest/DowonTestScreen";
-import RyuTestScreen from "../Screens/RyuTest/RyuTestScreen";
+import QstAnsModalPage from "../Screens/QstAnsModal/QstAnsModalPage";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -152,6 +150,12 @@ export type RootStackParamList = {
   };
   SchedulPage: undefined;
   SchedulePostRegiPage: undefined;
+  SchdEditPostPage: {
+    TIT: string;
+    STRT_SCHD_YMD: string;
+    END_SCHD_YMD: string;
+    CRE_SEQ: string;
+  };
   BottomTabNavigations: undefined;
   ProfilePage: undefined;
   TitleCodeCerti: undefined;
@@ -167,14 +171,29 @@ export type RootStackParamList = {
   };
 
   /**----------------------------------------------------------------------------*/
-  FreEditPostPage: undefined;
-  QstEditPostPage: undefined;
-  SgsEditPostPage: undefined;
-  VoteEditPostPage: undefined;
+  FreEditPostPage: {
+    CRE_SEQ: number;
+    CONT: string;
+    TIT: string;
+    NICK_NM: string;
+    LIKE_CNT: number;
+    CRE_DAT: string;
+  };
+  QstEditPostPage: {
+    CRE_SEQ: number;
+    TIT: string;
+    NICK_NM: string;
+    CRE_DAT: string;
+  };
+  SgsEditPostPage: {
+    CRE_SEQ: number;
+    CONT: string;
+    TIT: string;
+    NICK_NM: string;
+    CRE_DAT: string;
+  };
   /**----------------------------------------------------------------------------*/
-  JungTestScreen: undefined;
-  DowonTestScreen: undefined;
-  RyuTestScreen: undefined;
+  QstAnsModalPage: undefined;
   /**----------------------------------------------------------------------------*/
   /**----------------------------------------------------------------------------*/
 };
@@ -402,6 +421,12 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
+        name="SchdEditPostPage"
+        component={SchdEditPostPage}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
         name="BottomTabNavigations"
         component={BottomTabNavigations}
         options={{ headerShown: false }}
@@ -428,22 +453,10 @@ const StackNavigator = () => {
         component={SgsEditPostPage}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="VoteEditPostPage"
-        component={VoteEditPostPage}
-        options={{ headerShown: false }}
-      />
       {/**---------위에서부터 추가-----------------------------------------------------------*/}
-
       <Stack.Screen
-        name="JungTestScreen"
-        component={JungTestScreen}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="DowonTestScreen"
-        component={DowonTestScreen}
+        name="QstAnsModalPage"
+        component={QstAnsModalPage}
         options={{
           headerShown: false,
           presentation: "modal",
@@ -453,15 +466,6 @@ const StackNavigator = () => {
           cardOverlayEnabled: true,
         }}
       />
-
-      <Stack.Screen
-        name="RyuTestScreen"
-        component={RyuTestScreen}
-        options={{ headerShown: false }}
-      />
-
-      {/**----------위에서부터 추가-----------------------------------------------------------*/}
-      {/**-------------------------------------------------------------------------------*/}
     </Stack.Navigator>
   );
 };

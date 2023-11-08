@@ -22,5 +22,22 @@ export default StyleSheet.create({
     paddingRight: "5%",
   },
 
+  VoteTitInputBoxStyle: {
+    width: deviceWidth * 0.775,
+    height: deviceHeight * 0.065,
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingLeft: 10,
+    borderBottomWidth: 0.5,
+    borderColor: "#BDBDBD",
+  },
+
+  VoteTitInputAreaStyle: {
+    width: deviceWidth * 0.775,
+    height: deviceHeight * 0.091,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   /*------------------------------------------------------------*/
 });
