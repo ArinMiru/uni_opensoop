@@ -108,6 +108,7 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
 
 const BottomTabNavigations = () => {
   const { isTabBarVisible } = useModal(); // Custom Hook 사용
+  console.log("Tab Bar Visibility:", isTabBarVisible);
   return (
     <Tab.Navigator
       initialRouteName="HomePageScreen"
