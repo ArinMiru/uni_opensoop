@@ -88,10 +88,6 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     console.log(date);
   };
 
-  const schedulebutton = () => {
-    schdBubSvcDel(16);
-  };
-
   const scheduleForDate = (date: string) => {
     SchdBubDtlListSvc(date)
       .then((data) => {
@@ -269,7 +265,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
                   }
                 />
               ) : isDeleteClicked ? (
-                <SchldDelButton onPress={schedulebutton} />
+                <SchldDelButton onPress={() => schdBubSvcDel(detail.CRE_SEQ)} />
               ) : (
                 <Octicons
                   name="dot-fill"
