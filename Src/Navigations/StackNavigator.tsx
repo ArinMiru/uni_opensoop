@@ -94,7 +94,9 @@ export type RootStackParamList = {
   NoticePage: undefined;
   DrawerNavigator: undefined;
   NoticePostRegi: undefined;
-  ListPostPage: undefined;
+  ListPostPage: {
+    selectedCategory: string;
+  };
   NoticePostRegiPage: undefined;
   QstPostRegiPage: undefined;
   SgsPostRegiPage: undefined;

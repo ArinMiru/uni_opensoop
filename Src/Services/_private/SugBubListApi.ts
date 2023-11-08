@@ -106,15 +106,15 @@ export const SugBubListNew = async (
         return subgBubListData;
       } else {
         console.log("건의게시판 등록 실패");
-        return null;
+        return result;
       }
     } catch (error) {
       console.error("오류발생: ", error);
-      return null;
+      return "Error";
     }
   } else {
     console.log("데이터를 가져올 수 없습니다.");
-    return null;
+    return "data missing";
   }
 };
 
