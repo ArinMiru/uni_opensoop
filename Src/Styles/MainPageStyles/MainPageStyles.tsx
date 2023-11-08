@@ -31,7 +31,7 @@ export default StyleSheet.create({
    * 메인 페이지 - 공지사항 포토 박스 스타일
    */
   MainOpenPhotoBox: {
-    backgroundColor: "#999999",
+    backgroundColor: "#BDBDBD",
     borderRadius: 20,
     width: deviceWidth * 0.28,
     height: deviceHeight * 0.1073,

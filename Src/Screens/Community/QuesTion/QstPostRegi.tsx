@@ -18,16 +18,28 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [quesTit, setQuesTit] = useState<string>("");
 
   const quesNew = async () => {
+    if (quesTit.trim().length < 2) {
+      Alert.alert("오류", "제목은 최소 2자 이상이어야 합니다.");
+      return;
+    }
     try {
       const userData = getUserData();
       if (userData != null) {
         const result = await quesBubSvcNew(quesTit);
-        if (result && result.data.RSLT_CD === "00") {
-          navigation.goBack();
-          Alert.alert("성공", "등록 성공");
+        if (result.data.RSLT_CD === "00") {
+          setQuesTit("");
+          Alert.alert("성공", "게시물 등록 성공", [
+            {
+              text: "확인",
+              onPress: () =>
+                navigation.navigate("ListPostPage", {
+                  selectedCategory: "질문",
+                }),
+            },
+          ]);
         } else {
           navigation.goBack();
-          Alert.alert("실패", "등록 실패");
+          Alert.alert("실패", "게시물 등록 실패");
         }
       } else {
         console.error("userData가 null입니다.");
@@ -43,7 +55,9 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         Title="질문게시판 등록"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
-        onPress={() => navigation.goBack()}
+        onPress={() =>
+          navigation.navigate("ListPostPage", { selectedCategory: "질문" })
+        }
         onPressRegi={quesNew}
       />
       <View

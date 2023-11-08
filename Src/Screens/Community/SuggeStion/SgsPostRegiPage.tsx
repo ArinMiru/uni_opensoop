@@ -21,21 +21,38 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData(); // 현재 사용자 데이터
 
   const handleRegiButtonPress = async () => {
+    // ...
     try {
       if (userData) {
         const result = await SugBubListNew(tit, cont, "Y");
-        if (result && result.data.RSLT_CD === "00") {
-          navigation.goBack();
-          Alert.alert("성공", "등록 성공");
+        // result가 정상적으로 반환되었는지 그리고 result.data가 있는지 확인
+        if (result.data && result.data.RSLT_CD === "00") {
+          setTit("");
+          setCont("");
+          Alert.alert("성공", "게시물 등록 성공", [
+            {
+              text: "확인",
+              onPress: () =>
+                navigation.navigate("ListPostPage", {
+                  selectedCategory: "건의",
+                }),
+            },
+          ]);
         } else {
-          navigation.goBack();
-          Alert.alert("실패", "등록 실패");
+          // result.data가 없거나 RSLT_CD가 "00"이 아닐 경우
+          Alert.alert(
+            "실패",
+            "등록 실패: " +
+              (result && result.data ? result.data.RSLT_CD : "응답 없음")
+          );
         }
       } else {
         console.error("userData가 null입니다.");
+        Alert.alert("오류", "사용자 데이터가 없습니다.");
       }
     } catch (error) {
       console.error("등록 오류:", error);
+      Alert.alert("오류", "등록 중 오류가 발생했습니다.");
     }
   };
 
@@ -45,7 +62,9 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         Title="건의게시판 등록"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
-        onPress={() => navigation.goBack()}
+        onPress={() =>
+          navigation.navigate("ListPostPage", { selectedCategory: "건의" })
+        }
         onPressRegi={handleRegiButtonPress}
       />
       <View

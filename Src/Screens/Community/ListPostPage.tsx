@@ -19,7 +19,7 @@ import { QuestData } from "../../Utils/_private/ApiData/QuestData";
 import Spinner from "react-native-loading-spinner-overlay";
 import { timeSince } from "../../Utils/timeUtils";
 
-const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
+const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
   const userData = getUserData();
   const [selectedCategory, setSelectedCategory] = useState("자유");
   const [freeData, setFreeData] = useState<FreeData>({
@@ -38,6 +38,13 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [freePage, setFreePage] = useState<number>(1);
   const [questPage, setQuestPage] = useState<number>(1);
   const [sugPage, setSugPage] = useState<number>(1);
+
+  // ListPostPage 컴포넌트 내부
+  React.useEffect(() => {
+    if (route.params?.selectedCategory) {
+      setSelectedCategory(route.params.selectedCategory);
+    }
+  }, [route.params?.selectedCategory]);
 
   const fetchData = (category: string, page: number) => {
     setLoading(true);
