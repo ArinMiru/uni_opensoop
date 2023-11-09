@@ -20,7 +20,7 @@ export interface QuestItem {
   CRE_SEQ: number; //게시일련번호
   TIT: string; //제목
   CONT: string; //내용
-  LIKE_CNT: string; //좋아요건수
+  LIKE_CNT: number; //좋아요건수
   CRE_DAT: string; //게시일시
   ANS_FREE: AnsFree[]; //답변 정보 배열
 }
@@ -28,9 +28,10 @@ export interface QuestItem {
 // 질문게시판 게시물 답변 데이터 형식
 export interface AnsFree {
   ANS_MEMB_ID: string; //답변자ID
-  ANS_SEQ: string; //답변일련번호
+  ANS_SEQ: number; //답변일련번호
   CONT: string; //답변내용
   CRE_DAT: string; //답변일시
+  TOTAL_ANS: number; // 댓글 총 개수
 }
 
 // 서버에서 받아온 데이터를 QuestData 형식으로 파싱하는 함수
@@ -55,12 +56,13 @@ export function parseQuestData(rawData: any): QuestData {
         CRE_DAT: item.CRE_DAT || "", //게시일시, 없을 시 빈 문자열
         ANS_FREE: [], //답변 정보 배열 초기화
       };
-      if (Array.isArray(rawData.ANS_FREE)) {
+      if (Array.isArray(item.ANS_FREE)) {
         questItem.ANS_FREE = item.ANS_FREE.map((ans: any) => ({
           ANS_MEMB_ID: ans.ANS_MEMB_ID || "", //답변자ID, 없을 시 빈 문자열
           ANS_SEQ: ans.ANS_SEQ || "", //답변일련번호, 없을 시 빈 문자열
           CONT: ans.CONT || "", //답변내용, 없을 시 빈 문자열
           CRE_DAT: ans.CRE_DAT || "", //답변일시, 없을 시 빈 문자열
+          TOTAL_ANS: ans.TOTAL_ANS || "", // 질문게시판 답변 개수
         }));
       }
       return questItem;

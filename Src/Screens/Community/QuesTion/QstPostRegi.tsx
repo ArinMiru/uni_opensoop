@@ -26,15 +26,12 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       const userData = getUserData();
       if (userData != null) {
         const result = await quesBubSvcNew(quesTit);
-        if (result.data.RSLT_CD === "00") {
+        if (result.RSLT_CD === "00") {
           setQuesTit("");
           Alert.alert("성공", "게시물 등록 성공", [
             {
               text: "확인",
-              onPress: () =>
-                navigation.navigate("ListPostPage", {
-                  selectedCategory: "질문",
-                }),
+              onPress: () => navigation.goBack(),
             },
           ]);
         } else {
@@ -55,9 +52,7 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         Title="질문게시판 등록"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
-        onPress={() =>
-          navigation.navigate("ListPostPage", { selectedCategory: "질문" })
-        }
+        onPress={() => navigation.goBack()}
         onPressRegi={quesNew}
       />
       <View
