@@ -49,9 +49,7 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             onPress: () => {
               console.log("게시글 등록 성공, 탭 바를 보이게 설정합니다.");
               setTabBarVisible(true);
-              navigation.navigate("ListPostPage", {
-                selectedCategory: "자유",
-              });
+              navigation.goBack();
             },
           },
         ]);
@@ -75,7 +73,7 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => {
           setTabBarVisible(true);
-          navigation.navigate("ListPostPage", { selectedCategory: "자유" });
+          navigation.goBack();
         }}
         onPressRegi={handleRegiButtonPress}
       />
