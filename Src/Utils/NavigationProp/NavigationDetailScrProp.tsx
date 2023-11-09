@@ -16,6 +16,20 @@ export type SgsPostDetailProps = {
 };
 /* ---------------------------------------------------------------------------------------- */
 
+type QstPostDetailRouteProp = RouteProp<
+  RootStackParamList,
+  "QstPostDetailPage"
+>;
+type QstPostDetailNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "QstPostDetailPage"
+>;
+export type QstPostDetailProps = {
+  route: QstPostDetailRouteProp;
+  navigation: QstPostDetailNavigationProp;
+};
+/* ---------------------------------------------------------------------------------------- */
+
 type FreePostDetailRouteProp = RouteProp<
   RootStackParamList,
   "FrePostDetailPage"
