@@ -161,11 +161,17 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
 
   const fetchNextPage = () => {
     if (selectedCategory === "자유") {
-      fetchData(selectedCategory, freePage + 1);
+      let freeNewPage = freePage + 1;
+      fetchData(selectedCategory, freeNewPage);
+      setFreePage(freeNewPage);
     } else if (selectedCategory === "질문") {
-      fetchData(selectedCategory, questPage + 1);
+      let quesNewPage = questPage + 1;
+      fetchData(selectedCategory, quesNewPage);
+      setQuestPage(quesNewPage);
     } else if (selectedCategory === "건의") {
-      fetchData(selectedCategory, sugPage + 1);
+      let sugsNewPage = sugPage + 1;
+      fetchData(selectedCategory, sugsNewPage);
+      setSugPage(sugsNewPage);
     }
   };
   const loadNewPage = () => {
@@ -345,7 +351,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                   nickname={item.NICK_NM}
                   qstposttime={timeSince(item.CRE_DAT)}
                   postanswercount={10}
-                  postcontent={item.CONT}
+                  postcontent={item.TIT}
                   onPress={() => {
                     const postData = {
                       CRE_SEQ: item.CRE_SEQ,
