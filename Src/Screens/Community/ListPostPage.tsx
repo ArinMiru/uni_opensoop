@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { quesBubListSvc } from "../../Services/_private/QusetApi";
-import { FlatList, View, TouchableWithoutFeedback, Alert } from "react-native";
+import { FlatList, View, Alert } from "react-native";
 import { FreeBubListCall } from "../../Services/_private/FreeApi";
 import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
@@ -252,7 +252,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 <FreeListIclucontnButton
                   nickname={item.NICK_NM}
                   freposttime={timeSince(item.CRE_DAT)}
-                  frepostanscount={1}
+                  frepostanscount={item.ANS_FREE.map(
+                    (ans) => ans.TOTAL_ANS
+                  ).reduce((a, b) => a + b / 2, 0)}
                   fretit={item.TIT}
                   frecont={item.CONT}
                   onPress={() => {
@@ -344,7 +346,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 <QstListContentButton
                   nickname={item.NICK_NM}
                   qstposttime={timeSince(item.CRE_DAT)}
-                  postanswercount={2}
+                  postanswercount={item.ANS_FREE.map(
+                    (ans) => ans.TOTAL_ANS
+                  ).reduce((a, b) => a + b / 2, 0)}
                   postcontent={item.CONT}
                   onPress={() => {
                     navigation.navigate("QstPostDetailPage", {
