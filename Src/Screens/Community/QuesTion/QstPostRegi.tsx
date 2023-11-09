@@ -10,7 +10,7 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { KeyboardAvoidingView } from "react-native";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import { OpenFreSgsTitInputBox } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
-import { quesBubSvcNew } from "../../../Services/_private/QusetPostData";
+import { quesBubSvcNew } from "../../../Services/_private/QusetApi";
 
 const userData = getUserData(); // 현재 사용자 데이터
 

@@ -22,7 +22,7 @@ import { UserData } from "../../Utils/_private/ApiData/UserData";
  * @param LIST_UNIT_CNT
  * @param REQ_PAGE
  */
-export const QuesBubListSvc = async (
+export const quesBubListSvc = async (
   REQ_PAGE: number
 ): Promise<QuestData | null> => {
   const endpoint = "/UNI/QuesBubListSvc";
@@ -94,19 +94,17 @@ export const quesBubSvcNew = async (TIT: string): Promise<any | null> => {
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
       console.log("등록 성공");
-      return result;
     } else {
       console.log("등록 실패");
-      return result;
     }
   }
 };
 
 /** 수정 */
-export const QuesBubSvcUp = async (
-  CRE_SEQ: number,
+export const quesBubSvcUp = async (
   TIT: string,
-  CONT: string
+  CONT: string,
+  CRE_SEQ?: number
 ) => {
   const userData = getUserData();
   const endpoint = "/UNI/QuesBubSvc";
@@ -131,16 +129,15 @@ export const QuesBubSvcUp = async (
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
       console.log("등록 성공");
-      return result;
+      return result.data;
     } else {
       console.log("등록 실패");
-      return result;
     }
   }
 };
 
 /** 삭제 */
-export const QuesBubSvcDel = async (CRE_SEQ: number) => {
+export const quesBubSvcDel = async (CRE_SEQ: number) => {
   const userData = getUserData();
   const endpoint = "/UNI/QuesBubSvc";
   if (userData !== null) {
@@ -159,10 +156,8 @@ export const QuesBubSvcDel = async (CRE_SEQ: number) => {
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
       console.log("등록 성공");
-      return result;
     } else {
       console.log("등록 실패");
-      return result;
     }
   }
 };

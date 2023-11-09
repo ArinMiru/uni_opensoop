@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { FreeData } from "../../Utils/_private/ApiData/FreeData";
-import { QuesBubListSvc } from "../../Services/_private/QusetPostData";
+import { quesBubListSvc } from "../../Services/_private/QusetApi";
 import { FlatList, View, TouchableWithoutFeedback, Alert } from "react-native";
 import { FreeBubListCall } from "../../Services/_private/FreeApi";
 import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
@@ -77,7 +77,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
           });
         break;
       case "질문":
-        QuesBubListSvc(page)
+        quesBubListSvc(page)
           .then((data) => {
             if (data !== null) {
               const sorted = { ...data };

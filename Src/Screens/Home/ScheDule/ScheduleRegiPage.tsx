@@ -59,8 +59,15 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
     try {
       const userData = getUserData();
       if (userData != null) {
-        await schdBubSvcNew(schdTitle, selectedStartDate, selectedEndDate);
+        const result = await schdBubSvcNew(
+          schdTitle,
+          selectedStartDate,
+          selectedEndDate
+        );
         console.log("TIT : ", schdTitle);
+        if (result && result.RSLT_CD === "00") {
+          navigation.goBack();
+        }
       } else {
         console.error("userData가 null입니다.");
       }
@@ -93,7 +100,7 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
     const formattedDate = formatDate(date);
     if (new Date(formattedDate) < new Date(selectedStartDate)) {
       const prevDay = new Date(date);
-      prevDay.setDate(date.getDate() - 1);
+      prevDay.setDate(date.getDate() + 1);
       const prevFormattedDate = formatDate(prevDay);
       setSelectedEndDate(prevFormattedDate);
     } else {
