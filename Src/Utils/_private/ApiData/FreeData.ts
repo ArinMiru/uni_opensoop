@@ -26,6 +26,7 @@ export interface AnsFree {
   ANS_SEQ: number; // 답변 일련번호
   CONT: string; // 답변 내용
   CRE_DAT: string; // 답변 일시
+  TOTAL_ANS: number; // 댓글 총 개수
 }
 
 // 서버에서 받아온 데이터를 FreeData 형식으로 파싱하는 함수
@@ -57,6 +58,7 @@ export function parseFreeData(rawData: any): FreeData {
           ANS_SEQ: typeof ans.ANS_SEQ === "number" ? item.ANS_SEQ : 0,
           CONT: ans.CONT || "", // 자유게시판 답변내용, 없을 경우 빈 문자열
           CRE_DAT: ans.CRE_DAT || "", // 자유게시판 답변 일시, 없을 경우 빈 문자열
+          TOTAL_ANS: ans.TOTAL_ANS || "", // 자유게시판 답변 개수
         }));
       }
 
