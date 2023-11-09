@@ -169,7 +169,7 @@ export const FreeBubRegi = async (TIT: string, CONT: string) => {
       return result;
     } else {
       console.log("실패");
-      return null;
+      return result;
     }
   }
 };
@@ -200,8 +200,10 @@ export const FreeBubDel = async (CRE_SEQ: number) => {
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
+      return result;
     } else {
       console.log("실패");
+      return result;
     }
   }
 };
@@ -237,8 +239,10 @@ export const FreeBubEd = async (CRE_SEQ: string, TIT: string, CONT: string) => {
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
+      return result;
     } else {
       console.log("실패");
+      return result;
     }
   }
 };

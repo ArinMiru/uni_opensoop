@@ -42,10 +42,25 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 };
 
 // Custom Hook 생성
+// useModal 커스텀 훅 안에서 setTabBarVisible 함수를 수정합니다.
 export const useModal = () => {
   const context = useContext(ModalContext);
+
   if (!context) {
     throw new Error("useModal must be used within a ModalProvider");
   }
-  return context;
+
+  // context로부터 가져온 기존의 setTabBarVisible 함수를 래핑(wrapping)하여 로그를 출력하는 기능을 추가합니다.
+  const setTabBarVisible = (
+    visible: boolean | ((prevState: boolean) => boolean)
+  ) => {
+    console.log(`Tab Bar is now ${visible ? "visible" : "hidden"}.`); // 로그 출력
+    context.setTabBarVisible(visible); // 실제 context의 setTabBarVisible 함수를 호출하여 상태를 업데이트합니다.
+  };
+
+  // 수정된 setTabBarVisible 함수와 나머지 context를 반환합니다.
+  return {
+    ...context,
+    setTabBarVisible,
+  };
 };

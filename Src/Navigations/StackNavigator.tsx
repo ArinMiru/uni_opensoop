@@ -94,7 +94,9 @@ export type RootStackParamList = {
   NoticePage: undefined;
   DrawerNavigator: undefined;
   NoticePostRegi: undefined;
-  ListPostPage: undefined;
+  ListPostPage: {
+    selectedCategory: string;
+  };
   NoticePostRegiPage: undefined;
   QstPostRegiPage: undefined;
   SgsPostRegiPage: undefined;
@@ -154,7 +156,7 @@ export type RootStackParamList = {
     TIT: string;
     STRT_SCHD_YMD: string;
     END_SCHD_YMD: string;
-    CRE_SEQ: string;
+    CRE_SEQ: number;
   };
   BottomTabNavigations: undefined;
   ProfilePage: undefined;

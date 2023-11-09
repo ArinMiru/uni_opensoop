@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import VoteBoxStyle from "../../../Styles/VoteStyles/VoteBoxStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
@@ -14,7 +14,10 @@ import { Background } from "../../../Components/AllCompo/Background";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { SchdlTimeButton } from "../../../Components/SchdlCompo/SchdlButton";
-import { schdBubSvcNew } from "../../../Services/_private/SchdBubApi";
+import {
+  schdBubSvcNew,
+  schdBubSvcUp,
+} from "../../../Services/_private/SchdBubApi";
 import { SchdEditPostPageProp } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 import {
   formatDateString,
@@ -51,17 +54,29 @@ const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
     setDatePickerVisibility(false);
   };
 
-  const schNew = async () => {
+  const scEdit = async () => {
     try {
       const userData = getUserData();
       if (userData != null) {
-        await schdBubSvcNew(schdTitle, selectedStartDate, selectedEndDate);
+        const result = await schdBubSvcUp(
+          schdTitle,
+          selectedStartDate,
+          selectedEndDate,
+          CRE_SEQ
+        );
+        if (result && result.RSLT_CD === "00") {
+          navigation.goBack();
+          Alert.alert("수정 성공", "수정을 성공하였습니다.");
+        } else {
+          navigation.goBack();
+          Alert.alert("수정 실패", "수정에 실패하였습니다.");
+        }
         console.log("TIT : ", schdTitle);
       } else {
         console.error("userData가 null입니다.");
       }
     } catch (error) {
-      console.error("등록 오류", error);
+      console.error("수정 오류", error);
     }
   };
 
@@ -92,7 +107,7 @@ const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
-        onPressRegi={schNew}
+        onPressRegi={scEdit}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View
