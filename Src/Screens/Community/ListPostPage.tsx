@@ -352,7 +352,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 <QstListContentButton
                   nickname={item.NICK_NM}
                   qstposttime={timeSince(item.CRE_DAT)}
-                  postanswercount={10}
+                  postanswercount={item.ANS_FREE.map(
+                    (ans) => ans.TOTAL_ANS
+                  ).reduce((a, b) => a + b / 2, 0)}
                   postcontent={item.TIT}
                   onPress={() => {
                     navigation.navigate("QstPostDetailPage", {
