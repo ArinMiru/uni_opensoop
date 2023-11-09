@@ -118,11 +118,12 @@ const BottomTabNavigations = () => {
         name="NoticePage"
         component={NoTicePage}
         options={{ headerShown: false }}
+        
       />
       <Tab.Screen
         name="ListPostPage"
         component={ListPostPage}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, }}
       />
       <Tab.Screen
         name="HomePageScreen"

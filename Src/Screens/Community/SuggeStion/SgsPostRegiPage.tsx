@@ -32,10 +32,7 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           Alert.alert("성공", "게시물 등록 성공", [
             {
               text: "확인",
-              onPress: () =>
-                navigation.navigate("ListPostPage", {
-                  selectedCategory: "건의",
-                }),
+              onPress: () => navigation.goBack(),
             },
           ]);
         } else {
@@ -62,9 +59,7 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
         Title="건의게시판 등록"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
-        onPress={() =>
-          navigation.navigate("ListPostPage", { selectedCategory: "건의" })
-        }
+        onPress={() => navigation.goBack()}
         onPressRegi={handleRegiButtonPress}
       />
       <View
