@@ -252,7 +252,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 <FreeListIclucontnButton
                   nickname={item.NICK_NM}
                   freposttime={timeSince(item.CRE_DAT)}
-                  frepostanscount={20}
+                  frepostanscount={1}
                   fretit={item.TIT}
                   frecont={item.CONT}
                   onPress={() => {
@@ -344,15 +344,18 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 <QstListContentButton
                   nickname={item.NICK_NM}
                   qstposttime={timeSince(item.CRE_DAT)}
-                  postanswercount={10}
+                  postanswercount={2}
                   postcontent={item.CONT}
                   onPress={() => {
-                    const postData = {
+                    navigation.navigate("QstPostDetailPage", {
                       CRE_SEQ: item.CRE_SEQ,
+                      NICK_NM: item.NICK_NM,
+                      LIKE_CNT: item.LIKE_CNT,
+                      CRE_DAT: item.CRE_DAT,
+                      CONT: item.CONT,
+                      TIT: item.TIT,
                       AnsFree: item.ANS_FREE,
-                    };
-                    console.log(postData);
-                    navigation.navigate("QstAnsModalPage");
+                    });
                   }}
                 />
               </View>
