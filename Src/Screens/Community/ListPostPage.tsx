@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getUserData } from "../../Utils/_private/ApiData/UserData";
 import { FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { quesBubListSvc } from "../../Services/_private/QusetApi";
-import { FlatList, View, TouchableWithoutFeedback, Alert } from "react-native";
+import { FlatList, View, Alert } from "react-native";
 import { FreeBubListCall } from "../../Services/_private/FreeApi";
 import { ListCategorieCompo } from "../../Components/ListCompo/ListCommonCompo/ListCategorieCompo";
 import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
@@ -258,7 +258,9 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 <FreeListIclucontnButton
                   nickname={item.NICK_NM}
                   freposttime={timeSince(item.CRE_DAT)}
-                  frepostanscount={20}
+                  frepostanscount={item.ANS_FREE.map(
+                    (ans) => ans.TOTAL_ANS
+                  ).reduce((a, b) => a + b / 2, 0)}
                   fretit={item.TIT}
                   frecont={item.CONT}
                   onPress={() => {
@@ -353,12 +355,15 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                   postanswercount={10}
                   postcontent={item.TIT}
                   onPress={() => {
-                    const postData = {
+                    navigation.navigate("QstPostDetailPage", {
                       CRE_SEQ: item.CRE_SEQ,
+                      NICK_NM: item.NICK_NM,
+                      LIKE_CNT: item.LIKE_CNT,
+                      CRE_DAT: item.CRE_DAT,
+                      CONT: item.CONT,
+                      TIT: item.TIT,
                       AnsFree: item.ANS_FREE,
-                    };
-                    console.log(postData);
-                    navigation.navigate("QstAnsModalPage");
+                    });
                   }}
                 />
               </View>
