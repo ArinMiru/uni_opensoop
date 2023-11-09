@@ -43,14 +43,10 @@ import TitleCodeCerti from "../Screens/Home/TitleCodeCerti";
 import NoticeEditPage from "../Screens/Home/NoTice/NoticeEditPage";
 import FrePostDetailLawPage from "../Screens/Community/Free/FrePostDetailLawPage";
 import FreePostDetailPage from "../Screens/Community/Free/FrePostDetailPage";
-
-/**----------------------------------------------------------------------------*/
 import FreEditPostPage from "../Screens/Community/Free/FreEditPostPage";
 import QstEditPostPage from "../Screens/Community/QuesTion/QstEditPostPage";
 import SgsEditPostPage from "../Screens/Community/SuggeStion/SgsEditPostPage";
-
-/**----------------------------------------------------------------------------*/
-import QstAnsModalPage from "../Screens/QstAnsModal/QstAnsModalPage";
+import QstPostDetailPage from "../Screens/Community/QuesTion/QstPostDetailPage";
 
 /**----------------------------------------------------------------------------*/
 /**----------------------------------------------------------------------------*/
@@ -194,9 +190,22 @@ export type RootStackParamList = {
     NICK_NM: string;
     CRE_DAT: string;
   };
-  /**----------------------------------------------------------------------------*/
-  QstAnsModalPage: undefined;
-  /**----------------------------------------------------------------------------*/
+
+  QstPostDetailPage: {
+    CRE_SEQ: number;
+    CONT: string;
+    TIT: string;
+    NICK_NM: string;
+    LIKE_CNT: number;
+    CRE_DAT: string;
+    AnsFree: {
+      ANS_MEMB_ID: string;
+      ANS_SEQ: number;
+      CONT: string;
+      CRE_DAT: string;
+    }[];
+  };
+
   /**----------------------------------------------------------------------------*/
 };
 
@@ -455,18 +464,11 @@ const StackNavigator = () => {
         component={SgsEditPostPage}
         options={{ headerShown: false }}
       />
-      {/**---------위에서부터 추가-----------------------------------------------------------*/}
+
       <Stack.Screen
-        name="QstAnsModalPage"
-        component={QstAnsModalPage}
-        options={{
-          headerShown: false,
-          presentation: "modal",
-          cardStyle: {
-            backgroundColor: "rgba(0, 0, 0, 0.2)",
-          },
-          cardOverlayEnabled: true,
-        }}
+        name="QstPostDetailPage"
+        component={QstPostDetailPage}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
