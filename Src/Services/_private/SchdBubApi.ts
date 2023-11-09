@@ -30,6 +30,7 @@ export const SchdBubListSvc = async (): Promise<SchdBubData | null> => {
 
       if (result !== null && result.data.RSLT_CD === "00") {
         const SchdBubData: SchdBubData = parseSchdBubData(result.data);
+        console.log(SchdBubData);
         return SchdBubData;
       } else {
         console.log("일정 데이터 가져오기 실패");
@@ -115,6 +116,7 @@ export const schdBubSvcNew = async (
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("등록 성공");
+      return result.data;
     } else {
       console.log("등록 실패");
     }
@@ -122,14 +124,16 @@ export const schdBubSvcNew = async (
 };
 
 export const schdBubSvcUp = async (
-  CRE_SEQ: number,
   TIT: string,
-  CONT: string
+  STRT_SCHD_YMD: string,
+  END_SCHD_YMD: string,
+  CRE_SEQ: number
 ) => {
   const userData = getUserData();
   const endpoint = "/UNI/SchdBubSvc";
   if (userData !== null) {
     const PROC_TYPE = "02";
+    const CONT = "";
     const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
     const data = {
       CRE_SEQ,
@@ -140,6 +144,8 @@ export const schdBubSvcUp = async (
       MEMB_DEP_CD,
       TIT_CD,
       PROC_TYPE,
+      STRT_SCHD_YMD,
+      END_SCHD_YMD,
     };
     console.log(data);
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
@@ -148,6 +154,7 @@ export const schdBubSvcUp = async (
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("수정 성공");
+      return result.data;
     } else {
       console.log("수정 실패");
     }
