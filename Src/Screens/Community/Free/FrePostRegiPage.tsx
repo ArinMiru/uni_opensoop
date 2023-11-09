@@ -14,6 +14,7 @@ import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
+import { useModal } from "../../../Screens/ModalContext";
 
 //@jeakyoung 생성 게시글 등록 API
 
@@ -22,38 +23,60 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [cont, setCont] = useState<string>("");
   const [tit, setTit] = useState<string>("");
 
-  // 등록 버튼
-  const handleRegiButtonPress = async () => {
-    try {
-      const userData = getUserData();
-      if (userData) {
-        const result = await FreeBubRegi(tit, cont);
+  const { setTabBarVisible } = useModal();
 
-        if (result && result.data.RSLT_CD === "00") {
-          navigation.goBack();
-          Alert.alert("성공", "등록 성공");
-        } else {
-          navigation.goBack();
-          Alert.alert("실패", "등록 실패");
-        }
+  // 등록 버튼을 누르면 호출되는 함수
+  const handleRegiButtonPress = async () => {
+    // 제목과 내용이 2글자 이상인지 검사합니다.
+    if (tit.trim().length < 2) {
+      Alert.alert("오류", "제목은 최소 2자 이상이어야 합니다.");
+      return;
+    }
+
+    if (cont.trim().length < 2) {
+      Alert.alert("오류", "내용은 최소 2자 이상이어야 합니다.");
+      return;
+    }
+
+    try {
+      const result = await FreeBubRegi(tit, cont);
+      if (result && result.data.RSLT_CD === "00") {
+        setTit("");
+        setCont("");
+        Alert.alert("성공", "게시물 등록 성공", [
+          {
+            text: "확인",
+            onPress: () => {
+              console.log("게시글 등록 성공, 탭 바를 보이게 설정합니다.");
+              setTabBarVisible(true);
+              navigation.navigate("ListPostPage", {
+                selectedCategory: "자유",
+              });
+            },
+          },
+        ]);
       } else {
-        console.error("userData가 null입니다.");
+        console.log("게시글 등록 실패, 탭 바를 보이게 설정합니다.");
+        setTabBarVisible(true);
+        navigation.goBack();
+        Alert.alert("실패", "게시물 등록 실패");
       }
     } catch (error) {
+      console.log("게시글 등록 중 오류 발생, 탭 바를 보이게 설정합니다.");
       console.error("등록 오류", error);
+      setTabBarVisible(true);
     }
   };
-
   return (
     <Background>
       <BackIconRegiTopbarStyle
         Title="자유게시판 등록"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
-        //onPress={() => navigation.goBack()} 
-        // 이전 게시물을 작성을 완료한 후, FrePostRegiPage에서 뒤로가기 시
-        // 게시물 작성 기록이 사라짐
-        onPress={() => navigation.navigate("ListPostPage")}
+        onPress={() => {
+          setTabBarVisible(true);
+          navigation.navigate("ListPostPage", { selectedCategory: "자유" });
+        }}
         onPressRegi={handleRegiButtonPress}
       />
       <View

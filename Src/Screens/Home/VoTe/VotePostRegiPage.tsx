@@ -72,9 +72,9 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
 
   const getFormattedDate = () => {
     const date = selectedDate;
-    const formattedDate = `${date.getFullYear()}-${
-      date.getMonth() + 1
-    }-${date.getDate()}`;
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
     return formattedDate;
   };
 
@@ -235,6 +235,8 @@ const VotePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             <DateTimePickerModal
               isVisible={isDatePickerVisible}
               mode="date"
+              date={selectedDate}
+              display="inline"
               locale="ko-KR"
               onConfirm={handleConfirm}
               onCancel={hideDatePicker}
