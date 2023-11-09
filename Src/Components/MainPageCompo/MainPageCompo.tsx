@@ -587,7 +587,7 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                 source={{ uri: F_Open_Photo }}
                 style={[
                   MainPageStyles.MainOpenPhotoBox,
-                  { resizeMode: "contain" },
+                  { resizeMode: "stretch" },
                 ]}
               />
             </TouchableOpacity>
@@ -675,7 +675,7 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                 source={{ uri: S_Open_Photo }}
                 style={[
                   MainPageStyles.MainOpenPhotoBox,
-                  { resizeMode: "contain" },
+                  { resizeMode: "stretch" },
                 ]}
               />
             </TouchableOpacity>
