@@ -10,21 +10,21 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { KeyboardAvoidingView } from "react-native";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import { OpenFreSgsTitInputBox } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
-import { quesBubSvcNew } from "../../../Services/_private/QusetPostData";
 import { Alert } from "react-native";
-import { QuesBubSvcUp } from "../../../Services/_private/QusetPostData";
+import { quesBubSvcUp } from "../../../Services/_private/QusetApi";
 
 const userData = getUserData(); // 현재 사용자 데이터
 
 const QstEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [quesTit, setQuesTit] = useState<string>("");
+  const [quesCont, setQuesCont] = useState<string>("");
 
-  const quesNew = async () => {
+  const quesEdit = async () => {
     try {
       const userData = getUserData();
       if (userData != null) {
-        const result = await quesBubSvcNew(quesTit);
-        if (result && result.data.RSLT_CD === "00") {
+        const result = await quesBubSvcUp(quesTit, quesCont);
+        if (result && result.RSLT_CD === "00") {
           navigation.goBack();
           Alert.alert("성공", "수정 성공");
         } else {
@@ -46,7 +46,7 @@ const QstEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
-        onPressRegi={quesNew}
+        onPressRegi={quesEdit}
       />
       <View
         style={[
