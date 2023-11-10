@@ -70,6 +70,7 @@ const PassFindNewPass: React.FC<RegiCertiGradProps> = ({
               MEMB_SC_CD: MEMB_SC_CD,
             })
           }
+          disable={!selectedGrade} // 학년이 선택되지 않았으면 버튼 비활성화
         />
       </View>
       <Image

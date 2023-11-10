@@ -88,7 +88,7 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
                 { color: "#919191", alignSelf: "flex-end", paddingTop: "2%" },
               ]}
             >
-              최소 5자 / 최대 30자
+              최소 2글자
             </Text>
           </View>
         </View>
@@ -115,7 +115,7 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
                 { color: "#919191", alignSelf: "flex-end", paddingTop: "2%" },
               ]}
             >
-              최소 10자
+              최소 2글자
             </Text>
           </View>
         </KeyboardAvoidingView>
