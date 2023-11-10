@@ -26,7 +26,11 @@ const PassFindForId: React.FC<ScreenProps> = ({ navigation }) => {
       inputtext="아이디"
       buttontext="다음"
       value={userId}
-      onChangeText={(text) => setUserId(text)}
+      onChangeText={(text) => {
+        const filterRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣'";--@@@|%&+<>=]/g;
+        const filteredText = text.replace(filterRegex, "");
+        setUserId(filteredText);
+      }}
       onPress={passFindUserDataSave}
       keyboardType="default"
       autoCapitalize="none"

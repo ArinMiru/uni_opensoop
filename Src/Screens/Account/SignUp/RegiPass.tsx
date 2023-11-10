@@ -74,7 +74,7 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
     registerUser(MEMB_ID, MEMB_NM, pass)
       .then((isSuccess) => {
         if (isSuccess) {
-          navigation.navigate("RegiChk", {MEMB_ID: MEMB_ID});
+          navigation.navigate("RegiChk", { MEMB_ID: MEMB_ID });
         } else {
           console.log("실패");
         }
