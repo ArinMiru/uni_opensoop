@@ -20,7 +20,7 @@ interface ButtonProps {
   onPressDelPhoto?: () => void;
   onPressAddPhoto?: () => void;
   navigation?: { navigate: (screenName: string) => void };
-  selectedImage?: string;
+  selectedImage?: string[];
 }
 
 /**
@@ -179,7 +179,7 @@ export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
           key={index}
           onPressAddPhoto={onPress}
           onPressDelPhoto={() => removePhotoBox(index)}
-          postRegiImage={selectedImage}
+          postRegiImage={selectedImage?.[index]}
         />
       ))}
       {photoList.length < 4 && <OpenPhotoPlusBox onPress={addPhotoBox} />}
