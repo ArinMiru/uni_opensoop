@@ -36,7 +36,12 @@ const PassFindEcode: React.FC<ScreenProps> = ({ navigation }) => {
       inputtext="인증번호"
       buttontext="완료"
       value={userEcode}
-      onChangeText={(text) => setUserEcode(text)}
+      onChangeText={(text) => {
+        const onlyNumbers = /^\d+$/;
+        if (onlyNumbers.test(text) || text === "") {
+          setUserEcode(text);
+        }
+      }}
       onPress={passEcodeCheck}
       keyboardType="numeric"
     />

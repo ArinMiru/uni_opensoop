@@ -14,6 +14,11 @@ import { MembPassFndSvc } from "../../../../Src/Services/_private/EndPointApiFun
 const PassFindForEmail: React.FC<ScreenProps> = ({ navigation }) => {
   const [userEmail, setUserEmail] = useState<string>("");
 
+  const isEmailValid = (email: string): boolean => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@([a-zA-Z0-9-]+\.)+(ac\.kr)$/;
+    return emailPattern.test(email);
+  };
+
   const passEmailCheck = async () => {
     setUserDataAndNavigate("MEMB_EM", userEmail, navigation, "PassFindEcode");
     console.log(PassFindData.MEMB_EM);
@@ -31,7 +36,11 @@ const PassFindForEmail: React.FC<ScreenProps> = ({ navigation }) => {
       inputtext="이메일"
       buttontext="인증번호 전송"
       value={userEmail}
-      onChangeText={(text) => setUserEmail(text)}
+      onChangeText={(text) => {
+        if (isEmailValid(text) || text === "") {
+          setUserEmail(text);
+        }
+      }}
       onPress={passEmailCheck}
       keyboardType="email-address"
       autoCapitalize="none"
