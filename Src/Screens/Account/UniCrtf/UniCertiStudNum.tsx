@@ -8,11 +8,19 @@ const UniCertiStudNum: React.FC<RegiCertiStudNumProps> = ({
 }) => {
   const [studNum, setStudNum] = useState<string>("");
   const { MEMB_DEP_CD, MEMB_ID, MEMB_SC_CD } = route.params;
+
+  const handleStudNumChange = (text: string) => {
+    const onlyNumbers = /^\d+$/;
+    if (onlyNumbers.test(text) || text === "") {
+      setStudNum(text);
+    }
+  };
+
   return (
     <RegiCommonView
       IconPress={() => navigation.goBack()}
       value={studNum}
-      onChangeText={(text) => setStudNum(text)}
+      onChangeText={handleStudNumChange}
       bigtext="학번"
       smalltext="선택하기"
       inputtext="학번"

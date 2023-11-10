@@ -7,9 +7,6 @@ import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import { RegiTextflex1 } from "../../../Components/AccountCompo/AccountText";
 import { RegiDupleFlex2 } from "../../../Components/AccountCompo/AccountCustomCompo";
-import RegiUserData, {
-  setUserDataAndNavigate,
-} from "../../../Utils/_private/RegiData/RegiUserData";
 import { idCheckpoint } from "../../../Services/_private/EndPointApiFuntion";
 import { Image } from "react-native";
 
@@ -36,6 +33,12 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
     return userRegiId !== "" && isIdChecked;
   };
 
+  const handleIdChange = (text: string) => {
+    const filterRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣'";--@@@|%&+<>=]/g;
+    const filteredText = text.replace(filterRegex, "");
+    setUserRegiId(filteredText);
+  };
+
   return (
     <AccountBackground>
       <View
@@ -56,7 +59,7 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
         inputText="아이디"
         text="중복 확인"
         value={userRegiId}
-        onChangeText={(text) => setUserRegiId(text)}
+        onChangeText={handleIdChange}
         onPress={idCheck}
         validationMessage={idValidationMessage}
         validationColor={idValidationColor}
@@ -64,7 +67,9 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
       <View style={{ flex: 6, justifyContent: "flex-start" }}>
         <OnlyAccountButton
           text="다음"
-          onPress={() => navigation.navigate("RegiNmNic", {MEMB_ID: userRegiId})}
+          onPress={() =>
+            navigation.navigate("RegiNmNic", { MEMB_ID: userRegiId })
+          }
           disable={!isFormComplete()}
         />
       </View>
