@@ -236,12 +236,6 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
             setSelectedCategory={setSelectedCategory}
           />
         </View>
-        <Spinner
-          // 로딩 상태에 따라 Spinner를 화면에 표시
-          visible={loading}
-          textContent={"로딩 중..."}
-          textStyle={{ color: "#FFF" }}
-        />
         {selectedCategory === "자유" && freeData && (
           <FlatList
             data={freeData.FREE_BUB}
