@@ -26,9 +26,12 @@ export const TopbarStylePlusIcon: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity
       style={{
-        alignItems: "flex-end",
-        marginRight: deviceWidth * 0.06,
+        alignItems: "center",
+        marginRight: deviceWidth * 0.05,
         marginTop: deviceWidth * 0.01,
+        width: deviceWidth * 0.078,
+        height: deviceWidth * 0.078,
+        justifyContent: "center",
       }}
       onPress={onPress}
     >

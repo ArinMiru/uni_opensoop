@@ -103,12 +103,18 @@ export const GrayBackIconButton: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        marginLeft: deviceWidth * 0.06,
+        marginTop: deviceHeight * 0.002,
+        width: deviceWidth * 0.075,
+        height: deviceWidth * 0.075,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Ionicons
-        style={{
-          marginLeft: deviceWidth * 0.06,
-          marginTop: deviceHeight * 0.002,
-        }}
         name="chevron-back"
         size={deviceWidth * 0.055}
         color="#37424D"
