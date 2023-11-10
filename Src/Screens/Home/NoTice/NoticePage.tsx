@@ -235,11 +235,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
             { alignItems: "center" },
           ]}
         >
-          <Spinner
-            visible={loading}
-            textContent={"로딩 중..."}
-            textStyle={{ color: "#FFF" }}
-          />
           <FlatList
             data={data?.OPEN_BUB}
             keyExtractor={(item, index) =>
