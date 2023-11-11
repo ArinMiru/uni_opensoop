@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StackNavigationProp } from "@react-navigation/stack";
+import LoadingScreen from "../Screens/Loading/LoadingPage";
 import HomePageScreen from "../Screens/Home/HomePage";
 import AccountLogin from "../Screens/Account/SignIn/AccountLogin";
 import AccountLoginRegi from "../Screens/Account/SignIn/AccountLoginRegi";
@@ -53,6 +54,7 @@ import QstPostDetailPage from "../Screens/Community/QuesTion/QstPostDetailPage";
 
 export type RootStackParamList = {
   //파라미터 전달 값 없음
+  LoadingScreen: undefined;
   AccountLoginRegi: undefined;
   AccountLogin: undefined;
   HomePageScreen: undefined;
@@ -212,6 +214,11 @@ const Stack = createStackNavigator<RootStackParamList>();
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="LoadingScreen"
+        component={LoadingScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="AccountLoginRegi"
         component={AccountLoginRegi}
