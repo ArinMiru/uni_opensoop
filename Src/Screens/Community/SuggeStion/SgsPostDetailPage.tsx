@@ -3,6 +3,7 @@ import {
   Platform,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import {
@@ -39,8 +40,16 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
   const userData = getUserData();
   const [ansCont, setAnsCont] = useState<string>("");
   const { CRE_SEQ, CONT, TIT, NICK_NM, CRE_DAT, AnsFree } = route.params;
-  const sgsDel = () => {
-    SugBubListDel(CRE_SEQ);
+
+  const sgsDel = async () => {
+    const result = await SugBubListDel(CRE_SEQ);
+    if (result && result.RSLT_CD === "00") {
+      navigation.goBack();
+      Alert.alert("성공", "게시글 삭제 성공");
+    } else {
+      navigation.goBack();
+      Alert.alert("실패", "게시글 삭제 실패");
+    }
   };
   const SugAnsNew = async () => {
     try {
@@ -53,6 +62,14 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
     } catch (error) {
       console.error("등록 오류", error);
     }
+  };
+
+  const sugEdit = () => {
+    navigation.navigate("SgsEditPostPage", {
+      CRE_SEQ: CRE_SEQ,
+      CONT: CONT,
+      TIT: TIT,
+    });
   };
 
   return (
@@ -69,8 +86,8 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
           onDismiss={modalFunctions.handleCloseModal}
         >
           <View style={EditDelCloseModalStyle.contentContainer}>
-            <EditModalCompo EditonPress={modalFunctions.handleEditPress} />
-            <DelModalCompo DelonPress={modalFunctions.handleDeletePress} />
+            <EditModalCompo EditonPress={sugEdit} />
+            <DelModalCompo DelonPress={sgsDel} />
             <CloseModalCompo CloseonPress={modalFunctions.handleCloseModal} />
           </View>
         </BottomSheetModal>

@@ -16,7 +16,6 @@ import { QstListContentButton } from "../../Components/ListCompo/QstCompo/QstBut
 import { SugBubListData } from "../../Utils/_private/ApiData/SugBubListData";
 import { SugBubListSvc } from "../../Services/_private/SugBubListApi";
 import { QuestData } from "../../Utils/_private/ApiData/QuestData";
-import Spinner from "react-native-loading-spinner-overlay";
 import { timeSince } from "../../Utils/timeUtils";
 
 const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
@@ -57,10 +56,6 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
               if (sorted.FREE_BUB) {
                 sorted.FREE_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
               }
-              if (page === 1) {
-                setFreeData({ RSLT_CD: "", FREE_BUB: [] });
-                setFreePage(1);
-              }
               setFreeData((prevData) => {
                 return {
                   ...prevData,
@@ -68,13 +63,13 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 };
               });
             }
-            setLoading(false);
           })
           .catch((error) => {
             setLoading(false);
             console.error("데이터 가져오기 오류:", error);
             Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
           });
+        setLoading(false);
         break;
       case "질문":
         quesBubListSvc(page)
@@ -84,10 +79,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
               if (sorted.QUES_BUB) {
                 sorted.QUES_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
               }
-              if (page === 1) {
-                setQuestData({ RSLT_CD: "", QUES_BUB: [] });
-                setQuestPage(1);
-              }
+
               setQuestData((prevData) => {
                 if (prevData) {
                   return {
@@ -103,14 +95,13 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 }
               });
             }
-            setLoading(false);
           })
           .catch((error) => {
             setLoading(false);
             console.error("데이터 가져오기 오류:", error);
             Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
           });
-
+        setLoading(false);
         break;
       case "건의":
         SugBubListSvc(page)
@@ -119,10 +110,6 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
               const sorted = { ...data };
               if (sorted.SUG_BUB) {
                 sorted.SUG_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
-              }
-              if (page === 1) {
-                setSugsData({ RSLT_CD: "", SUG_BUB: [] });
-                setSugPage(1);
               }
               setSugsData((prevData) => {
                 if (prevData) {
@@ -139,13 +126,13 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 }
               });
             }
-            setLoading(false);
           })
           .catch((error) => {
             setLoading(false);
             console.error("데이터 가져오기 오류:", error);
             Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
           });
+        setLoading(false);
         break;
       default:
         break;
@@ -177,10 +164,16 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
   const loadNewPage = () => {
     if (selectedCategory === "자유") {
       fetchData(selectedCategory, 1);
+      setFreeData({ RSLT_CD: "", FREE_BUB: [] });
+      setFreePage(1);
     } else if (selectedCategory === "질문") {
       fetchData(selectedCategory, 1);
+      setQuestData({ RSLT_CD: "", QUES_BUB: [] });
+      setQuestPage(1);
     } else if (selectedCategory === "건의") {
       fetchData(selectedCategory, 1);
+      setSugsData({ RSLT_CD: "", SUG_BUB: [] });
+      setSugPage(1);
     }
   };
 

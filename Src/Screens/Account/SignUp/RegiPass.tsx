@@ -13,6 +13,7 @@ import TextStyle from "../../../Styles/TextStyle";
 import { Image } from "react-native";
 import { RegiPassProps } from "../../../Utils/NavigationProp/AccountScrProp";
 import { registerUser } from "../../../Services/_private/EndPointApiFuntion";
+import { hashUserPassword } from "../../../Utils/_private/.secure/.PassBcryHasing";
 
 interface ServerResponse {
   RSLT_CD: string;
@@ -70,19 +71,21 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
   const isButtonEnabled =
     pass.length >= 8 && configPass.length >= 8 && pass === configPass;
 
-  const regiPassData = () => {
-    registerUser(MEMB_ID, MEMB_NM, pass)
-      .then((isSuccess) => {
-        if (isSuccess) {
-          navigation.navigate("RegiChk", { MEMB_ID: MEMB_ID });
-        } else {
-          console.log("실패");
-        }
-      })
-      .catch((error) => {
-        // 오류 처리
-        console.error("Error:", error);
-      });
+  const regiPassData = async () => {
+    try {
+      const securePass = await hashUserPassword(pass);
+      const isSuccess = await registerUser(MEMB_ID, MEMB_NM, securePass);
+
+      if (isSuccess) {
+        navigation.navigate("RegiChk", { MEMB_ID: MEMB_ID });
+        console.log(securePass);
+      } else {
+        console.log("실패");
+      }
+    } catch (error) {
+      // 오류 처리
+      console.error("Error:", error);
+    }
   };
 
   return (

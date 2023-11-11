@@ -195,11 +195,8 @@ export const SugBubListDel = async (
       );
 
       if (result !== null && result.data.RSLT_CD === "00") {
-        const subgBubListData: SugBubListData = parseSugBubListData(
-          result.data
-        );
         console.log("삭제 성공");
-        return subgBubListData;
+        return result.data;
       } else {
         return null;
       }

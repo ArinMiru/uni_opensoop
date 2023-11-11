@@ -13,6 +13,10 @@ import {
   DprtData,
   parseDprtSrchData,
 } from "../../Utils/_private/RegiData/DprtSrchData";
+import {
+  jwtTokenSave,
+  checkStoredJWTToken,
+} from "../../Utils/_private/.secure/.autoLogin";
 
 /* ------------------------------------------------------------------------------- */
 
@@ -33,14 +37,42 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
   );
 
   if (result !== null) {
-    if (result.data.RSLT_CD === "00") {
+    const userData = result.data;
+    if (userData.RSLT_CD === "00") {
       setUserData(result.data);
-      return "00"; // 로그인 성공
+      if (userData.TOKEN_ID !== null) {
+        jwtTokenSave(userData.TOKEN_ID);
+      } else {
+        console.log("이미 저장된 토큰이 존재 합니다");
+      }
+      return userData.RSLT_CD;
     } else {
       return result.data.RSLT_CD; // 로그인 실패
     }
   } else {
-    console.log("로그인 실패");
+    return null;
+  }
+};
+
+export const autoLogin = async (TOKEN_ID: any) => {
+  const endpoint = "/UNI/LoginSvc";
+  const LOGIN_ID = "";
+  const LOGIN_PASS = "";
+
+  const data = {
+    TOKEN_ID, // UUID를 문자열로 변환
+    LOGIN_ID,
+    LOGIN_PASS,
+  };
+  console.log(data);
+  const result: AxiosResponse<any, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
+  console.log(result?.data);
+  if (result !== null) {
+    return result.data.RSLT_CD;
+  } else {
     return null;
   }
 };

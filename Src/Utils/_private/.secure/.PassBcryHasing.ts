@@ -17,17 +17,4 @@ async function hashUserPassword(userPassword: string) {
   const hashedPassword = await hashPassword(userPassword, globalSalt);
   return hashedPassword;
 }
-
-// 비밀번호를 해싱화할 사용자 비밀번호 (예시)
-const userPassword = "user_password";
-
-// 비밀번호를 해싱화하고 결과를 출력
-hashUserPassword(userPassword)
-  .then((hashedPassword) => {
-    console.log("해싱된 비밀번호:", hashedPassword);
-  })
-  .catch((error) => {
-    console.error("비밀번호 해싱 오류:", error);
-  });
-
 export { hashUserPassword };

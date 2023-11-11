@@ -5,6 +5,7 @@ import {
   ScrollView,
   Platform,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import {
   FreQstComment,
@@ -45,6 +46,8 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
 
   const dellPress = () => {
     FreeBubDel(CRE_SEQ);
+    navigation.goBack();
+    Alert.alert("성공", "게시물이 삭제 되었습니다");
   };
 
   const FreeAnsNewBut = async () => {
@@ -61,6 +64,14 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
     }
   };
 
+  const handleButEdit = () => {
+    navigation.navigate("FreEditPostPage", {
+      CRE_SEQ: CRE_SEQ,
+      CONT: CONT,
+      TIT: TIT,
+    });
+  };
+
   return (
     <Background>
       <BottomSheetModalProvider>
@@ -75,8 +86,8 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
           onDismiss={modalFunctions.handleCloseModal}
         >
           <View style={EditDelCloseModalStyle.contentContainer}>
-            <EditModalCompo EditonPress={modalFunctions.handleEditPress} />
-            <DelModalCompo DelonPress={modalFunctions.handleDeletePress} />
+            <EditModalCompo EditonPress={handleButEdit} />
+            <DelModalCompo DelonPress={dellPress} />
             <CloseModalCompo CloseonPress={modalFunctions.handleCloseModal} />
           </View>
         </BottomSheetModal>

@@ -173,22 +173,15 @@ export type RootStackParamList = {
     CRE_SEQ: number;
     CONT: string;
     TIT: string;
-    NICK_NM: string;
-    LIKE_CNT: number;
-    CRE_DAT: string;
   };
   QstEditPostPage: {
     CRE_SEQ: number;
     TIT: string;
-    NICK_NM: string;
-    CRE_DAT: string;
   };
   SgsEditPostPage: {
     CRE_SEQ: number;
     CONT: string;
     TIT: string;
-    NICK_NM: string;
-    CRE_DAT: string;
   };
 
   QstPostDetailPage: {

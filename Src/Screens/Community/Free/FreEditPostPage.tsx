@@ -16,14 +16,14 @@ import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
 import { Alert } from "react-native";
 import { FreeBubEd } from "../../../Services/_private/FreeApi";
-
+import { FreEditProps } from "../../../Utils/NavigationProp/NavigationEditScrProp";
 //@jeakyoung 생성 게시글 등록 API
 
-const FreEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
+const FreEditPostPage: React.FC<FreEditProps> = ({ navigation, route }) => {
   const userData = getUserData(); // 현재 사용자 데이터
   const [cont, setCont] = useState<string>("");
   const [tit, setTit] = useState<string>("");
-
+  const { CONT, TIT, CRE_SEQ } = route.params;
   // 등록 버튼
   const handleRegiButtonPress = async () => {
     try {
