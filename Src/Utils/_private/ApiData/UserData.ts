@@ -16,6 +16,7 @@ export interface UserData {
   MEMB_EM: string; // 사용자의 이메일
   PROF_IMG_PATH: string; // 사용자의 프로필 이미지 경로
   COLL_CERT_IND: string; // 대학생 인증 여부
+  TOKEN_ID: string; // 토큰 ID
   APP_NOTICE_YN: string; // 앱 알림 여부
   DEP_NOTICE_YN: string; // 공지사항 알림 여부
   LIST_UNIT_CNT: number; // LIST_UNIT_CNT 추가
@@ -39,6 +40,7 @@ let userData: UserData | null = {
   MEMB_EM: "",
   PROF_IMG_PATH: "",
   COLL_CERT_IND: "",
+  TOKEN_ID: "",
   APP_NOTICE_YN: "",
   DEP_NOTICE_YN: "",
   LIST_UNIT_CNT: 10, // 항상 고정된 값

@@ -45,6 +45,36 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
   }
 };
 
+/**
+ * 로그아웃 서비스 함수
+ * @param TOKEN_ID 토큰 아이디
+ * @param TYPE 로그아웃 타입 "D" 고정
+ * @ArinMiru (23.11.11 생성)
+ */
+export const loginOut = async (TOKEN_ID: string) => {
+  const endpoint = "/UNI/TokenSvc";
+  const data = {
+    TOKEN_ID,
+    TYPE: "D",
+  };
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
+
+  if (result !== null) {
+    if (result.data.RSLT_CD === "00") {
+      setUserData(result.data);
+      return "00"; // 로그아웃 성공 및 토큰 만료 성공
+    } else {
+      return result.data.RSLT_CD; // 로그아웃 성공
+    }
+  } else {
+    console.log("로그아웃 실패"); // 로그아웃 실패 및 토큰 만료 실패
+    return null;
+  }
+};
+
 /* ------------------------------------------------------------------------------- */
 
 /**
