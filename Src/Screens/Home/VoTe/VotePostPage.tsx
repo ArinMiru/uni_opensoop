@@ -23,7 +23,6 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
   const isFocused = useIsFocused();
   const [voteData, setVoteData] = useState<VoteData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
   const [isButtonOn, setIsButtonOn] = useState<boolean>(false);
 
   const filteredVoteData = isButtonOn
@@ -38,7 +37,24 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
           if (data !== null) {
             const sorted = { ...data };
             if (sorted.VOTE_BUB) {
-              sorted.VOTE_BUB.sort((a, b) => b.CRE_SEQ - a.CRE_SEQ);
+              // 투표 중 항목이 위에 오도록 정렬
+              sorted.VOTE_BUB.sort((a, b) => {
+                if (a.VOT_GO_CD === "VG" && b.VOT_GO_CD !== "VG") {
+                  return -1;
+                } else if (a.VOT_GO_CD !== "VG" && b.VOT_GO_CD === "VG") {
+                  return 1;
+                }
+
+                // 투표 종료 항목은 투표 중 항목 뒤에 오도록 정렬
+                if (a.VOT_GO_CD === "VF" && b.VOT_GO_CD === "VF") {
+                  return (
+                    new Date(a.VOT_EXPR_DATE).getTime() -
+                    new Date(b.VOT_EXPR_DATE).getTime()
+                  );
+                }
+
+                return 0; // 그 외의 경우에는 순서를 변경하지 않음
+              });
             }
             setVoteData(sorted);
           }
