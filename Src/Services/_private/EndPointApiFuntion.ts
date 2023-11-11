@@ -65,12 +65,13 @@ export const autoLogin = async (TOKEN_ID: any) => {
     LOGIN_PASS,
   };
   console.log(data);
-  const result: AxiosResponse<any, any> | null = await sendApiData(
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
     endpoint,
     data
   );
   console.log(result?.data);
-  if (result !== null) {
+  if (result !== null && result.data.RSLT_CD === "00") {
+    setUserData(result.data);
     return result.data.RSLT_CD;
   } else {
     return null;
