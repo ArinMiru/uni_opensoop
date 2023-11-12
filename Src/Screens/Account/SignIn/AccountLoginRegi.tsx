@@ -12,7 +12,7 @@ import { checkStoredJWTToken } from "../../../Utils/_private/.secure/.autoLogin"
 import { autoLogin } from "../../../Services/_private/EndPointApiFuntion";
 
 const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
-  useEffect(() => {
+  /* useEffect(() => {
     const jwtAutoLogin = async () => {
       try {
         const tokenCheck = await checkStoredJWTToken();
@@ -38,7 +38,7 @@ const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
     };
 
     jwtAutoLogin();
-  }, []);
+  }, []); */
 
   return (
     <AccountBackground>

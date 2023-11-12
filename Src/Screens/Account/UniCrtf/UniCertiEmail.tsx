@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text } from "react-native";
+import { Alert, Text } from "react-native";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { membUniCertUpd } from "../../../Services/_private/EndPointApiFuntion";
 import { isEmailValid } from "../../../Utils/SingleUse/Email";
@@ -17,7 +17,17 @@ const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
     return isValid;
   };
   const regiCertEmail = () => {
-    membUniCertUpd(MEMB_ID, MEMB_SC_CD, MEMB_DEP_CD, MEMB_NUM, email);
+    membUniCertUpd(MEMB_ID, MEMB_SC_CD, MEMB_DEP_CD, MEMB_NUM, email)
+      .then((result) => {
+        if (result && result.CERT_SEQ && result.RSLT_CD === "00") {
+          navigation.navigate("UniCertiEcode", { CERT_SEQ: result.CERT_SEQ });
+        } else {
+          Alert.alert("실패", "다시 시도해 주세요");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
   return (
     <RegiCommonView
@@ -28,7 +38,7 @@ const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
       buttontext="인증번호 전송"
       keyboardType="email-address"
       autoCapitalize="none"
-      onPress={() => navigation.navigate("UniCertiEcode")}
+      onPress={regiCertEmail}
       value={email}
       onChangeText={(text) => {
         setEmail(text);

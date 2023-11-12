@@ -17,7 +17,10 @@ import {
   jwtTokenSave,
   checkStoredJWTToken,
 } from "../../Utils/_private/.secure/.autoLogin";
-
+import {
+  EmailEcodeTable,
+  EmailEcodeParse,
+} from "../../Utils/_private/RegiData/EmailCerti";
 /* ------------------------------------------------------------------------------- */
 
 /**
@@ -312,14 +315,22 @@ export const membUniCertUpd = async (
     MEMB_NUM,
     MEMB_EM,
   };
-  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+  console.log(data);
+  const result: AxiosResponse<EmailEcodeTable, any> | null = await sendApiData(
     endpoint,
     data
   );
-  if (result !== null && result.data.RSLT_CD == "00") {
-    console.log("통신 성공");
+  console.log(result?.data);
+  if (
+    result !== null &&
+    result.data.CERT_SEQ !== null &&
+    result.data.RSLT_CD == "00"
+  ) {
+    const emailEcode: EmailEcodeTable = EmailEcodeParse(result.data);
+    console.log(emailEcode);
+    return emailEcode;
   } else {
-    console.log("통신 실패");
+    return null;
   }
 };
 
