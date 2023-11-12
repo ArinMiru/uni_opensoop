@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Alert, Text } from "react-native";
+import { Alert, Text, View } from "react-native";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { membUniCertUpd } from "../../../Services/_private/EndPointApiFuntion";
 import { isEmailValid } from "../../../Utils/SingleUse/Email";
 import { RegiCertEmailProps } from "../../../Utils/NavigationProp/AccountScrProp";
+import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 
 const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
   const [email, setEmail] = useState<string>("");
@@ -52,7 +53,15 @@ const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
       disable={!isValidEmail} // 버튼 활성화 상태를 역으로 지정
     >
       {!isValidEmail && (
-        <Text style={{ color: "red" }}>올바른 이메일 형식이 아닙니다.</Text>
+        <View
+          style={{
+            position: "absolute",
+            marginTop: deviceHeight * 0.33,
+            paddingLeft: deviceWidth * 0.35,
+          }}
+        >
+          <Text style={{ color: "red" }}>올바른 이메일 형식이 아닙니다.</Text>
+        </View>
       )}
     </RegiCommonView>
   );

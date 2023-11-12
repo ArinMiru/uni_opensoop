@@ -34,6 +34,19 @@ const UniCertiEcode: React.FC<RegiCertEcodeProps> = ({ navigation, route }) => {
     }
   };
 
+  const formatCountdown = (seconds: number) => {
+    if (seconds === 0) {
+      return "시간 만료";
+    }
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const formattedSeconds =
+      remainingSeconds < 10 ? `0${remainingSeconds}` : `${remainingSeconds}`;
+    return `${formattedMinutes}:${formattedSeconds}`;
+  };
+
   return (
     <RegiCommonView
       value={cert}
@@ -43,7 +56,7 @@ const UniCertiEcode: React.FC<RegiCertEcodeProps> = ({ navigation, route }) => {
       smalltext="입력하기"
       inputtext="인증번호"
       buttontext="완료"
-      count={`${Math.floor(countdown / 60)}:${countdown % 60}`}
+      count={formatCountdown(countdown)}
       onPress={() => ecodeVer()}
       navigation={navigation}
       keyboardType="numeric"

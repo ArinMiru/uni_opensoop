@@ -11,11 +11,13 @@ import { PassEcodeProps } from "../../../Utils/NavigationProp/AccountScrProp";
 
 const PassFindEcode: React.FC<PassEcodeProps> = ({ navigation, route }) => {
   const [userEcode, setUserEcode] = useState<string>("");
-
   const { MEMB_ID, CERT_SEQ } = route.params;
 
   const passEcodeCheck = async () => {
     console.log(PassFindData.CERT_SEQ);
+    console.log("MEMB_ID:", MEMB_ID);
+    console.log("CERT_SEQ:", CERT_SEQ);
+
     const result = await chkAndCertSvc(MEMB_ID, CERT_SEQ, userEcode);
   };
 

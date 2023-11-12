@@ -88,7 +88,13 @@ export const RegiCommonView: React.FC<CommonProps> = ({
             <View style={BackgroundStyle.accountInputFlex}>
               <OnlyAccountInputCompoMarginTop3 text={inputtext} {...props} />
             </View>
-            <View style={BackgroundStyle.accountButtonFlex}>
+            <View
+              style={{
+                position: "absolute",
+                paddingTop: deviceHeight * 0.27,
+                paddingLeft: deviceWidth * 0.62,
+              }}
+            >
               <Text
                 style={{
                   color: "red",
@@ -97,6 +103,8 @@ export const RegiCommonView: React.FC<CommonProps> = ({
               >
                 {count}
               </Text>
+            </View>
+            <View style={BackgroundStyle.accountButtonFlex}>
               <OnlyAccountButton
                 text={buttontext}
                 onPress={onPress}
