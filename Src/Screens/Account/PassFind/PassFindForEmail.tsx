@@ -26,6 +26,12 @@ const PassFindForEmail: React.FC<ScreenProps> = ({ navigation }) => {
       PassFindData.MEMB_ID,
       PassFindData.MEMB_EM
     );
+    if (result && result.RSLT_CD === "00" && result.CERT_SEQ) {
+      navigation.navigate("PassFindEcode", {
+        MEMB_ID: PassFindData.MEMB_ID,
+        CERT_SEQ: result.CERT_SEQ,
+      });
+    }
   };
 
   return (

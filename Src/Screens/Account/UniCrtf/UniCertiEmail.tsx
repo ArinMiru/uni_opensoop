@@ -8,7 +8,7 @@ import { RegiCertEmailProps } from "../../../Utils/NavigationProp/AccountScrProp
 const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
   const [email, setEmail] = useState<string>("");
   const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
-  const { MEMB_DEP_CD, MEMB_ID, MEMB_NUM } = route.params;
+  const { MEMB_DEP_CD, MEMB_ID, MEMB_NUM, MEMB_GRA } = route.params;
   const MEMB_SC_CD = route.params.MEMB_SC_CD.toString();
 
   const validateEmail = (email: string) => {
@@ -17,10 +17,14 @@ const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
     return isValid;
   };
   const regiCertEmail = () => {
-    membUniCertUpd(MEMB_ID, MEMB_SC_CD, MEMB_DEP_CD, MEMB_NUM, email)
+    membUniCertUpd(MEMB_ID, MEMB_SC_CD, MEMB_DEP_CD, MEMB_NUM, email, MEMB_GRA)
       .then((result) => {
         if (result && result.CERT_SEQ && result.RSLT_CD === "00") {
-          navigation.navigate("UniCertiEcode", { CERT_SEQ: result.CERT_SEQ });
+          navigation.navigate("UniCertiEcode", {
+            CERT_SEQ: result.CERT_SEQ,
+            MEMB_ID: MEMB_ID,
+          });
+          console.log(result.CERT_SEQ);
         } else {
           Alert.alert("실패", "다시 시도해 주세요");
         }

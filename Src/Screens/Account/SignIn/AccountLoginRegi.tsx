@@ -8,37 +8,8 @@ import {
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
-import { checkStoredJWTToken } from "../../../Utils/_private/.secure/.autoLogin";
-import { autoLogin } from "../../../Services/_private/EndPointApiFuntion";
 
 const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
-  /* useEffect(() => {
-    const jwtAutoLogin = async () => {
-      try {
-        const tokenCheck = await checkStoredJWTToken();
-
-        if (tokenCheck !== null) {
-          const loginauto = await autoLogin(tokenCheck);
-
-          if (loginauto !== null && loginauto === "00") {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "BottomTabNavigations" }],
-            });
-          } else {
-            Alert.alert(
-              "경고",
-              "로그인 30일이 경과 하여 자동 로그인이 해제 되었습니다 다시 로그인 해주세요"
-            );
-          }
-        }
-      } catch (error) {
-        console.error("JWT 토큰 확인 및 자동 로그인 오류:", error);
-      }
-    };
-
-    jwtAutoLogin();
-  }, []); */
 
   return (
     <AccountBackground>

@@ -3,7 +3,7 @@ import { sendApiData } from "../_private/Api.config";
 import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
 
-export const SugAnsBubNew = async (CONT: string, CRE_SEQ: number) => {
+export const SugAnsBubNew = async (CONT: string, CRE_SEQ: string) => {
   const endpoint = "/UNI/SugAnsBubSvc";
   const userData = getUserData();
   if (userData != null) {

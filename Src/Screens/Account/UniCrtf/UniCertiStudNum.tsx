@@ -7,7 +7,7 @@ const UniCertiStudNum: React.FC<RegiCertiStudNumProps> = ({
   route,
 }) => {
   const [studNum, setStudNum] = useState<string>("");
-  const { MEMB_DEP_CD, MEMB_ID, MEMB_SC_CD } = route.params;
+  const { MEMB_DEP_CD, MEMB_ID, MEMB_SC_CD, MEMB_GRA } = route.params;
 
   const handleStudNumChange = (text: string) => {
     const onlyNumbers = /^\d+$/;
@@ -31,6 +31,7 @@ const UniCertiStudNum: React.FC<RegiCertiStudNumProps> = ({
           MEMB_ID: MEMB_ID,
           MEMB_SC_CD: MEMB_SC_CD,
           MEMB_NUM: studNum,
+          MEMB_GRA: MEMB_GRA,
         })
       }
       navigation={navigation}

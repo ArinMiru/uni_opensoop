@@ -120,7 +120,7 @@ export const SugBubListNew = async (
 
 /** 수정 */
 export const SugBubListUp = async (
-  CRE_SEQ: number,
+  CRE_SEQ: string,
   TIT: string,
   CONT: string,
   SEC_YN: string
@@ -172,7 +172,7 @@ export const SugBubListUp = async (
 
 /** 삭제 */
 export const SugBubListDel = async (
-  CRE_SEQ: number
+  CRE_SEQ: string
 ): Promise<SugBubListData | null> => {
   const userData = getUserData();
   const endpoint = "/UNI/SugBubSvc";

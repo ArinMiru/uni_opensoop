@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Video, ResizeMode } from "expo-av";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../Navigations/StackNavigator";
+import { checkStoredJWTToken } from "../../Utils/_private/.secure/.autoLogin";
+import { autoLogin } from "../../Services/_private/EndPointApiFuntion";
 
 // ScreenProps 타입 정의
 export type ScreenProps = {
@@ -15,21 +17,41 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ navigation }) => {
   const videoRef = useRef<Video>(null);
 
   useEffect(() => {
-    const checkLoading = async () => {
-      const status = await videoRef.current?.getStatusAsync();
-      if (status?.isLoaded) {
-        // 5초 후에 AccountLogin 화면으로 이동
-        setTimeout(() => {
-          navigation.replace("AccountLoginRegi");
-        }, 5000);
+    const jwtAutoLogin = async () => {
+      try {
+        const tokenCheck = await checkStoredJWTToken();
+
+        if (tokenCheck !== null) {
+          const loginauto = await autoLogin(tokenCheck);
+
+          if (loginauto !== null && loginauto === "00") {
+            setTimeout(() => {
+              navigation.reset({
+                index: 0,
+                routes: [{ name: "BottomTabNavigations" }],
+              });
+            }, 1500);
+          } else {
+            navigation.navigate("AccountLoginRegi");
+          }
+        }
+      } catch (error) {
+        console.error("JWT 토큰 확인 및 자동 로그인 오류:", error);
       }
     };
 
-    checkLoading();
+    jwtAutoLogin();
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#FFFFFF",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Video
         ref={videoRef}
         source={require("../../Assets/Images/Loading.mp4")} // 비디오 파일 경로
@@ -40,24 +62,9 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ navigation }) => {
         shouldPlay
         isLooping
         style={{ width: "100%", height: "100%" }}
-        onPlaybackStatusUpdate={(status) => {
-          if (status.isLoaded && status.didJustFinish) {
-            // 비디오 재생이 끝나면 AccountLogin 화면으로 이동
-            navigation.replace("AccountLoginRegi");
-          }
-        }}
       />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default LoadingScreen;

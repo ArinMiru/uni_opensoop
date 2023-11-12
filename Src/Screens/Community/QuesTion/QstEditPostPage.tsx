@@ -12,6 +12,7 @@ import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import { OpenFreSgsTitInputBox } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
 import { Alert } from "react-native";
 import { quesBubSvcUp } from "../../../Services/_private/QusetApi";
+import { CommonActions } from "@react-navigation/native";
 
 const userData = getUserData(); // 현재 사용자 데이터
 
@@ -25,10 +26,44 @@ const QstEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
       if (userData != null) {
         const result = await quesBubSvcUp(quesTit, quesCont);
         if (result && result.RSLT_CD === "00") {
-          navigation.goBack();
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "질문" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
           Alert.alert("성공", "수정 성공");
         } else {
-          navigation.goBack();
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "질문" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
           Alert.alert("실패", "수정 실패");
         }
       } else {

@@ -15,25 +15,59 @@ import { SugBubListNew } from "../../../Services/_private/SugBubListApi";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import { Alert } from "react-native";
 import { SugBubListUp } from "../../../Services/_private/SugBubListApi";
+import { CommonActions } from "@react-navigation/native";
+import { sgsEditProps } from "../../../Utils/NavigationProp/NavigationEditScrProp";
 
-const SgsEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
+const SgsEditPostPage: React.FC<sgsEditProps> = ({ navigation, route }) => {
   const [cont, setCont] = useState<string>("");
   const [tit, setTit] = useState<string>("");
 
   const userData = getUserData(); // 현재 사용자 데이터
-
+  const { TIT, CONT, CRE_SEQ } = route.params;
   const handleRegiButtonPress = async () => {
     try {
-      // 필요한 데이터 가져오기
-
       if (userData) {
-        const result = await SugBubListNew(tit, cont, "Y");
-        if (result && result.data.RSLT_CD === "00") {
-          navigation.goBack();
+        const result = await SugBubListUp(CRE_SEQ, tit, cont, "Y");
+        if (result && result.RSLT_CD === "00") {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "건의" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
           Alert.alert("성공", "수정 성공");
         } else {
-          navigation.goBack();
-          Alert.alert("실패", "수정 실패");
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "건의" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
+          Alert.alert("성공", "수정 성공");
         }
       } else {
         console.error("userData가 null입니다.");

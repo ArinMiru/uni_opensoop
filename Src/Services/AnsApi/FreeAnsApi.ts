@@ -5,7 +5,7 @@ import { UserData } from "../../Utils/_private/ApiData/UserData";
 
 export const FreeAnsBubNew = async (
   CONT: string,
-  CRE_SEQ: number
+  CRE_SEQ: string
 ) => {
   const endpoint = "/UNI/FreeAnsBubSvc";
   const userData = getUserData();

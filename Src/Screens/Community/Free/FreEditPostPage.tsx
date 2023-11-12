@@ -17,6 +17,7 @@ import TextStyle from "../../../Styles/TextStyle";
 import { Alert } from "react-native";
 import { FreeBubEd } from "../../../Services/_private/FreeApi";
 import { FreEditProps } from "../../../Utils/NavigationProp/NavigationEditScrProp";
+import { CommonActions } from "@react-navigation/native";
 //@jeakyoung 생성 게시글 등록 API
 
 const FreEditPostPage: React.FC<FreEditProps> = ({ navigation, route }) => {
@@ -29,12 +30,46 @@ const FreEditPostPage: React.FC<FreEditProps> = ({ navigation, route }) => {
     try {
       const userData = getUserData();
       if (userData) {
-        const result = await FreeBubRegi(tit, cont);
+        const result = await FreeBubEd(CRE_SEQ,tit, cont);
         if (result && result.data.RSLT_CD === "00") {
-          navigation.goBack();
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "자유" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
           Alert.alert("성공", "수정 성공");
         } else {
-          navigation.goBack();
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "자유" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
           Alert.alert("실패", "수정 실패");
         }
       } else {

@@ -60,22 +60,25 @@ export type RootStackParamList = {
   HomePageScreen: undefined;
   RegiId: undefined;
   RegiNmNic: { MEMB_ID: string };
-  RegiPass: { MEMB_ID: string; MEMB_NM: string };
+  RegiPass: { MEMB_ID: string; MEMB_NM: string; NICK_NM: string };
   RegiChk: { MEMB_ID: string };
   UniCertiDprtSrch: { MEMB_ID: string; SCH_CD: string };
   UniCertiEcode: {
     CERT_SEQ: string;
+    MEMB_ID: string;
   };
   UniCertiEmail: {
     MEMB_ID: string;
     MEMB_SC_CD: string;
     MEMB_DEP_CD: string;
     MEMB_NUM: string;
+    MEMB_GRA: string;
   };
   UniCertiStudNum: {
     MEMB_ID: string;
     MEMB_SC_CD: string;
     MEMB_DEP_CD: string;
+    MEMB_GRA: string;
   };
   UniCertiGrad: {
     MEMB_ID: string;
@@ -84,7 +87,10 @@ export type RootStackParamList = {
   };
   UniCertiChk: undefined;
   UniCertiSchSrch: { MEMB_ID: string };
-  PassFindEcode: undefined;
+  PassFindEcode: {
+    MEMB_ID: string;
+    CERT_SEQ: string;
+  };
   PassFindForEmail: undefined;
   PassFindForId: undefined;
   PassFindNewPass: undefined;
@@ -101,7 +107,7 @@ export type RootStackParamList = {
   QstPostRegiPage: undefined;
   SgsPostRegiPage: undefined;
   SgsPostDetailPage: {
-    CRE_SEQ: number;
+    CRE_SEQ: string;
     CONT: string;
     TIT: string;
     NICK_NM: string;
@@ -117,7 +123,7 @@ export type RootStackParamList = {
   FrePostRegiPage: undefined;
   FrePostDetailLawPage: undefined;
   FrePostDetailPage: {
-    CRE_SEQ: number;
+    CRE_SEQ: string;
     CONT: string;
     TIT: string;
     NICK_NM: string;
@@ -174,16 +180,16 @@ export type RootStackParamList = {
 
   /**----------------------------------------------------------------------------*/
   FreEditPostPage: {
-    CRE_SEQ: number;
+    CRE_SEQ: string;
     CONT: string;
     TIT: string;
   };
   QstEditPostPage: {
-    CRE_SEQ: number;
+    CRE_SEQ: string;
     TIT: string;
   };
   SgsEditPostPage: {
-    CRE_SEQ: number;
+    CRE_SEQ: string;
     CONT: string;
     TIT: string;
   };

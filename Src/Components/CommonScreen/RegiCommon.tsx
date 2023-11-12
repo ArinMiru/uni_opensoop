@@ -29,6 +29,7 @@ interface CommonProps extends TextInputProps {
   disable?: boolean;
   IconPress?: () => void;
   onPress?: () => void;
+  count?: string;
   navigation?: {
     navigate: (screenName: string) => void;
   };
@@ -42,6 +43,7 @@ export const RegiCommonView: React.FC<CommonProps> = ({
   disable,
   onPress,
   IconPress,
+  count,
   ...props
 }) => {
   // 파스칼 케이스 적용
@@ -87,6 +89,14 @@ export const RegiCommonView: React.FC<CommonProps> = ({
               <OnlyAccountInputCompoMarginTop3 text={inputtext} {...props} />
             </View>
             <View style={BackgroundStyle.accountButtonFlex}>
+              <Text
+                style={{
+                  color: "red",
+                  fontSize: 15,
+                }}
+              >
+                {count}
+              </Text>
               <OnlyAccountButton
                 text={buttontext}
                 onPress={onPress}

@@ -181,7 +181,7 @@ export const FreeBubRegi = async (TIT: string, CONT: string) => {
  * 자유게시판 데이터 삭제 서비스 함수
  * PROC_TYPE 03
  */
-export const FreeBubDel = async (CRE_SEQ: number) => {
+export const FreeBubDel = async (CRE_SEQ: string) => {
   const endpoint = "/UNI/FreeBubSvc";
   const userData = getUserData();
 

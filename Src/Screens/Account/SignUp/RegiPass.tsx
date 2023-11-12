@@ -25,7 +25,7 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
   const [configPass, setConfigPass] = useState<string>("");
   const [data, setData] = useState<ServerResponse | null>(null);
 
-  const { MEMB_ID, MEMB_NM } = route.params;
+  const { MEMB_ID, MEMB_NM, NICK_NM } = route.params;
   console.log(MEMB_ID, MEMB_NM);
 
   const removeExceptChars = (text: string) => {
@@ -74,7 +74,12 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
   const regiPassData = async () => {
     try {
       const securePass = await hashUserPassword(pass);
-      const isSuccess = await registerUser(MEMB_ID, MEMB_NM, securePass);
+      const isSuccess = await registerUser(
+        MEMB_ID,
+        securePass,
+        MEMB_NM,
+        NICK_NM
+      );
 
       if (isSuccess) {
         navigation.navigate("RegiChk", { MEMB_ID: MEMB_ID });
@@ -113,6 +118,7 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
             setPass(filteredText);
             checkPasswordStrength(filteredText);
           }}
+          secureTextEntry={true}
         />
         <View
           style={{
@@ -138,6 +144,7 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
         <OnlyAccountInputCompoMarginTop3
           text="비밀번호 확인"
           value={configPass}
+          secureTextEntry={true}
           onChangeText={(text) => {
             const filteredText = removeExceptChars(text);
             setConfigPass(filteredText);
