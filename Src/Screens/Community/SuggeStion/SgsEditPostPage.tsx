@@ -19,11 +19,11 @@ import { CommonActions } from "@react-navigation/native";
 import { sgsEditProps } from "../../../Utils/NavigationProp/NavigationEditScrProp";
 
 const SgsEditPostPage: React.FC<sgsEditProps> = ({ navigation, route }) => {
-  const [cont, setCont] = useState<string>("");
-  const [tit, setTit] = useState<string>("");
+  const { TIT, CONT, CRE_SEQ } = route.params;
+  const [cont, setCont] = useState<string>(TIT);
+  const [tit, setTit] = useState<string>(CONT);
 
   const userData = getUserData(); // 현재 사용자 데이터
-  const { TIT, CONT, CRE_SEQ } = route.params;
   const handleRegiButtonPress = async () => {
     try {
       if (userData) {

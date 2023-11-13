@@ -17,10 +17,8 @@ import { quesEditProps } from "../../../Utils/NavigationProp/NavigationEditScrPr
 const userData = getUserData(); // 현재 사용자 데이터
 
 const QstEditPostPage: React.FC<quesEditProps> = ({ navigation, route }) => {
-  const [quesTit, setQuesTit] = useState<string>("");
-  const [quesCont, setQuesCont] = useState<string>("");
-
   const { CRE_SEQ, TIT } = route.params;
+  const [quesTit, setQuesTit] = useState<string>(TIT);
 
   const quesEdit = async () => {
     try {

@@ -27,15 +27,13 @@ import { NoticeEditProps } from "../../../Utils/NavigationProp/NavigationDetailS
 /** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 
 const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
+  const { CRE_SEQ, TIT, CONT, ImageInfo } = route.params;
   const [photoButtonClicked, setphotoButtonClicked] = React.useState(false);
   const userData = getUserData();
-  const [cont, setCont] = useState<string>("");
-  const [tit, setTit] = useState<string>("");
+  const [cont, setCont] = useState<string>(CONT);
+  const [tit, setTit] = useState<string>(TIT);
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
   const [imageUri, setImageUri] = useState<string>();
-
-  const { CRE_SEQ, TIT, CONT, ImageInfo } = route.params;
-  console.log(CRE_SEQ, TIT, CONT);
 
   const encodeImageToBase64 = async (imageUri: string) => {
     try {

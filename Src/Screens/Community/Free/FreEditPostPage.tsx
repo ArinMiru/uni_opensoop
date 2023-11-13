@@ -21,10 +21,10 @@ import { CommonActions } from "@react-navigation/native";
 //@jeakyoung 생성 게시글 등록 API
 
 const FreEditPostPage: React.FC<FreEditProps> = ({ navigation, route }) => {
-  const userData = getUserData(); // 현재 사용자 데이터
-  const [cont, setCont] = useState<string>("");
-  const [tit, setTit] = useState<string>("");
   const { CONT, TIT, CRE_SEQ } = route.params;
+  const userData = getUserData(); // 현재 사용자 데이터
+  const [cont, setCont] = useState<string>(CONT);
+  const [tit, setTit] = useState<string>(TIT);
   // 등록 버튼
   const handleRegiButtonPress = async () => {
     try {
