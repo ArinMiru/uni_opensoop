@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, KeyboardAvoidingView, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, KeyboardAvoidingView, Text, Alert } from "react-native";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import {
@@ -13,8 +13,7 @@ import {
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import {
-  openBubSvcNew,
-  openBubSvcUpdate,
+  openBubSvcUpdate
 } from "../../../Services/_private/NoticeApi";
 import { Background } from "../../../Components/AllCompo/Background";
 
@@ -33,7 +32,16 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
   const [cont, setCont] = useState<string>(CONT);
   const [tit, setTit] = useState<string>(TIT);
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
-  const [imageUri, setImageUri] = useState<string>();
+  const [imageUris, setImageUris] = useState<string[]>([]);
+
+  console.log(ImageInfo);
+
+  useEffect(() => {
+    if (ImageInfo && ImageInfo.length > 0) {
+      const initialImageUris = ImageInfo.map((image) => image.FILE_BASE64);
+      setImageUris(initialImageUris);
+    }
+  }, []);
 
   const encodeImageToBase64 = async (imageUri: string) => {
     try {
@@ -58,35 +66,7 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
     }
   };
 
-  const uploadImage = async () => {
-    if (!status?.granted) {
-      const permissions = await requestPermission();
-      if (!permissions.granted) {
-        return null;
-      }
-    }
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: false,
-      quality: 1,
-      aspect: [1, 1],
-    });
-    if (result.canceled) {
-      return null;
-    }
-
-    const resizedImage = await ImageManipulator.manipulateAsync(
-      result.assets[0].uri,
-      [{ resize: { width: 100, height: 100 } }],
-      { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
-    );
-
-    console.log(resizedImage);
-
-    setImageUri(resizedImage.uri);
-  };
-
-  const handleEditButtonPress = async () => {
+  const handleRegiButtonPress = async () => {
     try {
       if (!userData) {
         console.error("userData가 null입니다.");
@@ -96,34 +76,65 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
       const TIT = tit;
       const CONT = cont;
 
-      let IMAGE_INFO: ImageInfo[] = [];
+      const IMAGE_INFO: ImageInfo[] = [];
 
-      if (imageUri) {
-        const imageBase64 = await encodeImageToBase64(imageUri);
-        if (imageBase64 !== null) {
-          IMAGE_INFO.push({
-            FILE_BASE64: imageBase64,
-            FILE_NM: "image.webp",
-            IMG_SEQ: 0,
-          });
+      for (let i = 0; i < imageUris.length; i++) {
+        const imageUri = imageUris[i];
+        if (imageUri) {
+          const imageBase64 = await encodeImageToBase64(imageUri);
+          if (imageBase64 !== null) {
+            IMAGE_INFO.push({
+              FILE_BASE64: imageBase64,
+              FILE_NM: "image.webp",
+              IMG_SEQ: 0,
+            });
+          }
         }
       }
-
-      const dataToSubmit = {
-        TIT,
-        CONT,
-        IMAGE_INFO,
-      };
-
-      await openBubSvcUpdate(
-        dataToSubmit.TIT,
-        dataToSubmit.CONT,
-        dataToSubmit.IMAGE_INFO,
-        CRE_SEQ
-      );
+      console.log("이미지 정보 : ", IMAGE_INFO);
+      const result = await openBubSvcUpdate(TIT, CONT, IMAGE_INFO, CRE_SEQ);
+      if (result && result.RSLT_CD === "00") {
+        navigation.goBack();
+        Alert.alert("성공", "공지사항 수정 성공");
+      }
     } catch (error) {
       console.error("등록 오류:", error);
     }
+  };
+
+  const uploadImage = async () => {
+    if (imageUris.length >= 4) {
+      Alert.alert("경고", "이미지는 최대 4개까지 가능 합니다.");
+      return;
+    }
+    if (!status?.granted) {
+      const permissions = await requestPermission();
+      if (!permissions.granted) {
+        return null;
+      }
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      aspect: [4, 3],
+    });
+    if (result.canceled) {
+      return null;
+    }
+
+    const resizedImage = await ImageManipulator.manipulateAsync(
+      result.assets[0].uri,
+      [],
+      { format: ImageManipulator.SaveFormat.JPEG }
+    );
+
+    setImageUris((prevImageUris) => [...prevImageUris, resizedImage.uri]);
+  };
+
+  const deleteImage = (index: number) => {
+    const newImageUris = [...imageUris];
+    newImageUris.splice(index, 1);
+    setImageUris(newImageUris);
   };
 
   return (
@@ -133,7 +144,7 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
-        onPressRegi={handleEditButtonPress}
+        onPressRegi={handleRegiButtonPress}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         {/* 첫 번째 뷰 */}
@@ -206,6 +217,8 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
               onPress={() => {
                 uploadImage();
               }}
+              selectedImage={imageUris}
+              onPressDelPhoto={(index) => deleteImage(index)}
             />
           ) : (
             <View

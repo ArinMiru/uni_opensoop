@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   FlatList,
   View,
   TouchableWithoutFeedback,
-  Image,
 } from "react-native";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { openBubListCall } from "../../../Services/_private/NoticeApi";
@@ -27,7 +26,6 @@ import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { openBubListDell } from "../../../Services/_private/NoticeApi";
 import { deviceHeight } from "../../../Utils/DeviceUtils";
-import Spinner from "react-native-loading-spinner-overlay";
 import { Alert } from "react-native";
 import {
   MembLikeUpdSvc,
@@ -37,10 +35,6 @@ import {
 const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const modalFunctions = ModalReuableFuction();
   const userData = getUserData();
-  const [sortedData, setSortedData] = useState<NoticeData>({
-    RSLT_CD: undefined,
-    OPEN_BUB: [],
-  });
   const [data, setData] = useState<NoticeData>({
     RSLT_CD: undefined,
     OPEN_BUB: [],
@@ -108,12 +102,12 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
     openBubListDell(selectedCreSeq);
     modalFunctions.handleCloseModal();
   };
-
   const modalItemEdit = () => {
-    if (sortedData && selectedCreSeq) {
-      const selectedNotice = sortedData.OPEN_BUB.find(
+    if (data && selectedCreSeq) {
+      const selectedNotice = data.OPEN_BUB.find(
         (item) => item.CRE_SEQ === selectedCreSeq
       );
+
       if (selectedNotice) {
         const IMAGE_INFO = selectedNotice.IMAGE_INFO.map((image) => ({
           FILE_BASE64: image.FILE_PATH,
@@ -127,8 +121,11 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           TIT: selectedNotice.TIT,
           ImageInfo: IMAGE_INFO,
         });
+      } else {
+        Alert.alert("ERROR", "알 수 없는 에러가 발생 하였습니다.");
       }
     }
+
     modalFunctions.handleCloseModal();
   };
 
@@ -217,7 +214,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           onDismiss={modalFunctions.handleCloseModal}
         >
           <View style={EditDelCloseModalStyle.contentContainer}>
-            <EditModalCompo EditonPress={modalItemEdit} />
+            <EditModalCompo EditonPress={() => modalItemEdit()} />
             <DelModalCompo DelonPress={modalItemDel} />
             <CloseModalCompo CloseonPress={modalFunctions.handleCloseModal} />
           </View>
