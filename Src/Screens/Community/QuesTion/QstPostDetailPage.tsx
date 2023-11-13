@@ -59,7 +59,7 @@ const QstPostDetailPage: React.FC<QstPostDetailProps> = ({
     try {
       const userData = getUserData();
       if (userData != null) {
-        await QuesAnsBubSvcNew(TIT, cont, CRE_SEQ);
+        await QuesAnsBubSvcNew(cont, CRE_SEQ);
       } else {
         -885;
         console.error("userData가 null입니다.");

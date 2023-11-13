@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
-import PassFindData from "../../../Utils/_private/ApiData/PassFindData";
 import { chkAndCertSvc } from "../../../../Src/Services/_private/EndPointApiFuntion";
 import { PassEcodeProps } from "../../../Utils/NavigationProp/AccountScrProp";
 
@@ -11,13 +10,9 @@ import { PassEcodeProps } from "../../../Utils/NavigationProp/AccountScrProp";
 
 const PassFindEcode: React.FC<PassEcodeProps> = ({ navigation, route }) => {
   const [userEcode, setUserEcode] = useState<string>("");
-  const { MEMB_ID, CERT_SEQ } = route.params;
+  const { MEMB_ID, CERT_SEQ } = route.params || {};
 
   const passEcodeCheck = async () => {
-    console.log(PassFindData.CERT_SEQ);
-    console.log("MEMB_ID:", MEMB_ID);
-    console.log("CERT_SEQ:", CERT_SEQ);
-
     const result = await chkAndCertSvc(MEMB_ID, CERT_SEQ, userEcode);
   };
 

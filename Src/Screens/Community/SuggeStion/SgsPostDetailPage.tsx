@@ -51,7 +51,7 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
       Alert.alert("실패", "게시글 삭제 실패");
     }
   };
-  const SugAnsNew = async () => {
+  const sugAnsNew = async () => {
     try {
       const userData = getUserData();
       if (userData != null) {
@@ -135,7 +135,7 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
               keyboardType="default"
               value={ansCont}
               onChangeText={(text) => setAnsCont(text)}
-              onPress={SugAnsNew}
+              onPress={sugAnsNew}
             />
           </KeyboardAvoidingView>
         </KeyboardAvoidingView>

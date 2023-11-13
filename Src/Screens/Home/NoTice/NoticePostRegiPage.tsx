@@ -125,6 +125,12 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
     setImageUris((prevImageUris) => [...prevImageUris, resizedImage.uri]);
   };
 
+  const deleteImage = (index: number) => {
+    const newImageUris = [...imageUris];
+    newImageUris.splice(index, 1);
+    setImageUris(newImageUris);
+  };
+
   return (
     <Background>
       <BackIconRegiTopbarStyle
@@ -204,6 +210,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
                 uploadImage();
               }}
               selectedImage={imageUris}
+              onPressDelPhoto={(index) => deleteImage(index)}
             />
           ) : (
             <View

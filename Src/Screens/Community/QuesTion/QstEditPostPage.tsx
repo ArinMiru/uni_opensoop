@@ -13,18 +13,20 @@ import { OpenFreSgsTitInputBox } from "../../../Components/ListCompo/ListCommonC
 import { Alert } from "react-native";
 import { quesBubSvcUp } from "../../../Services/_private/QusetApi";
 import { CommonActions } from "@react-navigation/native";
-
+import { quesEditProps } from "../../../Utils/NavigationProp/NavigationEditScrProp";
 const userData = getUserData(); // 현재 사용자 데이터
 
-const QstEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
+const QstEditPostPage: React.FC<quesEditProps> = ({ navigation, route }) => {
   const [quesTit, setQuesTit] = useState<string>("");
   const [quesCont, setQuesCont] = useState<string>("");
+
+  const { CRE_SEQ, TIT } = route.params;
 
   const quesEdit = async () => {
     try {
       const userData = getUserData();
       if (userData != null) {
-        const result = await quesBubSvcUp(quesTit, quesCont);
+        const result = await quesBubSvcUp(quesTit, CRE_SEQ);
         if (result && result.RSLT_CD === "00") {
           navigation.dispatch(
             CommonActions.reset({

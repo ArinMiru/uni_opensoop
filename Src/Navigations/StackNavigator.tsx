@@ -107,7 +107,7 @@ export type RootStackParamList = {
   QstPostRegiPage: undefined;
   SgsPostRegiPage: undefined;
   SgsPostDetailPage: {
-    CRE_SEQ: string;
+    CRE_SEQ: number;
     CONT: string;
     TIT: string;
     NICK_NM: string;
@@ -123,7 +123,7 @@ export type RootStackParamList = {
   FrePostRegiPage: undefined;
   FrePostDetailLawPage: undefined;
   FrePostDetailPage: {
-    CRE_SEQ: string;
+    CRE_SEQ: number;
     CONT: string;
     TIT: string;
     NICK_NM: string;
@@ -180,16 +180,16 @@ export type RootStackParamList = {
 
   /**----------------------------------------------------------------------------*/
   FreEditPostPage: {
-    CRE_SEQ: string;
+    CRE_SEQ: number;
     CONT: string;
     TIT: string;
   };
   QstEditPostPage: {
-    CRE_SEQ: string;
+    CRE_SEQ: number;
     TIT: string;
   };
   SgsEditPostPage: {
-    CRE_SEQ: string;
+    CRE_SEQ: number;
     CONT: string;
     TIT: string;
   };
@@ -232,14 +232,15 @@ const StackNavigator = () => {
         component={AccountLoginRegi}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="AccountLogin"
-        component={AccountLogin}
-        options={{ headerShown: false }}
-      />
+
       <Stack.Screen
         name="HomePageScreen"
         component={HomePageScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AccountLogin"
+        component={AccountLogin}
         options={{ headerShown: false }}
       />
 

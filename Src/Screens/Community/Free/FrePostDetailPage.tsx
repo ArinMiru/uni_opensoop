@@ -42,12 +42,19 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
   const { CRE_SEQ, CONT, TIT, NICK_NM, LIKE_CNT, CRE_DAT, AnsFree } =
     route.params;
 
-  console.log(CRE_SEQ);
-
-  const dellPress = () => {
-    FreeBubDel(CRE_SEQ);
-    navigation.goBack();
-    Alert.alert("성공", "게시물이 삭제 되었습니다");
+  const dellPress = async () => {
+    try {
+      const result = await FreeBubDel(CRE_SEQ);
+      if (result && result.data.RSLT_CD === "00") {
+        navigation.goBack();
+        Alert.alert("성공", "게시물이 삭제 되었습니다");
+      } else {
+        navigation.goBack();
+        Alert.alert("실패", "게시물 삭제에 실패 하였습니다");
+      }
+    } catch (error) {
+      console.error("삭제 오류:", error);
+    }
   };
 
   const FreeAnsNewBut = async () => {
@@ -55,6 +62,7 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
       const userData = getUserData();
       if (userData != null) {
         await FreeAnsBubNew(cont, CRE_SEQ);
+        Alert.alert("성공", "댓글이 등록 되었습니다");
       } else {
         -885;
         console.error("userData가 null입니다.");

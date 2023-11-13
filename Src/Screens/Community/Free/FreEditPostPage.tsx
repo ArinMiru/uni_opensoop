@@ -30,7 +30,7 @@ const FreEditPostPage: React.FC<FreEditProps> = ({ navigation, route }) => {
     try {
       const userData = getUserData();
       if (userData) {
-        const result = await FreeBubEd(CRE_SEQ,tit, cont);
+        const result = await FreeBubEd(CRE_SEQ, tit, cont);
         if (result && result.data.RSLT_CD === "00") {
           navigation.dispatch(
             CommonActions.reset({

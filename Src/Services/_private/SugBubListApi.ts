@@ -120,7 +120,7 @@ export const SugBubListNew = async (
 
 /** 수정 */
 export const SugBubListUp = async (
-  CRE_SEQ: string,
+  CRE_SEQ: number,
   TIT: string,
   CONT: string,
   SEC_YN: string
@@ -172,7 +172,7 @@ export const SugBubListUp = async (
 
 /** 삭제 */
 export const SugBubListDel = async (
-  CRE_SEQ: string
+  CRE_SEQ: number
 ): Promise<SugBubListData | null> => {
   const userData = getUserData();
   const endpoint = "/UNI/SugBubSvc";
@@ -181,10 +181,12 @@ export const SugBubListDel = async (
 
   if (userData !== null) {
     const PROC_TYPE = "03";
-    const { LOGIN_ID } = userData; // 필요한 속성 추출
+    const { LOGIN_ID, MEMB_DEP_CD, MEMB_SC_CD } = userData; // 필요한 속성 추출
     const data = {
       CRE_SEQ,
       LOGIN_ID,
+      MEMB_DEP_CD,
+      MEMB_SC_CD,
       PROC_TYPE,
     };
 
