@@ -230,6 +230,7 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
           style={[
             NewBackgroundStyle.BottomTabBackgroundStyle,
             { alignItems: "center" },
+            { paddingTop: deviceHeight * 0.01 },
           ]}
         >
           <FlatList

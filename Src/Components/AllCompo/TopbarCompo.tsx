@@ -67,7 +67,7 @@ export const MainPageTopbarStyle: React.FC<ButtonProps> = ({
               textStyle.semibold11,
               { marginLeft: deviceWidth * 0.01 },
               { marginTop: deviceHeight * 0.01 },
-              { lineHeight: deviceHeight * 0.026 },
+              { lineHeight: deviceHeight * 0.029 },
               { color: "#151515" },
             ]}
           >
@@ -77,8 +77,7 @@ export const MainPageTopbarStyle: React.FC<ButtonProps> = ({
             style={[
               textStyle.bold08,
               { marginLeft: deviceWidth * 0.01 },
-              { marginTop: deviceHeight * 0.012 },
-              { lineHeight: deviceHeight * 0.031 },
+              { marginTop: deviceHeight * 0.015 },
               { color: "#919191" },
             ]}
           >
@@ -131,6 +130,7 @@ export const MenuTopbarStyle: React.FC<ButtonProps> = ({
             textStyle.semibold13,
             { color: "#151515" },
             { marginLeft: deviceWidth * 0.02 },
+            { lineHeight: deviceHeight * 0.026 },
           ]}
         >
           {Title}
@@ -139,7 +139,8 @@ export const MenuTopbarStyle: React.FC<ButtonProps> = ({
           style={[
             textStyle.bold08,
             { marginLeft: deviceWidth * 0.02 },
-            { marginTop: deviceHeight * 0.009 },
+            { marginTop: deviceHeight * 0.006 },
+            { lineHeight: deviceHeight * 0.031 },
             { color: "#919191" },
           ]}
         >
@@ -149,7 +150,8 @@ export const MenuTopbarStyle: React.FC<ButtonProps> = ({
           style={[
             textStyle.bold08,
             { marginLeft: deviceWidth * 0.01 },
-            { marginTop: deviceHeight * 0.009 },
+            { marginTop: deviceHeight * 0.006 },
+            { lineHeight: deviceHeight * 0.031 },
             { color: "#919191" },
           ]}
         >
