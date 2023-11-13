@@ -163,8 +163,7 @@ export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
   };
   const removePhotoBox = (index: number) => {
     setPhotoList(photoList.filter((_, i) => i !== index));
-    // 수정: 이미지 삭제 시 imageUris 상태 업데이트
-    if (selectedImage && selectedImage[index]) {
+    if (selectedImage && selectedImage[index]) {    // 이미지 삭제 시 imageUris 상태 업데이트
       const newImageUris = [...selectedImage];
       newImageUris.splice(index, 1);
       onPressDelPhoto && onPressDelPhoto(index);
