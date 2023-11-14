@@ -20,7 +20,7 @@ import { timeSince } from "../../Utils/timeUtils";
 
 const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
   const userData = getUserData();
-  const [selectedCategory, setSelectedCategory] = useState("자유");
+  const [selectedCategory, setSelectedCategory] = useState<string>("자유");
   const [freeData, setFreeData] = useState<FreeData>({
     RSLT_CD: "",
     FREE_BUB: [],
@@ -43,7 +43,25 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
     if (route.params?.selectedCategory) {
       setSelectedCategory(route.params.selectedCategory);
     }
-  }, [route.params?.selectedCategory]);
+    if (
+      route?.params?.newPageload &&
+      route.params.selectedCategory === "자유"
+    ) {
+      fetchData("자유", 1);
+    }
+    if (
+      route?.params?.newPageload &&
+      route.params.selectedCategory === "건의"
+    ) {
+      fetchData("건의", 1);
+    }
+    if (
+      route?.params?.newPageload &&
+      route.params.selectedCategory === "질문"
+    ) {
+      fetchData("질문", 1);
+    }
+  }, [route.params?.selectedCategory, route.params?.newPageload]);
 
   const fetchData = (category: string, page: number) => {
     setLoading(true);

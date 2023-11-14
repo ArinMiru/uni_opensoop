@@ -31,7 +31,11 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           Alert.alert("성공", "게시물 등록 성공", [
             {
               text: "확인",
-              onPress: () => navigation.goBack(),
+              onPress: () =>
+                navigation.navigate("ListPostPage", {
+                  selectedCategory: "질문",
+                  newPageload: true,
+                }),
             },
           ]);
         } else {

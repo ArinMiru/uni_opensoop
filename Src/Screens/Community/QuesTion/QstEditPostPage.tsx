@@ -36,7 +36,7 @@ const QstEditPostPage: React.FC<quesEditProps> = ({ navigation, route }) => {
                     routes: [
                       {
                         name: "ListPostPage",
-                        params: { selectedCategory: "질문" },
+                        params: { selectedCategory: "질문", newPageload: true },
                       },
                     ],
                   },

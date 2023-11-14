@@ -20,8 +20,8 @@ import { sgsEditProps } from "../../../Utils/NavigationProp/NavigationEditScrPro
 
 const SgsEditPostPage: React.FC<sgsEditProps> = ({ navigation, route }) => {
   const { TIT, CONT, CRE_SEQ } = route.params;
-  const [cont, setCont] = useState<string>(TIT);
-  const [tit, setTit] = useState<string>(CONT);
+  const [cont, setCont] = useState<string>(CONT);
+  const [tit, setTit] = useState<string>(TIT);
 
   const userData = getUserData(); // 현재 사용자 데이터
   const handleRegiButtonPress = async () => {
@@ -39,7 +39,7 @@ const SgsEditPostPage: React.FC<sgsEditProps> = ({ navigation, route }) => {
                     routes: [
                       {
                         name: "ListPostPage",
-                        params: { selectedCategory: "건의" },
+                        params: { selectedCategory: "건의", newPageload: true },
                       },
                     ],
                   },
@@ -67,7 +67,7 @@ const SgsEditPostPage: React.FC<sgsEditProps> = ({ navigation, route }) => {
               ],
             })
           );
-          Alert.alert("성공", "수정 성공");
+          Alert.alert("실패", "수정 실패");
         }
       } else {
         console.error("userData가 null입니다.");

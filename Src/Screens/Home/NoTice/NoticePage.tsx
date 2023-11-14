@@ -31,8 +31,9 @@ import {
   MembLikeUpdSvc,
   MembLikeMinusUpdSvc,
 } from "../../../Services/_private/EndPointApiFuntion";
+import { NoticeProps } from "../../../Utils/NavigationProp/NoticeProp";
 
-const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
+const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
   const modalFunctions = ModalReuableFuction();
   const userData = getUserData();
   const [data, setData] = useState<NoticeData>({
@@ -42,6 +43,13 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedCreSeq, setSelectedCreSeq] = useState<number>(0);
   const [page, setPage] = useState<number>(1); // 페이지 번호 상태
+
+  useEffect(() => {
+    const newPageload = route?.params?.newPageload;
+    if (newPageload) {
+      fetchNoticeData(1);
+    }
+  }, [route?.params?.newPageload]);
 
   const fetchNoticeData = (defaultPage: number) => {
     if (userData !== null) {
@@ -77,7 +85,6 @@ const NoTicePage: React.FC<ScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     fetchNoticeData(1);
-    console.log(data);
   }, []);
 
   const loadNewPage = () => {

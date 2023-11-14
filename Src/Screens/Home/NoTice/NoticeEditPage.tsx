@@ -12,9 +12,7 @@ import {
 } from "../../../Components/ListCompo/OpenCompo/OpenButton";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
-import {
-  openBubSvcUpdate
-} from "../../../Services/_private/NoticeApi";
+import { openBubSvcUpdate } from "../../../Services/_private/NoticeApi";
 import { Background } from "../../../Components/AllCompo/Background";
 
 import * as ImagePicker from "expo-image-picker";
@@ -22,6 +20,7 @@ import * as ImageManipulator from "expo-image-manipulator";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
 import { NoticeEditProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
+import { CommonActions } from "@react-navigation/native";
 
 /** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 
@@ -94,7 +93,24 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
       console.log("이미지 정보 : ", IMAGE_INFO);
       const result = await openBubSvcUpdate(TIT, CONT, IMAGE_INFO, CRE_SEQ);
       if (result && result.RSLT_CD === "00") {
-        navigation.goBack();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "BottomTabNavigations",
+                state: {
+                  routes: [
+                    {
+                      name: "NoticePage",
+                      params: { newPageload: true },
+                    },
+                  ],
+                },
+              },
+            ],
+          })
+        );
         Alert.alert("성공", "공지사항 수정 성공");
       }
     } catch (error) {
@@ -161,9 +177,7 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
               text="제목을 입력하세요"
               value={tit}
               onChangeText={(text) => setTit(text)}
-            >
-              <Text>{TIT}</Text>
-            </OpenFreSgsTitInputBox>
+            ></OpenFreSgsTitInputBox>
             <Text
               style={[
                 TextStyle.semibold08,

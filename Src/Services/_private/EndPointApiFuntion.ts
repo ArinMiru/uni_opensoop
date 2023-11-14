@@ -194,7 +194,7 @@ export const nickCheckpoint = async (NICK_NM: string): Promise<boolean> => {
 export const MembIdFndSvc = async (MEMB_EM: string) => {
   const endpoint = "/UNI/MembIdFndSvc";
   const data = { MEMB_EM };
-  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+  const result: AxiosResponse<any, any> | null = await sendApiData(
     endpoint,
     data
   );

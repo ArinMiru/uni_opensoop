@@ -31,6 +31,7 @@ import {
   DelModalCompo,
   CloseModalCompo,
 } from "../../../Components/AllCompo/ModalCompo";
+import { CommonActions } from "@react-navigation/native";
 
 const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
   route,
@@ -47,7 +48,24 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
       const result = await FreeBubDel(CRE_SEQ);
       if (result && result.data.RSLT_CD === "00") {
         navigation.goBack();
-        Alert.alert("성공", "게시물이 삭제 되었습니다");
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "BottomTabNavigations",
+                state: {
+                  routes: [
+                    {
+                      name: "ListPostPage",
+                      params: { selectedCategory: "자유", newPageload: true },
+                    },
+                  ],
+                },
+              },
+            ],
+          })
+        );
       } else {
         navigation.goBack();
         Alert.alert("실패", "게시물 삭제에 실패 하였습니다");

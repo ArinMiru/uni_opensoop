@@ -42,7 +42,7 @@ const FreEditPostPage: React.FC<FreEditProps> = ({ navigation, route }) => {
                     routes: [
                       {
                         name: "ListPostPage",
-                        params: { selectedCategory: "자유" },
+                        params: { selectedCategory: "자유", newPageload: true },
                       },
                     ],
                   },

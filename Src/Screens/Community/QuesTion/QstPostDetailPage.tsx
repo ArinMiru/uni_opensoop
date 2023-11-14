@@ -31,6 +31,7 @@ import {
 import EditDelCloseModalStyle from "../../../Styles/ModalStyles/EditDelCloseModalStyles";
 import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
 import { quesBubSvcDel } from "../../../Services/_private/QusetApi";
+import { CommonActions } from "@react-navigation/native";
 
 const QstPostDetailPage: React.FC<QstPostDetailProps> = ({
   route,
@@ -48,7 +49,24 @@ const QstPostDetailPage: React.FC<QstPostDetailProps> = ({
     const result = await quesBubSvcDel(CRE_SEQ);
     if (result && result.RSLT_CD === "00") {
       navigation.goBack();
-      Alert.alert("성공", "게시글 삭제 성공");
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: "BottomTabNavigations",
+              state: {
+                routes: [
+                  {
+                    name: "ListPostPage",
+                    params: { selectedCategory: "질문", newPageload: true },
+                  },
+                ],
+              },
+            },
+          ],
+        })
+      );
     } else {
       navigation.goBack();
       Alert.alert("실패", "게시글 삭제 실패");
@@ -97,7 +115,7 @@ const QstPostDetailPage: React.FC<QstPostDetailProps> = ({
           MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
           MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
           onPress={() => navigation.goBack()}
-          onPressEditDel={modalFunctions.handleButtonPress}
+          onPressEditDel={ modalFunctions.handleButtonPress}
         />
         <KeyboardAvoidingView
           style={[NewBackgroundStyle.ListDetailBackgroundStyle, { flex: 1 }]}

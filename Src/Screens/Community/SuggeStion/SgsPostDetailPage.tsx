@@ -31,6 +31,7 @@ import {
   DelModalCompo,
   CloseModalCompo,
 } from "../../../Components/AllCompo/ModalCompo";
+import { CommonActions } from "@react-navigation/native";
 
 const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
   navigation,
@@ -44,7 +45,24 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
   const sgsDel = async () => {
     const result = await SugBubListDel(CRE_SEQ);
     if (result && result.RSLT_CD === "00") {
-      navigation.goBack();
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: "BottomTabNavigations",
+              state: {
+                routes: [
+                  {
+                    name: "ListPostPage",
+                    params: { selectedCategory: "건의", newPageload: true },
+                  },
+                ],
+              },
+            },
+          ],
+        })
+      );
       Alert.alert("성공", "게시글 삭제 성공");
     } else {
       navigation.goBack();

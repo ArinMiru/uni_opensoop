@@ -97,11 +97,12 @@ export type RootStackParamList = {
   PassFindChk: undefined;
   IdFindEmail: undefined;
   IdFindOut: { memberId: string };
-  NoticePage: undefined;
+  NoticePage: {newPageload?: boolean};
   DrawerNavigator: undefined;
   NoticePostRegi: undefined;
   ListPostPage: {
     selectedCategory: string;
+    newPageload?: boolean;
   };
   NoticePostRegiPage: undefined;
   QstPostRegiPage: undefined;

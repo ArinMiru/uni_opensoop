@@ -25,7 +25,7 @@ interface ButtonProps {
   onPressDel?: () => void;
   onPressRegi?: () => void;
   onPressEdit?: () => void;
-  onPressEditDel?: () => void;
+  onPressEditDel?: () => void | undefined;
 }
 
 /*------------------------------------------------------------*/
