@@ -237,6 +237,7 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
           style={[
             NewBackgroundStyle.BottomTabBackgroundStyle,
             { alignItems: "center" },
+            { paddingTop: deviceHeight * 0.01 },
           ]}
         >
           <FlatList
