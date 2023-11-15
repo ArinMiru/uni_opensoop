@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Text } from "react-native";
+import { Alert, Text, View } from "react-native";
 import { RegiCommonView } from "../../../Components/CommonScreen/RegiCommon";
 import { membUniCertUpd } from "../../../Services/_private/EndPointApiFuntion";
 import { isEmailValid } from "../../../Utils/SingleUse/Email";
 import { RegiCertEmailProps } from "../../../Utils/NavigationProp/AccountScrProp";
+import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 
 const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
   const [email, setEmail] = useState<string>("");
   const [isValidEmail, setIsValidEmail] = useState<boolean>(false);
-  const { MEMB_DEP_CD, MEMB_ID, MEMB_NUM } = route.params;
+  const { MEMB_DEP_CD, MEMB_ID, MEMB_NUM, MEMB_GRA } = route.params;
   const MEMB_SC_CD = route.params.MEMB_SC_CD.toString();
 
   const validateEmail = (email: string) => {
@@ -17,7 +18,21 @@ const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
     return isValid;
   };
   const regiCertEmail = () => {
-    membUniCertUpd(MEMB_ID, MEMB_SC_CD, MEMB_DEP_CD, MEMB_NUM, email);
+    membUniCertUpd(MEMB_ID, MEMB_SC_CD, MEMB_DEP_CD, MEMB_NUM, email, MEMB_GRA)
+      .then((result) => {
+        if (result && result.CERT_SEQ && result.RSLT_CD === "00") {
+          navigation.navigate("UniCertiEcode", {
+            CERT_SEQ: result.CERT_SEQ,
+            MEMB_ID: MEMB_ID,
+          });
+          console.log(result.CERT_SEQ);
+        } else {
+          Alert.alert("실패", "다시 시도해 주세요");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
   return (
     <RegiCommonView
@@ -28,7 +43,7 @@ const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
       buttontext="인증번호 전송"
       keyboardType="email-address"
       autoCapitalize="none"
-      onPress={() => navigation.navigate("UniCertiEcode")}
+      onPress={regiCertEmail}
       value={email}
       onChangeText={(text) => {
         setEmail(text);
@@ -38,7 +53,15 @@ const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
       disable={!isValidEmail} // 버튼 활성화 상태를 역으로 지정
     >
       {!isValidEmail && (
-        <Text style={{ color: "red" }}>올바른 이메일 형식이 아닙니다.</Text>
+        <View
+          style={{
+            position: "absolute",
+            marginTop: deviceHeight * 0.33,
+            paddingLeft: deviceWidth * 0.35,
+          }}
+        >
+          <Text style={{ color: "red" }}>올바른 이메일 형식이 아닙니다.</Text>
+        </View>
       )}
     </RegiCommonView>
   );

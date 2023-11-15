@@ -5,6 +5,7 @@ import {
   ScrollView,
   Platform,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import {
   FreQstComment,
@@ -30,6 +31,7 @@ import {
   DelModalCompo,
   CloseModalCompo,
 } from "../../../Components/AllCompo/ModalCompo";
+import { CommonActions } from "@react-navigation/native";
 
 const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
   route,
@@ -41,10 +43,36 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
   const { CRE_SEQ, CONT, TIT, NICK_NM, LIKE_CNT, CRE_DAT, AnsFree } =
     route.params;
 
-  console.log(CRE_SEQ);
-
-  const dellPress = () => {
-    FreeBubDel(CRE_SEQ);
+  const dellPress = async () => {
+    try {
+      const result = await FreeBubDel(CRE_SEQ);
+      if (result && result.data.RSLT_CD === "00") {
+        navigation.goBack();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "BottomTabNavigations",
+                state: {
+                  routes: [
+                    {
+                      name: "ListPostPage",
+                      params: { selectedCategory: "자유", newPageload: true },
+                    },
+                  ],
+                },
+              },
+            ],
+          })
+        );
+      } else {
+        navigation.goBack();
+        Alert.alert("실패", "게시물 삭제에 실패 하였습니다");
+      }
+    } catch (error) {
+      console.error("삭제 오류:", error);
+    }
   };
 
   const FreeAnsNewBut = async () => {
@@ -52,6 +80,7 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
       const userData = getUserData();
       if (userData != null) {
         await FreeAnsBubNew(cont, CRE_SEQ);
+        Alert.alert("성공", "댓글이 등록 되었습니다");
       } else {
         -885;
         console.error("userData가 null입니다.");
@@ -59,6 +88,14 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
     } catch (error) {
       console.error("등록 오류", error);
     }
+  };
+
+  const handleButEdit = () => {
+    navigation.navigate("FreEditPostPage", {
+      CRE_SEQ: CRE_SEQ,
+      CONT: CONT,
+      TIT: TIT,
+    });
   };
 
   return (
@@ -75,8 +112,8 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
           onDismiss={modalFunctions.handleCloseModal}
         >
           <View style={EditDelCloseModalStyle.contentContainer}>
-            <EditModalCompo EditonPress={modalFunctions.handleEditPress} />
-            <DelModalCompo DelonPress={modalFunctions.handleDeletePress} />
+            <EditModalCompo EditonPress={handleButEdit} />
+            <DelModalCompo DelonPress={dellPress} />
             <CloseModalCompo CloseonPress={modalFunctions.handleCloseModal} />
           </View>
         </BottomSheetModal>

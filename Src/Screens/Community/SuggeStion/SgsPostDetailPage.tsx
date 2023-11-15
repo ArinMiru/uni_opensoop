@@ -3,6 +3,7 @@ import {
   Platform,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import {
@@ -30,6 +31,7 @@ import {
   DelModalCompo,
   CloseModalCompo,
 } from "../../../Components/AllCompo/ModalCompo";
+import { CommonActions } from "@react-navigation/native";
 
 const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
   navigation,
@@ -39,10 +41,35 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
   const userData = getUserData();
   const [ansCont, setAnsCont] = useState<string>("");
   const { CRE_SEQ, CONT, TIT, NICK_NM, CRE_DAT, AnsFree } = route.params;
-  const sgsDel = () => {
-    SugBubListDel(CRE_SEQ);
+
+  const sgsDel = async () => {
+    const result = await SugBubListDel(CRE_SEQ);
+    if (result && result.RSLT_CD === "00") {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: "BottomTabNavigations",
+              state: {
+                routes: [
+                  {
+                    name: "ListPostPage",
+                    params: { selectedCategory: "건의", newPageload: true },
+                  },
+                ],
+              },
+            },
+          ],
+        })
+      );
+      Alert.alert("성공", "게시글 삭제 성공");
+    } else {
+      navigation.goBack();
+      Alert.alert("실패", "게시글 삭제 실패");
+    }
   };
-  const SugAnsNew = async () => {
+  const sugAnsNew = async () => {
     try {
       const userData = getUserData();
       if (userData != null) {
@@ -53,6 +80,14 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
     } catch (error) {
       console.error("등록 오류", error);
     }
+  };
+
+  const sugEdit = () => {
+    navigation.navigate("SgsEditPostPage", {
+      CRE_SEQ: CRE_SEQ,
+      CONT: CONT,
+      TIT: TIT,
+    });
   };
 
   return (
@@ -69,8 +104,8 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
           onDismiss={modalFunctions.handleCloseModal}
         >
           <View style={EditDelCloseModalStyle.contentContainer}>
-            <EditModalCompo EditonPress={modalFunctions.handleEditPress} />
-            <DelModalCompo DelonPress={modalFunctions.handleDeletePress} />
+            <EditModalCompo EditonPress={sugEdit} />
+            <DelModalCompo DelonPress={sgsDel} />
             <CloseModalCompo CloseonPress={modalFunctions.handleCloseModal} />
           </View>
         </BottomSheetModal>
@@ -118,7 +153,7 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
               keyboardType="default"
               value={ansCont}
               onChangeText={(text) => setAnsCont(text)}
-              onPress={SugAnsNew}
+              onPress={sugAnsNew}
             />
           </KeyboardAvoidingView>
         </KeyboardAvoidingView>
