@@ -17,7 +17,7 @@ interface ButtonProps {
   onPress?: () => void;
   onLikePress?: () => void;
   onDislikePress?: () => void;
-  onPressDelPhoto?: () => void;
+  onPressDelPhoto?: (index: number) => void;
   onPressAddPhoto?: () => void;
   navigation?: { navigate: (screenName: string) => void };
   selectedImage?: string[];
@@ -154,16 +154,22 @@ export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
   children,
   onPress,
   selectedImage,
+  onPressDelPhoto,
 }) => {
   const [photoList, setPhotoList] = React.useState([0]);
 
   const addPhotoBox = () => {
     if (photoList.length < 4) setPhotoList([...photoList, photoList.length]);
   };
-
-  const removePhotoBox = (index?: any) => {
+  const removePhotoBox = (index: number) => {
     setPhotoList(photoList.filter((_, i) => i !== index));
+    if (selectedImage && selectedImage[index]) {    // 이미지 삭제 시 imageUris 상태 업데이트
+      const newImageUris = [...selectedImage];
+      newImageUris.splice(index, 1);
+      onPressDelPhoto && onPressDelPhoto(index);
+    }
   };
+
   return (
     <View
       style={{

@@ -17,6 +17,7 @@ const IdFindOut: React.FC<ScreenProps> = ({ navigation, route }) => {
       onPress={() => navigation.navigate("AccountLogin")}
       navigation={navigation}
       editable={false}
+      
     />
   );
 };

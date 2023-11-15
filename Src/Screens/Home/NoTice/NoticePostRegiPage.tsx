@@ -20,6 +20,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
+import { CommonActions } from "@react-navigation/native";
 
 /** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 
@@ -88,7 +89,24 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
       console.log("이미지 정보 : ", IMAGE_INFO);
       const result = await openBubSvcNew(TIT, CONT, IMAGE_INFO);
       if (result && result.data.RSLT_CD === "00") {
-        navigation.goBack();
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "BottomTabNavigations",
+                state: {
+                  routes: [
+                    {
+                      name: "NoticePage",
+                      params: { newPageload: true },
+                    },
+                  ],
+                },
+              },
+            ],
+          })
+        );
         Alert.alert("성공", "공지사항 등록 성공");
       }
     } catch (error) {
@@ -123,6 +141,12 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
     );
 
     setImageUris((prevImageUris) => [...prevImageUris, resizedImage.uri]);
+  };
+
+  const deleteImage = (index: number) => {
+    const newImageUris = [...imageUris];
+    newImageUris.splice(index, 1);
+    setImageUris(newImageUris);
   };
 
   return (
@@ -204,6 +228,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
                 uploadImage();
               }}
               selectedImage={imageUris}
+              onPressDelPhoto={(index) => deleteImage(index)}
             />
           ) : (
             <View
