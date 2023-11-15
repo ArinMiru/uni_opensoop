@@ -15,24 +15,58 @@ import { SugBubListNew } from "../../../Services/_private/SugBubListApi";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import { Alert } from "react-native";
 import { SugBubListUp } from "../../../Services/_private/SugBubListApi";
+import { CommonActions } from "@react-navigation/native";
+import { sgsEditProps } from "../../../Utils/NavigationProp/NavigationEditScrProp";
 
-const SgsEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
-  const [cont, setCont] = useState<string>("");
-  const [tit, setTit] = useState<string>("");
+const SgsEditPostPage: React.FC<sgsEditProps> = ({ navigation, route }) => {
+  const { TIT, CONT, CRE_SEQ } = route.params;
+  const [cont, setCont] = useState<string>(CONT);
+  const [tit, setTit] = useState<string>(TIT);
 
   const userData = getUserData(); // 현재 사용자 데이터
-
   const handleRegiButtonPress = async () => {
     try {
-      // 필요한 데이터 가져오기
-
       if (userData) {
-        const result = await SugBubListNew(tit, cont, "Y");
-        if (result && result.data.RSLT_CD === "00") {
-          navigation.goBack();
+        const result = await SugBubListUp(CRE_SEQ, tit, cont, "Y");
+        if (result && result.RSLT_CD === "00") {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "건의", newPageload: true },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
           Alert.alert("성공", "수정 성공");
         } else {
-          navigation.goBack();
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "건의" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
           Alert.alert("실패", "수정 실패");
         }
       } else {

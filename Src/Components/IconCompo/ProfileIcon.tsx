@@ -30,7 +30,13 @@ export const PostProfileIcon: React.FC<ProfileProps> = ({}) => {
 export const ProfileIcon: React.FC<ProfileProps> = ({ onPress }) => {
   return (
     <TouchableOpacity
-      style={{ marginRight: deviceWidth * 0.06 }}
+      style={{
+        marginRight: deviceWidth * 0.05,
+        width: deviceWidth * 0.082,
+        height: deviceWidth * 0.082,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
       onPress={onPress}
     >
       <Ionicons

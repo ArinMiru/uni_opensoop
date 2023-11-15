@@ -24,7 +24,7 @@ const IdFindEmail: React.FC<ScreenProps> = ({ navigation }) => {
 
     const fullEmail = `${userEmail}`;
     const responseData = await MembIdFndSvc(fullEmail);
-    if (responseData) {
+    if (responseData && responseData.RSLT_CD === "00") {
       navigation.navigate("IdFindOut", { memberId: responseData.MEMB_ID });
     } else {
       Alert.alert("오류", "등록되어 있지 않은 이메일입니다.");

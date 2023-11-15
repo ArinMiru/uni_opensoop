@@ -102,15 +102,12 @@ export const quesBubSvcNew = async (TIT: string): Promise<any | null> => {
 };
 
 /** 수정 */
-export const quesBubSvcUp = async (
-  TIT: string,
-  CONT: string,
-  CRE_SEQ?: number
-) => {
+export const quesBubSvcUp = async (TIT: string, CRE_SEQ?: number) => {
   const userData = getUserData();
   const endpoint = "/UNI/QuesBubSvc";
   if (userData !== null) {
     const PROC_TYPE = "02";
+    const CONT = "";
     const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
     const data = {
       CRE_SEQ,
@@ -129,10 +126,9 @@ export const quesBubSvcUp = async (
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-      console.log("등록 성공");
       return result.data;
     } else {
-      console.log("등록 실패");
+      return null;
     }
   }
 };
@@ -143,9 +139,11 @@ export const quesBubSvcDel = async (CRE_SEQ: number) => {
   const endpoint = "/UNI/QuesBubSvc";
   if (userData !== null) {
     const PROC_TYPE = "03";
-    const { LOGIN_ID } = userData;
+    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD } = userData;
     const data = {
       CRE_SEQ,
+      MEMB_DEP_CD,
+      MEMB_SC_CD,
       LOGIN_ID,
       PROC_TYPE,
     };
@@ -156,9 +154,9 @@ export const quesBubSvcDel = async (CRE_SEQ: number) => {
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-      console.log("등록 성공");
+      return result.data;
     } else {
-      console.log("등록 실패");
+      return null;
     }
   }
 };

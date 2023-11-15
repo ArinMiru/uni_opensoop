@@ -117,7 +117,7 @@ const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
             S_Open_MEMB_NM={notices[1]?.MEMB_NM || "작성자 이름"}
             S_Open_DEP_NM={notices[1]?.MEMB_DEP_NM || "학과 이름"}
             S_TIT_NM={notices[1]?.TIT_NM || "직책 이름"}
-            S_Open_Photo={notices[1]?.IMAGE_INFO[1]?.FILE_PATH || "이미지 path"}
+            S_Open_Photo={notices[1]?.IMAGE_INFO[0]?.FILE_PATH || "이미지 path"}
             S_OpenPostLike={notices[1]?.LIKE_CNT}
             onPress={() => navigation.navigate("NoticePage")}
           />

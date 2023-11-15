@@ -4,7 +4,6 @@ import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
 
 export const QuesAnsBubSvcNew = async (
-  TIT: string,
   CONT: string,
   CRE_SEQ: number
 ) => {
@@ -12,6 +11,7 @@ export const QuesAnsBubSvcNew = async (
   const endpoint = "/UNI/QuesAnsBubSvc";
   if (userData !== null) {
     const PROC_TYPE = "01";
+    const TIT = ""
     const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
     const data = {
       TIT,
@@ -21,6 +21,7 @@ export const QuesAnsBubSvcNew = async (
       MEMB_DEP_CD,
       TIT_CD,
       PROC_TYPE,
+      CRE_SEQ
     };
     console.log(data);
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
