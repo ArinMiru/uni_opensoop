@@ -8,3 +8,7 @@ export const handleItemPress = (creSeq: number) => {
 
   console.log(selectedCreSeq); // 선택된 CRE_SEQ를 출력
 };
+
+export interface RSLT_TABLE {
+  RSLT_CD : string
+}

@@ -12,23 +12,58 @@ import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import { OpenFreSgsTitInputBox } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
 import { Alert } from "react-native";
 import { quesBubSvcUp } from "../../../Services/_private/QusetApi";
-
+import { CommonActions } from "@react-navigation/native";
+import { quesEditProps } from "../../../Utils/NavigationProp/NavigationEditScrProp";
 const userData = getUserData(); // 현재 사용자 데이터
 
-const QstEditPostPage: React.FC<ScreenProps> = ({ navigation }) => {
-  const [quesTit, setQuesTit] = useState<string>("");
-  const [quesCont, setQuesCont] = useState<string>("");
+const QstEditPostPage: React.FC<quesEditProps> = ({ navigation, route }) => {
+  const { CRE_SEQ, TIT } = route.params;
+  const [quesTit, setQuesTit] = useState<string>(TIT);
 
   const quesEdit = async () => {
     try {
       const userData = getUserData();
       if (userData != null) {
-        const result = await quesBubSvcUp(quesTit, quesCont);
+        const result = await quesBubSvcUp(quesTit, CRE_SEQ);
         if (result && result.RSLT_CD === "00") {
-          navigation.goBack();
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "질문", newPageload: true },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
           Alert.alert("성공", "수정 성공");
         } else {
-          navigation.goBack();
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "질문" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
           Alert.alert("실패", "수정 실패");
         }
       } else {

@@ -12,6 +12,7 @@ import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { loginUser } from "../../../Services/_private/EndPointApiFuntion";
+import { hashUserPassword } from "../../../Utils/_private/.secure/.PassBcryHasing";
 
 const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   // 아이디와 비밀번호 상태값과 타입 명시적 설정 설정
@@ -54,7 +55,8 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   }, []);
 
   const handleLogin = async () => {
-    const resultCode = await loginUser(LOGIN_ID, LOGIN_PASS);
+    const securePass = await hashUserPassword(LOGIN_PASS);
+    const resultCode = await loginUser(LOGIN_ID, securePass);
 
     if (resultCode === "00") {
       navigation.reset({

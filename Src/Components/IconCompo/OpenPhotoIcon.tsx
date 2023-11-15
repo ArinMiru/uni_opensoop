@@ -6,7 +6,7 @@ import { deviceHeight, deviceWidth } from "../../Utils/DeviceUtils";
 interface ButtonProps {
   children?: React.ReactNode;
   text?: String;
-  onPress?: () => void;
+  onPress?: ((index: number) => void) | undefined;
   navigation?: { navigate: (screenName: string) => void };
 }
 
@@ -21,11 +21,11 @@ export const OpenPhotoDelIcon: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity
       style={{
-       marginLeft: deviceWidth * 0.155,
-       borderRadius: 100,
-       alignItems: "center",
-       justifyContent: "center",
-       position: "absolute",
+        marginLeft: deviceWidth * 0.155,
+        borderRadius: 100,
+        alignItems: "center",
+        justifyContent: "center",
+        position: "absolute",
       }}
       onPress={onPress}
     >

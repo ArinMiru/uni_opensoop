@@ -27,7 +27,7 @@ const PassFindForId: React.FC<ScreenProps> = ({ navigation }) => {
       buttontext="다음"
       value={userId}
       onChangeText={(text) => {
-        const filterRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣'";--@@@|%&+<>=]/g;
+        const filterRegex = /[^a-zA-Z0-9]/g; // 영문자와 숫자만 허용
         const filteredText = text.replace(filterRegex, "");
         setUserId(filteredText);
       }}

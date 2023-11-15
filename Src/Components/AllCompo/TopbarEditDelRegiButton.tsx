@@ -43,10 +43,16 @@ export const TopbarDelButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={{ marginRight: deviceWidth * 0.06 }}
+      style={{
+        marginRight: deviceWidth * 0.08,
+        width: deviceWidth * 0.08,
+        height: deviceWidth * 0.08,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
       onPress={onPress}
     >
-      <Feather name="trash" size={deviceWidth * 0.04} color="#F05151" />
+      <Feather name="trash" size={deviceWidth * 0.06} color="#F05151" />
     </TouchableOpacity>
   );
 };
@@ -77,10 +83,16 @@ export const TopbarRegiButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={{ marginRight: deviceWidth * 0.06 }}
+      style={{
+        marginRight: deviceWidth * 0.06,
+        width: deviceWidth * 0.072,
+        height: deviceWidth * 0.072,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
       onPress={onPress}
     >
-      <Ionicons name="send-sharp" size={deviceWidth * 0.045} color="#4BB781" />
+      <Ionicons name="send-sharp" size={deviceWidth * 0.052} color="#4BB781" />
     </TouchableOpacity>
   );
 };

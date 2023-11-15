@@ -13,6 +13,7 @@ import TextStyle from "../../../Styles/TextStyle";
 import { Image } from "react-native";
 import { RegiPassProps } from "../../../Utils/NavigationProp/AccountScrProp";
 import { registerUser } from "../../../Services/_private/EndPointApiFuntion";
+import { hashUserPassword } from "../../../Utils/_private/.secure/.PassBcryHasing";
 
 interface ServerResponse {
   RSLT_CD: string;
@@ -24,7 +25,7 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
   const [configPass, setConfigPass] = useState<string>("");
   const [data, setData] = useState<ServerResponse | null>(null);
 
-  const { MEMB_ID, MEMB_NM } = route.params;
+  const { MEMB_ID, MEMB_NM, NICK_NM } = route.params;
   console.log(MEMB_ID, MEMB_NM);
 
   const removeExceptChars = (text: string) => {
@@ -70,19 +71,26 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
   const isButtonEnabled =
     pass.length >= 8 && configPass.length >= 8 && pass === configPass;
 
-  const regiPassData = () => {
-    registerUser(MEMB_ID, MEMB_NM, pass)
-      .then((isSuccess) => {
-        if (isSuccess) {
-          navigation.navigate("RegiChk", { MEMB_ID: MEMB_ID });
-        } else {
-          console.log("실패");
-        }
-      })
-      .catch((error) => {
-        // 오류 처리
-        console.error("Error:", error);
-      });
+  const regiPassData = async () => {
+    try {
+      const securePass = await hashUserPassword(pass);
+      const isSuccess = await registerUser(
+        MEMB_ID,
+        securePass,
+        MEMB_NM,
+        NICK_NM
+      );
+
+      if (isSuccess) {
+        navigation.navigate("RegiChk", { MEMB_ID: MEMB_ID });
+        console.log(securePass);
+      } else {
+        console.log("실패");
+      }
+    } catch (error) {
+      // 오류 처리
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -110,6 +118,7 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
             setPass(filteredText);
             checkPasswordStrength(filteredText);
           }}
+          secureTextEntry={true}
         />
         <View
           style={{
@@ -135,6 +144,7 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
         <OnlyAccountInputCompoMarginTop3
           text="비밀번호 확인"
           value={configPass}
+          secureTextEntry={true}
           onChangeText={(text) => {
             const filteredText = removeExceptChars(text);
             setConfigPass(filteredText);
