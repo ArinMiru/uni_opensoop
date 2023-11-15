@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, SafeAreaView, ScrollView, Text, Dimensions } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  Dimensions,
+  Alert,
+} from "react-native";
 import { LocaleConfig, Calendar } from "react-native-calendars";
 import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import Constants from "expo-constants";
@@ -8,13 +15,12 @@ import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import SgsButtonStyles from "../../../Styles/ListStyles/SgsStyles/SgsButtonStyles";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
-import { useIsFocused } from "@react-navigation/native";
+import { CommonActions, useIsFocused } from "@react-navigation/native";
 import { SchdBubData } from "../../../Utils/_private/ApiData/SchdBubData";
 import { SchdBubListSvc } from "../../../Services/_private/SchdBubApi";
 import Spinner from "react-native-loading-spinner-overlay";
 import moment from "moment";
 import SchdlButtonStyle from "../../../Styles/SchdlStyles/SchdlButtonStyle";
-import SchdEditPostPage from "../ScheDule/SchdEditPostPage";
 import TextStyle from "../../../Styles/TextStyle";
 import {
   ScdlEditIcon,
@@ -116,6 +122,47 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     } else {
       setIsDeleteClicked(true);
       setIsEditClicked(false);
+    }
+  };
+
+  const schdBubSvcDelPress = async (CRE_SEQ: number) => {
+    try {
+      const userData = getUserData();
+      if (userData != null) {
+        const result = await schdBubSvcDel(CRE_SEQ);
+        if (result && result.RSLT_CD === "00") {
+          Alert.alert("성공", "일정 삭제 성공", [
+            {
+              text: "확인",
+              onPress: () =>
+                navigation.dispatch(
+                  CommonActions.reset({
+                    index: 0,
+                    routes: [
+                      {
+                        name: "BottomTabNavigations",
+                        state: {
+                          routes: [
+                            {
+                              name: "SchedulePage",
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  })
+                ),
+            },
+          ]);
+        } else {
+          navigation.goBack();
+          Alert.alert("실패", "게시물 등록 실패");
+        }
+      } else {
+        console.error("userData가 null입니다.");
+      }
+    } catch (error) {
+      console.error("등록 오류", error);
     }
   };
 
@@ -265,7 +312,9 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
                   }
                 />
               ) : isDeleteClicked ? (
-                <SchldDelButton onPress={() => schdBubSvcDel(detail.CRE_SEQ)} />
+                <SchldDelButton
+                  onPress={() => schdBubSvcDelPress(detail.CRE_SEQ)}
+                />
               ) : (
                 <Octicons
                   name="dot-fill"
