@@ -11,7 +11,6 @@ import {
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 
 interface inputProps extends TextInputProps {
-  children?: React.ReactNode;
   text?: string;
   inputText?: string;
   onPress?: () => void;

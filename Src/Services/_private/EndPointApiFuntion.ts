@@ -13,7 +13,11 @@ import {
   DprtData,
   parseDprtSrchData,
 } from "../../Utils/_private/RegiData/DprtSrchData";
-
+import { jwtTokenSave } from "../../Utils/_private/.secure/.autoLogin";
+import {
+  EmailEcodeTable,
+  EmailEcodeParse,
+} from "../../Utils/_private/RegiData/EmailCerti";
 /* ------------------------------------------------------------------------------- */
 
 /**
@@ -27,6 +31,62 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
     LOGIN_ID,
     LOGIN_PASS,
   };
+  console.log(data);
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
+
+  if (result !== null) {
+    const userData = result.data;
+    if (userData.RSLT_CD === "00") {
+      setUserData(result.data);
+      if (userData.TOKEN_ID !== null) {
+        jwtTokenSave(userData.TOKEN_ID);
+      } else {
+        console.log("이미 저장된 토큰이 존재 합니다");
+      }
+      return userData.RSLT_CD;
+    } else {
+      return result.data.RSLT_CD;
+    }
+  } else {
+    return null;
+  }
+};
+
+export const autoLogin = async (TOKEN_ID: any) => {
+  const endpoint = "/UNI/LoginSvc";
+
+  const data = {
+    TOKEN_ID,
+  };
+  console.log(data);
+  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    endpoint,
+    data
+  );
+  console.log(result?.data);
+  if (result !== null && result.data.RSLT_CD === "00") {
+    setUserData(result.data);
+    return result.data.RSLT_CD;
+  } else {
+    return null;
+  }
+};
+
+/**
+ * 로그아웃 서비스 함수
+ * @param TOKEN_ID 토큰 아이디
+ * @param TYPE 로그아웃 타입 "D" 고정
+ * @ArinMiru (23.11.11 생성)
+ */
+export const loginOut = async (TOKEN_ID: string) => {
+  const endpoint = "/UNI/TokenSvc";
+  const data = {
+    TOKEN_ID,
+    TYPE: "D",
+  };
   const result: AxiosResponse<UserData, any> | null = await sendApiData(
     endpoint,
     data
@@ -35,12 +95,12 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
   if (result !== null) {
     if (result.data.RSLT_CD === "00") {
       setUserData(result.data);
-      return "00"; // 로그인 성공
+      return "00"; // 로그아웃 성공 및 토큰 만료 성공
     } else {
-      return result.data.RSLT_CD; // 로그인 실패
+      return result.data.RSLT_CD; // 로그아웃 성공
     }
   } else {
-    console.log("로그인 실패");
+    console.log("로그아웃 실패"); // 로그아웃 실패 및 토큰 만료 실패
     return null;
   }
 };
@@ -56,17 +116,19 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
  */
 export const registerUser = async (
   MEMB_ID: string,
+  PASS: string,
   MEMB_NM: string,
-  MEMB_PASS: string
+  NICK_NM: string
 ): Promise<boolean> => {
   return new Promise(async (resolve) => {
     const endpoint = "/UNI/MembRegSvc"; // 회원가입 엔드포인트 URL
     const data = {
       MEMB_ID,
       MEMB_NM,
-      MEMB_PASS,
+      PASS,
+      NICK_NM,
     };
-
+    console.log(data);
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
@@ -95,8 +157,8 @@ export const idCheckpoint = async (MEMB_ID: string) => {
     endpoint,
     data
   );
+  console.log(data);
   if (result !== null && result.data.RSLT_CD === "00") {
-    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
     return true;
   }
   return false;
@@ -118,6 +180,7 @@ export const nickCheckpoint = async (NICK_NM: string): Promise<boolean> => {
     endpoint,
     data
   );
+  console.log(data);
   if (result !== null && result.data.RSLT_CD == "00") {
     return true;
   }
@@ -131,7 +194,7 @@ export const nickCheckpoint = async (NICK_NM: string): Promise<boolean> => {
 export const MembIdFndSvc = async (MEMB_EM: string) => {
   const endpoint = "/UNI/MembIdFndSvc";
   const data = { MEMB_EM };
-  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+  const result: AxiosResponse<any, any> | null = await sendApiData(
     endpoint,
     data
   );
@@ -153,38 +216,43 @@ export const MembPassFndSvc = async (MEMB_ID: string, MEMB_EM: string) => {
     MEMB_ID,
     MEMB_EM,
   };
-  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+  const result: AxiosResponse<EmailEcodeTable, any> | null = await sendApiData(
     endpoint,
     data
   );
   if (result !== null && result.data.RSLT_CD === "00") {
-    // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-    console.log("인증번호를 발송합니다.");
+    return result.data;
   } else {
-    console.log("등록되지 않은 정보입니다.");
+    return null;
   }
 };
 
 /**
- * 비밀번호 찾기 인증번호 API 호출 함수
+ * 인증번호 API 호출 함수
  * @param MEMB_ID
  * @param CERT_SEQ
  */
-export const ChkAndCertSvc = async (MEMB_ID: string, CERT_SEQ: string) => {
+export const chkAndCertSvc = async (
+  MEMB_ID: string,
+  CERT_SEQ: string,
+  INPUT_CD: string
+) => {
   const endpoint = "/UNI/ChkAndCertSvc";
   const data = {
     MEMB_ID,
     CERT_SEQ,
+    INPUT_CD,
   };
+  console.log(data);
   const result: AxiosResponse<UserData, any> | null = await sendApiData(
     endpoint,
     data
   );
   if (result !== null && result.data.RSLT_CD === "00") {
     // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-    console.log("인증번호 일치.");
+    return result.data;
   } else {
-    console.log("인증번호 불일치.");
+    return null;
   }
 };
 
@@ -204,7 +272,7 @@ export const SchlSrchCall = async (
   const data = {
     SCH_NM, // 대학교 이름
   };
-
+  console.log(data);
   try {
     // 서버에 대학교명 데이터 요청을 보내고 응답을 기다립니다.
     const result: AxiosResponse<any, any> | null = await sendApiData(
@@ -239,7 +307,8 @@ export const membUniCertUpd = async (
   MEMB_SC_CD: string,
   MEMB_DEP_CD: string,
   MEMB_NUM: string,
-  MEMB_EM: string
+  MEMB_EM: string,
+  MEMB_GRA: string
 ) => {
   const endpoint = "/UNI/MembUniCertUpdSvc";
   const data = {
@@ -248,15 +317,24 @@ export const membUniCertUpd = async (
     MEMB_DEP_CD,
     MEMB_NUM,
     MEMB_EM,
+    MEMB_GRA,
   };
-  const result: AxiosResponse<UserData, any> | null = await sendApiData(
+  console.log(data);
+  const result: AxiosResponse<EmailEcodeTable, any> | null = await sendApiData(
     endpoint,
     data
   );
-  if (result !== null && result.data.RSLT_CD == "00") {
-    console.log("통신 성공");
+  console.log("반환 데이터", result?.data);
+  if (
+    result !== null &&
+    result.data.CERT_SEQ !== null &&
+    result.data.RSLT_CD == "00"
+  ) {
+    const emailEcode: EmailEcodeTable = EmailEcodeParse(result.data);
+    console.log(emailEcode);
+    return emailEcode;
   } else {
-    console.log("통신 실패");
+    return null;
   }
 };
 

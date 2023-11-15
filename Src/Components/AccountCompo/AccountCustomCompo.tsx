@@ -23,7 +23,7 @@ export const RegiDupleFlex2: React.FC<
   inputText,
   onPress,
   validationMessage,
-  validationColor,
+  validationColor = "#BDBDBD",
   ...props
 }) => (
   <View style={{ flex: 2 }}>
@@ -45,7 +45,7 @@ export const RegiDupleFlex2: React.FC<
         ]}
         onPress={onPress}
       >
-        <Text style={[textStyle.semibold13, { color: "#fff" }]}>{text}</Text>
+        <Text style={[textStyle.semibold13, { color: "#FFFFFF" }]}>{text}</Text>
         {children}
       </TouchableOpacity>
     </View>
@@ -89,7 +89,7 @@ export const RegiDupleFlex3: React.FC<TextTopProps> = ({
       ]}
       onPress={onPress}
     >
-      <Text style={[textStyle.semibold13, { color: "#fff" }]}>{text}</Text>
+      <Text style={[textStyle.semibold13, { color: "#FFFFFF" }]}>{text}</Text>
       {children}
     </TouchableOpacity>
   </View>

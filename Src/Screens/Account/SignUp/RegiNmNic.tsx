@@ -21,6 +21,7 @@ const RegiNmNic: React.FC<RegiRegiNmNicProps> = ({ navigation, route }) => {
     useState<string>("");
   const [nickValidationColor, setNickValidationColor] = useState<string>("");
   const [isNickChecked, setIsNickChecked] = useState<boolean>(false); // 닉네임 중복확인이 완료되었는지 확인하는 상태
+  const [name, setName] = useState<string>("");
 
   const { MEMB_ID } = route.params;
   console.log(MEMB_ID);
@@ -67,7 +68,11 @@ const RegiNmNic: React.FC<RegiRegiNmNicProps> = ({ navigation, route }) => {
       </View>
       <RegiTextflex1 text="회원가입" />
       <View style={{ flex: 1 }}>
-        <OnlyAccountInputCompoMarginTop3 text="이름을 입력해주세요." />
+        <OnlyAccountInputCompoMarginTop3
+          text="이름을 입력해주세요."
+          value={name}
+          onChangeText={(text) => setName(text)}
+        />
       </View>
       <RegiDupleFlex2
         inputText="닉네임"
@@ -89,7 +94,8 @@ const RegiNmNic: React.FC<RegiRegiNmNicProps> = ({ navigation, route }) => {
           onPress={() =>
             navigation.navigate("RegiPass", {
               MEMB_ID: MEMB_ID,
-              MEMB_NM: userRegiNick,
+              MEMB_NM: name,
+              NICK_NM: userRegiNick,
             })
           }
           disable={!isFormComplete()}

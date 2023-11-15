@@ -7,6 +7,7 @@ import {
   Keyboard,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import textStyle from "../../../Styles/TextStyle";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
@@ -25,6 +26,9 @@ const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
   const [dprtData, setDprtData] = useState<any[]>([]); // Array to store department data
   const [selectedDprtCode, setSelectedDprtCode] = useState<string>("");
   const { SCH_CD, MEMB_ID } = route.params;
+  const [searchText, setSearchText] = useState<string>("");
+  const [selectedDprtName, setSelectedDprtName] = useState<string>("");
+  const [showScrollView, setShowScrollView] = useState(true);
 
   const dprtSrchcall = () => {
     dprtSrch(SCH_CD)
@@ -40,6 +44,10 @@ const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
       });
   };
 
+  const filterDprtData = () => {
+    return dprtData.filter((dprt) => dprt.DPRT_NM.includes(searchText));
+  };
+
   useEffect(() => {
     // Call the function to fetch department data when the component mounts
     dprtSrchcall();
@@ -47,11 +55,20 @@ const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
 
   const handleDprtSelect = (dprt: any) => {
     setSelectedDprtCode(dprt.DPRT_CD);
-    // Navigate to the next screen with MEMB_ID, SCH_CD, and selectedDprtCode
+    setSelectedDprtName(dprt.DPRT_NM);
+    setShowScrollView(false); // 스크롤 뷰 숨김
+  };
+
+  const handleNextButtonPress = () => {
+    if (!selectedDprtCode) {
+      Alert.alert("오류", "학과를 선택해주세요.");
+      return;
+    }
+
     navigation.navigate("UniCertiGrad", {
       MEMB_ID: MEMB_ID,
       MEMB_SC_CD: SCH_CD,
-      MEMB_DEP_CD: dprt.DPRT_CD,
+      MEMB_DEP_CD: selectedDprtCode,
     });
   };
 
@@ -92,9 +109,19 @@ const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
             text={"학과/전공"}
             autoCapitalize="none"
             keyboardType="default"
+            onChangeText={(text) => {
+              setSearchText(text);
+              setSelectedDprtName(text);
+              setShowScrollView(true); // 텍스트가 변경될 때 스크롤 뷰 표시
+              if (text === "") {
+                setSelectedDprtCode("");
+              }
+            }}
+            value={selectedDprtName}
           />
+
           <ScrollView style={{ maxHeight: deviceHeight * 0.19 }}>
-            {dprtData.map((dprt, index) => (
+            {filterDprtData().map((dprt, index) => (
               <TouchableOpacity
                 key={index}
                 onPress={() => handleDprtSelect(dprt)}
@@ -113,7 +140,7 @@ const UniCertiDprtSrch: React.FC<RegiDprtSrchProps> = ({
             ))}
           </ScrollView>
           <View style={{ height: deviceHeight * 0.01 }} />
-          <OnlyAccountButton text={"검색"} onPress={dprtSrchcall} />
+          <OnlyAccountButton text={"다음"} onPress={handleNextButtonPress} />
         </View>
         <Image
           source={require("../../../Assets/Images/LogoImage.png")}

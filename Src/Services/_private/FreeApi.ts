@@ -3,6 +3,7 @@ import { sendApiData } from "./Api.config";
 import { AxiosResponse } from "axios";
 import { parseFreeData, FreeData } from "../../Utils/_private/ApiData/FreeData";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
+import { RSLT_TABLE } from "../../Utils/ReusableFuction/Reusable";
 
 /**
  * @jeakyoung 생성
@@ -159,7 +160,7 @@ export const FreeBubRegi = async (TIT: string, CONT: string) => {
       CONT,
     };
 
-    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    const result: AxiosResponse<RSLT_TABLE, any> | null = await sendApiData(
       endpoint,
       data
     );
@@ -186,23 +187,22 @@ export const FreeBubDel = async (CRE_SEQ: number) => {
   const userData = getUserData();
 
   if (userData != null) {
-    const { LOGIN_ID } = userData;
+    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD } = userData;
     const PROC_TYPE = "03";
     const data = {
       LOGIN_ID,
+      MEMB_DEP_CD,
+      MEMB_SC_CD,
       PROC_TYPE,
       CRE_SEQ,
     };
-    console.log(data);
-    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    const result: AxiosResponse<RSLT_TABLE, any> | null = await sendApiData(
       endpoint,
       data
     );
-    if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+    if (result !== null && result?.data?.RSLT_CD === "00") {
       return result;
     } else {
-      console.log("실패");
       return result;
     }
   }
@@ -215,7 +215,7 @@ export const FreeBubDel = async (CRE_SEQ: number) => {
  * 자유게시판 데이터 수정 서비스 함수
  * PROC_TYPE 02
  */
-export const FreeBubEd = async (CRE_SEQ: string, TIT: string, CONT: string) => {
+export const FreeBubEd = async (CRE_SEQ: number, TIT: string, CONT: string) => {
   const endpoint = "/UNI/FreeBubSvc";
   const userData = getUserData();
 
@@ -232,7 +232,7 @@ export const FreeBubEd = async (CRE_SEQ: string, TIT: string, CONT: string) => {
       TIT,
       CONT,
     };
-    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    const result: AxiosResponse<RSLT_TABLE, any> | null = await sendApiData(
       endpoint,
       data
     );
@@ -242,7 +242,7 @@ export const FreeBubEd = async (CRE_SEQ: string, TIT: string, CONT: string) => {
       return result;
     } else {
       console.log("실패");
-      return result;
+      return null;
     }
   }
 };

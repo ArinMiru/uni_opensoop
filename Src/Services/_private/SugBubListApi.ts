@@ -181,10 +181,12 @@ export const SugBubListDel = async (
 
   if (userData !== null) {
     const PROC_TYPE = "03";
-    const { LOGIN_ID } = userData; // 필요한 속성 추출
+    const { LOGIN_ID, MEMB_DEP_CD, MEMB_SC_CD } = userData; // 필요한 속성 추출
     const data = {
       CRE_SEQ,
       LOGIN_ID,
+      MEMB_DEP_CD,
+      MEMB_SC_CD,
       PROC_TYPE,
     };
 
@@ -195,11 +197,8 @@ export const SugBubListDel = async (
       );
 
       if (result !== null && result.data.RSLT_CD === "00") {
-        const subgBubListData: SugBubListData = parseSugBubListData(
-          result.data
-        );
         console.log("삭제 성공");
-        return subgBubListData;
+        return result.data;
       } else {
         return null;
       }
