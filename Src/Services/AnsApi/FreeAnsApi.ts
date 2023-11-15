@@ -3,10 +3,7 @@ import { sendApiData } from "../_private/Api.config";
 import { AxiosResponse } from "axios";
 import { UserData } from "../../Utils/_private/ApiData/UserData";
 
-export const FreeAnsBubNew = async (
-  CONT: string,
-  CRE_SEQ: number
-) => {
+export const FreeAnsBubNew = async (CONT: string, CRE_SEQ: number) => {
   const endpoint = "/UNI/FreeAnsBubSvc";
   const userData = getUserData();
   if (userData != null) {
@@ -23,13 +20,15 @@ export const FreeAnsBubNew = async (
     };
     console.log(data);
 
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+      return result.data
     } else {
-      console.log("실패", result?.data);
+      return null
     }
   }
 };
@@ -41,8 +40,8 @@ export const FreeAnsBubNew = async (
  * 자유게시판 데이터 삭제 서비스 함수
  * PROC_TYPE 03
  */
-export const FreeAnsBubDel = async (CRE_SEQ: number) => {
-  const endpoint = "/UNI/FreeBubSvc";
+export const FreeAnsBubDel = async (CRE_SEQ: number, ANS_SEQ: number) => {
+  const endpoint = "/UNI/FreeAnsBubSvc";
   const userData = getUserData();
 
   if (userData != null) {
@@ -52,14 +51,17 @@ export const FreeAnsBubDel = async (CRE_SEQ: number) => {
       LOGIN_ID,
       PROC_TYPE,
       CRE_SEQ,
+      ANS_SEQ,
     };
     console.log(data);
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+      return result.data
     } else {
-      console.log("실패");
+      return null
     }
   }
 };
@@ -73,7 +75,7 @@ export const FreeAnsBubDel = async (CRE_SEQ: number) => {
  */
 export const FreeAnsBubEd = async (
   CRE_SEQ: string,
-  TIT: string,
+  ANS_SEQ: string,
   CONT: string
 ) => {
   const endpoint = "/UNI/FreeBubSvc";
@@ -82,23 +84,27 @@ export const FreeAnsBubEd = async (
   if (userData !== null) {
     const { LOGIN_ID, MEMB_DEP_CD, MEMB_SC_CD, TIT_CD } = userData;
     const PROC_TYPE = "02";
+    const TIT = "";
     const data = {
       LOGIN_ID,
       PROC_TYPE,
       CRE_SEQ,
+      ANS_SEQ,
       MEMB_DEP_CD,
       MEMB_SC_CD,
       TIT_CD,
       TIT,
       CONT,
     };
-    const result: AxiosResponse<UserData, any> | null =
-      await sendApiData(endpoint, data);
+    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+      return result.data
     } else {
-      console.log("실패");
+      return null
     }
   }
 };

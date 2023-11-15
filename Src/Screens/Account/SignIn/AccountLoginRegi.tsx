@@ -1,5 +1,5 @@
-import { View } from "react-native";
-import React from "react";
+import { Alert, View } from "react-native";
+import React, { useEffect } from "react";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import {
   OnlyAccountButton,
@@ -10,7 +10,6 @@ import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 
 const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
-  // 타입을 명시적으로 설정
 
   return (
     <AccountBackground>

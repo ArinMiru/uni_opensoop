@@ -138,7 +138,7 @@ export const FreeListIclucontnButton: React.FC<ButtonProps> = ({
       >
         <Text
           style={[
-            textStyle.regular08,
+            textStyle.regular09,
             {
               color: "#969996",
               marginLeft: deviceWidth * 0.034,

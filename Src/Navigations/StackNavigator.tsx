@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StackNavigationProp } from "@react-navigation/stack";
+import LoadingScreen from "../Screens/Loading/LoadingPage";
 import HomePageScreen from "../Screens/Home/HomePage";
 import AccountLogin from "../Screens/Account/SignIn/AccountLogin";
 import AccountLoginRegi from "../Screens/Account/SignIn/AccountLoginRegi";
@@ -53,25 +54,31 @@ import QstPostDetailPage from "../Screens/Community/QuesTion/QstPostDetailPage";
 
 export type RootStackParamList = {
   //파라미터 전달 값 없음
+  LoadingScreen: undefined;
   AccountLoginRegi: undefined;
   AccountLogin: undefined;
   HomePageScreen: undefined;
   RegiId: undefined;
   RegiNmNic: { MEMB_ID: string };
-  RegiPass: { MEMB_ID: string; MEMB_NM: string };
+  RegiPass: { MEMB_ID: string; MEMB_NM: string; NICK_NM: string };
   RegiChk: { MEMB_ID: string };
   UniCertiDprtSrch: { MEMB_ID: string; SCH_CD: string };
-  UniCertiEcode: undefined;
+  UniCertiEcode: {
+    CERT_SEQ: string;
+    MEMB_ID: string;
+  };
   UniCertiEmail: {
     MEMB_ID: string;
     MEMB_SC_CD: string;
     MEMB_DEP_CD: string;
     MEMB_NUM: string;
+    MEMB_GRA: string;
   };
   UniCertiStudNum: {
     MEMB_ID: string;
     MEMB_SC_CD: string;
     MEMB_DEP_CD: string;
+    MEMB_GRA: string;
   };
   UniCertiGrad: {
     MEMB_ID: string;
@@ -80,18 +87,22 @@ export type RootStackParamList = {
   };
   UniCertiChk: undefined;
   UniCertiSchSrch: { MEMB_ID: string };
-  PassFindEcode: undefined;
+  PassFindEcode: {
+    MEMB_ID: string;
+    CERT_SEQ: string;
+  };
   PassFindForEmail: undefined;
   PassFindForId: undefined;
   PassFindNewPass: undefined;
   PassFindChk: undefined;
   IdFindEmail: undefined;
   IdFindOut: { memberId: string };
-  NoticePage: undefined;
+  NoticePage: {newPageload?: boolean};
   DrawerNavigator: undefined;
   NoticePostRegi: undefined;
   ListPostPage: {
     selectedCategory: string;
+    newPageload?: boolean;
   };
   NoticePostRegiPage: undefined;
   QstPostRegiPage: undefined;
@@ -173,22 +184,15 @@ export type RootStackParamList = {
     CRE_SEQ: number;
     CONT: string;
     TIT: string;
-    NICK_NM: string;
-    LIKE_CNT: number;
-    CRE_DAT: string;
   };
   QstEditPostPage: {
     CRE_SEQ: number;
     TIT: string;
-    NICK_NM: string;
-    CRE_DAT: string;
   };
   SgsEditPostPage: {
     CRE_SEQ: number;
     CONT: string;
     TIT: string;
-    NICK_NM: string;
-    CRE_DAT: string;
   };
 
   QstPostDetailPage: {
@@ -220,18 +224,24 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name="LoadingScreen"
+        component={LoadingScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="AccountLoginRegi"
         component={AccountLoginRegi}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="HomePageScreen"
+        component={HomePageScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name="AccountLogin"
         component={AccountLogin}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="HomePageScreen"
-        component={HomePageScreen}
         options={{ headerShown: false }}
       />
 

@@ -35,15 +35,29 @@ export const createAndSaveJWTToken = async () => {
   }
 };
 
+export const jwtTokenSave = async (jwtToken: string) => {
+  try {
+    await SecureStore.setItemAsync("JWTAutoLogin", jwtToken);
+    console.log("JWT 토큰이 저장 되었습니다.", jwtToken);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 export const checkStoredJWTToken = async () => {
   try {
-    const storedToken = await SecureStore.getItemAsync("jwtToken");
+    const storedToken = await SecureStore.getItemAsync("JWTAutoLogin");
     if (storedToken) {
       console.log("저장된 JWT 토큰:", storedToken);
+      return storedToken;
     } else {
       console.log("저장된 JWT 토큰이 없습니다.");
+      return null;
     }
   } catch (error) {
     console.error("JWT 토큰 확인 오류:", error);
+
+    return null;
   }
 };

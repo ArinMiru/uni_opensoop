@@ -15,7 +15,7 @@ const PassFindNewPass: React.FC<RegiCertiGradProps> = ({
   navigation,
   route,
 }) => {
-  const [selectedGrade, setSelectedGrade] = useState<string | null>(null);
+  const [selectedGrade, setSelectedGrade] = useState<string>("");
   const { MEMB_SC_CD, MEMB_ID, MEMB_DEP_CD } = route.params;
   return (
     <AccountBackground>
@@ -68,6 +68,7 @@ const PassFindNewPass: React.FC<RegiCertiGradProps> = ({
               MEMB_DEP_CD: MEMB_DEP_CD,
               MEMB_ID: MEMB_ID,
               MEMB_SC_CD: MEMB_SC_CD,
+              MEMB_GRA: selectedGrade,
             })
           }
           disable={!selectedGrade} // 학년이 선택되지 않았으면 버튼 비활성화
