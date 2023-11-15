@@ -15,6 +15,7 @@ import { Background } from "../../../Components/AllCompo/Background";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
 import { useModal } from "../../../Screens/ModalContext";
+import { CommonActions } from "@react-navigation/native";
 
 //@jeakyoung 생성 게시글 등록 API
 
@@ -49,7 +50,27 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             onPress: () => {
               console.log("게시글 등록 성공, 탭 바를 보이게 설정합니다.");
               setTabBarVisible(true);
-              navigation.navigate("ListPostPage", {selectedCategory: "자유" , newPageload : true});
+              navigation.dispatch(
+                CommonActions.reset({
+                  index: 0,
+                  routes: [
+                    {
+                      name: "BottomTabNavigations",
+                      state: {
+                        routes: [
+                          {
+                            name: "ListPostPage",
+                            params: {
+                              selectedCategory: "자유",
+                              newPageload: true,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                })
+              );
             },
           },
         ]);

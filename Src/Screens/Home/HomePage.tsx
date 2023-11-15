@@ -119,7 +119,9 @@ const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
             S_TIT_NM={notices[1]?.TIT_NM || "직책 이름"}
             S_Open_Photo={notices[1]?.IMAGE_INFO[0]?.FILE_PATH || "이미지 path"}
             S_OpenPostLike={notices[1]?.LIKE_CNT}
-            onPress={() => navigation.navigate("NoticePage")}
+            onPress={() =>
+              navigation.navigate("NoticePage", { newPageload: true })
+            }
           />
         </View>
         <View>

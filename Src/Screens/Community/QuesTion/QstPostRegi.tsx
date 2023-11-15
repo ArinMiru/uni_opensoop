@@ -11,6 +11,7 @@ import { KeyboardAvoidingView } from "react-native";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import { OpenFreSgsTitInputBox } from "../../../Components/ListCompo/ListCommonCompo/ListCommonInput";
 import { quesBubSvcNew } from "../../../Services/_private/QusetApi";
+import { CommonActions } from "@react-navigation/native";
 
 const userData = getUserData(); // 현재 사용자 데이터
 
@@ -32,10 +33,27 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
             {
               text: "확인",
               onPress: () =>
-                navigation.navigate("ListPostPage", {
-                  selectedCategory: "질문",
-                  newPageload: true,
-                }),
+                navigation.dispatch(
+                  CommonActions.reset({
+                    index: 0,
+                    routes: [
+                      {
+                        name: "BottomTabNavigations",
+                        state: {
+                          routes: [
+                            {
+                              name: "ListPostPage",
+                              params: {
+                                selectedCategory: "질문",
+                                newPageload: true,
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  })
+                ),
             },
           ]);
         } else {

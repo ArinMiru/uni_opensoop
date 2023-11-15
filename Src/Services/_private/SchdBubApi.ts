@@ -9,6 +9,7 @@ import {
   SchdBubDtlListData,
   parseSchdbubDtlListData,
 } from "../../Utils/_private/ApiData/SchdBubDtlListSvc";
+import { RSLT_TABLE } from "../../Utils/ReusableFuction/Reusable";
 
 export const SchdBubListSvc = async (): Promise<SchdBubData | null> => {
   const endpoint = "/UNI/SchdBubListSvc";
@@ -173,14 +174,16 @@ export const schdBubSvcDel = async (CRE_SEQ: number) => {
       PROC_TYPE,
     };
     console.log(data);
-    const result: AxiosResponse<UserData, any> | null = await sendApiData(
+    const result: AxiosResponse<RSLT_TABLE, any> | null = await sendApiData(
       endpoint,
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("삭제 성공");
+      return result.data;
     } else {
       console.log("삭제 실패");
+      return null;
     }
   }
 };

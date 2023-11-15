@@ -13,6 +13,7 @@ import { Background } from "../../../Components/AllCompo/Background";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { SugBubListNew } from "../../../Services/_private/SugBubListApi";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
+import { CommonActions } from "@react-navigation/native";
 
 const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   const [cont, setCont] = useState<string>("");
@@ -32,7 +33,28 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           Alert.alert("성공", "게시물 등록 성공", [
             {
               text: "확인",
-              onPress: () => navigation.navigate("ListPostPage", {selectedCategory: "건의", newPageload: true}),
+              onPress: () =>
+                navigation.dispatch(
+                  CommonActions.reset({
+                    index: 0,
+                    routes: [
+                      {
+                        name: "BottomTabNavigations",
+                        state: {
+                          routes: [
+                            {
+                              name: "ListPostPage",
+                              params: {
+                                selectedCategory: "건의",
+                                newPageload: true,
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  })
+                ),
             },
           ]);
         } else {
