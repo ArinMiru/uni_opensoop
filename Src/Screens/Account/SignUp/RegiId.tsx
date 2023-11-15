@@ -34,7 +34,7 @@ const RegiId: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   const handleIdChange = (text: string) => {
-    const filterRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣'";--@@@|%&+<>=]/g;
+    const filterRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣'"@;%&+<>=]/g;
     const filteredText = text.replace(filterRegex, "");
     setUserRegiId(filteredText);
   };

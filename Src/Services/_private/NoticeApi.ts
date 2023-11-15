@@ -143,9 +143,10 @@ export const openBubSvcUpdate = async (
 
     if (result !== null && result.data.RSLT_CD === "00") {
       console.log("성공");
+      return result.data;
     } else {
       console.log("실패");
-      console.log(result?.data);
+      return null;
     }
   }
 };

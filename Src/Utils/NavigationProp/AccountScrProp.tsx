@@ -111,3 +111,15 @@ export type RegiCertEcodeProps = {
   route: RegiCertEcodeRouteProp;
   navigation: RegiCertEcodeNavigationProp;
 };
+/* ---------------------------------------------------------------------------------------- */
+
+type PassEcodeRouteProp = RouteProp<RootStackParamList, "PassFindEcode">;
+type PassEcodeNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "PassFindEcode"
+>;
+
+export type PassEcodeProps = {
+  route: PassEcodeRouteProp;
+  navigation: PassEcodeNavigationProp;
+};
