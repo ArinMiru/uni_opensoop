@@ -44,7 +44,6 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
       if (userData.TOKEN_ID !== null) {
         jwtTokenSave(userData.TOKEN_ID);
       } else {
-        console.log("이미 저장된 토큰이 존재 합니다");
       }
       return userData.RSLT_CD;
     } else {
