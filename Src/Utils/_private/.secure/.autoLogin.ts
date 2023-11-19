@@ -29,9 +29,9 @@ export const createAndSaveJWTToken = async () => {
     const token = jwt.encode(jwtPayload, secretKey);
     // JWT 토큰을 SecureStore를 사용하여 안전하게 저장합니다.
     await SecureStore.setItemAsync("jwtToken", token);
-    console.log("JWT 토큰이 안전하게 저장되었습니다.", token);
+  
   } catch (error) {
-    console.error("JWT 토큰 저장 오류:", error);
+  
   }
 };
 

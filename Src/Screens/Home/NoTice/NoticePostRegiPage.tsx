@@ -56,7 +56,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
 
       return base64Data;
     } catch (error) {
-      console.error("Error encoding image to Base64:", error);
+     
       return null;
     }
   };
@@ -64,7 +64,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const handleRegiButtonPress = async () => {
     try {
       if (!userData) {
-        console.error("userData가 null입니다.");
+    
         return;
       }
 
@@ -86,7 +86,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
           }
         }
       }
-      console.log("이미지 정보 : ", IMAGE_INFO);
+    
       const result = await openBubSvcNew(TIT, CONT, IMAGE_INFO);
       if (result && result.data.RSLT_CD === "00") {
         navigation.dispatch(
@@ -110,7 +110,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         Alert.alert("성공", "공지사항 등록 성공");
       }
     } catch (error) {
-      console.error("등록 오류:", error);
+     
     }
   };
 

@@ -8,7 +8,7 @@ import {
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { openBubListCall } from "../../../Services/_private/NoticeApi";
 import { NoticeData } from "../../../Utils/_private/ApiData/NoticeData";
-import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { ManagerMenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import Constants from "expo-constants";
 import { NoticePostBoxView } from "../../../Components/ListCompo/OpenCompo/NoticePostCompo";
 import { ModalReuableFuction } from "../../../Utils/ReusableFuction/ModalReuableFuction";
@@ -155,15 +155,15 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
           // 현재 예시에서는 그러한 작업이 생략되어 있으며, 단순히 'data' 상태를 'updatedData'로 갱신한다.
           setData(updatedData);
           // 콘솔에 성공 메시지를 출력한다.
-          console.log("좋아요 누적 성공");
+
         }
       } else {
         // 'responseData'가 없다면, 요청이 실패한 것으로 간주하고 콘솔에 실패 메시지를 출력한다.
-        console.error("좋아요 누적 실패");
+       
       }
     } catch (error) {
       // 요청 과정 중에 오류가 발생하면, catch 블록이 실행되며 콘솔에 오류 내용을 출력한다.
-      console.log("좋아요 누적 오류", error);
+ 
     }
   };
 
@@ -190,15 +190,15 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
           setData(updatedData);
 
           // 6. 차감 성공 메시지를 콘솔에 출력합니다.
-          console.log("좋아요 차감 성공");
+     
         }
       } else {
         // 7. API 호출에 실패했을 때, 오류 메시지를 콘솔에 출력합니다.
-        console.error("좋아요 차감 실패");
+    
       }
     } catch (error) {
       // 8. 예외가 발생했을 때, 오류 메시지를 콘솔에 출력합니다.
-      console.error("좋아요 차감 오류", error);
+    
     }
   };
 
@@ -226,7 +226,7 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
             <CloseModalCompo CloseonPress={modalFunctions.handleCloseModal} />
           </View>
         </BottomSheetModal>
-        <MenuTopbarStyle
+        <ManagerMenuTopbarStyle
           Title="공지사항"
           MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
           MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}

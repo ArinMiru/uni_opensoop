@@ -25,14 +25,14 @@ async function convertToWebPAndEncode(imageUri: string) {
     });
 
     if (serverResponse) {
-      console.log("Server response:", serverResponse.data);
+     
     } else {
-      console.log("Failed to upload image to server");
+   
     }
 
     return serverResponse;
   } catch (error) {
-    console.error("Error during image manipulation:", error);
+    
   }
 }
 

@@ -20,7 +20,7 @@ export const SugAnsBubNew = async (CONT: string, CRE_SEQ: number) => {
       CRE_SEQ,
       SEC_YN,
     };
-    console.log(data);
+   
 
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
@@ -28,9 +28,9 @@ export const SugAnsBubNew = async (CONT: string, CRE_SEQ: number) => {
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+      return result.data
     } else {
-      console.log("실패", result?.data);
+      return null
     }
   }
 };
@@ -54,15 +54,15 @@ export const SugAnsBubDel = async (CRE_SEQ: number) => {
       PROC_TYPE,
       CRE_SEQ,
     };
-    console.log(data);
+
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+ 
     } else {
-      console.log("실패");
+
     }
   }
 };
@@ -101,9 +101,9 @@ export const SugAnsBubEd = async (
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+    
     } else {
-      console.log("실패");
+     
     }
   }
 };

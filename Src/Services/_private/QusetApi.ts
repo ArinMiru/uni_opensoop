@@ -56,15 +56,15 @@ export const quesBubListSvc = async (
         const questData: QuestData = parseQuestData(result.data);
         return questData; // 파싱된 데이터를 반환합니다.
       } else {
-        console.log("질문게시판 조회 실패");
+     
         return null;
       }
     } catch (error) {
-      console.error("질문게시판 조회 중 오류 발생:", error);
+  
       return null;
     }
   } else {
-    console.log("질문게시판 조회 실패");
+   
     return null;
   }
 };
@@ -86,17 +86,17 @@ export const quesBubSvcNew = async (TIT: string): Promise<any | null> => {
       TIT_CD,
       PROC_TYPE,
     };
-    console.log(data);
+
     const result: AxiosResponse<any, any> | null = await sendApiData(
       endpoint,
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-      console.log("등록 성공");
+ 
       return result.data;
     } else {
-      console.log("등록 실패");
+ 
     }
   }
 };
@@ -119,7 +119,7 @@ export const quesBubSvcUp = async (TIT: string, CRE_SEQ?: number) => {
       TIT_CD,
       PROC_TYPE,
     };
-    console.log(data);
+  
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
@@ -147,7 +147,7 @@ export const quesBubSvcDel = async (CRE_SEQ: number) => {
       LOGIN_ID,
       PROC_TYPE,
     };
-    console.log(data);
+  
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data

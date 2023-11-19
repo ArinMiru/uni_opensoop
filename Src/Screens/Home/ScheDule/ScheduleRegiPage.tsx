@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import VoteBoxStyle from "../../../Styles/VoteStyles/VoteBoxStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
@@ -36,15 +36,15 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   const [selectedStartDate, setSelectedStartDate] = useState<string>(
-    `${new Date().getFullYear()}- ${
+    `${new Date().getFullYear()}-${
       new Date().getMonth() + 1
-    }- ${new Date().getDate()}`
+    }-${new Date().getDate()}`
   );
 
   const [selectedEndDate, setSelectedEndDate] = useState<string>(
-    `${new Date().getFullYear()}- ${
+    `${new Date().getFullYear()}-${
       new Date().getMonth() + 1
-    }- ${new Date().getDate()}`
+    }-${new Date().getDate()}`
   );
 
   const showDatePicker = () => {
@@ -64,15 +64,16 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           selectedStartDate,
           selectedEndDate
         );
-        console.log("TIT : ", schdTitle);
+      
         if (result && result.RSLT_CD === "00") {
           navigation.goBack();
+          Alert.alert("성공", "등록 성공");
         }
       } else {
-        console.error("userData가 null입니다.");
+        Alert.alert("실패", "등록 실패");
       }
     } catch (error) {
-      console.error("등록 오류", error);
+    
     }
   };
 
@@ -80,7 +81,7 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const day = date.getDate().toString().padStart(2, "0");
-    return `${year}-${month}-${day}`;
+    return `${year}${month}${day}`;
   };
 
   const handleStartDateConfirm = (date: Date) => {

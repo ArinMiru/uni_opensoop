@@ -61,7 +61,6 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
           setLoading(false);
         })
         .catch((error) => {
-          console.error("투표 게시판 데이터 가져오기 오류:", error);
         });
     }
   }, [userData, isFocused]);

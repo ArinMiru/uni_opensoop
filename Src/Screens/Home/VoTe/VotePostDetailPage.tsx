@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
@@ -7,10 +7,7 @@ import { VoteStatusButton } from "../../../Components/VoteCompo/VoteButton";
 import { VoteRegiButton } from "../../../Components/VoteCompo/VoteButton";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
-import {
-  BackIconTopbarStyle,
-  BackIconDelTopbarStyle,
-} from "../../../Components/AllCompo/TopbarCompo";
+import { BackIconDelTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import { VotePostDetailProp } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 import VoteButtonStyle from "../../../Styles/VoteStyles/VoteButtonStyle";
 import { votBubListDetailupCall } from "../../../Services/_private/VoteApi";
@@ -34,29 +31,39 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
     VOT_TYPE_CD,
     VOT_SEL_SEQ,
   } = route.params;
-  let LOGIN_ID = "";
-
-  if (userData !== null) {
-    LOGIN_ID = userData.LOGIN_ID;
-  }
 
   const formattedVOT_EXPR_DATE = VOT_EXPR_DATE.split(" ")[0];
 
-  const voteList: VoteItem[] = VOT_INFO.split(",").map((item, index) => {
-    const [_, text] = item.split(":");
-    return { index, text };
-  });
+  const [processedData, setProcessedData] = useState<VoteItem[]>([]);
+
+  useEffect(() => {
+    if (VOT_INFO) {
+      const processedInfo = VOT_INFO.replace(/\\+/g, "") // 역슬래시 제거
+        .replace(/[\[\]"]+/g, "") // 대괄호 및 따옴표 제거
+        .split(",")
+        .map((item) => {
+          const parts = item.split(":");
+          if (parts.length === 2) {
+            return parts[1];
+          }
+          return null;
+        })
+        .filter((item) => item !== null) as string[]; // 필터링 및 타입 변환
+
+      setProcessedData(
+        processedInfo.map((item, index) => ({ index, text: item }))
+      );
+    }
+  }, [VOT_INFO]);
 
   const initialSelectedItems = VOT_SEL_SEQ.split(",").map(Number);
 
   const [selectedItems, setSelectedItems] =
     useState<number[]>(initialSelectedItems);
 
-  console.log("초기 selectedItems:", selectedItems);
-  console.log("VOTE_TYPE_CD 값:", VOT_TYPE_CD);
 
   const handleItemClick = (index: number) => {
-    console.log("클릭된 항목의 인덱스:", index);
+
 
     // setSelectedItems를 통해 selectedItems 상태를 업데이트하는 함수
     setSelectedItems((prevSelectedItems) => {
@@ -74,29 +81,27 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
         const selectedIndex = updatedSelectedItems.indexOf(index);
         if (selectedIndex > -1) {
           // 이미 선택되어 있다면, 그 항목을 선택된 항목들의 목록에서 제거
-          console.log(index + " 번 항목이 이미 선택되었으므로 제거합니다.");
+  
           updatedSelectedItems.splice(selectedIndex, 1);
         } else {
           // 선택되어 있지 않다면, 새로운 항목을 선택된 항목들의 목록에 추가
-          console.log(index + " 번 항목을 선택합니다.");
+         
           updatedSelectedItems.push(index);
         }
       } else {
         // 중복 선택이 불가능한 투표인 경우 단일 선택만 가능
-        console.log("단일 선택 모드에서 " + index + " 번 항목을 선택합니다.");
+     
         updatedSelectedItems = [index];
       }
 
       // 최종적으로 업데이트된 selectedItems 상태를 로그로 출력
-      console.log("업데이트된 selectedItems:", updatedSelectedItems);
+   
       return updatedSelectedItems;
     });
   };
 
   const handleSubmitVote = async () => {
     const resultMessage = await votBubListDetailupCall(selectedItems, CRE_SEQ);
-
-    console.log(resultMessage);
 
     if (resultMessage === "정상적으로 투표되었습니다.") {
       Alert.alert("알림", "정상적으로 투표되었습니다.");
@@ -160,7 +165,7 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
             alignItems: "center",
           }}
         >
-          {voteList.map((item) => {
+          {processedData.map((item) => {
             const isSelected = selectedItems.includes(item.index);
             return (
               <TouchableOpacity

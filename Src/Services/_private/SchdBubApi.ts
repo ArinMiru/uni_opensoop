@@ -31,18 +31,18 @@ export const SchdBubListSvc = async (): Promise<SchdBubData | null> => {
 
       if (result !== null && result.data.RSLT_CD === "00") {
         const SchdBubData: SchdBubData = parseSchdBubData(result.data);
-        console.log(SchdBubData);
+    
         return SchdBubData;
       } else {
-        console.log("일정 데이터 가져오기 실패");
+     
         return null;
       }
     } catch (error) {
-      console.error("오류 발생:", error);
+   
       return null;
     }
   } else {
-    console.log("데이터를 가져올 수 없습니다.");
+ 
     return null;
   }
 };
@@ -72,18 +72,18 @@ export const SchdBubDtlListSvc = async (
         const SchdBubDtlListData: SchdBubDtlListData = parseSchdbubDtlListData(
           result.data
         );
-        console.log(SchdBubDtlListData);
+  
         return SchdBubDtlListData;
       } else {
-        console.log("일정 상세 데이터 가져오기 실패");
+   
         return null;
       }
     } catch (error) {
-      console.error("오류 발생:", error);
+
       return null;
     }
   } else {
-    console.log("데이터를 가져올 수 없습니다.");
+
     return null;
   }
 };
@@ -110,16 +110,16 @@ export const schdBubSvcNew = async (
       TIT_CD,
       PROC_TYPE,
     };
-    console.log(data);
+
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("등록 성공");
       return result.data;
     } else {
-      console.log("등록 실패");
+    
+      return null;
     }
   }
 };
@@ -148,16 +148,15 @@ export const schdBubSvcUp = async (
       STRT_SCHD_YMD,
       END_SCHD_YMD,
     };
-    console.log(data);
+  
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("수정 성공");
       return result.data;
     } else {
-      console.log("수정 실패");
+      return null;
     }
   }
 };
@@ -173,16 +172,16 @@ export const schdBubSvcDel = async (CRE_SEQ: number) => {
       LOGIN_ID,
       PROC_TYPE,
     };
-    console.log(data);
+ 
     const result: AxiosResponse<RSLT_TABLE, any> | null = await sendApiData(
       endpoint,
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("삭제 성공");
+   
       return result.data;
     } else {
-      console.log("삭제 실패");
+
       return null;
     }
   }

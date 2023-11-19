@@ -43,12 +43,11 @@ const QstPostDetailPage: React.FC<QstPostDetailProps> = ({
   const { CRE_SEQ, CONT, TIT, NICK_NM, LIKE_CNT, CRE_DAT, AnsFree } =
     route.params;
 
-  console.log(CRE_SEQ);
+
 
   const dellPress = async () => {
     const result = await quesBubSvcDel(CRE_SEQ);
     if (result && result.RSLT_CD === "00") {
-      navigation.goBack();
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
@@ -77,13 +76,32 @@ const QstPostDetailPage: React.FC<QstPostDetailProps> = ({
     try {
       const userData = getUserData();
       if (userData != null) {
-        await QuesAnsBubSvcNew(cont, CRE_SEQ);
+        const result = await QuesAnsBubSvcNew(cont, CRE_SEQ);
+        if (result && result.RSLT_CD === "00") {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "질문", newPageload: true },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
+        }
       } else {
-        -885;
-        console.error("userData가 null입니다.");
+        Alert.alert("실패", "댓글 등록 실패");
       }
     } catch (error) {
-      console.error("등록 오류", error);
+   
     }
   };
 
@@ -115,7 +133,7 @@ const QstPostDetailPage: React.FC<QstPostDetailProps> = ({
           MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
           MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
           onPress={() => navigation.goBack()}
-          onPressEditDel={ modalFunctions.handleButtonPress}
+          onPressEditDel={modalFunctions.handleButtonPress}
         />
         <KeyboardAvoidingView
           style={[NewBackgroundStyle.ListDetailBackgroundStyle, { flex: 1 }]}

@@ -84,7 +84,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
           })
           .catch((error) => {
             setLoading(false);
-            console.error("데이터 가져오기 오류:", error);
+            
             Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
           });
         setLoading(false);
@@ -116,7 +116,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
           })
           .catch((error) => {
             setLoading(false);
-            console.error("데이터 가져오기 오류:", error);
+           
             Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
           });
         setLoading(false);
@@ -147,7 +147,6 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
           })
           .catch((error) => {
             setLoading(false);
-            console.error("데이터 가져오기 오류:", error);
             Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
           });
         setLoading(false);

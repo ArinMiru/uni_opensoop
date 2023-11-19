@@ -33,7 +33,7 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
   const [imageUris, setImageUris] = useState<string[]>([]);
 
-  console.log(ImageInfo);
+
 
   useEffect(() => {
     if (ImageInfo && ImageInfo.length > 0) {
@@ -60,7 +60,7 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
 
       return base64Data;
     } catch (error) {
-      console.error("Error encoding image to Base64:", error);
+     
       return null;
     }
   };
@@ -68,7 +68,7 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
   const handleRegiButtonPress = async () => {
     try {
       if (!userData) {
-        console.error("userData가 null입니다.");
+      
         return;
       }
 
@@ -90,7 +90,7 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
           }
         }
       }
-      console.log("이미지 정보 : ", IMAGE_INFO);
+
       const result = await openBubSvcUpdate(TIT, CONT, IMAGE_INFO, CRE_SEQ);
       if (result && result.RSLT_CD === "00") {
         navigation.dispatch(
@@ -114,7 +114,7 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
         Alert.alert("성공", "공지사항 수정 성공");
       }
     } catch (error) {
-      console.error("등록 오류:", error);
+     
     }
   };
 

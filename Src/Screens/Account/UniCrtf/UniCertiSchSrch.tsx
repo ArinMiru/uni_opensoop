@@ -28,8 +28,6 @@ const UniCertiSchSrch: React.FC<RegiSchlSrchProps> = ({
   const [selectedSchoolCode, setSelectedSchoolCode] = useState<string>("");
   const [searchResultData, setSearchResultData] = useState<any>(null);
   const { width: deviceWidth, height: deviceHeight } = Dimensions.get("window");
-  console.log("deviceWidth:", deviceWidth);
-  console.log("deviceHeight:", deviceHeight);
   const marginTopValue =
     Platform.OS === "ios" && deviceHeight <= 667 ? "18%" : "20%";
 
@@ -39,7 +37,6 @@ const UniCertiSchSrch: React.FC<RegiSchlSrchProps> = ({
     if (userSchSrch.length >= 2) {
       const result = await SchlSrchCall(userSchSrch);
       setSearchResultData(result); // 'result' 값을 상태로 저장
-      console.log("결과:", result); // 로그를 출력합니다.
       if (result && result.SCH_NM_INFO) {
         const schNames = result.SCH_NM_INFO.map((item) => item.SCH_NM);
         setSearchResults(schNames);

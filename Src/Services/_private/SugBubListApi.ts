@@ -10,6 +10,7 @@ import {
   SugBubListData,
   parseSugBubListData,
 } from "../../Utils/_private/ApiData/SugBubListData";
+import { RSLT_TABLE } from "../../Utils/ReusableFuction/Reusable";
 // 전역 스코프로 지정
 
 /**
@@ -54,15 +55,15 @@ export const SugBubListSvc = async (
         );
         return subgBubListData;
       } else {
-        console.log("건의게시판 데이터 가져오기 실패");
+      
         return null;
       }
     } catch (error) {
-      console.error("오류발생: ", error);
+   
       return null;
     }
   } else {
-    console.log("데이터를 가져올 수 없습니다.");
+  
     return null;
   }
 };
@@ -90,30 +91,26 @@ export const SugBubListNew = async (
       SEC_YN,
     };
 
-    console.log(data);
+   
 
     try {
-      const result: AxiosResponse<any, any> | null = await sendApiData(
+      const result: AxiosResponse<RSLT_TABLE, any> | null = await sendApiData(
         endpoint,
         data
       );
 
       if (result !== null && result.data.RSLT_CD === "00") {
-        const subgBubListData: SugBubListData = parseSugBubListData(
-          result.data
-        );
-        console.log(subgBubListData.RSLT_CD);
-        return subgBubListData;
+        return result.data;
       } else {
-        console.log("건의게시판 등록 실패");
-        return result;
+       
+        return result?.data;
       }
     } catch (error) {
-      console.error("오류발생: ", error);
+     
       return "Error";
     }
   } else {
-    console.log("데이터를 가져올 수 없습니다.");
+
     return "data missing";
   }
 };
@@ -157,15 +154,15 @@ export const SugBubListUp = async (
         );
         return subgBubListData;
       } else {
-        console.log("건의게시판 등록 실패");
+
         return null;
       }
     } catch (error) {
-      console.error("오류발생: ", error);
+  
       return null;
     }
   } else {
-    console.log("데이터를 가져올 수 없습니다.");
+
     return null;
   }
 };
@@ -197,17 +194,17 @@ export const SugBubListDel = async (
       );
 
       if (result !== null && result.data.RSLT_CD === "00") {
-        console.log("삭제 성공");
+     
         return result.data;
       } else {
         return null;
       }
     } catch (error) {
-      console.error("오류발생: ", error);
+  
       return null;
     }
   } else {
-    console.log("삭제 실패");
+  
     return null;
   }
 };

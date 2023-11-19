@@ -73,12 +73,33 @@ const SgsPostClkToast: React.FC<SgsPostDetailProps> = ({
     try {
       const userData = getUserData();
       if (userData != null) {
-        await SugAnsBubNew(ansCont, CRE_SEQ);
+        const result = await SugAnsBubNew(ansCont, CRE_SEQ);
+        if (result && result.RSLT_CD === "00") {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "건의", newPageload: true },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
+          Alert.alert("성공", "댓글 등록 성공");
+        }
       } else {
-        console.error("userData가 null입니다.");
+        Alert.alert("실패", "댓글 등록 실패");
       }
     } catch (error) {
-      console.error("등록 오류", error);
+     
     }
   };
 

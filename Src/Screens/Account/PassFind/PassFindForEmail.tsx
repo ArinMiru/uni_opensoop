@@ -25,7 +25,6 @@ const PassFindForEmail: React.FC<ScreenProps> = ({ navigation }) => {
     }
 
     setUserDataAndNavigate("MEMB_EM", userEmail, navigation, "PassFindEcode");
-    console.log(PassFindData.MEMB_EM);
     const result = await MembPassFndSvc(
       PassFindData.MEMB_ID,
       PassFindData.MEMB_EM

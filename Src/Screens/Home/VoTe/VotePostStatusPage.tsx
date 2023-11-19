@@ -39,6 +39,7 @@ interface VoteStatItem {
 const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
   const userData = getUserData();
   const [voteStatData, setVoteStatData] = useState<VoteStatData | null>(null);
+  const [processedData, setProcessedData] = useState<VoteItem[]>([]);
   const {
     VOT_TITLE,
     VOT_DESC,
@@ -51,10 +52,12 @@ const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
 
   const formattedVOT_EXPR_DATE = VOT_EXPR_DATE.split(" ")[0];
 
+  
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await votBubStatCall(CRE_SEQ);
-      console.log("Loaded data:", data);
+      
       setVoteStatData(data);
     };
     fetchData();
@@ -71,7 +74,7 @@ const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
   };
 
   const parsedVotInfo = parseVOT_INFO(VOT_INFO);
-  console.log("Parsed VOT_INFO:", parsedVotInfo);
+
 
   return (
     <Background>
@@ -128,7 +131,7 @@ const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
             const matchedVoteStat = voteStatData?.VOT_BUB.find(
               (voteStat) => voteStat.VOT_SEQ === Number(item.id)
             );
-            console.log("Matched Vote Stat for", item.id, ":", matchedVoteStat);
+
 
             return (
               <View

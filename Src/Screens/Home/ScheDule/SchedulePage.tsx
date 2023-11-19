@@ -8,7 +8,7 @@ import {
   Alert,
 } from "react-native";
 import { LocaleConfig, Calendar } from "react-native-calendars";
-import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { ManagerMenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import Constants from "expo-constants";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
@@ -91,7 +91,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
   const dateSelect = (date: string) => {
     setSelectedDate(date);
     scheduleForDate(date);
-    console.log(date);
+  
   };
 
   const scheduleForDate = (date: string) => {
@@ -103,7 +103,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
         }
       })
       .catch((error) => {
-        console.error("특정 날짜의 일정 데이터 가져오기 오류:", error);
+     
       });
   };
 
@@ -159,10 +159,10 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
           Alert.alert("실패", "게시물 등록 실패");
         }
       } else {
-        console.error("userData가 null입니다.");
+     
       }
     } catch (error) {
-      console.error("등록 오류", error);
+     
     }
   };
 
@@ -221,7 +221,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
           setLoading(false);
         })
         .catch((error) => {
-          console.error("투표 게시판 데이터 가져오기 오류:", error);
+        
         });
     }
   }, [userData, isFocused]);
@@ -372,7 +372,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     <SafeAreaView
       style={[{ flex: 1 }, { paddingTop: Constants.statusBarHeight }]}
     >
-      <MenuTopbarStyle
+      <ManagerMenuTopbarStyle
         Title="일정"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}

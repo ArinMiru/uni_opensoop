@@ -42,15 +42,15 @@ export const openBubListCall = async (
         const noticeData: NoticeData = parseNoticeData(result.data);
         return noticeData; // 파싱된 데이터를 반환합니다.
       } else {
-        console.log("공지사항 데이터 가져오기 실패");
+  
         return null;
       }
     } catch (error) {
-      console.error("오류 발생:", error);
+  
       return null;
     }
   } else {
-    console.log("데이터를 가져올 수 없습니다.");
+
     return null;
   }
 };
@@ -91,12 +91,10 @@ export const openBubSvcNew = async (
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
-      console.log(result.data);
+  
       return result;
     } else {
-      console.log(result?.data);
-      console.log("실패");
+  
       return null;
     }
   } else {
@@ -135,17 +133,17 @@ export const openBubSvcUpdate = async (
       CRE_SEQ,
       PROC_TYPE: "02",
     };
-    console.log(data);
+  
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+  
       return result.data;
     } else {
-      console.log("실패");
+  
       return null;
     }
   }
@@ -176,7 +174,7 @@ export const openBubListDell = async (
       PROC_TYPE,
       CRE_SEQ,
     };
-    console.log(data);
+
 
     try {
       // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
@@ -188,18 +186,18 @@ export const openBubListDell = async (
       if (result !== null && result.data.RSLT_CD === "00") {
         // 서버 응답이 성공적이면 데이터를 파싱합니다.
         const noticeData: NoticeData = parseNoticeData(result.data);
-        console.log(noticeData.RSLT_CD);
+    
         return noticeData; // 파싱된 데이터를 반환합니다.
       } else {
-        console.log("공지사항 데이터 가져오기 실패");
+      
         return null;
       }
     } catch (error) {
-      console.error("오류 발생:", error);
+  
       return null;
     }
   } else {
-    console.log("데이터를 가져올 수 없습니다.");
+
     return null;
   }
 };

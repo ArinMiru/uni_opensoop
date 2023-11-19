@@ -4,7 +4,7 @@ export const timeSince = (dateString: string): string => {
   const past = new Date(correctedDate);
 
   if (isNaN(past.getTime())) {
-    console.error(`잘못된 날짜 형식: ${correctedDate}`);
+    
     return "올바른 날짜 형식이 아닙니다.";
   }
 

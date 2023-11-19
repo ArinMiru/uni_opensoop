@@ -25,13 +25,13 @@ const UniCertiEmail: React.FC<RegiCertEmailProps> = ({ navigation, route }) => {
             CERT_SEQ: result.CERT_SEQ,
             MEMB_ID: MEMB_ID,
           });
-          console.log(result.CERT_SEQ);
+        
         } else {
           Alert.alert("실패", "다시 시도해 주세요");
         }
       })
       .catch((error) => {
-        console.error("Error:", error);
+     
       });
   };
   return (

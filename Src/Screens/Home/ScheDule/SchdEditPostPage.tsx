@@ -71,12 +71,10 @@ const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
           navigation.goBack();
           Alert.alert("수정 실패", "수정에 실패하였습니다.");
         }
-        console.log("TIT : ", schdTitle);
       } else {
-        console.error("userData가 null입니다.");
       }
     } catch (error) {
-      console.error("수정 오류", error);
+
     }
   };
 

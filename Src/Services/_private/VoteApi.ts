@@ -41,18 +41,17 @@ export const votBubListCall = async (): Promise<VoteData | null> => {
       if (result !== null && result.data.RSLT_CD === "00") {
         // 서버 응답이 성공적이면 데이터를 파싱합니다.
         const voteData: VoteData = parseVoteData(result.data);
-        console.log("성공");
+   
         return voteData; // 파싱된 데이터를 반환합니다.
       } else {
-        console.log("공지사항 데이터 가져오기 실패");
         return null;
       }
     } catch (error) {
-      console.error("오류 발생:", error);
+
       return null;
     }
   } else {
-    console.log("데이터를 가져올 수 없습니다.");
+
     return null;
   }
 };
@@ -79,8 +78,7 @@ export const votBubListDetailupCall = async (
       );
 
       // 서버 응답 확인을 위한 로그 추가
-      console.log("서버로부터의 응답:", data);
-      console.log("서버로부터의 응답:", result);
+
 
       if (result !== null && result.data.RSLT_CD === "00") {
         return "정상적으로 투표되었습니다.";
@@ -88,11 +86,10 @@ export const votBubListDetailupCall = async (
         return "투표 데이터가 정상적으로 전송되지 않았습니다.";
       }
     } catch (error) {
-      console.error("votBubListDetailupCall 함수에서 오류 발생:", error);
       return null;
     }
   } else {
-    console.log("userData가 null입니다.");
+
     return null;
   }
 };
@@ -108,18 +105,18 @@ export const votBubStatCall = async (
       endpoint,
       data
     );
-    console.log("서버로부터의 응답:", result);
+
 
     if (result && result.data.RSLT_CD === "00") {
       const voteStatData: VoteStatData = parseVoteStatData(result.data);
-      console.log("파싱된 데이터:", voteStatData);
+ 
       return voteStatData;
     } else {
-      console.log("투표 통계 데이터 가져오기 실패");
+    
       return null;
     }
   } catch (error) {
-    console.error("votBubStatCall 함수에서 오류 발생:", error);
+ 
     return null;
   }
 };
@@ -152,21 +149,20 @@ export const votBubRegi = async (
       VOT_DESC,
       VOT_INFO,
     };
-    console.log(data);
 
     const result: AxiosResponse<any, any> | null = await sendApiData(
       endpoint,
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("투표가 정상적으로 등록되었습니다.");
+   
       return result;
     } else {
-      console.log("투표 등록 실패");
+     
       return null;
     }
   } else {
-    console.log("userData가 null입니다.");
+   
     return null;
   }
 };
@@ -209,18 +205,18 @@ export const votBubEditCall = async (
       );
 
       if (result !== null && result.data.RSLT_CD === "00") {
-        console.log("투표가 정상적으로 수정되었습니다.");
+      
         return "정상적으로 수정되었습니다.";
       } else {
-        console.log("투표 수정 실패");
+      
         return "투표 수정에 실패하였습니다.";
       }
     } catch (error) {
-      console.error("투표 수정 중 오류 발생:", error);
+    
       return null;
     }
   } else {
-    console.log("userData가 null입니다.");
+   
     return null;
   }
 };
@@ -246,18 +242,18 @@ export const votBubDeleteCall = async (
       );
 
       if (result !== null && result.data.RSLT_CD === "00") {
-        console.log("투표가 정상적으로 삭제되었습니다.");
+       
         return "정상적으로 삭제되었습니다.";
       } else {
-        console.log("투표 삭제 실패");
+   
         return "투표 삭제에 실패하였습니다.";
       }
     } catch (error) {
-      console.error("투표 삭제 중 오류 발생:", error);
+   
       return null;
     }
   } else {
-    console.log("userData가 null입니다.");
+  
     return null;
   }
 };

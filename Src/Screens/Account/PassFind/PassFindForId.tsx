@@ -15,7 +15,6 @@ const PassFindForId: React.FC<ScreenProps> = ({ navigation }) => {
 
   const passFindUserDataSave = () => {
     setUserDataAndNavigate("MEMB_ID", userId, navigation, "PassFindForEmail"); //같은 역할을 하는 함수를 만들 예정
-    console.log(PassFindData.MEMB_ID);
   };
 
   return (

@@ -24,7 +24,6 @@ const RegiNmNic: React.FC<RegiRegiNmNicProps> = ({ navigation, route }) => {
   const [name, setName] = useState<string>("");
 
   const { MEMB_ID } = route.params;
-  console.log(MEMB_ID);
 
   const NickCheck = async () => {
     const isAvailable = await nickCheckpoint(userRegiNick);

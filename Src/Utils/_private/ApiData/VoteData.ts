@@ -20,7 +20,6 @@ export interface VoteItem {
 }
 
 export function parseVoteData(rawData: any): VoteData {
-  console.log("원본 rawData:", rawData); // 여기에 추가
   const voteData: VoteData = {
     RSLT_CD: rawData.RSLT_CD || "",
     VOTE_BUB: [],

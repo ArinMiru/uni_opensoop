@@ -47,7 +47,6 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
     try {
       const result = await FreeBubDel(CRE_SEQ);
       if (result && result.data.RSLT_CD === "00") {
-        navigation.goBack();
         navigation.dispatch(
           CommonActions.reset({
             index: 0,
@@ -66,12 +65,12 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
             ],
           })
         );
+        Alert.alert("성공", "삭제 성공");
       } else {
-        navigation.goBack();
         Alert.alert("실패", "게시물 삭제에 실패 하였습니다");
       }
     } catch (error) {
-      console.error("삭제 오류:", error);
+
     }
   };
 
@@ -79,14 +78,51 @@ const FreePostDetailPage: React.FC<FreePostDetailProps> = ({
     try {
       const userData = getUserData();
       if (userData != null) {
-        await FreeAnsBubNew(cont, CRE_SEQ);
-        Alert.alert("성공", "댓글이 등록 되었습니다");
+        const result = await FreeAnsBubNew(cont, CRE_SEQ);
+        if (result && result.RSLT_CD === "00") {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "BottomTabNavigations",
+                  state: {
+                    routes: [
+                      {
+                        name: "ListPostPage",
+                        params: { selectedCategory: "자유", newPageload: true },
+                      },
+                    ],
+                  },
+                },
+              ],
+            })
+          );
+        }
+        Alert.alert("성공", "댓글 등록 성공");
       } else {
-        -885;
-        console.error("userData가 null입니다.");
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "BottomTabNavigations",
+                state: {
+                  routes: [
+                    {
+                      name: "ListPostPage",
+                      params: { selectedCategory: "자유", newPageload: true },
+                    },
+                  ],
+                },
+              },
+            ],
+          })
+        );
+        Alert.alert("실패", "댓글 등록 실패");
       }
     } catch (error) {
-      console.error("등록 오류", error);
+    
     }
   };
 

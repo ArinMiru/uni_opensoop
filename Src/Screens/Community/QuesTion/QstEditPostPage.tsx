@@ -67,10 +67,10 @@ const QstEditPostPage: React.FC<quesEditProps> = ({ navigation, route }) => {
           Alert.alert("실패", "수정 실패");
         }
       } else {
-        console.error("userData가 null입니다.");
+        
       }
     } catch (error) {
-      console.error("등록 오류", error);
+    
     }
   };
 

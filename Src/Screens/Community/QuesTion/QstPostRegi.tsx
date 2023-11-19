@@ -61,10 +61,10 @@ const QstPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           Alert.alert("실패", "게시물 등록 실패");
         }
       } else {
-        console.error("userData가 null입니다.");
+     
       }
     } catch (error) {
-      console.error("등록 오류", error);
+ 
     }
   };
 

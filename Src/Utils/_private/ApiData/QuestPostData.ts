@@ -56,15 +56,15 @@ export const QuesBubListSvc = async (
           const questData: QuestData = parseQuestData(result.data);
           return questData; // 파싱된 데이터를 반환합니다.
         } else {
-          console.log("질문게시판 조회 성공");
+          
           return null;
         }
       } catch (error) {
-        console.error("질문게시판 조회 중 오류 발생:", error);
+    
         return null;
       }
     } else {
-        console.log("질문게시판 조회 실패");
+  
         return null;
     }
 };

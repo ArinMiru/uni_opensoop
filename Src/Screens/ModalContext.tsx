@@ -54,7 +54,6 @@ export const useModal = () => {
   const setTabBarVisible = (
     visible: boolean | ((prevState: boolean) => boolean)
   ) => {
-    console.log(`Tab Bar is now ${visible ? "visible" : "hidden"}.`); // 로그 출력
     context.setTabBarVisible(visible); // 실제 context의 setTabBarVisible 함수를 호출하여 상태를 업데이트합니다.
   };
 

@@ -26,7 +26,6 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
   const [data, setData] = useState<ServerResponse | null>(null);
 
   const { MEMB_ID, MEMB_NM, NICK_NM } = route.params;
-  console.log(MEMB_ID, MEMB_NM);
 
   const removeExceptChars = (text: string) => {
     // @, $, !, %, *, ?, &, #, 영어 알파벳, 숫자 외의 문자들을 제거
@@ -83,13 +82,13 @@ const RegiPass: React.FC<RegiPassProps> = ({ navigation, route }) => {
 
       if (isSuccess) {
         navigation.navigate("RegiChk", { MEMB_ID: MEMB_ID });
-        console.log(securePass);
+       
       } else {
-        console.log("실패");
+        
       }
     } catch (error) {
       // 오류 처리
-      console.error("Error:", error);
+
     }
   };
 

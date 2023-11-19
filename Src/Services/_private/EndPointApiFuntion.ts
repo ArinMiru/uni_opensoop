@@ -31,7 +31,7 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
     LOGIN_ID,
     LOGIN_PASS,
   };
-  console.log(data);
+
   const result: AxiosResponse<UserData, any> | null = await sendApiData(
     endpoint,
     data
@@ -60,12 +60,12 @@ export const autoLogin = async (TOKEN_ID: any) => {
   const data = {
     TOKEN_ID,
   };
-  console.log(data);
+
   const result: AxiosResponse<UserData, any> | null = await sendApiData(
     endpoint,
     data
   );
-  console.log(result?.data);
+ 
   if (result !== null && result.data.RSLT_CD === "00") {
     setUserData(result.data);
     return result.data.RSLT_CD;
@@ -99,7 +99,7 @@ export const loginOut = async (TOKEN_ID: string) => {
       return result.data.RSLT_CD; // 로그아웃 성공
     }
   } else {
-    console.log("로그아웃 실패"); // 로그아웃 실패 및 토큰 만료 실패
+  
     return null;
   }
 };
@@ -127,17 +127,17 @@ export const registerUser = async (
       PASS,
       NICK_NM,
     };
-    console.log(data);
+   
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+     
       resolve(true);
     } else {
-      console.log("실패");
+  
       resolve(false);
     }
   });
@@ -156,7 +156,7 @@ export const idCheckpoint = async (MEMB_ID: string) => {
     endpoint,
     data
   );
-  console.log(data);
+
   if (result !== null && result.data.RSLT_CD === "00") {
     return true;
   }
@@ -271,7 +271,7 @@ export const SchlSrchCall = async (
   const data = {
     SCH_NM, // 대학교 이름
   };
-  console.log(data);
+
   try {
     // 서버에 대학교명 데이터 요청을 보내고 응답을 기다립니다.
     const result: AxiosResponse<any, any> | null = await sendApiData(
@@ -282,14 +282,14 @@ export const SchlSrchCall = async (
     if (result !== null && result.data.RSLT_CD === "00") {
       // 서버 응답이 성공적이면 데이터를 파싱합니다.
       const schlsrchdata: SchlSrchData = parseSchlSrchData(result.data);
-      console.log(result.data);
+  
       return schlsrchdata; // 파싱된 데이터를 반환합니다.
     } else {
-      console.log("대학교명이 존재하지 않습니다.");
+    
       return null;
     }
   } catch (error) {
-    console.error("오류 발생:", error);
+   
     return null;
   }
 };
@@ -318,19 +318,19 @@ export const membUniCertUpd = async (
     MEMB_EM,
     MEMB_GRA,
   };
-  console.log(data);
+
   const result: AxiosResponse<EmailEcodeTable, any> | null = await sendApiData(
     endpoint,
     data
   );
-  console.log("반환 데이터", result?.data);
+
   if (
     result !== null &&
     result.data.CERT_SEQ !== null &&
     result.data.RSLT_CD == "00"
   ) {
     const emailEcode: EmailEcodeTable = EmailEcodeParse(result.data);
-    console.log(emailEcode);
+
     return emailEcode;
   } else {
     return null;
@@ -364,9 +364,9 @@ export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
     //result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 00인 경우
     //비밀번호 변경 시의 처리
     //userData 객체의 데이터 저장
-    console.log("비밀번호가 변경되었습니다.");
+ 
   } else {
-    console.log("다른 새로운 비밀번호를 입력해주세요.");
+
   }
 };
 
@@ -390,11 +390,11 @@ export const dprtSrch = async (SCH_CD: string): Promise<DprtData | null> => {
       const dprtData: DprtData = parseDprtSrchData(result.data);
       return dprtData; // 파싱된 데이터를 반환합니다.
     } else {
-      console.log("공지사항 데이터 가져오기 실패");
+
       return null;
     }
   } catch (error) {
-    console.error("오류 발생:", error);
+
     return null;
   }
 };
@@ -423,17 +423,17 @@ export const MembLikeUpdSvc = async (CRE_SEQ: number) => {
       MEMB_DEP_CD,
       TIT_CD,
     };
-    console.log(data);
+
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-      console.log("서버 통신 성공.");
+
       return result.data;
     } else {
-      console.log("서버 통신 실패.");
+
       return null;
     }
   }
@@ -463,17 +463,17 @@ export const MembLikeMinusUpdSvc = async (CRE_SEQ: number) => {
       MEMB_DEP_CD,
       TIT_CD,
     };
-    console.log(data);
+
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-      console.log("서버 통신 성공.");
+   
       return result.data;
     } else {
-      console.log("서버 통신 실패.");
+  
       return null;
     }
   }

@@ -52,15 +52,15 @@ export const FreeBubListCall = async (
         const freeData: FreeData = parseFreeData(result.data);
         return freeData; // 파싱된 데이터를 반환합니다.
       } else {
-        console.log("자유게시판 데이터 가져오기 실패");
+     
         return null;
       }
     } catch (error) {
-      console.error("오류 발생:", error);
+   
       return null;
     }
   } else {
-    console.log("데이터를 가져올 수 없습니다.");
+ 
     return null;
   }
 };
@@ -124,15 +124,15 @@ export const FreeAnsBubSvc = async (
         const freeData: FreeData = parseFreeData(result.data);
         return freeData; // 파싱된 데이터를 반환합니다.
       } else {
-        console.log("자유게시판 답변 데이터 가져오기 실패");
+       
         return null;
       }
     } catch (error) {
-      console.error("오류 발생:", error);
+ 
       return null;
     }
   } else {
-    console.log("데이터를 가져올 수 없습니다.");
+
     return null;
   }
 };
@@ -166,10 +166,10 @@ export const FreeBubRegi = async (TIT: string, CONT: string) => {
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+
       return result;
     } else {
-      console.log("실패");
+
       return result;
     }
   }
@@ -238,10 +238,10 @@ export const FreeBubEd = async (CRE_SEQ: number, TIT: string, CONT: string) => {
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-      console.log("성공");
+ 
       return result;
     } else {
-      console.log("실패");
+  
       return null;
     }
   }

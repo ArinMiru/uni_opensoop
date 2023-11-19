@@ -48,7 +48,7 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           {
             text: "확인",
             onPress: () => {
-              console.log("게시글 등록 성공, 탭 바를 보이게 설정합니다.");
+             
               setTabBarVisible(true);
               navigation.dispatch(
                 CommonActions.reset({
@@ -75,14 +75,14 @@ const FrePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           },
         ]);
       } else {
-        console.log("게시글 등록 실패, 탭 바를 보이게 설정합니다.");
+      
         setTabBarVisible(true);
         navigation.goBack();
         Alert.alert("실패", "게시물 등록 실패");
       }
     } catch (error) {
-      console.log("게시글 등록 중 오류 발생, 탭 바를 보이게 설정합니다.");
-      console.error("등록 오류", error);
+     
+    
       setTabBarVisible(true);
     }
   };

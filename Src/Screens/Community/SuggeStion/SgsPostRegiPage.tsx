@@ -27,7 +27,7 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       if (userData) {
         const result = await SugBubListNew(tit, cont, "Y");
         // result가 정상적으로 반환되었는지 그리고 result.data가 있는지 확인
-        if (result.data && result.data.RSLT_CD === "00") {
+        if (result && result.RSLT_CD === "00") {
           setTit("");
           setCont("");
           Alert.alert("성공", "게시물 등록 성공", [
@@ -66,11 +66,11 @@ const SgsPostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           );
         }
       } else {
-        console.error("userData가 null입니다.");
+       
         Alert.alert("오류", "사용자 데이터가 없습니다.");
       }
     } catch (error) {
-      console.error("등록 오류:", error);
+     
       Alert.alert("오류", "등록 중 오류가 발생했습니다.");
     }
   };

@@ -35,16 +35,15 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ navigation }) => {
             // 로그인 실패 시 사용자에게 6초 동안 대기 후 피드백 제공
             setTimeout(() => {
               navigation.navigate("AccountLoginRegi");
-            }, 6000);
+            }, 3000);
           }
         } else {
           // 토큰이 없는 경우 6초 동안 대기 후 화면 전환
           setTimeout(() => {
             navigation.navigate("AccountLoginRegi");
-          }, 6000);
+          }, 3000);
         }
       } catch (error) {
-        console.error("JWT 토큰 확인 및 자동 로그인 오류:", error);
         Alert.alert("자동 로그인 오류", "자동 로그인에 실패하였습니다.");
         // 예외 발생 시 사용자에게 피드백 제공
         setTimeout(() => {

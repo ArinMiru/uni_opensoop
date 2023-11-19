@@ -1,5 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { VoteItem } from "../Utils/_private/ApiData/VoteData";
 import { StackNavigationProp } from "@react-navigation/stack";
 import LoadingScreen from "../Screens/Loading/LoadingPage";
 import HomePageScreen from "../Screens/Home/HomePage";
@@ -97,7 +98,7 @@ export type RootStackParamList = {
   PassFindChk: undefined;
   IdFindEmail: undefined;
   IdFindOut: { memberId: string };
-  NoticePage: {newPageload?: boolean};
+  NoticePage: { newPageload: boolean };
   DrawerNavigator: undefined;
   NoticePostRegi: undefined;
   ListPostPage: {

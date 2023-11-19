@@ -107,7 +107,7 @@ export const MainPageTopbarStyle: React.FC<ButtonProps> = ({
  * 조건부 렌더링
  * 공지사항, 투표, 일정, 게시판에서 사용
  */
-export const MenuTopbarStyle: React.FC<ButtonProps> = ({
+export const ManagerMenuTopbarStyle: React.FC<ButtonProps> = ({
   children,
   Title,
   MEMB_SC_NM,
@@ -159,6 +159,71 @@ export const MenuTopbarStyle: React.FC<ButtonProps> = ({
         </Text>
       </View>
       {["02", "03", "05"].includes(userData?.TIT_CD || "") ? (
+        <View style={{ flex: 1, alignItems: "flex-end" }}>
+          <TopbarStylePlusIcon onPress={onPressRegi} />
+        </View>
+      ) : (
+        <View style={{ flex: 1 }} />
+      )}
+      {children}
+    </View>
+  );
+};
+
+/*------------------------------------------------------------*/
+
+export const MenuTopbarStyle: React.FC<ButtonProps> = ({
+  children,
+  Title,
+  MEMB_SC_NM,
+  MEMB_DEP_NM,
+  onPressRegi,
+}) => {
+  const userData = getUserData();
+  // 컴포넌트의 타입을 정확하게 명시
+  return (
+    <View style={Styles.TopbarStyle}>
+      <View style={{ flex: 0.1 }}></View>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={[
+            textStyle.semibold13,
+            { color: "#151515" },
+            { marginLeft: deviceWidth * 0.02 },
+            { lineHeight: deviceHeight * 0.026 },
+          ]}
+        >
+          {Title}
+        </Text>
+        <Text
+          style={[
+            textStyle.bold08,
+            { marginLeft: deviceWidth * 0.02 },
+            { marginTop: deviceHeight * 0.006 },
+            { lineHeight: deviceHeight * 0.031 },
+            { color: "#919191" },
+          ]}
+        >
+          {MEMB_SC_NM}
+        </Text>
+        <Text
+          style={[
+            textStyle.bold08,
+            { marginLeft: deviceWidth * 0.01 },
+            { marginTop: deviceHeight * 0.006 },
+            { lineHeight: deviceHeight * 0.031 },
+            { color: "#919191" },
+          ]}
+        >
+          {MEMB_DEP_NM}
+        </Text>
+      </View>
+      {userData?.TIT_CD !== null ? (
         <View style={{ flex: 1, alignItems: "flex-end" }}>
           <TopbarStylePlusIcon onPress={onPressRegi} />
         </View>

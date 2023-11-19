@@ -18,7 +18,7 @@ export const FreeAnsBubNew = async (CONT: string, CRE_SEQ: number) => {
       CONT,
       CRE_SEQ,
     };
-    console.log(data);
+
 
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
@@ -53,7 +53,7 @@ export const FreeAnsBubDel = async (CRE_SEQ: number, ANS_SEQ: number) => {
       CRE_SEQ,
       ANS_SEQ,
     };
-    console.log(data);
+
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
