@@ -13,7 +13,7 @@ import {
   votBubStatCall,
   votBubListCall,
 } from "../../../Services/_private/VoteApi";
-
+import { processInfo } from "../../../Utils/SingleUse/VoteString";
 /**
  * @Dowon(김도원 생성)
  * VotePostStatusPage
@@ -52,12 +52,17 @@ const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
 
   const formattedVOT_EXPR_DATE = VOT_EXPR_DATE.split(" ")[0];
 
-  
+  useEffect(() => {
+    if (VOT_INFO) {
+      const processedInfo = processInfo(VOT_INFO);
+      setProcessedData(processedInfo);
+    }
+  }, [VOT_INFO]);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await votBubStatCall(CRE_SEQ);
-      
+
       setVoteStatData(data);
     };
     fetchData();
@@ -74,7 +79,6 @@ const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
   };
 
   const parsedVotInfo = parseVOT_INFO(VOT_INFO);
-
 
   return (
     <Background>
@@ -127,11 +131,10 @@ const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
             alignItems: "center",
           }}
         >
-          {parsedVotInfo.map((item) => {
+          {processedData.map((item) => {
             const matchedVoteStat = voteStatData?.VOT_BUB.find(
-              (voteStat) => voteStat.VOT_SEQ === Number(item.id)
+              (voteStat) => voteStat.VOT_SEQ === Number(item.index)
             );
-
 
             return (
               <View
@@ -142,8 +145,8 @@ const VotPostStatusPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 }}
               >
                 <VoteStatusPageButton
-                  key={item.id}
-                  text={item.name}
+                  key={item.index}
+                  text={item.text}
                   votestatusnum={
                     matchedVoteStat
                       ? matchedVoteStat.VOT_SUB_TOT.toString()
