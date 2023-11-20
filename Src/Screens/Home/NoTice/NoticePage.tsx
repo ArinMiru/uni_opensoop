@@ -204,7 +204,7 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
         paddingTop: Constants.statusBarHeight,
       }}
     >
-      <StatusBar backgroundColor="black" />
+      <StatusBar style="light" backgroundColor="black" />
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={modalFunctions.bottomSheetModalRef}
