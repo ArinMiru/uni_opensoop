@@ -55,18 +55,25 @@ const AccountLogin: React.FC<ScreenProps> = ({ navigation }) => {
   }, []);
 
   const handleLogin = async () => {
-    const securePass = await hashUserPassword(LOGIN_PASS);
-    const resultCode = await loginUser(LOGIN_ID, securePass);
+    try {
+      const securePass = await hashUserPassword(LOGIN_PASS);
+      const resultCode = await loginUser(LOGIN_ID, securePass);
 
-    if (resultCode === "00") {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "BottomTabNavigations" }],
-      });
-    } else if (resultCode === "01") {
-      Alert.alert("로그인 오류", "아이디나 비밀번호가 잘못되었습니다.");
-    } else {
-      Alert.alert("오류", "알 수 없는 오류가 발생했습니다.");
+      if (resultCode === "00") {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "BottomTabNavigations" }],
+        });
+      } else if (resultCode === "01") {
+        Alert.alert("로그인 오류", "아이디나 비밀번호가 잘못되었습니다.");
+      } else {
+        Alert.alert("오류", "알 수 없는 오류가 발생했습니다.");
+      }
+    } catch (error) {
+      // Axios 요청에서 발생한 오류 처리
+      console.error("Axios 요청 중 오류 발생:", error);
+      // 또는 적절한 에러 메시지를 사용하여 사용자에게 안내
+      Alert.alert("오류", "로그인 중 문제가 발생했습니다.");
     }
   };
 

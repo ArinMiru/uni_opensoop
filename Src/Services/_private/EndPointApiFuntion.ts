@@ -36,7 +36,7 @@ export const loginUser = async (LOGIN_ID: string, LOGIN_PASS: string) => {
     endpoint,
     data
   );
-
+  console.log(result?.data);
   if (result !== null) {
     const userData = result.data;
     if (userData.RSLT_CD === "00") {
@@ -65,7 +65,7 @@ export const autoLogin = async (TOKEN_ID: any) => {
     endpoint,
     data
   );
- 
+
   if (result !== null && result.data.RSLT_CD === "00") {
     setUserData(result.data);
     return result.data.RSLT_CD;
@@ -99,7 +99,6 @@ export const loginOut = async (TOKEN_ID: string) => {
       return result.data.RSLT_CD; // 로그아웃 성공
     }
   } else {
-  
     return null;
   }
 };
@@ -127,17 +126,15 @@ export const registerUser = async (
       PASS,
       NICK_NM,
     };
-   
+
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-     
       resolve(true);
     } else {
-  
       resolve(false);
     }
   });
@@ -282,14 +279,12 @@ export const SchlSrchCall = async (
     if (result !== null && result.data.RSLT_CD === "00") {
       // 서버 응답이 성공적이면 데이터를 파싱합니다.
       const schlsrchdata: SchlSrchData = parseSchlSrchData(result.data);
-  
+
       return schlsrchdata; // 파싱된 데이터를 반환합니다.
     } else {
-    
       return null;
     }
   } catch (error) {
-   
     return null;
   }
 };
@@ -364,9 +359,7 @@ export const MembPassUpdSvc = async (MEMB_ID: string, PASS: string) => {
     //result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 00인 경우
     //비밀번호 변경 시의 처리
     //userData 객체의 데이터 저장
- 
   } else {
-
   }
 };
 
@@ -390,11 +383,9 @@ export const dprtSrch = async (SCH_CD: string): Promise<DprtData | null> => {
       const dprtData: DprtData = parseDprtSrchData(result.data);
       return dprtData; // 파싱된 데이터를 반환합니다.
     } else {
-
       return null;
     }
   } catch (error) {
-
     return null;
   }
 };
@@ -433,7 +424,6 @@ export const MembLikeUpdSvc = async (CRE_SEQ: number) => {
 
       return result.data;
     } else {
-
       return null;
     }
   }
@@ -470,10 +460,9 @@ export const MembLikeMinusUpdSvc = async (CRE_SEQ: number) => {
     );
     if (result !== null && result.data.RSLT_CD === "00") {
       // result가 null이 아니고 서버 응답 데이터의 RSLT_CD가 "00"인 경우
-   
+
       return result.data;
     } else {
-  
       return null;
     }
   }

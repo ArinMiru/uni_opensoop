@@ -1,29 +1,43 @@
 {
   "expo": {
-    "name": "UNI",
+    "name": "OpenSoop",
     "slug": "UNI",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/ApplogoIcon.png",
+    "resizeMode": "contain",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/ApplogoIcon.png",
+        "backgroundColor": "#ffffff",
+        "resizeMode": "contain"
       },
-      "softwareKeyboardLayoutMode": "adjustNothing"
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.leejt.UNI"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b9f12324-ead1-4524-bbac-d70a0932dbfc"
+      }
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          },
+          "ios": {}
+        }
+      ]
+    ]
   }
 }
