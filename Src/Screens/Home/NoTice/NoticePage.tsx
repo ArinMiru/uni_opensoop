@@ -108,6 +108,8 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
 
   const modalItemDel = () => {
     openBubListDell(selectedCreSeq);
+    Alert.alert("삭제", "삭제 되었습니다.");
+    fetchNoticeData(1);
     modalFunctions.handleCloseModal();
   };
   const modalItemEdit = () => {
@@ -133,7 +135,7 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
         Alert.alert("ERROR", "알 수 없는 에러가 발생 하였습니다.");
       }
     }
-
+    fetchNoticeData(1);
     modalFunctions.handleCloseModal();
   };
 

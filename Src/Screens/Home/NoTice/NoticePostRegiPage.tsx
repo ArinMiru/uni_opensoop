@@ -21,6 +21,7 @@ import * as ImageManipulator from "expo-image-manipulator";
 import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
 import { CommonActions } from "@react-navigation/native";
+import Spinner from "react-native-loading-spinner-overlay";
 
 /** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 
@@ -56,17 +57,18 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
 
       return base64Data;
     } catch (error) {
-     
       return null;
     }
   };
 
   const handleRegiButtonPress = async () => {
+    const [loading, setLoading] = useState<boolean>(true);
     try {
       if (!userData) {
-    
         return;
       }
+
+      setLoading(true);
 
       const TIT = tit;
       const CONT = cont;
@@ -86,7 +88,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
           }
         }
       }
-    
+
       const result = await openBubSvcNew(TIT, CONT, IMAGE_INFO);
       if (result && result.data.RSLT_CD === "00") {
         navigation.dispatch(
@@ -110,7 +112,8 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         Alert.alert("성공", "공지사항 등록 성공");
       }
     } catch (error) {
-     
+    } finally {
+      setLoading(false);
     }
   };
 
