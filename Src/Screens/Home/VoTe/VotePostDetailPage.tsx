@@ -12,6 +12,8 @@ import { VotePostDetailProp } from "../../../Utils/NavigationProp/NavigationDeta
 import VoteButtonStyle from "../../../Styles/VoteStyles/VoteButtonStyle";
 import { votBubListDetailupCall } from "../../../Services/_private/VoteApi";
 import { processInfo } from "../../../Utils/SingleUse/VoteString";
+import { votBubDeleteCall } from "../../../Services/_private/VoteApi";
+import { CommonActions } from "@react-navigation/native";
 
 interface VoteItem {
   index: number;
@@ -97,6 +99,36 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
       );
     }
   };
+  const dellPress = async () => {
+    try {
+      const result = await votBubDeleteCall(CRE_SEQ);
+      if (result && result.RSLT_CD) {
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "BottomTabNavigations",
+                state: {
+                  routes: [
+                    {
+                      name: "VotePostPage",
+                    },
+                  ],
+                },
+              },
+            ],
+          })
+        );
+        Alert.alert("성공", "삭제 성공");
+      } else {
+        navigation.goBack();
+        Alert.alert("실패", "삭제 실패");
+      }
+    } catch (error) {
+      navigation.goBack();
+    }
+  };
 
   return (
     <Background>
@@ -105,7 +137,7 @@ const VotePostDetailPage: React.FC<VotePostDetailProp> = ({
         MEMB_DEP_NM={userData?.MEMB_DEP_NM ?? ""}
         MEMB_SC_NM={userData?.MEMB_SC_NM ?? ""}
         onPress={() => navigation.goBack()}
-        onPressDel={() => navigation.navigate("VotePostPage")}
+        onPressDel={dellPress}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View

@@ -10,7 +10,6 @@ import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButto
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
-import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import { loginUser } from "../../../Services/_private/EndPointApiFuntion";
 import { hashUserPassword } from "../../../Utils/_private/.secure/.PassBcryHasing";
 

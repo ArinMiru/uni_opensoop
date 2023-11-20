@@ -10,6 +10,7 @@ import {
   parseVoteStatData,
 } from "../../Utils/_private/ApiData/VoteStatData";
 import { AxiosResponse } from "axios";
+import { RSLT_TABLE } from "../../Utils/ReusableFuction/Reusable";
 
 export const votBubListCall = async (): Promise<VoteData | null> => {
   const endpoint = "/UNI/VotBubListSvc";
@@ -41,17 +42,15 @@ export const votBubListCall = async (): Promise<VoteData | null> => {
       if (result !== null && result.data.RSLT_CD === "00") {
         // 서버 응답이 성공적이면 데이터를 파싱합니다.
         const voteData: VoteData = parseVoteData(result.data);
-   
+
         return voteData; // 파싱된 데이터를 반환합니다.
       } else {
         return null;
       }
     } catch (error) {
-
       return null;
     }
   } else {
-
     return null;
   }
 };
@@ -79,7 +78,6 @@ export const votBubListDetailupCall = async (
 
       // 서버 응답 확인을 위한 로그 추가
 
-
       if (result !== null && result.data.RSLT_CD === "00") {
         return "정상적으로 투표되었습니다.";
       } else {
@@ -89,7 +87,6 @@ export const votBubListDetailupCall = async (
       return null;
     }
   } else {
-
     return null;
   }
 };
@@ -106,17 +103,14 @@ export const votBubStatCall = async (
       data
     );
 
-
     if (result && result.data.RSLT_CD === "00") {
       const voteStatData: VoteStatData = parseVoteStatData(result.data);
- 
+
       return voteStatData;
     } else {
-    
       return null;
     }
   } catch (error) {
- 
     return null;
   }
 };
@@ -155,14 +149,11 @@ export const votBubRegi = async (
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
-   
       return result;
     } else {
-     
       return null;
     }
   } else {
-   
     return null;
   }
 };
@@ -205,55 +196,39 @@ export const votBubEditCall = async (
       );
 
       if (result !== null && result.data.RSLT_CD === "00") {
-      
-        return "정상적으로 수정되었습니다.";
+        return result.data;
       } else {
-      
-        return "투표 수정에 실패하였습니다.";
+        return result?.data;
       }
     } catch (error) {
-    
       return null;
     }
   } else {
-   
     return null;
   }
 };
 
 /** PROC_TYPE : 03 삭제 */
-export const votBubDeleteCall = async (
-  CRE_SEQ: number
-): Promise<string | null> => {
-  const endpoint = "/UNI/VotBubSvc";
+export const votBubDeleteCall = async (CRE_SEQ: number) => {
   const userData = getUserData();
-
+  const endpoint = "/UNI/VotBubSvc";
   if (userData !== null) {
+    const PROC_TYPE = "03";
+    const { LOGIN_ID } = userData;
     const data = {
-      LOGIN_ID: userData.LOGIN_ID,
-      PROC_TYPE: "03",
       CRE_SEQ,
+      LOGIN_ID,
+      PROC_TYPE,
     };
 
-    try {
-      const result: AxiosResponse<any, any> | null = await sendApiData(
-        endpoint,
-        data
-      );
-
-      if (result !== null && result.data.RSLT_CD === "00") {
-       
-        return "정상적으로 삭제되었습니다.";
-      } else {
-   
-        return "투표 삭제에 실패하였습니다.";
-      }
-    } catch (error) {
-   
+    const result: AxiosResponse<RSLT_TABLE, any> | null = await sendApiData(
+      endpoint,
+      data
+    );
+    if (result !== null && result.data.RSLT_CD === "00") {
+      return result.data;
+    } else {
       return null;
     }
-  } else {
-  
-    return null;
   }
 };

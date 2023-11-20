@@ -10,7 +10,6 @@ import { Image } from "react-native";
 import { deviceHeight, deviceWidth } from "../../../Utils/DeviceUtils";
 
 const AccountLoginRegi: React.FC<ScreenProps> = ({ navigation }) => {
-
   return (
     <AccountBackground>
       <View style={{ flex: 5, justifyContent: "center", alignItems: "center" }}>

@@ -32,6 +32,7 @@ import {
   MembLikeMinusUpdSvc,
 } from "../../../Services/_private/EndPointApiFuntion";
 import { NoticeProps } from "../../../Utils/NavigationProp/NoticeProp";
+import { StatusBar } from "expo-status-bar";
 
 const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
   const modalFunctions = ModalReuableFuction();
@@ -155,15 +156,12 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
           // 현재 예시에서는 그러한 작업이 생략되어 있으며, 단순히 'data' 상태를 'updatedData'로 갱신한다.
           setData(updatedData);
           // 콘솔에 성공 메시지를 출력한다.
-
         }
       } else {
         // 'responseData'가 없다면, 요청이 실패한 것으로 간주하고 콘솔에 실패 메시지를 출력한다.
-       
       }
     } catch (error) {
       // 요청 과정 중에 오류가 발생하면, catch 블록이 실행되며 콘솔에 오류 내용을 출력한다.
- 
     }
   };
 
@@ -190,15 +188,12 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
           setData(updatedData);
 
           // 6. 차감 성공 메시지를 콘솔에 출력합니다.
-     
         }
       } else {
         // 7. API 호출에 실패했을 때, 오류 메시지를 콘솔에 출력합니다.
-    
       }
     } catch (error) {
       // 8. 예외가 발생했을 때, 오류 메시지를 콘솔에 출력합니다.
-    
     }
   };
 
@@ -209,6 +204,7 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
         paddingTop: Constants.statusBarHeight,
       }}
     >
+      <StatusBar backgroundColor="black" />
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={modalFunctions.bottomSheetModalRef}

@@ -5,18 +5,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/ApplogoIcon.png",
-    "resizeMode": "contain",
     "userInterfaceStyle": "automatic",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/ApplogoIcon.png",
-        "backgroundColor": "#ffffff",
-        "resizeMode": "contain"
-      },
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.leejt.UNI"
     },
@@ -38,6 +34,12 @@
           "ios": {}
         }
       ]
-    ]
+    ],
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/b9f12324-ead1-4524-bbac-d70a0932dbfc"
+    }
   }
 }

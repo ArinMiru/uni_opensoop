@@ -64,7 +64,7 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
           selectedStartDate,
           selectedEndDate
         );
-      
+
         if (result && result.RSLT_CD === "00") {
           navigation.goBack();
           Alert.alert("성공", "등록 성공");
@@ -72,16 +72,14 @@ const SchedulePostRegiPage: React.FC<ScreenProps> = ({ navigation }) => {
       } else {
         Alert.alert("실패", "등록 실패");
       }
-    } catch (error) {
-    
-    }
+    } catch (error) {}
   };
 
   const formatDate = (date: Date) => {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const day = date.getDate().toString().padStart(2, "0");
-    return `${year}${month}${day}`;
+    return `${year}-${month}-${day}`;
   };
 
   const handleStartDateConfirm = (date: Date) => {
