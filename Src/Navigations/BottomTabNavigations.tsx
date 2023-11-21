@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View } from "react-native";
 import HomePageScreen from "../Screens/Home/HomePage";
@@ -16,11 +16,21 @@ import {
 } from "../Components/IconCompo/DrawerIcon";
 import { deviceHeight } from "../Utils/DeviceUtils";
 import { useModal } from "../Screens/ModalContext";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
 const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
   const [selectedIcon, setSelectedIcon] = useState("HomePageScreen");
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const selectedRoute = state.routes[state.index];
+      if (selectedRoute) {
+        setSelectedIcon(selectedRoute.name);
+      }
+    }, [state])
+  );
 
   return (
     <View style={{ flexDirection: "row", backgroundColor: "lightgray" }}>
@@ -117,12 +127,11 @@ const BottomTabNavigations = () => {
         name="NoticePage"
         component={NoTicePage}
         options={{ headerShown: false }}
-        
       />
       <Tab.Screen
         name="ListPostPage"
         component={ListPostPage}
-        options={{ headerShown: false, }}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="HomePageScreen"

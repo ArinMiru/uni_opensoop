@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { View, FlatList, Text } from "react-native";
 import { deviceWidth } from "../../../Utils/DeviceUtils";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
-import { ViewUnvottedButton } from "../../../Components/VoteCompo/VoteButton";
 import { UnVotedListButton } from "../../../Components/VoteCompo/VoteButton";
 import { VotedListButton } from "../../../Components/VoteCompo/VoteButton";
-import { MenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
+import { ManagerMenuTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
@@ -60,14 +59,13 @@ const VotePostPage: React.FC<ScreenProps> = ({ navigation }) => {
           }
           setLoading(false);
         })
-        .catch((error) => {
-        });
+        .catch((error) => {});
     }
   }, [userData, isFocused]);
 
   return (
     <Background>
-      <MenuTopbarStyle
+      <ManagerMenuTopbarStyle
         Title="투표"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}

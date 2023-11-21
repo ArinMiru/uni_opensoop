@@ -41,6 +41,7 @@ import {
   SCHD_BuB_Item,
   parseSchdbubDtlListData,
 } from "../../../Utils/_private/ApiData/SchdBubDtlListSvc";
+import { StatusBar } from "expo-status-bar";
 
 LocaleConfig.locales["kr"] = {
   monthNames: [
@@ -91,7 +92,6 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
   const dateSelect = (date: string) => {
     setSelectedDate(date);
     scheduleForDate(date);
-  
   };
 
   const scheduleForDate = (date: string) => {
@@ -102,9 +102,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
           setScheduleDetails(parsedData);
         }
       })
-      .catch((error) => {
-     
-      });
+      .catch((error) => {});
   };
 
   const handleEditClick = () => {
@@ -159,11 +157,8 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
           Alert.alert("실패", "게시물 등록 실패");
         }
       } else {
-     
       }
-    } catch (error) {
-     
-    }
+    } catch (error) {}
   };
 
   const monthNames = [
@@ -220,9 +215,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
           }
           setLoading(false);
         })
-        .catch((error) => {
-        
-        });
+        .catch((error) => {});
     }
   }, [userData, isFocused]);
 
@@ -300,7 +293,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
             }}
           >
             <View style={{ marginRight: deviceWidth * 0.03 }}>
-              {isEditClicked ? (
+              {["02", "03", "05"].includes(userData?.TIT_CD || "") ? (
                 <ScdlEditIcon
                   onPress={() =>
                     navigation.navigate("SchdEditPostPage", {
@@ -311,7 +304,8 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
                     })
                   }
                 />
-              ) : isDeleteClicked ? (
+              ) : isDeleteClicked &&
+                ["02", "03", "05"].includes(userData?.TIT_CD || "") ? (
                 <SchldDelButton
                   onPress={() => schdBubSvcDelPress(detail.CRE_SEQ)}
                 />
@@ -323,6 +317,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
                 />
               )}
             </View>
+
             <View
               style={{
                 alignContent: "center",
@@ -372,6 +367,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     <SafeAreaView
       style={[{ flex: 1 }, { paddingTop: Constants.statusBarHeight }]}
     >
+      <StatusBar style="dark" backgroundColor="white" />
       <ManagerMenuTopbarStyle
         Title="일정"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}

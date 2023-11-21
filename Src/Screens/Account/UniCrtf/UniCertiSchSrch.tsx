@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { AccountBackground } from "../../../Components/AllCompo/Background";
 import { OnlyAccountButton } from "../../../Components/AccountCompo/AccountButton";
-import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import { BlackBackIconButton } from "../../../Components/IconCompo/BackIconButton";
 import BackgroundStyle from "../../../Styles/BackgroundStyle";
 import textStyle from "../../../Styles/TextStyle";

@@ -21,6 +21,8 @@ import ListInputBoxStyle from "../../../Styles/ListStyles/ListInputBoxStyle";
 import TextStyle from "../../../Styles/TextStyle";
 import { NoticeEditProps } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
 import { CommonActions } from "@react-navigation/native";
+import Spinner from "react-native-loading-spinner-overlay/lib";
+import { OpenPhotoEditComboBox } from "../../../Components/ListCompo/OpenCompo/OpenButton";
 
 /** [02, 03, 05] TIT_CD에 해당하는 사용자만 접근 가능 페이지 */
 
@@ -32,8 +34,7 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
   const [tit, setTit] = useState<string>(TIT);
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
   const [imageUris, setImageUris] = useState<string[]>([]);
-
-
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (ImageInfo && ImageInfo.length > 0) {
@@ -60,7 +61,6 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
 
       return base64Data;
     } catch (error) {
-     
       return null;
     }
   };
@@ -68,10 +68,9 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
   const handleRegiButtonPress = async () => {
     try {
       if (!userData) {
-      
         return;
       }
-
+      setLoading(true);
       const TIT = tit;
       const CONT = cont;
 
@@ -113,8 +112,10 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
         );
         Alert.alert("성공", "공지사항 수정 성공");
       }
-    } catch (error) {
-     
+    } catch (error: any) {
+      Alert.alert(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -161,6 +162,11 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
         onPressRegi={handleRegiButtonPress}
+      />
+      <Spinner
+        visible={loading} // 로딩 상태에 따라 로딩창을 표시하거나 숨깁니다.
+        textContent={"전송 중..."}
+        textStyle={{ color: "#FFF" }}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         {/* 첫 번째 뷰 */}
@@ -226,28 +232,13 @@ const NoticeEditPage: React.FC<NoticeEditProps> = ({ navigation, route }) => {
             alignItems: "center",
           }}
         >
-          {photoButtonClicked ? (
-            <OpenPhotoComboBox
-              onPress={() => {
-                uploadImage();
-              }}
-              selectedImage={imageUris}
-              onPressDelPhoto={(index) => deleteImage(index)}
-            />
-          ) : (
-            <View
-              style={{
-                flex: 1.5,
-                width: deviceWidth * 1,
-                justifyContent: "flex-start",
-                alignItems: "flex-end",
-              }}
-            >
-              <OpenPhotoButton
-                onPress={() => setphotoButtonClicked(!photoButtonClicked)}
-              />
-            </View>
-          )}
+          <OpenPhotoEditComboBox
+            onPress={() => {
+              uploadImage();
+            }}
+            selectedImage={imageUris}
+            onPressDelPhoto={(index) => deleteImage(index)}
+          />
         </View>
 
         {/* 네 번째 뷰 */}

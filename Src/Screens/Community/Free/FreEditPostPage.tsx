@@ -38,6 +38,7 @@ const FreEditPostPage: React.FC<FreEditProps> = ({ navigation, route }) => {
               routes: [
                 {
                   name: "BottomTabNavigations",
+                  params : {},
                   state: {
                     routes: [
                       {
@@ -73,11 +74,8 @@ const FreEditPostPage: React.FC<FreEditProps> = ({ navigation, route }) => {
           Alert.alert("실패", "수정 실패");
         }
       } else {
-      
       }
-    } catch (error) {
-  
-    }
+    } catch (error) {}
   };
 
   return (

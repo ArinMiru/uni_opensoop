@@ -5,7 +5,7 @@ const SERVER_URL = "http://138.2.50.90:9000"; // 서버 API 주소
 
 const axiosInstance = axios.create({
   baseURL: SERVER_URL,
-  timeout: 5000, // 요청 제한 시간 (5초)
+  timeout: 10000, // 요청 제한 시간 (10초)
 });
 
 /**

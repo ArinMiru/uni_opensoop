@@ -3,6 +3,8 @@ import React from "react";
 import styles from "../../Styles/BackgroundStyle";
 import MainPageStyles from "../../Styles/MainPageStyles/MainPageStyles";
 import { ScrollView } from "react-native-gesture-handler";
+import { StatusBar } from "expo-status-bar";
+import { currentPlatform } from "../../Utils/DeviceUtils";
 
 interface BackgroundProps {
   children?: React.ReactNode;
@@ -34,7 +36,10 @@ export const AccountBackground: React.FC<BackgroundProps> = ({ children }) => {
 export const Background: React.FC<BackgroundProps> = ({ children }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={MainPageStyles.Background}>{children}</SafeAreaView>
+      <SafeAreaView style={MainPageStyles.Background}>
+        <StatusBar style="dark" backgroundColor="white" />
+        {children}
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 };

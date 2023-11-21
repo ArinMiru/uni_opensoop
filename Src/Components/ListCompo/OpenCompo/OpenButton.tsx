@@ -163,7 +163,7 @@ export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
   };
   const removePhotoBox = (index: number) => {
     setPhotoList(photoList.filter((_, i) => i !== index));
-    if (selectedImage && selectedImage[index]) {    // 이미지 삭제 시 imageUris 상태 업데이트
+    if (selectedImage && selectedImage[index]) {
       const newImageUris = [...selectedImage];
       newImageUris.splice(index, 1);
       onPressDelPhoto && onPressDelPhoto(index);
@@ -189,6 +189,48 @@ export const OpenPhotoComboBox: React.FC<ButtonProps> = ({
         />
       ))}
       {photoList.length < 4 && <OpenPhotoPlusBox onPress={addPhotoBox} />}
+    </View>
+  );
+};
+
+export const OpenPhotoEditComboBox: React.FC<
+  ButtonProps & { selectedImage?: string[] }
+> = ({
+  children,
+  onPress,
+  selectedImage = [], // 초기값을 빈 배열로 설정하여 undefined일 경우 대비
+  onPressDelPhoto,
+}) => {
+  const addPhotoBox = () => {
+    if (selectedImage.length < 4) {
+      // 이미지 갯수가 4개 미만이면 추가합니다.
+      onPress && onPress();
+    }
+  };
+
+  const removePhotoBox = (index: number) => {
+    onPressDelPhoto && onPressDelPhoto(index);
+  };
+
+  return (
+    <View
+      style={{
+        flex: 2,
+        width: deviceWidth * 0.84,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+      }}
+    >
+      {selectedImage.map((imageUri, index) => (
+        <OpenPhotoDelBox
+          key={index}
+          onPressAddPhoto={onPress}
+          onPressDelPhoto={() => removePhotoBox(index)}
+          postRegiImage={imageUri}
+        />
+      ))}
+      {selectedImage.length < 4 && <OpenPhotoPlusBox onPress={addPhotoBox} />}
     </View>
   );
 };

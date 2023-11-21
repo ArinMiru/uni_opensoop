@@ -42,15 +42,12 @@ export const openBubListCall = async (
         const noticeData: NoticeData = parseNoticeData(result.data);
         return noticeData; // 파싱된 데이터를 반환합니다.
       } else {
-  
         return null;
       }
     } catch (error) {
-  
       return null;
     }
   } else {
-
     return null;
   }
 };
@@ -91,10 +88,8 @@ export const openBubSvcNew = async (
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-  
       return result;
     } else {
-  
       return null;
     }
   } else {
@@ -133,17 +128,15 @@ export const openBubSvcUpdate = async (
       CRE_SEQ,
       PROC_TYPE: "02",
     };
-  
+
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
     );
 
     if (result !== null && result.data.RSLT_CD === "00") {
-  
       return result.data;
     } else {
-  
       return null;
     }
   }
@@ -175,7 +168,6 @@ export const openBubListDell = async (
       CRE_SEQ,
     };
 
-
     try {
       // 서버에 공지사항 데이터 요청을 보내고 응답을 기다립니다.
       const result: AxiosResponse<any, any> | null = await sendApiData(
@@ -185,19 +177,15 @@ export const openBubListDell = async (
 
       if (result !== null && result.data.RSLT_CD === "00") {
         // 서버 응답이 성공적이면 데이터를 파싱합니다.
-        const noticeData: NoticeData = parseNoticeData(result.data);
-    
-        return noticeData; // 파싱된 데이터를 반환합니다.
+
+        return result.data; // 파싱된 데이터를 반환합니다.
       } else {
-      
         return null;
       }
     } catch (error) {
-  
       return null;
     }
   } else {
-
     return null;
   }
 };

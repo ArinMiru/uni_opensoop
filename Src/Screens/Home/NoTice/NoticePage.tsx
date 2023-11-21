@@ -46,7 +46,7 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
   const [page, setPage] = useState<number>(1); // 페이지 번호 상태
 
   useEffect(() => {
-    const newPageload = route?.params?.newPageload;
+    const newPageload = route.params;
     if (newPageload) {
       fetchNoticeData(1);
     }
@@ -106,11 +106,20 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
     modalFunctions.handleButtonPress(creseq);
   };
 
-  const modalItemDel = () => {
-    openBubListDell(selectedCreSeq);
-    Alert.alert("삭제", "삭제 되었습니다.");
-    fetchNoticeData(1);
-    modalFunctions.handleCloseModal();
+  const modalItemDel = async () => {
+    try {
+      setLoading(true);
+      const result = await openBubListDell(selectedCreSeq);
+      if (result && result.RSLT_CD === "00") {
+        Alert.alert("성공", "삭제 되었습니다.");
+        fetchNoticeData(1);
+        modalFunctions.handleCloseModal();
+      }
+    } catch (error) {
+      Alert.alert("실패", "게시물 삭제에 실패 하였습니다");
+    } finally {
+      setLoading(false);
+    }
   };
   const modalItemEdit = () => {
     if (data && selectedCreSeq) {
@@ -206,7 +215,7 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
         paddingTop: Constants.statusBarHeight,
       }}
     >
-      <StatusBar style="light" backgroundColor="black" />
+      <StatusBar style="dark" backgroundColor="white" />
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={modalFunctions.bottomSheetModalRef}

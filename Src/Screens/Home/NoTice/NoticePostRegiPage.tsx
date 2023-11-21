@@ -37,6 +37,7 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   const [cont, setCont] = useState<string>("");
   const [tit, setTit] = useState<string>("");
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
+  const [loading, setLoading] = useState<boolean>(false);
   const [imageUris, setImageUris] = useState<string[]>([]);
 
   const encodeImageToBase64 = async (imageUri: string) => {
@@ -62,7 +63,6 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
   };
 
   const handleRegiButtonPress = async () => {
-    const [loading, setLoading] = useState<boolean>(true);
     try {
       if (!userData) {
         return;
@@ -160,6 +160,11 @@ const NoticePostRegi: React.FC<ScreenProps> = ({ navigation }) => {
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
         onPressRegi={handleRegiButtonPress}
+      />
+      <Spinner
+        visible={loading}
+        textContent={"전송 중..."}
+        textStyle={{ color: "#FFF" }}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         {/* 첫 번째 뷰 */}
