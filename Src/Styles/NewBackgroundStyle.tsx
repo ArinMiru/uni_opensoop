@@ -7,7 +7,7 @@ const hightvalue =
   Platform.OS === "ios" && deviceHeight <= 667 ? "90.8%" : "91%";
 
 const voteHightValue =
-  Platform.OS === "ios" && deviceHeight <= 667 ? "85%" : "87%";
+  Platform.OS === "ios" && deviceHeight <= 667 ? "85%" : "91.2%";
 
 const containerhightvalue =
   Platform.OS === "ios" && deviceHeight <= 667 ? "90.8%" : "91%";
