@@ -18,3 +18,41 @@ async function hashUserPassword(userPassword: string) {
   return hashedPassword;
 }
 export { hashUserPassword };
+
+{
+  /**
+import * as Crypto from 'expo-crypto';
+import * as SecureStore from 'expo-secure-store';
+import { v4 as uuidv4 } from 'uuid'; // expo에서 제공하는 uuid 라이브러리 설치해야함
+
+async function saveUserSalt(userId: string): Promise<string> {
+  const salt = uuidv4();
+  await SecureStore.setItemAsync(userId, salt);
+  return salt;
+}
+
+async function hashPasswordOnSignUp(password: string, userId: string): Promise<string> {
+  const salt = await saveUserSalt(userId);
+  const digest = await Crypto.digestStringAsync(
+    Crypto.CryptoDigestAlgorithm.SHA256,
+    password + salt
+  );
+  return digest;
+}
+
+async function hashPasswordOnLogin(password: string, userId: string): Promise<string> {
+  const salt = await SecureStore.getItemAsync(userId);
+  if (!salt) {
+    throw new Error('솔트 값이 존재하지 않습니다.');
+  }
+  const digest = await Crypto.digestStringAsync(
+    Crypto.CryptoDigestAlgorithm.SHA256,
+    password + salt
+  );
+  return digest;
+}
+
+export { hashPasswordOnSignUp, hashPasswordOnLogin };
+
+*/
+}
