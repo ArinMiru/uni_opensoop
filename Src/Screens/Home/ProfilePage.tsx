@@ -60,6 +60,7 @@ const ProfilePage: React.FC<ScreenProps> = ({ navigation }) => {
         <View style={{ alignItems: "center" }}>
           <CertLogoutBox
             onPressTITCERT={() => navigation.navigate("TitleCodeCerti")}
+            onPressLOGOUT={() => navigation.navigate("AccountLogin")}
           />
         </View>
       </View>
