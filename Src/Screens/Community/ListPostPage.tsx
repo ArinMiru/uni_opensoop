@@ -84,7 +84,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
           })
           .catch((error) => {
             setLoading(false);
-            
+
             Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
           });
         setLoading(false);
@@ -116,7 +116,7 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
           })
           .catch((error) => {
             setLoading(false);
-           
+
             Alert.alert("오류", "데이터를 가져오는데 실패했습니다.");
           });
         setLoading(false);
@@ -262,9 +262,10 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 <FreeListIclucontnButton
                   nickname={item.NICK_NM}
                   freposttime={timeSince(item.CRE_DAT)}
-                  frepostanscount={item.ANS_FREE.map(
-                    (ans) => ans.TOTAL_ANS
-                  ).reduce((a, b) => a + b / 2, 0)}
+                  frepostanscount={item.ANS_FREE.reduce(
+                    (sum, ans) => ans.TOTAL_ANS,
+                    0
+                  )}
                   fretit={item.TIT}
                   frecont={item.CONT}
                   onPress={() => {
@@ -356,9 +357,10 @@ const ListPostPage: React.FC<ScreenProps> = ({ navigation, route }) => {
                 <QstListContentButton
                   nickname={item.NICK_NM}
                   qstposttime={timeSince(item.CRE_DAT)}
-                  postanswercount={item.ANS_FREE.map(
-                    (ans) => ans.TOTAL_ANS
-                  ).reduce((a, b) => a + b / 2, 0)}
+                  postanswercount={item.ANS_FREE.reduce(
+                    (sum, ans) => ans.TOTAL_ANS,
+                    0
+                  )}
                   postcontent={item.TIT}
                   onPress={() => {
                     navigation.navigate("QstPostDetailPage", {
