@@ -33,6 +33,7 @@ import {
 } from "../../../Services/_private/EndPointApiFuntion";
 import { NoticeProps } from "../../../Utils/NavigationProp/NoticeProp";
 import { StatusBar } from "expo-status-bar";
+import { timeSince } from "../../../Utils/timeUtils";
 
 const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
   const modalFunctions = ModalReuableFuction();
@@ -262,7 +263,7 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
                   MEMB_CD={item.TIT_NM}
                   MEMB_DEP_CD={item.MEMB_DEP_NM}
                   Title={item.TIT}
-                  PostingTime={item.CRE_DAT}
+                  PostingTime={timeSince(item.CRE_DAT)}
                   postLike={item.LIKE_CNT}
                   PostContent={item.CONT}
                   PostImage={imagePaths}
