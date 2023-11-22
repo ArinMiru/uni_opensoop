@@ -28,41 +28,37 @@ const HomePageScreen: React.FC<ScreenProps> = ({ navigation }) => {
   const [schedules, setSchedules] = useState<SCHD_BuB_Item[]>([]);
   const [todaySchedules, setTodaySchedules] = useState<SCHD_BuB_Item[]>([]);
 
-  useEffect(() => {
-    const fetchNoticeData = async () => {
-      const REQ_PAGE = 1;
-      const noticeData = await openBubListCall(REQ_PAGE);
-      if (noticeData && noticeData.OPEN_BUB) {
-        setNotices(noticeData.OPEN_BUB.slice(0, 2));
-      }
-    };
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchData = async () => {
+        const REQ_PAGE = 1;
+        const noticeData = await openBubListCall(REQ_PAGE);
+        if (noticeData && noticeData.OPEN_BUB) {
+          setNotices(noticeData.OPEN_BUB.slice(0, 2));
+        }
 
-    const fetchVoteData = async () => {
-      const voteData = await votBubListCall();
-      if (voteData && voteData.VOTE_BUB) {
-        setVotes(voteData.VOTE_BUB.slice(0, 2));
-      }
-    };
+        const voteData = await votBubListCall();
+        if (voteData && voteData.VOTE_BUB) {
+          setVotes(voteData.VOTE_BUB.slice(0, 2));
+        }
 
-    const fetchScheduleData = async () => {
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, "0");
-      const dd = String(today.getDate()).padStart(2, "0");
-      const formattedToday = `${yyyy}-${mm}-${dd}`;
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const dd = String(today.getDate()).padStart(2, "0");
+        const formattedToday = `${yyyy}-${mm}-${dd}`;
 
-      const scheduleData = await SchdBubDtlListSvc(formattedToday);
-      if (scheduleData !== null) {
-        setSchedules(scheduleData.SCHD_BUB);
-      } else {
-        setSchedules([]);
-      }
-    };
+        const scheduleData = await SchdBubDtlListSvc(formattedToday);
+        if (scheduleData !== null) {
+          setSchedules(scheduleData.SCHD_BUB);
+        } else {
+          setSchedules([]);
+        }
+      };
 
-    fetchNoticeData();
-    fetchVoteData();
-    fetchScheduleData();
-  }, []);
+      fetchData();
+    }, [])
+  );
 
   useEffect(() => {
     const today = new Date();

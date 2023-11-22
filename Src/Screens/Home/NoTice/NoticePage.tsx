@@ -258,6 +258,7 @@ const NoTicePage: React.FC<NoticeProps> = ({ navigation, route }) => {
               );
               return (
                 <NoticePostBoxView
+                  likeyn={item.LIKE_YN}
                   MEMB_NM={item.MEMB_NM}
                   MEMB_CD={item.TIT_NM}
                   MEMB_DEP_CD={item.MEMB_DEP_NM}

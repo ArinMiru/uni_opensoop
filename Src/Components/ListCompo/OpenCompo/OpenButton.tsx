@@ -21,6 +21,7 @@ interface ButtonProps {
   onPressAddPhoto?: () => void;
   navigation?: { navigate: (screenName: string) => void };
   selectedImage?: string[];
+  likeYN?: string;
 }
 
 /**
@@ -59,8 +60,9 @@ export const OpenLikeButtton: React.FC<ButtonProps> = ({
   onLikePress,
   onDislikePress,
   onPress,
+  likeYN,
 }) => {
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState<boolean>(likeYN === "Y");
   const [likeCount, setLikeCount] = useState<number>(postLike || 0);
 
   const handlePress = () => {

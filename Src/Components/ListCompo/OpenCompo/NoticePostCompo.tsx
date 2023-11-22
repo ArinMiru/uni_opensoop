@@ -33,6 +33,7 @@ interface CommonProps {
   onDislikePress?: () => void;
   likePress?: () => void;
   children?: React.ReactNode;
+  likeyn?: string
 }
 
 export const NoticePostBoxView: React.FC<CommonProps> = ({
@@ -47,6 +48,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
   onPress,
   onLikePress,
   onDislikePress,
+  likeyn,
   likePress,
   children,
 }) => {
@@ -169,6 +171,7 @@ export const NoticePostBoxView: React.FC<CommonProps> = ({
               onDislikePress={onDislikePress}
               onLikePress={onLikePress}
               postLike={postLike}
+              likeYN={likeyn}
             />
           </View>
           <View

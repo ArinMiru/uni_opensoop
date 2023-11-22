@@ -293,7 +293,8 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
             }}
           >
             <View style={{ marginRight: deviceWidth * 0.03 }}>
-              {["02", "03", "05"].includes(userData?.TIT_CD || "") ? (
+              {["02", "03", "05"].includes(userData?.TIT_CD || "") &&
+              isEditClicked ? (
                 <ScdlEditIcon
                   onPress={() =>
                     navigation.navigate("SchdEditPostPage", {
@@ -309,13 +310,13 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
                 <SchldDelButton
                   onPress={() => schdBubSvcDelPress(detail.CRE_SEQ)}
                 />
-              ) : (
+              ) : !isEditClicked && !isDeleteClicked ? (
                 <Octicons
                   name="dot-fill"
                   size={deviceWidth * 0.05}
                   color="#4BB781"
                 />
-              )}
+              ) : null}
             </View>
 
             <View
