@@ -14,7 +14,7 @@ export default StyleSheet.create({
    * 공지사항 게시물의 이미지 박스입니다.
    */
   NoticePostImageBoxStyle: {
-    height: deviceHeight * 0.571,
+    height: deviceHeight * 0.6,
     width: deviceWidth * 1,
   },
 });

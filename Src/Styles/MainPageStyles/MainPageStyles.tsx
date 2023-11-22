@@ -32,16 +32,16 @@ export default StyleSheet.create({
    */
   MainOpenPhotoBox: {
     backgroundColor: "#BDBDBD",
-    borderRadius: 20,
-    width: deviceWidth * 0.28,
-    height: deviceHeight * 0.1073,
+    borderRadius: 10,
+    width: deviceWidth * 0.32,
+    height: deviceHeight * 0.11,
   },
 
   /**
    * 메인 페이지 - 공지사항 게시물 단위 박스 스타일
    */
   MainOpenBox: {
-    width: deviceWidth * 0.8156,
+    width: deviceWidth * 0.87,
     height: deviceHeight * 0.1109,
   },
 

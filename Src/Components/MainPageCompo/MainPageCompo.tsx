@@ -582,15 +582,13 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
               { flexDirection: "row" },
             ]}
           >
-            <TouchableOpacity onPress={onPressPhoto}>
-              <Image
-                source={{ uri: F_Open_Photo }}
-                style={[
-                  MainPageStyles.MainOpenPhotoBox,
-                  { resizeMode: "stretch" },
-                ]}
-              />
-            </TouchableOpacity>
+            <Image
+              source={{ uri: F_Open_Photo }}
+              style={[
+                MainPageStyles.MainOpenPhotoBox,
+                { resizeMode: "stretch" },
+              ]}
+            />
             <View
               style={{
                 flex: 1,
@@ -605,12 +603,9 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                   marginLeft: deviceWidth * 0.025,
                 }}
               >
-                <TouchableOpacity onPress={onPressOpenBubTitle}>
-                  <Text style={[textStyle.bold10, { color: "#121212" }]}>
-                    {F_Open_Tit}
-                    {/**공지사항 제목 */}
-                  </Text>
-                </TouchableOpacity>
+                <Text style={[textStyle.bold10, { color: "#121212" }]}>
+                  {F_Open_Tit}
+                </Text>
               </View>
               <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
                 <View
@@ -670,15 +665,13 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
               { flexDirection: "row" },
             ]}
           >
-            <TouchableOpacity onPress={onPressPhoto}>
-              <Image
-                source={{ uri: S_Open_Photo }}
-                style={[
-                  MainPageStyles.MainOpenPhotoBox,
-                  { resizeMode: "stretch" },
-                ]}
-              />
-            </TouchableOpacity>
+            <Image
+              source={{ uri: S_Open_Photo }}
+              style={[
+                MainPageStyles.MainOpenPhotoBox,
+                { resizeMode: "stretch" },
+              ]}
+            />
             <View
               style={{
                 flex: 1,
@@ -693,11 +686,9 @@ export const MainOpenBub: React.FC<ButtonProps> = ({
                   marginLeft: deviceWidth * 0.025,
                 }}
               >
-                <TouchableOpacity onPress={onPressOpenBubTitle}>
-                  <Text style={[textStyle.bold10, { color: "#121212" }]}>
-                    {S_Open_Tit}
-                  </Text>
-                </TouchableOpacity>
+                <Text style={[textStyle.bold10, { color: "#121212" }]}>
+                  {S_Open_Tit}
+                </Text>
               </View>
               <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
                 <View
