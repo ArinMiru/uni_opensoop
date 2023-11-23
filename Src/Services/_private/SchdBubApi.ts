@@ -31,18 +31,53 @@ export const SchdBubListSvc = async (): Promise<SchdBubData | null> => {
 
       if (result !== null && result.data.RSLT_CD === "00") {
         const SchdBubData: SchdBubData = parseSchdBubData(result.data);
-    
+
         return SchdBubData;
       } else {
-     
         return null;
       }
     } catch (error) {
-   
       return null;
     }
   } else {
- 
+    return null;
+  }
+};
+
+export const YMDSchdBubListSvc = async (
+  selectedYear: string,
+  selectedMonth: string
+): Promise<SchdBubData | null> => {
+  const endpoint = "/UNI/YMDSchdBubListSvc";
+  const userData = getUserData();
+
+  if (userData !== null) {
+    const { LOGIN_ID, MEMB_SC_CD, MEMB_DEP_CD, TIT_CD } = userData;
+    const data = {
+      LOGIN_ID,
+      MEMB_SC_CD,
+      MEMB_DEP_CD,
+      TIT_CD,
+      SELECTEDYEAR: selectedYear,
+      SELECTEDMONTH: selectedMonth,
+    };
+    try {
+      const result: AxiosResponse<any, any> | null = await sendApiData(
+        endpoint,
+        data
+      );
+
+      if (result !== null && result.data.RSLT_CD === "00") {
+        const SchdBubData: SchdBubData = parseSchdBubData(result.data);
+
+        return SchdBubData;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  } else {
     return null;
   }
 };
@@ -72,18 +107,15 @@ export const SchdBubDtlListSvc = async (
         const SchdBubDtlListData: SchdBubDtlListData = parseSchdbubDtlListData(
           result.data
         );
-  
+
         return SchdBubDtlListData;
       } else {
-   
         return null;
       }
     } catch (error) {
-
       return null;
     }
   } else {
-
     return null;
   }
 };
@@ -118,7 +150,6 @@ export const schdBubSvcNew = async (
     if (result !== null && result.data.RSLT_CD === "00") {
       return result.data;
     } else {
-    
       return null;
     }
   }
@@ -148,7 +179,7 @@ export const schdBubSvcUp = async (
       STRT_SCHD_YMD,
       END_SCHD_YMD,
     };
-  
+
     const result: AxiosResponse<UserData, any> | null = await sendApiData(
       endpoint,
       data
@@ -172,16 +203,14 @@ export const schdBubSvcDel = async (CRE_SEQ: number) => {
       LOGIN_ID,
       PROC_TYPE,
     };
- 
+
     const result: AxiosResponse<RSLT_TABLE, any> | null = await sendApiData(
       endpoint,
       data
     );
     if (result !== null && result.data.RSLT_CD === "00") {
-   
       return result.data;
     } else {
-
       return null;
     }
   }

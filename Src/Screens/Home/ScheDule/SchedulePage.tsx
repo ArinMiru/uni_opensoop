@@ -42,6 +42,7 @@ import {
   parseSchdbubDtlListData,
 } from "../../../Utils/_private/ApiData/SchdBubDtlListSvc";
 import { StatusBar } from "expo-status-bar";
+import { YMDSchdBubListSvc } from "../../../Services/_private/SchdBubApi";
 
 LocaleConfig.locales["kr"] = {
   monthNames: [
@@ -72,6 +73,14 @@ LocaleConfig.locales["kr"] = {
 };
 LocaleConfig.defaultLocale = "kr";
 
+interface MarkedDates {
+  [date: string]: {
+    selected: boolean;
+    marked: boolean;
+    selectedColor: string;
+  };
+}
+
 const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
   const isFocused = useIsFocused();
   const [schdData, setSchdData] = useState<SchdBubData | null>(null);
@@ -79,6 +88,8 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState(moment().format("YYYY-MM"));
+  const [specificDates, setSpecificDates] = useState<MarkedDates>({});
   const [scheduleDetails, setScheduleDetails] = useState<
     SCHD_BuB_Item[] | null
   >(null);
@@ -120,6 +131,46 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
     } else {
       setIsDeleteClicked(true);
       setIsEditClicked(false);
+    }
+  };
+
+  const updateMarkedDates = (data: SchdBubData, todayStr: string) => {
+    const newMarkedDates: MarkedDates = {};
+    data.SCHD_BUB.forEach((item) => {
+      const day = item.DAY;
+      const year = data.YEAR;
+      const month = data.MONTH.padStart(2, "0");
+      const dateStr = `${year}-${month}-${day.padStart(2, "0")}`;
+
+      if (Number(item.CNT) > 0) {
+        newMarkedDates[dateStr] = {
+          selected: true,
+          marked: true,
+          selectedColor: "#4BB781",
+        };
+      }
+    });
+
+    // 현재 날짜에 빨간색 원을 추가합니다.
+    newMarkedDates[todayStr] = {
+      selected: true,
+      marked: true,
+      selectedColor: "red",
+    };
+
+    setSpecificDates(newMarkedDates);
+  };
+
+  const onMonthChange = async (month: string) => {
+    const [year, m] = month.split("-");
+    try {
+      const newSchdData = await YMDSchdBubListSvc(year, m);
+      const todayStr = moment().format("YYYY-MM-DD"); // 오늘 날짜 문자열
+      if (newSchdData) {
+        updateMarkedDates(newSchdData, todayStr);
+      }
+    } catch (error) {
+      // 오류 처리
     }
   };
 
@@ -218,14 +269,6 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
         .catch((error) => {});
     }
   }, [userData, isFocused]);
-
-  const [specificDates, setSpecificDates] = useState<{
-    [date: string]: {
-      selected: boolean;
-      marked: boolean;
-      selectedColor: string;
-    };
-  }>({});
 
   const renderButtons = () => {
     if (!scheduleDetails || scheduleDetails.length === 0) {
@@ -397,7 +440,7 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
               return month;
             },
           }}
-          markingType={"multi-dot"}
+          markingType={"multi-period"}
           markedDates={specificDates}
           style={{
             width: deviceWidth * 1,
@@ -405,6 +448,11 @@ const SchedulePage: React.FC<ScreenProps> = ({ navigation }) => {
             borderTopRightRadius: 20,
           }}
           onDayPress={(day) => dateSelect(day.dateString)}
+          current={currentMonth}
+          onMonthChange={(month) => {
+            setCurrentMonth(month.dateString.substring(0, 7));
+            onMonthChange(month.dateString.substring(0, 7));
+          }}
         />
         <View style={[SgsButtonStyles.divideSchdlContentsLine]} />
         <View style={{ flexDirection: "row", height: deviceHeight * 0.06 }}>
