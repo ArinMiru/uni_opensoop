@@ -1,38 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, Alert } from "react-native";
 import VoteBoxStyle from "../../../Styles/VoteStyles/VoteBoxStyle";
 import textStyle from "../../../Styles/TextStyle";
 import { deviceWidth, deviceHeight } from "../../../Utils/DeviceUtils";
 import { BackIconRegiTopbarStyle } from "../../../Components/AllCompo/TopbarCompo";
-import {
-  SchdlVoteEditTitInput,
-  SchdlVoteRegiTitInput,
-} from "../../../Components/SchdlCompo/SchdlInput";
+import { SchdlVoteRegiTitInput } from "../../../Components/SchdlCompo/SchdlInput";
 import { ScreenProps } from "../../../Navigations/StackNavigator";
 import NewBackgroundStyle from "../../../Styles/NewBackgroundStyle";
 import { Background } from "../../../Components/AllCompo/Background";
 import { getUserData } from "../../../Utils/_private/ApiData/UserData";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { SchdlTimeButton } from "../../../Components/SchdlCompo/SchdlButton";
-import {
-  schdBubSvcNew,
-  schdBubSvcUp,
-} from "../../../Services/_private/SchdBubApi";
-import { SchdEditPostPageProp } from "../../../Utils/NavigationProp/NavigationDetailScrProp";
-import {
-  formatDateString,
-  handleDateConfirm,
-} from "../../../Utils/ReusableFuction/DateFormat";
+import { schdBubSvcNew } from "../../../Services/_private/SchdBubApi";
 
-const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
-  navigation,
-  route,
-}) => {
-  const { TIT, STRT_SCHD_YMD, END_SCHD_YMD, CRE_SEQ } = route.params;
+/**
+ * @Dowon(김도원 생성)
+ * 일정 게시물 등록 페이지
+ * [02, 03, 05] TIT_CD 에 맞는 사용자만 접근 가능 페이지
+ */
+
+const SchedulePostEditPage: React.FC<ScreenProps> = ({ navigation }) => {
   const userData = getUserData();
-  const [schdTitle, setSchdTitle] = useState<string>(TIT);
+  const [schdTitle, setSchdTitle] = useState<string>("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [dateType, setDateType] = useState<"start" | "end">("start");
+
   const showStartDatePicker = () => {
     setDateType("start");
     setDatePickerVisibility(true);
@@ -44,65 +36,86 @@ const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
   };
 
   const [selectedStartDate, setSelectedStartDate] = useState<string>(
-    formatDateString(STRT_SCHD_YMD)
+    `${new Date().getFullYear()}-${
+      new Date().getMonth() + 1
+    }-${new Date().getDate()}`
   );
+
   const [selectedEndDate, setSelectedEndDate] = useState<string>(
-    formatDateString(END_SCHD_YMD)
+    `${new Date().getFullYear()}-${
+      new Date().getMonth() + 1
+    }-${new Date().getDate()}`
   );
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
 
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
 
-  const scEdit = async () => {
+  const schNew = async () => {
     try {
-      const result = await schdBubSvcUp(
-        schdTitle,
-        selectedStartDate,
-        selectedEndDate,
-        CRE_SEQ
-      );
-      if (result && result.RSLT_CD === "00") {
-        navigation.goBack();
-        Alert.alert("성공", "수정을 성공하였습니다.");
+      const userData = getUserData();
+      if (userData != null) {
+        const result = await schdBubSvcNew(
+          schdTitle,
+          selectedStartDate,
+          selectedEndDate
+        );
+
+        if (result && result.RSLT_CD === "00") {
+          navigation.goBack();
+          Alert.alert("성공", "등록 성공");
+        }
       } else {
-        // API 호출 실패시 에러 메시지 표시
-        Alert.alert("실패", "수정에 실패하였습니다. 데이터를 확인해주세요.");
+        Alert.alert("실패", "등록 실패");
       }
-    } catch (error) {
-      // 네트워크 에러 등 기타 에러 처리
-      Alert.alert("오류", "수정 중 오류가 발생하였습니다.");
-    }
+    } catch (error) {}
+  };
+
+  const formatDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
   };
 
   const handleStartDateConfirm = (date: Date) => {
-    handleDateConfirm(
-      selectedStartDate,
-      selectedEndDate,
-      date,
-      setSelectedStartDate,
-      hideDatePicker
-    );
+    const formattedDate = formatDate(date);
+    setSelectedStartDate(formattedDate);
+
+    if (new Date(formattedDate) >= new Date(selectedEndDate)) {
+      const nextDay = new Date(date);
+      nextDay.setDate(date.getDate() + 1);
+      const nextFormattedDate = formatDate(nextDay);
+      setSelectedStartDate(nextFormattedDate);
+    }
+    hideDatePicker();
   };
 
   const handleEndDateConfirm = (date: Date) => {
-    handleDateConfirm(
-      selectedStartDate,
-      selectedEndDate,
-      date,
-      setSelectedEndDate,
-      hideDatePicker
-    );
+    const formattedDate = formatDate(date);
+    if (new Date(formattedDate) < new Date(selectedStartDate)) {
+      const prevDay = new Date(date);
+      prevDay.setDate(date.getDate() + 1);
+      const prevFormattedDate = formatDate(prevDay);
+      setSelectedEndDate(prevFormattedDate);
+    } else {
+      setSelectedEndDate(formattedDate);
+    }
+    hideDatePicker();
   };
 
   return (
     <Background>
       <BackIconRegiTopbarStyle
-        Title="일정 수정"
+        Title="일정 등록"
         MEMB_SC_NM={userData?.MEMB_SC_NM || ""}
         MEMB_DEP_NM={userData?.MEMB_DEP_NM || ""}
         onPress={() => navigation.goBack()}
-        onPressRegi={scEdit}
+        onPressRegi={schNew}
       />
       <View style={[NewBackgroundStyle.OnlyTopRadiusBackgroundStyle]}>
         <View
@@ -114,8 +127,8 @@ const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
             alignItems: "center",
           }}
         >
-          <SchdlVoteEditTitInput
-            text={schdTitle}
+          <SchdlVoteRegiTitInput
+            text="제목을 입력하세요."
             value={schdTitle}
             onChangeText={(text) => setSchdTitle(text)}
           />
@@ -175,6 +188,7 @@ const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
               <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="date"
+                display="inline"
                 locale="ko-KR"
                 onConfirm={
                   dateType === "start"
@@ -192,4 +206,4 @@ const SchedulePostRegiPage: React.FC<SchdEditPostPageProp> = ({
   );
 };
 
-export default SchedulePostRegiPage;
+export default SchedulePostEditPage;
